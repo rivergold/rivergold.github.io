@@ -2,8 +2,10 @@
 main:
   - title: "Github"
     url: https://github.com/rivergold/
-  # - title: "About"
-  #   url: https://mmistakes.github.io/minimal-mistakes/about/
+  - title: "About"
+    url: /pages/About-me
+  - title: "Lab"
+    url: http://uestcrobot.net/
   # - title: "Sample Posts"
   #   url: /year-archive/
   # - title: "Sample Collections"

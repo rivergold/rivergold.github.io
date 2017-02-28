@@ -1,6 +1,6 @@
 # Set up your own blog with Github pages and Jekyll
 
-How can I have a minimalist blog? This article will help you to make it come true.
+How can I have a minimalistic blog? This article will help you to make it come true.
 
 There are many ways to buid a blog, here we will use Github pages and jekyll to do this. Why? Many programmer use Github pages as their project websites or home pages. Github offer you free server which is very convenient. And it supports Jekyll, a very good static site generator.
 
@@ -46,6 +46,7 @@ There are many ways to buid a blog, here we will use Github pages and jekyll to 
     - [indigo](https://github.com/sergiokopplin/indigo)
     - [The Plain](http://jekyllthemes.org/themes/the-plain/)
     - [Zetsu](http://jekyllthemes.org/themes/zetsu/)
+
 By the way, my blog is built based on _Minimal Mistakes Jekyll Theme_ which is created by [mmistakes](https://github.com/mmistakes). I love this minimalistic  theme and it is very easy to install with `ruby gem`.
 
 7. Jekyll base tutorials:

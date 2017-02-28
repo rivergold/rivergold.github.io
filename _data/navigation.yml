@@ -3,7 +3,7 @@ main:
   - title: "Github"
     url: https://github.com/rivergold/
   - title: "About"
-    url: /pages/About-me
+    url: /pages/About
   - title: "Lab"
     url: http://uestcrobot.net/
   # - title: "Sample Posts"

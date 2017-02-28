@@ -1,7 +1,7 @@
 ---
 layout: single
-permalink: /pages/About-me
-title: About me
+permalink: /pages/About
+title: About
 subtitle: A man loves freedom, machine learning and data mining.
 excerpt: "_Stay Hungry, Stay Foolish.<br> A learning curve of computer vision and machine learning._"
 header:
@@ -11,7 +11,7 @@ header:
 <p align="justify">
 I'm Kevin Ho, a researcher of machine learning and data mining. Most of my work is about huamn activity recognition and relevant ML algorithm. Now, I am studying at University of Electronic Science and Technology of China, Chendu, China.
 <br><br>
-Windfall is a blog to record my learng curve of computer vision and machine learning. Why it's called _Windfall_? It means that keep doing and one day you will get what you want, just like the squashy fruits fallen off trees.
+Windfall is a blog to record my learng curve of computer vision and machine learning. Why it's called <i>Windfall</i>? It means that keep doing and one day you will get what you want, just like the squashy fruits fallen off trees.
 <!-- I am also a fan of kaggle data mining competition and have finished the Titanic and digit recognition competition. It is challenging but interesting! -->
 </p>
 

@@ -1,6 +1,6 @@
 Python is a language which is flexible and easy to learn. And it has lots of convenient modules and  packages.
 
-In this article, I summarized some useful modules and packages I have used for mackine learning and data science. Hope it will give you some help or guidance:smiley:
+In this article, I summarized some useful modules and packages I have used for mackine learning and data science. Hope it will give you some help or guidance:smiley:.
 
 # Modules:
 ## pickle:

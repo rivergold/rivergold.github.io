@@ -1,4 +1,4 @@
-Recently, Facebook has opened a new deep learning framework called ___PyTorch___, which puts python first and is in an early-release Beta. I used __Keras__ before and want to know what is the differences between Keras and PyTorch. This article will let you and me make a acquaintance with __PyTorch__.
+Recently, Facebook has opened a new deep learning framework called __PyTorch__, which puts python first and is in an early-release Beta. I used __Keras__ before and want to know what is the differences between Keras and PyTorch. This article will let you and me make a acquaintance with __PyTorch__.
 
 In this article, I use PyTorch to build a convolutional neural network to recognize image in CIFAR-10 dataset. [Here](https://github.com/pytorch/tutorials/blob/master/Deep%20Learning%20with%20PyTorch.ipynb
 ) is the offical tutorial about learning/using PyTroch.
@@ -125,9 +125,11 @@ Here are a example network from [Offical Tutorial](https://github.com/pytorch/tu
 
 ## Problems and Solution:
 - Cannot download datasets fluentlly.
+
 Download CIFAR-10 from [here](https://www.cs.toronto.edu/~kriz/cifar.html). The script provided by the website for loading data is just for python2.7, if you want to use python3+, you need to replace `import Cpickle` by `import pickle` or `from _pickle import Cpickle`. And then you need to write some codes to preprocess the data to fit PyTorch input requires. I write a script to do this and save it also with `pickle`, you can get it [here](还没有上传！).
 
 - `KeyError: <class 'torch.ByteTensor'>` occurs when training.
+
 I met this error when I did training first time. My training data is loaded as numpy and it saved as `np.int`, and when it is transformed into PyTorch tensor, it is just a `torch.CharTensor`, but in PyTorch most operations are only defined on FloatTensor and DoubleTensor (and cuda.HalfTensor)[ref][ref_1]. So it will occur the error. The solution is using `numpy.astype(np.float32/np.float64)` to convert int into float.  
 [Here][ref_2] are some torch equivalents of numpy functions, maybe useful.
 

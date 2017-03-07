@@ -8,8 +8,7 @@ This file is for collecting and recording good materials about artificial intell
 
 
 - [Deep Learning Papers Reading Roadmap](https://github.com/songrotek/Deep-Learning-Papers-Reading-Roadmap)<br>
-非常值得收藏的github，包括了很多最重要的深度学习的论文
-知乎上还有其[翻译的版本](https://zhuanlan.zhihu.com/p/25549497)
+非常值得收藏的github，包括了很多最重要的深度学习的论文。知乎上还有其[翻译的版本](https://zhuanlan.zhihu.com/p/25549497)
 
 - [AI突破性论文及代码实现汇总](https://zhuanlan.zhihu.com/p/25191377)<br>
 汇总了关于AI的一些很重要的论文与网站资源

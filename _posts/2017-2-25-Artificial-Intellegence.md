@@ -5,13 +5,18 @@ This file is for collecting and recording good materials about artificial intell
 ## Valuable Websites
 - [GitXiv](http://www.gitxiv.com)<br>
 收集了与计算机相关的很多论文与github的源代码
-<br>
+
+
+- [Deep Learning Papers Reading Roadmap](https://github.com/songrotek/Deep-Learning-Papers-Reading-Roadmap)<br>
+非常值得收藏的github，包括了很多最重要的深度学习的论文
+知乎上还有其[翻译的版本](https://zhuanlan.zhihu.com/p/25549497)
+
 - [AI突破性论文及代码实现汇总](https://zhuanlan.zhihu.com/p/25191377)<br>
 汇总了关于AI的一些很重要的论文与网站资源
-<br>
+
 - [Data Science Python notebooks](https://github.com/donnemartin/data-science-ipython-notebooks)<br>
 包含了与数据科学有关的很多工具的python使用教程
-<br>
+
 - [Notes on Data Science, Machine Learning, & Artificial Intelligence](http://chrisalbon.com/)<br>
 很不错的有关数据科学、机器学习和人工智能的笔记
 <br>

@@ -10,15 +10,15 @@ Notes:
 
 ## Main Concepts
 Here are some main concepts about PyTorch, it will help you undertand how PyTorch works and how to write your own neural nets.
-- Tensors<br>
-    PyTorch offers most tensor operations, including transposing, indexing, slicing, mathematical operations, linear algebra, random numbers, etc. _Tensors_ in PyTorch are similar to numpy's ndarrays, with adding accelerate computing on GPU. You can define a tensor via
+- _Tensors_<br>
+    PyTorch offers most tensor operations, including transposing, indexing, slicing, mathematical operations, linear algebra, random numbers, etc. `Tensors` in PyTorch are similar to numpy's ndarrays, with adding accelerate computing on GPU. You can define a tensor via
         ```python
         import torch
         # construct a 3x3 matrix without initialised
         x = torch.Tensor(5, 3)
         ```
 
-- Numpy Bridge<br>
+- _Numpy Bridge_<br>
     As we all know, numpy is an indispensable part of python for scientific computation and many data is constructed as numpy. Pytorch provide an easy to convert between tensors and numpy. It's really convenient!
     - Convert PyTorch tensor into numpy array, E.g.
         ```python
@@ -31,7 +31,7 @@ Here are some main concepts about PyTorch, it will help you undertand how PyTorc
         b = torch.from_numpy(a)
         ```
 
-- Cuda Tensors<br>
+- _Cuda Tensors_<br>
     If you want to calculate on GPU, you can use:
         ```python
         # let us run this cell only if CUDA is available
@@ -42,19 +42,19 @@ Here are some main concepts about PyTorch, it will help you undertand how PyTorc
         ```
     Because there is no high-performance GPU on my computer, I have not yet try this...
 
-- Autograd<br>
-    _Autograd_ means automatic differentiation, provides automatic differentiation for all operations on tensors. You need to understand it with another concept _Variable_ together.
+- _Autograd_<br>
+    `Autograd` means automatic differentiation, provides automatic differentiation for all operations on tensors. You need to understand it with another concept _Variable_ together.
 
-- Variable<br>
-    _Variable_ is used to wrap a tensor and records the operations applied to it. In my view, I regrad it as a _Symbol_ represents tensor and is uesd during computing, especially for differentiation.
+- _Variable_<br>
+    `Variable` is used to wrap a tensor and records the operations applied to it. In my view, I regrad it as a _Symbol_ represents tensor and is uesd during computing, especially for differentiation.
 
-- Function<br>
-    _Function_ is used to define formulas for differentiating operations on _Variable_.
+- _Function_<br>
+    `Function` is used to define formulas for differentiating operations on _Variable_.
 
 ## Let's Have a Try
 If we want to build a neural net for recognize image from CIFAR-10, what should we do?
 1. Prepare data<br>
-    We need to make our data suitable for PyTorch inputs. PyTorch provide a package called _torchvision_ which offers some common datasets, you can get more details from [here](http://pytorch.org/docs/torchvision/torchvision.html).
+    We need to make our data suitable for PyTorch inputs. PyTorch provide a package called `torchvision` which offers some common datasets, you can get more details from [here](http://pytorch.org/docs/torchvision/torchvision.html).
 
 2. Design your neural network<br>
     Here are a example network from [Offical Tutorial](https://github.com/pytorch/tutorials/blob/master/Deep%20Learning%20with%20PyTorch.ipynb)

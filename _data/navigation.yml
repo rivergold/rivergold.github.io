@@ -1,5 +1,7 @@
 # main links
 main:
+  - titile: "Articles"
+    url: /pages/articles
   - title: "Github"
     url: https://github.com/rivergold/
   - title: "About"

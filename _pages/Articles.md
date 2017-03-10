@@ -1,7 +1,7 @@
 ---
 layout: archive
 permalink: /pages/articles
-title: "Posts by Year"
+title: "Articles"
 author_profile: true
 ---
 
@@ -9,9 +9,9 @@ author_profile: true
 {% capture written_year %}'None'{% endcapture %}
 {% for post in site.posts %}
   {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
-  {% if year != written_year %}
+  <!-- {% if year != written_year %}
     <h2 id="{{ year | slugify }}" class="archive__subtitle">{{ year }}</h2>
     {% capture written_year %}{{ year }}{% endcapture %}
-  {% endif %}
+  {% endif %} -->
   {% include archive-single.html %}
 {% endfor %}

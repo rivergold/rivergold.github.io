@@ -53,6 +53,10 @@ At first, we need to preprocess the CIFAR-10 dataset, you can download it from [
         $$
         where, $\mu$ is mean value and $\sigma$ is standard deviation.
 
+    {% raw %}
+    $$a^2 + b^2 = c^2$$
+    {% endraw %}
+
 # PyTorch Version
 PyTorch, created by Facebook, is a new member of Machine Learning/Deep Learning framework group.<br>
 You can learn the basics of PyTorch from my blog or offical tutorial.

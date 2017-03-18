@@ -47,7 +47,7 @@ At first, we need to preprocess the CIFAR-10 dataset, you can download it from [
     Each image has 3 channels, 32 * 32 pixels and the depth is 8 bits(0 ~ 255). It is strongly recommended to do normalizing. Here are two ways you can choose:
     - Max-Min Normalization
         $$x^* = \frac{x_i - min(x)}{max(x) - min(x)}$$
-        In CIFAR-10 image, $max(x) = 255$ and $min(x) = 0$
+        In CIFAR-10 image, $$ax(x) = 255$$ and $$min(x) = 0$$
 
     - Z-Score Normalization  
         $$x^* = \frac{x - \mu}{\sigma}$$  

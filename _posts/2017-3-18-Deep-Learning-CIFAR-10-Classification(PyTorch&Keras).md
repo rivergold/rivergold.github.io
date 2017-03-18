@@ -1,3 +1,10 @@
+{% include katex_import.html %}
+... content of post here
+<div class="equation" data-expr="...."></div>
+<div class="equation" data-expr="...."></div>   
+... more content
+{% include katex_render.html %}
+
 This article will introduce how build a convolutional neural network by using python and popular dl framework.
 
 Here we will build two network versions, one is by _PyTorch_ and another is by _Keras_. Then we train the networks on CIFAR-10 dataset.

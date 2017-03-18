@@ -2,13 +2,6 @@
 layout: default
 ---
 
-{% include katex_import.html %}
-... content of post here
-<div class="equation" data-expr="...."></div>
-<div class="equation" data-expr="...."></div>
-... more content
-{% include katex_render.html %}
-
 {% if page.header.overlay_color or page.header.overlay_image or page.header.image %}
   {% include page__hero.html %}
 {% elsif page.header.video.id and page.header.video.provider %}

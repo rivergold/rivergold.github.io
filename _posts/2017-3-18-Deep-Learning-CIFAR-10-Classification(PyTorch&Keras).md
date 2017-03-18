@@ -1,3 +1,7 @@
+---
+use_math: true
+---
+
 This article will introduce how build a convolutional neural network by using python and popular dl framework.
 
 Here we will build two network versions, one is by _PyTorch_ and another is by _Keras_. Then we train the networks on CIFAR-10 dataset.
@@ -52,10 +56,6 @@ At first, we need to preprocess the CIFAR-10 dataset, you can download it from [
         x^* = \frac{x - \mu}{\sigma}
         $$
         where, $\mu$ is mean value and $\sigma$ is standard deviation.
-
-    {% raw %}
-    $$a^2 + b^2 = c^2$$
-    {% endraw %}
 
 # PyTorch Version
 PyTorch, created by Facebook, is a new member of Machine Learning/Deep Learning framework group.<br>

@@ -49,8 +49,8 @@ At first, we need to preprocess the CIFAR-10 dataset, you can download it from [
         $$x^* = \frac{x_i - min(x)}{max(x) - min(x)}$$
         In CIFAR-10 image, $max(x) = 255$ and $min(x) = 0$
 
-    - Z-Score Normalization
-        $$x^* = \frac{x - \mu}{\sigma}$$
+    - Z-Score Normalization  
+        $$x^* = \frac{x - \mu}{\sigma}$$  
         where, $\mu$ is mean value and $\sigma$ is standard deviation.
 
 # PyTorch Version

@@ -46,7 +46,7 @@ At first, we need to preprocess the CIFAR-10 dataset, you can download it from [
         x^* = \frac{x_i - min(x)}{max(x) - min(x)}
         $$
         In CIFAR-10 image, $max(x) = 255$ and $min(x) = 0$
-
+        katex.render("c = \\pm\\sqrt{a^2 + b^2}", element);
     - Z-Score Normalization
         $$
         x^* = \frac{x - \mu}{\sigma}

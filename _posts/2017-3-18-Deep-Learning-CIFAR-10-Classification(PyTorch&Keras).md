@@ -46,12 +46,16 @@ At first, we need to preprocess the CIFAR-10 dataset, you can download it from [
 2. Normalize
     Each image has 3 channels, 32 * 32 pixels and the depth is 8 bits(0 ~ 255). It is strongly recommended to do normalizing. Here are two ways you can choose:
     - Max-Min Normalization
-        $$x^* = \frac{x_i - min(x)}{max(x) - min(x)}$$
-        In CIFAR-10 image, $$ax(x) = 255$$ and $$min(x) = 0$$
+        $$
+        x^* = \frac{x_i - min(x)}{max(x) - min(x)}
+        $$
+        In CIFAR-10 image, $$max(x) = 255$$ and $$min(x) = 0$$
 
     - Z-Score Normalization  
-        $$x^* = \frac{x - \mu}{\sigma}$$  
-        where, $\mu$ is mean value and $\sigma$ is standard deviation.
+        $$
+        x^* = \frac{x - \mu}{\sigma}
+        $$  
+        where, $$\mu$$ is mean value and $$\sigma$$ is standard deviation.
 
 # PyTorch Version
 PyTorch, created by Facebook, is a new member of Machine Learning/Deep Learning framework group.<br>

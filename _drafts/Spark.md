@@ -26,10 +26,14 @@ Some references:
     - JRE: Java Runtime Environment. It is basically the Java Virtual Machine where your Java programs run on. It also includes browser plugins for Applet execution.
 
     - JDK: It's the full featured Software Development Kit for Java, including JRE, and the compilers and tools (like JavaDoc, and Java Debugger) to create and compile programs.
+
 - Vim do not work well in Conemu for docker container?
     - When I start vim in a docker container in ConEmu, vim do not work well when I move cursor.
     - I solute it by update Docker for Windows from 1.13 to 1.17. The author of ConEmu said that this bug is not from ConEmu, it is because the old version docker not support it well. And the latest version of docker fix this bug.
 
+# 我的Spark学习笔记
+Spark是一个用来实现快速、通用的集群计算的平台
 
+RDD(Resilient Distributed Dataset):弹性分布式数据集， 表示分布在多个计算节点上可以并行操作的元素集合，是Spark主要的编程抽象。
 
 [ref_1]: http://stackoverflow.com/questions/1906445/what-is-the-difference-between-jdk-and-jre

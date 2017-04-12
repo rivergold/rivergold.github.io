@@ -1,9 +1,9 @@
-- How to update .barchrc(update bash path)?([ref][ref_1])<br>
+- How to update .barchrc(update bash path)?([ref_1])<br>
     ```shell
     . ~/.bashrc
     ```
 
-- How to rename a directory?([ref][ref_2])<br>
+- How to rename a directory?([ref_2])<br>
     ```shell
     mv <oldname> <newname>
     ```

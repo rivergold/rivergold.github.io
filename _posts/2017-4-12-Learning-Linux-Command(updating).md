@@ -3,7 +3,7 @@
     . ~/.bashrc
     ```
 
-- How to rename a directory?([ref_2])<br>
+- How to rename a directory?([ref_2](http://askubuntu.com/questions/56326/how-do-i-rename-a-directory-via-the-command-line))<br>
     ```shell
     mv <oldname> <newname>
     ```
@@ -37,6 +37,3 @@
     - `ctr + c`: kill foreground processes
 
 [ref_1]: http://stackoverflow.com/questions/2518127/how-do-i-reload-bashrc-without-logging-out-and-back-in
-
-[ref_2]:
-http://askubuntu.com/questions/56326/how-do-i-rename-a-directory-via-the-command-line

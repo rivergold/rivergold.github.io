@@ -73,6 +73,8 @@
     - I solute it by update Docker for Windows from 1.13 to 1.17. The author of ConEmu said that this bug is not from ConEmu, it is because the old version docker not support it well. And the latest version of docker fix this bug.
 
 ## 我的Spark学习笔记
-Spark是一个用来实现快速、通用的集群计算的平台
+Spark
+: 一个用来实现快速、通用的集群计算的平台
 
-RDD(Resilient Distributed Dataset):弹性分布式数据集， 表示分布在多个计算节点上可以并行操作的元素集合，是Spark主要的编程抽象。
+RDD(Resilient Distributed Dataset)
+: 弹性分布式数据集， 表示分布在多个计算节点上可以并行操作的元素集合，是Spark主要的编程抽象。

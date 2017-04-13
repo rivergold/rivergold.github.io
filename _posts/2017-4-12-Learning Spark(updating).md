@@ -55,6 +55,7 @@
     ```shell
     . ~/.bashrc
     ```
+    
 - Reference
     - [Installing Apache Spark on Ubuntu 16.04](https://www.santoshsrinivas.com/installing-apache-spark-on-ubuntu-16-04/)
     - [Stackoverflow: importing pyspark in python shell](http://stackoverflow.com/questions/23256536/importing-pyspark-in-python-shell)

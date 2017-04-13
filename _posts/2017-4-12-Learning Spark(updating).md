@@ -74,7 +74,7 @@
     import findspark
     findspark.find()
     ```
-    Then, just import pyspark
+    Then, just import pyspark and start using it in jupyter notebook.
 
 ## Problems and Solutions
 - What is the difference between JDK and JRE? ([ref][ref_1])

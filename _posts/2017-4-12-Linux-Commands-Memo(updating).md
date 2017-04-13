@@ -3,7 +3,7 @@
     . ~/.bashrc
     ```
 
-- How to rename a directory?([ref][2]<br>
+- How to rename a directory?([ref][2])<br>
     ```shell
     mv <oldname> <newname>
     ```

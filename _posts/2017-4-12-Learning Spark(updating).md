@@ -62,6 +62,10 @@
 
 ## Basic Understanding
 - Spark is compatible with Hadoop
+- RDD support two types of operations:
+    - Transformations: Create a new dataset from an existing one
+
+    - Actions: Return a value to the driver program after running a computation on the dataset.
 
 ## Variable Websites
 [Apache Spark in Python: Beginner's Guide](https://www.datacamp.com/community/tutorials/apache-spark-python)
@@ -92,3 +96,13 @@ Spark
 
 RDD(Resilient Distributed Dataset)
 : 弹性分布式数据集， 表示分布在多个计算节点上可以并行操作的元素集合，是Spark主要的编程抽象。
+
+## Simulate spark cluster using docker on one computer
+- Reference
+    - [Deploy a Mesos Cluster with 7 Commands Using Docker](https://medium.com/@gargar454/deploy-a-mesos-cluster-with-7-commands-using-docker-57951e020586)
+
+    - [Simulating a multi-node (Py)Spark cluster using Docker](https://spaceandtim.es/code/mesos_spark_zookeeper_hdfs_docker/)
+
+    - [Connecting Docker Containers, Part one&two](https://deis.com/blog/2016/connecting-docker-containers-1/)
+
+    - [CockroachDB: Start a Cluster in Docker](https://www.cockroachlabs.com/docs/start-a-local-cluster-in-docker.html#os-windows)

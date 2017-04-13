@@ -55,13 +55,26 @@
     ```shell
     . ~/.bashrc
     ```
-    
+
 - Reference
     - [Installing Apache Spark on Ubuntu 16.04](https://www.santoshsrinivas.com/installing-apache-spark-on-ubuntu-16-04/)
     - [Stackoverflow: importing pyspark in python shell](http://stackoverflow.com/questions/23256536/importing-pyspark-in-python-shell)
 
 ## Basic Understanding
 - Spark is compatible with Hadoop
+
+## Variable Websites
+[Apache Spark in Python: Beginner's Guide](https://www.datacamp.com/community/tutorials/apache-spark-python)
+: Good start with pyspark and tell how to use Spark in Jupyter.
+
+## Using Spark in Jupyter
+1. Install `findspark` via `pip install findspark`
+2. In Jupyter Notebook input the followings
+    ```python
+    import findspark
+    findspark.find()
+    ```
+    Then, just import pyspark
 
 ## Problems and Solutions
 - What is the difference between JDK and JRE? ([ref][ref_1])

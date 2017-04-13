@@ -1,5 +1,3 @@
-# Spark
-
 ## Install Spark
 1. Install Java(jre and jdk)
     ```shell

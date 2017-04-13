@@ -1,9 +1,9 @@
-- How to update .barchrc(update bash path)?([ref_1])<br>
+- How to update .barchrc(update bash path)?([ref][1])<br>
     ```shell
     . ~/.bashrc
     ```
 
-- How to rename a directory?([ref_2](http://askubuntu.com/questions/56326/how-do-i-rename-a-directory-via-the-command-line))<br>
+- How to rename a directory?([ref][2]<br>
     ```shell
     mv <oldname> <newname>
     ```
@@ -36,4 +36,5 @@
     - `ctr + z`: suspend foreground processes
     - `ctr + c`: kill foreground processes
 
-[ref_1]: http://stackoverflow.com/questions/2518127/how-do-i-reload-bashrc-without-logging-out-and-back-in
+[1]:http://stackoverflow.com/questions/2518127/how-do-i-reload-bashrc-without-logging-out-and-back-in
+[2]:http://askubuntu.com/questions/56326/how-do-i-rename-a-directory-via-the-command-line

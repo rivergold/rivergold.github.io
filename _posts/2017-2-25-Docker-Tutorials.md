@@ -78,7 +78,6 @@ This is a tutorial about base operation of Docker.
 - On docker for Windows, how host computer powershell direct ping to container(container ip is 172.17.0.1)?
     run docker container with `--net=<net bridge>`, set a net bridge for container.
 
-
 ## Tips
 - Useful command in ubnutu image:
     - Change ubuntu download source, using `sed`<br>
@@ -88,6 +87,12 @@ This is a tutorial about base operation of Docker.
 
         E.g. ```s@http://archive.ubuntu.com/ubuntu/@http://mirrors.tuna.tsinghua.edu.cn/ubuntu/@g /etc/apt/sources.list```<br>
         After you change the source list, you need to update it to let it work via `sudo apt-get update`
+
+- How run linux gui in docker container?
+    - References
+        - [Blog: Running a GUI application in a Docker container](https://linuxmeerkat.wordpress.com/2014/10/17/running-a-gui-application-in-a-docker-container/)
+        - [Stackoverflow: How to run GUI application from linux container in Window using Docker?](http://stackoverflow.com/questions/29844237/how-to-run-gui-application-from-linux-container-in-window-using-docker)
+        - [Blog: Running Linux graphical applications in Docker on Windows with Cygwin/X](https://jarekprzygodzki.wordpress.com/2016/07/11/running-linux-graphical-applications-in-docker-on-windows-with-cygwinx/)
 
 ## References
 - [Docker Toolbox, Docker Machine, Docker Compose, Docker WHAT!?](https://nickjanetakis.com/blog/docker-toolbox-docker-machine-docker-compose-docker-wtf)

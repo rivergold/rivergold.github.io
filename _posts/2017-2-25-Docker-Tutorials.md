@@ -75,6 +75,10 @@ This is a tutorial about base operation of Docker.
 - How to use jupyter notebook in docker? localhost:8888 not work? [(ref)][ref_3]
     - _Solution:_ The ip of container in docker is 0.0.0.0, but default ip address in jupyter is 127.0.0.1. So we should change jupyter notebook ip if we want to use it on our host computer. Input `jupyter note --ip=0.0.0.0` in your docker container and then open localhost:8888 in your browser, and see it will work ok.
 
+- On docker for Windows, how host computer powershell direct ping to container(container ip is 172.17.0.1)?
+    run docker container with `--net=<net bridge>`, set a net bridge for container.
+
+
 ## Tips
 - Useful command in ubnutu image:
     - Change ubuntu download source, using `sed`<br>
@@ -84,6 +88,9 @@ This is a tutorial about base operation of Docker.
 
         E.g. ```s@http://archive.ubuntu.com/ubuntu/@http://mirrors.tuna.tsinghua.edu.cn/ubuntu/@g /etc/apt/sources.list```<br>
         After you change the source list, you need to update it to let it work via `sudo apt-get update`
+
+## References
+- [Docker Toolbox, Docker Machine, Docker Compose, Docker WHAT!?](https://nickjanetakis.com/blog/docker-toolbox-docker-machine-docker-compose-docker-wtf)
 
 [ref_1]:http://stackoverflow.com/questions/22907231/copying-files-from-host-to-docker-container
 [ref_2]:https://rominirani.com/docker-on-windows-mounting-host-directories-d96f3f056a2c#.8tny4uf9o

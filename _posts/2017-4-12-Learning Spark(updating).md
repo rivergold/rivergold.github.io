@@ -103,7 +103,7 @@ RDD(Resilient Distributed Dataset)
 
     - [Simulating a multi-node (Py)Spark cluster using Docker](https://spaceandtim.es/code/mesos_spark_zookeeper_hdfs_docker/)
 
-    - [Connecting Docker Containers, Part one&two](https://deis.com/blog/2016/connecting-docker-containers-1/)
+    - [Connecting Docker Containers, Part one&two](https://deis.com/blog/2016/connecting-docker-containers-2/)
 
     - [Docker Container Networking on Windows](https://docs.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/container-networking)
 

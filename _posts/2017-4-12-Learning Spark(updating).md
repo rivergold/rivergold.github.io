@@ -67,7 +67,7 @@
 
     - Actions: Return a value to the driver program after running a computation on the dataset.
 
-## Variable Websites
+## Valuable Websites
 [Apache Spark in Python: Beginner's Guide](https://www.datacamp.com/community/tutorials/apache-spark-python)
 : Good start with pyspark and tell how to use Spark in Jupyter.
 

@@ -71,4 +71,10 @@ In this article, I summarized some useful modules and packages I have used for m
         - Parse arguments
             `args = parser.parse_args()`
 
+## collections
+This module implements specialized container datatypes providing alternatives to Python’s general purpose built-in containers, dict, list, set, and tuple.
+
+- Reference
+    - [不可不知的Python模块: collections](http://www.zlovezl.cn/articles/collections-in-python/)
+
 Continuously updated...

@@ -77,4 +77,12 @@ This module implements specialized container datatypes providing alternatives to
 - Reference
     - [不可不知的Python模块: collections](http://www.zlovezl.cn/articles/collections-in-python/)
 
+## codecs
+This module defines base classes for standard Python codecs (encoders and decoders) and provides access to the internal Python codec registry, which manages the codec and error handling lookup process.
+
+- Reference
+    - [Offical Website](https://docs.python.org/3/library/codecs.html#standard-encodings)
+
+    - [Standard Encodings](https://docs.python.org/3/library/codecs.html#standard-encodings)
+
 Continuously updated...

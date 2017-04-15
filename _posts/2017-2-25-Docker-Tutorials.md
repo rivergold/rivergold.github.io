@@ -88,7 +88,21 @@ This is a tutorial about base operation of Docker.
         E.g. ```s@http://archive.ubuntu.com/ubuntu/@http://mirrors.tuna.tsinghua.edu.cn/ubuntu/@g /etc/apt/sources.list```<br>
         After you change the source list, you need to update it to let it work via `sudo apt-get update`
 
-- How run linux gui in docker container?
+- How run linux gui in docker container on docker for windows?
+    - *Solustion*
+        1. Install **Cygwin** with **Cygwin/x** on your computer.
+
+        2. In cygwin terminal, run
+            ```shell
+            startxwin -- -listen tcp &
+            xhost + <your computer ip>
+            ```
+
+        3. In your powershell, run
+            ```
+                docker run --it -e DISPLAY=<your computer ip>:0.0 <image> /bin/bash
+            ```
+
     - References
         - [Blog: Running a GUI application in a Docker container](https://linuxmeerkat.wordpress.com/2014/10/17/running-a-gui-application-in-a-docker-container/)
 

@@ -99,7 +99,7 @@ This is a tutorial about base operation of Docker.
             ```
 
         3. In your powershell, run
-            ```docker
+            ```
             docker run --it -e DISPLAY=<your computer ip>:0.0 <image> /bin/bash
             ```
 

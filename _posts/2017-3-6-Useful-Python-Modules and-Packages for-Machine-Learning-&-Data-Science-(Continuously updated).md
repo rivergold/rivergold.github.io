@@ -85,4 +85,6 @@ This module defines base classes for standard Python codecs (encoders and decode
 
     - [Standard Encodings](https://docs.python.org/3/library/codecs.html#standard-encodings)
 
+# Functions:
+##
 Continuously updated...

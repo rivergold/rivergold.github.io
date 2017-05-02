@@ -94,6 +94,7 @@ This is a tutorial about base operation of Docker.
 
         2. In cygwin terminal, run
             ```shell
+            export DISPLAY=<your-machine-ip>:0.0
             startxwin -- -listen tcp &
             xhost + <your computer ip>
             ```
@@ -109,6 +110,8 @@ This is a tutorial about base operation of Docker.
         - [Running Linux GUI Apps in Windows using Docker](https://manomarks.net/2015/12/03/docker-gui-windows.html)
 
         - [Stackoverflow: How to run GUI application from linux container in Window using Docker?](http://stackoverflow.com/questions/29844237/how-to-run-gui-application-from-linux-container-in-window-using-docker)
+
+        - [Linux: Running GUI apps with Docker](http://fabiorehm.com/blog/2014/09/11/running-gui-apps-with-docker/)
 
 
 ## References

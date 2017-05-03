@@ -78,6 +78,10 @@ This is a tutorial about base operation of Docker.
 - On docker for Windows, how host computer powershell direct ping to container(container ip is 172.17.0.1)?
     run docker container with `--net=<net bridge>`, set a net bridge for container.
 
+- When delete image, error `Can’t delete image with children
+` occur.  
+    Use `docker inspect --format='{{.Id}} {{.Parent}}' $(docker images --filter since=<image_id> -q)`. And then delete sub_image using `docker rmi {sub_image_id}`
+
 ## Tips
 - Useful command in ubnutu image:
     - Change ubuntu download source, using `sed`<br>
@@ -85,7 +89,11 @@ This is a tutorial about base operation of Docker.
         sed -i s@<needed replace content>@<replace content>@g <file path>
         ```
 
-        E.g. ```s@http://archive.ubuntu.com/ubuntu/@http://mirrors.tuna.tsinghua.edu.cn/ubuntu/@g /etc/apt/sources.list```<br>
+        E.g.
+        ```shell
+        sed -i s@http://archive.ubuntu.com/ubuntu/@http://mirrors.tuna.tsinghua.edu.cn/ubuntu/@g /etc/apt/sources.list
+        ```
+
         After you change the source list, you need to update it to let it work via `sudo apt-get update`
 
 - How run linux gui in docker container on docker for windows?
@@ -103,6 +111,9 @@ This is a tutorial about base operation of Docker.
             ```
             docker run --it -e DISPLAY=<your computer ip>:0.0 <image> /bin/bash
             ```
+    - *Problem*
+        - Error: `xhost:  unable to open display`  
+            Use `rm ~/.Xauthority`, then try again previous steps.
 
     - References
         - [Blog: Running a GUI application in a Docker container](https://linuxmeerkat.wordpress.com/2014/10/17/running-a-gui-application-in-a-docker-container/)

@@ -127,6 +127,7 @@ This is a tutorial about base operation of Docker.
 
 ## References
 - [Docker Toolbox, Docker Machine, Docker Compose, Docker WHAT!?](https://nickjanetakis.com/blog/docker-toolbox-docker-machine-docker-compose-docker-wtf)
+- [Docker Explained](https://www.digitalocean.com/community/tutorials/docker-explained-using-dockerfiles-to-automate-building-of-images)
 
 [ref_1]:http://stackoverflow.com/questions/22907231/copying-files-from-host-to-docker-container
 [ref_2]:https://rominirani.com/docker-on-windows-mounting-host-directories-d96f3f056a2c#.8tny4uf9o

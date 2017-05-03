@@ -41,7 +41,8 @@
         1. Create a folder named `.pip` in `~/`
         2. Create a file named `pip.conf`
         3. Write the followings into `pip.conf`
-        ```[global]
+        ```
+        [global]
         index-url=https://pypi.douban.com/simple
         ```
 

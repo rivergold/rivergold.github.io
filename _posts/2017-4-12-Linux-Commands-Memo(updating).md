@@ -36,5 +36,23 @@
     - `ctr + z`: suspend foreground processes
     - `ctr + c`: kill foreground processes
 
+- Change `pip` and `conda` donload source
+    - `pip`
+        1. Create a folder named `.pip` in `~/`
+        2. Create a file named `pip.conf`
+        3. Write the followings into `pip.conf`
+        ```[global]
+        index-url=https://pypi.douban.com/simple
+        ```
+
+    - `conda`
+        Input followings in terminal
+        ```shell
+        conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+        conda config --set show_channel_urls yes
+        ```
+        And it will create a file named `.condarc` in `~/` folder.
+
+
 [1]:http://stackoverflow.com/questions/2518127/how-do-i-reload-bashrc-without-logging-out-and-back-in
 [2]:http://askubuntu.com/questions/56326/how-do-i-rename-a-directory-via-the-command-line

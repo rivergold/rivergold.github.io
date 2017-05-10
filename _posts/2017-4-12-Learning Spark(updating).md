@@ -71,6 +71,9 @@
 [Apache Spark in Python: Beginner's Guide](https://www.datacamp.com/community/tutorials/apache-spark-python)
 : Good start with pyspark and tell how to use Spark in Jupyter.
 
+[Database Label of Xiamen Uniersity](http://dblab.xmu.edu.cn/blog/)
+: Good Spark blog from Xiamen Uniersity.
+
 ## Using Spark in Jupyter
 1. Install `findspark` via `pip install findspark`
 2. In Jupyter Notebook input the followings

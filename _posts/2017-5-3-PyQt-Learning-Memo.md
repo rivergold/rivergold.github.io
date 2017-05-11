@@ -4,8 +4,8 @@
     - signal: after the object state changed, it will sent a signal.
     - slot: When a specific signal emitted, corresponding function will execute, it is called slot.
 
-Qt QGraphicsView, QGraphicsScene and QGraphicsItem
-: Good framework to show 2D Graph.
+- Qt QGraphicsView, QGraphicsScene and QGraphicsItem
+    Good framework to show 2D Graph.<br>
     - Understanding the framework of QGraphics
     <p align="center">
     <img src="http://i4.buimg.com/586835/affe6461486eb627.png" width="50%">
@@ -25,9 +25,9 @@ Qt QGraphicsView, QGraphicsScene and QGraphicsItem
         3. Pay attention to `QGraphicsItem` coordinate system
             The `QGraphicsItem` coordinate system defines theelement(such as text, image and so on) postion inthe `QGraphicsItem`. The origin of  `QGraphicsItem`coordinate system may be the Top-Left point ofelement or the center of the element. It means that`QGraphicsItem` maybe draw the element fromdifferent start point. For example,`QGraphicsPixmapItem` will draw the pixmap from theitem's(0, 0), you can use`QGraphicsPixmapItem.setOffset()` to move pixmapcenter at origin. It is a good usual practice tobrowse the Qt official manual.
 
-        - Reference
-            - [QT开发（三十九）——GraphicsView框架](http://9291927.blog.51cto.com/9281927/1879128)
-            - [Stackoverflow: QGraphicsItem: emulating an item origin which is not the top left corner](http://stackoverflow.com/questions/906994/qgraphicsitem-emulating-an-item-origin-which-is-not-the-top-left-corner)
+    - Reference
+        - [QT开发（三十九）——GraphicsView框架](http://9291927.blog.51cto.com/9281927/1879128)
+        - [Stackoverflow: QGraphicsItem: emulating an item origin which is not the top left corner](http://stackoverflow.com/questions/906994/qgraphicsitem-emulating-an-item-origin-which-is-not-the-top-left-corner)
 
 # Common functions:
 - `QWidget.setGeometry(x, y, w, h)`  

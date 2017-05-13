@@ -85,6 +85,7 @@ This is a tutorial about base operation of Docker.
 - Using python in Docker Linex container, has error like `UnicodeEncodeError: 'ascii' codec can't encode character '\u22f1' in position 242`
     - Solution:
         - [解决Python3下打印utf-8字符串出现UnicodeEncodeError的问题](https://www.binss.me/blog/solve-problem-of-python3-raise-unicodeencodeerror-when-print-utf8-string/)
+
         ```python
         >>> import sys
         >>> sys.stdout

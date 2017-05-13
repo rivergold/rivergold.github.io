@@ -82,6 +82,22 @@ This is a tutorial about base operation of Docker.
 ` occur.  
     Use `docker inspect --format='{{.Id}} {{.Parent}}' $(docker images --filter since=<image_id> -q)`. And then delete sub_image using `docker rmi {sub_image_id}`
 
+- Using python in Docker Linex container, has error like `UnicodeEncodeError: 'ascii' codec can't encode character '\u22f1' in position 242`
+    - Solution:
+        - [解决Python3下打印utf-8字符串出现UnicodeEncodeError的问题](https://www.binss.me/blog/solve-problem-of-python3-raise-unicodeencodeerror-when-print-utf8-string/)
+        ```python
+        >>> import sys
+        >>> sys.stdout
+        <_io.TextIOWrapper name='' mode='w' encoding='ANSI_X3.4-1968'>
+        ```
+
+        Change output encode as utf-8
+        ```python
+        >>> import sys
+        >>> import io
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+        ```
+
 ## Tips
 - Useful command in ubnutu image:
     - Change ubuntu download source, using `sed`<br>

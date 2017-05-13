@@ -86,5 +86,9 @@ This module defines base classes for standard Python codecs (encoders and decode
     - [Standard Encodings](https://docs.python.org/3/library/codecs.html#standard-encodings)
 
 # Functions:
-##
+
+# Problems and Solutions
+- `UnicodeEncodeError: 'ascii' codec can't encode character '\u22f1' in position 242`
+    - [解决Python3下打印utf-8字符串出现UnicodeEncodeError的问题](https://www.binss.me/blog/solve-problem-of-python3-raise-unicodeencodeerror-when-print-utf8-string/)
+
 Continuously updated...

@@ -129,6 +129,10 @@ If we want to build a neural net for recognize image from CIFAR-10, what should 
     I met this error when I did training first time. My training data is loaded as numpy and it saved as `np.int`, and when it is transformed into PyTorch tensor, it is just a `torch.CharTensor`, but in PyTorch most operations are only defined on FloatTensor and DoubleTensor (and cuda.HalfTensor)[ref][ref_1]. So it will occur the error. The solution is using `numpy.astype(np.float32/np.float64)` to convert int into float.<br>
     [Here][ref_2] are some torch equivalents of numpy functions, maybe useful.
 
+- Error `optimizing a parameter that doesn't require gradients`
+    Solution: `optimizer.SGD(filter(lambda p: p.requires_grad, model.parameters()), lr=1e-3)`
+    - Reference
+        - [pytorch github #679: Allow optimizers to skip nn.Parameters that have requires_grad=False](https://github.com/pytorch/pytorch/issues/679)
 
 This article is not abundant for using PyTorch, but still wish it would be useful for you and let us progress together:thumbsup:!
 

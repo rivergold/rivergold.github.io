@@ -85,9 +85,37 @@ This module defines base classes for standard Python codecs (encoders and decode
 
     - [Standard Encodings](https://docs.python.org/3/library/codecs.html#standard-encodings)
 
-# Functions:
+# Packages:
+## Matplotlib
+- Draw heatmap
+    ```python
+    import matplotlib.pyplot as plt
+    import numpy as np
 
-# Problems and Solutions
+    a = np.random.random((24, 24))
+    plt.show(a, cmap='jet', interpolation='nearest')
+    ```
+
+- Reference
+    - [Stackoverflow: Plotting a 2D heatmap with Matplotlib](http://stackoverflow.com/questions/33282368/plotting-a-2d-heatmap-with-matplotlib)
+    - [Matplot: color example](https://matplotlib.org/examples/color/colormaps_reference.html)
+
+# Python Tips:
+- How print in one with dynamically refresh in Python?
+    - Python3
+        ```python
+        print(data, end'\r', flush=True)
+        ```
+
+    - Python2
+        ```python
+        import sys
+        sys.stdout.write('.')
+        # or from Python 2.6 you can import the `print` function from Python3
+        from __future__ import print_function
+        ```
+
+# Problems and Solutions:
 - `UnicodeEncodeError: 'ascii' codec can't encode character '\u22f1' in position 242`
     - [解决Python3下打印utf-8字符串出现UnicodeEncodeError的问题](https://www.binss.me/blog/solve-problem-of-python3-raise-unicodeencodeerror-when-print-utf8-string/)
 

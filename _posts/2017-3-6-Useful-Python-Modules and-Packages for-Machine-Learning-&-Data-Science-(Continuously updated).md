@@ -87,6 +87,8 @@ This module defines base classes for standard Python codecs (encoders and decode
 
 # Packages:
 ## Matplotlib
+
+### Tips
 - Draw heatmap
     ```python
     import matplotlib.pyplot as plt
@@ -99,6 +101,8 @@ This module defines base classes for standard Python codecs (encoders and decode
 - Reference
     - [Stackoverflow: Plotting a 2D heatmap with Matplotlib](http://stackoverflow.com/questions/33282368/plotting-a-2d-heatmap-with-matplotlib)
     - [Matplot: color example](https://matplotlib.org/examples/color/colormaps_reference.html)
+
+##
 
 # Python Tips:
 - How print in one with dynamically refresh in Python?
@@ -114,6 +118,24 @@ This module defines base classes for standard Python codecs (encoders and decode
         # or from Python 2.6 you can import the `print` function from Python3
         from __future__ import print_function
         ```
+
+- `enumerate` using details [(\*ref)](http://book.pythontips.com/en/latest/enumerate.html)
+    Common use is like followings,<br>
+    ```python
+    for counter, value in enumerate(some_list):
+        print(counter, value)
+    ```
+
+    `enumerate(iterable, start=0)`, optional parameters `start` decide the start number of counter,<br>
+    ```python
+    a = ['apple', 'banana', 'orange']
+    for counter, value in enumerate(a, 1)
+        print(counter, value)
+    >>> 1 apple
+    >>> 2 banana
+    >>> 3 orange
+    ```
+
 
 # Problems and Solutions:
 - `UnicodeEncodeError: 'ascii' codec can't encode character '\u22f1' in position 242`

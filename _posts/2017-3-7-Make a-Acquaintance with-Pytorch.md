@@ -51,6 +51,47 @@ Here are some main concepts about PyTorch, it will help you undertand how PyTorc
 - _Function_<br>
     `Function` is used to define formulas for differentiating operations on _Variable_.
 
+## Tips
+### Trick of making batch of training data with `torch.utils.data`
+Suppose that you have trainning data `x_train` and `y_train` which you load them via `numpy`. You wan to train your neural network with `batch_size=64`. A convenient method is using `torch.utils.data`,<br>
+1. Convert `x_train` and `y_train` into `tensor`
+    ```python
+    import torch
+    import torch.utils.data as utils_data
+    x = torch.from_numpy(x)
+    y = torch.from_numpy(y)
+    ```
+
+2. Build data loader
+    ```python
+    training_samples = utils_data.TensorDataset(x, y)
+    data_loader = utils_data.DataLoader(training_samples, batch_size=64)
+    ```
+
+3. Using data loader like followings during training
+    ```python
+    import torch.autograd.Variable as Variable
+
+    def train():
+        for epoch in range(10):
+            for i, data in enumerate(data_loader):
+                # Get each batch
+                inputs, labels = data
+                # Convert tensor into Variable
+                inputs, labels = Variable(inputs), Variable(labels)
+                # Zero the parameter gradients
+                optimizer.zero_grad()
+                # Forward + backward + optimize
+                outputs = neural_network.forward(inputs)
+                loss = loss_function(outputs, labels)
+                loss.backwark()
+                optimizer.step()    
+    ```
+
+- Reference
+    - [Pytorch doc: torch.utils.data](http://pytorch.org/docs/data.html)
+    - [Stackoverflow: PyTorch How to use DataLoader for custom Datasets](http://stackoverflow.com/questions/41924453/pytorch-how-to-use-dataloaders-for-custom-datasets)
+
 ## Let's Have a Try
 If we want to build a neural net for recognize image from CIFAR-10, what should we do?
 1. Prepare data<br>
@@ -130,7 +171,8 @@ If we want to build a neural net for recognize image from CIFAR-10, what should 
     [Here][ref_2] are some torch equivalents of numpy functions, maybe useful.
 
 - Error `optimizing a parameter that doesn't require gradients`
-    Solution: `optimizer.SGD(filter(lambda p: p.requires_grad, model.parameters()), lr=1e-3)`
+    Solution:<br>
+    `optimizer.SGD(filter(lambda p: p.requires_grad, model.parameters()), lr=1e-3)`
     - Reference
         - [pytorch github #679: Allow optimizers to skip nn.Parameters that have requires_grad=False](https://github.com/pytorch/pytorch/issues/679)
 

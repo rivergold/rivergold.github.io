@@ -85,6 +85,17 @@ This module defines base classes for standard Python codecs (encoders and decode
 
     - [Standard Encodings](https://docs.python.org/3/library/codecs.html#standard-encodings)
 
+## random
+This module implements pseudo-random number generators for various distributions.
+
+- `random.shuffle(x)`
+    Shuffle the squence x in place<br>
+    ```python
+    a = [1, 2, 3, 4]
+    random.shuffle(a)
+    >>> [2, 1, 4, 3]
+    ```
+
 # Packages:
 ## Matplotlib
 
@@ -136,6 +147,8 @@ This module defines base classes for standard Python codecs (encoders and decode
     >>> 3 orange
     ```
 
+# Valuable Websites
+- [python3-cookbook](http://python3-cookbook.readthedocs.io/zh_CN/latest/index.html)
 
 # Problems and Solutions:
 - `UnicodeEncodeError: 'ascii' codec can't encode character '\u22f1' in position 242`

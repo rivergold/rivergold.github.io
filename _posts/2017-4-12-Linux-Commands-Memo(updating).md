@@ -54,6 +54,36 @@
         ```
         And it will create a file named `.condarc` in `~/` folder.
 
+- How can *Windows client* visit *Linux Host* and send/copy files?
+    - Install SSH Clients on windows client computer
+    - Using `ssh` can visit and log remote linux host
+    - `pscp` command can send/download files to/from remote linux host
+        ```shell
+        pscp [options] source de
+        ```
+
+        - send file to linux host
+            ```shell
+            pscp <windows file path> <linux user-name>@<ip>:<path>
+            ```
+
+        - copy file from linux host
+            ```shell
+            pscp <linux user-name>@<ip>:<file path> <windows path>
+            ```
+
+- `wget` command
+    ```shell
+    wget [options] <url>
+    ```
+
+    | Options |  whole  |                Description                         |
+    |:--:|:------------:|:--------------------------------------------------:|
+    | -c | --continue | Continue getting a partially-downloaded file. |
+
+- References
+    - [每天一个linux命令（61）：wget命令](http://www.cnblogs.com/peida/archive/2013/03/18/2965369.html)
+    - [Computer Hope: Linux wget command](https://www.computerhope.com/unix/wget.htm)
 
 [1]:http://stackoverflow.com/questions/2518127/how-do-i-reload-bashrc-without-logging-out-and-back-in
 [2]:http://askubuntu.com/questions/56326/how-do-i-rename-a-directory-via-the-command-line

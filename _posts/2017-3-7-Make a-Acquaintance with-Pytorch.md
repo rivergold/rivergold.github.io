@@ -88,9 +88,50 @@ Suppose that you have trainning data `x_train` and `y_train` which you load them
                 optimizer.step()    
     ```
 
+- **Pay attention!**
+    If training data is too large to read all into memory, it is a solution to read a batch from training data. Pytorch supports buid a `custom dataset` using `torch.utils.Dataset`.<br>
+    Class `torch.utils.Dataset` is ([\*ref](http://pytorch.org/docs/_modules/torch/utils/data/dataset.html#Dataset))
+    ```python
+    class Dataset(object):
+    """An abstract class representing a Dataset.
+
+    All other datasets should subclass it. All subclasses should override
+    ``__len__``, that provides the size of the dataset, and ``__getitem__``,
+    supporting integer indexing in range from 0 to len(self) exclusive.
+    """
+    def __getitem__(self, index):
+        raise NotImplementedError
+
+    def __len__(self):
+        raise NotImplementedError
+    ```
+
+    You need to rewrite `__getitem__` and `__len__` functions ([\*ref](https://discuss.pytorch.org/t/loading-huge-data-functionality/346/10)), the followings show a example:<br>
+    ```python
+    class LSPDataSet(utils_data.Dataset):
+        def __init__(self, config):
+            self.dataset_path = config['dataset_path']
+            self.num_samples =config['train_data_size']
+            self.ids_list = list(range(1, self.num_samples + 1))
+            random.shuffle(self.ids_list)
+
+        def __getitem__(self, index):
+            image = Image.open('{}train/{:>06}.png'.format(self.dataset_path, self.ids_list[index]))
+            image = np.array(image)
+            image = np.rollaxis(image, 2, 0)
+            label = np.load('{}train_label(pytorch)/{:>06}.npy'.format(self.dataset_path, self.ids_list[index]))
+            image = np.array(image).astype(np.float32)
+            label = np.array(label).astype(np.int)
+            return image, label
+
+        def __len__(self):
+            return len(self.ids_list)
+    ```
+
 - Reference
     - [Pytorch doc: torch.utils.data](http://pytorch.org/docs/data.html)
     - [Stackoverflow: PyTorch How to use DataLoader for custom Datasets](http://stackoverflow.com/questions/41924453/pytorch-how-to-use-dataloaders-for-custom-datasets)
+    - [PyTorch Forums: Loading huge data functionality](https://discuss.pytorch.org/t/loading-huge-data-functionality/346)
 
 ## Let's Have a Try
 If we want to build a neural net for recognize image from CIFAR-10, what should we do?

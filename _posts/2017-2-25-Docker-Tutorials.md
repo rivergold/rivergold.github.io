@@ -141,6 +141,23 @@ This is a tutorial about base operation of Docker.
 
         - [Linux: Running GUI apps with Docker](http://fabiorehm.com/blog/2014/09/11/running-gui-apps-with-docker/)
 
+- Using **nvidia-docker** run cuda in docker container.
+    - Install **nvidia-docker** from [here]()
+    - Problems and Solutions
+        - `Error: Could not load UVM kernel module. Is nvidia-modprobe installed?`
+            - Install `nvidia-modprobe`([\*ref](https://askubuntu.com/questions/841824/how-to-install-nvidia-modprobe))<br>
+            ```shell
+            sudo apt-add-repository multiverse
+            sudo apt update
+            sudo apt install nvidia-modprobe
+            ```
+
+        - `Error response from daemon: create nvidia_driver_352.63: create nvidia_driver_352.63: Error looking up volume plugin nvidia-docker: plugin not found.`
+            1. Check the status of the plugin using via `service nvidia-docker status` or `systemctl status nvidia-docker`
+            2. run `sudo nvidia-docker-plugin` in shell
+            3. restart docker `sudo restart docker`
+            4. logout
+            5. test `nvidia-docker run --rm nvidia/cuda nvidia-smi` again
 
 ## References
 - [Docker Toolbox, Docker Machine, Docker Compose, Docker WHAT!?](https://nickjanetakis.com/blog/docker-toolbox-docker-machine-docker-compose-docker-wtf)

@@ -81,9 +81,12 @@
     |:--:|:------------:|:--------------------------------------------------:|
     | -c | --continue | Continue getting a partially-downloaded file. |
 
-- References
-    - [每天一个linux命令（61）：wget命令](http://www.cnblogs.com/peida/archive/2013/03/18/2965369.html)
-    - [Computer Hope: Linux wget command](https://www.computerhope.com/unix/wget.htm)
+    - References
+        - [每天一个linux命令（61）：wget命令](http://www.cnblogs.com/peida/archive/2013/03/18/2965369.html)
+        - [Computer Hope: Linux wget command](https://www.computerhope.com/unix/wget.htm)
+
+- How to see GPU state in unbuntu ([\*ref](https://unix.stackexchange.com/questions/38560/gpu-usage-monitoring-cuda))
+    - Run `watch -n 0.5 nvidia-smi` in terminal
 
 [1]:http://stackoverflow.com/questions/2518127/how-do-i-reload-bashrc-without-logging-out-and-back-in
 [2]:http://askubuntu.com/questions/56326/how-do-i-rename-a-directory-via-the-command-line

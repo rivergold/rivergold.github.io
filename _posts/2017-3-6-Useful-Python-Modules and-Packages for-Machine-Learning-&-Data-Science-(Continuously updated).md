@@ -2,6 +2,11 @@ Python is a language which is flexible and easy to learn. And it has lots of con
 
 In this article, I summarized some useful modules and packages I have used for mackine learning and data science. Hope it will give you some help or guidance:smiley:.
 
+# Valuable Websites
+- [python3-cookbook](http://python3-cookbook.readthedocs.io/zh_CN/latest/index.html)
+
+- [Unofficial Windows Binaries for Python Extension Packages](http://www.lfd.uci.edu/~gohlke/pythonlibs/)
+
 # Modules:
 ## pickle:
 1. What is pickle?
@@ -109,6 +114,22 @@ This module implements pseudo-random number generators for various distributions
     plt.show(a, cmap='jet', interpolation='nearest')
     ```
 
+- Refresh picture([\*ref](https://stackoverflow.com/questions/20936817/how-do-i-redraw-an-image-using-pythons-matplotlib))
+    ```python
+    fig, ax = plt.subplots(figsize=(12,8))
+    fig.show()
+    plt.pause(0.5)
+    for i in range(100):
+        ax.plot(<your data>)
+        fig.canvas.draw()
+    ```
+
+- Change figure window name([\*ref](https://stackoverflow.com/questions/5812960/change-figure-window-title-in-pylab))
+    ```python
+    fig, ax = plt.subplots(figsize=(12,8))
+    fig.canvas.set_window_title(<window title>)
+    ```
+
 - Reference
     - [Stackoverflow: Plotting a 2D heatmap with Matplotlib](http://stackoverflow.com/questions/33282368/plotting-a-2d-heatmap-with-matplotlib)
     - [Matplot: color example](https://matplotlib.org/examples/color/colormaps_reference.html)
@@ -147,8 +168,11 @@ This module implements pseudo-random number generators for various distributions
     >>> 3 orange
     ```
 
-# Valuable Websites
-- [python3-cookbook](http://python3-cookbook.readthedocs.io/zh_CN/latest/index.html)
+## C++ Embed Python
+### Reference
+- [Embedding Python in C/C++: Part I](https://www.codeproject.com/Articles/11805/Embedding-Python-in-C-C-Part-I)
+
+- [CSDN Blog: C++调用python](http://blog.csdn.net/marising/article/details/2917892)
 
 # Problems and Solutions:
 - `UnicodeEncodeError: 'ascii' codec can't encode character '\u22f1' in position 242`

@@ -129,7 +129,7 @@ This is a tutorial about base operation of Docker.
             docker run --it -e DISPLAY=<your computer ip>:0.0 <image> /bin/bash
             ```
     - *Problem*
-        - Error: `xhost:  unable to open display`  
+        - Error: `xhost:  unable to open display`(\*[ref](https://forums.freebsd.org/threads/50613/))  
             Use `rm ~/.Xauthority`, then try again previous steps.
 
     - References

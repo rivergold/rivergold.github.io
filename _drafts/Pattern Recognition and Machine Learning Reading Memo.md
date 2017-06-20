@@ -23,4 +23,15 @@ Bayesian Theory
 <p align="center">
     <img src='http://i1.piimg.com/586835/729ee1b656fa2098.png'>
 </p>
+
 需要注意的是，这种表示方法，n是在上面的
+
+# Graphical Models
+## Basics
+Bayesian Networks
+: also known as *directed graphical models*
+
+Markov Random Fields
+: also known as undirected graphical models
+
+For the purpose of solving inference problems, it is often convenient to convert both directed and undirected graphs into a different representation called a *factor graph*.

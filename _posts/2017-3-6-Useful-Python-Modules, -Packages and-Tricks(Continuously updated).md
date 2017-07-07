@@ -90,6 +90,18 @@ This module defines base classes for standard Python codecs (encoders and decode
 
     - [Standard Encodings](https://docs.python.org/3/library/codecs.html#standard-encodings)
 
+## shutil
+> The shutil module offers a number of high-level operations on files and collections of files. In particular, functions are provided which support file copying and removal.
+
+How to rename a folder?
+: - Using `os.rename(<old folder path>, <new folder path>)`
+  - Using `shutil.move(<old folder path>, <new folder path>)`
+
+**Reference**
+: - [stackoverflow: How to rename a file using Python](https://stackoverflow.com/questions/2491222/how-to-rename-a-file-using-python)
+  - [stackoverflow: When using python os.rmdir, get PermissionError: [WinError 5] Access is denied](https://stackoverflow.com/questions/36360167/when-using-python-os-rmdir-get-permissionerror-winerror-5-access-is-denied)
+
+
 ## random
 This module implements pseudo-random number generators for various distributions.
 
@@ -134,39 +146,63 @@ This module implements pseudo-random number generators for various distributions
     - [Stackoverflow: Plotting a 2D heatmap with Matplotlib](http://stackoverflow.com/questions/33282368/plotting-a-2d-heatmap-with-matplotlib)
     - [Matplot: color example](https://matplotlib.org/examples/color/colormaps_reference.html)
 
-##
 
 # Python Tips:
-- How print in one with dynamically refresh in Python?
-    - Python3
+## Change python packages download source.
+pip
+: - On Windows:
+    - New a folder called `pip` under path `c:/user/<your user name>/`, and new a file name `pip.ini`, write followings in it:
         ```python
-        print(data, end'\r', flush=True)
+        [global]
+        index-url = https://pypi.tuna.tsinghua.edu.cn/simple
         ```
 
-    - Python2
-        ```python
-        import sys
-        sys.stdout.write('.')
-        # or from Python 2.6 you can import the `print` function from Python3
-        from __future__ import print_function
-        ```
+: - On Linux:
+    - New a folder called '.pip' under `~/`, create a file named `pip.conf` and write the same as Windows in the file.<br>
 
-- `enumerate` using details [(\*ref)](http://book.pythontips.com/en/latest/enumerate.html)
-    Common use is like followings,<br>
+conda
+: Input followings in terminal
+: ```python
+  conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+  conda config --set show_channel_urls yes
+  ```
+
+Reference
+: - [csdn: 更改pip源至国内镜像，显著提升下载速度](http://blog.csdn.net/zhangchilei/article/details/53893002)
+
+## How print in one with dynamically refresh in Python?
+- Python3
     ```python
-    for counter, value in enumerate(some_list):
-        print(counter, value)
+    print(data, end'\r', flush=True)
     ```
 
-    `enumerate(iterable, start=0)`, optional parameters `start` decide the start number of counter,<br>
+- Python2
     ```python
-    a = ['apple', 'banana', 'orange']
-    for counter, value in enumerate(a, 1)
-        print(counter, value)
-    >>> 1 apple
-    >>> 2 banana
-    >>> 3 orange
+    import sys
+    sys.stdout.write('.')
+    # or from Python 2.6 you can import the `print` function from Python3
+    from __future__ import print_function
     ```
+
+## `enumerate` using details [(\*ref)](http://book.pythontips.com/en/latest/enumerate.html)
+Common use is like followings,<br>
+```python
+for counter, value in enumerate(some_list):
+    print(counter, value)
+```
+
+`enumerate(iterable, start=0)`, optional parameters `start` decide the start number of counter,<br>
+```python
+a = ['apple', 'banana', 'orange']
+for counter, value in enumerate(a, 1)
+    print(counter, value)
+>>> 1 apple
+>>> 2 banana
+>>> 3 orange
+```
+## Parallel in Python
+Reference
+: - [知乎专栏： Python多核并行计算](https://zhuanlan.zhihu.com/p/24311810)
 
 ## C++ Embed Python
 ### Reference

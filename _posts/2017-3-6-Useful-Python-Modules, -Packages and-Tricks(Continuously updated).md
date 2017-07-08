@@ -200,6 +200,27 @@ for counter, value in enumerate(a, 1)
 >>> 2 banana
 >>> 3 orange
 ```
+
+## Create a directory/folder if it does not exist
+```python
+import os
+if not os.path.exists(<directory_path>):
+    os.makedirs(<directory_path>)
+```
+
+Reference
+: - [stackoverflow: How can I create a directory if it does not exist?](https://stackoverflow.com/questions/273192/how-can-i-create-a-directory-if-it-does-not-exist)
+
+## How to run `pip` in python script?
+```python
+import pip
+pip.main(['install', '-r'. 'requirements.txt'])
+```
+
+Reference
+: - [stackoverflow: use “pip install/uninstall” inside a python script](https://stackoverflow.com/questions/12937533/use-pip-install-uninstall-inside-a-python-script)
+: - [stackoverflow: How to pip install packages according to requirements.txt from a local directory?](https://stackoverflow.com/questions/7225900/how-to-pip-install-packages-according-to-requirements-txt-from-a-local-directory)
+
 ## Parallel in Python
 Reference
 : - [知乎专栏： Python多核并行计算](https://zhuanlan.zhihu.com/p/24311810)

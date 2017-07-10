@@ -2,10 +2,14 @@ Python is a language which is flexible and easy to learn. And it has lots of con
 
 In this article, I summarized some useful modules and packages I have used for mackine learning and data science. Hope it will give you some help or guidance:smiley:.
 
+<br>
+
 # Valuable Websites
 - [python3-cookbook](http://python3-cookbook.readthedocs.io/zh_CN/latest/index.html)
 
 - [Unofficial Windows Binaries for Python Extension Packages](http://www.lfd.uci.edu/~gohlke/pythonlibs/)
+
+<br>
 
 # Modules:
 ## pickle:
@@ -24,6 +28,7 @@ In this article, I summarized some useful modules and packages I have used for m
 
     - Load binary data in disk into python
     `loaded_data = pickle.load(file)`
+
 
 ## argparse
 1. What is argparse?
@@ -76,11 +81,13 @@ In this article, I summarized some useful modules and packages I have used for m
         - Parse arguments
             `args = parser.parse_args()`
 
+
 ## collections
 This module implements specialized container datatypes providing alternatives to Python’s general purpose built-in containers, dict, list, set, and tuple.
 
 - Reference
     - [不可不知的Python模块: collections](http://www.zlovezl.cn/articles/collections-in-python/)
+
 
 ## codecs
 This module defines base classes for standard Python codecs (encoders and decoders) and provides access to the internal Python codec registry, which manages the codec and error handling lookup process.
@@ -89,6 +96,7 @@ This module defines base classes for standard Python codecs (encoders and decode
     - [Offical Website](https://docs.python.org/3/library/codecs.html#standard-encodings)
 
     - [Standard Encodings](https://docs.python.org/3/library/codecs.html#standard-encodings)
+
 
 ## shutil
 > The shutil module offers a number of high-level operations on files and collections of files. In particular, functions are provided which support file copying and removal.
@@ -112,6 +120,8 @@ This module implements pseudo-random number generators for various distributions
     random.shuffle(a)
     >>> [2, 1, 4, 3]
     ```
+
+<br>
 
 # Packages:
 ## Matplotlib
@@ -147,6 +157,8 @@ This module implements pseudo-random number generators for various distributions
     - [Matplot: color example](https://matplotlib.org/examples/color/colormaps_reference.html)
 
 
+<br>
+
 # Python Tips:
 ## Change python packages download source.
 pip
@@ -170,6 +182,7 @@ conda
 Reference
 : - [csdn: 更改pip源至国内镜像，显著提升下载速度](http://blog.csdn.net/zhangchilei/article/details/53893002)
 
+
 ## How print in one with dynamically refresh in Python?
 - Python3
     ```python
@@ -183,6 +196,7 @@ Reference
     # or from Python 2.6 you can import the `print` function from Python3
     from __future__ import print_function
     ```
+
 
 ## `enumerate` using details [(\*ref)](http://book.pythontips.com/en/latest/enumerate.html)
 Common use is like followings,<br>
@@ -201,6 +215,7 @@ for counter, value in enumerate(a, 1)
 >>> 3 orange
 ```
 
+
 ## Create a directory/folder if it does not exist
 ```python
 import os
@@ -210,6 +225,7 @@ if not os.path.exists(<directory_path>):
 
 Reference
 : - [stackoverflow: How can I create a directory if it does not exist?](https://stackoverflow.com/questions/273192/how-can-i-create-a-directory-if-it-does-not-exist)
+
 
 ## How to run `pip` in python script?
 ```python
@@ -221,15 +237,19 @@ Reference
 : - [stackoverflow: use “pip install/uninstall” inside a python script](https://stackoverflow.com/questions/12937533/use-pip-install-uninstall-inside-a-python-script)
 : - [stackoverflow: How to pip install packages according to requirements.txt from a local directory?](https://stackoverflow.com/questions/7225900/how-to-pip-install-packages-according-to-requirements-txt-from-a-local-directory)
 
+
 ## Parallel in Python
 Reference
 : - [知乎专栏： Python多核并行计算](https://zhuanlan.zhihu.com/p/24311810)
+
 
 ## C++ Embed Python
 ### Reference
 - [Embedding Python in C/C++: Part I](https://www.codeproject.com/Articles/11805/Embedding-Python-in-C-C-Part-I)
 
 - [CSDN Blog: C++调用python](http://blog.csdn.net/marising/article/details/2917892)
+
+<br>
 
 # Problems and Solutions:
 - `UnicodeEncodeError: 'ascii' codec can't encode character '\u22f1' in position 242`

@@ -59,6 +59,12 @@ layout: default
     {% if site.comments.provider and page.comments %}
       {% include comments.html %}
     {% endif %}
+
+    <div>
+    {% include disqus.html %}
+    </div>
+
+
   </article>
 
   {% comment %}<!-- only show related on a post page when not disabled -->{% endcomment %}

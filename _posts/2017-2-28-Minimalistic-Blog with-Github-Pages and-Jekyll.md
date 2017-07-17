@@ -69,6 +69,10 @@ By the way, my blog is built based on _Minimal Mistakes Jekyll Theme_ which is c
 
      For more details, you should browse [Jekyll Docs](https://jekyllrb.com/docs/home/).
 
+8. Add **Comment** to your blog.
+    **Reference**<br>
+    - [Using Disqus to a Jekyll Blog](http://sgeos.github.io/jekyll/disqus/2016/02/14/adding-disqus-to-a-jekyll-blog.html)
+
 Wish you will build your favurite blog by Github Pages and Jekyll :relaxed:.
 
 [ref_1]:https://git-scm.com/

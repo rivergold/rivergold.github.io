@@ -75,6 +75,18 @@ By the way, my blog is built based on _Minimal Mistakes Jekyll Theme_ which is c
 
 Wish you will build your favurite blog by Github Pages and Jekyll :relaxed:.
 
+# Problems and Solutions
+- How to change font size of paragraphs in minimal-mistakes?
+    Add followings in `_page.scss`
+    ```
+    .article-wrap p {
+    font-size: 16px; /* 16 is the default increase if you want it larger */
+    }
+    ```
+    Ref: [Changing font size #167](https://github.com/mmistakes/minimal-mistakes/issues/167)
+
+
+
 [ref_1]:https://git-scm.com/
 [ref_2]:https://github.com/
 [ref_3]:https://www.ruby-lang.org/en/downloads/

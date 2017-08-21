@@ -406,3 +406,7 @@
   font-size: $type-size-6;
   text-transform: uppercase;
 }
+
+.article-wrap p {
+  font-size: 12px; /* 16 is the default increase if you want it larger */
+}

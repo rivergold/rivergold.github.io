@@ -1,4 +1,103 @@
 # SVM
+## 基础
+**SVM的核心思想**： 找到一个超平面$\textbf{w}^T\textbf{x} + b = 0$将两类数据分离，且数据距离超平面有一定的间隔（margin）。<br>
+**推导与理解**：样本$x_i$到超平面$\textbf{w}^T\textbf{x} + b = 0$的距离为
+<p>
+
+$$
+\gamma_i = \frac{y_i(\textbf{w}^Tx_i + b)}{||\textbf{w}||}
+$$
+
+几何间隔(Geometric Margin)为所有样本点中到超平面距离最小值（SVM目的在于让这个最近的距离最大化）：
+$$
+\gamma = \min\limits_{i=1,2,...,N}\frac{y_i(\textbf{w}^Tx_i + b)}{||\textbf{w}||}
+$$
+
+函数间隔(Functional Margin): 所有样本点中到超平面的未经规范化的距离的最小值
+$$
+\hat{\gamma_i} = y_i(\textbf{w}^Tx_i + b)
+$$
+
+$$
+\hat{\gamma} = \min\limits_{i=1,2,...,N}\hat{\gamma_i}
+$$
+
+</p>
+
+因此，SVM目标函数为
+<p>
+
+$$
+\max\limits_{\textbf{w}, b} \gamma
+$$
+$$
+s.t.{~~~} \frac{y_i(\textbf{w}^Tx_i + b)}{||\textbf{w}||} \ge \gamma, ~~i = 1, 2,...,N
+$$
+
+因为$\gamma = \frac{\hat{\gamma}}{||\textbf{w}||}$,所以目标函数可转化为<br>
+$$
+\max\limits_{\textbf{w}, b} \frac{\hat\gamma}{||\textbf{w}||}
+$$
+$$
+s.t.{~~~} y_i(\textbf{w}^Tx_i + b)\ge\hat\gamma, ~i=1,2,...,N
+$$
+
+因为函数间隔$\hat\gamma$不影响最优化问题的解，假设将$\textbf{w}$和$b$按比例变为$\lambda\textbf{w}$和$\lambda b$，则函数间隔为$\lambda\hat\gamma$。函数间隔的这一改变并不影响上面最优化问题的不等数约束，也不影响目标函数优化的结果，即变化前后是等价的最优化问题。所以，可以令$\hat\gamma=1$。
+
+<b>理解</b>: 换个角度思考下，因为成比例$\lambda$改变$\textbf{w}, b$，$\hat\gamma$也会成比例改变，所以如果取$\lambda = \frac{1}{\hat\gamma}$，最优化问题也是不变的。这样就可以理解为什么令$\hat\gamma=1$是可以的了。
+
+则目标函数可以写为，
+$$
+\max\limits_{\textbf{w}, b} \frac{1}{||\textbf{w}||}
+$$
+$$
+s.t.{~~~} y_i(\textbf{w}^Tx_i + b)\ge1, ~i=1,2,...,N
+$$
+转化为最小化问题为，
+$$
+\min\limits_{\textbf{w}, b}\frac{1}{2}||\textbf{w}||^2
+$$
+$$
+s.t.{~~~} y_i(\textbf{w}^Tx_i + b)\ge1, ~i=1,2,...,N
+$$
+(注：$||\textbf{w}||^2 = \textbf{w}^T\textbf{w}$)
+
+该优化问题为凸优化问题(有约束的)。
+
+<b>凸优化问题</b>: 指约束优化问题
+$$
+\min\limits_{w} f(w)
+$$
+$$
+s.t.{~~~} g_i(w) \le 0, {~~}i=1,2,...,k
+$$
+$$
+{~~~~~~~} h_i(w) = 0, {~~}i=1,2,...,l
+$$
+其中，目标函数$f(w)$和约束函数$g_i(w)$都是$\textbf{R}^n$上连续可微的凸函数，约束函数$h_i(w)$是$\textbf{R}^n$上的仿射函数。
+(注：当函数满足$f(x) = ax + b,~a\in\textbf{R}^n,~b\in\textbf{R}^n,~x\in\textbf{R}^n$时，其为仿射函数。即函数为一次函数，对应空间中对向量线性变换再平移。)
+</p>
+
+**最优化求解**: 利用拉格朗日对偶性(Lagrange duality)。在约束最优化问题中，常常利用对偶性将原始问题转化为对偶问题，通过解对偶问题而得到原始问题的解。
+<br>
+**原始问题**: 假设$f(x), c_i(x), h_j(x)$是定义在$\textbf{R}^n$上的连续可微函数，考虑约束最优化问题
+<p>
+
+$$
+\min\limits_{w} f(w)
+$$
+$$
+s.t.{~~~} c_i(w) \le 0, {~~}i=1,2,...,k
+$$
+$$
+{~~~~~~~} h_j(w) = 0, {~~}j=1,2,...,l
+$$
+此约束最优化问题为原始问题。
+引入
+</p>
+
+
+
 ## 核函数
 当数据是非线性可分时（无法用$\textbf{w}^T\textbf{x} + b$超平面分开），通常需要进行一个非线性变换，将非线性问题转化为线性问题。
 

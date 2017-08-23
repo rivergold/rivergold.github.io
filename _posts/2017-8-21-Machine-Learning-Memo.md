@@ -225,6 +225,12 @@ b^\star = y_j - \sum_{i=1}^{N}\alpha_i y_i\langle \textbf{x}^{(i)}, \textbf{x}^{
 $$
 </p>
 
+***Reference***
+- [统计学习方法 李航](https://book.douban.com/subject/10590856/)
+- [StackExchange: How does a Support Vector Machine (SVM) work?](https://stats.stackexchange.com/questions/23391/how-does-a-support-vector-machine-svm-work)
+- [知乎：支持向量机中的函数距离和几何距离怎么理解？](https://www.zhihu.com/question/20466147)
+- [CS229 Lecture notes: Part V Support Vector Machine](http://cs229.stanford.edu/notes/cs229-notes3.pdf)
+
 ## 核函数
 当数据是非线性可分时（无法用$\textbf{w}^T\textbf{x} + b$超平面分开），通常需要进行一个非线性变换，将非线性问题转化为线性问题。
 

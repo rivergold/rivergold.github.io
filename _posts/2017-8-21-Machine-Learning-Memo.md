@@ -208,10 +208,10 @@ $$
 \nabla_bL(\textbf{w}^\star, b\star, \alpha^\star) = -\sum_{i=1}^{N}\alpha^\star y_i = 0
 $$
 $$
-\nabla_\alpha L({\textbf{w}^{\star}}^T, b\star, \alpha^\star) = \alpha_i^\star(y_i(\textbf{w}^{{\star}^T}\textbf{x}^{(i)} + b) - 1) = 0, ~ i = 1,2,..,N
+\nabla_\alpha L({\textbf{w}^\star}^T, b\star, \alpha^\star) = \alpha_i^\star(y_i({\textbf{w}^\star}^T\textbf{x}^{(i)} + b) - 1) = 0, ~ i = 1,2,..,N
 $$
 $$
-y_i({\textbf{w}^{\star}}^T\textbf{x}^{(i)} + b) - 1 \ge 0, ~ i = 1,2,...,N
+y_i({\textbf{w}^\star}^T\textbf{x}^{(i)} + b) - 1 \ge 0, ~ i = 1,2,...,N
 $$
 $$
 \alpha^\star \ge 0, ~ i = 1,2,...,N

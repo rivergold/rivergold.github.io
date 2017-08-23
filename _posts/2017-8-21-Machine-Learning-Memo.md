@@ -85,19 +85,53 @@ $$
 <p>
 
 $$
-\min\limits_{w} f(w)
+\min\limits_{x} f(x)
 $$
 $$
-s.t.{~~~} c_i(w) \le 0, {~~}i=1,2,...,k
+s.t.{~~~} c_i(x) \le 0, {~~}i=1,2,...,k
 $$
 $$
-{~~~~~~~~~~} h_j(w) = 0, {~~}j=1,2,...,l
+{~~~~~~~~~~} h_j(x) = 0, {~~}j=1,2,...,l
 $$
 此约束最优化问题为原始问题。
 <br>
 引入拉格朗日函数(Generalized Lagrange Function),
 $$
-L(x, \textbf{\alpha}, \bf{\beta}) = 
+L(x, \alpha, \beta) = f(x) + \sum_{i=1}^{k}\alpha_ic_i(x) + \sum_{j=1}^{l}\beta_jh_j(x)
+$$
+这里，$\textbf{x} = (x_1, x_2, ..., x_n)^T \in \textbf{R}^n$, $\alpha_i, \beta_j$是拉格朗日乘子，$\alpha_i \ge0$，x的函数
+$$
+\theta_P = \max\limits_{\alpha, \beta: \alpha_i\ge0}L(x, \alpha, \beta)
+$$
+下标$P$表示原始问题。
+<br>
+因为$c_i(x)\le0, h_j(x)=0, \alpha_i\ge0$, 所以在满足约束条件的情况下,
+$$
+\theta_P(x) = \max\limits_{\alpha, \beta: \alpha_i\ge0}L(x, \alpha, \beta) = f(x)
+$$
+则优化问题表示为,
+$$
+\min\limits_{x}\theta_P(x) = \min\limits_{x}\max\limits_{\alpha, \beta: \alpha_i\ge0}L(x, \alpha, \beta)
+$$
+<b>对偶问题</b>:
+$$
+\theta_D = \max\limits_{x}L(x, \alpha, \beta)
+$$
+$$
+\max\limits_{\alpha, \beta: \alpha_i\ge0}\theta_D(\alpha, \beta) = \max\limits_{\alpha, \beta: \alpha_i\ge0}\min\limits_{x}L(x, \alpha, \beta)
+$$
+<br>
+<b>定理C.1</b>: 若原始问题和对偶问题都有最优值，则
+$$
+d^\star = \max\limits_{\alpha, \beta: \alpha_i\ge0}\min\limits_{x}L(x, \alpha, \beta) \le \min\limits_{x}\max\limits_{\alpha, \beta: \alpha_i\ge0}L(x, \alpha, \beta) = p^\star
+$$
+因为， 对任意的$\alpha, \beta, x$，有
+$$
+\theta_D(\alpha, \beta) = \min\limits_{x}L(x, \alpha, \beta) \le L(x, \alpha, \beta) \le \max\limits_{\alpha, \beta: \alpha^i\ge0}L(x, \alpha, \beta) = \theta_P(x)
+$$
+当满足KKT条件时，
+$$
+d^\star = p^\star
 $$
 </p>
 

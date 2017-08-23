@@ -1,21 +1,21 @@
 # SVM
 ## 基础
 **SVM的核心思想**： 找到一个超平面$\textbf{w}^T\textbf{x} + b = 0$将两类数据分离，且数据距离超平面有一定的间隔（margin）。<br>
-**推导与理解**：样本$x_i$到超平面$\textbf{w}^T\textbf{x} + b = 0$的距离为
+**推导与理解**：样本$\textbf{x}^{(i)}$到超平面$\textbf{w}^T\textbf{x} + b = 0$的距离为
 <p>
 
 $$
-\gamma_i = \frac{y_i(\textbf{w}^Tx_i + b)}{||\textbf{w}||}
+\gamma_i = \frac{y_i(\textbf{w}^T\textbf{x}^{(i)} + b)}{||\textbf{w}||}
 $$
 
 几何间隔(Geometric Margin)为所有样本点中到超平面距离最小值（SVM目的在于让这个最近的距离最大化）：
 $$
-\gamma = \min\limits_{i=1,2,...,N}\frac{y_i(\textbf{w}^Tx_i + b)}{||\textbf{w}||}
+\gamma = \min\limits_{i=1,2,...,N}\frac{y_i(\textbf{w}^T\textbf{x}^{(i)} + b)}{||\textbf{w}||}
 $$
 
 函数间隔(Functional Margin): 所有样本点中到超平面的未经规范化的距离的最小值
 $$
-\hat{\gamma_i} = y_i(\textbf{w}^Tx_i + b)
+\hat{\gamma_i} = y_i(\textbf{w}^T\textbf{x}^{(i)} + b)
 $$
 
 $$
@@ -31,7 +31,7 @@ $$
 \max\limits_{\textbf{w}, b} \gamma
 $$
 $$
-s.t.{~~~} \frac{y_i(\textbf{w}^Tx_i + b)}{||\textbf{w}||} \ge \gamma, ~~i = 1, 2,...,N
+s.t.{~~~} \frac{y_i(\textbf{w}^T\textbf{x}^{(i)} + b)}{||\textbf{w}||} \ge \gamma, ~~i = 1, 2,...,N
 $$
 
 因为$\gamma = \frac{\hat{\gamma}}{||\textbf{w}||}$,所以目标函数可转化为<br>
@@ -39,7 +39,7 @@ $$
 \max\limits_{\textbf{w}, b} \frac{\hat\gamma}{||\textbf{w}||}
 $$
 $$
-s.t.{~~~} y_i(\textbf{w}^Tx_i + b)\ge\hat\gamma, ~i=1,2,...,N
+s.t.{~~~} y_i(\textbf{w}^T\textbf{x}^{(i)} + b)\ge\hat\gamma, ~i=1,2,...,N
 $$
 
 因为函数间隔$\hat\gamma$不影响最优化问题的解，假设将$\textbf{w}$和$b$按比例变为$\lambda\textbf{w}$和$\lambda b$，则函数间隔为$\lambda\hat\gamma$。函数间隔的这一改变并不影响上面最优化问题的不等数约束，也不影响目标函数优化的结果，即变化前后是等价的最优化问题。所以，可以令$\hat\gamma=1$。
@@ -51,19 +51,19 @@ $$
 \max\limits_{\textbf{w}, b} \frac{1}{||\textbf{w}||}
 $$
 $$
-s.t.{~~~} y_i(\textbf{w}^Tx_i + b)\ge1, ~i=1,2,...,N
+s.t.{~~~} y_i(\textbf{w}^T\textbf{x}^{(i)} + b)\ge1, ~i=1,2,...,N
 $$
 转化为最小化问题为，
 $$
 \min\limits_{\textbf{w}, b}\frac{1}{2}||\textbf{w}||^2
 $$
 $$
-s.t.{~~~} y_i(\textbf{w}^Tx_i + b)\ge1, ~i=1,2,...,N
+s.t.{~~~} y_i(\textbf{w}^T\textbf{x}^{(i)} + b)\ge1, ~i=1,2,...,N
 $$
 (注：$||\textbf{w}||^2 = \textbf{w}^T\textbf{w}$)
 <br>
 该优化问题为凸优化问题(有约束的)。
-
+<br>
 <b>凸优化问题</b>: 指约束优化问题
 $$
 \min\limits_{w} f(w)
@@ -129,13 +129,101 @@ $$
 $$
 \theta_D(\alpha, \beta) = \min\limits_{x}L(x, \alpha, \beta) \le L(x, \alpha, \beta) \le \max\limits_{\alpha, \beta: \alpha^i\ge0}L(x, \alpha, \beta) = \theta_P(x)
 $$
+<br>
+即，对偶问题的最优值(max value)始终小于等于原始问题的最优值(min value)。
+<br>
 当满足KKT条件时，
 $$
 d^\star = p^\star
 $$
 </p>
 
+**SVM最优解**:
+<p>
 
+$$
+L(\textbf{w}, b, \alpha) = \frac{1}{2}||\textbf{w}||^2 + \sum_{i=1}^{N}\alpha_i(1 - y_i(\textbf{w}^T\textbf{x}^{(i)} + b)) + \sum_{i}^{N}\alpha_i
+$$
+原问题，
+$$
+\min\limits_{\textbf{w}, b}\max\limits_{\alpha}L(\textbf{w}, \alpha, \beta)
+$$
+对偶问题，
+$$
+\max\limits_{\alpha}\min\limits_{\textbf{w}, b}L(\textbf{w}, \alpha, \beta)
+$$
+求解，
+(1). 求$\min\limits_{\textbf{w}, b}L(\textbf{w}, b, \alpha)$, 分别令$L(\textbf{w}, b, \alpha)$对$\textbf{w}$和$b$的偏导数为0
+$$
+\nabla_{\textbf{w}}L(\textbf{w}, b, \alpha) = \textbf{w} - \sum_{i=1}^{N}\alpha_iy_i\textbf{x}^{(i)} = 0
+$$
+$$
+\nabla_{\textbf{b}}L(\textbf{w}, b, \alpha) = \sum_{i=1}^{N}\alpha_iy_i = 0
+$$
+解得,
+$$
+\textbf{w} = \sum_{i=1}^{N}\alpha_i y_i \textbf{x}^{(i)}
+$$
+$$
+\sum_{i=1}^{N}\alpha_iy_i = 0
+$$
+将上述结果带入$L(\textbf{w}, b, \alpha)$中得，
+$$
+L(\textbf{w}, b, \alpha) = \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i \alpha_j y_i y_j \langle\textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle - \sum_{i=1}^{N}\alpha_i y_i(\langle\sum_{j=1}^{N}\alpha_i y_i \textbf{x}^{(j)}, \textbf{x}^{(i)}\rangle + b) + \sum_{i=1}^{N}\alpha_i
+$$
+$$
+= -\frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i \alpha_j y_i y_j\langle \textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle + \sum_{i=1}^{N}\alpha_i
+$$
+即，
+$$
+\min\limits_{\textbf{w}, b}L(\textbf{w}, b, \alpha) = -\frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i \alpha_j y_i y_j\langle \textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle + \sum_{i=1}^{N}\alpha_i
+$$
+(2). 求$\min\limits_{\textbf{w}, b}L(\textbf{w}, b, \alpha)$对$\alpha$的极大值
+$$
+\max\limits_{\alpha} -\frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i \alpha_j y_i y_j\langle \textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle + \sum_{i=1}^{N}\alpha_i
+$$
+$$
+s.t.{~~} \sum_{i=1}^{N}\alpha_i y_i = 0
+$$
+$$
+{~~~~~~~~~~~~~~~~~~~~~~~~}\alpha_i \ge 0, ~i=1,2,...,N
+$$
+转化为最小化问题，
+$$
+\min\limits_{\alpha} \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i \alpha_j y_i y_j\langle \textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle - \sum_{i=1}^{N}\alpha_i
+$$
+$$
+s.t.{~~} \sum_{i=1}^{N}\alpha_i y_i = 0
+$$
+$$
+{~~~~~~~~~~~~~~~~~~~~~~~~}\alpha_i \ge 0, ~i=1,2,...,N
+$$
+优化该目标函数，可得$\alpha$的最优解$\alpha^\star = (\alpha_1^\star, \alpha_2^\star,...,\alpha_N^\star)^T$
+<br>
+根据KKT条件，
+$$
+\nabla_\textbf{w}L(\textbf{w}^\star, b\star, \alpha^\star) = \textbf{w}^\star - \sum_{i=1}^{N}\alpha_i^\star y_i \textbf{x}^{(i)} = 0
+$$
+$$
+\nabla_bL(\textbf{w}^\star, b\star, \alpha^\star) = -\sum_{i=1}^{N}\alpha^\star y_i = 0
+$$
+$$
+\nabla_\alpha L(\textbf{w}^\star, b\star, \alpha^\star) = \alpha_i^\star(y_i(\textbf{w}^{{\star}^T}\textbf{x}^{(i)} + b) - 1) = 0, ~ i = 1,2,..,N
+$$
+$$
+y_i(\textbf{w}^{{\star}^T}\textbf{x}^{(i)} + b) - 1 \ge 0, ~ i = 1,2,...,N
+$$
+$$
+\alpha^\star \ge 0, ~ i = 1,2,...,N
+$$
+<b>结果：</b>存在$\alpha^\star = (\alpha_1^\star, \alpha_2^\star,...,\alpha_N^\star)^T$且存在下标为$j$的$\alpha_j^\star > 0$, 使得
+$$
+\textbf{w}^\star = \sum_{i=1}^{N}\alpha_i^\star y_i \textbf{x}^{(i)}
+$$
+$$
+b^\star = y_j - \sum_{i=1}^{N}\alpha_i y_i\langle \textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle
+$$
+</p>
 
 ## 核函数
 当数据是非线性可分时（无法用$\textbf{w}^T\textbf{x} + b$超平面分开），通常需要进行一个非线性变换，将非线性问题转化为线性问题。

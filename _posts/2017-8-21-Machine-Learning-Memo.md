@@ -287,3 +287,46 @@ $$K(\textbf{x}, \textbf{y}) = (1 + \textbf{x}^T \textbf{y})^2 = \varphi(\textbf{
 ***Reference***
 - [How to intuitively explain what a kernel is?](https://stats.stackexchange.com/questions/152897/how-to-intuitively-explain-what-a-kernel-is)
 - [知乎：SVM的核函数如何选取？](https://www.zhihu.com/question/21883548)
+
+# PCA
+## 数据基础知识
+**向量的表示:** 向量$\textbf{x}$是空间$R^n$的一个向量，$\mathbf{A} = (\mathbf{a_1}, \mathbf{a_2}, ..., \mathbf{a_n})$是空间$R^n$中的一组基，则$\mathbf{x}$可以表示为：
+<p>
+
+$$
+\textbf{x} = A{(x_1, x_2,..., x_n)}^T = x_1\mathbf{a_1} + x_2\mathbf{a_2} + ... + x_n\mathbf{a_n}
+$$
+则向量$\mathbf{x}$在空间$R^n$中以$\mathbf{A}$为基的坐标为$(x_1, x_2,..., x_n)$.
+</p>
+
+**基变换与坐标变换:** $\mathbf{A} = (\mathbf{a_1}, \mathbf{a_2}, ..., \mathbf{a_n})$和$\mathbf{B} = (\mathbf{b_1}, \mathbf{b_2}, ..., \mathbf{b_n})$分别是空间$R^n$中的两组基。向量$\mathbf{x}$是空间$R^n$的一个向量，其在$\mathbf{A}$中的坐标为$(x_1, x_2,..., x_n)$，则其在以$\mathbf{B}$为基时的坐标为：
+
+<p>
+
+根据基变换的相关知识，我们将基$\mathbf{A}$与基$\mathbf{B}$的变换关系描述为，
+$$
+\mathbf{B} = (\mathbf{b_1}, \mathbf{b_2}, ...,\mathbf{b_n}) = (\mathbf{a_1}, \mathbf{a_2}, ..., \mathbf{a_n})\left[\begin{matrix}
+  m_{11} & m_{12} & ... & m_{1n}\\
+  m_{21} & m_{22} & ... & m_{1n}\\
+  ...    & ...    & ... & ...   \\
+  m_{n1} & m_{n2} & ... & m_{nn}
+\end{matrix}\right] = \mathbf{A} \mathbf{T}
+$$
+则向量$\mathbf{x}$在基$\mathbf{B}$中的坐标为：
+$$
+\mathbf{x} = \mathbf{A}[\mathbf{x}]_{A} = \mathbf{B} [\mathbf{x}]_{B}
+$$
+$$
+\mathbf{A}[\mathbf{x}]_{A} = \mathbf{AT} [\mathbf{x}]_{B}
+$$
+$$
+[\mathbf{x}]_{B} = \mathbf{T}^{-1}[\mathbf{x}]_{A}
+$$
+其中，$\lbrack\mathbf{x}\rbrack_{A}$表示向量$\mathbf{x}$在基$\mathbf{A}$中的坐标。
+</p>
+
+***Reference:***
+- [豆瓣：矩阵基的变换和坐标理解](https://www.douban.com/note/549051760/)
+- [可汗学院-线性代数：基变换的矩阵](http://open.163.com/movie/2011/6/7/F/M82ICR1D9_M83J6M77F.html)
+- [Tex: Which “bold” style is recommended for matrix notation?](https://tex.stackexchange.com/questions/199789/which-bold-style-is-recommended-for-matrix-notation)
+- [KaTex: how to output a matrix? #667](https://github.com/Khan/KaTeX/issues/667)

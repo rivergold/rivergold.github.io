@@ -334,8 +334,13 @@ $$
 **思想：** 在信号处理中，人们认为噪声的方差较小，而有用信息的方差较大。因此我们希望找到一种变换，将原始空间中的基变换为另一个空间的一组可以有效描述有用信息的基，即在新基下，样本在基的方向上方差最大。<br>
 **理解：** 在原始空间中，找到样本方差最大的方向（样本都投影到该方向上，方差最大，且样本距离这一方向的直线/超平面的距离最小），用该方向作为新空间中的基的一个。<br>
 
-在空间$R^n$中，$m$组样本构成的矩阵$\mathbf{X} = ({\mathbf{x^{(1)}}}^T, {\mathbf{x^{(2)}}}^T, ..., {\mathbf{x^{(m)}}}^T)$, 其中${\mathbf{x^{(i)}}} = (x_1^{(i)}, x_2^{(i)}, ..., x_n^{(i)})$。<br>
-首先，需对$\mathbf{X}$进行去均值处理，即对$m$维的列向量分别计算均值并减去均值。<br>
+在空间$R^n$中，$m$组样本构成的矩阵$\mathbf{X} = \left[\begin{matrix}
+  \mathbf{x_1}\\
+  \mathbf{x_2}\\
+  ...\\
+  \mathbf{x_n}
+\end{matrix}\right]$, 其中${\mathbf{x^{(i)}}} = (x_1^{(i)}, x_2^{(i)}, ..., x_n^{(i)})$。<br>
+首先，需对$\mathbf{X}$进行去均值处理，即对$m$维的列向量分别计算均值并减去均值，并进行标准化。<br>
 之后，为了找到方差最大的方向$\mathbf{u}$作为空间的基（最好为单位向量），需要计算
 <p>
 
@@ -372,8 +377,8 @@ $$
 $$
 \mathbf{\Sigma}\mathbf{u} = \lambda \mathbf{u}
 $$
-因此，$\lambda$为矩阵$\mathbf{\Sigma}$的特征值，$\mathbf{\Sigma}$为样本矩阵$\mathbf{X}$在归一化后的协方差矩阵。
-
+因此，$\lambda$为矩阵$\mathbf{\Sigma}$的特征值，$\mathbf{\Sigma}$为向量变量$\mathbf{x}$的协方差矩阵，也可以用样本矩阵$\mathbf{X}$计算出$\mathbf{\Sigma} = \frac{1}{m}\mathbf{X}^T\mathbf{X}$。
+<br>
 <b>注</b>： $\frac{\partial \mathbf{x}^T \mathbf{A} \mathbf{x}}{\mathbf{x}} = (\mathbf{A} + \mathbf{A}^T)\mathbf{x}$<br>
 
 原始的样本向量${\mathbf{x}}^{(i)} \in R^n$，变换完后（降维后的）的向量记做${\mathbf{y}}^{(i)}$,
@@ -389,8 +394,39 @@ $$
   \mathbf{u_n}^T
 \end{matrix}\right] \lbrack\mathbf{x}^{(i)}\rbrack_A
 $$
-随后截取前$k$维，便获取了降维后的结果。
+随后截取前$k$维（投影），便获取了降维后的结果。<br>
+这些特征向量$\mathbf{u_i}$是子空间的基，可以线性组合出子空间的所有点，因而可以将这些特征向量作为模版（例如特征脸），去组合出别的样本脸。但要注意的是不要单独考虑其中某一个特征向量，应整体考虑，因为他们是子空间的一组基，单独考虑特别的意义。—— by Andrew Ng
 </p>
+<br>
+## PCA的实现与SVD
+如果当特征维数很高时，其协方差矩阵的维度也会很高。例如，$\mathbf{x} \in R^{5000}$，则且协方差矩阵$\mathbf{\Sigma} \in R^{5000 * 5000}$。因此，直接计算其特征值和特征向量是很花费时间的。<br>
+
+**奇异值分解(Singular Value Decompotition, SVD):** 矩阵$\mathbf{A} \in R^{m * n}$, 则其可以被分解为，
+<p>
+
+$$
+\mathbf{A} = \mathbf{U} \mathbf{D} \mathbf{V}^T
+$$
+其中，$\mathbf{U} \in R^{m * n}, \mathbf{D} \in \mathbf{n * n}, \mathbf{V} \in R^{n * n}$，$\mathbf{D}$为对角矩阵(Diagonal Matrix),
+$$
+\mathbf{D} = \left[\begin{matrix}
+  \sigma_1\\
+  &\sigma_2\\
+  &&...\\
+  &&&\sigma_n
+\end{matrix}\right]
+$$
+$\sigma_i$称矩阵$\mathbf{A}$的奇异值。<br>
+$\mathbf{U}$的列向量是矩阵$\mathbf{A}\mathbf{A}^T$的特征向量，$\mathbf{V}$的列向量是矩阵$\mathbf{A}^T\mathbf{A}$的特征向量。<br>
+
+</p>
+
+**PCA的应用**
+- 可视化：将数据降维到2，3维，方便绘制出可视化图像
+- 数据压缩
+- 机器学习：高维数据通常会落在低维子空间中（高维空间中的很多点是无意义的），即降维不会丢失数据间的pattern
+- 异常检测
+- 距离计算：不在高维空间中计算两个样本的距离，转换到低维空间进行计算
 
 ***Reference:***
 - [机器学习中的数学(4)-线性判别分析（LDA）, 主成分分析(PCA)](http://www.cnblogs.com/LeftNotEasy/archive/2011/01/08/lda-and-pca-machine-learning.html)
@@ -398,3 +434,20 @@ $$
 - [机器学习中常用的矩阵求导公式](http://www.voidcn.com/article/p-ponrkmdt-xd.html)
 - [The Matrix Cookbook - Mathematics](https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf)
 - [KaTex: how to output a matrix? #667](https://github.com/Khan/KaTeX/issues/667)
+
+**SVD与PCA：**<br>
+
+<p>
+
+因为，向量$\mathbf{x}$（每一维对应了一个特征变量）的协方差矩阵$\mathbf{\Sigma}$可以根据其样本样本矩阵计算出，即$\mathbf{\Sigma} = \mathbf{X}^T\mathbf{X}$，则，
+$$
+\mathbf{X} = \mathbf{U} \mathbf{D} \mathbf{V}^T
+$$
+$$
+\mathbf{\Sigma} = \mathbf{X}^T \mathbf{X} = \mathbf{V} \mathbf{D} \mathbf{U}^T \mathbf{U} \mathbf{D} \mathbf{V}^T = \mathbf{V} \mathbf{D}^2 \mathbf{V}^T
+$$
+因为$\mathbf{V}$是正交矩阵，所以$\mathbf{V}^{-1} = \mathbf{V}^T$，所以上式为矩阵$\mathbf{\Sigma}$的特征值分解，则$\mathbf{V}$的列向量（也是矩阵$\mathbf{U}$的行向量）是$\mathbf{\Sigma}$的特征向量，而$\mathbf{X}$的奇异值的平方是$\mathbf{\Sigma}$的特征值，此时通过对$\mathbf{X}$的奇异值分解，而得到了其PCA的计算，同时避免了直接计算高维矩阵$\mathbf{\Sigma}$的特征值与特征向量。
+</p>
+
+***Reference:***
+- [网易公开课：cs229——奇异值分解](http://open.163.com/movie/2008/1/J/V/M6SGF6VB4_M6SGKINJV.html)

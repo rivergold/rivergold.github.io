@@ -397,8 +397,23 @@ $$
 随后截取前$k$维（投影），便获取了降维后的结果。<br>
 这些特征向量$\mathbf{u_i}$是子空间的基，可以线性组合出子空间的所有点，因而可以将这些特征向量作为模版（例如特征脸），去组合出别的样本脸。但要注意的是不要单独考虑其中某一个特征向量，应整体考虑，因为他们是子空间的一组基，单独考虑特别的意义。—— by Andrew Ng
 </p>
+
+**PCA的应用**
+- 可视化：将数据降维到2，3维，方便绘制出可视化图像
+- 数据压缩
+- 机器学习：高维数据通常会落在低维子空间中（高维空间中的很多点是无意义的），即降维不会丢失数据间的pattern
+- 异常检测
+- 距离计算：不在高维空间中计算两个样本的距离，转换到低维空间进行计算
+
+***Reference:***
+- [机器学习中的数学(4)-线性判别分析（LDA）, 主成分分析(PCA)](http://www.cnblogs.com/LeftNotEasy/archive/2011/01/08/lda-and-pca-machine-learning.html)
+- [网易云课堂：cs229——主成分分析法](http://open.163.com/movie/2008/1/M/E/M6SGF6VB4_M6SGKIEME.html)
+- [机器学习中常用的矩阵求导公式](http://www.voidcn.com/article/p-ponrkmdt-xd.html)
+- [The Matrix Cookbook - Mathematics](https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf)
+- [KaTex: how to output a matrix? #667](https://github.com/Khan/KaTeX/issues/667)
 <br>
-## PCA的实现与SVD
+
+## PCA与SVD
 如果当特征维数很高时，其协方差矩阵的维度也会很高。例如，$\mathbf{x} \in R^{5000}$，则且协方差矩阵$\mathbf{\Sigma} \in R^{5000 * 5000}$。因此，直接计算其特征值和特征向量是很花费时间的。<br>
 
 **奇异值分解(Singular Value Decompotition, SVD):** 矩阵$\mathbf{A} \in R^{m * n}$, 则其可以被分解为，
@@ -420,24 +435,9 @@ $\sigma_i$称矩阵$\mathbf{A}$的奇异值。<br>
 $\mathbf{U}$的列向量是矩阵$\mathbf{A}\mathbf{A}^T$的特征向量，$\mathbf{V}$的列向量是矩阵$\mathbf{A}^T\mathbf{A}$的特征向量。<br>
 
 </p>
-
-**PCA的应用**
-- 可视化：将数据降维到2，3维，方便绘制出可视化图像
-- 数据压缩
-- 机器学习：高维数据通常会落在低维子空间中（高维空间中的很多点是无意义的），即降维不会丢失数据间的pattern
-- 异常检测
-- 距离计算：不在高维空间中计算两个样本的距离，转换到低维空间进行计算
-
-***Reference:***
-- [机器学习中的数学(4)-线性判别分析（LDA）, 主成分分析(PCA)](http://www.cnblogs.com/LeftNotEasy/archive/2011/01/08/lda-and-pca-machine-learning.html)
-- [网易云课堂：cs229——主成分分析法](http://open.163.com/movie/2008/1/M/E/M6SGF6VB4_M6SGKIEME.html)
-- [机器学习中常用的矩阵求导公式](http://www.voidcn.com/article/p-ponrkmdt-xd.html)
-- [The Matrix Cookbook - Mathematics](https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf)
-- [KaTex: how to output a matrix? #667](https://github.com/Khan/KaTeX/issues/667)
-
-**SVD与PCA：**<br>
-
+<br>
 <p>
+<b>SVD与PCA：</b>
 
 因为，向量$\mathbf{x}$（每一维对应了一个特征变量）的协方差矩阵$\mathbf{\Sigma}$可以根据其样本样本矩阵计算出，即$\mathbf{\Sigma} = \mathbf{X}^T\mathbf{X}$，则，
 $$

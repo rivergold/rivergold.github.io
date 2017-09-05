@@ -198,7 +198,7 @@ $$
 $$
 {~~~~~~~~~~~~~~~~~~~~~~~~}\alpha_i \ge 0, ~i=1,2,...,N
 $$
-优化该目标函数，可得$\alpha$的最优解$\alpha^\star = (\alpha_1^\star, \alpha_2^\star,...,\alpha_N^\star)^T$
+优化该目标函数，一般采用SMO（Sequential minimal optimization）优化方法，可得$\alpha$的最优解$\alpha^\star = (\alpha_1^\star, \alpha_2^\star,...,\alpha_N^\star)^T$
 <br>
 根据KKT条件，
 $$
@@ -329,4 +329,72 @@ $$
 - [豆瓣：矩阵基的变换和坐标理解](https://www.douban.com/note/549051760/)
 - [可汗学院-线性代数：基变换的矩阵](http://open.163.com/movie/2011/6/7/F/M82ICR1D9_M83J6M77F.html)
 - [Tex: Which “bold” style is recommended for matrix notation?](https://tex.stackexchange.com/questions/199789/which-bold-style-is-recommended-for-matrix-notation)
+
+## PCA原理
+**思想：** 在信号处理中，人们认为噪声的方差较小，而有用信息的方差较大。因此我们希望找到一种变换，将原始空间中的基变换为另一个空间的一组可以有效描述有用信息的基，即在新基下，样本在基的方向上方差最大。<br>
+**理解：** 在原始空间中，找到样本方差最大的方向（样本都投影到该方向上，方差最大，且样本距离这一方向的直线/超平面的距离最小），用该方向作为新空间中的基的一个。<br>
+
+在空间$R^n$中，$m$组样本构成的矩阵$\mathbf{X} = ({\mathbf{x^{(1)}}}^T, {\mathbf{x^{(2)}}}^T, ..., {\mathbf{x^{(m)}}}^T)$, 其中${\mathbf{x^{(i)}}} = (x_1^{(i)}, x_2^{(i)}, ..., x_n^{(i)})$。<br>
+首先，需对$\mathbf{X}$进行去均值处理，即对$m$维的列向量分别计算均值并减去均值。<br>
+之后，为了找到方差最大的方向$\mathbf{u}$作为空间的基（最好为单位向量），需要计算
+<p>
+
+$$
+\max\limits_{\mathbf{\mu}} \frac{1}{m}\sum_{i = 1}^m {(\langle \mathbf{x}^{(i)}, \mathbf{u} \rangle - \mu)}^2
+$$
+$$
+s.t. ~~~ {\mathbf{u}}^T \mathbf{u} = 1
+$$
+因为样本的期望$\mu = 0$, 并且，
+$$
+\langle \mathbf{x^{(i)}}, \mathbf{u} \rangle = {\mathbf{x}^{(i)}}^T \mathbf{u} = {\mathbf{u}}^T {\mathbf{x}^{(i)}}
+$$
+所以，
+$$
+\frac{1}{m}\sum_{i = 1}^m {(\langle \mathbf{x}^{(i)}, \mathbf{u} \rangle - \mu)}^2 =  \frac{1}{m}\sum_{i=1}^{m}{\mathbf{u}}^T {\mathbf{x}^{(i)}} {\mathbf{x}^{(i)}}^T \mathbf{u} = \mathbf{u}^T (\frac{1}{m}\sum_{i=1}^{m}\mathbf{x}^{(i)} {\mathbf{x}^{(i)}}^T) \mathbf{u}
+$$
+即，
+$$
+\max\limits_{\mathbf{\mu}} \mathbf{u}^T (\frac{1}{m}\sum_{i=1}^{m}\mathbf{x}^{(i)} {\mathbf{x}^{(i)}}^T) \mathbf{u}
+$$
+$$
+s.t. ~~~ {\mathbf{u}}^T \mathbf{u} = 1
+$$
+采用拉格朗日乘数法，
+$$
+L(\mathbf{u}, \lambda) = \mathbf{u}^T (\frac{1}{m}\sum_{i=1}^{m}\mathbf{x}^{(i)} {\mathbf{x}^{(i)}}^T) \mathbf{u} - \lambda({\mathbf{u}}^T\mathbf{u} - 1)
+$$
+记$\mathbf{\Sigma} = \frac{1}{m}\sum_{i=1}^{m}\mathbf{x}^{(i)} {\mathbf{x}^{(i)}}^T$，且${\mathbf{\Sigma}}^T = \mathbf{\Sigma}$
+$$
+\nabla_{\mathbf{u}} L = (\mathbf{\Sigma} + {\mathbf{\Sigma}}^T) \mathbf{u} - 2\lambda \mathbf{u} = 2\mathbf{\Sigma}\mathbf{u} - 2\lambda \mathbf{u} = 0  
+$$
+即，
+$$
+\mathbf{\Sigma}\mathbf{u} = \lambda \mathbf{u}
+$$
+因此，$\lambda$为矩阵$\mathbf{\Sigma}$的特征值，$\mathbf{\Sigma}$为样本矩阵$\mathbf{X}$在归一化后的协方差矩阵。
+
+<b>注</b>： $\frac{\partial \mathbf{x}^T \mathbf{A} \mathbf{x}}{\mathbf{x}} = (\mathbf{A} + \mathbf{A}^T)\mathbf{x}$<br>
+
+原始的样本向量${\mathbf{x}}^{(i)} \in R^n$，变换完后（降维后的）的向量记做${\mathbf{y}}^{(i)}$,
+$$
+\mathbf{y}^{(i)} = {(\mathbf{u_1}^T\mathbf{x}^{(i)}, \mathbf{u_2}^T\mathbf{x}^{(i)}, ..., \mathbf{u_k}^T\mathbf{x}^{(i)})}^T
+$$
+<b>个人的理解：</b> 从线性变换的角度上理解PCA的原理就是说，找到一种变换，将原空间的基变换为另一组，其样本在基的方向上方差最大，之后选取前$k$个基组成新的低维的空间。因为样本在这一组基上的方差大，所以尽可能多的保留了信息（噪声的方差小，被省去了），从而达到了降维的目的。其中对应的线性变换的矩阵为$\mathbf{\Sigma} = (\mathbf{u_1}, \mathbf{u_2}, ..., \mathbf{u_n})$，即$\mathbf{B} = \mathbf{A}\mathbf{\Sigma}$。则在两个不同基下的向量坐标为
+$$
+\lbrack \mathbf{x}^{(i)}\rbrack_B = \mathbf{\Sigma}^{-1} \lbrack \mathbf{x}^{(i)}\rbrack_A = \mathbf{\Sigma}^T \lbrack\mathbf{x}^{(i)}\rbrack_A = \left[\begin{matrix}
+  \mathbf{u_1}^T\\
+  \mathbf{u_2}^T\\
+  ...\\
+  \mathbf{u_n}^T
+\end{matrix}\right] \lbrack\mathbf{x}^{(i)}\rbrack_A
+$$
+随后截取前$k$维，便获取了降维后的结果。
+</p>
+
+***Reference:***
+- [机器学习中的数学(4)-线性判别分析（LDA）, 主成分分析(PCA)](http://www.cnblogs.com/LeftNotEasy/archive/2011/01/08/lda-and-pca-machine-learning.html)
+- [网易云课堂：cs229——主成分分析法](http://open.163.com/movie/2008/1/M/E/M6SGF6VB4_M6SGKIEME.html)
+- [机器学习中常用的矩阵求导公式](http://www.voidcn.com/article/p-ponrkmdt-xd.html)
+- [The Matrix Cookbook - Mathematics](https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf)
 - [KaTex: how to output a matrix? #667](https://github.com/Khan/KaTeX/issues/667)

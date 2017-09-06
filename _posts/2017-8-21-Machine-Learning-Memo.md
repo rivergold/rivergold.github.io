@@ -1,3 +1,124 @@
+# 生成式模型和判别式模型
+如果从概率的角度理解，特征变量用$x$表示，标签用$y$表示，<br>
+**生成式模型：** 对样本的特征和标签的$p(x|y), p(y)$进行建模，之后根据贝叶斯定理$p(x, y) = p(x|y)p(y)$得到联合概率<br>
+**判别式模型：** 对样本的特征和标签的$p(y|x)$进行建模
+
+# Gaussian Discriminant Analysis(GDA)
+**高斯分布：** $n$维的高斯分布的参数为均指向量(mean vector) $\mathbf{\mu} \in \mathbb{R}^n$和协方差矩阵(covariance matrix)$\mathbf{\Sigma} \in \mathbb{R}^{n \times n}$，记做$x \sim \mathcal{N}(\mathbf{\mu}, \mathbf{\Sigma})$,
+<p>
+
+$$
+p(\mathbf{x}; \mu, \mathbf{\Sigma}) = \frac{1}{(2\pi)^{n/2}|\mathbf{\Sigma}|^{1/2}}\exp(-\frac{1}{2}(x - \mu)^T\mathbf{\Sigma}^{-1}(\mathbf{x} - \mu))
+$$
+
+</p>
+
+**GDA** 是一种生成式学习方法。其假设$p(x|y)$是服从高斯分布的。以二分类为例，
+<p>
+
+$$
+y \sim Bernoulli(\phi)
+$$
+$$
+\mathbf{x}|y=0 \sim \mathcal{N}(\mu_0, \mathbf{\Sigma})
+$$
+$$
+\mathbf{x}|y=1 \sim \mathcal{N}(\mu_1, \mathbf{\Sigma})
+$$
+
+</p>
+
+注：假设的$p(\mathbf{x}|y)$的分布，其均值向量是不同的，但是协方差矩阵是相同的，因为在不同的$y$下，变量的均值可以发生改变，但是其特征与特征之间的关系，我们一般假设是不会发生改变的。<br>
+
+**GDA和Logistic：** 如果$\mathbf{x}|y=y_i \sim \mathcal{N}(\mu, \sigma^2)$，则后验概率$p(y|\mathbf{x}; \phi, \Sigma, \mu_0, \mu_1) = \frac{1}{1 + \exp(-\theta^Tx)}$，是一个logistic函数。因此当我们确定或比较确定$p(\mathbf{x}|y)$是服从高斯分布时（近似服从高斯），我们使用GDA的效果会比使用logistic要好，因为我们更好的利用了数据的信息。反之，如果我们不确定其实服从高斯分布的，选择logisitic会好一些。<br>
+更一般的，如果$\mathbf{x}|y=y_i$ exponential distribution分布，其后验概率$p(y|\mathbf{x})$也是满足logistic。
+
+## 朴素贝叶斯（Naive Bayse）
+**核心思想：**
+假设在给定$y$的情况下，随机向量$\mathbf{x} = (x_1, x_2, ..., x_n)$的每个变量$x_i$是条件独立的，即，
+<p>
+
+$$
+p(x_1, x_2, ..., x_n|y) = p(x_1|y)p(x_2|x_1,y)...p(x_n|x_1, x_2,...,x_{n-1}, y) = \prod_{i=1}^{n}p(x_i|y)
+$$
+
+</p>
+
+***补充：***
+- 概率论的两个核心公式
+    - sum rule
+        <p>
+
+        $$
+        p(A) = \sum_B p(A, B)
+        $$
+
+        </p>
+    - product rule
+        <p>
+
+        $$
+        p(A, B) = p(A|B)p(B) = p(B|A)p(A)
+        $$
+
+        </p>
+
+- 贝叶斯定理
+    <p>
+
+    $$
+    p(A|B) = \frac{p(B|A)p(A)}{p(B)}
+    $$
+    注：由product rule推倒而来.
+    </p>
+
+- 多变量的条件概率
+    <p>
+
+    $$
+    p(A_1, A_2, ..., A_n|B) = p(A_1|B)p(A_2|A_1, B)p(A_3|A_1, A_2, B)...p(A_n|A_1,A_2,...,A_{n-1},B)
+    $$
+    推导过程（链式计算），
+    $$
+    p(A_1, A_2, ..., A_n|B) = \frac{p(A_1,A_2,...,A_n,B)}{p(B)} = \frac{p(A_n|A_1,A_2,...,A_{n-1},B)p(A_1,A_2,...,A_{n-1},B)}{p(B)}
+    $$
+    $$
+    =  \frac{p(A_n|A_1,A_2,...,A_{N-1},B)p(A_{n-1}|A_1,A_2,...,A_{n-2},B)p(A_1,A_2,...,A_{n-2},B)}{p(B)}
+    $$
+    $$
+    = \frac{p(A_n|A_1,A_2,...,A_{N-1},B)p(A_{n-1}|A_1,A_2,...,A_{n-2},B)~...~ p(A_1|B)p(B)}{p(B)}
+    $$
+    $$
+    = p(A_1|B)p(A_2|A_1,B)...p(A_n|A_1, A_2,...,A_{n-1}, B)
+    $$
+    引申出的另外一个公式
+    $$
+    p(A,B|C) = p(A|B,C)p(B|C)
+    $$
+    </p>
+
+- 条件独立
+    如果在给定C的情况下，A和B是条件独立的，那么，
+    <p>
+
+    $$
+    p(A, B|C) = p(A|C)p(B|C)
+    $$
+
+    $$
+    p(A|B,C) = P(A|C)
+    $$
+    第二个式子的推导,
+    $$
+    p(A|B,C) = \frac{p(A,B|C)}{p(B|C)} = \frac{p(A|C)p(B|C)}{p(B|C)} = p(A|C)
+    $$
+
+    </p>
+
+***Reference:***
+- [Introduction to Probability & Statistics: Conditional Independence (*Book)](https://www.probabilitycourse.com/chapter1/1_4_4_conditional_independence.php)
+- [Pattern Recognition and Machine Learning: Introduction](http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop%20-%20Pattern%20Recognition%20And%20Machine%20Learning%20-%20Springer%20%202006.pdf)
+
 # SVM
 ## 基础
 **SVM的核心思想**： 找到一个超平面$\textbf{w}^T\textbf{x} + b = 0$将两类数据分离，且数据距离超平面有一定的间隔（margin）。<br>
@@ -287,6 +408,8 @@ $$K(\textbf{x}, \textbf{y}) = (1 + \textbf{x}^T \textbf{y})^2 = \varphi(\textbf{
 ***Reference***
 - [How to intuitively explain what a kernel is?](https://stats.stackexchange.com/questions/152897/how-to-intuitively-explain-what-a-kernel-is)
 - [知乎：SVM的核函数如何选取？](https://www.zhihu.com/question/21883548)
+
+<br><br>
 
 # PCA
 ## 数据基础知识

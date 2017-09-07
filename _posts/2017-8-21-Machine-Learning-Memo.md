@@ -421,14 +421,26 @@ $$
 $$
 \alpha^\star \ge 0, ~ i = 1,2,...,m
 $$
-<b>结果：</b>存在$\alpha^\star = (\alpha_1^\star, \alpha_2^\star,...,\alpha_N^\star)^T$, 使得
+<b>结果：</b>存在$\alpha^\star = (\alpha_1^\star, \alpha_2^\star,...,\alpha_m^\star)^T$, 使得
 $$
-\mathbf{w}^\star = \sum_{i=1}^{N}\alpha_i^\star y^{(i)} \mathbf{x}^{(i)}
+\mathbf{w}^\star = \sum_{i=1}^{m}\alpha_i^\star y^{(i)} \mathbf{x}^{(i)}
 $$
 $$
 b^\star = - \frac{\max_{i:y^{(i)}=-1}{\mathbf{w}^\star}^T\mathbf{x}^{(i)} + \min_{i:y^{(i)}=1}{\mathbf{w}^\star}^T\mathbf{x}^{(i)}}{2}
 $$
-对于$\alpha_i^\star = 0$的$\mathbf{x}^{(i)}$，该样本的函数间隔$y^{(i)}({\mathbf{w}^\star}^T\mathbf{x}^{(i)} + b) = 1$，这些样本成为支持向量。$b^\star$是根据这些支持向量计算出来的。
+对于$\alpha_i^\star > 0$的$\mathbf{x}^{(i)}$，该样本的函数间隔$y^{(i)}({\mathbf{w}^\star}^T\mathbf{x}^{(i)} + b) = 1$，这些样本成为支持向量。$b^\star$是根据这些支持向量计算出来的。<br>
+在求的$\mathbf{w},b$之后，对于新来样本的预测，
+$$
+y^{new} = g(\mathbf{w}^T\mathbf{x}^{new} + b) = g(\sum_{i=1}^{m}\alpha_i y^{(i)} \langle {\mathbf{x}^{(i)}}^T, \mathbf{x}^{new}\rangle + b)
+$$
+其中,
+$$
+g(x) = \begin{cases}
+1 ~~~~~~x > 0, \\
+-1 ~~~x < 0
+\end{cases}
+$$
+
 </p>
 
 ***Reference***

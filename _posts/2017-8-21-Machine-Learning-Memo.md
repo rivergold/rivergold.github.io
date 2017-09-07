@@ -1,3 +1,4 @@
+<br>
 # 生成式模型和判别式模型
 如果从概率的角度理解，特征变量用$x$表示，标签用$y$表示，<br>
 **生成式模型：** 对样本的特征和标签的$p(x|y), p(y)$进行建模，之后根据贝叶斯定理$p(x, y) = p(x|y)p(y)$得到联合概率<br>
@@ -39,7 +40,7 @@ $$
 更一般的，如果$\mathbf{x}|y=y_i$ exponential distribution分布，其后验概率$p(y|\mathbf{x})$也是满足logistic。
 </p>
 
-## 朴素贝叶斯（Naive Bayse）
+## 朴素贝叶斯（Naive Bayes）
 **核心思想：**
 假设在给定$y$的情况下，随机向量$\mathbf{x} = (x_1, x_2, ..., x_n)$的每个变量$x_i$是条件独立的，即，
 <p>
@@ -121,6 +122,9 @@ $$
 
     </p>
 
+- 极大似然估计(Maximum Likelihood)
+    基本思想就是：一种通过用观测数据来估计概率模型中的参数的方法。已知该概率模型的分布函数，但是不知道其模型的参数
+
 ***Reference:***
 - [Introduction to Probability & Statistics: Conditional Independence (*Book)](https://www.probabilitycourse.com/chapter1/1_4_4_conditional_independence.php)
 - [Pattern Recognition and Machine Learning: Introduction](http://users.isr.ist.utl.pt/~wurmd/Livros/school/Bishop%20-%20Pattern%20Recognition%20And%20Machine%20Learning%20-%20Springer%20%202006.pdf)
@@ -128,37 +132,88 @@ $$
 # SVM
 ## 基础
 **SVM的核心思想**： 找到一个超平面$\textbf{w}^T\textbf{x} + b = 0$将两类数据分离，且数据距离超平面有一定的间隔（margin）。<br>
-**推导与理解**：样本$\textbf{x}^{(i)}$到超平面$\textbf{w}^T\textbf{x} + b = 0$的距离为
-<p>
 
-$$
-\gamma_i = \frac{y_i(\textbf{w}^T\textbf{x}^{(i)} + b)}{||\textbf{w}||}
-$$
+**最大化间隔分类器(Maximum Margin Classifier)：** 训练样本$\mathbf{X} \in \mathbb{R}^{m \times n}$，其标签$\mathbf{y} \in \mathbb{R}^m$，且$y^{(i)} = \{+1, -1\}$。
+最简单的情况，对于线性可分的二分类问题，即可以找到一条直线or超平面将两类数据分开，而且正样本在超平面的上方$\mathbf{w}^T\mathbf{x}^{(i)} + b > 0, ~y^{(i)}=+1$，负样本在超平面的下方$\mathbf{w}^T\mathbf{x}^{(i)} + b < 0, y^{(i)}=-1$。假设其数据如下图，
 
-几何间隔(Geometric Margin)为所有样本点中到超平面距离最小值（SVM目的在于让这个最近的距离最大化）：
-$$
-\gamma = \min\limits_{i=1,2,...,N}\frac{y_i(\textbf{w}^T\textbf{x}^{(i)} + b)}{||\textbf{w}||}
-$$
-
-函数间隔(Functional Margin): 所有样本点中到超平面的未经规范化的距离的最小值
-$$
-\hat{\gamma_i} = y_i(\textbf{w}^T\textbf{x}^{(i)} + b)
-$$
-
-$$
-\hat{\gamma} = \min\limits_{i=1,2,...,N}\hat{\gamma_i}
-$$
-
+<p align="center">
+    <img src="http://ovvybawkj.bkt.clouddn.com/svm.png" width="40%">
 </p>
 
-因此，SVM目标函数为
+<p>
+直观理解：如果我们学习到的这个分割超平面很好，那它不仅可以有效的分离两类数据，还会使每类数据距离该平面的距离比较远，越远表示该模型对预测结果的可信度（confidence）就越大（离得越远，分对的可能性就越大），而且模型的鲁棒性越强（数据有波动/噪声，对模型的分类结果影响不会很大）。因此，我们优化的目标就是找到合适的参数$\mathbf{w},b$使得两类样本不仅在超平面的两侧，而且距离该平面越远越好。
+</p>
+
+为达到该目标，首先定义：<br>
+- 函数间隔（Functional Margin）
+    <p>
+
+    $$
+    \hat{\gamma}^{(i)} =  y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b)
+    $$
+    如果我们想要使这个间隔最大$\max \hat{\gamma}^{(i)}$，那么从上面的式子可以看出：
+    - 当$y^{(i)} = 1$时, 我们需要让$y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) \gg 0$
+    - 当$y^{(i)} = -1$时, 我们需要让$y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) \ll 0$
+    <br>
+    函数间隔定义为，所有$\hat{\gamma}^{(i)}$中最小的那个（因为我们的目的是要最大化间隔，让最小的最大化，则整体都是最大化的了）
+    $$
+    \hat{\gamma} = \min_{i} y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b), ~~i=1,2,...,m
+    $$
+
+    </p>
+
+- 几何间隔（Geometric Margin）
+    <p>
+
+    由线性代数可知，超平面$\mathbf{w} + b = 0$的法向量为$\mathbf{w}$，单位法向量为$\frac{\mathbf{w}}{\mathbf{||w||}}$（假设法向量的方向是指向正类样本所在的方向），下图为示意图，
+
+    <p align="center">
+        <img src="http://ovvybawkj.bkt.clouddn.com/svm%20ge.png" width="40%">
+    </p>
+
+    $A$点表示正样本$(\mathbf{x}^{(i)}, y^{(i)})$，$B$点为$A$点在超平面的投影，$\gamma^{(i)}$表示其到超平面的距离，则有,
+    $$
+    \mathbf{w}^T(\mathbf{x}^{(i)} - \gamma^{(i)}\frac{\mathbf{w}}{||\mathbf{w}||}) + b = 0
+    $$
+    $$
+    \gamma^{(i)} \frac{\mathbf{w}^T\mathbf{w}}{||\mathbf{w}||} = \mathbf{w}^T\mathbf{x}^{(i)} + b
+    $$
+    $$
+    \mathbf{w}^T\mathbf{w} = ||\mathbf{w}||^2
+    $$
+    则，
+    $$
+    \gamma^{(i)} = \frac{\mathbf{w}^T\mathbf{x}^{(i)} + b}{||\mathbf{w}||} = (\frac{\mathbf{w}}{||\mathbf{w}||})^T \mathbf{x}^{(i)} + \frac{b}{||\mathbf{w}||}
+    $$
+    对于负样本
+    $$
+    \gamma^{(i)} = \frac{\mathbf{w}^T\mathbf{x}^{(i)} + b}{||\mathbf{w}||} = -((\frac{\mathbf{w}}{||\mathbf{w}||})^T \mathbf{x}^{(i)} + \frac{b}{||\mathbf{w}||})
+    $$
+    即，
+    $$
+    \gamma^{(i)} = y^{(i)}((\frac{\mathbf{w}}{||\mathbf{w}||})^T \mathbf{x}^{(i)} + \frac{b}{||\mathbf{w}||})
+    $$
+    几何间隔定义为$\gamma^{(i)}$最小的那个，即，
+    $$
+    \gamma = \min_{i} \gamma^{(i)}, ~~~i=1,2,...,m
+    $$
+
+    且几何间隔与函数间隔的关系为
+    $$
+    \gamma = \frac{\hat\gamma}{||\mathbf{w}||}
+    $$
+
+    </p>
+
+
+因此，最大间隔分类器的目标函数为
 <p>
 
 $$
 \max\limits_{\textbf{w}, b} \gamma
 $$
 $$
-s.t.{~~~} \frac{y_i(\textbf{w}^T\textbf{x}^{(i)} + b)}{||\textbf{w}||} \ge \gamma, ~~i = 1, 2,...,N
+s.t.{~~~} \frac{y_i(\textbf{w}^T\textbf{x}^{(i)} + b)}{||\textbf{w}||} \ge \gamma, ~~i = 1, 2,...,m
 $$
 
 因为$\gamma = \frac{\hat{\gamma}}{||\textbf{w}||}$,所以目标函数可转化为<br>
@@ -166,20 +221,17 @@ $$
 \max\limits_{\textbf{w}, b} \frac{\hat\gamma}{||\textbf{w}||}
 $$
 $$
-s.t.{~~~} y_i(\textbf{w}^T\textbf{x}^{(i)} + b)\ge\hat\gamma, ~i=1,2,...,N
+s.t.{~~~} y_i(\textbf{w}^T\textbf{x}^{(i)} + b)\ge\hat\gamma, ~i=1,2,...,m
 $$
-
-因为函数间隔$\hat\gamma$不影响最优化问题的解，假设将$\textbf{w}$和$b$按比例变为$\lambda\textbf{w}$和$\lambda b$，则函数间隔为$\lambda\hat\gamma$。函数间隔的这一改变并不影响上面最优化问题的不等数约束，也不影响目标函数优化的结果，即变化前后是等价的最优化问题。所以，可以令$\hat\gamma=1$。
-<br>
-<b>理解</b>: 换个角度思考下，因为成比例$\lambda$改变$\textbf{w}, b$，$\hat\gamma$也会成比例改变，所以如果取$\lambda = \frac{1}{\hat\gamma}$，最优化问题也是不变的。这样就可以理解为什么令$\hat\gamma=1$是可以的了。
-<br>
-则目标函数可以写为，
+为了便于优化，我们令$\hat\gamma = 1$，可得
 $$
 \max\limits_{\textbf{w}, b} \frac{1}{||\textbf{w}||}
 $$
 $$
 s.t.{~~~} y_i(\textbf{w}^T\textbf{x}^{(i)} + b)\ge1, ~i=1,2,...,N
 $$
+注：为什么可以令$\hat\gamma = 1$？我是这么理解的：对于任意的一组$\mathbf{w},b$，其所对应的$\hat\gamma$是固定且可以知道的，那么我对所有的$\mathbf{w},b$都乘以其所对应的$\frac{1}{\hat\gamma}$，则缩放完后的$\hat\gamma = 1$，但是超平面$\mathbf{w}\mathbf{x} + b = 0$并没有改变，即我们还是可以找到了正确的分隔平面，因此此处可以令$\hat\gamma = 1$，目的是为了可以使优化更为简便。
+<br>
 转化为最小化问题为，
 $$
 \min\limits_{\textbf{w}, b}\frac{1}{2}||\textbf{w}||^2
@@ -187,7 +239,6 @@ $$
 $$
 s.t.{~~~} y_i(\textbf{w}^T\textbf{x}^{(i)} + b)\ge1, ~i=1,2,...,N
 $$
-(注：$||\textbf{w}||^2 = \textbf{w}^T\textbf{w}$)
 <br>
 该优化问题为凸优化问题(有约束的)。
 <br>
@@ -261,15 +312,39 @@ $$
 <br>
 当满足KKT条件时，
 $$
+\nabla_{x}L(x^\star, \alpha^\star, \beta^\star) = 0
+$$
+$$
+\nabla_{\alpha}L(x^\star, \alpha^\star, \beta^\star) = 0
+$$
+$$
+\nabla_{\beta}L(x^\star, \alpha^\star, \beta^\star) = 0
+$$
+$$
+\alpha_i^\star c_i(x^\star) = 0, ~~~i=1,2,...,k
+$$
+$$
+\alpha_i^\star \ge 0, ~~~i=1,2,...,k
+$$
+$$
+h_j(x^\star) = 0,~~~j=1,2,...,l
+$$
+原问题的最优解与对偶问题的最优解相同，
+$$
 d^\star = p^\star
 $$
+KKT条件隐含了这种情况，
+$$
+when~~\alpha_i^\star > 0, ~~~c_i(x^\star) = 0
+$$
+此时，该$c(x)$成为active constraint.
 </p>
 
 **SVM最优解**:
 <p>
 
 $$
-L(\textbf{w}, b, \alpha) = \frac{1}{2}||\textbf{w}||^2 + \sum_{i=1}^{N}\alpha_i(1 - y_i(\textbf{w}^T\textbf{x}^{(i)} + b)) + \sum_{i}^{N}\alpha_i
+L(\textbf{w}, b, \alpha) = \frac{1}{2}||\textbf{w}||^2 + \sum_{i=1}^{m}\alpha_i(1 - y_i(\textbf{w}^T\textbf{x}^{(i)} + b)) + \sum_{i}^{m}\alpha_i
 $$
 原问题，
 $$
@@ -282,66 +357,66 @@ $$
 求解，
 (1). 求$\min\limits_{\textbf{w}, b}L(\textbf{w}, b, \alpha)$, 分别令$L(\textbf{w}, b, \alpha)$对$\textbf{w}$和$b$的偏导数为0
 $$
-\nabla_{\textbf{w}}L(\textbf{w}, b, \alpha) = \textbf{w} - \sum_{i=1}^{N}\alpha_iy_i\textbf{x}^{(i)} = 0
+\nabla_{\textbf{w}}L(\textbf{w}, b, \alpha) = \textbf{w} - \sum_{i=1}^{m}\alpha_iy_i\textbf{x}^{(i)} = 0
 $$
 $$
-\nabla_{\textbf{b}}L(\textbf{w}, b, \alpha) = \sum_{i=1}^{N}\alpha_iy_i = 0
+\nabla_{\textbf{b}}L(\textbf{w}, b, \alpha) = \sum_{i=1}^{m}\alpha_iy_i = 0
 $$
 解得,
 $$
-\textbf{w} = \sum_{i=1}^{N}\alpha_i y_i \textbf{x}^{(i)}
+\textbf{w} = \sum_{i=1}^{m}\alpha_i y_i \textbf{x}^{(i)}
 $$
 $$
-\sum_{i=1}^{N}\alpha_iy_i = 0
+\sum_{i=1}^{m}\alpha_iy_i = 0
 $$
 将上述结果带入$L(\textbf{w}, b, \alpha)$中得，
 $$
-L(\textbf{w}, b, \alpha) = \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i \alpha_j y_i y_j \langle\textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle - \sum_{i=1}^{N}\alpha_i y_i(\langle\sum_{j=1}^{N}\alpha_i y_i \textbf{x}^{(j)}, \textbf{x}^{(i)}\rangle + b) + \sum_{i=1}^{N}\alpha_i
+L(\textbf{w}, b, \alpha) = \frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_i \alpha_j y_i y_j \langle\textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle - \sum_{i=1}^{m}\alpha_i y_i(\langle\sum_{j=1}^{m}\alpha_i y_i \textbf{x}^{(j)}, \textbf{x}^{(i)}\rangle + b) + \sum_{i=1}^{m}\alpha_i
 $$
 $$
-= -\frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i \alpha_j y_i y_j\langle \textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle + \sum_{i=1}^{N}\alpha_i
+= -\frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_i \alpha_j y_i y_j\langle \textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle + \sum_{i=1}^{m}\alpha_i
 $$
 即，
 $$
-\min\limits_{\textbf{w}, b}L(\textbf{w}, b, \alpha) = -\frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i \alpha_j y_i y_j\langle \textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle + \sum_{i=1}^{N}\alpha_i
+\min\limits_{\textbf{w}, b}L(\textbf{w}, b, \alpha) = -\frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_i \alpha_j y_i y_j\langle \textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle + \sum_{i=1}^{m}\alpha_i
 $$
 (2). 求$\min\limits_{\textbf{w}, b}L(\textbf{w}, b, \alpha)$对$\alpha$的极大值
 $$
-\max\limits_{\alpha} -\frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i \alpha_j y_i y_j\langle \textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle + \sum_{i=1}^{N}\alpha_i
+\max\limits_{\alpha} -\frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_i \alpha_j y_i y_j\langle \textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle + \sum_{i=1}^{m}\alpha_i
 $$
 $$
-s.t.{~~} \sum_{i=1}^{N}\alpha_i y_i = 0
+s.t.{~~} \sum_{i=1}^{m}\alpha_i y_i = 0
 $$
 $$
-{~~~~~~~~~~~~~~~~~~~~~~~~}\alpha_i \ge 0, ~i=1,2,...,N
+{~~~~~~~~~~~~~~~~~~~~~~~~}\alpha_i \ge 0, ~i=1,2,...,m
 $$
 转化为最小化问题，
 $$
-\min\limits_{\alpha} \frac{1}{2}\sum_{i=1}^{N}\sum_{j=1}^{N}\alpha_i \alpha_j y_i y_j\langle \textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle - \sum_{i=1}^{N}\alpha_i
+\min\limits_{\alpha} \frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_i \alpha_j y_i y_j\langle \textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle - \sum_{i=1}^{m}\alpha_i
 $$
 $$
-s.t.{~~} \sum_{i=1}^{N}\alpha_i y_i = 0
+s.t.{~~} \sum_{i=1}^{m}\alpha_i y_i = 0
 $$
 $$
-{~~~~~~~~~~~~~~~~~~~~~~~~}\alpha_i \ge 0, ~i=1,2,...,N
+{~~~~~~~~~~~~~~~~~~~~~~~~}\alpha_i \ge 0, ~i=1,2,...,m
 $$
-优化该目标函数，一般采用SMO（Sequential minimal optimization）优化方法，可得$\alpha$的最优解$\alpha^\star = (\alpha_1^\star, \alpha_2^\star,...,\alpha_N^\star)^T$
+优化该目标函数，一般采用SMO（Sequential minimal optimization）优化方法，可得$\alpha$的最优解$\alpha^\star = (\alpha_1^\star, \alpha_2^\star,...,\alpha_m^\star)^T$
 <br>
 根据KKT条件，
 $$
-\nabla_\textbf{w}L(\textbf{w}^\star, b\star, \alpha^\star) = \textbf{w}^\star - \sum_{i=1}^{N}\alpha_i^\star y_i \textbf{x}^{(i)} = 0
+\nabla_\textbf{w}L(\textbf{w}^\star, b^\star, \alpha^\star) = \textbf{w}^\star - \sum_{i=1}^{N}\alpha_i^\star y_i \textbf{x}^{(i)} = 0
 $$
 $$
-\nabla_bL(\textbf{w}^\star, b\star, \alpha^\star) = -\sum_{i=1}^{N}\alpha^\star y_i = 0
+\nabla_bL(\textbf{w}^\star, b^\star, \alpha^\star) = -\sum_{i=1}^{N}\alpha^\star y_i = 0
 $$
 $$
-\nabla_\alpha L({\textbf{w}^\star}^T, b\star, \alpha^\star) = \alpha_i^\star(y_i({\textbf{w}^\star}^T\textbf{x}^{(i)} + b) - 1) = 0, ~ i = 1,2,..,N
+\nabla_\alpha L({\textbf{w}^\star}^T, b^\star, \alpha^\star) = \alpha_i^\star(y_i({\textbf{w}^\star}^T\textbf{x}^{(i)} + b) - 1) = 0, ~ i = 1,2,..,m
 $$
 $$
-y_i({\textbf{w}^\star}^T\textbf{x}^{(i)} + b) - 1 \ge 0, ~ i = 1,2,...,N
+y_i({\textbf{w}^\star}^T\textbf{x}^{(i)} + b) - 1 \ge 0, ~ i = 1,2,...,m
 $$
 $$
-\alpha^\star \ge 0, ~ i = 1,2,...,N
+\alpha^\star \ge 0, ~ i = 1,2,...,m
 $$
 <b>结果：</b>存在$\alpha^\star = (\alpha_1^\star, \alpha_2^\star,...,\alpha_N^\star)^T$且存在下标为$j$的$\alpha_j^\star > 0$, 使得
 $$
@@ -350,9 +425,11 @@ $$
 $$
 b^\star = y_j - \sum_{i=1}^{N}\alpha_i y_i\langle \textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle
 $$
+对于$\alpha_i^\star = 0$的$\mathbf{x}^{(i)}$，该样本的函数间隔$y_i({\mathbf{w}^\star}^T\mathbf{x}^{(i)} + b) = 1$，这些样本成为支持向量。
 </p>
 
 ***Reference***
+- [cs229: Maximum Margin Classifier](http://open.163.com/movie/2008/1/C/6/M6SGF6VB4_M6SGJVMC6.html)
 - [统计学习方法 李航](https://book.douban.com/subject/10590856/)
 - [StackExchange: How does a Support Vector Machine (SVM) work?](https://stats.stackexchange.com/questions/23391/how-does-a-support-vector-machine-svm-work)
 - [知乎：支持向量机中的函数距离和几何距离怎么理解？](https://www.zhihu.com/question/20466147)
@@ -580,3 +657,33 @@ $$
 
 ***Reference:***
 - [网易公开课：cs229——奇异值分解](http://open.163.com/movie/2008/1/J/V/M6SGF6VB4_M6SGKINJV.html)
+
+
+
+<!-- 样本$\textbf{x}^{(i)}$到超平面$\textbf{w}^T\textbf{x} + b = 0$的距离为
+<p>
+
+$$
+\gamma_i = \frac{y_i(\textbf{w}^T\textbf{x}^{(i)} + b)}{||\textbf{w}||}
+$$
+
+几何间隔(Geometric Margin)为所有样本点中到超平面距离最小值（SVM目的在于让这个最近的距离最大化）：
+$$
+\gamma = \min\limits_{i=1,2,...,N}\frac{y_i(\textbf{w}^T\textbf{x}^{(i)} + b)}{||\textbf{w}||}
+$$
+
+函数间隔(Functional Margin): 所有样本点中到超平面的未经规范化的距离的最小值
+$$
+\hat{\gamma_i} = y_i(\textbf{w}^T\textbf{x}^{(i)} + b)
+$$
+
+$$
+\hat{\gamma} = \min\limits_{i=1,2,...,N}\hat{\gamma_i}
+$$
+
+</p> -->
+
+<!-- 因为函数间隔$\hat\gamma$不影响最优化问题的解，假设将$\textbf{w}$和$b$按比例变为$\lambda\textbf{w}$和$\lambda b$，则函数间隔为$\lambda\hat\gamma$。函数间隔的这一改变并不影响上面最优化问题的不等数约束，也不影响目标函数优化的结果，即变化前后是等价的最优化问题。所以，可以令$\hat\gamma=1$。
+<br>
+<b>理解</b>: 换个角度思考下，因为成比例$\lambda$改变$\textbf{w}, b$，$\hat\gamma$也会成比例改变，所以如果取$\lambda = \frac{1}{\hat\gamma}$，最优化问题也是不变的。这样就可以理解为什么令$\hat\gamma=1$是可以的了。
+<br> -->

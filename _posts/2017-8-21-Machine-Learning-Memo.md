@@ -131,7 +131,7 @@ $$
 
 # SVM
 ## 基础
-**SVM的核心思想**： 找到一个超平面$\textbf{w}^T\textbf{x} + b = 0$将两类数据分离，且数据距离超平面有一定的间隔（margin）。<br>
+**SVM的核心思想**： 找到一个超平面$\mathbf{w}^T\mathbf{x} + b = 0$将两类数据分离，且数据距离超平面有一定的间隔（margin）。<br>
 
 **最大化间隔分类器(Maximum Margin Classifier)：** 训练样本$\mathbf{X} \in \mathbb{R}^{m \times n}$，其标签$\mathbf{y} \in \mathbb{R}^m$，且$y^{(i)} = \{+1, -1\}$。
 最简单的情况，对于线性可分的二分类问题，即可以找到一条直线or超平面将两类数据分开，而且正样本在超平面的上方$\mathbf{w}^T\mathbf{x}^{(i)} + b > 0, ~y^{(i)}=+1$，负样本在超平面的下方$\mathbf{w}^T\mathbf{x}^{(i)} + b < 0, y^{(i)}=-1$。假设其数据如下图，
@@ -210,34 +210,34 @@ $$
 <p>
 
 $$
-\max\limits_{\textbf{w}, b} \gamma
+\max\limits_{\mathbf{w}, b} \gamma
 $$
 $$
-s.t.{~~~} \frac{y_i(\textbf{w}^T\textbf{x}^{(i)} + b)}{||\textbf{w}||} \ge \gamma, ~~i = 1, 2,...,m
+s.t.{~~~} \frac{y_i(\mathbf{w}^T\mathbf{x}^{(i)} + b)}{||\mathbf{w}||} \ge \gamma, ~~i = 1, 2,...,m
 $$
 
-因为$\gamma = \frac{\hat{\gamma}}{||\textbf{w}||}$,所以目标函数可转化为<br>
+因为$\gamma = \frac{\hat{\gamma}}{||\mathbf{w}||}$,所以目标函数可转化为<br>
 $$
-\max\limits_{\textbf{w}, b} \frac{\hat\gamma}{||\textbf{w}||}
+\max\limits_{\mathbf{w}, b} \frac{\hat\gamma}{||\mathbf{w}||}
 $$
 $$
-s.t.{~~~} y_i(\textbf{w}^T\textbf{x}^{(i)} + b)\ge\hat\gamma, ~i=1,2,...,m
+s.t.{~~~} y_i(\mathbf{w}^T\mathbf{x}^{(i)} + b)\ge\hat\gamma, ~i=1,2,...,m
 $$
 为了便于优化，我们令$\hat\gamma = 1$，可得
 $$
-\max\limits_{\textbf{w}, b} \frac{1}{||\textbf{w}||}
+\max\limits_{\mathbf{w}, b} \frac{1}{||\mathbf{w}||}
 $$
 $$
-s.t.{~~~} y_i(\textbf{w}^T\textbf{x}^{(i)} + b)\ge1, ~i=1,2,...,N
+s.t.{~~~} y_i(\mathbf{w}^T\mathbf{x}^{(i)} + b)\ge1, ~i=1,2,...,N
 $$
 注：为什么可以令$\hat\gamma = 1$？我是这么理解的：对于任意的一组$\mathbf{w},b$，其所对应的$\hat\gamma$是固定且可以知道的，那么我对所有的$\mathbf{w},b$都乘以其所对应的$\frac{1}{\hat\gamma}$，则缩放完后的$\hat\gamma = 1$，但是超平面$\mathbf{w}\mathbf{x} + b = 0$并没有改变，即我们还是可以找到了正确的分隔平面，因此此处可以令$\hat\gamma = 1$，目的是为了可以使优化更为简便。
 <br>
 转化为最小化问题为，
 $$
-\min\limits_{\textbf{w}, b}\frac{1}{2}||\textbf{w}||^2
+\min\limits_{\mathbf{w}, b}\frac{1}{2}||\mathbf{w}||^2
 $$
 $$
-s.t.{~~~} y_i(\textbf{w}^T\textbf{x}^{(i)} + b)\ge1, ~i=1,2,...,N
+s.t.{~~~} y_i(\mathbf{w}^T\mathbf{x}^{(i)} + b)\ge1, ~i=1,2,...,N
 $$
 <br>
 该优化问题为凸优化问题(有约束的)。
@@ -252,14 +252,14 @@ $$
 $$
 {~~~~~~~~} h_i(w) = 0, {~~}i=1,2,...,l
 $$
-其中，目标函数$f(w)$和约束函数$g_i(w)$都是$\textbf{R}^n$上连续可微的凸函数，约束函数$h_i(w)$是$\textbf{R}^n$上的仿射函数。
+其中，目标函数$f(w)$和约束函数$g_i(w)$都是$\mathbf{R}^n$上连续可微的凸函数，约束函数$h_i(w)$是$\mathbf{R}^n$上的仿射函数。
 <br>
-(注：当函数满足$f(x) = ax + b,~a\in\textbf{R}^n,~b\in\textbf{R}^n,~x\in\textbf{R}^n$时，其为仿射函数。即函数为一次函数，对应空间中对向量线性变换再平移。)
+(注：当函数满足$f(x) = ax + b,~a\in\mathbf{R}^n,~b\in\mathbf{R}^n,~x\in\mathbf{R}^n$时，其为仿射函数。即函数为一次函数，对应空间中对向量线性变换再平移。)
 </p>
 
 **最优化求解**: 利用拉格朗日对偶性(Lagrange Duality)。在约束最优化问题中，常常利用对偶性将原始问题转化为对偶问题，通过解对偶问题而得到原始问题的解。
 <br>
-**原始问题**: 假设$f(x), c_i(x), h_j(x)$是定义在$\textbf{R}^n$上的连续可微函数，考虑约束最优化问题
+**原始问题**: 假设$f(x), c_i(x), h_j(x)$是定义在$\mathbf{R}^n$上的连续可微函数，考虑约束最优化问题
 <p>
 
 $$
@@ -277,7 +277,7 @@ $$
 $$
 L(x, \alpha, \beta) = f(x) + \sum_{i=1}^{k}\alpha_ic_i(x) + \sum_{j=1}^{l}\beta_jh_j(x)
 $$
-这里，$\textbf{x} = (x_1, x_2, ..., x_n)^T \in \textbf{R}^n$, $\alpha_i, \beta_j$是拉格朗日乘子，$\alpha_i \ge0$，x的函数
+这里，$\mathbf{x} = (x_1, x_2, ..., x_n)^T \in \mathbf{R}^n$, $\alpha_i, \beta_j$是拉格朗日乘子，$\alpha_i \ge0$，x的函数
 $$
 \theta_P = \max\limits_{\alpha, \beta: \alpha_i\ge0}L(x, \alpha, \beta)
 $$
@@ -293,7 +293,7 @@ $$
 $$
 <b>对偶问题</b>:
 $$
-\theta_D = \max\limits_{x}L(x, \alpha, \beta)
+\theta_D(\alpha, \beta) = \max\limits_{x}L(x, \alpha, \beta)
 $$
 $$
 \max\limits_{\alpha, \beta: \alpha_i\ge0}\theta_D(\alpha, \beta) = \max\limits_{\alpha, \beta: \alpha_i\ge0}\min\limits_{x}L(x, \alpha, \beta)
@@ -340,62 +340,65 @@ $$
 此时，该$c(x)$成为active constraint.
 </p>
 
-**SVM最优解**:
+**最大间隔分类器的最优解**:
 <p>
 
 $$
-L(\textbf{w}, b, \alpha) = \frac{1}{2}||\textbf{w}||^2 + \sum_{i=1}^{m}\alpha_i(1 - y_i(\textbf{w}^T\textbf{x}^{(i)} + b)) + \sum_{i}^{m}\alpha_i
+L(\mathbf{w}, b, \alpha) = \frac{1}{2}||\mathbf{w}||^2 + \sum_{i=1}^{m}\alpha_i(1 - y_i(\mathbf{w}^T\mathbf{x}^{(i)} + b))
 $$
 原问题，
 $$
-\min\limits_{\textbf{w}, b}\max\limits_{\alpha}L(\textbf{w}, \alpha, \beta)
+\min\limits_{\mathbf{w}, b}\max\limits_{\alpha}L(\mathbf{w}, \alpha, \beta)
 $$
 对偶问题，
 $$
-\max\limits_{\alpha}\min\limits_{\textbf{w}, b}L(\textbf{w}, \alpha, \beta)
+\max\limits_{\alpha}\min\limits_{\mathbf{w}, b}L(\mathbf{w}, \alpha, \beta)
 $$
 求解，
-(1). 求$\min\limits_{\textbf{w}, b}L(\textbf{w}, b, \alpha)$, 分别令$L(\textbf{w}, b, \alpha)$对$\textbf{w}$和$b$的偏导数为0
+(1). 求$\min\limits_{\mathbf{w}, b}L(\mathbf{w}, b, \alpha)$, 分别令$L(\mathbf{w}, b, \alpha)$对$\mathbf{w}$和$b$的偏导数为0
 $$
-\nabla_{\textbf{w}}L(\textbf{w}, b, \alpha) = \textbf{w} - \sum_{i=1}^{m}\alpha_iy_i\textbf{x}^{(i)} = 0
+\nabla_{\mathbf{w}}L(\mathbf{w}, b, \alpha) = \mathbf{w} - \sum_{i=1}^{m}\alpha_iy^{(i)}\mathbf{x}^{(i)} = 0
 $$
 $$
-\nabla_{\textbf{b}}L(\textbf{w}, b, \alpha) = \sum_{i=1}^{m}\alpha_iy_i = 0
+\nabla_{\mathbf{b}}L(\mathbf{w}, b, \alpha) = \sum_{i=1}^{m}\alpha_iy^{(i)} = 0
 $$
 解得,
 $$
-\textbf{w} = \sum_{i=1}^{m}\alpha_i y_i \textbf{x}^{(i)}
+\mathbf{w} = \sum_{i=1}^{m}\alpha_i y^{(i)} \mathbf{x}^{(i)}
 $$
 $$
-\sum_{i=1}^{m}\alpha_iy_i = 0
+\sum_{i=1}^{m}\alpha_iy^{(i)} = 0
 $$
-将上述结果带入$L(\textbf{w}, b, \alpha)$中得，
+将上述结果带入$L(\mathbf{w}, b, \alpha)$中得，
 $$
-L(\textbf{w}, b, \alpha) = \frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_i \alpha_j y_i y_j \langle\textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle - \sum_{i=1}^{m}\alpha_i y_i(\langle\sum_{j=1}^{m}\alpha_i y_i \textbf{x}^{(j)}, \textbf{x}^{(i)}\rangle + b) + \sum_{i=1}^{m}\alpha_i
+L(\mathbf{w}, b, \alpha) = \frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_i \alpha_j y^{(i)} y^{(j)} \langle\mathbf{x}^{(i)}, \mathbf{x}^{(j)}\rangle - \sum_{i=1}^{m}\alpha_i y^{(i)}(\langle\sum_{j=1}^{m}\alpha_j y^{(j)} \mathbf{x}^{(j)}, \mathbf{x}^{(i)}\rangle + b) + \sum_{i=1}^{m}\alpha_i
 $$
 $$
-= -\frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_i \alpha_j y_i y_j\langle \textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle + \sum_{i=1}^{m}\alpha_i
+= \sum_{i=1}^{m}\alpha_i - \frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_i \alpha_j y^{(i)} y^{(j)}\langle \mathbf{x}^{(i)}, \mathbf{x}^{(j)}\rangle + b\sum_{i=1}^{m} \alpha_i y^{(i)}
+$$
+$$
+= \sum_{i=1}^{m}\alpha_i - \frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_i \alpha_j y^{(i)} y^{(j)}\langle \mathbf{x}^{(i)}, \mathbf{x}^{(j)}\rangle
 $$
 即，
 $$
-\min\limits_{\textbf{w}, b}L(\textbf{w}, b, \alpha) = -\frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_i \alpha_j y_i y_j\langle \textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle + \sum_{i=1}^{m}\alpha_i
+\min\limits_{\mathbf{w}, b}L(\mathbf{w}, b, \alpha) = \sum_{i=1}^{m}\alpha_i - \frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_i \alpha_j y^{(i)} y^{(j)}\langle \mathbf{x}^{(i)}, \mathbf{x}^{(j)}\rangle
 $$
-(2). 求$\min\limits_{\textbf{w}, b}L(\textbf{w}, b, \alpha)$对$\alpha$的极大值
+(2). 求$\min\limits_{\mathbf{w}, b}L(\mathbf{w}, b, \alpha)$对$\alpha$的极大值
 $$
-\max\limits_{\alpha} -\frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_i \alpha_j y_i y_j\langle \textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle + \sum_{i=1}^{m}\alpha_i
+\max\limits_{\alpha} \sum_{i=1}^{m}\alpha_i - \frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_i \alpha_j y^{(i)} y^{(j)}\langle \mathbf{x}^{(i)}, \mathbf{x}^{(j)}\rangle
 $$
 $$
-s.t.{~~} \sum_{i=1}^{m}\alpha_i y_i = 0
+s.t.{~~} \sum_{i=1}^{m}\alpha_i y^{(i)} = 0
 $$
 $$
 {~~~~~~~~~~~~~~~~~~~~~~~~}\alpha_i \ge 0, ~i=1,2,...,m
 $$
 转化为最小化问题，
 $$
-\min\limits_{\alpha} \frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_i \alpha_j y_i y_j\langle \textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle - \sum_{i=1}^{m}\alpha_i
+\min\limits_{\alpha} \frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_i \alpha_j y^{(i)} y^{(j)}\langle \mathbf{x}^{(i)}, \mathbf{x}^{(j)}\rangle - \sum_{i=1}^{m}\alpha_i
 $$
 $$
-s.t.{~~} \sum_{i=1}^{m}\alpha_i y_i = 0
+s.t.{~~} \sum_{i=1}^{m}\alpha_i y^{(i)} = 0
 $$
 $$
 {~~~~~~~~~~~~~~~~~~~~~~~~}\alpha_i \ge 0, ~i=1,2,...,m
@@ -404,28 +407,28 @@ $$
 <br>
 根据KKT条件，
 $$
-\nabla_\textbf{w}L(\textbf{w}^\star, b^\star, \alpha^\star) = \textbf{w}^\star - \sum_{i=1}^{N}\alpha_i^\star y_i \textbf{x}^{(i)} = 0
+\nabla_\mathbf{w}L(\mathbf{w}^\star, b^\star, \alpha^\star) = \mathbf{w}^\star - \sum_{i=1}^{N}\alpha_i^\star y^{(i)} \mathbf{x}^{(i)} = 0
 $$
 $$
-\nabla_bL(\textbf{w}^\star, b^\star, \alpha^\star) = -\sum_{i=1}^{N}\alpha^\star y_i = 0
+\nabla_bL(\mathbf{w}^\star, b^\star, \alpha^\star) = -\sum_{i=1}^{N}\alpha^\star y^{(i)} = 0
 $$
 $$
-\nabla_\alpha L({\textbf{w}^\star}^T, b^\star, \alpha^\star) = \alpha_i^\star(y_i({\textbf{w}^\star}^T\textbf{x}^{(i)} + b) - 1) = 0, ~ i = 1,2,..,m
+\nabla_\alpha L({\mathbf{w}^\star}^T, b^\star, \alpha^\star) = \alpha_i^\star(y^{(i)}({\mathbf{w}^\star}^T\mathbf{x}^{(i)} + b) - 1) = 0, ~ i = 1,2,..,m
 $$
 $$
-y_i({\textbf{w}^\star}^T\textbf{x}^{(i)} + b) - 1 \ge 0, ~ i = 1,2,...,m
+y^{(i)}({\mathbf{w}^\star}^T\mathbf{x}^{(i)} + b) - 1 \ge 0, ~ i = 1,2,...,m
 $$
 $$
 \alpha^\star \ge 0, ~ i = 1,2,...,m
 $$
-<b>结果：</b>存在$\alpha^\star = (\alpha_1^\star, \alpha_2^\star,...,\alpha_N^\star)^T$且存在下标为$j$的$\alpha_j^\star > 0$, 使得
+<b>结果：</b>存在$\alpha^\star = (\alpha_1^\star, \alpha_2^\star,...,\alpha_N^\star)^T$, 使得
 $$
-\textbf{w}^\star = \sum_{i=1}^{N}\alpha_i^\star y_i \textbf{x}^{(i)}
+\mathbf{w}^\star = \sum_{i=1}^{N}\alpha_i^\star y^{(i)} \mathbf{x}^{(i)}
 $$
 $$
-b^\star = y_j - \sum_{i=1}^{N}\alpha_i y_i\langle \textbf{x}^{(i)}, \textbf{x}^{(j)}\rangle
+b^\star = - \frac{\max_{i:y^{(i)}=-1}{\mathbf{w}^\star}^T\mathbf{x}^{(i)} + \min_{i:y^{(i)}=1}{\mathbf{w}^\star}^T\mathbf{x}^{(i)}}{2}
 $$
-对于$\alpha_i^\star = 0$的$\mathbf{x}^{(i)}$，该样本的函数间隔$y_i({\mathbf{w}^\star}^T\mathbf{x}^{(i)} + b) = 1$，这些样本成为支持向量。
+对于$\alpha_i^\star = 0$的$\mathbf{x}^{(i)}$，该样本的函数间隔$y^{(i)}({\mathbf{w}^\star}^T\mathbf{x}^{(i)} + b) = 1$，这些样本成为支持向量。$b^\star$是根据这些支持向量计算出来的。
 </p>
 
 ***Reference***
@@ -436,35 +439,35 @@ $$
 - [CS229 Lecture notes: Part V Support Vector Machine](http://cs229.stanford.edu/notes/cs229-notes3.pdf)
 
 ## 核函数
-当数据是非线性可分时（无法用$\textbf{w}^T\textbf{x} + b$超平面分开），通常需要进行一个非线性变换，将非线性问题转化为线性问题。
+当数据是非线性可分时（无法用$\mathbf{w}^T\mathbf{x} + b$超平面分开），通常需要进行一个非线性变换，将非线性问题转化为线性问题。
 
-Kernel是用来计算在高维特征空间中两个向量内积(dot product)。假设我们有从$ R^n \Rightarrow R^m $的映射$\varphi$, 将向量$\textbf{x}, \textbf{y} y$从特征空间$R^n$映射到$R^m$。在$R^m$中，$\textbf{x}$和$\textbf{y}$的内积为$\varphi(\textbf{x})^T\varphi(\textbf{y} )$。核函数$K$定义为$K(\textbf{x}, \textbf{y}) = \varphi(\textbf{x})^T\varphi(\textbf{y})$。
+Kernel是用来计算在高维特征空间中两个向量内积(dot product)。假设我们有从$ R^n \Rightarrow R^m $的映射$\varphi$, 将向量$\mathbf{x}, \mathbf{y} y$从特征空间$R^n$映射到$R^m$。在$R^m$中，$\mathbf{x}$和$\mathbf{y}$的内积为$\varphi(\mathbf{x})^T\varphi(\mathbf{y} )$。核函数$K$定义为$K(\mathbf{x}, \mathbf{y}) = \varphi(\mathbf{x})^T\varphi(\mathbf{y})$。
 
 定义核函数的好处（为什么使用核方法？）在于，核函数提供了在不知道是什么空间和是什么映射$\varphi$时计算内积。
 
 例如：定义polynomial kernel
-$$K(\textbf{x}, \textbf{y}) = (1 + \textbf{x}^T\textbf{y})^2$$
+$$K(\mathbf{x}, \mathbf{y}) = (1 + \mathbf{x}^T\mathbf{y})^2$$
 
 $$
-\textbf{x}, \textbf{y} \in R^2, \textbf{x} = (x_1, x_2), \textbf{y} = (y_1, y_2)
+\mathbf{x}, \mathbf{y} \in R^2, \mathbf{x} = (x_1, x_2), \mathbf{y} = (y_1, y_2)
 $$
 
 看起来$K$并没有表示出这是什么映射，但是：
 
 $$
-K(\textbf{x}, \textbf{y}) = (1 + \textbf{x}^T \textbf{y})^2 = (1 + x_1y_1 + x_2y_2)^2 = 1 + x_1^2y_1^2 + x_2^2y_2^2 + 2x_1y_1 + 2x_2y_2 + 2x_1x_2y_1y_2
+K(\mathbf{x}, \mathbf{y}) = (1 + \mathbf{x}^T \mathbf{y})^2 = (1 + x_1y_1 + x_2y_2)^2 = 1 + x_1^2y_1^2 + x_2^2y_2^2 + 2x_1y_1 + 2x_2y_2 + 2x_1x_2y_1y_2
 $$
 
-相当于将$\textbf{x}$从$(x_1, x_2)$映射为$(1, x_1^2, x_2^2. \sqrt{2}x_1, \sqrt{2}x_2, \sqrt{2}x_1x_2)$，将$\textbf{y}$从$(y_1, y_2)$映射为$(1, y_1^2, y_2^2. \sqrt{2}y_1, \sqrt{2}y_2, \sqrt{2}y_1y_2)$
+相当于将$\mathbf{x}$从$(x_1, x_2)$映射为$(1, x_1^2, x_2^2. \sqrt{2}x_1, \sqrt{2}x_2, \sqrt{2}x_1x_2)$，将$\mathbf{y}$从$(y_1, y_2)$映射为$(1, y_1^2, y_2^2. \sqrt{2}y_1, \sqrt{2}y_2, \sqrt{2}y_1y_2)$
 
 即
 
-$$\varphi(\textbf{x}) = \varphi(x_1, x_2) = (1, x_1^2, x_2^2. \sqrt{2}x_1, \sqrt{2}x_2, \sqrt{2}x_1x_2)$$
+$$\varphi(\mathbf{x}) = \varphi(x_1, x_2) = (1, x_1^2, x_2^2. \sqrt{2}x_1, \sqrt{2}x_2, \sqrt{2}x_1x_2)$$
 
-$$\varphi(\textbf{y}) = \varphi(y_1, y_2) = (1, y_1^2, y_2^2. \sqrt{2}y_1, \sqrt{2}y_2, \sqrt{2}y_1y_2)$$
+$$\varphi(\mathbf{y}) = \varphi(y_1, y_2) = (1, y_1^2, y_2^2. \sqrt{2}y_1, \sqrt{2}y_2, \sqrt{2}y_1y_2)$$
 
 则可知
-$$K(\textbf{x}, \textbf{y}) = (1 + \textbf{x}^T \textbf{y})^2 = \varphi(\textbf{x})^T\varphi(\textbf{y})$$
+$$K(\mathbf{x}, \mathbf{y}) = (1 + \mathbf{x}^T \mathbf{y})^2 = \varphi(\mathbf{x})^T\varphi(\mathbf{y})$$
 
 **理解**：对于一些特征，其在低维空间中是线性不可分，但是如果将其映射到高维空间中，就可能会是线性可分的。处理的步骤为：特征 -> 映射到高维空间(使用映射函数$\varphi$) -> 分类算法(定义loss function，多表达为内积的形式)。采用核函数的优点在于，不必确定具体的映射函数$\varphi$是什么，不必显示的计算每个特征向量在映射到高维空间的表达是什么样的，而可以直接用低维空间的数据(坐标值)去计算得出向量在高维空间中内积的结果。
 
@@ -472,15 +475,15 @@ $$K(\textbf{x}, \textbf{y}) = (1 + \textbf{x}^T \textbf{y})^2 = \varphi(\textbf{
 - Linear kernel
 - Polynomial kernel
     $$
-    K(\textbf{x}, \textbf{z}) = (\textbf{x} \cdot \textbf{z} + 1)
+    K(\mathbf{x}, \mathbf{z}) = (\mathbf{x} \cdot \mathbf{z} + 1)
     $$
 
 - RBF kernel
-    A **radial basis function(RBF)** is a real-valued function whose value depends only on the distance from the origin, so that $\phi(\textbf{x}) = \phi(\textbf{||x||})$; or on the distance from some other point $c$, called a *center*, so that $\phi(\textbf{x}, c) = \phi(||\textbf{x - c}||)$.
+    A **radial basis function(RBF)** is a real-valued function whose value depends only on the distance from the origin, so that $\phi(\mathbf{x}) = \phi(\mathbf{||x||})$; or on the distance from some other point $c$, called a *center*, so that $\phi(\mathbf{x}, c) = \phi(||\mathbf{x - c}||)$.
     <br>
     One common RBF kernel is Gaussian kernel
     $$
-    K(\textbf{x}, \textbf{z}) = exp(-\frac{||\textbf{x} - \textbf{z}||^2}{2\sigma^2})
+    K(\mathbf{x}, \mathbf{z}) = \exp(-\frac{||\mathbf{x} - \mathbf{z}||^2}{2\sigma^2})
     $$
 
 **Kernel的选择**
@@ -496,11 +499,11 @@ $$K(\textbf{x}, \textbf{y}) = (1 + \textbf{x}^T \textbf{y})^2 = \varphi(\textbf{
 
 # PCA
 ## 数据基础知识
-**向量的表示:** 向量$\textbf{x}$是空间$R^n$的一个向量，$\mathbf{A} = (\mathbf{a_1}, \mathbf{a_2}, ..., \mathbf{a_n})$是空间$R^n$中的一组基，则$\mathbf{x}$可以表示为：
+**向量的表示:** 向量$\mathbf{x}$是空间$R^n$的一个向量，$\mathbf{A} = (\mathbf{a_1}, \mathbf{a_2}, ..., \mathbf{a_n})$是空间$R^n$中的一组基，则$\mathbf{x}$可以表示为：
 <p>
 
 $$
-\textbf{x} = A{(x_1, x_2,..., x_n)}^T = x_1\mathbf{a_1} + x_2\mathbf{a_2} + ... + x_n\mathbf{a_n}
+\mathbf{x} = A{(x_1, x_2,..., x_n)}^T = x_1\mathbf{a_1} + x_2\mathbf{a_2} + ... + x_n\mathbf{a_n}
 $$
 则向量$\mathbf{x}$在空间$R^n$中以$\mathbf{A}$为基的坐标为$(x_1, x_2,..., x_n)$.
 </p>
@@ -660,21 +663,21 @@ $$
 
 
 
-<!-- 样本$\textbf{x}^{(i)}$到超平面$\textbf{w}^T\textbf{x} + b = 0$的距离为
+<!-- 样本$\mathbf{x}^{(i)}$到超平面$\mathbf{w}^T\mathbf{x} + b = 0$的距离为
 <p>
 
 $$
-\gamma_i = \frac{y_i(\textbf{w}^T\textbf{x}^{(i)} + b)}{||\textbf{w}||}
+\gamma_i = \frac{y_i(\mathbf{w}^T\mathbf{x}^{(i)} + b)}{||\mathbf{w}||}
 $$
 
 几何间隔(Geometric Margin)为所有样本点中到超平面距离最小值（SVM目的在于让这个最近的距离最大化）：
 $$
-\gamma = \min\limits_{i=1,2,...,N}\frac{y_i(\textbf{w}^T\textbf{x}^{(i)} + b)}{||\textbf{w}||}
+\gamma = \min\limits_{i=1,2,...,N}\frac{y_i(\mathbf{w}^T\mathbf{x}^{(i)} + b)}{||\mathbf{w}||}
 $$
 
 函数间隔(Functional Margin): 所有样本点中到超平面的未经规范化的距离的最小值
 $$
-\hat{\gamma_i} = y_i(\textbf{w}^T\textbf{x}^{(i)} + b)
+\hat{\gamma_i} = y_i(\mathbf{w}^T\mathbf{x}^{(i)} + b)
 $$
 
 $$
@@ -683,7 +686,7 @@ $$
 
 </p> -->
 
-<!-- 因为函数间隔$\hat\gamma$不影响最优化问题的解，假设将$\textbf{w}$和$b$按比例变为$\lambda\textbf{w}$和$\lambda b$，则函数间隔为$\lambda\hat\gamma$。函数间隔的这一改变并不影响上面最优化问题的不等数约束，也不影响目标函数优化的结果，即变化前后是等价的最优化问题。所以，可以令$\hat\gamma=1$。
+<!-- 因为函数间隔$\hat\gamma$不影响最优化问题的解，假设将$\mathbf{w}$和$b$按比例变为$\lambda\mathbf{w}$和$\lambda b$，则函数间隔为$\lambda\hat\gamma$。函数间隔的这一改变并不影响上面最优化问题的不等数约束，也不影响目标函数优化的结果，即变化前后是等价的最优化问题。所以，可以令$\hat\gamma=1$。
 <br>
-<b>理解</b>: 换个角度思考下，因为成比例$\lambda$改变$\textbf{w}, b$，$\hat\gamma$也会成比例改变，所以如果取$\lambda = \frac{1}{\hat\gamma}$，最优化问题也是不变的。这样就可以理解为什么令$\hat\gamma=1$是可以的了。
+<b>理解</b>: 换个角度思考下，因为成比例$\lambda$改变$\mathbf{w}, b$，$\hat\gamma$也会成比例改变，所以如果取$\lambda = \frac{1}{\hat\gamma}$，最优化问题也是不变的。这样就可以理解为什么令$\hat\gamma=1$是可以的了。
 <br> -->

@@ -454,9 +454,12 @@ $$
 ## 核函数
 当数据是非线性可分时（无法用$\mathbf{w}^T\mathbf{x} + b$超平面分开），通常需要进行一个非线性变换，将非线性问题转化为线性问题。
 
-Kernel是用来计算在高维特征空间中两个向量内积(dot product)。假设我们有从$ R^n \Rightarrow R^m $的映射$\varphi$, 将向量$\mathbf{x}, \mathbf{y} y$从特征空间$R^n$映射到$R^m$。在$R^m$中，$\mathbf{x}$和$\mathbf{y}$的内积为$\varphi(\mathbf{x})^T\varphi(\mathbf{y} )$。核函数$K$定义为$K(\mathbf{x}, \mathbf{y}) = \varphi(\mathbf{x})^T\varphi(\mathbf{y})$。
+Kernel是用来计算在高维特征空间中两个向量内积(inner product)。假设我们有从$\mathbb{R}^n \Rightarrow \mathbb{R}^m $的映射$\varphi$, 将向量$\mathbf{x}^{(i)}, \mathbf{x}^{(j)}$从特征空间$\mathbb{R}^n$映射到$\mathbb{R}^m$。在$\mathbb{R}^m$中，$\mathbf{x}^{(i)}$和$\mathbf{x}^{(j)}$的内积为$\langle\varphi(\mathbf{x}^{(i)}), \varphi(\mathbf{x}^{(j)})\rangle$。核函数$K$定义为$K(\mathbf{x}, \mathbf{y}) = \langle \varphi(\mathbf{x}), \varphi(\mathbf{y})\rangle$。<br>
 
-定义核函数的好处（为什么使用核方法？）在于，核函数提供了在不知道是什么空间和是什么映射$\varphi$时计算内积。
+为什么要使用核方法：
+- 由上面推到的svm公式，可以看出所有的参数都是和$\langle \varphi(\mathbf{x}), \varphi(\mathbf{y})\rangle$有关系的，所有的计算都需要计算内积，而当向量的维数很高时，计算内积很消耗资源
+- 有些数据在低维空间中线性不可分，转换到高维空间时更容易分割，但是当向量为无穷维或者维数很高时，计算其从低维映射到高维的表达也是计算量很大的
+- 使用核方法，可以不用去计算样本在映射到高维空间是什么样的，也不需要在意用什么映射，只需要使用低维的数据计算出在高维空间中的内积就可以了
 
 例如：定义polynomial kernel
 $$K(\mathbf{x}, \mathbf{y}) = (1 + \mathbf{x}^T\mathbf{y})^2$$
@@ -483,12 +486,14 @@ $$\varphi(\mathbf{y}) = \varphi(y_1, y_2) = (1, y_1^2, y_2^2. \sqrt{2}y_1, \sqrt
 $$K(\mathbf{x}, \mathbf{y}) = (1 + \mathbf{x}^T \mathbf{y})^2 = \varphi(\mathbf{x})^T\varphi(\mathbf{y})$$
 
 **理解**：对于一些特征，其在低维空间中是线性不可分，但是如果将其映射到高维空间中，就可能会是线性可分的。处理的步骤为：特征 -> 映射到高维空间(使用映射函数$\varphi$) -> 分类算法(定义loss function，多表达为内积的形式)。采用核函数的优点在于，不必确定具体的映射函数$\varphi$是什么，不必显示的计算每个特征向量在映射到高维空间的表达是什么样的，而可以直接用低维空间的数据(坐标值)去计算得出向量在高维空间中内积的结果。
+<br>
+**注：** 核方法并不仅限于在SVM中使用，只要该学习方法可以用内积的形式$langle \mathbf{x}^{(i)}, \mathbf{x}^{(j)} \rangle$表达，就可以使用核方法。而大部分的算法是可以改写成内积的形式的。
 
 ## SVM常用核函数
 - Linear kernel
 - Polynomial kernel
     $$
-    K(\mathbf{x}, \mathbf{z}) = (\mathbf{x} \cdot \mathbf{z} + 1)
+    K(\mathbf{x}, \mathbf{z}) = (\mathbf{x}^T\mathbf{z} + c)^d
     $$
 
 - RBF kernel
@@ -507,6 +512,8 @@ $$K(\mathbf{x}, \mathbf{y}) = (1 + \mathbf{x}^T \mathbf{y})^2 = \varphi(\mathbf{
 ***Reference***
 - [How to intuitively explain what a kernel is?](https://stats.stackexchange.com/questions/152897/how-to-intuitively-explain-what-a-kernel-is)
 - [知乎：SVM的核函数如何选取？](https://www.zhihu.com/question/21883548)
+
+## L1 Softmargin SVM
 
 <br><br>
 

@@ -451,6 +451,130 @@ $$
 - [知乎：支持向量机中的函数距离和几何距离怎么理解？](https://www.zhihu.com/question/20466147)
 - [CS229 Lecture notes: Part V Support Vector Machine](http://cs229.stanford.edu/notes/cs229-notes3.pdf)
 
+## L1 Soft Margin SVM
+软间隔SVM（也可以称为线性SVM），在最大化间隔算法的基础上，采用软间隔去解决线性不可分的数据，例如下图所示：
+<p align="center">
+    <img src="http://ovvybawkj.bkt.clouddn.com/svm/soft%20margin.png" width="30%">
+</p>
+其优化问题如下，
+<p>
+
+$$
+\min_{\mathbf{w}} \frac{1}{2}||\mathbf{w}||^2 + C\sum_{i=1}^{m}\zeta_i
+$$
+$$
+s.t. ~~~ y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) \ge 1- \zeta_i
+$$
+$$
+\zeta_i \ge 0, ~~~~ i =1,2,...,m
+$$
+使用拉格朗日乘数法，其对偶问题为
+$$
+\min_{\alpha} \frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_i\alpha_j y^{(i)}y^{(j)}\langle \mathbf{x}^{(i)}, \mathbf{x}^{(j)} \rangle - \sum_{i=1}^{m}\alpha_i
+$$
+$$
+s.t. ~~~\sum_{i=1}^{m}\alpha_iy^{(i)} = 0
+$$
+$$
+0 \le \alpha_i \le C, ~~~ i = 1,2,...,m
+$$
+注：与线性可分的最大间隔方法的对偶问题的区别在于对$\alpha_i$的约束，此处不仅要求$\alpha_i \ge 0$而且还要求$\alpha_i \le C$。
+<br>
+
+根据KKT条件要求，可以得出
+$$
+\nabla_{\mathbf{w}}L(\mathbf{w}, b, \zeta, \alpha, \beta) = \mathbf{w} - \sum_{i=1}^{m}\alpha_iy^{(i)}\mathbf{x}^{(i)} = 0
+$$
+$$
+\nabla_{b}L(\mathbf{w}, b, \zeta, \alpha, \beta) = -\sum_{i=1}^{m}\alpha_iy^{(i)} = 0
+$$
+$$
+\nabla_{\zeta}L(\mathbf{w}, b, \zeta, \alpha, \beta) = C - \alpha_i - \beta_i, ~~~i = 1,2,..,m
+$$
+$$
+\alpha_i(y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) - 1 + \zeta_i) = 0, ~~~i = 1,2,..,m
+$$
+$$
+\beta_i \zeta_i = 0, i=1,2,..,m
+$$
+$$
+y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) - 1 + \zeta_i \ge 0, ~~~i = 1,2,...m
+$$
+$$
+\zeta \ge 0, ~~~i=1,2,...,m
+$$
+$$
+\alpha_i \ge 0, ~~~i = 1,2,..,m
+$$
+$$
+\beta_i \ge 0, ~~~i = 1,2,...,m
+$$
+<br>
+
+从KKT条件中可以得出下列隐藏结果：
+$$
+\alpha_i = 0 ~~~\Rightarrow~~~ y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) \ge 1
+$$
+$$
+\alpha_i = C ~~~\Rightarrow~~~ y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) \le 1
+$$
+$$
+\alpha_i < C ~~~\Rightarrow~~~ y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) = 1
+$$
+软间隔的支持向量分类器的支持向量是在间隔边界上和在边界内部的样本点，即其满足$y^{(i)}(\mathbf{(w)}^T\mathbf{x}^{(i)} + b) \le 1$。
+</p>
+
+**Hinge Loss Function:**
+<p>
+
+函数定义为：
+$$
+f(x) = \max(0, x)
+$$
+对于SVM对偶问题的优化问题，可以转换为：
+$$
+\min_{\mathbf{w}, b} ~~~\sum_{i=1}^{m} \max(0, 1-y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b)) + \lambda ||\mathbf{w}||^2
+$$
+
+我自己推导的过程：
+当$\alpha_i = 0$时,
+$$
+C - \alpha_i - \beta_i = 0 ~~~ \Rightarrow ~~~ \beta_i = C > 0
+$$
+$$
+\beta_i \zeta_i = 0 ~~~ \Rightarrow ~~~ \zeta_i = 0
+$$
+$$
+y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) - 1 + \zeta_i \ge 0 ~~~ \Rightarrow ~~~ y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) \ge 1
+$$
+
+当$0 < \alpha_i < C$时，
+$$
+C - \alpha_i - \beta_i = 0 ~~~ \Rightarrow ~~~ \beta_i > 0
+$$
+$$
+\beta_i \zeta_i = 0 ~~~ \Rightarrow ~~~ \zeta_i = 0
+$$
+$$
+\alpha_i(y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) - 1 + \zeta_i) = 0 ~~~\Rightarrow ~~~ y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) = 1
+$$
+
+当$\alpha_i =C$时,
+$$
+\alpha_i(y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) - 1 + \zeta_i) = 0 ~~~\Rightarrow~~~ y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) - 1 + \zeta_i) = 0
+$$
+$$
+y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) = 1 - \zeta_i \le 1
+$$
+综上可得，
+$$
+\zeta_i = \max(1 - y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b))
+$$
+因此，可以用上式去替换SVM对偶问题目标函数中的$\zeta_i$，即可得到Hinge Loss表达的SVM。
+
+</p>
+<br>
+
 ## 核函数
 当数据是非线性可分时（无法用$\mathbf{w}^T\mathbf{x} + b$超平面分开），通常需要进行一个非线性变换，将非线性问题转化为线性问题。
 
@@ -512,63 +636,6 @@ $$K(\mathbf{x}, \mathbf{y}) = (1 + \mathbf{x}^T \mathbf{y})^2 = \varphi(\mathbf{
 ***Reference***
 - [How to intuitively explain what a kernel is?](https://stats.stackexchange.com/questions/152897/how-to-intuitively-explain-what-a-kernel-is)
 - [知乎：SVM的核函数如何选取？](https://www.zhihu.com/question/21883548)
-
-## L1 Soft Margin SVM
-软间隔SVM（也可以称为线性SVM），在最大化间隔算法的基础上，采用软间隔去解决线性不可分的数据，例如下图所示：
-<p align="center">
-    <img src="http://ovvybawkj.bkt.clouddn.com/svm/soft%20margin.png" width="30%">
-</p>
-其优化问题如下，
-<p>
-
-$$
-\min_{\mathbf{w}} \frac{1}{2}||\mathbf{w}||^2 + C\sum_{i=1}^{m}\zeta_i
-$$
-$$
-s.t. ~~~ y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) \ge 1- \zeta_i
-$$
-$$
-\zeta_i \ge 0, ~~~~ i =1,2,...,m
-$$
-使用拉格朗日乘数法，其对偶问题为
-$$
-\min_{\alpha} \frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_i\alpha_j y^{(i)}y^{(j)}\langle \mathbf{x}^{(i)}, \mathbf{x}^{(j)} \rangle - \sum_{i=1}^{m}\alpha_i
-$$
-$$
-s.t. ~~~\sum_{i=1}^{m}\alpha_iy^{(i)} = 0
-$$
-$$
-0 \le \alpha_i \le C, ~~~ i = 1,2,...,m
-$$
-注：与线性可分的最大间隔方法的对偶问题的区别在于对$\alpha_i$的约束，此处不仅要求$\alpha_i \ge 0$而且还要求$\alpha_i \le C$。
-<br>
-根据KKT条件，可以得出
-<!-- 还需补充！！！ -->
-$$
-\alpha_i = 0 ~~~\Rightarrow~~~ y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) \ge 1
-$$
-$$
-\alpha_i = C ~~~\Rightarrow~~~ y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) \le 1
-$$
-$$
-\alpha_i < C ~~~\Rightarrow~~~ y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) = 1
-$$
-软间隔的支持向量分类器的支持向量是在间隔边界上和在边界内部的样本点，即其满足$y^{(i)}(\mathbf{(w)}^T\mathbf{x}^{(i)} + b) \le 1$。
-</p>
-
-**Hinge Loss Function:**
-<p>
-
-函数定义为：
-$$
-f(x) = \max(0, x)
-$$
-对于SVM对偶问题的优化问题，可以转换为：
-$$
-\min_{\mathbf{w}, b} ~~~\sum_{i=1}^{m} \max(0, 1-y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b)) + \lambda ||\mathbf{w}||^2
-$$
-
-</p>
 
 <br><br>
 

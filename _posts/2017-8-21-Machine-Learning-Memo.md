@@ -513,7 +513,62 @@ $$K(\mathbf{x}, \mathbf{y}) = (1 + \mathbf{x}^T \mathbf{y})^2 = \varphi(\mathbf{
 - [How to intuitively explain what a kernel is?](https://stats.stackexchange.com/questions/152897/how-to-intuitively-explain-what-a-kernel-is)
 - [知乎：SVM的核函数如何选取？](https://www.zhihu.com/question/21883548)
 
-## L1 Softmargin SVM
+## L1 Soft Margin SVM
+软间隔SVM（也可以称为线性SVM），在最大化间隔算法的基础上，采用软间隔去解决线性不可分的数据，例如下图所示：
+<p align="center">
+    <img src="http://ovvybawkj.bkt.clouddn.com/svm/soft%20margin.png" width="30%">
+</p>
+其优化问题如下，
+<p>
+
+$$
+\min_{\mathbf{w}} \frac{1}{2}||\mathbf{w}||^2 + C\sum_{i=1}^{m}\zeta_i
+$$
+$$
+s.t. ~~~ y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) \ge 1- \zeta_i
+$$
+$$
+\zeta_i \ge 0, ~~~~ i =1,2,...,m
+$$
+使用拉格朗日乘数法，其对偶问题为
+$$
+\min_{\alpha} \frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_i\alpha_j y^{(i)}y^{(j)}\langle \mathbf{x}^{(i)}, \mathbf{x}^{(j)} \rangle - \sum_{i=1}^{m}\alpha_i
+$$
+$$
+s.t. ~~~\sum_{i=1}^{m}\alpha_iy^{(i)} = 0
+$$
+$$
+0 \le \alpha_i \le C, ~~~ i = 1,2,...,m
+$$
+注：与线性可分的最大间隔方法的对偶问题的区别在于对$\alpha_i$的约束，此处不仅要求$\alpha_i \ge 0$而且还要求$\alpha_i \le C$。
+<br>
+根据KKT条件，可以得出
+<!-- 还需补充！！！ -->
+$$
+\alpha_i = 0 ~~~\Rightarrow~~~ y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) \ge 1
+$$
+$$
+\alpha_i = C ~~~\Rightarrow~~~ y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) \le 1
+$$
+$$
+\alpha_i < C ~~~\Rightarrow~~~ y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b) = 1
+$$
+软间隔的支持向量分类器的支持向量是在间隔边界上和在边界内部的样本点，即其满足$y^{(i)}(\mathbf{(w)}^T\mathbf{x}^{(i)} + b) \le 1$。
+</p>
+
+**Hinge Loss Function:**
+<p>
+
+函数定义为：
+$$
+f(x) = \max(0, x)
+$$
+对于SVM对偶问题的优化问题，可以转换为：
+$$
+\min_{\mathbf{w}, b} ~~~\sum_{i=1}^{m} \max(0, 1-y^{(i)}(\mathbf{w}^T\mathbf{x}^{(i)} + b)) + \lambda ||\mathbf{w}||^2
+$$
+
+</p>
 
 <br><br>
 
@@ -681,7 +736,43 @@ $$
 ***Reference:***
 - [网易公开课：cs229——奇异值分解](http://open.163.com/movie/2008/1/J/V/M6SGF6VB4_M6SGKINJV.html)
 
+<br>
+<br>
 
+# 最优化算法
+## Coordinate Ascent(坐标上升算法)
+<p>
+
+目标函数为，
+$$
+\max W(\alpha_1, \alpha_2, ..., \alpha_m)
+$$
+并且对$\alpha_i$没有任何约束。<br>
+优化思想是：在参数空间内（坐标轴是参数的每一维构成的），依次更新每一维的参数：在更新某一维参数时，固定所有其他参数，计算最大化目标函数的对应的那个参数作为更新后的值。
+</p>
+
+```
+Repeat
+{
+    For 1 to m:
+        alpha_i = argmax_{alpha_i}(W(alpha_1, alpha_2, ..., alpha_m))
+        # 保持除去alpha_i以外的alpha的值不变，最大化W找到其对应的alpha_i作为alpha_i更新后的值
+}
+```
+
+<br>
+
+## Sequential Minimal Optimization(SMO)优化算法
+**SMO的由来:** 可以理解为是从coordinate assent的基础上演变而来的。由于SVM对偶问题的优化有约束条件$\sum_{i=1}^{m}\alpha_iy^{(i)} = 0$，而coordinate assent要求每次都固定其他所有参数，但是由于约束条件的存在，如果固定其他所有参数，那么要优化的那个$\alpha_i$也就确定了，这样是没有办法优化的。因此SMO决定每次迭代更新两个参数。<br>
+```
+Repeat
+{
+    Select two parameters: alpha_i, alpha_j
+    Fix ohter parameters
+    alpha_i, alpha_j = argmax_{alpha_i, alpha_j}W(alpha_1, alpha_2, ..., alpha_m)
+    # 每次选择两个进行优化，并固定其他参数，并优化W(alpha_i, alpha_j)
+}
+```
 
 <!-- 样本$\mathbf{x}^{(i)}$到超平面$\mathbf{w}^T\mathbf{x} + b = 0$的距离为
 <p>

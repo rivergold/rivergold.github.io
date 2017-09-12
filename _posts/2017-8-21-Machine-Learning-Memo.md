@@ -5,6 +5,41 @@
 **判别式模型：** 对样本的特征和标签的$p(y|x)$进行建模
 <br>
 <br>
+
+## Logistic Regression
+针对于二分类问题，$y^{(i)} \in {0, 1}$， 我们希望找到一个函数$h_{\mathbf{\theta}}(\mathbf{x}) \in {0, 1}$，且
+<p>
+
+$$
+h_{\mathbf{\theta}}(\mathbf{x}) = g(\mathbf{\theta}^T\mathbf{x}) = \frac{1}{1 + e^{-\mathbf{\theta}^T\mathbf{x}}}
+$$
+$$
+g(z) = \frac{1}{1 + e^{-z}}
+$$
+其中，$g(z)$被称作Sigmoid function or logistic function。其图像为下图所示：
+</p>
+<p align="center">
+    <img src="http://ovvybawkj.bkt.clouddn.com/base/logistic%20function.png" width="35%">
+</p>
+<p>
+
+我们认为，
+$$
+p(y = 1|\mathbf{x}; \mathbf{\theta}) = h_{\mathbf{\theta}}(\mathbf{x})
+$$
+$$
+p(y = 0|\mathbf{x}; \mathbf{\theta}) = 1- h_{\mathbf{\theta}}(\mathbf{x})
+$$
+即，
+$$
+p(y|\mathbf{x}; \mathbf{\theta}) = h_{\mathbf{\theta}}(\mathbf{x})^{y}(1- h_{\mathbf{\theta}}(\mathbf{x}))^{1-y}
+$$
+（个人理解：上面的概率表达式从某种角度上解释了解决分类问题的logistic regression为什么要叫做regression，因为它表达、拟合了$y=1$的概率）<br>
+
+之后使用最大似然估计求出$\mathbf{\theta}$。
+<!-- 求解过程需要补充 -->
+</p>
+
 # Gaussian Discriminant Analysis(GDA)
 **高斯分布：** $n$维的高斯分布的参数为均指向量(mean vector) $\mathbf{\mu} \in \mathbb{R}^n$和协方差矩阵(covariance matrix)$\mathbf{\Sigma} \in \mathbb{R}^{n \times n}$，记做$x \sim \mathcal{N}(\mathbf{\mu}, \mathbf{\Sigma})$,
 <p>
@@ -123,7 +158,28 @@ $$
     </p>
 
 - 极大似然估计(Maximum Likelihood)
-    基本思想就是：一种通过用观测数据来估计概率模型中的参数的方法。已知该概率模型的分布函数，但是不知道其模型的参数
+    基本思想就是：一种通过用观测数据来估计概率模型中的参数的方法。已知该概率模型的分布函数，但是不知道其模型的参数。用带有这些参数的概率表示每个采样样本的概率乘积，并使该乘积最大化。
+
+    <p>
+
+    $$
+    L(\theta) = \prod_{i=1}^{m}p(y|x; \theta)
+    $$
+    我们需要将上式最大化
+    $$
+    \max_{\theta} L(\theta)
+    $$
+    为了便于计算，我们定义
+    $$
+    l(\theta) = \log L(\theta) = \log\prod_{i=1}^{m}(p(y|x; \theta) = \sum_{i=1}^{m}log(p(y|x; \theta))
+    $$
+    即，我们需要优化的是，$\max_{\theta}l(\theta)$.
+
+
+    </p>
+
+    - *Likelihood*:
+        一般写为$p(y|x, \theta)$，本质上Likelihood和概率没有区别，只是在表达为likelihood的时候，更为强调的是：这个概率是以$\theta$为参数的函数。(注：英文中通常说likelihood of parameter $\theta$)
 
 ***Reference:***
 - [Introduction to Probability & Statistics: Conditional Independence (*Book)](https://www.probabilitycourse.com/chapter1/1_4_4_conditional_independence.php)
@@ -807,6 +863,70 @@ $$
 <br>
 
 # 最优化算法
+## Gradient Descent（梯度下降法）
+求解无约束最优化常用的方法。<br>
+**Bath Gradient Descent:** <br>
+目标函数：
+<p>
+
+$$
+\min_{\mathbf{w}} f(\mathbf{w})
+$$
+优化的方式为:
+$$
+w_{i} := w_{i} - \alpha \nabla_{w_i} f(\mathbf{w})
+$$
+例如，Least Mean Square(LMS)中的优化问题，
+$$
+\hat y^{(i)} = h_{\mathbf{w}}(\mathbf{x}^{(i)})
+$$
+$$
+J(\mathbf{w}, \mathbf{x}) = \frac{1}{2}\frac{1}{m}\sum_{i=1}^{m}(h_{\mathbf{w}}(\mathbf{x}^{(i)}) - y^{(i)})^2
+$$
+可以使用梯度下降法去求解$\mathbf{w}$。<br>
+但如果当训练样本很多时$m \gg 0$，求和这一步需要非常大量的计算量。
+
+因此，在batch GD的基础上，有了**Stochastic Gradient Descent**方法：<br>
+$$
+w_i := w_i - \alpha \nabla_{w_i}(h_{\mathbf{w}}(\mathbf{x}^{(j)}) - y^{(j)})^2
+$$
+```
+Repeat
+{
+    For 1 to m:
+        w_i = w_i - alpha * derivative(w^T * x^{j}, w_i), i = 1,2...,n
+        # x^{j}: 第j个训练样本
+        # 从样本1到m，对每个w_i进行更新(依次用样本对参数进行更新)
+}
+```
+
+**mini-batch Gradient Descent:**
+$$
+w_i := w_i - \alpha ~ \frac{1}{b}\sum_{j=1}^{b}\nabla_{w_i}(h_{\mathbf{w}}(\mathbf{x}^{(j)}) - y^{(j)})^2
+$$
+将总的样本分为多个mini-bath(k = 1,2...,m/b)，在一个mini-bath中，对这个mini-batch中的所有样本进行梯度计算并求平均值，并更新参数。如此依次计算所有的mini-batch。
+```
+Repeat
+{
+    k from 1 to m/b:
+        j from 1 to b:
+            gradient_total += gradient_j
+        w_i = w_i - alpha * gradient_total / b
+}
+```
+
+
+</p>
+
+batch GD, SGD, mini-batch GD之间的关系：
+- batch GD： 每次迭代使用所有样本对参数进行一次更新
+- SGD：每次迭代使用一个样本对参数进行m次更新
+- mini-batch：每次迭代使用b个样本对参数进行m/b次更新
+
+因为在计算梯度时对多个样本的梯度取了平均值，这样有助于提高算法的精度（找到最优解的准确度），因此mini-batch精度比SGD好，但是比batch GD差一些。
+
+<br>
+
 ## Coordinate Ascent(坐标上升算法)
 <p>
 

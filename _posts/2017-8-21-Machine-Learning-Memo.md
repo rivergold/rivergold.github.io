@@ -860,6 +860,31 @@ $$
 - [网易公开课：cs229——奇异值分解](http://open.163.com/movie/2008/1/J/V/M6SGF6VB4_M6SGKINJV.html)
 
 <br>
+
+## K-means
+输入为无标签的一组样本$\mathbf{X} = \left[\begin{matrix}
+  \mathbf{x_1}^T\\
+  \mathbf{x_2}^T\\
+  ...\\
+  \mathbf{x_n}^T
+\end{matrix}\right]$, 其中${\mathbf{x^{(i)}}} = (x_1^{(i)}, x_2^{(i)}, ..., x_m^{(i)})^T$。<br>
+k-means聚类算法的计算步骤如下：
+1. Initialize *cluster centroids* $\mu_1, \mu_2, ..., \mu_k \in \mathbb{R}^n$ randomly.
+2. Repeat until convergence:
+    <p>
+
+    For each i, set
+    $$
+    c^{(i)} := \arg\min_j \| \mathbf{x}^{(i)} - \mathbf{\mu}_j \|^2
+    $$
+    For each j, set
+    $$
+    \mathbf{\mu}_j := \frac{\sum_{i=1}^{m}1\{c^{(i)} = j\}\mathbf{x}^{(i)}}{\sum_{i=1}^{m}1\{c^{(i)} = j\}}
+    $$
+
+  </p>
+
+<br>
 <br>
 
 # 最优化算法

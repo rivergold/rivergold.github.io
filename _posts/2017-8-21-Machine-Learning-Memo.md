@@ -68,9 +68,10 @@ $$
 </p>
 
 <p>
+
 注：假设的$p(\mathbf{x}|y)$的分布，其均值向量是不同的，但是协方差矩阵是相同的，因为在不同的$y$下，变量的均值可以发生改变，但是其特征与特征之间的关系，我们一般假设是不会发生改变的。<br>
 
-**GDA和Logistic：** 如果$\mathbf{x}|y=y_i \sim \mathcal{N}(\mu, \sigma^2)$，则后验概率$p(y|\mathbf{x}; \phi, \Sigma, \mu_0, \mu_1) = \frac{1}{1 + \exp(-\theta^Tx)}$，是一个logistic函数。因此当我们确定或比较确定$p(\mathbf{x}|y)$是服从高斯分布时（近似服从高斯），我们使用GDA的效果会比使用logistic要好，因为我们更好的利用了数据的信息。反之，如果我们不确定其实服从高斯分布的，选择logisitic会好一些。<br>
+<b>GDA和Logistic:</b> 如果$\mathbf{x}|y=y_i \sim \mathcal{N}(\mu, \sigma^2)$，则后验概率$p(y|\mathbf{x}; \phi, \Sigma, \mu_0, \mu_1) = \frac{1}{1 + \exp(-\theta^Tx)}$，是一个logistic函数。因此当我们确定或比较确定$p(\mathbf{x}|y)$是服从高斯分布时（近似服从高斯），我们使用GDA的效果会比使用logistic要好，因为我们更好的利用了数据的信息。反之，如果我们不确定其实服从高斯分布的，选择logisitic会好一些。<br>
 
 更一般的，如果$\mathbf{x}|y=y_i$ exponential distribution分布，其后验概率$p(y|\mathbf{x})$也是满足logistic。
 </p>
@@ -742,10 +743,10 @@ $$
 **理解：** 在原始空间中，找到样本方差最大的方向（样本都投影到该方向上，方差最大，且样本距离这一方向的直线/超平面的距离最小），用该方向作为新空间中的基的一个。<br>
 
 在空间$R^n$中，$m$组样本构成的矩阵$\mathbf{X} = \left[\begin{matrix}
-  \mathbf{x_1}\\
-  \mathbf{x_2}\\
+  \mathbf{x^{(1)}}^T\\
+  \mathbf{x^{(2)}}^T\\
   ...\\
-  \mathbf{x_n}
+  \mathbf{x^{(m)}}^T
 \end{matrix}\right]$, 其中${\mathbf{x^{(i)}}} = (x_1^{(i)}, x_2^{(i)}, ..., x_n^{(i)})$。<br>
 首先，需对$\mathbf{X}$进行去均值处理，即对$m$维的列向量分别计算均值并减去均值，并进行标准化。<br>
 之后，为了找到方差最大的方向$\mathbf{u}$作为空间的基（最好为单位向量），需要计算
@@ -863,10 +864,10 @@ $$
 
 ## K-means
 输入为无标签的一组样本$\mathbf{X} = \left[\begin{matrix}
-  \mathbf{x_1}^T\\
-  \mathbf{x_2}^T\\
+  \mathbf{x^{(1)}}^T\\
+  \mathbf{x^{(2)}}^T\\
   ...\\
-  \mathbf{x_n}^T
+  \mathbf{x^{(m)}}^T
 \end{matrix}\right]$, 其中${\mathbf{x^{(i)}}} = (x_1^{(i)}, x_2^{(i)}, ..., x_m^{(i)})^T$。<br>
 k-means聚类算法的计算步骤如下：
 1. Initialize *cluster centroids* $\mu_1, \mu_2, ..., \mu_k \in \mathbb{R}^n$ randomly.
@@ -883,6 +884,65 @@ k-means聚类算法的计算步骤如下：
     $$
 
   </p>
+
+<br>
+
+## Mixtures of Gaussians and EM Algorithm
+对于无标签的数据集$\mathbf{X} = \left[\begin{matrix}
+  \mathbf{x^{(1)}}^T\\
+  \mathbf{x^{(2)}}^T\\
+  ...\\
+  \mathbf{x^{(m)}}^T
+\end{matrix}\right]$, 其中${\mathbf{x^{(i)}}} = (x_1^{(i)}, x_2^{(i)}, ..., x_m^{(i)})^T$<br>
+我们希望建立其联合分布$P(\mathbf{x}^{(i)}, z^{(i)}) = P(\mathbf{x}^{(i)}|z^{(i)})P(z^{(i)})$。
+<p>
+
+$$
+z^{(i)} \sim Multinomial(\phi), ~~~where ~~\phi_j \ge 0, ~\sum_{j=1}^{k}\phi_j=1
+$$
+$$
+x^{(i)}|z^{(j)} = j ~~\sim~~ \mathcal{N}(\mu_j, \Sigma_j)
+$$
+我们用$k$表示$z^{(i)}$可以取的值，因此，该模型表达了从${1,2..,k}$中随机的选取$z^{(i)}$来产生 $\mathbf{x}^{(i)}$。模型的参数为$\phi, \mu$和$\Sigma$，使用最大似然估计去估计这些参数，
+$$
+l(\phi, \mu, \Sigma) = \sum_{i=1}^{m}\log P(\mathbf{x}^{(i)}; \phi, \mu, \Sigma) = \sum_{i=1}^{m}
+\log \sum_{z^{(i)}=1}^{k} P(\mathbf{x}^{(i)}|z^{(i)}; \mu, \Sigma)P(z^{(i)}; \phi)
+$$
+
+</p>
+
+
+### EM算法
+**思想:** 我们不知道隐变量$z$的值，因此我们先用模型先去猜测隐变量$z$的值，之后用猜出来的值去计算模型的参数，不断重复迭代，得到一个对参数比较好的估计。<br>
+
+
+<p>
+
+Repeat until convergence:
+(E-step, guess value of $z^{(i)}$) For each $i,j$, set
+$$
+w^{i}_j = P(z^{(i)} = j|x^{(i)}; \phi, \mu, \Sigma)
+$$
+$$
+= \frac{P(x^{(i)}|z^{(i)} = j)P(z^{(i)}=j)}{P(x^{(i)})} = \frac{P(x^{(i)}|z^{(i)} = j)P(z^{(i)}=j)}{\sum_{z^{(i)}}P(x^{(i)}, z^{(i)})}
+$$
+$$    
+= \frac{P(x^{(i)}|z^{(i)} = j)P(z^{(i)}=j)}{\sum_{l=1}^{k}P(x^{(i)}|z^{(i)}=l)P(z^{(i)}=l)}
+$$
+(M-step) Update the parameters
+$$
+\phi_j := \frac{1}{m}\sum_{i=1}^{m}w_j^{(i)}
+$$
+$$
+\mu_j := \frac{\sum_{i=1}^{m}w_j^{(i)}x^{(i)}}{\sum_{i=1}^{m}w_j^{(i)}}
+$$
+$$
+\Sigma_j := \frac{\sum_{i=1}^{m}w_j^{(i)}(x^{(i)}-mu_j)(x^{(i)} - \mu_J)^T}{\sum_{i=1}^{m}w_j^{(i)}}
+$$
+
+</p>
+
+
 
 <br>
 <br>

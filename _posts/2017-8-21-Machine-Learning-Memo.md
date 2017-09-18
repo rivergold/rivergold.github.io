@@ -36,8 +36,21 @@ p(y|\mathbf{x}; \mathbf{\theta}) = h_{\mathbf{\theta}}(\mathbf{x})^{y}(1- h_{\ma
 $$
 （个人理解：上面的概率表达式从某种角度上解释了解决分类问题的logistic regression为什么要叫做regression，因为它表达、拟合了$y=1$的概率）<br>
 
-之后使用最大似然估计求出$\mathbf{\theta}$。
-<!-- 求解过程需要补充 -->
+之后使用最大似然估计求出$\mathbf{\theta}$:
+$$
+L(\theta) = \prod_{i=1}^{m}p(y^{(i)}|\mathbf{x}^{(i)}; \theta) = \prod_{i=1}^{m}h_{\theta}(\mathbf{x}^{(i)})^{y^{(i)}}(1 - h_{\theta}(\mathbf{x}^{(i)}))^{1-y^{(i)}}
+$$
+$$
+l(\theta) = \log L(\theta) = \sum_{i=1}^{m}\log h_{\theta}(\mathbf{x}^{(i)})^{y^{(i)}}(1 - h_{\theta}(\mathbf{x}^{(i)}))^{1-y^{(i)}}
+$$
+$$
+= \sum_{i=1}^{m}y^{(i)}\log h_{\theta}(\mathbf{x}^{(i)}) + (1 - y^{(i)})\log (1 - h_{\theta}(\mathbf{x}^{(i)}))
+$$
+$$
+= sdfg
+$$
+
+
 </p>
 
 # Gaussian Discriminant Analysis(GDA)

@@ -47,7 +47,21 @@ $$
 = \sum_{i=1}^{m}y^{(i)}\log h_{\theta}(\mathbf{x}^{(i)}) + (1 - y^{(i)})\log (1 - h_{\theta}(\mathbf{x}^{(i)}))
 $$
 $$
-= sdfg
+= \sum_{i=1}^{m}y^{(i)}\log \frac{h_{\theta}(\mathbf{x}^{(i)})}{1 - h_{\theta}(\mathbf{x}^{(i)})} + \log (1-h_{\theta}(\mathbf{x}^{(i)}))
+$$
+我们需要最大化似然函数，这里我们采用随机梯度下降法去求解，即
+$$
+\nabla_{\theta} l(\theta) = \nabla_{h_{\theta}} l \times \nabla_{\theta} h_{\theta} = (y^{(i)} \frac{1}{h_{\theta}(\mathbf{x}^{(i)})(1 - h_{\theta}(\mathbf{x}^{(i)}))} - \frac{1}{1 - h_{\theta}(\mathbf{x}^{(i)})}) \times h_{\theta}(\mathbf{x}^{(i)})(1 - h_{\theta}(\mathbf{x}^{(i)})) \times \mathbf{x}^{(i)}
+$$
+$$
+= \frac{y^{(i)} - h_{\theta}(\mathbf{x}^{(i)})}{h_{\theta}(\mathbf{x}^{(i)})(1 - h_{\theta}(\mathbf{x}^{(i)}))} \times h_{\theta}(\mathbf{x}^{(i)})(1 - h_{\theta}(\mathbf{x}^{(i)})) \times \mathbf{x}^{(i)}
+$$
+$$
+= (y^{(i)} - h_{\theta}(\mathbf{x}^{(i)}))\mathbf{x}^{(i)}
+$$
+则，$\theta$的迭代更新公式为
+$$
+\theta := \theta + \alpha (y^{(i)} - h_{\theta}(\mathbf{x}^{(i)}))\mathbf{x}^{(i)}
 $$
 
 

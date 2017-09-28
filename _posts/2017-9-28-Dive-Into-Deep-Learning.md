@@ -7,9 +7,9 @@
 
 <p>
 
-Here are some notations we will need later. We use $w^l_{jk}$ to denote the weight for the connection from the $k^{th}$ neuron in the $(l - 1)^{th}$ layer to the $j^{th}$ neuron in the $l^{th}$ layer. And we use $z^{l}_j$ to represent the input of the $j^{th}$ neuron in the $l^{th}$ layer, $a^l_j$ to represent the activation output in the j^{th} neuron in the $l^{th}$ layer. Similarly, $b^l_j$ represents the bias of the $j^{th}$ neuron in the $l^{th}$ layer.
+Here are some notations we will need later. We use $w^l_{jk}$ to denote the weight for the connection from the $k^{th}$ neuron in the $(l - 1)^{th}$ layer to the $j^{th}$ neuron in the $l^{th}$ layer. And we use $z^{l}_j$ to represent the input of the $j^{th}$ neuron in the $l^{th}$ layer, $a^l_j$ to represent the activation output in the j^{th} neuron in the $l^{th}$ layer. Similarly, $b^l_j$ represents the bias of the $j^{th}$ neuron in the $l^{th}$ layer.<br>
 <br>
-**Why use this cumbersome notation?** Maybe it is better to use $j$ to refer to the inpurt neuron, and $k$ to the output neuron. Why we use vice versa? The reason is the activation output of the $j^{th}$ neuron in the $l^{th}$ layer can be expressed like,
+<b>Why use this cumbersome notation?</b> Maybe it is better to use $j$ to refer to the inpurt neuron, and $k$ to the output neuron. Why we use vice versa? The reason is the activation output of the $j^{th}$ neuron in the $l^{th}$ layer can be expressed like,
 
 $$
 a^l_j = \sigma(\sum_k w^l_{jk}a^{l-1}_k + b^l_j)
@@ -19,13 +19,14 @@ This expression can be rewritten into a matrix from as followings,
 $$
 \mathbf{a}^l = \sigma(\mathbf{W}^l \mathbf{a}^{l-1} + \mathbf{b}^l)
 $$
-where, $\mathbf{a}^{l}$, $\mathbf{a}^{l-1}$ and $\mathbf{b}^l$ are vectores, $\mathbf{W}^l$ is a <b>weight matirx</b> for the $j^{th}$ layer, and its $j^{th}$ row and $k^{th}$ column is $w^l_{jk}$. The elements in $j^{th}$ row of $\mathbf{W}^l$ are reprent the weights of neurons in $(l-1)^{th}$ layer connecting to the $j^{th}$ neuron in $l^{th}$ layer.<br>
+where, $\mathbf{a}^{l}$, $\mathbf{a}^{l-1}$ and $\mathbf{b}^l$ are vectores, $\mathbf{W}^l$ is a <b>weight matirx</b> for the $j^{th}$ layer, and its $j^{th}$ row and $k^{th}$ column is $w^l_{jk}$. The elements in $j^{th}$ row of $\mathbf{W}^l$ are reprent the weights of neurons in $(l-1)^{th}$ layer connecting to the $j^{th}$ neuron in $l^{th}$ layer.<br><br>
 
 Then, we define the loss function $C$, here we use the following notation(mean square error, MSE) as a example,
 $$
 C = \frac{1}{2}\frac{1}{m}\sum_{i}^{m}\| \mathbf{y}^{(i)} - \mathbf{a}^{L}(\mathbf{x}^{(i)}) \|^2
 $$
-where, $L$ denotes the number of layers in the networks, $\mathbf{a}^L$ denotes the final output of the network. And the loss of a single training example is $C_{\mathbf{x}^{(i)}} = \frac{1}{2}\|\mathbf{y}^{(i) - \mathbf{a}^L}\|^2$.<br>
+where, $L$ denotes the number of layers in the networks, $\mathbf{a}^L$ denotes the final output of the network. And the loss of a single training example is $C_{\mathbf{x}^{(i)}} = \frac{1}{2}\|\mathbf{y}^{(i) - \mathbf{a}^L}\|^2$.<br><br>
+
 <b>Note:</b> Backpropagation actually compute the partial derivatives $\frac{\partial C_{x^{(i)}}}{\partial w}$ and $\frac{\partial C_{x^{(i)}}}{\partial b}$ for single trainning example. Then, we calculate $\frac{\partial C}{\partial w}$ and $\frac{\partial C}{\partial b}$ by averageing over training samples (this step is for GD or mini-bath GD). Here we suppose the training example $\mathbf{x}$ has been fixed. And in order to simplify notation, we drop the $\mathbf{x}$ subscript, writing the loss $C_\mathbf{x}^{(i)}$ as $C$.<br>
 
 So, for each single training sample $\mathbf{x}$, the lose maybe written as,
@@ -36,7 +37,12 @@ Here, we define $\delta^l_j$ as
 $$
 \delta^l_j = \frac{\partial C}{\partial z^l_j}
 $$
+
+</p>
+
 $\delta^l_j$ shows that the input of $j^{th}$ neuron in the $l^{th}$ layer influences the extent of the network loss change (Details can be obtained from [here](http://neuralnetworksanddeeplearning.com/chap2.html#the_four_fundamental_equations_behind_backpropagation)).<br>
+
+<p>
 
 <b>理解：</b>$\delta^l_j$表达了在第$l$层网络的第$j$个神经元的输入值的变化对最终的loss function的影响程度。<br>
 
@@ -67,6 +73,7 @@ Then, we get
 $$
 \delta_j^l = \sum_k \delta_k^{l+1} w^{l+1}_{kj} \sigma^{'}(z^l_j)
 $$
+<br>
 <b>理解：</b>$w^{l+1}_{kj}$表示位于$(l+1)^{th}$层的$k^{th}$神经元连接到$l^{th}$层$j^{th}$神经元的权值，该公式表明，将$(l+1)^{th}$层的所有神经元的梯度变化分别乘以其与$l^{th}$层$k^{th}$神经元的权值并相加。<br>
 Our goal is to update $w^l_{jk}$ and $b^l_j$, and we need to calculate the partial derivative,
 $$
@@ -109,7 +116,8 @@ Assume $\mathbf{X}$ is 4d input $(N, C, H, W)$, the output of batch normalizatio
 $$
 y = \frac{x - \mathrm{E}[x]}{\sqrt{\mathrm{Var}[x] + \epsilon}} * \gamma + \beta
 $$
-where $x$ is a mini-batch of 3d input $(N, H, W)$. The $\mathrm{E}[x]$ and $\mathrm{Var}[x]$ are calculate pre-dimension over the mini-batches and $\gamma$ and $\beta$ are learnable parameter vectors of size $C$(the input size).<br>
+where $x$ is a mini-batch of 3d input $(N, H, W)$. The $\mathrm{E}[x]$ and $\mathrm{Var}[x]$ are calculate pre-dimension over the mini-batches and $\gamma$ and $\beta$ are learnable parameter vectors of size $C$(the input size).<br><br>
+
 <b>理解：</b>按照$C$的维度，把其他维度的值拉成一个向量计算均值和方差，之后进行归一化：即对每个Channel的所有mini-batch样本所有值计算均值和方差并归一化。
 
 </p>

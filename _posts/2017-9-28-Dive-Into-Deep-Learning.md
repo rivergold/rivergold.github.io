@@ -179,7 +179,7 @@ $$
 $$
 
 Here, we assumed zero mean inputs and weights, so $\mathrm{E}[x_i] = 0, \mathrm{E}[w_i] = 0$, and $w_i, x_i$ are independent each other, $x_i (i = 1,2,..,n)$ are independent identically distributed and $w_i (i = 1,2,..,n)$ are alse independent identically distributed.<br>
-If we want output $a$ to have the same variance as all of its input $x$, the variance of $w$ needs to be $\frac{1}{n}$, $\mathrm{Var}(x) = \frac{1}{n}$, it means $w \sim \mathcal{N}(0, \frac{1}{n})$.<br>
+If we want output $a$ to have the same variance as all of its input $x$, the variance of $w$ needs to be $\frac{1}{n}$, $\mathrm{Var}(x) = \frac{1}{n}$, it means $w \sim \mathcal{N}(0, \frac{1}{n})$.<br><br>
 
 <b>理解：</b>我们假设了输入特征和权重的均值都是0，$\mathrm{E}[x_i] = 0$，$\mathrm{E}(w_i) = 0$，并且$w_i, x_i$之间都是相互独立的，且$x_i$独立同分布，$w_i$独立同分布。因此，如果想要$a$与$x$的方差相同（网络输入与输出的分布不发生改变），我们需要让$\mathrm{Var}(w) = \frac{1}{n}$，即$w \sim \mathcal{N}(0, \frac{1}{n})$，又因为$\mathrm{Var}(nx) = n^2\mathrm{Var}(x)$，所以有`w = np.random.randn(n) / sqrt(n)`.
 另外，在深度学习代码实现中，通常采用下面所示的方法对参数初始化

@@ -99,6 +99,8 @@ $$
 ***Reference:***
 - [Neural Networks and Deep Learning: How the backpropagation algorithm works](http://neuralnetworksanddeeplearning.com/chap2.html)
 
+<br>
+
 ## Batch Normalization
 
 <p>
@@ -149,6 +151,8 @@ output = bn(x)
 - [PyTorch: BathNorm2d](http://pytorch.org/docs/master/nn.html#batchnorm2d)
 - [pytorch: 利用batch normalization对Variable进行normalize/instance normalize](http://blog.csdn.net/u014722627/article/details/68947016)
 
+<br>
+
 ## Weight Initialization
 <p>
 
@@ -185,6 +189,9 @@ w = np.random.uniform(-stdv, stdv)
 - [cs231n: Weight Initialization](http://cs231n.github.io/neural-networks-2/#init)
 - [Wiki: Variance](https://en.wikipedia.org/wiki/Variance)
 - [知乎: 为什么神经网络在考虑梯度下降的时候，网络参数的初始值不能设定为全0，而是要采用随机初始化思想？](https://www.zhihu.com/question/36068411)
+
+<br>
+<br>
 
 # Installation
 ## Install Cuda, cuDNN

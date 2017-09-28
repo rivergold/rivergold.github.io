@@ -2,7 +2,7 @@
 ## Backpropagation
 
 <p align="center">
-    <img src="http://ovvybawkj.bkt.clouddn.com/dl/backpropagation_1.png" width="60%">
+    <img src="http://ovvybawkj.bkt.clouddn.com/dl/backpropagation_1.png" width="75%">
 </p>
 
 <p>

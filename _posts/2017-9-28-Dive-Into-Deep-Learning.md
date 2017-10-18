@@ -199,16 +199,197 @@ w = np.random.uniform(-stdv, stdv)
 - [知乎: 为什么神经网络在考虑梯度下降的时候，网络参数的初始值不能设定为全0，而是要采用随机初始化思想？](https://www.zhihu.com/question/36068411)
 
 <br>
+
+## Optimization Methods
+<p>
+Loss function is defined as,
+
+$$
+J(\mathbf{w}, \mathbf{x}) = \frac{1}{2}\frac{1}{m}\sum_{i=1}^{m}(h_{\mathbf{w}}(\mathbf{x}^{(i)}) - y^{(i)})^2 + \frac{1}{2}\lambda \mathbf{w}^2
+$$
+$$
+J(\mathbf{w}, \mathbf{x})^{(i)} = \frac{1}{2}(h_{\mathbf{w}}(\mathbf{x}^{(i)}) - y^{(i)})^2 + \frac{1}{2}\lambda\mathbf{w}^2
+$$
+$$
+\nabla_{\mathbf{w}} J(\mathbf{w}, \mathbf{x})^{(i)}
+$$
+
+</p >
+
+### Batch Gradient Descent(BGD)
+BGD calculate the sum gradients of all samples and get the mean,
+<p>
+
+$$
+w_i := w_i - \eta \frac{1}{m}\sum_{k=1}^{m}\nabla_{w_i}J(\mathbf{w}, \mathbf{x})^{(k)}
+$$
+
+</p>
+
+**Advantages**:
+- Simpleness
+
+**Disdvantages**:
+- Large amounts of computation
+- Memory may not enough to put all samples
+- Difficult to update weights online
+
+### Stochastic Gradient Descent
+SGD get one sample and calculate the gradient to update weights,
+<p>
+
+$$
+w_i := w_i - \eta \nabla J(\mathbf{w}, \mathbf{x})^{(k)}
+$$
+
+</p>
+
+### Mini-batch Gradient Descent
+These method calculate the gradient of a mini-batch samples and the get the mean to update weights,
+<p>
+
+$$
+w_i := w_i - \eta \frac{1}{b}\sum_{k=j}^{j+b}\nabla_{w_i}J(\mathbf{w}, \mathbf{x})^{(k)}
+$$
+
+</p>
+
+The following methods are optimized based on **Gradient Descent**, we ues $g$ to notate gradient $\nabla J(\mathbf{w}, \mathbf{x})$(This gradient can be the mean of all samples, a samples or a mean of a batch of samples). And in deep learning we often use SGD, but you should know that SGD here represents mini-batch gradient descent.
+
+### Momentum
+
+<p>
+
+$$
+v := \mu v_{t-1} + g
+$$
+$$
+w_i := w_i - \eta v
+$$
+
+</p>
+
+### Nesterov Momentum
+<p>
+
+$$
+v := \mu v_{t-1} + g
+$$
+$$
+w_{i_{\text{next}}} = w - \eta v
+$$
+$$
+v := \mu v_{t-1} + g_{w_{i_{\text{next}}}}
+$$
+$$
+w_i := w_i - \eta v
+$$
+
+</p>
+
+***Reference:***
+- [知乎专栏：深度学习最全优化方法总结比较（SGD，Adagrad，Adadelta，Adam，Adamax，Nadam）](https://zhuanlan.zhihu.com/p/22252270)
+- [卷积神经网络中的优化算法比较](http://shuokay.com/2016/06/11/optimization/) (注：该博客写的有些错误，主要了解其讲解的思想)
+- [知乎：在神经网络中weight decay起到的做用是什么？momentum呢？normalization呢？](https://www.zhihu.com/question/24529483)
+
+<br>
 <br>
 
-# Installation
-## Install Cuda, cuDNN
-1. Install Cuda
-2. Install cuDNN
-    - Download cuDNN from [NVIDA cuDNN](https://developer.nvidia.com/cudnn)
-    - Decompress it and copy `include` and `lib` file into cuda ([\*ref](https://medium.com/@acrosson/installing-nvidia-cuda-cudnn-tensorflow-and-keras-69bbf33dce8a))
-        ```shell
-        tar -xzvf cudnn-7.0-linux-x64-v4.0-prod.tgz
-        cp cuda/lib64/* /usr/local/cuda/lib64/
-        cp cuda/include/cudnn.h /usr/local/cuda/include/
+# Pre-installation for Deep Learning
+We need:
+1. Ubuntu OS
+2. Nvidia GPU and driver
+3. CUDA and cudann
+## Install Nvidia Driver
+- Notebook computer with dual graphics
+    If you want to install Nvidia driver on your notebook computer which has dual graphics, it is better to install Nvidia driver by using **Additional Drivers** in Ubuntu.
+    <p align="center">
+        <img src="http://ovvybawkj.bkt.clouddn.com/dl/ubuntu-addtional-driver.png" width="40%">
+    </p>
+- Desktop computer
+    To install Nvidia driver on desktop, you need to download the specific driver for your computer from [Nvidia](https://www.geforce.com/drivers). When you install the driver, you need to do the followings:
+    1. Disable `Nouveau`
+        ```bash
+        # Inspect if there is Nouveau
+        lsmod | grep nouveau
+        # Create a blacklist and set nouveau into it.
+        sudo gedit /etc/modprobe.d/blacklist-nouveau.conf
         ```
+        Add run the following contents into the `.conf`
+        ```bash
+        blacklist nouveau
+        options nouveau modeset=0
+        ```
+        Then, regenerate the kernel initramfs
+        ```bash
+        sudo update-initramfs -u
+        ```
+    2. Install Nvidia driver
+        ```bash
+        # Close gui
+        sudo service lightdm stop
+        # Install dirver
+        sudo chmod u+x <nvidia-driver.run>
+        sudo ./<nvidia-driver.run>
+        # Reboot
+        sudo reboot
+        ```
+
+## Install CUDA Toolkit
+1. Download the install package from [here](https://developer.nvidia.com/cuda-downloads). It is recommended to download the `.run` to install cuda. And during installation, when it asks whether install Nvidia driver or not, please choose `No` because you have already installed the dirver.
+2. Install
+    ```
+    sudo bash <cuda.run>
+    ```
+3. Test: `cd` into the cuda folder, which default path is `/usr/local/cuda`.
+    ```bash
+    cd ./samples/1_Utilities/diviceQuery
+    make -j4
+    cd <samples path>/bin/x86_64/linux/release/
+    ./deviceQuery
+    ```
+    Check the output to inspect if you have installed Cuda successfully or not.
+4. Add Cuda into path.
+    ```bash
+    # Open ~/.bashrc
+    sudo gedit ~/.bashrc
+    # Add
+    export PATH=$PATH:/usr/local/cuda/bin
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
+    ```
+
+## Install cuDNN
+1. Download cuDNN from [Nvidia website]().
+2. Run
+    ```bash
+    tar -xzvf <cudnn.tgz>
+    # Copy files into CUDA Toolkit directory.
+    sudo cp cuda/include/cudnn.h /usr/local/cuda/include
+    sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
+    sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
+    ```
+
+***Reference:***
+- [Nvidia: CUDA guide](http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
+- [Nvidia: cuDNN install guide](http://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html)
+- [ubuntu 16.04降级安装gcc为4.8](http://www.cnblogs.com/in4ight/p/6626708.html)
+- [Ubuntu 16.04 安装英伟达（Nvidia）显卡驱动](https://gist.github.com/dangbiao1991/7825db1d17df9231f4101f034ecd5a2b)
+
+# Ubuntu gcc from 5.x to 4.8
+```bash
+# Check gcc version
+gcc --version
+# Install gcc-4.8
+sudo apt-get install gcc-4.8
+# gcc version
+gcc --version
+# List all gcc to see if gcc-4.8 installed successfully
+ls /usr/bin/gcc*
+# Put gcc-4.8 into priority
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 100
+sudo update-alternatives --config gcc
+# Check gcc version again
+gcc --version
+```
+***Reference:***
+- [Ubuntu change gcc from 5.x to 4.8](http://www.cnblogs.com/in4ight/p/6626708.html)

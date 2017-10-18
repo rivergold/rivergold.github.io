@@ -170,7 +170,7 @@ pip
         ```
 
 : - On Linux:
-    - New a folder called '.pip' under `~/`, create a file named `pip.conf` and write the same as Windows in the file.<br>
+    - New a folder called `.pip` under `~/`, create a file named `pip.conf` and write the same as Windows in the file.<br>
 
 conda
 : Input followings in terminal

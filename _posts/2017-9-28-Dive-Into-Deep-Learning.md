@@ -427,7 +427,20 @@ make runtest
 make install
 ```
 
-***Reference***
+***Errors & Solution:***
+- If cmake cannot find opencv and the error is like
+    ```
+    Could not find module FindOpenCV.cmake or a configuration file for package OpenCV.
+      Adjust CMAKE_MODULE_PATH to find FindOpenCV.cmake or set OpenCV_DIR to the
+      directory containing a CMake configuration file for OpenCV.  The file will
+      have one of the following names:
+        OpenCVConfig.cmake
+        opencv-config.cmake
+    ```
+    Add `set(CMAKE_PREFIX_PATH <opencv install path>/share/OpenCV)` in the `CMakeLists.txt`
+
+
+***Reference:***
 - [BVLC/caffe wiki: Caffe installing script for ubuntu 16.04 support Cuda 8](https://github.com/BVLC/caffe/wiki/Caffe-installing-script-for-ubuntu-16.04---support-Cuda-8)
 
 <!-- # Ubuntu gcc from 5.x to 4.8

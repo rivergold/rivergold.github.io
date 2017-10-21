@@ -336,7 +336,7 @@ We need:
         ```
 
 ## Install CUDA Toolkit
-1. Download the install package from [here](https://developer.nvidia.com/cuda-downloads). It is recommended to download the `.run` to install cuda. And during installation, when it asks whether install Nvidia driver or not, please choose `No` because you have already installed the dirver.
+1. Download the install package from [here](https://developer.nvidia.com/cuda-downloads). It is recommended to download the `.run` to install cuda. And during installation, when it asks whether install Nvidia driver or not, please choose `No` because you have already installed the dirver. For ubuntu 16.04, it is better to install cuda 8.0+(here we use cuda_8.0.44 and we haven't try cuda9 yet), because cuda 7.5 and lower version do not support gcc > 4.9.
 2. Install
     ```
     sudo bash <cuda.run>
@@ -375,7 +375,62 @@ We need:
 - [ubuntu 16.04降级安装gcc为4.8](http://www.cnblogs.com/in4ight/p/6626708.html)
 - [Ubuntu 16.04 安装英伟达（Nvidia）显卡驱动](https://gist.github.com/dangbiao1991/7825db1d17df9231f4101f034ecd5a2b)
 
-# Ubuntu gcc from 5.x to 4.8
+## Build and Install Caffe1
+Caffe1 need a a series of dependent libraries: OpenCV, ProtoBuffer, Boost, GFLAGS, GLOG, BLAS, HDF5, LMDB, LevelDB and Snappy. We need all of these before we start to build caffe.
+### Build OpenCV
+Here the version of OpenCV we build is 3.3.0 and we use `cmake-gui` to make it convenient during build configuration.<br>
+The source code of OpenCV and Opencv_contrib can be downloaded from [Github](https://github.com/opencv). Before building OpenCV, we need to install some dependent libraries,
+```bash
+# Dependencies
+sudo apt-get install build-essential checkinstall cmake pkg-config yasm gfortran git
+sudo apt-get install -y libjpeg8-dev libjasper-dev libpng12-dev libtiff5-dev \
+                        libavcodec-dev libavformat-dev libswscale-dev \ libdc1394-22-dev libxine2-dev libv4l-dev \
+                        libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev \
+                        libqt4-dev libgtk2.0-dev libtbb-dev \
+                        libatlas-base-dev \
+                        libfaac-dev libmp3lame-dev libtheora-dev \
+                        libvorbis-dev libxvidcore-dev
+# Install Python Libraries(here we use python3)
+sudo apt-get install python3-dev
+# OpenCV need numpy
+pip install numpy
+```
+Then, open cmake-gui in OpenCV folder. Here are some tips needed to be aware of:
+1. Check `PYTHON` configuration
+2. Better to change `CMAKE_INSTALL_PREFIX` to `/usr/local/opencv3`
+3. Set `OPENCV_EXTRA_MODULES_PATH` as `<the path of opencv_contirb>/modules`
+
+After make, make install, add opencv to `PATH`
+```bash
+vim ~/.bashrc
+# Add followings into .bashrc
+export PATH=$PATH:/usr/local/opencv3/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/opencv3/lib
+```
+
+***Reference***
+- [Learn Opencv: Install OpenCV3 on Ubuntu](https://www.learnopencv.com/install-opencv3-on-ubuntu/)
+- [pyimagesearch: Ubuntu 16.04: How to install OpenCV](https://www.pyimagesearch.com/2016/10/24/ubuntu-16-04-how-to-install-opencv/)
+
+### Install other dependent libraries
+```
+sudo apt-get install -y opencl-headers build-essential protobuf-compiler \
+                        libprotoc-dev libboost-all-dev libleveldb-dev hdf5-tools libhdf5-serial-dev \
+                        libsnappy-dev \
+                        libatlas-base-dev cmake libstdc++6-4.8-dbg libgoogle-glog0v5 libgoogle-glog-dev \
+                        libgflags-dev liblmdb-dev git python-pip gfortran
+```
+**Then** use cmake-gui to make caffe1, and run
+```
+make -j4
+make runtest
+make install
+```
+
+***Reference***
+- [BVLC/caffe wiki: Caffe installing script for ubuntu 16.04 support Cuda 8](https://github.com/BVLC/caffe/wiki/Caffe-installing-script-for-ubuntu-16.04---support-Cuda-8)
+
+<!-- # Ubuntu gcc from 5.x to 4.8
 ```bash
 # Check gcc version
 gcc --version
@@ -392,4 +447,4 @@ sudo update-alternatives --config gcc
 gcc --version
 ```
 ***Reference:***
-- [Ubuntu change gcc from 5.x to 4.8](http://www.cnblogs.com/in4ight/p/6626708.html)
+- [Ubuntu change gcc from 5.x to 4.8](http://www.cnblogs.com/in4ight/p/6626708.html) -->

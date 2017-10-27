@@ -108,6 +108,76 @@ $$
 
 <br>
 
+## Regularization
+### $L_1$ regularization
+<p>
+
+$$
+\lambda \sum_{i=1}^{n} \| \mathbf{w} \| = \lambda {\|\mathbf{w}\|}_1
+$$
+
+</p>
+
+By using $L_1$ regularization, $\mathbf{w}$ will be sparse.
+
+### $L_2$ regularization
+$L2$ regularization are used much more often during training neural network, it will make weights uniform,
+
+<p>
+
+$$
+\lambda \sum_{i=1}^{n}\|\mathbf{w}\|^2 = \lambda {\|\mathbf{w}\|}_2
+$$
+
+</p>
+
+In neural network, the loss function with regularization is written as,
+
+<p>
+
+$$
+J(\mathbf{w}^1, b^1, \mathbf{w}^2, b^2, ...,  \mathbf{w}^L, b^L) = \frac{1}{m}\sum_{i=1}^{m}L(\hat{y}^{(i)}, y^{(i)}) + \frac{\lambda}{2m}\sum_{l=1}^{L}\|\mathbf{w}^l\|^2_2
+$$
+
+where, $\mathbf{w}^l$ is weights matrix and $b$ is a bias vector.<br>
+When we do backpropagation to update weights(here assume we use SGD), the gradient of $\mathbf{w}^L$ is,
+
+$$
+\frac{\partial J}{\partial \mathbf{w}^L} = \frac{\partial L(\hat{y}^{(i)}, y^{(i)})}{\partial \mathbf{w}^L} + \lambda \mathbf{w}^L
+$$
+we note $\frac{\partial L(\hat{y}^{(i)}, y^{(i)})}{\partial \mathbf{w}^L}$ as $\mathrm{d}\mathbf{w}^L$
+$$
+\mathbf{w}^L := \mathbf{w}^L - \alpha \mathrm{d} \mathbf{w}^L - \alpha \lambda \mathbf{w}^L
+$$
+Here, the $\lambda$ is called **weight decay**, no matter what value of $mathbf{w}^L$ is, this notation is intent to decay the weights(make weights' absolute value small).
+
+</p>
+
+### Dropout
+Core concept:
+1. Dropout randomly knocks out units in the network, so it's as if on every iteration, we are working with a smaller neural network and so using a smaller neural network seems like it should has a regularization effect.
+
+2. Make the neuron can not rely on any one feature, so it makes to spread out weights.<br>
+**理解：** dropout在每一次迭代都会抛弃部分输入数据（使某些输入为0），不使权值集中于某个或者部分输入特征上，而是使权值参数更加均匀的分布，可以理解为**shrink weights**，因此于$L_2$正则化类似。
+<br>
+
+Tips of using Dropout:
+1. Dropout is for preventing over-fitting. It the model is not over-fitting, it's better not to use dropout.<br>
+**理解：** Dropout是用来解决over-fitting的，如果模型没有over-fitting，不必非要使用。
+
+2. Because of dropout, the loss function $J$ can not be defined explicitly. So it's hard to check whether loss decrease rightly. It's a good choice to close dropout and check the loss decreases right to ensure that your code has no bug, and then open dropout to work.
+
+### Other Regularization Methods
+1. Data augmentation
+    - Flipping
+    - Random rotation
+    - Clip
+    - Distortion
+
+2. Early stopping
+Check dev set error and early stop training. $\mathbf{w}$ is small at initialization and it will increase along with iteration. Early stop will get a mid-size rate $\mathbf{w}$, so it's similar to $L_2$ regularization.
+<br>
+
 ## Batch Normalization
 
 <p>
@@ -384,7 +454,8 @@ The source code of OpenCV and Opencv_contrib can be downloaded from [Github](htt
 # Dependencies
 sudo apt-get install build-essential checkinstall cmake pkg-config yasm gfortran git
 sudo apt-get install -y libjpeg8-dev libjasper-dev libpng12-dev libtiff5-dev \
-                        libavcodec-dev libavformat-dev libswscale-dev \ libdc1394-22-dev libxine2-dev libv4l-dev \
+                        libavcodec-dev libavformat-dev libswscale-dev \
+                        libdc1394-22-dev libxine2-dev libv4l-dev \
                         libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev \
                         libqt4-dev libgtk2.0-dev libtbb-dev \
                         libatlas-base-dev \

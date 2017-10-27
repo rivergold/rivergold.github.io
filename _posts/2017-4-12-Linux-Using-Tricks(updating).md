@@ -1,3 +1,4 @@
+# Base Linux Command
 - How to update .barchrc(update bash path)?([ref][1])<br>
     ```shell
     . ~/.bashrc
@@ -90,3 +91,35 @@
 
 [1]:http://stackoverflow.com/questions/2518127/how-do-i-reload-bashrc-without-logging-out-and-back-in
 [2]:http://askubuntu.com/questions/56326/how-do-i-rename-a-directory-via-the-command-line
+
+<br>
+
+# Common Software
+## shadowsocks-qt-gui
+```bash
+sudo add-apt-repository ppa:hzwhuang/ss-qt5
+sudo apt-get update
+sudo apt-get install shadowsocks-qt5
+```
+And you also need to install Chrome or Firefox extension `switchyomega`, you can get it from [github: FelisCatus/SwitchyOmega](https://github.com/FelisCatus/SwitchyOmega/releases). And the configuration can be get from its [wiki](https://github.com/FelisCatus/SwitchyOmega/wiki/GFWList).
+
+## synergy
+```bash
+sudo apt-get install quicksynergy
+```
+
+## Filezilla
+```bash
+sudo apt-get install filezilla
+```
+
+## sogou input
+1. First install `fcitx`. Because Ubuntu set `Ibus` as default keyboard input framework, we need change it.
+```bash
+sudo apt-get install fcitx
+```
+2. Go to `System Settings` -> `Language Support`, change `Keyboard input method system as `fcitx`.
+3. Download Sogou input method from [here](https://pinyin.sogou.com/linux/?r=pinyin)
+```
+sudo dpkg -i install <sogou.deb>
+```

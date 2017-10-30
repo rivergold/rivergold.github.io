@@ -155,11 +155,11 @@ Configuration tips:
   ```
   And set like this,
   <p align="center">
-    <img src="http://ovvybawkj.bkt.clouddn.com/linux/nautilus-actions-1" width="60%">
+    <img src="http://ovvybawkj.bkt.clouddn.com/linux/nautilus-actions-1" width="80%">
   </p>
   Set Terminator path and parameters `--working-directory=%d/%b`
   <p align="center">
-    <img src="http://ovvybawkj.bkt.clouddn.com/linux/nautilus-actions-2" width="60%">
+    <img src="http://ovvybawkj.bkt.clouddn.com/linux/nautilus-actions-2" width="80%">
   </p>
 
 **Some shortcuts**

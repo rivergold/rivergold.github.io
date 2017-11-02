@@ -175,3 +175,26 @@ Configuration tips:
 ***References***
 - [简书： 5分钟入手Terminator](http://www.jianshu.com/p/cee2de32ca28)
 - [ubuntu: Setting nautilus-open-terminal to launch Terminator rather than gnome-terminal](https://askubuntu.com/questions/76712/setting-nautilus-open-terminal-to-launch-terminator-rather-than-gnome-terminal)
+
+## Matlab
+1. Download matlab2016b from [baidu cloud](https://pan.baidu.com/s/1mi0PRqK#list/path=%2F).
+2. Mount install `.iso`
+```
+sudo mkdir /media/matlab
+cd <matlab.iso path>
+sudo mount -o loop <matlab-d1.iso> /media/matlab
+```
+3. Install
+```
+sudo /media/matlab/install
+```
+When it is in the middle of installation, `Eject DVD 1 and insert DVD 2 to continue.` will occur, you should mount `DVD2.iso`
+```
+sudo mount -o loop <matlab-d2.iso> /media/matlab
+```
+
+***Reference:***
+- [ubuntu 16.04 安装 matlab](http://blog.csdn.net/jesse_mx/article/details/53956358)
+
+## System Monitor
+This software is default installed on Ubuntu. It makes inspecting `disk/cpu/memory` use condition simply.

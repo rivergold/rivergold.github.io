@@ -350,7 +350,7 @@ w_{i_{\text{next}}} = w - \eta v
 $$
 $$
 v := \mu v_{t-1} + g_{w_{i_{\text{next}}}}
-$$
+$$l
 $$
 w_i := w_i - \eta v
 $$
@@ -361,6 +361,27 @@ $$
 - [知乎专栏：深度学习最全优化方法总结比较（SGD，Adagrad，Adadelta，Adam，Adamax，Nadam）](https://zhuanlan.zhihu.com/p/22252270)
 - [卷积神经网络中的优化算法比较](http://shuokay.com/2016/06/11/optimization/) (注：该博客写的有些错误，主要了解其讲解的思想)
 - [知乎：在神经网络中weight decay起到的做用是什么？momentum呢？normalization呢？](https://www.zhihu.com/question/24529483)
+
+## 1D, 2D, 3D Convlutions
+- 1D convolution:
+    - Input: a vector $[C_{in}, L_{in}]$
+    - Kernel: a vector $[k,]$
+    - Output(one kernel): a vector $[L_{out},]$
+- 2D convolution:
+    - Input: a image $[1, H, W]$ or $[C_{in}, H, W]$
+    - Kernel: $[C_{in}, k, k]$
+    - Output(one kernel): a feature map $[H_{out}, W_{out}]$
+- 3D convolution:
+    - Input: a video or CT $[C_{in}, D, H, W]$
+    - Kernel: $[C_{in}, k, k, k]$
+    - Output(one kernel): $[D_{out}, H_{out}, W_{out}]$
+
+Notice that the dimensions of the output after convolution make the name of what kind convolution it is.<br>
+**注：** 几维的卷积是由一个卷积核卷积之后的输出结果的维度决定的。
+
+***References:***
+- [网易-deeplearning.ai: Convolution over volumes](https://mooc.study.163.com/learn/deeplearning_ai-2001281004?tid=2001392030#/learn/content?type=detail&id=2001728687&cid=2001725124)
+
 
 <br>
 <br>

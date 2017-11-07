@@ -156,6 +156,17 @@ This module implements pseudo-random number generators for various distributions
     - [Stackoverflow: Plotting a 2D heatmap with Matplotlib](http://stackoverflow.com/questions/33282368/plotting-a-2d-heatmap-with-matplotlib)
     - [Matplot: color example](https://matplotlib.org/examples/color/colormaps_reference.html)
 
+<br>
+
+## Numpy
+### Common Function
+- Dot product: `np.dot(x1, x2)`
+    Dot product of two arrays.
+    For 2-D arrays it is equivalent to matrix multiplication, and for 1-D arrays to inner product of vectors (without complex conjugation). For N dimensions it is a sum product over the last axis of a and the second-to-last of b:
+- Outer product: `np.outer(x1, x2)`
+- Elementwise multiplication: `np.multiply(x1, x2)`
+
+**Note:** `np.dot()` performs a matrix-matrix or matrix-vector multiplication.
 
 <br>
 

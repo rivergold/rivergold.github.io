@@ -1,4 +1,11 @@
 # Basics
+
+## Standard notations
+- Variable: $X$ (uppercase and no bold)
+- Matrix: $\mathbf{X}$ (upper-case and bold)
+- Vetor: $\mathbf{x}$ (lower-case and bold)
+- Element/Scalar: $x$ (lower-case and no bold)
+
 ## Backpropagation
 
 <p align="center">
@@ -91,6 +98,68 @@ $$
 & \frac{\partial C}{\partial b^l_j} = \delta_j^l &~(4) \\
 \end{aligned}
 $$
+<br>
+### Deduce BP with Vectorization
+Here we use the concept of differential:
+- Monadic calculus: $\mathrm{d}f = f^{'}(x)\mathrm{d}x$
+- **Multivariable calculus**:
+    - Scalar to vector
+    <p>
+
+    $$
+    \mathrm{d}f = \sum_i \frac{\partial f}{\partial x_i} = {\frac{\partial f}{\partial \mathbf{x}}^T}\mathrm{d}\mathbf{x}
+    $$
+
+    </p>
+
+    - Scalar to matrix
+    <p>
+
+    $$
+    \mathrm{d}f = \sum_{i, j}\frac{\partial f}{x_{ij}}\mathrm{d}x_{ij} = \mathrm{tr}({\frac{\partial f}{\partial \mathbf{X}}}^T)\mathrm{d}\mathbf{X}
+    $$
+
+    </p>
+
+So, we can get,
+<p>
+
+$$
+\frac{\partial J}{\partial {\mathbf{W}}^L} = \frac{\partial J}{\partial \mathbf{a}^L} \frac{\partial \mathbf{a}^L}{\partial \mathbf{z}^L} \frac{\partial \mathbf{z}^L}{\partial \mathbf{W}^L}
+$$
+
+$$
+\frac{\partial J}{\partial \mathbf{W}^{L-1}} = \frac{\partial J}{\partial\mathbf{a}^L} \frac{\partial \mathbf{a}^L}{\partial \mathbf{z}^L} \frac{\partial \mathbf{z}^L}{\mathbf{a}^{L-1}} \frac{\partial\mathbf{a}^{L-1}}{\partial \mathbf{z}^{L-1}} \frac{\partial\mathbf{z}^{L-1}}{\partial\mathbf{W}^{L-1}}
+$$
+
+$$
+...
+$$
+
+$$
+\frac{\partial J}{\partial \mathbf{W}^l} = \frac{\partial J}{\mathbf{z}^l} \frac{\partial \mathbf{z}^l}{\partial \mathbf{W}^l}
+$$
+
+$$
+\frac{\partial J}{\partial \mathbf{b}^l} = \frac{\partial J}{\partial \mathbf{z}^l}
+$$
+
+Note that,
+$$
+\mathrm{d}\mathbf{z}^l = \mathrm{tr}(\mathrm{d}\mathbf{W}^l\mathbf{a}^{l-1}) = \mathrm{tr}(\mathbf{a}^{l-1}\mathrm{d}\mathbf{W}^{l})
+$$
+
+$$
+\frac{\partial \mathbf{z}^l}{\partial \mathbf{W}^l} = {\mathbf{a}^{l-1}}^T
+$$
+
+$$
+\frac{\partial J}{\partial\mathbf{W}^l} = \frac{\partial J}{\partial\mathbf{z}^l} {\mathbf{a}^{l-1}}^T
+$$
+
+</p>
+
+
 And we can rewrite these formulas into matrix-based form, as
 $$
 \begin{aligned}
@@ -104,6 +173,7 @@ $$
 </p>
 
 ***Reference:***
+- [知乎：矩阵求导术（上）](https://zhuanlan.zhihu.com/p/24709748)
 - [Neural Networks and Deep Learning: How the backpropagation algorithm works](http://neuralnetworksanddeeplearning.com/chap2.html)
 
 <br>

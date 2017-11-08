@@ -98,7 +98,9 @@ $$
 & \frac{\partial C}{\partial b^l_j} = \delta_j^l &~(4) \\
 \end{aligned}
 $$
+
 <br>
+
 ### Deduce BP with Vectorization
 Here we use the concept of differential:
 - Monadic calculus: $\mathrm{d}f = f^{'}(x)\mathrm{d}x$

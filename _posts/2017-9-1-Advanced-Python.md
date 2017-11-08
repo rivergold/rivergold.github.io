@@ -159,15 +159,46 @@ This module implements pseudo-random number generators for various distributions
 <br>
 
 ## Numpy
-### Common Function
-- Dot product: `np.dot(x1, x2)`
+### Multiplication computation functions
+- `np.dot(x1, x2)`: Dot product
     Dot product of two arrays.
     For 2-D arrays it is equivalent to matrix multiplication, and for 1-D arrays to inner product of vectors (without complex conjugation). For N dimensions it is a sum product over the last axis of a and the second-to-last of b:
-- Outer product: `np.outer(x1, x2)`
-- Elementwise multiplication: `np.multiply(x1, x2)`
+- `np.outer(x1, x2)`: Outer product
+- `np.multiply(x1, x2)`: Elementwise multiplication
 
 **Note:** `np.dot()` performs a matrix-matrix or matrix-vector multiplication.
 
+### Random
+- `np.random.randn(d0, d1, ..., dn)`: Return a sample from the **standard normal** distribution.
+
+### Shape transform
+- `np.squeeze(a, axis=None)`: Remove single-dimensional entries from the shape of array.
+
+### Change element value
+- `np.where(condition[, x, y])`: Return elements, either from x or y, depending on condition.
+    ```python
+    a = np.random.randn(2,2)
+    >>> array([[ 0.04584302, -0.24067515],
+               [ 0.09577436,  0.5294515 ]])
+    b = np.where(a>0.5, 1, 0)
+    >>> array([[0, 0],
+               [0, 1]])
+    ```
+
+    ***References:***
+    - [Stackoverflow: convert numpy array to 0 or 1](https://stackoverflow.com/questions/45648668/convert-numpy-array-to-0-or-1)
+
+### Create array
+- `np.meshgrid(x1, x2, ..., xn)`: Return coordinate matrices from coordinate vectors.
+    ```python
+    x = np.linspace(0, 1, nx)
+    y = np.linspace(0, 1, ny)
+    xx, yy = np.meshgrid(x, y)
+    ```
+    **Note:** This function is used often when you want to draw your prediction model's decision boundary.
+
+    ***References:***
+    - [deeplearning.ai: Planar data classification with one hidden layer/planar_utils.py](https://github.com/XingxingHuang/deeplearning.ai/blob/master/1_Neural%20Networks%20and%20Deep%20Learning/week3/Planar%20data%20classification%20with%20one%20hidden%20layer/planar_utils.py#L7)
 <br>
 
 # Python Tips:

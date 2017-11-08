@@ -382,6 +382,15 @@ Notice that the dimensions of the output after convolution make the name of what
 ***References:***
 - [网易-deeplearning.ai: Convolution over volumes](https://mooc.study.163.com/learn/deeplearning_ai-2001281004?tid=2001392030#/learn/content?type=detail&id=2001728687&cid=2001725124)
 
+<br>
+
+## Basic Steps for Deep Learning
+1. Define the model structure
+2. Initialize the model's parameters
+3. Loop:
+    - Calculate current loss(forward propagation)
+    - Calculate current gradient(backward propagation)
+    - Update parameters(gradient descent)
 
 <br>
 <br>

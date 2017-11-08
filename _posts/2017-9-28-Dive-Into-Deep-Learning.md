@@ -161,9 +161,6 @@ $$
 \frac{\partial J}{\partial\mathbf{W}^l} = \frac{\partial J}{\partial\mathbf{z}^l} {\mathbf{a}^{l-1}}^T
 $$
 
-</p>
-
-
 And we can rewrite these formulas into matrix-based form, as
 $$
 \begin{aligned}

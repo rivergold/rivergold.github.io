@@ -99,6 +99,8 @@ $$
 \end{aligned}
 $$
 
+</p>
+
 <br>
 
 ### Deduce BP with Vectorization

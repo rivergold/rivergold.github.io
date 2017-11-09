@@ -6,6 +6,20 @@
 - Vetor: $\mathbf{x}$ (lower-case and bold)
 - Element/Scalar: $x$ (lower-case and no bold)
 
+<br>
+<br>
+
+## Basic Steps for Deep Learning
+1. Define the model structure
+2. Initialize the model's parameters
+3. Loop:
+    - Calculate current loss(forward propagation)
+    - Calculate current gradient(backward propagation)
+    - Update parameters(gradient descent)
+
+<br>
+<br>
+
 ## Backpropagation
 
 <p align="center">
@@ -421,7 +435,7 @@ w_{i_{\text{next}}} = w - \eta v
 $$
 $$
 v := \mu v_{t-1} + g_{w_{i_{\text{next}}}}
-$$l
+$$
 $$
 w_i := w_i - \eta v
 $$
@@ -453,15 +467,57 @@ Notice that the dimensions of the output after convolution make the name of what
 ***References:***
 - [网易-deeplearning.ai: Convolution over volumes](https://mooc.study.163.com/learn/deeplearning_ai-2001281004?tid=2001392030#/learn/content?type=detail&id=2001728687&cid=2001725124)
 
-<br>
+## Loss Function
+### Classification
+#### Cross Entropy
+<p>
 
-## Basic Steps for Deep Learning
-1. Define the model structure
-2. Initialize the model's parameters
-3. Loop:
-    - Calculate current loss(forward propagation)
-    - Calculate current gradient(backward propagation)
-    - Update parameters(gradient descent)
+$$
+H(Y, \hat{Y}) = E_Y [\frac{1}{\log \hat{Y}}] = E_Y [-\log \hat{Y}]
+$$
+
+</p>
+
+**Basic knowledge:**
+- **Entropy(Shannon Entropy):** Shannon defined the entropy $H$ of a discrete random variable $X$ with possible values ${x_1, x_2, ..., x_n}$ and probability mass function $P(X)$ as:
+    <p>
+
+    $$
+    H(X) = E[I(X)] = E[-\ln(P(X))]
+    $$
+
+    </p>
+
+    Here $E$ is the *expected value operator*, and $I$ is the *information content* of $X$.<br>
+
+    It can be explicitly be written as,
+    <p>
+
+    $$
+    H(X) = \sum_{i=1}^{n}P(x_i)I(x_i) = -\sum_{i=1}^{n}P(x_i)\log_b P(x_i)
+    $$
+    where $b$ is the base of the logarithm used. Common values of $b$ are 2, Euler's number $e$, and 10. In machine learning and deep learning, people often use $e$.
+
+    </p>
+
+- KL divergence from $\hat{Y}$ to $Y$ is the difference between cross entropy and entropy
+<p>
+
+$$
+\mathrm{KL}(Y\|\hat{Y}) = \sum_{i}y_i\log\frac{1}{\hat{y_i}} - \sum_{i}y_i\log\frac{1}{y_i} = \sum_{i}y_i\log\frac{y_i}{\hat{y_i}}
+$$
+
+</p>
+
+**注：** 熵的本质是香农信息量的期望，信息量就是上面公式中的$I(X)$。
+- 信息量： 对信息的度量，随机变量所代表的事件发生所带来的信息的大小。出现概率小的事件信息量多，而事件发生的概率越大，则信息量越小，即信息量的大小与事件发生的概率大小成反比。
+- 熵：度量了随机变量$X$平均的信息量。
+- 交叉熵：使用估计出的分布q去逼近真实分布p所需要的信息
+- KL散度： 交叉熵与熵的差值
+
+***References:***
+- [A Friendly Introduction to Cross-Entropy Loss](https://rdipietro.github.io/friendly-intro-to-cross-entropy-loss/)
+- [知乎：如何通俗的解释交叉熵与相对熵?](https://www.zhihu.com/question/41252833)
 
 <br>
 <br>

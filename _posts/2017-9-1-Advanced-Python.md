@@ -201,6 +201,30 @@ This module implements pseudo-random number generators for various distributions
     - [deeplearning.ai: Planar data classification with one hidden layer/planar_utils.py](https://github.com/XingxingHuang/deeplearning.ai/blob/master/1_Neural%20Networks%20and%20Deep%20Learning/week3/Planar%20data%20classification%20with%20one%20hidden%20layer/planar_utils.py#L7)
 <br>
 
+# Python Build-in Function
+## list
+- `zip(*iterables)`: Make an iterator that aggregates elements from each of the iterables.
+    ```python
+    x1 = [1, 2, 3]
+    x2 = [4, 5, 6]
+    zipped = zip(x1, x2)
+    list(zipped)
+    >>> [(1, 4), (2, 5), (3, 6)]
+    ```
+    `zip()` in conjunction with the `*` operator can be used to unzip a list:
+    ```python
+    y = [(1, 4), (2, 5), (3, 6)]
+    x1, x2 = zip(*y)
+    x1
+    >>> (1, 2, 3)
+    x2
+    >>> (4, 5, 6)
+    ```
+    ***Reference:***
+    - [Python doc: 2. Built-in Functions: zip](https://docs.python.org/3/library/functions.html#zip)
+## dict
+- `dict1.update(dict2)`: Adds dictionary `dict2's` key-values pairs in to `dict1`. This function does not return anything.
+
 # Python Tips:
 ## Change python packages download source.
 pip
@@ -265,8 +289,8 @@ if not os.path.exists(<directory_path>):
     os.makedirs(<directory_path>)
 ```
 
-Reference
-: - [stackoverflow: How can I create a directory if it does not exist?](https://stackoverflow.com/questions/273192/how-can-i-create-a-directory-if-it-does-not-exist)
+Reference: 
+- [stackoverflow: How can I create a directory if it does not exist?](https://stackoverflow.com/questions/273192/how-can-i-create-a-directory-if-it-does-not-exist)
 
 
 ## How to run `pip` in python script?

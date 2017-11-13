@@ -169,6 +169,7 @@ Run docker container with `--net=<net bridge>`, set a net bridge for container.
 <br>
 
 # Valuble Docker Images
+- [nvidia/cuda](https://hub.docker.com/r/nvidia/cuda/)
 - [dl-docker](https://github.com/floydhub/dl-docker): all-in-one docker image for deep learning.
 
 <br>

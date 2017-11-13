@@ -522,170 +522,21 @@ $$
 <br>
 <br>
 
-# Pre-installation for Deep Learning
-We need:
-1. Ubuntu OS
-2. Nvidia GPU and driver
-3. CUDA and cudann
-## Install Nvidia Driver
-- Notebook computer with dual graphics
-    If you want to install Nvidia driver on your notebook computer which has dual graphics, it is better to install Nvidia driver by using **Additional Drivers** in Ubuntu.
-    <p align="center">
-        <img src="http://ovvybawkj.bkt.clouddn.com/dl/ubuntu-addtional-driver.png" width="40%">
-    </p>
-- Desktop computer
-    To install Nvidia driver on desktop, you need to download the specific driver for your computer from [Nvidia](https://www.geforce.com/drivers). When you install the driver, you need to do the followings:
-    1. Disable `Nouveau`
-        ```bash
-        # Inspect if there is Nouveau
-        lsmod | grep nouveau
-        # Create a blacklist and set nouveau into it.
-        sudo gedit /etc/modprobe.d/blacklist-nouveau.conf
-        ```
-        Add run the following contents into the `.conf`
-        ```bash
-        blacklist nouveau
-        options nouveau modeset=0
-        ```
-        Then, regenerate the kernel initramfs
-        ```bash
-        sudo update-initramfs -u
-        ```
-    2. Install Nvidia driver
-        ```bash
-        # Close gui
-        sudo service lightdm stop
-        # Install dirver
-        sudo chmod u+x <nvidia-driver.run>
-        sudo ./<nvidia-driver.run>
-        # Reboot
-        sudo reboot
-        ```
+## Awesome Papers
+### [Very Deep Convolutional Networks for Large-Scale Image Recognition, arXiv-2014](https://arxiv.org/abs/1409.1556)
+这篇论文提出了**VGG Net**。核心思想是使用小的kernel(3 * 3)来实现深度比较深的网络。使用小的kernel的原因在于，在加深网路的同时控制网络的参数不会过多。<br>
+其中，该网络在训练时使用的fully connected layer，而在测试时为了适应不同大小的图片，将全连接层的参数转化为了对应参数大小的卷积核从而实现了fully convolution layer。
 
-## Install CUDA Toolkit
-1. Download the install package from [here](https://developer.nvidia.com/cuda-downloads). It is recommended to download the `.run` to install cuda. And during installation, when it asks whether install Nvidia driver or not, please choose `No` because you have already installed the dirver. For ubuntu 16.04, it is better to install cuda 8.0+(here we use cuda_8.0.44 and we haven't try cuda9 yet), because cuda 7.5 and lower version do not support gcc > 4.9.
-2. Install
-    ```
-    sudo bash <cuda.run>
-    ```
-3. Test: `cd` into the cuda folder, which default path is `/usr/local/cuda`.
-    ```bash
-    cd ./samples/1_Utilities/diviceQuery
-    make -j4
-    cd <samples path>/bin/x86_64/linux/release/
-    ./deviceQuery
-    ```
-    Check the output to inspect if you have installed Cuda successfully or not.
-4. Add Cuda into path.
-    ```bash
-    # Open ~/.bashrc
-    sudo gedit ~/.bashrc
-    # Add
-    export PATH=$PATH:/usr/local/cuda/bin
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
-    ```
+### [Deep Residual Learning for Image Recognition, CVPR-2016](https://www.cv-foundation.org/openaccess/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html)
+论文中提出了deep network出现的**degradation**问题，深度网络退化问题，即：深度网络在训练是会出现其training loss比前层网络的loss要大，并将这种网络称为**plain networks**。论文中认为该问题的出现不是因为梯度消失(vanishing gradients), 因为这些plain networks中使用**BN**从而保证了在前向传播中信号是有**non-zero variance**的，并且他们通过实验证明方向传播中的由于**BN**的作用，梯度是正常的。作者认为出现这种**plain networks**的问题在于**The deep plain nets may have exponentially low convergence rates, which impact the reducing of the training error**, 而且单纯地增加迭代次数无法解决这个问题。我的理解：这些病态网络的参数空间存在很多类似于**马鞍面**的这种情况，导致梯度值变化不大从而影响了最优化。<br>
+因此，该论文提出了**Resudual Learning**:
+<p>
 
-## Install cuDNN
-1. Download cuDNN from [Nvidia website]().
-2. Run
-    ```bash
-    tar -xzvf <cudnn.tgz>
-    # Copy files into CUDA Toolkit directory.
-    sudo cp cuda/include/cudnn.h /usr/local/cuda/include
-    sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
-    sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
-    ```
+$$
+\mathcal{F}(\mathbf{x}) = \mathcal{H}(\mathbf{x}) - \mathbf{x} 
+$$
 
-***Reference:***
-- [Nvidia: CUDA guide](http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html)
-- [Nvidia: cuDNN install guide](http://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html)
-- [ubuntu 16.04降级安装gcc为4.8](http://www.cnblogs.com/in4ight/p/6626708.html)
-- [Ubuntu 16.04 安装英伟达（Nvidia）显卡驱动](https://gist.github.com/dangbiao1991/7825db1d17df9231f4101f034ecd5a2b)
+</p>
 
-## Build and Install Caffe1
-Caffe1 need a a series of dependent libraries: OpenCV, ProtoBuffer, Boost, GFLAGS, GLOG, BLAS, HDF5, LMDB, LevelDB and Snappy. We need all of these before we start to build caffe.
-### Build OpenCV
-Here the version of OpenCV we build is 3.3.0 and we use `cmake-gui` to make it convenient during build configuration.<br>
-The source code of OpenCV and Opencv_contrib can be downloaded from [Github](https://github.com/opencv). Before building OpenCV, we need to install some dependent libraries,
-```bash
-# Dependencies
-sudo apt-get install build-essential checkinstall cmake pkg-config yasm gfortran git
-sudo apt-get install -y libjpeg8-dev libjasper-dev libpng12-dev libtiff5-dev \
-                        libavcodec-dev libavformat-dev libswscale-dev \
-                        libdc1394-22-dev libxine2-dev libv4l-dev \
-                        libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev \
-                        libqt4-dev libgtk2.0-dev libtbb-dev \
-                        libatlas-base-dev \
-                        libfaac-dev libmp3lame-dev libtheora-dev \
-                        libvorbis-dev libxvidcore-dev
-# Install Python Libraries(here we use python3)
-sudo apt-get install python3-dev
-# OpenCV need numpy
-pip install numpy
-```
-Then, open cmake-gui in OpenCV folder. Here are some tips needed to be aware of:
-1. Check `PYTHON` configuration
-2. Better to change `CMAKE_INSTALL_PREFIX` to `/usr/local/opencv3`
-3. Set `OPENCV_EXTRA_MODULES_PATH` as `<the path of opencv_contirb>/modules`
-
-After make, make install, add opencv to `PATH`
-```bash
-vim ~/.bashrc
-# Add followings into .bashrc
-export PATH=$PATH:/usr/local/opencv3/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/opencv3/lib
-```
-
-***Reference***
-- [Learn Opencv: Install OpenCV3 on Ubuntu](https://www.learnopencv.com/install-opencv3-on-ubuntu/)
-- [pyimagesearch: Ubuntu 16.04: How to install OpenCV](https://www.pyimagesearch.com/2016/10/24/ubuntu-16-04-how-to-install-opencv/)
-
-### Install other dependent libraries
-```
-sudo apt-get install -y opencl-headers build-essential protobuf-compiler \
-                        libprotoc-dev libboost-all-dev libleveldb-dev hdf5-tools libhdf5-serial-dev \
-                        libsnappy-dev \
-                        libatlas-base-dev cmake libstdc++6-4.8-dbg libgoogle-glog0v5 libgoogle-glog-dev \
-                        libgflags-dev liblmdb-dev git python-pip gfortran
-```
-**Then** use cmake-gui to make caffe1, and run
-```
-make -j4
-make runtest
-make install
-```
-
-***Errors & Solution:***
-- If cmake cannot find opencv and the error is like
-    ```
-    Could not find module FindOpenCV.cmake or a configuration file for package OpenCV.
-      Adjust CMAKE_MODULE_PATH to find FindOpenCV.cmake or set OpenCV_DIR to the
-      directory containing a CMake configuration file for OpenCV.  The file will
-      have one of the following names:
-        OpenCVConfig.cmake
-        opencv-config.cmake
-    ```
-    Add `set(CMAKE_PREFIX_PATH <opencv install path>/share/OpenCV)` in the `CMakeLists.txt`
-
-
-***Reference:***
-- [BVLC/caffe wiki: Caffe installing script for ubuntu 16.04 support Cuda 8](https://github.com/BVLC/caffe/wiki/Caffe-installing-script-for-ubuntu-16.04---support-Cuda-8)
-
-<!-- # Ubuntu gcc from 5.x to 4.8
-```bash
-# Check gcc version
-gcc --version
-# Install gcc-4.8
-sudo apt-get install gcc-4.8
-# gcc version
-gcc --version
-# List all gcc to see if gcc-4.8 installed successfully
-ls /usr/bin/gcc*
-# Put gcc-4.8 into priority
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 100
-sudo update-alternatives --config gcc
-# Check gcc version again
-gcc --version
-```
-***Reference:***
-- [Ubuntu change gcc from 5.x to 4.8](http://www.cnblogs.com/in4ight/p/6626708.html) -->
+where, $\mathcal{H}(\mathbf{x})$ is output of a few stacked layers, $\mathbf{x}$ denotes the input of the first layer of these layers. It makes the network to learn the **residual** between the input and output. And this **reidual learning** is realized by **skip connection**.<br>
+**注：** 参差网络学习的是输出与输入之间的参差，就是说：输出等于在输入的$\mathbf{x}$的基础上在加上$\mathcal{F}(\mathbf{x})$。而之前的方法是学习从输入到输出的mapping: $\mathbf{x} \to \mathrm{ouput}$, 并没有参差的学习。 

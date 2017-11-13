@@ -67,8 +67,8 @@ docker load -i <image file path>
 <br>
 <br>
 
-# Tips & Tricks
-## Using **nvidia-docker** run cuda in docker container.
+## Tips & Tricks
+### Using **nvidia-docker** run cuda in docker container.
 Install **nvidia-docker** from [Github-NVIDIA/nvidia-docker](https://github.com/NVIDIA/nvidia-docker) and create new container with `nvidia-docker`<br>
 **Problems and Solutions**:
 - `Error: Could not load UVM kernel module. Is nvidia-modprobe installed?`
@@ -86,7 +86,7 @@ Install **nvidia-docker** from [Github-NVIDIA/nvidia-docker](https://github.com/
     4. logout
     5. test `nvidia-docker run --rm nvidia/cuda nvidia-smi` again
 
-## Change Ubuntu download source with command, using `sed`<br>
+### Change Ubuntu download source with command, using `sed`<br>
 ```
 sed -i s@<needed replace content>@<replace content>@g <file path>
 ```
@@ -96,16 +96,16 @@ sed -i s@http://archive.ubuntu.com/ubuntu/@http://mirrors.tuna.tsinghua.edu.cn/u
 ```
 After you change the source list, you need to update it to let it work via `sudo apt-get update`
 
-## How to use jupyter notebook in docker? localhost:8888 not work?
+### How to use jupyter notebook in docker? localhost:8888 not work?
 The ip of container in docker is 0.0.0.0, but default ip address in jupyter is 127.0.0.1. So we should change jupyter notebook ip if we want to use it on our host computer. Input `jupyter note --ip=0.0.0.0` in your docker container and then open localhost:8888 in your browser, and see it will work ok.
 
 ***References:***
 - [Github-gopherdata/gophernotes](https://github.com/gopherdata/gophernotes/issues/6)
 
-## When delete image, error `Can’t delete image with children occur.  
+### When delete image, error `Can’t delete image with children occur.  
 Use `docker inspect --format='{{.Id}} {{.Parent}}' $(docker images --filter since=<image_id> -q)`. And then delete sub_image using `docker rmi {sub_image_id}`
 
-## [Windows] Using python in Docker Linex container, has error like `UnicodeEncodeError: 'ascii' codec can't encode character '\u22f1' in position 242`
+### [Windows] Using python in Docker Linex container, has error like `UnicodeEncodeError: 'ascii' codec can't encode character '\u22f1' in position 242`
 ```python
 import sys
 sys.stdout
@@ -121,7 +121,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 ***References:***
 - [解决Python3下打印utf-8字符串出现UnicodeEncodeError的问题](https://www.binss.me/blog/solve-problem-of-python3-raise-unicodeencodeerror-when-print-utf8-string/)
 
-## [Windows] How run linux gui in docker container on docker for windows?
+### [Windows] How run linux gui in docker container on docker for windows?
 1. Install **Cygwin** with **Cygwin/x** on your computer.
 2. In cygwin terminal, run
     ```shell
@@ -143,10 +143,10 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 - [Stackoverflow: How to run GUI application from linux container in Window using Docker?](http://stackoverflow.com/questions/29844237/how-to-run-gui-application-from-linux-container-in-window-using-docker)
 - [Linux: Running GUI apps with Docker](http://fabiorehm.com/blog/2014/09/11/running-gui-apps-with-docker/)
 
-## [Windows] On docker for Windows, how host computer powershell direct ping to container(container ip is 172.17.0.1)?
+### [Windows] On docker for Windows, how host computer powershell direct ping to container(container ip is 172.17.0.1)?
 Run docker container with `--net=<net bridge>`, set a net bridge for container.
 
-## [Windows] How to share fold betweent host and container on Docker for Windows? 
+### [Windows] How to share fold betweent host and container on Docker for Windows? 
 1. Open Docker for Windows
 2. Set `Shared Drives`
 3. run docker contrainer with `-v [fold path on host]:[fold path on contrainer]`

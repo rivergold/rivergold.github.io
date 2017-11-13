@@ -2,102 +2,109 @@
 This is a tutorial about base operation of Docker.
 
 ## Common command:
-- List all installed images.<br>
-    ```
-    docker images
-    ```
+### List all installed images
+```
+docker images
+```
 
-- List all containers.<br>
-    ```
-    docker ps -a
-    ```
+### List all containers
+```
+docker ps -a
+```
 
-- Stop all containers.<br>
-    ```
-    docker stop $(docker ps -a -q)
-    ```
-    -q(--quiet), Only display numeric IDs.
+### Stop all containers
+```
+docker stop $(docker ps -a -q)
+```
+`-q(--quiet)`: Only display numeric IDs.
 
-- Remove a container.<br>
-    ```
-    docker rm <contrain name>
-    ```
+### Remove a container
+```
+docker rm <contrain name>
+```
 
-- Remove all containers.<br>
-    ```
-    docker rm $(docker -a -q)
-    ```
+### Remove all containers.<br>
+```
+docker rm $(docker -a -q)
+```
 
-- Remove a image.<br>
-    ```
-    docker rmi <image name and tag>
-    ```
+### Remove a image
+```
+docker rmi <image name and tag>
+```
 
-- Run a container which is already exiting.<br>
-    ```
-    docker start <container_id or name>
-    docker exec -ti <container_id or name> /bin/bash
-    ```
+### Run a container which is already exiting
+```
+docker start <container_id or name>
+docker exec -ti <container_id or name> /bin/bash
+```
 
-- Copy file from host into container in shell (From [stackoverflow][ref_1]).<br>
-    ```
-    docker cp <file name> container:<path>
-    ```
+### Copy file from host into container in shell
+```
+docker cp <file name> container:<path>
+```
+***References:***
+- [Stackoverflow: Copying files from host to Docker container](https://stackoverflow.com/questions/22907231/copying-files-from-host-to-docker-container)
 
-- Convert container into image.<br>
-    ```
-    docker commit <container name/id> <image name>
-    ```
-    It is used to build new image from container.
+### Convert container into image
+It is used to build new image from container.
+```
+docker commit <container name/id> <image name>
+```
 
-- Save docker image into host disk.<br>
-    ```
-    docker save -o <path you want to save> <image name and tag>
-    ```
-    often save docker image as .tar
-
-- Load docker image from disk.<br>
-    ```
-    docker load -i <image file path>
-    ```
-
-## Valuble Docker Image
-- [dl-docker](https://github.com/floydhub/dl-docker):
-    all-in-one docker image for deep learning.
+### Save docker image into host disk
+Often save docker image as .tar
+```
+docker save -o <path you want to save> <image name and tag>
+```
 
 
-## Problem and Solution
-- How to share fold betweent host and container on Docker for Windows? [(ref)][ref_2]
-    - Open Docker for Windows
-    - Set `Shared Drives`
-    - run docker contrainer with `-v [fold path on host]:[fold path on contrainer]`
+### Load docker image from disk
+```
+docker load -i <image file path>
+```
 
-- How to use jupyter notebook in docker? localhost:8888 not work? [(ref)][ref_3]
-    - _Solution:_ The ip of container in docker is 0.0.0.0, but default ip address in jupyter is 127.0.0.1. So we should change jupyter notebook ip if we want to use it on our host computer. Input `jupyter note --ip=0.0.0.0` in your docker container and then open localhost:8888 in your browser, and see it will work ok.
+# Valuble Docker Image
+- [dl-docker](https://github.com/floydhub/dl-docker): all-in-one docker image for deep learning.
 
-- On docker for Windows, how host computer powershell direct ping to container(container ip is 172.17.0.1)?
-    run docker container with `--net=<net bridge>`, set a net bridge for container.
 
-- When delete image, error `Can’t delete image with children
-` occur.  
-    Use `docker inspect --format='{{.Id}} {{.Parent}}' $(docker images --filter since=<image_id> -q)`. And then delete sub_image using `docker rmi {sub_image_id}`
+# Problem and Solution
+## [Windows] How to share fold betweent host and container on Docker for Windows? 
+1. Open Docker for Windows
+2. Set `Shared Drives`
+3. run docker contrainer with `-v [fold path on host]:[fold path on contrainer]`
 
-- Using python in Docker Linex container, has error like `UnicodeEncodeError: 'ascii' codec can't encode character '\u22f1' in position 242`
-    - Solution:
-        - [解决Python3下打印utf-8字符串出现UnicodeEncodeError的问题](https://www.binss.me/blog/solve-problem-of-python3-raise-unicodeencodeerror-when-print-utf8-string/)
+***References:***
+- [Romin Irani’s Blog: Docker on Windows — Mounting Host Directories](https://rominirani.com/docker-on-windows-mounting-host-directories-d96f3f056a2c)
 
-        ```python
-        >>> import sys
-        >>> sys.stdout
-        <_io.TextIOWrapper name='' mode='w' encoding='ANSI_X3.4-1968'>
-        ```
 
-        Change output encode as utf-8
-        ```python
-        >>> import sys
-        >>> import io
-        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-        ```
+## How to use jupyter notebook in docker? localhost:8888 not work?
+The ip of container in docker is 0.0.0.0, but default ip address in jupyter is 127.0.0.1. So we should change jupyter notebook ip if we want to use it on our host computer. Input `jupyter note --ip=0.0.0.0` in your docker container and then open localhost:8888 in your browser, and see it will work ok.
+
+***References:***
+- [Github-gopherdata/gophernotes](https://github.com/gopherdata/gophernotes/issues/6)
+
+## [Windows] On docker for Windows, how host computer powershell direct ping to container(container ip is 172.17.0.1)?
+Run docker container with `--net=<net bridge>`, set a net bridge for container.
+
+## When delete image, error `Can’t delete image with children occur.  
+Use `docker inspect --format='{{.Id}} {{.Parent}}' $(docker images --filter since=<image_id> -q)`. And then delete sub_image using `docker rmi {sub_image_id}`
+
+## [Windows] Using python in Docker Linex container, has error like `UnicodeEncodeError: 'ascii' codec can't encode character '\u22f1' in position 242`
+```python
+import sys
+sys.stdout
+>>> <_io.TextIOWrapper name='' mode='w' encoding='ANSI_X3.4-1968'>
+```
+Change output encode as utf-8
+```python
+import sys
+import io
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+```
+
+***References:***
+- [解决Python3下打印utf-8字符串出现UnicodeEncodeError的问题](https://www.binss.me/blog/solve-problem-of-python3-raise-unicodeencodeerror-when-print-utf8-string/)
 
 ## Tips
 - Useful command in ubnutu image:

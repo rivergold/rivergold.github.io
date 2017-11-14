@@ -173,6 +173,8 @@ When load trained model, if this error occur it mean that the loading model is t
 <br>
 
 # Tensorflow
+## Basics
+### Understanding Tensorflow framework
 Tensorflow use **computational graph** to structure its computation. You should do two discrete sections:
 1. Building the computatinal graph
 2. Running the computational graph
@@ -181,11 +183,16 @@ A **computational graph** is a series of TensorFlow operations arranged into a g
 
 Tensorflow采用计算图的方式实现张量的计算，首先需要构建计算图，之后再运行计算图来得出计算的结构。其中，变量是计算图中的一个节点，而操作也是计算图中的节点。<br>计算图实际是基于符号计算的，在构建计算图时可以不确定每个符号的具体数值是多少，之后当计算图运行时才会根据符号所表示具体的数值来计算出结果。
 
-
+***References:***
 - [深度学习框架的比较（MXNet, Caffe, TensorFlow, Torch, Theano)](http://kylt.iteye.com/blog/2338800) 
 
+## Common Funtions
+### `tf`
+- `tf.argmax`: Gives the index of the highest entry in a tensor along some axis
+
 <br>
 <br>
+
 # Caffe1
 ## Build and Install Caffe1
 Caffe1 need a a series of dependent libraries: OpenCV, ProtoBuffer, Boost, GFLAGS, GLOG, BLAS, HDF5, LMDB, LevelDB and Snappy. We need all of these before we start to build caffe.

@@ -176,6 +176,27 @@ Configuration tips:
 - [简书： 5分钟入手Terminator](http://www.jianshu.com/p/cee2de32ca28)
 - [ubuntu: Setting nautilus-open-terminal to launch Terminator rather than gnome-terminal](https://askubuntu.com/questions/76712/setting-nautilus-open-terminal-to-launch-terminator-rather-than-gnome-terminal)
 
+## zsh and oh-my-zsh
+`zsh` is powerfull and beautiful shell for Unix, and `Oh my zsh` is an open source, community-driven framework for managing `zsh` configuration.
+1. Install and set up `zsh` as default
+    ```bash
+    sudo apt-get isntall zsh
+    # Set zsh as default shell
+    chsh -s $(which zsh)
+    ```
+2. Install `oh my zsh`
+    ```bash
+    sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+    ```
+3. Config
+    ```
+    vim ~/.zshrc
+    ```
+
+***References***:
+- [Github: robbyrussell/oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+- [LINUX大棚： Linux命令五分钟-用chsh选择shell](http://roclinux.cn/?p=739)
+
 ## Matlab
 1. Download matlab2016b from [baidu cloud](https://pan.baidu.com/s/1mi0PRqK#list/path=%2F).
 2. Mount install `.iso`

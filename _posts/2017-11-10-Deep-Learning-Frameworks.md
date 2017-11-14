@@ -109,6 +109,7 @@ for param in model.parameters():
 - [PyTorch Forums: Fcn using pretrained vgg16 in model zoo? ](https://discuss.pytorch.org/t/fcn-using-pretrained-vgg16-in-model-zoo/941)
 
 ### Convolutional layer padding
+
 | kernel_size | stride | padding |
 |:-----------:|:------:|:-------:|
 |    3 * 3    |    1   |    1    |

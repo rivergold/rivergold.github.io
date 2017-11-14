@@ -263,6 +263,44 @@ Tips of using Dropout:
 Check dev set error and early stop training. $\mathbf{w}$ is small at initialization and it will increase along with iteration. Early stop will get a mid-size rate $\mathbf{w}$, so it's similar to $L_2$ regularization.
 <br>
 
+## Preprocessing
+Most dateset maybe have different size of image, a common preprocession is:
+1. Scale image into same size or scale one side(width or height, often the short one) into the same size
+2. Do data augmentation: flipping, random rotation
+3. Crop a square from each image randomly
+4. mean subtract
+### Per-pixel mean subtract
+Subtract input image with per-pixel mean. The whole training set is $(N, C, H, W)$, the per-pixel mean is calculated by for each $C$ computing the average of all the same position pixel over all image, and then will get `mean matrix` which size is $(C, H, W)$.
+```python
+# X size is (N, C, H, W)
+mean = np.mean(X, axis=0)
+mean.shape
+>>> (C, H, W)
+``` 
+`Caffe` use per-pixel mean subtract in its [tutorial]().<br>
+**注：** per-pixel mean处理时，每个通道是独立处理的， 因为不同通道的像素不具有平稳性（图像中不同部分的统计特性是相同的），并对同一位置的像素计算所有样本的平均值。
+
+### Per-channel mean subtract
+Subtract the mean of per channel calculated over all images. The training set size is $(N, C, H, W)$, the mean is calculated each channel over all images, and get the `mean vector` size of $(C, )$.
+```python
+# X size is (N, C, H, W)
+mean = np.mean(X, axis=(0, 2, 3))
+mean.shape
+>>> (C,)
+```
+<br>
+
+Whether **per-pixel mean subtract** or **per-channel mean subtract**, they all serves to "center" the data, it means to make the mean of the dataset is around zero, which will help train the networks(make gradient healthy). And as far as I knowm, **per-channel mean subtract** is better and common choice for preprocessing.
+
+***References:***
+- [Github: KaimingHe/deep-residual-networks: preprocessing? #5](https://github.com/KaimingHe/deep-residual-networks/issues/5)
+- [caffe: Brewing ImageNet](http://caffe.berkeleyvision.org/gathered/examples/imagenet.html)
+- [Google Groups: Subtract mean image/pixel](https://groups.google.com/forum/#!topic/digits-users/FfeFp0MHQfQ)
+- [StackExchange: Why do we normalize images by subtracting the dataset's image mean and not the current image mean in deep learning?](https://stats.stackexchange.com/questions/211436/why-do-we-normalize-images-by-subtracting-the-datasets-image-mean-and-not-the-c)
+- [MathWorks: What is per-pixel mean?](https://cn.mathworks.com/matlabcentral/answers/292415-what-is-per-pixel-mean)
+
+<br>
+
 ## Batch Normalization
 
 <p>

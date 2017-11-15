@@ -217,5 +217,22 @@ sudo mount -o loop <matlab-d2.iso> /media/matlab
 ***Reference:***
 - [ubuntu 16.04 安装 matlab](http://blog.csdn.net/jesse_mx/article/details/53956358)
 
+## cmake-gui
+- Ubuntu > 16.04
+    ```
+    sudo apt-get install cmake-qt-gui
+    ```
+- Ubuntu 14.04
+    Default cmake version of 14.04 is 2.8 which is too old.
+    ```bash
+    sudo apt-get install software-properties-common
+    sudo add-apt-repository ppa:george-edison55/cmake-3.x
+    sudo apt-get update
+    sudo apt-get install cmake-qt-gui
+    ```
+
+***References:***
+- [StackExchange-ask ubuntu: How to install cmake 3.2 on ubuntu 14.04?](https://askubuntu.com/questions/610291/how-to-install-cmake-3-2-on-ubuntu-14-04)
+
 ## System Monitor
 This software is default installed on Ubuntu. It makes inspecting `disk/cpu/memory` use condition simply.

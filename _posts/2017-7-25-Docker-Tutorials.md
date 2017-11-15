@@ -121,6 +121,12 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 ***References:***
 - [解决Python3下打印utf-8字符串出现UnicodeEncodeError的问题](https://www.binss.me/blog/solve-problem-of-python3-raise-unicodeencodeerror-when-print-utf8-string/)
 
+### Run gui in docker container on docker for Ubuntu
+```
+docker run -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix 
+```
+
+
 ### [Windows] How run linux gui in docker container on docker for windows?
 1. Install **Cygwin** with **Cygwin/x** on your computer.
 2. In cygwin terminal, run

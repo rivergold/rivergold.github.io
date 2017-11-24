@@ -24,7 +24,7 @@ docker rm <contrain name>
 
 ## Remove all containers.<br>
 ```
-docker rm $(docker -a -q)
+docker rm $(docker ps -a -q)
 ```
 
 ## Remove a image

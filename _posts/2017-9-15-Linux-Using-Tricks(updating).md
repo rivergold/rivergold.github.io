@@ -1,13 +1,13 @@
-# Base Linux Command
-- How to update .barchrc(update bash path)?([ref][1])<br>
-    ```shell
-    . ~/.bashrc
-    ```
+# Linux Command
+### How to update .barchrc(update bash path)?([ref][1])
+```shell
+. ~/.bashrc
+```
 
-- How to rename a directory?([ref][2])<br>
-    ```shell
-    mv <oldname> <newname>
-    ```
+## How to rename a directory?([ref][2])
+```shell
+mv <oldname> <newname>
+```
 
 - How `cd` into previous path?<br>
     ```shell
@@ -92,7 +92,28 @@
 [1]:http://stackoverflow.com/questions/2518127/how-do-i-reload-bashrc-without-logging-out-and-back-in
 [2]:http://askubuntu.com/questions/56326/how-do-i-rename-a-directory-via-the-command-line
 
+- How to pass password to scp
+Using `sshpass`
+```
+sudo apt-get install sshpass
+```
+```
+sshpass -p <password> scp -P <port> <source path> <dist path>
+```
+- [stackoverflow: How to pass password to scp?](https://stackoverflow.com/questions/50096/how-to-pass-password-to-scp)
+
+## How to uninstall software
+```
+sudo apt-get purge <package name>
+sudo apt-get autoremove
+```
+**Note:** It is dangerous to add `*` in `<package name>`, do not use `apt-get purge <package name*>`<br>
+***References:***
+- [ask ubuntu: What is the correct way to completely remove an application?](https://askubuntu.com/questions/187888/what-is-the-correct-way-to-completely-remove-an-application)
+
 <br>
+
+* * *
 
 # Common Software
 ## shadowsocks-qt-gui

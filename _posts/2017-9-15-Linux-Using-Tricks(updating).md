@@ -1,98 +1,102 @@
-# Linux Command
-### How to update .barchrc(update bash path)?([ref][1])
+# Common Linux Command
+### Update `.barchrc`
 ```shell
 . ~/.bashrc
 ```
+Another way
+```
+source ~/.bashrc
+```
+***References:***
+- [stackoverflow: How do I reload .bashrc without logging out and back in?](https://stackoverflow.com/questions/2518127/how-do-i-reload-bashrc-without-logging-out-and-back-in)
 
-## How to rename a directory?([ref][2])
+### Rename a directory
 ```shell
 mv <oldname> <newname>
 ```
+***References:***
+- [ask ubuntu: How do I rename a directory via the command line?](https://askubuntu.com/questions/56326/how-do-i-rename-a-directory-via-the-command-line)
 
-- How `cd` into previous path?<br>
+### `cd` into previous path?<br>
+```shell
+cd -
+```
+
+### Using command change Ubuntu download source<br>
+```shell
+sed -is@http://archive.ubuntu.com/ubuntu/@https://mirrors.ustcedu.cn/ubuntu/@g /etc/apt/sources.list
+```
+
+### Install Java on Ubuntu with apt-get
+```
+sudo apt-add-repository ppa:webupd8team/java  
+sudo apt-get update  
+sudo apt-get install oracle-java8-installer  
+```
+***References:***
+- [Blog: Installing Apache Spark on Ubuntu 16.04](https://www.santoshsrinivas.com/installing-apache-spark-on-ubuntu-16-04/)
+
+### Differences of `ctr + d`, `ctr + z` and `ctr + c`<br>
+- `ctr + d`: terminate input or exit the terminal or shell
+- `ctr + z`: suspend foreground processes
+- `ctr + c`: kill foreground processes
+
+### Change `pip` and `conda` donload source
+- `pip`
+    1. Create a folder named `.pip` in `~/`
+    2. Create a file named `pip.conf`
+    3. Write the followings into `pip.conf`
+    ```bash
+    [global]
+    index-url=https://pypi.douban.com/simple
+    ```
+
+- `conda`
+    Input followings in terminal
     ```shell
-    cd -
+    conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+    conda config --set show_channel_urls yes
     ```
+    And it will create a file named `.condarc` in `~/` folder.
 
-- Using command change Ubuntu download source<br>
+### Send/Copy files between *Windows* and *Linux*
+1. Install SSH Clients on windows client computer
+2. Using `ssh` can visit and log remote linux host
+3. `pscp` command can send/download files to/from remote linux host
     ```shell
-    sed -i s@http://archive.ubuntu.com/ubuntu/@https://mirrors.ustc.edu.cn/ubuntu/@g /etc/apt/sources.list
+    pscp [options] source de
     ```
 
-- Ubuntu error: 'apt-add-repository: command not found'<br>
-    ```
-    apt-get install software-properties-common
-    ```
-
-- [How to install Java on Ubuntu with apt-get](https://www.digitalocean.com/community/tutorials/how-to-install-java-on-ubuntu-with-apt-get)
-
-- Ubuntu error: `Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)`<br>
+- send file to linux host
     ```shell
-    sudo rm /var/cache/apt/archives/lock
-    sudo rm /var/lib/dpkg/lock
+    pscp <windows file path> <linux user-name>@<ip>:<path>
     ```
 
-- Differences of `ctr + d`, `ctr + z` and `ctr + c`<br>
-    - `ctr + d`: terminate input or exit the terminal or shell
-    - `ctr + z`: suspend foreground processes
-    - `ctr + c`: kill foreground processes
-
-- Change `pip` and `conda` donload source
-    - `pip`
-        1. Create a folder named `.pip` in `~/`
-        2. Create a file named `pip.conf`
-        3. Write the followings into `pip.conf`
-        ```
-        [global]
-        index-url=https://pypi.douban.com/simple
-        ```
-
-    - `conda`
-        Input followings in terminal
-        ```shell
-        conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-        conda config --set show_channel_urls yes
-        ```
-        And it will create a file named `.condarc` in `~/` folder.
-
-- How can *Windows client* visit *Linux Host* and send/copy files?
-    - Install SSH Clients on windows client computer
-    - Using `ssh` can visit and log remote linux host
-    - `pscp` command can send/download files to/from remote linux host
-        ```shell
-        pscp [options] source de
-        ```
-
-        - send file to linux host
-            ```shell
-            pscp <windows file path> <linux user-name>@<ip>:<path>
-            ```
-
-        - copy file from linux host
-            ```shell
-            pscp <linux user-name>@<ip>:<file path> <windows path>
-            ```
-
-- `wget` command
+- copy file from linux host
     ```shell
-    wget [options] <url>
+    pscp <linux user-name>@<ip>:<file path> <windows path>
     ```
 
-    | Options |  whole  |                Description                         |
-    |:--:|:------------:|:--------------------------------------------------:|
-    | -c | --continue | Continue getting a partially-downloaded file. |
+### `wget` command
+```shell
+wget [options] <url>
+```
 
-    - References
-        - [每天一个linux命令（61）：wget命令](http://www.cnblogs.com/peida/archive/2013/03/18/2965369.html)
-        - [Computer Hope: Linux wget command](https://www.computerhope.com/unix/wget.htm)
+| Options |  whole  |                Description                         |
+|:--:|:------------:|:--------------------------------------------------:|
+| -c | --continue | Continue getting a partially-downloaded file. |
 
-- How to see GPU state in unbuntu ([\*ref](https://unix.stackexchange.com/questions/38560/gpu-usage-monitoring-cuda))
-    - Run `watch -n 0.5 nvidia-smi` in terminal
+***References:***
+- [每天一个linux命令（61）：wget命令](http://www.cnblogs.com/peida/archive/2013/03/18/2965369.html)
+- [Computer Hope: Linux wget command](https://www.computerhope.com/unix/wget.htm)
 
-[1]:http://stackoverflow.com/questions/2518127/how-do-i-reload-bashrc-without-logging-out-and-back-in
-[2]:http://askubuntu.com/questions/56326/how-do-i-rename-a-directory-via-the-command-line
+### Inspect GPU state in unbuntu using `watch` ([\*ref](https://unix.stackexchange.com/questions/38560/gpu-usage-monitoring-cuda))
+`watch -n 0.5 nvidia-smi`
 
-- How to pass password to scp
+***References:***
+- [Unix & Linux: GPU usage monitoring (CUDA)](https://unix.stackexchange.com/questions/38560/gpu-usage-monitoring-cuda)
+
+### Pass password to scp
 Using `sshpass`
 ```
 sudo apt-get install sshpass
@@ -102,7 +106,7 @@ sshpass -p <password> scp -P <port> <source path> <dist path>
 ```
 - [stackoverflow: How to pass password to scp?](https://stackoverflow.com/questions/50096/how-to-pass-password-to-scp)
 
-## How to uninstall software
+### Uninstall software
 ```
 sudo apt-get purge <package name>
 sudo apt-get autoremove
@@ -111,9 +115,21 @@ sudo apt-get autoremove
 ***References:***
 - [ask ubuntu: What is the correct way to completely remove an application?](https://askubuntu.com/questions/187888/what-is-the-correct-way-to-completely-remove-an-application)
 
-<br>
+## Errors and Solutions
+### Ubuntu error: 'apt-add-repository: command not found'<br>
+```
+apt-get install software-properties-common
+```
+
+### Ubuntu error: `Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)`<br>
+```shell
+sudo rm /var/cache/apt/archives/lock
+sudo rm /var/lib/dpkg/lock
+```
 
 * * *
+
+<br>
 
 # Common Software
 ## shadowsocks-qt-gui

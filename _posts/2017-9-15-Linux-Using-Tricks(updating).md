@@ -1,5 +1,7 @@
-# Common Linux Command
-### Update `.barchrc`
+This article has recorded some tips and tricks for linux, especially for Ubuntu. All of these commands and tricks are sorted up with my using experience.
+
+# Linux Command Tips
+## Update `.barchrc`
 ```shell
 . ~/.bashrc
 ```
@@ -10,24 +12,24 @@ source ~/.bashrc
 ***References:***
 - [stackoverflow: How do I reload .bashrc without logging out and back in?](https://stackoverflow.com/questions/2518127/how-do-i-reload-bashrc-without-logging-out-and-back-in)
 
-### Rename a directory
+## Rename a directory
 ```shell
 mv <oldname> <newname>
 ```
 ***References:***
 - [ask ubuntu: How do I rename a directory via the command line?](https://askubuntu.com/questions/56326/how-do-i-rename-a-directory-via-the-command-line)
 
-### `cd` into previous path?<br>
+## `cd` into previous path?<br>
 ```shell
 cd -
 ```
 
-### Using command change Ubuntu download source<br>
+## Using command change Ubuntu download source<br>
 ```shell
 sed -is@http://archive.ubuntu.com/ubuntu/@https://mirrors.ustcedu.cn/ubuntu/@g /etc/apt/sources.list
 ```
 
-### Install Java on Ubuntu with apt-get
+## Install Java on Ubuntu with apt-get
 ```
 sudo apt-add-repository ppa:webupd8team/java  
 sudo apt-get update  
@@ -36,12 +38,12 @@ sudo apt-get install oracle-java8-installer
 ***References:***
 - [Blog: Installing Apache Spark on Ubuntu 16.04](https://www.santoshsrinivas.com/installing-apache-spark-on-ubuntu-16-04/)
 
-### Differences of `ctr + d`, `ctr + z` and `ctr + c`<br>
+## Differences of `ctr + d`, `ctr + z` and `ctr + c`<br>
 - `ctr + d`: terminate input or exit the terminal or shell
 - `ctr + z`: suspend foreground processes
-- `ctr + c`: kill foreground processes
+- `ctr + c`: kill foregrousortednd processes
 
-### Change `pip` and `conda` donload source
+## Change `pip` and `conda` donload source
 - `pip`
     1. Create a folder named `.pip` in `~/`
     2. Create a file named `pip.conf`
@@ -59,7 +61,7 @@ sudo apt-get install oracle-java8-installer
     ```
     And it will create a file named `.condarc` in `~/` folder.
 
-### Send/Copy files between *Windows* and *Linux*
+## Send/Copy files between *Windows* and *Linux*
 1. Install SSH Clients on windows client computer
 2. Using `ssh` can visit and log remote linux host
 3. `pscp` command can send/download files to/from remote linux host
@@ -77,7 +79,7 @@ sudo apt-get install oracle-java8-installer
     pscp <linux user-name>@<ip>:<file path> <windows path>
     ```
 
-### `wget` command
+## `wget` command
 ```shell
 wget [options] <url>
 ```
@@ -90,13 +92,13 @@ wget [options] <url>
 - [每天一个linux命令（61）：wget命令](http://www.cnblogs.com/peida/archive/2013/03/18/2965369.html)
 - [Computer Hope: Linux wget command](https://www.computerhope.com/unix/wget.htm)
 
-### Inspect GPU state in unbuntu using `watch` ([\*ref](https://unix.stackexchange.com/questions/38560/gpu-usage-monitoring-cuda))
+## Inspect GPU state in unbuntu using `watch` ([\*ref](https://unix.stackexchange.com/questions/38560/gpu-usage-monitoring-cuda))
 `watch -n 0.5 nvidia-smi`
 
 ***References:***
 - [Unix & Linux: GPU usage monitoring (CUDA)](https://unix.stackexchange.com/questions/38560/gpu-usage-monitoring-cuda)
 
-### Pass password to scp
+## Pass password to scp
 Using `sshpass`
 ```
 sudo apt-get install sshpass
@@ -106,7 +108,7 @@ sshpass -p <password> scp -P <port> <source path> <dist path>
 ```
 - [stackoverflow: How to pass password to scp?](https://stackoverflow.com/questions/50096/how-to-pass-password-to-scp)
 
-### Uninstall software
+## Uninstall software
 ```
 sudo apt-get purge <package name>
 sudo apt-get autoremove
@@ -116,16 +118,18 @@ sudo apt-get autoremove
 - [ask ubuntu: What is the correct way to completely remove an application?](https://askubuntu.com/questions/187888/what-is-the-correct-way-to-completely-remove-an-application)
 
 ## Errors and Solutions
-### Ubuntu error: 'apt-add-repository: command not found'<br>
+## Ubuntu error: 'apt-add-repository: command not found'<br>
 ```
 apt-get install software-properties-common
 ```
 
-### Ubuntu error: `Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)`<br>
+## Ubuntu error: `Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)`<br>
 ```shell
 sudo rm /var/cache/apt/archives/lock
 sudo rm /var/lib/dpkg/lock
 ```
+
+<br>
 
 * * *
 

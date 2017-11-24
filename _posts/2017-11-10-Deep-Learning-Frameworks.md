@@ -79,6 +79,9 @@ We need:
 - [Ubuntu 16.04 安装英伟达（Nvidia）显卡驱动](https://gist.github.com/dangbiao1991/7825db1d17df9231f4101f034ecd5a2b)
 
 <br>
+
+* * *
+
 <br>
 
 # PyTorch
@@ -171,6 +174,9 @@ When load trained model, if this error occur it mean that the loading model is t
 - [PyTorch Forums: [solved] KeyError: ‘unexpected key “module.encoder.embedding.weight" in state_dict’](https://discuss.pytorch.org/t/solved-keyerror-unexpected-key-module-encoder-embedding-weight-in-state-dict/1686)
 
 <br>
+
+* * *
+
 <br>
 
 # Tensorflow
@@ -192,6 +198,9 @@ Tensorflow采用计算图的方式实现张量的计算，首先需要构建计�
 - `tf.argmax`: Gives the index of the highest entry in a tensor along some axis
 
 <br>
+
+* * *
+
 <br>
 
 # Caffe1

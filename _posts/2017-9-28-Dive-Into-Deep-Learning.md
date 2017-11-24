@@ -558,9 +558,12 @@ $$
 - [知乎：如何通俗的解释交叉熵与相对熵?](https://www.zhihu.com/question/41252833)
 
 <br>
+
+* * *
+
 <br>
 
-## Awesome Papers
+# Awesome Papers
 ### [Very Deep Convolutional Networks for Large-Scale Image Recognition, arXiv-2014](https://arxiv.org/abs/1409.1556)
 这篇论文提出了**VGG Net**。核心思想是使用小的kernel(3 * 3)来实现深度比较深的网络。使用小的kernel的原因在于，在加深网路的同时控制网络的参数不会过多。<br>
 其中，该网络在训练时使用的fully connected layer，而在测试时为了适应不同大小的图片，将全连接层的参数转化为了对应参数大小的卷积核从而实现了fully convolution layer。

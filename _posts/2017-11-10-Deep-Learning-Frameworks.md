@@ -270,8 +270,17 @@ make install
     Add `set(CMAKE_PREFIX_PATH <opencv install path>/share/OpenCV)` in the `CMakeLists.txt`
 
 
-***Reference:***
-- [BVLC/caffe wiki: Caffe installing script for ubuntu 16.04 support Cuda 8](https://github.com/BVLC/caffe/wiki/Caffe-installing-script-for-ubuntu-16.04---support-Cuda-8)
+    ***Reference:***
+    - [BVLC/caffe wiki: Caffe installing script for ubuntu 16.04 support Cuda 8](https://github.com/BVLC/caffe/wiki/Caffe-installing-script-for-ubuntu-16.04---support-Cuda-8)
+
+<br>
+
+- When make caffe with `cudnn`, and run `make runtest` occur error like `Check failed: status == CUDNN_STATUS_SUCCESS (6 vs. 0) CUDNN_STATUS_ARCH_MISMATCH`
+    This is beacuse `cudnn` requisites GPU's compute capability 3.0 or higher. If your GPU doesn't conform this requist, you should have to make caffe without cudnn
+
+    ***References:***
+    - [Google Maile-Caffe Users: Check failed: status == CUDNN_STATUS_SUCCESS (6 vs. 0) CUDNN_STATUS_ARCH_MISMATCH](https://groups.google.com/forum/#!topic/caffe-users/AEh4cqkvAIM)
+    - [NVIDI: Deep Learning SDK Documentation](http://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html)
 
 <!-- # Ubuntu gcc from 5.x to 4.8
 ```bash

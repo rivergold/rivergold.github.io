@@ -11,6 +11,36 @@ In this article, I summarized some useful modules and packages I have used for m
 
 <br>
 
+# Python Build-in Function
+## list
+- `zip(*iterables)`: Make an iterator that aggregates elements from each of the iterables.
+    ```python
+    x1 = [1, 2, 3]
+    x2 = [4, 5, 6]
+    zipped = zip(x1, x2)
+    list(zipped)
+    >>> [(1, 4), (2, 5), (3, 6)]
+    ```
+    `zip()` in conjunction with the `*` operator can be used to unzip a list:
+    ```python
+    y = [(1, 4), (2, 5), (3, 6)]
+    x1, x2 = zip(*y)
+    x1
+    >>> (1, 2, 3)
+    x2
+    >>> (4, 5, 6)
+    ```
+    ***Reference:***
+    - [Python doc: 2. Built-in Functions: zip](https://docs.python.org/3/library/functions.html#zip)
+## dict
+- `dict1.update(dict2)`: Adds dictionary `dict2's` key-values pairs in to `dict1`. This function does not return anything.
+
+<br>
+
+* * *
+
+<br>
+
 # Modules:
 ## pickle:
 1. What is pickle?
@@ -121,6 +151,35 @@ This module implements pseudo-random number generators for various distributions
     >>> [2, 1, 4, 3]
     ```
 
+## Enum
+Enum in python
+```python
+from enum import IntEnum
+class Color(IntEnum):
+    BLUE = 0
+    GREEN = 1
+    RED = 2
+# get a list of this enum
+color = [x for x in Color]
+```
+If we do not use `IntEnum`, another choice is
+```
+from enum import Enum
+class Color(Enum):
+    BLUE = 0
+    GREEN = 1
+    RED = 2
+# get a list of this enum
+color = [x.value for x in Color]
+```
+
+***References:***
+- [stackoverflow: How to get all values from python enum class?](https://stackoverflow.com/questions/29503339/how-to-get-all-values-from-python-enum-class)
+
+<br>
+
+* * *
+
 <br>
 
 # Packages:
@@ -199,31 +258,12 @@ This module implements pseudo-random number generators for various distributions
 
     ***References:***
     - [deeplearning.ai: Planar data classification with one hidden layer/planar_utils.py](https://github.com/XingxingHuang/deeplearning.ai/blob/master/1_Neural%20Networks%20and%20Deep%20Learning/week3/Planar%20data%20classification%20with%20one%20hidden%20layer/planar_utils.py#L7)
+
 <br>
 
-# Python Build-in Function
-## list
-- `zip(*iterables)`: Make an iterator that aggregates elements from each of the iterables.
-    ```python
-    x1 = [1, 2, 3]
-    x2 = [4, 5, 6]
-    zipped = zip(x1, x2)
-    list(zipped)
-    >>> [(1, 4), (2, 5), (3, 6)]
-    ```
-    `zip()` in conjunction with the `*` operator can be used to unzip a list:
-    ```python
-    y = [(1, 4), (2, 5), (3, 6)]
-    x1, x2 = zip(*y)
-    x1
-    >>> (1, 2, 3)
-    x2
-    >>> (4, 5, 6)
-    ```
-    ***Reference:***
-    - [Python doc: 2. Built-in Functions: zip](https://docs.python.org/3/library/functions.html#zip)
-## dict
-- `dict1.update(dict2)`: Adds dictionary `dict2's` key-values pairs in to `dict1`. This function does not return anything.
+* * *
+
+<br> 
 
 # Python Tips:
 ## Change python packages download source.
@@ -314,6 +354,10 @@ Reference
 - [Embedding Python in C/C++: Part I](https://www.codeproject.com/Articles/11805/Embedding-Python-in-C-C-Part-I)
 
 - [CSDN Blog: C++调用python](http://blog.csdn.net/marising/article/details/2917892)
+
+<br>
+
+* * *
 
 <br>
 

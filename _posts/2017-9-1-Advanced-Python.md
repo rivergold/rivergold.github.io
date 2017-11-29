@@ -261,6 +261,44 @@ color = [x.value for x in Color]
 
 <br>
 
+## OpenCV
+Using `import cv2` to import OpenCV
+### Rotate image
+Function: `cv2.warpAffine(img, M, dsize, flags=, borderMode=, borderValue=)`<br>
+We need `rotate center`, `degree` to calculate the rotate marix
+```python
+# Calculate rotate matrix
+M = cv2.getRotationMatrix2D(rotate_center, degree)
+# Rotate
+img_rotated = cv2.warpAffine(img, M, img.shape[0:2])
+```
+**Note:** `cv2.warpAffine` need the size of rotated image. So if you want to rotated without cropped, you need to calculate the size of rotated image manually
+```python
+def rotate_image(mat, angle):
+    height, width = mat.shape[:2]
+    image_center = (width / 2, height / 2)
+
+    rotation_mat = cv2.getRotationMatrix2D(image_center, angle, 1)
+
+    radians = math.radians(angle)
+    sin = math.sin(radians)
+    cos = math.cos(radians)
+    bound_w = int((height * abs(sin)) + (width * abs(cos)))
+    bound_h = int((height * abs(cos)) + (width * abs(sin)))
+
+    rotation_mat[0, 2] += ((bound_w / 2) - image_center[0])
+    rotation_mat[1, 2] += ((bound_h / 2) - image_center[1])
+
+    rotated_mat = cv2.warpAffine(mat, rotation_mat, (bound_w, bound_h))
+    return rotated_mat
+```
+
+***References***:
+- [OpenCV doc: warpAffine](https://docs.opencv.org/3.1.0/da/d54/group__imgproc__transform.html#ga0203d9ee5fcd28d40dbc4a1ea4451983)
+- [stackoverflow: Rotate an image without cropping in OpenCV in C++](https://stackoverflow.com/questions/22041699/rotate-an-image-without-cropping-in-opencv-in-c)
+
+<br>
+
 * * *
 
 <br> 

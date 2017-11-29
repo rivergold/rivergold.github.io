@@ -581,3 +581,7 @@ $$
 
 where, $\mathcal{H}(\mathbf{x})$ is output of a few stacked layers, $\mathbf{x}$ denotes the input of the first layer of these layers. It makes the network to learn the **residual** between the input and output. And this **reidual learning** is realized by **skip connection**.<br>
 **注：** 参差网络学习的是输出与输入之间的参差，就是说：输出等于在输入的$\mathbf{x}$的基础上在加上$\mathcal{F}(\mathbf{x})$。而之前的方法是学习从输入到输出的mapping: $\mathbf{x} \to \mathrm{ouput}$, 并没有参差的学习。 
+
+
+### [Realtime Multi-Person 2D Pose Estimation using Part Affinity Fields](https://github.com/ZheC/Realtime_Multi-Person_Pose_Estimation)
+CMU的多人姿态估计论文，效果很不错。核心思想为：heatmap + paf，其中heatmap为多人的关键点预测，paf为骨骼bone的方向预测。通过在图像上计算每个bone的方向（使用单位向量表示）来构建对骨骼点之间的相互关系的表示。网络的label为每个骨骼点的heatmap和每个bone的paf（数量为bone的两倍，分别描述x方向和y方向）。其数据预处理部分中，使用了matlab将含有多人的同一张图片的annotation生成为多个sample，即分为`self_joints`和`others_joints`，另外其数据增强是内嵌在caffe代码中，依次对图片做了`scale`, `rotate`, `crop and pad`和`flip`的操作。

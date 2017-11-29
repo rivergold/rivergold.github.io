@@ -129,6 +129,21 @@ sudo rm /var/cache/apt/archives/lock
 sudo rm /var/lib/dpkg/lock
 ```
 
+## Ubuntu `.desktop` write format
+Here is a example from `NetBeans`
+```
+[Desktop Entry]
+Encoding=UTF-8
+Name=NetBeans IDE 8.2
+Comment=The Smarter Way to Code
+Exec=/bin/sh "/home/rivergold/software/NetBeans/netbeans-8.2/bin/netbeans"
+Icon=/home/rivergold/software/NetBeans/netbeans-8.2/nb/netbeans.png
+Categories=Application;Development;Java;IDE
+Version=1.0
+Type=Application
+Terminal=0
+```
+
 <br>
 
 * * *

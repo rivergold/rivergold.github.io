@@ -248,6 +248,7 @@ Configuration tips:
     ```
     vim ~/.zshrc
     ```
+    A recommending theme is `ys`, set `ZSH_THEME="ys"` in `.zshrc`.
 
 ***References***:
 - [Github: robbyrussell/oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)

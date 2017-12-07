@@ -131,18 +131,105 @@ Here we use the concept of differential:
     </p>
 
     - Scalar to matrix
-    <p>
+        <p>
 
-    $$
-    \mathrm{d}f = \sum_{i, j}\frac{\partial f}{x_{ij}}\mathrm{d}x_{ij} = \mathrm{tr}({\frac{\partial f}{\partial \mathbf{X}}}^T)\mathrm{d}\mathbf{X}
-    $$
+        base on trace of a matrix,
+        $$
+        \sum_i \sum_j a_{ij}b_{ij} = \mathrm{Tr}(A^TB)
+        $$
 
-    </p>
+        $$
+        \mathrm{Tr}(AB) = \mathrm{Tr}(BA)
+        $$
 
-So, we can get,
+        we can have,
+        $$
+        \mathrm{d}f = \sum_i \sum_j \frac{\partial y}{x_{ij}}\mathrm{d}x_{ij} = \sum_i \sum_j [\frac{\partial f}{\partial \mathbf{X}}]_{ij} [\mathrm{d}\mathbf{X}]_{ij} = \mathrm{Tr}[{({\frac{\partial f}{\partial \mathbf{X}})}^T} \mathrm{d}\mathbf{X}]
+        $$
+        
+        so,
+        $$
+        \mathrm{d}f = \mathrm{Tr}({\frac{\partial f}{\partial \mathbf{X}}}^T)\mathrm{d}\mathbf{X}
+        $$
+
+        </p>
+
+We already have,
 <p>
 
 $$
+\mathbf{z}^l = \mathbf{W}^l \mathbf{a}^{l-1} + \mathbf{b}^l
+$$
+
+$$
+\mathbf{a}^l = \sigma(\mathbf{z}^l)
+$$
+
+And,
+
+$$
+\frac{\partial J}{\partial \mathbf{W}^l} = \frac{\partial J}{\partial \mathbf{a}^{l}} \frac{\partial \mathbf{a}^l}{\partial \mathbf{z}^l} \frac{\partial \mathbf{z}}{\partial \mathbf{W}^l} = \frac{\partial J}{\partial \mathbf{z}^l} \frac{\partial \mathbf{z}^l} {\partial \mathbf{W}^l}
+$$
+
+$$
+\mathrm{d}\mathbf{z}^l = \mathrm{d} \mathbf{W}^l \mathbf{a}^{l-1} = \mathbf{a}^{l-1} \mathrm{d} \mathbf{W}^{l}
+$$
+
+so,
+
+$$
+\frac{\partial \mathbf{z}^l} {\partial \mathbf{W}^l} = {\mathbf{a}^{l-1}}^T
+$$
+
+then, calulate $\frac{\partial J}{\partial \mathbf{z}^l}$
+
+$$
+\mathrm{d} J = \mathrm{Tr}[{(\frac{\partial J}{\partial \mathbf{a}^l})}^T \mathrm{d} \mathbf{a}^l] = \mathrm{Tr}[{(\frac{\partial J}{\partial \mathbf{a}^l})}^T  \sigma^{'}(\mathbf{z}^l) \odot \mathrm{d} \mathbf{z}^l]
+$$
+
+$$
+\frac{\partial J}{\partial \mathbf{z}^l} = \frac{\partial J}{\partial \mathbf{a}^l} \odot \sigma^{'}(\mathbf{z}^l)
+$$
+
+and,
+
+$$
+\mathrm{d}J = \mathrm{Tr}[{(\frac{\partial J}{\partial \mathbf{z}^{l+1}})}^T \mathrm{d}\mathbf{z}^{l+1}] = \mathrm{Tr}[{(\frac{\partial J}{\partial \mathbf{z}^{l+1}})}^T \mathrm{d}\mathbf{W}^{l+1}\mathbf{a}^l] = \mathrm{Tr}[{(\frac{\partial J}{\partial \mathbf{z}^{l+1}})}^T \mathbf{W}^{l+1}\mathrm{d}  \mathbf{a}^l]
+$$
+
+$$
+\frac{\partial J}{\partial \mathbf{a}^l} = \mathbf{W}^{l+1} \frac{\partial J}{\partial \mathbf{z}^{l+1}}
+$$
+
+Until now we have,
+$$
+\frac{\partial J}{\partial \mathbf{W}^l} = \frac{\partial J}{\partial \mathbf{z}^l} {\mathbf{a}^{l-1}}^T
+$$
+
+$$
+\frac{\partial J}{\partial \mathbf{z}^L} =  (\mathbf{W}^{l+1} \frac{\partial J}{\partial \mathbf{z}^{l+1}}) \odot \sigma^{'}(\mathbf{z}^l)
+$$
+
+<br>
+
+We note,
+$$
+\delta^l = \frac{\partial J}{\partial \mathbf{z}^{l}}
+$$
+
+And we can rewrite these formulas into matrix-based form, as
+$$
+\begin{aligned}
+& \delta^L = \nabla_{\mathbf{a}^L} C \odot \sigma^{'}(\mathbf{z}^L) & ~(1) \\
+& \delta^l = ({(\mathbf{W}^{l+1})}^T \delta^{l+1}) \odot \sigma^{'}(\mathbf{z}^l) & ~(2) \\
+& \nabla_{\mathbf{W}^l}C = \delta^{l} {(\mathbf{a}^{l - 1})}^T & ~(3) \\
+& \nabla_{\mathbf{b}^l}C = \delta^l & ~(4) \\
+\end{aligned}
+$$
+
+</p>
+
+<!-- $$
 \frac{\partial J}{\partial {\mathbf{W}}^L} = \frac{\partial J}{\partial \mathbf{a}^L} \frac{\partial \mathbf{a}^L}{\partial \mathbf{z}^L} \frac{\partial \mathbf{z}^L}{\partial \mathbf{W}^L}
 $$
 
@@ -173,23 +260,13 @@ $$
 
 $$
 \frac{\partial J}{\partial\mathbf{W}^l} = \frac{\partial J}{\partial\mathbf{z}^l} {\mathbf{a}^{l-1}}^T
-$$
-
-And we can rewrite these formulas into matrix-based form, as
-$$
-\begin{aligned}
-& \delta^L = \nabla_{\mathbf{a}^L} C \odot \sigma^{'}(\mathbf{z}^L) & ~(1) \\
-& \delta^l = ({(\mathbf{W}^{l+1})}^T \delta^{l+1}) \odot \sigma^{'}(\mathbf{z}^l) & ~(2) \\
-& \nabla_{\mathbf{W}^l}C = \delta^{l} {(\mathbf{a}^{l - 1})}^T & ~(3) \\
-& \nabla_{\mathbf{b}^l}C = \delta^l & ~(4) \\
-\end{aligned}
-$$
-
-</p>
+$$ -->
 
 ***Reference:***
 - [知乎：矩阵求导术（上）](https://zhuanlan.zhihu.com/p/24709748)
 - [Neural Networks and Deep Learning: How the backpropagation algorithm works](http://neuralnetworksanddeeplearning.com/chap2.html)
+- [The Matrix Cookbook](https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf)
+- [Caltech: EE/ACM 150 - Applications of Convex Optimization in Signal Processing and Communications Lecture 5](http://www.systems.caltech.edu/dsp/ee150_acospc/lectures/EE_150_Lecture_5_Slides.pdf)
 
 <br>
 

@@ -93,24 +93,6 @@ We need:
 <br>
 
 ## PyTorch Using Tricks
-### Load part of pre-trained model to your model
-```python
-# Assume your model is `model`
-pre_trained_model = torch.load(<pre-trained-model.pth>)
-# Set params
-layer_name = [name for name in pre_trained_model.keys()]
-count = 0
-for param in model.parameters():
-    param.data = pre_trained_model[layer_name[count]]
-    # Do not update this param
-    param.requires_grad = False
-    count += 1
-    if count >= <lay_num>:
-        break
-```
-***Reference:***
-- [PyTorch Forums: Fcn using pretrained vgg16 in model zoo? ](https://discuss.pytorch.org/t/fcn-using-pretrained-vgg16-in-model-zoo/941)
-
 ### Convolutional layer padding
 
 | kernel_size | stride | padding |
@@ -148,6 +130,47 @@ model.cuda()
 ***References:***
 - [Github: pytorch/examples/imageent/main.py](https://github.com/pytorch/examples/blob/master/imagenet/main.py#L82)
 - [PyTorch Forums: How to parallel in GPU when finetuning](https://discuss.pytorch.org/t/how-to-parallel-in-gpu-when-finetuning/796)
+
+### Load pre-trained model
+A recommended way to save trained model is 
+```python
+torch.save(<model>.state_dict(), <save path>)
+```
+This way only saves the parameters of the trained model as a `OrderedDict`, without the structure. So when you want to load the pre-trained saved by this way, first you need to creat a object of the model, and then
+```python
+model_params = torch.load(<pre_trained_model path>)
+# Assume your model is `model`
+model.load_state_dict(model_params)
+```
+If you want to **load a part of a model**, for example just load previous $n$ layers of a pre-trained model,
+```python
+# Assume your model is `model`
+trained_model_params = torch.load(<pre-trained-model.pth>)
+# Set params
+layer_name = [name for name in trained_model_params.keys()]
+for i, param in enumerate(model.parameters()):
+    param.data = pre_trained_model[layer_name[count]]
+    # Do not update this param
+    param.requires_grad = False
+    if i > n:
+        break
+```
+**Note:** In PyTorch, saved model state_dict save the model parameters in the order of the layer creates in the `nn.Model`.<br>
+
+If you model is trained with `nn.DataParallel`, when you save the mode as `OrderedDict` using `torch.save(<model>.state_dict, <path>)`, it will add a string `module.` before each key. And when you load this model without `DataParallel` next time, it will occur `keyError: unexpected key "module.<xxx>" in state_dict'`, one solution is to create a new orderdict dict without `module` prefix
+```python
+from collections import OrderedDict
+new_state_dict = OrderedDict()
+for k, v in state_dict.items():
+    name = k[7:] # remove `module.`
+    new_state_dict[name] = v
+# load params
+model.load_state_dict(new_state_dict)
+```
+***Reference:***
+- [PyTorch Forums: Fcn using pretrained vgg16 in model zoo? ](https://discuss.pytorch.org/t/fcn-using-pretrained-vgg16-in-model-zoo/941)
+- [PyTorch Forums: [solved] KeyError: ‘unexpected key “module.encoder.embedding.weight” in state_dict’](https://discuss.pytorch.org/t/solved-keyerror-unexpected-key-module-encoder-embedding-weight-in-state-dict/1686)
+
 
 <br>
 
@@ -281,6 +304,31 @@ make install
     ***References:***
     - [Google Maile-Caffe Users: Check failed: status == CUDNN_STATUS_SUCCESS (6 vs. 0) CUDNN_STATUS_ARCH_MISMATCH](https://groups.google.com/forum/#!topic/caffe-users/AEh4cqkvAIM)
     - [NVIDI: Deep Learning SDK Documentation](http://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html)
+
+<br>
+
+## Convolution Implement in Caffe
+Caffe use a `im2col` to implement convolution, the key thought is:
+
+<p align="center">
+<tr>
+<td> <img src="http://ovvybawkj.bkt.clouddn.com/caffe/caffe-convolution-1.png" alt="Drawing" style="width: 320px;"/> </td>
+<td> <img src="http://ovvybawkj.bkt.clouddn.com/caffe/caffe-convolution-2.png" alt="Drawing" style="width: 320px;"/> </td>
+</tr>
+</p>
+
+<p align="center">
+<tr>
+<td> <img src="http://ovvybawkj.bkt.clouddn.com/caffe/caffe-convolution-3.png" alt="Drawing" style="width: 320px;"/> </td>
+<td> <img src="http://ovvybawkj.bkt.clouddn.com/caffe/caffe-convolution-4.png" alt="Drawing" style="width: 320px;"/> </td>
+</tr>
+</p>
+
+***References:***
+- [Blog: RTFSC|Caffe源码阅读（其一）](http://www.jianshu.com/p/810d30e5ebf8)
+- [知乎：在Caffe中如何计算卷积](https://www.zhihu.com/question/28385679)
+- [Github Yangqing/caffe: Convolution in Caffe: a memo](https://github.com/Yangqing/caffe/wiki/Convolution-in-Caffe:-a-memo)
+
 
 <!-- # Ubuntu gcc from 5.x to 4.8
 ```bash

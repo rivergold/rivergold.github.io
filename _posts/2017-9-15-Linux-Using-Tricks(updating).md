@@ -92,7 +92,7 @@ wget [options] <url>
 - [每天一个linux命令（61）：wget命令](http://www.cnblogs.com/peida/archive/2013/03/18/2965369.html)
 - [Computer Hope: Linux wget command](https://www.computerhope.com/unix/wget.htm)
 
-## Inspect GPU state in unbuntu using `watch` ([\*ref](https://unix.stackexchange.com/questions/38560/gpu-usage-monitoring-cuda))
+## Inspect GPU state in unbuntu using `watch`
 `watch -n 0.5 nvidia-smi`
 
 ***References:***
@@ -117,7 +117,40 @@ sudo apt-get autoremove
 ***References:***
 - [ask ubuntu: What is the correct way to completely remove an application?](https://askubuntu.com/questions/187888/what-is-the-correct-way-to-completely-remove-an-application)
 
-## Errors and Solutions
+## Create a new user
+1. 
+    If you are a `root` user,
+    ```sh
+    adduser <username> 
+    ```
+    If you are a `non-root` user,
+    ```bash
+    sudo adduser <username>
+    ``` 
+2. Set a passward 
+    ```bash
+    Set password prompts:
+    Enter new UNIX password:
+    Retype new UNIX password:
+    passwd: password updated successfully
+    ```
+3. Follow the prompts to set the new user's information. It is fine to accept the defaults to leave all of this information blank.
+
+4. Use `usermod` command to add the user into the `sudo` group, otherwise the user cannot use `sudo`
+```bash
+usermod -aG sudo <username>
+```
+
+***References:***
+- [DigtialOcean: How To Create a Sudo User on Ubuntu [Quickstart]](https://www.digitalocean.com/community/tutorials/how-to-create-a-sudo-user-on-ubuntu-quickstart)
+
+<br>
+
+***
+
+<br>
+
+# Errors and Solutions
 ## Ubuntu error: 'apt-add-repository: command not found'<br>
 ```
 apt-get install software-properties-common

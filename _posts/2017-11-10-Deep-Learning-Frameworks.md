@@ -172,6 +172,37 @@ model.load_state_dict(new_state_dict)
 - [PyTorch Forums: [solved] KeyError: ‘unexpected key “module.encoder.embedding.weight” in state_dict’](https://discuss.pytorch.org/t/solved-keyerror-unexpected-key-module-encoder-embedding-weight-in-state-dict/1686)
 
 
+### Train network with multiple branches
+Here is an example
+```python
+class mm(nn.Module):
+    def __init__(self):
+        super(mm, self).__init__()
+        self.n = nn.Linear(4,3)
+        self.m = nn.Linear(3,2)
+        self.m2 = nn.Linear(3,4)
+    def forward(self, input, input2):
+        input_ = self.n(input)
+        input2_ = self.n(input2)
+        o1 = self.m(input_)
+        o2 = self.m2(input2_)
+        return o1, o2
+```
+Calculate loss with PyTorch
+```python
+# One way
+o1, o2 = mm(input)
+o = o1 + o2
+# Another way
+l1 = loss(o1, target)
+l2 = loss2(o2, target2)
+torch.autograd.backward([l1, l2])
+```
+
+***References:***
+- [PyTorch Forums: How to train the network with multiple branches](https://discuss.pytorch.org/t/how-to-train-the-network-with-multiple-branches/2152)
+
+
 <br>
 
 ## Promble & Solutions

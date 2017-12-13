@@ -6,12 +6,12 @@ In this article, I summarized some useful modules and packages I have used for m
 
 # Valuable Websites
 - [python3-cookbook](http://python3-cookbook.readthedocs.io/zh_CN/latest/index.html)
-
+- [Python Tips](http://book.pythontips.com/en/latest/index.html)
 - [Unofficial Windows Binaries for Python Extension Packages](http://www.lfd.uci.edu/~gohlke/pythonlibs/)
 
 <br>
 
-# Python Build-in Function
+# Python Build-in
 ## list
 - `zip(*iterables)`: Make an iterator that aggregates elements from each of the iterables.
     ```python
@@ -34,6 +34,17 @@ In this article, I summarized some useful modules and packages I have used for m
     - [Python doc: 2. Built-in Functions: zip](https://docs.python.org/3/library/functions.html#zip)
 ## dict
 - `dict1.update(dict2)`: Adds dictionary `dict2's` key-values pairs in to `dict1`. This function does not return anything.
+
+## Errors and Exceptions
+### Raising exceptions
+The `raise` statement allows the programmer to force a specified exception to occur.
+```python
+raise NameError('Error')
+```
+
+***References:***
+- [stackoverflow: Manually raising (throwing) an exception in Python](https://stackoverflow.com/questions/2052390/manually-raising-throwing-an-exception-in-python)
+- [Python tutorial: 错误与异常](http://www.pythondoc.com/pythontutorial3/errors.html)
 
 <br>
 
@@ -131,17 +142,32 @@ This module defines base classes for standard Python codecs (encoders and decode
 ## shutil
 > The shutil module offers a number of high-level operations on files and collections of files. In particular, functions are provided which support file copying and removal.
 
-How to rename a folder?
-: - Using `os.rename(<old folder path>, <new folder path>)`
-  - Using `shutil.move(<old folder path>, <new folder path>)`
+**How to rename a folder?**
+- Using `os.rename(<old folder path>, <new folder path>)`
+- Using `shutil.move(<old folder path>, <new folder path>)`
 
 **Reference**
-: - [stackoverflow: How to rename a file using Python](https://stackoverflow.com/questions/2491222/how-to-rename-a-file-using-python)
-  - [stackoverflow: When using python os.rmdir, get PermissionError: [WinError 5] Access is denied](https://stackoverflow.com/questions/36360167/when-using-python-os-rmdir-get-permissionerror-winerror-5-access-is-denied)
+- [stackoverflow: How to rename a file using Python](https://stackoverflow.com/questions/2491222/how-to-rename-a-file-using-python)
+- [stackoverflow: When using python os.rmdir, get PermissionError: [WinError 5] Access is denied](https://stackoverflow.com/questions/36360167/when-using-python-os-rmdir-get-permissionerror-winerror-5-access-is-denied)
 
 
 ## random
 This module implements pseudo-random number generators for various distributions.
+- `random.seed(a=None, version=2)`
+    Initialize the random number genearator
+    ```python
+    for i in range(3):
+        random.seed(123)
+        print(random.randint(1, 10))
+        >>> 1
+        >>> 1
+        >>> 1
+    ```
+    **Note:** `random.seed()` set the seed only work for once.<br>
+    随机数种子seed只有一次有效，在下一次调用产生随机数函数前没有设置seed，则还是产生随机数。
+
+    ***References:***
+    - [random.seed(): What does it do?](https://stackoverflow.com/questions/22639587/random-seed-what-does-it-do)
 
 - `random.shuffle(x)`
     Shuffle the squence x in place<br>
@@ -149,6 +175,13 @@ This module implements pseudo-random number generators for various distributions
     a = [1, 2, 3, 4]
     random.shuffle(a)
     >>> [2, 1, 4, 3]
+    ```
+
+- `random.sample(population, k)`
+    Return a $k$ length list of unique elements chosen from the population sequences or set.
+    ```python
+    # Generate a random sequences 0 - 99, length: 10
+    random_ids = random.sample(range(100, 10))
     ```
 
 ## Enum
@@ -228,7 +261,20 @@ color = [x.value for x in Color]
 **Note:** `np.dot()` performs a matrix-matrix or matrix-vector multiplication.
 
 ### Random
-- `np.random.randn(d0, d1, ..., dn)`: Return a sample from the **standard normal** distribution.
+- `np.random.seed(seed=None)`
+    Seed the generator. **Note:** The seed is only work for once.
+
+- `np.random.randn(d0, d1, ..., dn)`: 
+    Return a sample from the **standard normal** distribution.
+
+- `class np.random.RandomState(seed=None)`
+    ```
+    r = np.random.RandomState(123)
+    r.randn(2,2)
+    ```
+
+***References:***
+- [SciPy.org: Numpy Random sampling](https://docs.scipy.org/doc/numpy-1.13.0/reference/routines.random.html)
 
 ### Shape transform
 - `np.squeeze(a, axis=None)`: Remove single-dimensional entries from the shape of array.
@@ -258,6 +304,16 @@ color = [x.value for x in Color]
 
     ***References:***
     - [deeplearning.ai: Planar data classification with one hidden layer/planar_utils.py](https://github.com/XingxingHuang/deeplearning.ai/blob/master/1_Neural%20Networks%20and%20Deep%20Learning/week3/Planar%20data%20classification%20with%20one%20hidden%20layer/planar_utils.py#L7)
+
+- Copy array
+    ```
+    a = np.zeros((2,2))
+    b = np.copy(a)
+    ```
+    **Note!** Numpy arrays work differently than lists do. When use `b = a[::]` in numpy, `b` is not a deep copy of a, but a view of a.
+
+    ***References:***
+    - [stackoverflow: Numpy array assignment with copy](https://stackoverflow.com/questions/19676538/numpy-array-assignment-with-copy)
 
 <br>
 
@@ -323,14 +379,66 @@ conda
   conda config --set show_channel_urls yes
   ```
 
-Reference
-: - [csdn: 更改pip源至国内镜像，显著提升下载速度](http://blog.csdn.net/zhangchilei/article/details/53893002)
+***Reference:***
+- [csdn: 更改pip源至国内镜像，显著提升下载速度](http://blog.csdn.net/zhangchilei/article/details/53893002)
 
+## Organize your python module
+Assume that your module is like,
+```
+package
+  __init__.py
+  |- subpackage1
+      |- __init__.py
+      |- a.py
+  |- subpackage2
+      |- __init__.py
+      |- b.py
+```
+Each `__init__.py` is
+```python
+# package's __init__py
+from . import subpackage1
+from . import subpackage2
+```
+
+```python
+# subpackage1's __init__py
+from . import a
+```
+
+```python
+# subpackage2's __init__py
+from . import b
+```
+If `b.py` want to import method or variable in `a.py`,
+```
+# b.py
+from ..a import <method>
+```
+
+***Referneces:***
+- [python3-cookbook: 10.3 使用相对路径名导入包中子模块](http://python3-cookbook.readthedocs.io/zh_CN/latest/c10/p03_import_submodules_by_relative_names.html)
+
+## Python script import from parent directory
+Assume you have some scripts like
+```
+src
+  |- part_1
+      |- a.py
+  |- part_2
+      |- b.py
+```
+And `b.py` want to use method or variable in `a.py`, one solution is to add parent path into `sys.path`
+```
+import sys
+sys.append('..')
+import a
+```
 
 ## How print in one with dynamically refresh in Python?
 - Python3
     ```python
-    print(data, end'\r', flush=True)
+    print(data, end='\r', flush=True)
     ```
 
 - Python2
@@ -341,8 +449,46 @@ Reference
     from __future__ import print_function
     ```
 
+## `format` print
+```python
+x = 1234.56789
 
-## `enumerate` using details [(\*ref)](http://book.pythontips.com/en/latest/enumerate.html)
+# Two decimal places of accuracy
+format(x, '0.2f')
+>>> '1234.57'
+
+# Right justified in 10 chars, one-digit accuracy
+format(x, '>10.1f')
+>>> '    1234.6'
+
+# Left justified
+format(x, '<10.1f')
+>>> '1234.6    '
+
+# Centered
+format(x, '^10.1f')
+>>> '  1234.6  '
+
+# Inclusion of thousands separator
+format(x, ',')
+>>> '1,234.56789'
+format(x, '0,.1f')
+>>> '1,234.6'
+
+# string format
+temp = '{:0<10.2}'.format(x)
+print(temp)
+>>> 1.2e+03000
+temp = '{:0<10.2f}'.format(x)
+>>> 1234.57000
+temp = temp = '{:0<10.2E}'.format(x)
+>>> 1.23E+0300
+```
+
+***References:***
+- [python3-cookbook: 3.3 数字的格式化输出](http://python3-cookbook.readthedocs.io/zh_CN/latest/c03/p03_format_numbers_for_output.html)
+
+## `enumerate` using details
 Common use is like followings,<br>
 ```python
 for counter, value in enumerate(some_list):
@@ -358,6 +504,9 @@ for counter, value in enumerate(a, 1)
 >>> 2 banana
 >>> 3 orange
 ```
+
+***References:***
+- [Python Tips: 13. Enumerate](http://book.pythontips.com/en/latest/enumerate.html)
 
 
 ## Create a directory/folder if it does not exist

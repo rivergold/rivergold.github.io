@@ -90,6 +90,80 @@ We need:
 - `torch.unsqueeze(input, dim, out=None)`
 - `torch.transpose(input, dim0, dim1, out=None)` -> `Tensor`
 
+## Loss Layer
+### `nn.MSELoss(size_average=True, reduce=True)`
+Creates a criterion that measures the mean squared error between $n$ elements in the input $x$ and target $y$:
+<p>
+
+$$
+loss(x, y) = \frac{1}{n} \sum\|x_i - y_i\|^2
+$$
+
+</p>
+
+- **size_average:** By default `size_average=True`, it calculate the mean value of loss between intput and output. If set `size_average=False` the loss is the sum of each element of input and target.
+- **reduce:** By default `reduce=True` the loss calculate mode depends on **size_average**. If set `reduce=False`, this function will ignore `size_average` and return each sample's element loss in the mini-batch.
+```python
+class Dataset(torch.utils.data.Dataset):
+    def __init__(self, num_samples=0):
+        super().__init__()
+        self.num_samples = num_samples
+    
+    def __getitem__(self, index):
+        x = np.zeros((2,2))
+        y = np.ones((2,2))
+        return torch.from_numpy(x), torch.from_numpy(y)
+    
+    def __len__(self):
+        return self.num_samples
+
+train_set = Dataset(4)
+train_set_loader = torch.utils.data.DataLoader(train_set, batch_size=2)
+
+# size_average=True
+criterion = nn.MSELoss()
+
+for batch_id, (input, target) in enumerate(train_set_loader):
+    input_var, target_var = Variable(input), Variable(target)
+    loss = criterion(input_var, target_var)
+    print(loss)
+    # Just run one batch and print once
+    break
+
+>>> Variable containing:
+>>> 1
+>>> [torch.DoubleTensor of size 1]
+
+# size_average=False
+criterion = nn.MSELoss(size_average=False)
+>>> Variable containing:
+>>> 8
+>>> [torch.DoubleTensor of size 1]
+
+# reduce=False
+criterion = nn.MSELoss(reduce=False)
+>>> Variable containing:
+# 1th sample in mini-batch
+>>> (0 ,.,.) = 
+>>>   1  1
+>>>   1  1
+# 2th sample in mini-batch
+>>> (1 ,.,.) = 
+>>>   1  1
+>>>   1  1
+>>> [torch.DoubleTensor of size 2x2x2]
+```
+**注：** 这里的`reduce`可理解为“归纳”。另外需要注意的是，PyTorch的`MSELoss`与Caffe的`EuclideanLossLayer`的不同之处，`EuclideanLossLayer`计算
+<p>
+
+$$
+loss = \frac{1}{2N}\sum_{n=1}^{N}\|\hat{y_n} - y_n\|^2
+$$
+
+</p>
+
+`EuclideanLossLayer`取了mini-batch大小的平均，而`MSELoss`要么是计算element-size平均（所有数值都算进去），要么是求所有的和，而不会计算mini-batch的平均。
+
 <br>
 
 ## PyTorch Using Tricks
@@ -130,6 +204,15 @@ model.cuda()
 ***References:***
 - [Github: pytorch/examples/imageent/main.py](https://github.com/pytorch/examples/blob/master/imagenet/main.py#L82)
 - [PyTorch Forums: How to parallel in GPU when finetuning](https://discuss.pytorch.org/t/how-to-parallel-in-gpu-when-finetuning/796)
+
+**Difference between DataParallel and DistributedDataParallel**
+- `DataParallel` is for perfoming training on multiple GPUs, single machine.
+- `DistributedDataParallel` is for multiple machines.
+
+***References:***
+- [PyTorch Forums: What is the difference between DataParallel and DistributedDataParallel?](https://discuss.pytorch.org/t/what-is-the-difference-between-dataparallel-and-distributeddataparallel/6108)
+
+**对PyTorch的分布式训练的浅显理解：** 单机多GPU中，将模型拷贝到不同的GPU中，每个GPU计算当前mini-bath中一部分，之后将计算的梯度的**sum/average**（单机多GPU中PyTorch是将梯度加起来的）传递到original模型里进行BP。在多机分布计算时，将输入的mini-batch分配到各个node中，之后在BP阶段将不同的node的梯度取平均之后更新参数。
 
 ### Load pre-trained model
 A recommended way to save trained model is 

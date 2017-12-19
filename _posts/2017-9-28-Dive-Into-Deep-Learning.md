@@ -614,8 +614,9 @@ $$
     where $b$ is the base of the logarithm used. Common values of $b$ are 2, Euler's number $e$, and 10. In machine learning and deep learning, people often use $e$.
 
     </p>
+<br>
 
-- KL divergence from $\hat{Y}$ to $Y$ is the difference between cross entropy and entropy
+- **KL divergence** from $\hat{Y}$ to $Y$ is the difference between cross entropy and entropy
 <p>
 
 $$

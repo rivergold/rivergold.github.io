@@ -12,7 +12,7 @@ warpAffine(img_src, img_dst, R, img_src.size(), INTER_CUBIC, BORDER_CONSTANT, Sc
 ```
 
 **Python**
-```python
+```python  
 center = (img.shape[1] / 2, img.shape[0] / 2)
 degree = 30
 R = cv2.getRotationMatrix2D(center, degree, 1)

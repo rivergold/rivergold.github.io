@@ -12,6 +12,30 @@ In this article, I summarized some useful modules and packages I have used for m
 <br>
 
 # Python Build-in
+## Variables
+Variable in Python is a label bound to a object, it means that variable is a reference of the object.<br>
+If you are a C++ programmer, you can think variable in Python as a pointer in C++ which point to the object.<br>
+
+**理解：** Python中的变量是对object的标注，也可以说是object的引用，而且这种引用是可以动态改变的。而C++中的Varible就是那个object, 而且Python中的reference与C++的reference是有不同的： C++的reference就代表了那个object，且不能改变，而Python中的reference(variable)可以改变其reference的object，是动态的。而且如果你是一个C++掌握者，Python的Variable更像是C++的pointer。
+```python
+a = [1, 2, 3]
+b = a # b is a reference of object [1, 2, 3]
+pritn(b)
+>>> [1, 2, 3]
+b = [1, 2] # now b is a reference of another object: [1, 2]
+print(a)
+>>> [1, 2, 3]
+```
+
+## Function parameters as references
+Type of passing parameters to function:
+- **call by value:** the function gets a copy of the argument
+- **call by reference:** the function gets a pointer to the argument
+- **call by sharing:** the function gets a copy of the reference of the argument, it means that the parameters inside the function become a **alias** of the arguments.
+
+In Python, the function gets a copy of the arguments, but the arguments are always references.<br>
+**理解：** Python的函数传参，函数获得的是实参object的引用的拷贝<br>
+
 ## list
 - `zip(*iterables)`: Make an iterator that aggregates elements from each of the iterables.
     ```python

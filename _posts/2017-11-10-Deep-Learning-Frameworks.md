@@ -90,6 +90,10 @@ We need:
 - `torch.unsqueeze(input, dim, out=None)`
 - `torch.transpose(input, dim0, dim1, out=None)` -> `Tensor`
 
+## torch.nn
+- `torch.nn.Sequential(*args)`
+    A sequential container. Modules will be added to it in the order they are passed in the constructor.
+
 ## Loss Layer
 ### `nn.MSELoss(size_average=True, reduce=True)`
 Creates a criterion that measures the mean squared error between $n$ elements in the input $x$ and target $y$:
@@ -327,8 +331,18 @@ A **computational graph** is a series of TensorFlow operations arranged into a g
 
 Tensorflow采用计算图的方式实现张量的计算，首先需要构建计算图，之后再运行计算图来得出计算的结构。其中，变量是计算图中的一个节点，而操作也是计算图中的节点。<br>计算图实际是基于符号计算的，在构建计算图时可以不确定每个符号的具体数值是多少，之后当计算图运行时才会根据符号所表示具体的数值来计算出结果。
 
+The role of the Python code is therefore to build this external computation graph, and to dictate which parts of the computation graph should be run. 
+
 ***References:***
 - [深度学习框架的比较（MXNet, Caffe, TensorFlow, Torch, Theano)](http://kylt.iteye.com/blog/2338800) 
+
+## `Placeholders`
+A graph can be parameterized to accept external inputs, known as placeholders. A placeholder is a promise to provide a value later.
+```python
+a = tf.placeholder(tf.float32)
+b = tf.placeholder(tf.float32)
+adder_node = a + b  # + provides a shortcut for tf.add(a, b)
+```
 
 ## Common Funtions
 ### `tf`

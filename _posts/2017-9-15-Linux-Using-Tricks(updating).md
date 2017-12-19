@@ -27,6 +27,7 @@ cd -
 ## Using command change Ubuntu download source<br>
 ```shell
 sed -is@http://archive.ubuntu.com/ubuntu/@https://mirrors.ustcedu.cn/ubuntu/@g /etc/apt/sources.list
+sed -i s@http://security.ubuntu.com/ubuntu/@http://mirrors.tuna.tsinghua.edu.cn/ubuntu/@g /etc/apt/sources.list
 ```
 
 ## Install Java on Ubuntu with apt-get

@@ -472,17 +472,10 @@ w = np.random.uniform(-stdv, stdv)
 
 ## Optimization Methods
 <p>
-Loss function is defined as,
 
-$$
-J(\mathbf{w}, \mathbf{x}) = \frac{1}{2}\frac{1}{m}\sum_{i=1}^{m}(h_{\mathbf{w}}(\mathbf{x}^{(i)}) - y^{(i)})^2 + \frac{1}{2}\lambda \mathbf{w}^2
-$$
-$$
-J(\mathbf{w}, \mathbf{x})^{(i)} = \frac{1}{2}(h_{\mathbf{w}}(\mathbf{x}^{(i)}) - y^{(i)})^2 + \frac{1}{2}\lambda\mathbf{w}^2
-$$
-$$
-\nabla_{\mathbf{w}} J(\mathbf{w}, \mathbf{x})^{(i)}
-$$
+Loss function is defined as $J(\mathbf{W}, \mathbf{X})$, $X \in \mathbb{R}^{m \times n}$
+
+- $\eta$: learning rate 
 
 </p >
 
@@ -504,6 +497,8 @@ $$
 - Memory may not enough to put all samples
 - Difficult to update weights online
 
+When the training set is very large, BGD will takes lots of time.
+
 ### Stochastic Gradient Descent
 SGD get one sample and calculate the gradient to update weights,
 <p>
@@ -511,6 +506,8 @@ SGD get one sample and calculate the gradient to update weights,
 $$
 w_i := w_i - \eta \nabla J(\mathbf{w}, \mathbf{x})^{(k)}
 $$
+
+A drawback of SGD is that direction maybe not always of the miniumum, because you only calculate one sample's gradient time.
 
 </p>
 
@@ -524,9 +521,62 @@ $$
 
 </p>
 
-The following methods are optimized based on **Gradient Descent**, we ues $g$ to notate gradient $\nabla J(\mathbf{w}, \mathbf{x})$(This gradient can be the mean of all samples, a samples or a mean of a batch of samples). And in deep learning we often use SGD, but you should know that SGD here represents mini-batch gradient descent.
+```python
+n_batches = m / batch_size
+for i in n_batches
+    # use matrix to calculate loss of mini-batch
+    output = xxxx
+    loss = loss_function(output, target)
+    # update weights
+    w := w - lr * gradient
+```
+
+Mini-batch GD is much faster than Batch GD. But the loss of GD will go down all the time(assume that lear rate is suitable), but the loss of SGD or mini-batch GD will be noisy, it means that sometime the loss is decrease and sometime it will increase.
+
+<p align="center">
+    <img src="http://ovvybawkj.bkt.clouddn.com/dl-base/loss%20of%20BGD%20and%20Mini-batch%20GD.png" width="80%">
+</p>
+
+**Summary**<br>
+In one epoch(a single pass through training set), BGD update the weights onec; SGD update the weights $m$ times; mini-batch GD update the weights $\frac{m}{\mathrm{batch~size}}$ times.<br>
+
+**注：** epoch的意思是训练时，遍历了整个训练集一次
+
+**How to choose mini-batch size?**
+- If small training set($m \le 2000$): use batch gradient descent
+- Typical mini-batch size: 64 ~ 512, which is a power of 2 (because of the way computer memory is laid out and accessed, it will make computation run faster)
+
+<br>
+
+The following methods are optimized based on **Gradient Descent**, we ues $g$ to notate gradient $\nabla J(\mathbf{w}, \mathbf{x})$(This gradient can be the mean of all samples, a samples or a mean of a batch of samples). 
+
+**Note:** In deep learning we often use SGD, but you should know that then SGD here often represents mini-batch gradient descent.
+
+### Exponentially weighted averages(指数加权平均)
+<p>
+
+- $v_t$: exponentially weighted average when time is $t$
+- $\theta_t$: current value
+
+$$
+v_t = \beta v_{t-1} + (1-\beta) \theta_t 
+$$
+It can be rewritten as,
+$$
+v_t = (1-\beta)\theta_t + (1-\beta) \beta \theta_{t-1} + (1-\beta)\beta^2 \theta_{t-2} + ... 
+$$
+
+</p>
+
+$v_t$ is an approximate average over $\frac{1}{1-\beta}$ previous data. And $v_0$ is 0.<br>
+
+**理解：** $v_t$是前$\frac{1}{1-\beta}$个数据的平均值的近似。该方法是一种加窗型的平均值计算方法，$\beta$决定了窗口的大小。
+
+> 本质就是以指数式递减加权的移动平均。各数值的加权而随时间而指数式递减，越近期的数据加权越重，但较旧的数据也给予一定的加权。
 
 ### Momentum
+$g$: current gradent
+
 
 <p>
 
@@ -538,6 +588,8 @@ w_i := w_i - \eta v
 $$
 
 </p>
+
+**理解：** 考虑上一次迭代时更新的方向，并结合当前方向
 
 ### Nesterov Momentum
 <p>

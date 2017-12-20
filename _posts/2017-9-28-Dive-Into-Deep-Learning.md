@@ -553,10 +553,9 @@ The following methods are optimized based on **Gradient Descent**, we ues $g$ to
 **Note:** In deep learning we often use SGD, but you should know that then SGD here often represents mini-batch gradient descent.
 
 ### Exponentially weighted averages(指数加权平均)
-<p>
-
-- $v_t$: exponentially weighted average when time is $t$
+- $v_t$: exponentially weighted average(a moving average) when time is $t$
 - $\theta_t$: current value
+<p>
 
 $$
 v_t = \beta v_{t-1} + (1-\beta) \theta_t 
@@ -570,30 +569,51 @@ $$
 
 $v_t$ is an approximate average over $\frac{1}{1-\beta}$ previous data. And $v_0$ is 0.<br>
 
-**理解：** $v_t$是前$\frac{1}{1-\beta}$个数据的平均值的近似。该方法是一种加窗型的平均值计算方法，$\beta$决定了窗口的大小。
+**理解：** $v_t$是前$\frac{1}{1-\beta}$个数据的平均值的近似。该方法是一种加窗型的平均值计算方法，$\beta$决定了窗口的大小。（该平均值可以用来预测下一时刻的值为多少）
 
 > 本质就是以指数式递减加权的移动平均。各数值的加权而随时间而指数式递减，越近期的数据加权越重，但较旧的数据也给予一定的加权。
 
 ### Momentum
-$g$: current gradent
+Basic idea is to computate an exponentially weighted average of the gradients, and use this average gradient to update weights.<br>
 
+- $\mathrm{dw}$: current gradient
+- $\eta$: learning rate
 
 <p>
 
 $$
-v := \mu v_{t-1} + g
+v_{dw} := \beta v_{dw} + (1-\beta) \mathrm{dw}
 $$
 $$
-w_i := w_i - \eta v
+w := w - \eta v_{dw}
 $$
 
 </p>
 
-**理解：** 考虑上一次迭代时更新的方向，并结合当前方向
+Some version of momentum is written as (like PyTorch),
+<p>
+
+$$
+v_{dw} := \beta v_{dw} + \mathrm{dw}
+$$
+
+</p>
+
+It mean that $v$ is divided by $1-\beta$.
+
+The most common value for $\beta$ is $0.9$(a average of last 10 gradients) for both two version momentum. The difference is that the second version's $v$ is larger than the first one, which will only have a influence on the **learning rate**.
+
+**理解：** Momentum通过计算当前时刻的梯度的平均值（指数加权平均）来作为更新参数的梯度， 即借用了当前信息与历史信息来修正梯度从而得到更好的优化方向。
+
+***References:***
+- [deeplearing.ai: Momentum](https://mooc.study.163.com/learn/2001281003?tid=2001391036#/learn/content?type=detail&id=2001702123&cid=2001694311)
 
 ### Nesterov Momentum
 <p>
 
+Init $v_{dw}=0$<br>
+Then in each iteration $t$<br>
+Compute $\mathrm{dw}$ and $\mathrm{db}$ on current mini-batch, then
 $$
 v := \mu v_{t-1} + g
 $$
@@ -613,6 +633,61 @@ $$
 - [知乎专栏：深度学习最全优化方法总结比较（SGD，Adagrad，Adadelta，Adam，Adamax，Nadam）](https://zhuanlan.zhihu.com/p/22252270)
 - [卷积神经网络中的优化算法比较](http://shuokay.com/2016/06/11/optimization/) (注：该博客写的有些错误，主要了解其讲解的思想)
 - [知乎：在神经网络中weight decay起到的做用是什么？momentum呢？normalization呢？](https://www.zhihu.com/question/24529483)
+
+### RMSprop (Root Mean Square)
+<p>
+
+Init $s_{dw}=0$<br>
+Then in iteration $t$<br>
+Compute $\mathrm{dw}$ and $\mathrm{db}$ on current mini-batch, then
+$$
+s_{dw} := \beta s_{dw} + (1 - \beta) {\mathrm{dw}}^2
+$$
+$$
+w := w - \eta \frac{\mathrm{dw}}{\sqrt{s_{dw}}}
+$$
+
+Here ${\mathrm{dw}}^2$ is square of $\mathrm{dw}$
+
+</p>
+
+**理解：** 直观理解，通过$s$的作用，让梯度大的参数除以一个大的值从而让参数更新的幅度减小，而让梯度小的参数除以一个小的值从而让参数更新的幅度变大。
+
+In order to avoid $\sqrt{s_{dw}}$ is zero or near to zero, in parctice, we often add a small valur $\epsilon$ ($10^{-8}$) to denominator $\frac{\mathrm{dw}}{\sqrt{s_{dw}}+\epsilon}$ to avoid getting `inf` or a very large value. 
+
+### Adam (Adaptive Moment Estimation)
+A combination of Momentum and RMSprop
+<p>
+
+Init $v_{dw}=0$, $s_{dw}=0$<br>
+Then in iteration $t$<br>
+Compute $\mathrm{dw}$ and $\mathrm{db}$ on current mini-batch, then 
+$$
+v_{dw} := \beta_1 v_{dw} + (1-\beta_1) \mathrm{dw}
+$$
+$$
+s_{dw} := \beta_2 s_{dw} + (1-\beta_2) \mathrm{dw}
+$$
+Do bias correction,
+$$
+v_{dw}^{correct} = \frac{v_{dw}}{(1 - \beta_1^t)}
+$$
+$$
+s_{dw}^{correct} = \frac{s_{dw}}{(1 - \beta_2^t)}
+$$
+Update weights,
+$$
+w := w - \eta \frac{v_{dw}^{correct}}{\sqrt{s_{dw}^{correct}} + \epsilon}
+$$
+
+</p>
+
+A common value for $\beta_1$ is 0.9, and $\beta_2$ is 0.999
+
+### Learning Rate Decay
+During training, with the increase of epoch, decrease value of learning rate. Because when in earlier epoch network can accept a relatively large learning rate which can accelarate training, but with the loss decrease we are getting closer to the optimal solution, using a smaller learning rate can help us get the solution in a tighter region around the minimum.
+
+<br>
 
 ## 1D, 2D, 3D Convlutions
 - 1D convolution:

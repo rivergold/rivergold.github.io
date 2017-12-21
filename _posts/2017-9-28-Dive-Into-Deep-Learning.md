@@ -271,11 +271,12 @@ $$ -->
 <br>
 
 ## Regularization
+**Key idea** is to add another term to the loss, which penalizes large weights.
 ### $L_1$ regularization
 <p>
 
 $$
-\lambda \sum_{i=1}^{n} \| \mathbf{w} \| = \lambda {\|\mathbf{w}\|}_1
+\lambda \sum_{i=1}^{n} | w_i | = \lambda {\|\mathbf{w}\|}_1
 $$
 
 </p>
@@ -288,7 +289,7 @@ $L2$ regularization are used much more often during training neural network, it 
 <p>
 
 $$
-\lambda \sum_{i=1}^{n}\|\mathbf{w}\|^2 = \lambda {\|\mathbf{w}\|}_2
+\lambda \sum_{i=1}^{n} w_i^2 = \lambda {\|\mathbf{w}\|}_2^2
 $$
 
 </p>
@@ -311,7 +312,7 @@ we note $\frac{\partial L(\hat{y}^{(i)}, y^{(i)})}{\partial \mathbf{w}^L}$ as $\
 $$
 \mathbf{w}^L := \mathbf{w}^L - \alpha \mathrm{d} \mathbf{w}^L - \alpha \lambda \mathbf{w}^L
 $$
-Here, the $\lambda$ is called **weight decay**, no matter what value of $mathbf{w}^L$ is, this notation is intent to decay the weights(make weights' absolute value small).
+Here, the $\lambda$ is called **weight decay**, no matter what value of $\mathbf{w}^L$ is, this notation is intent to decay the weights(make weights' absolute value small).
 
 </p>
 

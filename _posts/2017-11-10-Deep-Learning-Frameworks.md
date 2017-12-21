@@ -1,3 +1,14 @@
+# Deep Learning Programming Style
+- Imperative Programs (命令式编程): PyTorch
+    Programs perform computation as what you write.
+- Symbolic Programs (符号式编程): Tensorflow
+    We define the abstract function in terms of placeholder values. Then we compile the function, and evaluate it given real inputs.
+
+***References***
+- [mxnect doc: Deep Learning Programming Style](http://mxnet.incubator.apache.org/architecture/program_model.html)
+- [深度学习中的编程模型](http://shuokay.com/2017/03/08/programming-models-for-deep-learning/)
+
+
 # Pre-installation for Deep Learning
 We need:
 1. Ubuntu OS
@@ -334,6 +345,7 @@ Tensorflow采用计算图的方式实现张量的计算，首先需要构建计�
 The role of the Python code is therefore to build this external computation graph, and to dictate which parts of the computation graph should be run. 
 
 ***References:***
+- [知乎专栏： 深度长文 Tensorflow代码解析（一）](https://zhuanlan.zhihu.com/p/25646408)
 - [深度学习框架的比较（MXNet, Caffe, TensorFlow, Torch, Theano)](http://kylt.iteye.com/blog/2338800) 
 
 ## `Placeholders`

@@ -108,6 +108,7 @@ We need:
 ## Loss Layer
 ### `nn.MSELoss(size_average=True, reduce=True)`
 Creates a criterion that measures the mean squared error between $n$ elements in the input $x$ and target $y$:
+
 <p>
 
 $$
@@ -118,6 +119,7 @@ $$
 
 - **size_average:** By default `size_average=True`, it calculate the mean value of loss between intput and output. If set `size_average=False` the loss is the sum of each element of input and target.
 - **reduce:** By default `reduce=True` the loss calculate mode depends on **size_average**. If set `reduce=False`, this function will ignore `size_average` and return each sample's element loss in the mini-batch.
+
 ```python
 class Dataset(torch.utils.data.Dataset):
     def __init__(self, num_samples=0):
@@ -168,6 +170,7 @@ criterion = nn.MSELoss(reduce=False)
 >>>   1  1
 >>> [torch.DoubleTensor of size 2x2x2]
 ```
+
 **注：** 这里的`reduce`可理解为“归纳”。另外需要注意的是，PyTorch的`MSELoss`与Caffe的`EuclideanLossLayer`的不同之处，`EuclideanLossLayer`计算
 <p>
 

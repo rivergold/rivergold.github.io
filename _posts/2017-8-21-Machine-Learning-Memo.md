@@ -659,7 +659,13 @@ $$
 </p>
 <br>
 
-## 核函数
+## 核技巧 (Kernel Trick)
+**Key idea:** Convert low dimensional feature input space into a high dimensional space.
+
+<p align="center">
+    <img src="http://ovvybawkj.bkt.clouddn.com/ml-base/svm-kearn-trick.png" width="70%">
+</p>
+
 当数据是非线性可分时（无法用$\mathbf{w}^T\mathbf{x} + b$超平面分开），通常需要进行一个非线性变换，将非线性问题转化为线性问题。
 
 Kernel是用来计算在高维特征空间中两个向量内积(inner product)。假设我们有从$\mathbb{R}^n \Rightarrow \mathbb{R}^m $的映射$\varphi$, 将向量$\mathbf{x}^{(i)}, \mathbf{x}^{(j)}$从特征空间$\mathbb{R}^n$映射到$\mathbb{R}^m$。在$\mathbb{R}^m$中，$\mathbf{x}^{(i)}$和$\mathbf{x}^{(j)}$的内积为$\langle\varphi(\mathbf{x}^{(i)}), \varphi(\mathbf{x}^{(j)})\rangle$。核函数$K$定义为$K(\mathbf{x}, \mathbf{y}) = \langle \varphi(\mathbf{x}), \varphi(\mathbf{y})\rangle$。<br>

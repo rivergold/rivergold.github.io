@@ -120,56 +120,56 @@ $$
 - **size_average:** By default `size_average=True`, it calculate the mean value of loss between intput and output. If set `size_average=False` the loss is the sum of each element of input and target.
 - **reduce:** By default `reduce=True` the loss calculate mode depends on **size_average**. If set `reduce=False`, this function will ignore `size_average` and return each sample's element loss in the mini-batch.
 
-    ```python
-    class Dataset(torch.utils.data.Dataset):
-        def __init__(self, num_samples=0):
-            super().__init__()
-            self.num_samples = num_samples
-        
-        def __getitem__(self, index):
-            x = np.zeros((2,2))
-            y = np.ones((2,2))
-            return torch.from_numpy(x), torch.from_numpy(y)
-        
-        def __len__(self):
-            return self.num_samples
+```python
+class Dataset(torch.utils.data.Dataset):
+    def __init__(self, num_samples=0):
+        super().__init__()
+        self.num_samples = num_samples
+    
+    def __getitem__(self, index):
+        x = np.zeros((2,2))
+        y = np.ones((2,2))
+        return torch.from_numpy(x), torch.from_numpy(y)
+    
+    def __len__(self):
+        return self.num_samples
 
-    train_set = Dataset(4)
-    train_set_loader = torch.utils.data.DataLoader(train_set, batch_size=2)
+train_set = Dataset(4)
+train_set_loader = torch.utils.data.DataLoader(train_set, batch_size=2)
 
-    # size_average=True
-    criterion = nn.MSELoss()
+# size_average=True
+criterion = nn.MSELoss()
 
-    for batch_id, (input, target) in enumerate(train_set_loader):
-        input_var, target_var = Variable(input), Variable(target)
-        loss = criterion(input_var, target_var)
-        print(loss)
-        # Just run one batch and print once
-        break
+for batch_id, (input, target) in enumerate(train_set_loader):
+    input_var, target_var = Variable(input), Variable(target)
+    loss = criterion(input_var, target_var)
+    print(loss)
+    # Just run one batch and print once
+    break
 
-    >>> Variable containing:
-    >>> 1
-    >>> [torch.DoubleTensor of size 1]
+>>> Variable containing:
+>>> 1
+>>> [torch.DoubleTensor of size 1]
 
-    # size_average=False
-    criterion = nn.MSELoss(size_average=False)
-    >>> Variable containing:
-    >>> 8
-    >>> [torch.DoubleTensor of size 1]
+# size_average=False
+criterion = nn.MSELoss(size_average=False)
+>>> Variable containing:
+>>> 8
+>>> [torch.DoubleTensor of size 1]
 
-    # reduce=False
-    criterion = nn.MSELoss(reduce=False)
-    >>> Variable containing:
-    # 1th sample in mini-batch
-    >>> (0 ,.,.) = 
-    >>>   1  1
-    >>>   1  1
-    # 2th sample in mini-batch
-    >>> (1 ,.,.) = 
-    >>>   1  1
-    >>>   1  1
-    >>> [torch.DoubleTensor of size 2x2x2]
-    ```
+# reduce=False
+criterion = nn.MSELoss(reduce=False)
+>>> Variable containing:
+# 1th sample in mini-batch
+>>> (0 ,.,.) = 
+>>>   1  1
+>>>   1  1
+# 2th sample in mini-batch
+>>> (1 ,.,.) = 
+>>>   1  1
+>>>   1  1
+>>> [torch.DoubleTensor of size 2x2x2]
+```
 
 **注：** 这里的`reduce`可理解为“归纳”。另外需要注意的是，PyTorch的`MSELoss`与Caffe的`EuclideanLossLayer`的不同之处，`EuclideanLossLayer`计算
 <p>

@@ -58,6 +58,20 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
     - [Python doc: 2. Built-in Functions: zip](https://docs.python.org/3/library/functions.html#zip)
 ## dict
 - `dict1.update(dict2)`: Adds dictionary `dict2's` key-values pairs in to `dict1`. This function does not return anything.
+- `dict.pop(<key>)`: Delate a key of a dict
+
+## string
+- Remove punctuation(标点符号) in a string using `str.translate(table)`
+    ```python
+    import string
+    trans_table = str.maketrans('', '', str.punctuation)
+    data = 'this is a test!!!'
+    data.translate(trans_table)
+    print(data)
+    >>> this is a test
+    ```
+***References:***
+- [Python3.6 doc str.translate](https://docs.python.org/3/library/stdtypes.html?highlight=maketrans#str.translate)
 
 ## Errors and Exceptions
 ### Raising exceptions

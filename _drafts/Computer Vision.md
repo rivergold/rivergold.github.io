@@ -197,3 +197,71 @@ $$
 
 where (X,Y,Z) are in camera coordinates, (x, y) are in image coordinates.
 </p>
+
+## Homogeneous Coordinates
+***References***
+- [3D数学基础-矩阵变换（二）](http://frankorz.com/2017/09/24/matrix-transformation-2/)
+
+we put image plane at (0, 0, f)
+
+## Perspective Projection
+f is focal length: put image plane at (0, 0, f)
+
+### Vanishing points
+Sets of parallel lines on the same plane lead to collinear(共线的) vanishing points. This line is called the horizon for that plane.
+<p align="center">
+    <img src="http://ovvybawkj.bkt.clouddn.com/cv/horizon_of_plane.png" width="50%">
+</p>
+
+For a image example,
+<p align="center">
+    <img src="http://ovvybawkj.bkt.clouddn.com/cv/horizon_of_plane_example.png" width="50%">
+</p>
+
+### Other models:
+One model 对应一个 projection matrix
+
+- Orthograpphic projection
+Parallel projection: special case of perspective projection
+
+- Weak Perspective
+Assume all object in the world has the same depth(depth over an object or over the range of an object is very samll compared to the difference in depth from the object to the center of projection)
+
+# Stereo geometry
+## Estimating depth with stereo
+Two need have:
+- Calibrated cameras
+- Matched points
+
+## Epipolar geometry
+**理解** epipolar line的理解，一切基于针孔模型，两张图像（image plane），相机坐标系中的3D的某一个点在左图的投影的连线，与其在右图投影所在点的连线，构成了平面，该平面与两个image plane的交线就是epipolar line
+
+
+## Stereo correspondence
+Using epipolar line, search region is made to samller as one demension
+
+Porblem:
+- Occlusion: half occlusion, one camera can see but another can not see
+
+Energy minimization problem?
+
+Regard stereo depth calculate(stereo disparity problem) as an energy minimization problem and the energy function of this form can be minimized using **graph cuts**
+
+
+> Fast Approximate energy minimization via graph cuts, PAMI 2001
+
+Challenges:
+- Low-contrast
+- Occlusions
+- Violations of brightness constancy(e.g. specular reflections)
+- Really large baselines(two camera far away each other)(foreshortening and apperance change)
+- Camera calibration errors(it will make epipolar lines error)
+
+# Camera
+- [Udacity - Computer vision: Extrinsic camera parameters](https://classroom.udacity.com/courses/ud810/lessons/2952438768/concepts/29548388600923)
+    A summry of camera model, homogeneous coordinates and perspective projection.
+## Extrinsic camera parameters
+### Geometric camera calibration
+We need the relationship between coordinates in the world and coordinates in the image: **geometric camera calibration**, it is composed of 2 transformations:
+- **Extrinsic parameters(or camera pose):** From world coordinate system to the camera's 3D coordinate system
+- **Intrinsic parameters:** From the 3D coordinates in the camera frame to the 2D image plane via projection

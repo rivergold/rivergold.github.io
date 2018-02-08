@@ -265,3 +265,69 @@ Challenges:
 We need the relationship between coordinates in the world and coordinates in the image: **geometric camera calibration**, it is composed of 2 transformations:
 - **Extrinsic parameters(or camera pose):** From world coordinate system to the camera's 3D coordinate system
 - **Intrinsic parameters:** From the 3D coordinates in the camera frame to the 2D image plane via projection
+
+相机参数M is 3*4的矩阵 
+
+# Calibrating cameras: using know points(its coordinates in 3D word and image), then recover the calibration matrix
+
+## Direct linear calibration
+相机参数共有12个，每个3D点及其对应的2D点可以得到两个方程（u和v的方程），因此最少需要6个点
+
+核心思想，使用最小二乘法去求解矩阵方程（借助SVD分解求解）
+
+对齐次（英文翻译理解为同质）的理解：变量扩大k倍，值不变/方程不变
+- [知乎：什么是「齐次」，「非齐次」，「线性」，「非线性」？](https://www.zhihu.com/question/19816504)
+
+缺点: 模型是近似的，求解也是近似的（局部最优）
+
+**可以使用**方法更进一步使M精确
+
+在获得了相机参数矩阵M之后，可以从M中直接得到相机中心在3D世界坐标中的位置C
+$$
+MC = 0
+M = [Q|b]
+$$
+b is last column of M
+$$
+C = [-Q^{-1}b; 1]
+$$
+c is a 4*1 的向量
+
+# Multi Plane Calibration
+Zhenyou Zhang标定法：原理上述一致，但是使用2D平面在3D中的坐标
+
+
+<br>
+
+***
+
+<br>
+
+# Image to image projections
+stereo 
+
+Map one image to another image
+
+## 2D Transformations
+Transform image A to image B
+
+Euclidean: a rigid transformations where you have the rotation translation
+
+Affine transform: translate, rotate, scale and skew(歪斜) the image
+Preserves(保留):
+- Parallel Lines
+- Ratio of Areas: 自身的面积会发生改变，但各个平面的的面积变化比例是一致的
+- Lines
+
+Projectvie Transformations(Homography)
+Preserves：
+- Lines
+原来的平行线经过变换后将不在平行
+
+- [各类变换的介绍](https://classroom.udacity.com/courses/ud810/lessons/3011388777/concepts/30117587440923)
+
+**!!! 注：** 关于齐次坐标，3D中（世界坐标器）的点的变换采用4D的坐标，2D点（平面）的点的变换用的是3D坐标
+
+# Homography 单应性变换
+同焦点的两张图像，之间的变换（same center projection）
+

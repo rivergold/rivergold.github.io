@@ -63,6 +63,18 @@ Ross Girshick使用caffe编写的Faster R-CNN的代码中，没有事先处理�
 - [知乎专栏：晓雷机器学习笔记 Faster R-CNN](https://zhuanlan.zhihu.com/p/24916624)
 - [Medium: Faster R-CNN Explained](https://medium.com/@smallfishbigsea/faster-r-cnn-explained-864d4fb7e3f8)
 
+# R-FCN
+<p align="center">
+    <img src="http://ovvybawkj.bkt.clouddn.com/Papers/R-FCN/R-FCN-1.jpg" width="80%">
+</p>
+<p align="center">
+    <img src="http://ovvybawkj.bkt.clouddn.com/Papers/R-FCN/R-FCN-2.jpg" width="80%">
+</p>
+核心思想：使用FCN替代Faster R-CNN中的object detector的FC网络。Faster R-CNN需要对每个ROI计算一次FC，计算量比较大。R-FCN使用fcn实现实现share all feature map，无需对每个ROI计算FC，减少了计算量。同时，提出了position-senstive score map和position-sensitive ROI pooling。
+
+- **position-senstive score maps**：通过卷积将与RPN共享的feature map再次进行卷积，生成两个分支，一个为用于分类的$k*k*(c+1)$个score map，另一个为用于回归bounding box的$4*k*k$个regression map
+- **position-sensitive ROI pooling**： 将ROI的$k*k*(c+1)$个score mapsp分为$k*k$个bin，并对每个bin进行pooling，从而得到$(c+1)$个大小为$(k * k)$的map（即：对每个channel进行一次ROI pooling，并将pooling所得的结果根据位置的不同放到对应的输出bin上）；同时将ROI的$4*k*k$个regression map也对应分为$k*k$个bin，并对每个bin进行pooling，获得4个大小为$(k*k)$的map。之后采用average voting的方式，对每个channle的大小为$(k*k)$的map计算平均值，得到$(c+1)$维的分类向量和4维的bounding box回归向量。
+
 ## Mask R-CNN
 Instance Segmentation has two sub-problems
 - Object Detection -> bounding box

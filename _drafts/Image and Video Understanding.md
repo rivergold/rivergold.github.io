@@ -26,7 +26,10 @@
 以Fatser R-CNN为基础，使用FCN添加了并行的segmentation mask
 
 ## Fast R-CNN
-**ROI Pooling:** 将大小为$(h_{roi}, w_{roi})$的ROI所对应的feature map，大小为$(h_{f}, w_{f})$分成$H * W$个sub-windows，每个sub-window的大小为$(h_{f}/H, w_f/W)$. 
+**ROI Pooling:** ROI指的是在feature map上的矩形框
+> In this paper, an RoI is a rectangular window into a conv feature map.
+
+将在feature map上的大小为$(h_{roi}, w_{roi})$的ROI所对应的feature map分成$H * W$个sub-windows，每个sub-window的大小为$(h_{f}/H, w_f/W)$。其中，每个sub-window称为RoI bin，而$H, W为下一层输入所需要的大小。 
 
 > Pooling is applied independently to each feature map channel, as in standard max pooling.
 
@@ -45,16 +48,22 @@ RPN和之后的Fast R-CNN共享了位于前端的网络层，用于获得shared 
 
 RPN:由$3*3$的卷积和$1*1$的卷积构成(即使用FCN实现)
 训练RPN
-将原始图像的短边rescale为600， 输入单张图像，在shared feature map的基础上对每个像素点都生成k个anchor（带有锚点的box），$k=(n*m*9)$, n, m为feature map的大小，共有3种大小的anchor以及3种scale ratio故有9种anchor，并计算生成的anchor与数据集中标记的box的IoU，来实现正负样本的标记，从而训练网络。
+将原始图像的短边rescale为600， 输入单张图像，在shared feature map的基础上对每个像素点都生成k个anchor（带有锚点的box），$k=(n*m*9)$, n, m为feature map的大小，共有3种大小的anchor以及3种scale ratio故有9种anchor，并计算生成的anchor与数据集中标记的box的IoU，来实现正负样本的标记（2类，有无object），从而训练网络。
 - Net: VGG / Resnet
 - input: 原始图像
 - label:
     - cls: (h, w, num_anchors * 2)
     - bounding box: (h, w, num_anchors * 4)
 
-Ross Girshick使用caffe编写的Faster R-CNN的代码中，没有事先处理、生成好Label，而是在训练过程中在线计算label，之后计算误差。
+**RPN的作用就是从anchor中挑选出合适的作为proposal**
 
+Ross Girshick使用caffe编写的Faster R-CNN的代码中，没有事先处理、生成好Label，而是在训练过程中在线计算label，之后计算误差。
 
 ***References:***
 - [知乎专栏：晓雷机器学习笔记 Faster R-CNN](https://zhuanlan.zhihu.com/p/24916624)
 - [Medium: Faster R-CNN Explained](https://medium.com/@smallfishbigsea/faster-r-cnn-explained-864d4fb7e3f8)
+
+## Mask R-CNN
+Instance Segmentation has two sub-problems
+- Object Detection -> bounding box
+- Semantic Segmentation -> shaded masks

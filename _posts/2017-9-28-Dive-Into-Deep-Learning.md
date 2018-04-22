@@ -267,6 +267,7 @@ $$ -->
 - [Neural Networks and Deep Learning: How the backpropagation algorithm works](http://neuralnetworksanddeeplearning.com/chap2.html)
 - [The Matrix Cookbook](https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf)
 - [Caltech: EE/ACM 150 - Applications of Convex Optimization in Signal Processing and Communications Lecture 5](http://www.systems.caltech.edu/dsp/ee150_acospc/lectures/EE_150_Lecture_5_Slides.pdf)
+- [DeepGrid: Backpropagation In Convolutional Neural Networks](http://www.jefkine.com/general/2016/09/05/backpropagation-in-convolutional-neural-networks/)
 
 <br>
 

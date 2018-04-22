@@ -391,6 +391,31 @@ def rotate_image(mat, angle):
 - [OpenCV doc: warpAffine](https://docs.opencv.org/3.1.0/da/d54/group__imgproc__transform.html#ga0203d9ee5fcd28d40dbc4a1ea4451983)
 - [stackoverflow: Rotate an image without cropping in OpenCV in C++](https://stackoverflow.com/questions/22041699/rotate-an-image-without-cropping-in-opencv-in-c)
 
+
+## Cython
+**What is Cython?** The Cython language is a superset of the Python language that additionally supports calling C functions and declaring C types on variables and class attributes. This allows the compiler to generate very efficient C code from Cython code. 
+ Cython是包含C数据类型的Python，Cython编译器会转化Python代码为C代码，这些C代码均可以调用Python/C的API
+
+***References:***
+- [Github: cython/cython](https://github.com/cython/cython)
+- [Cython 0.28.2 documentation](http://docs.cython.org/en/latest/src/tutorial/)
+- [Gitbook: Cython官方文档中文版](https://moonlet.gitbooks.io/cython-document-zh_cn/content/ch1-basic_tutorial.html)
+
+
+## easydict
+**EasyDict** allows to access dict values as attributes(works recursively).
+```python
+from easydict import EasyDict as edict
+d = edict({'foo':3, 'bar':{'x':1, 'y':2}})
+print(d.foo)
+print(d.bar.x)
+```
+
+***Referneces:***
+- [Github: makinacorpus/easydict](https://github.com/makinacorpus/easydict)
+- [Github: endernewton/tf-faster-rcnn/lib/model/config.py](https://github.com/endernewton/tf-faster-rcnn/blob/master/lib/model/config.py)
+
+
 <br>
 
 * * *

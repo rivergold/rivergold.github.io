@@ -115,9 +115,13 @@ tf.constant(value, dtype=None, shape=None, name='Const', verify_shape=False)
                 saver.save(sess, <save_path>, global_step=model.global_step)
     ```
 
-***References***
-- [Tensorflow API: Constants, Sequences, and Random Values](https://www.tensorflow.org/api_guides/python/constant_op#Random_Tensors)
-- [Tensorflow Programmers's Guide: Variables: Creation, Initialization, Saving, and Loading](https://www.tensorflow.org/versions/r1.0/programmers_guide/variables)
+    ***References***
+    - [Tensorflow API: Constants, Sequences, and Random Values](https://www.tensorflow.org/api_guides/python/constant_op#Random_Tensors)
+    - [Tensorflow Programmers's Guide: Variables: Creation, Initialization, Saving, and Loading](https://www.tensorflow.org/versions/r1.0/programmers_guide/variables)
+
+
+- **tf.slice**: Extracts a slice from a tensor.
+
 
 # tf.summary and Tensorboard
 

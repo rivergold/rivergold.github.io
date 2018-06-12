@@ -62,17 +62,50 @@ When CentOS install torch, it occur error: **xxxx**
 
 when install torch error: https://ubuntuforums.org/showthread.php?t=1670531
 
+### Tensor slice index
+```lua
+M:sub(1, -1, 2, 3)
+```
+***References:***
+- [Blog: torch Tensor学习：切片操作](https://www.cnblogs.com/YiXiaoZhou/p/6387769.html)
+
+### Torch print dimension size of each layer
+***References:***
+- [Github torch/nn/Issues: How to print the output dimension size of each layer, just like "Top shape" in caffe](https://github.com/torch/nn/issues/922)
+
+### Torch read weights of the model
+```lua
+model.modules[2].weight
+```
+
+***References:***
+- [stackoverflow: [torch]how to read weights in nn model](https://stackoverflow.com/questions/32086106/torchhow-to-read-weights-in-nn-model)
+
 ### Problems and Solutions
 - Install [torch-opencv](https://github.com/VisionLabs/torch-opencv) ouucurs errors: `Cannot Find OpenCV` or other errors about OpenCV
     **Solution:** Change `CMakeLists.txt` and set OpenCV path. Then use `luarocks make` to build and install package.
     ***References:*** 
     - [isionLabs/torch-opencv: Problem installing from source](https://github.com/VisionLabs/torch-opencv/issues/182)
 
-### Lua
+## Lua
 > Lua arrays begin with 1
+
+### Getting input from the user in Lua
+- [stackoverflow: Getting input from the user in Lua](https://stackoverflow.com/questions/12069109/getting-input-from-the-user-in-lua) 
 
 ## Deep Learning Model Convertor
 - [Github: ysh329/deep-learning-model-convertor](https://github.com/ysh329/deep-learning-model-convertor)
+
+# PyTorch
+## PyTorch load torch model
+```python
+import torch
+from torch.utils.serialization import load_lua
+model = load_lua(<torch model>)
+```
+
+***References:***
+- [PyTorch Forum: Convert/import Torch model to PyTorch](https://discuss.pytorch.org/t/convert-import-torch-model-to-pytorch/37)
 
 # Tensorflow
 ## tf.nn, tf.layers, tf.contrib区别
@@ -110,6 +143,18 @@ print(x.shape)
 ***References:***
 - [stackoverflow: How does numpy.newaxis work and when to use it?](https://stackoverflow.com/questions/29241056/how-does-numpy-newaxis-work-and-when-to-use-it)
 
+### round number
+***References:***
+- [SciPy.org: numpy.around](https://docs.scipy.org/doc/numpy-1.14.0/reference/generated/numpy.around.html)
+
+### Print full numpy array
+```python
+import numpy as np
+np.set_printoptions(threshold=np.nan)
+```
+
+***References:***
+- [stackoverflow: How to print the full NumPy array?](https://stackoverflow.com/questions/1987694/how-to-print-the-full-numpy-array)
 
 ## OpenCV
 ### When OpenCV read color image, color information is stored as BGR, in order to convert to RGB

@@ -31,12 +31,12 @@ There are two solutions:
 - compress
     ```bash
     tar -czvf <file_name>.tar.gz <folder need compressed>
-    tar -cjvf <file_name>.tar.gz
+    tar -cjvf <file_name>.tar.bz2
     ```
 - uncompress
     ```bash
     tar -xzvf <file_name>.tar.gz
-    tar -xjvf <file_name>.tar.gz
+    tar -xjvf <file_name>.tar.bz2
     ```
 
 - `-c`: 建立一个压缩档案
@@ -258,6 +258,61 @@ if os.path.exit(log_file_name): os.remove(log_file_name)
 - [stackoverflow: Downloading a picture via urllib and python](https://stackoverflow.com/questions/3042757/downloading-a-picture-via-urllib-and-python)
 - [stackoverflow: AttributeError: 'module' object has no attribute 'urlretrieve'](https://stackoverflow.com/questions/17960942/attributeerror-module-object-has-no-attribute-urlretrieve)
 
+### `zip`
+- Combine two list:
+    ```python
+    a = [1, 2, 3]
+    b = [4, 5, 6]
+    c = list(zip(a, b))
+    print(c)
+    >>> [(1, 4), (2, 5), (3, 6)]
+    ```
+    **理解:** `zip`就是将多个list对应位置上的element分别组合起来
+
+- Unzip a list of list/tuple
+    ```
+    a = [1, 2, 3], [4, 5, 6], [7, 8, 9]
+    a1, a2, a3 = zip(*a)
+    print(a1, a3, a3)
+    >>> (1, 4, 7) (2, 5, 8), (3, 6, 9)
+    ```
+
+    **Note:** If you regard `a` as a matrix, `zip(*a)` will get each column of `a`.
+
+***References:***
+- [stackoverflow: How to unzip a list of tuples into individual lists? [duplicate]](https://stackoverflow.com/questions/12974474/how-to-unzip-a-list-of-tuples-into-individual-lists/12974504)
+- [stackoverflow: What does the Star operator mean? [duplicate]](https://stackoverflow.com/questions/2921847/what-does-the-star-operator-mean)
+
+### File Operations
+#### Copy file
+```python
+import shutil
+shutil.copy2(<from_path>, <to_path>)
+```
+E.G
+```python
+shutil.copy2('./test.jpg', '/data/test_dist.jpg')
+```
+
+***References:***
+- [stackoverflow: How do I copy a file in python?](https://stackoverflow.com/questions/123198/how-do-i-copy-a-file-in-python)
+
+#### Move file
+```python
+import os
+import shutil
+# Method 1:
+os.rename("path/to/current/file.foo", "path/to/new/destination/for/file.foo")
+# Method 2:
+shutil.move("path/to/current/file.foo", "path/to/new/destination/for/file.foo")
+```
+
+***References:***
+- [stackoverflow: How to move a file in Python](https://stackoverflow.com/questions/8858008/how-to-move-a-file-in-python)
+
+### Issues
+- [Global, Local and nonlocal Variables](https://www.python-course.eu/python3_global_vs_local_variables.php)
+
 ## Numpy
 ### Copy in numpy
 ***References:***
@@ -302,7 +357,31 @@ np.set_printoptions(threshold=np.nan)
 ```python
 df = pd.DataFrame(<data>, columns=[name_1, name_2, ..., name_n])
 ```
+### Rename DataFrame columns name
+Using `df.rename(index=str, columns={<pre_name_1>: <new_name_1>, <pre_name_2>: <new_name_2>}`
+```python
+# Rename
+df = df.rename(index=str, columns={'mask_coordinates': 'mask', 'resolution_processed': 'resolution'})
+```
 
+***References:***
+- [pandas doc: pandas.DataFrame.rename](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.rename.html)
+
+### `SettingWithCopyWarning`
+- [SofaSOfa.io: pandas DataFrame中经常出现SettingWithCopyWarning](http://sofasofa.io/forum_main_post.php?postid=1001449)
+
+### df.loc[]
+If you want to using `df.loc[]` by index and column name, you should set a column named `index` of df
+```
+df['index'] = range(len(df))
+df.set_index('index')
+```
+Then you can use like this:
+```python
+df.loc[:10, '<col_name>']
+```
+
+**Note:** `df.loc[:10]` will contain the index=10, the 11th element, it is different between Python.
 
 ## OpenCV
 ### When OpenCV read color image, color information is stored as BGR, in order to convert to RGB
@@ -329,6 +408,13 @@ cv2.destroyAllWindows()
 ***References:***
 - [Github Opencv/opencv Issues: opencv cv2.waitKey() do not work well with python idle or ipython](https://github.com/opencv/opencv/issues/6452)
 
+## Anaconda
+### When install Anaconda/Miniconda, occur error `bunzip2: command not found
+You need to install `bzip2`
+```bash
+sudo apt-get install bzip2
+```
+
 <!--  -->
 <br>
 
@@ -343,3 +429,21 @@ ssh-keygen -t rsa -C "your_email@example.com"
 ```
 - [Bitbucket Support: Creating SSH keys](https://confluence.atlassian.com/bitbucketserver/creating-ssh-keys-776639788.html)
 - [Github Help: Connecting to GitHub with SSH](https://help.github.com/articles/connecting-to-github-with-ssh/)
+
+## Using command install miniconda silent
+```bash
+bash <miniconda.sh path> -b -p <install path>
+```
+- [Conda doc: Installing on macOS](https://conda.io/docs/user-guide/install/macos.html#install-macos-silent)
+
+## `pip` install OpenCV packages for Python
+```bash
+pip install opencv-python # If you need only main modules
+pip install opencv-contrib-python # If you need both main and contrib modules
+```
+
+***References:***
+- [PyPi: opencv-python 3.4.1.15](https://pypi.org/project/opencv-python/)
+
+## Nvidia cuDNN download websites
+- [Nvidia: cuDNN Archive](https://developer.nvidia.com/rdp/cudnn-archive)

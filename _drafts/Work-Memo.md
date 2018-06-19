@@ -51,6 +51,9 @@ There are two solutions:
 - [Blog: linux tar (打包.压缩.解压缩)命令说明 | tar如何解压文件到指定的目录？](http://www.cnblogs.com/52linux/archive/2012/03/04/2379738.html)
 
 ## `Error mounting /dev/sdb1`
+```bash
+sudo ntfsfix /dev/sdb1 
+```
 ***References:***
 - [StackExchange: Error mounting /dev/sdb1 at /media/ on Ubuntu 14.04 LTS](https://askubuntu.com/questions/586308/error-mounting-dev-sdb1-at-media-on-ubuntu-14-04-lts)
 
@@ -258,6 +261,26 @@ if os.path.exit(log_file_name): os.remove(log_file_name)
 - [stackoverflow: Downloading a picture via urllib and python](https://stackoverflow.com/questions/3042757/downloading-a-picture-via-urllib-and-python)
 - [stackoverflow: AttributeError: 'module' object has no attribute 'urlretrieve'](https://stackoverflow.com/questions/17960942/attributeerror-module-object-has-no-attribute-urlretrieve)
 
+Error `ConnectionResetError: [Errno 104] Connection reset by peer`: this error means that the request is so frequently, the server refuse some request. One solution is to do delay when download, here is an example:
+```python
+for url in urls:
+    for i in range(10):
+        try:
+            r = requests.get(url).content
+        except Exception, e:
+            if i >= 9:
+                do_some_log()
+            else:
+                time.sleep(0.5)
+        else:
+            time.sleep(0.1)
+            break
+     save_image(r)
+```
+
+***References:***
+- [segmentfault: Python 频繁请求问题: [Errno 104] Connection reset by peer](https://segmentfault.com/a/1190000007480913)
+
 ### `zip`
 - Combine two list:
     ```python
@@ -310,6 +333,24 @@ shutil.move("path/to/current/file.foo", "path/to/new/destination/for/file.foo")
 ***References:***
 - [stackoverflow: How to move a file in Python](https://stackoverflow.com/questions/8858008/how-to-move-a-file-in-python)
 
+
+### String
+#### `"` in str
+```python
+a = '\"abc\"'
+print(a)
+>>> "abc"
+```
+
+#### `str.replace`
+```python
+<str>.replace(<old_str>, <new_str>)
+```
+You can use it to delete character by replace `<old_str>` as `''`
+
+***References:***
+- [stackoverflow: How to delete a character from a string using Python](https://stackoverflow.com/questions/3559559/how-to-delete-a-character-from-a-string-using-python)
+
 ### Issues
 - [Global, Local and nonlocal Variables](https://www.python-course.eu/python3_global_vs_local_variables.php)
 
@@ -319,7 +360,7 @@ shutil.move("path/to/current/file.foo", "path/to/new/destination/for/file.foo")
 - [CSDN:【Python】numpy中的copy问题详解](https://blog.csdn.net/u010099080/article/details/59111207)
 
 ### `np.newaxis` add new axis to array
-```
+```python
 x = np.array([1, 2, 3, 4])
 x = x[:, np.newaxis]
 print(x)
@@ -350,7 +391,15 @@ np.set_printoptions(threshold=np.nan)
 ***References:***
 - [stackoverflow: How to print the full NumPy array?](https://stackoverflow.com/questions/1987694/how-to-print-the-full-numpy-array)
 
+### Change set a value for a region of array
+```python
+a = np.zeros((2, 2))
+b = np.ones((2, 2))
+b[0:2, 0:2] = a
+```
 
+***References:***
+- [stackoverflow: Numpy array and change value regions](https://stackoverflow.com/questions/13000842/numpy-array-and-change-value-regions)
 
 ## Pandas
 ### Create `pd.DataFrame` with setting column names
@@ -447,3 +496,10 @@ pip install opencv-contrib-python # If you need both main and contrib modules
 
 ## Nvidia cuDNN download websites
 - [Nvidia: cuDNN Archive](https://developer.nvidia.com/rdp/cudnn-archive)
+
+## Linux build OpenCV from source, occur cannot download `ippicv`
+**Solution:** Manually download `ippicv` from [here](https://raw.githubusercontent.com/Itseez/opencv_3rdparty/81a676001ca8075ada498583e4166079e5744668/ippicv/ippicv_linux_20151201.tgz)
+And move it into `opencv-3.1.0/3rdparty/ippicv/downloads/linux-808b791a6eac9ed78d32a7666804320e`
+
+***References:***
+- [Blog: Cenots7编译Opencv3.1错误：下载ippicv，解决方案](https://blog.csdn.net/daunxx/article/details/50495111)

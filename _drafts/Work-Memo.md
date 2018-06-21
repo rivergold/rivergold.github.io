@@ -48,7 +48,7 @@ There are two solutions:
 
 ***References:***
 - [Blog: tar压缩解压缩命令详解](https://www.cnblogs.com/jyaray/archive/2011/04/30/2033362.html)
-- [Blog: linux tar (打包.压缩.解压缩)命令说明 | tar如何解压文件到指定的目录？](http://www.cnblogs.com/52linux/archive/2012/03/04/2379738.html)
+- [Blog: linux tar (打包.压缩.解压缩)命令说明 | tar如何解压文件到指定的目录？](http://www.cnblogs.com/52linux/archive/2012/0luarocks install cutorch3/04/2379738.html)
 
 ## `Error mounting /dev/sdb1`
 ```bash
@@ -503,3 +503,35 @@ And move it into `opencv-3.1.0/3rdparty/ippicv/downloads/linux-808b791a6eac9ed78
 
 ***References:***
 - [Blog: Cenots7编译Opencv3.1错误：下载ippicv，解决方案](https://blog.csdn.net/daunxx/article/details/50495111)
+
+## Cuda version manage
+- [stackoverflow: How to change CUDA version](https://stackoverflow.com/questions/45477133/how-to-change-cuda-version)
+- [Blog: 安装多版本 cuda ，多版本之间切换](https://blog.csdn.net/Maple2014/article/details/78574275)
+
+## Terminator
+- [Blog: Ubuntu终端多窗口分屏Terminator](https://blog.csdn.net/MrGong_/article/details/77817018)
+- [stackoverflow: How do I set default terminal to terminator? [closed]](https://stackoverflow.com/questions/16808231/how-do-i-set-default-terminal-to-terminator)
+
+### Set `Open in Terminator` in right click
+- [stackoverflow: Setting nautilus-open-terminal to launch Terminator rather than gnome-terminal](https://askubuntu.com/questions/76712/setting-nautilus-open-terminal-to-launch-terminator-rather-than-gnome-terminal)
+
+### Config
+- [Wentong's Blog: 使用Terminator增强你的终端](http://blog.wentong.me/2014/05/work-with-terminator/)
+Change font size
+```config
+use_system_font = False
+font = Monospace 12
+```
+
+
+## `tmux`
+- [Blog: 优雅地使用命令行：Tmux 终端复用](https://harttle.land/2015/11/06/tmux-startup.html)
+
+
+# 临时
+Tensorflow: 实战Google深度学习框架PDF
+- [网址](http://www.olecn.com/5096.html)
+- [百度网盘地址](http://www.olecn.com/download.php?id=5096)
+
+Hands-On Machine Learning with Scikit-Learn & Tensorflow
+- [Github apachecn/hands_on_Ml_with_Sklearn_and_TF](https://github.com/apachecn/hands_on_Ml_with_Sklearn_and_TF)

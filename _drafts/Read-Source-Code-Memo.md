@@ -32,3 +32,6 @@ Tensorflow dimension order: (num_samples, h, w, channel)
 
 ***References:***
 - [stackoverflow: Why tensorflow uses channel-last ordering instead of row-major?](https://stackoverflow.com/questions/44774234/why-tensorflow-uses-channel-last-ordering-instead-of-row-major)
+
+$inf{}$: 最大下界
+- [wiki: 最大下界](https://zh.wikipedia.org/wiki/%E6%9C%80%E5%A4%A7%E4%B8%8B%E7%95%8C)

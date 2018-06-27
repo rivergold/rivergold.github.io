@@ -84,6 +84,12 @@ sudo ntfsfix /dev/sdb1
 ### `rpm`的使用
 - [Blog: CentOS RPM 包使用详解](http://blog.51cto.com/tengq/1930181)
 
+### vim version update
+vim 7 not support `YouCompleteMe`, need to update to version 8
+
+***References:***
+- [TecMint: Vim 8.0 Is Released After 10 Years – Install on Linux Systems](https://www.tecmint.com/vim-8-0-install-in-ubuntu-linux-systems/)
+
 <!--  -->
 <br>
 
@@ -351,6 +357,19 @@ You can use it to delete character by replace `<old_str>` as `''`
 ***References:***
 - [stackoverflow: How to delete a character from a string using Python](https://stackoverflow.com/questions/3559559/how-to-delete-a-character-from-a-string-using-python)
 
+### Exception
+E.G.
+```python
+img = cv2.imread(img_path)
+if img is None :
+    raise IOError('Load img failed: ', img_path)
+```
+- [RUNOOB.COM: Python异常处理](http://www.runoob.com/python/python-exceptions.html)
+
+### collections
+#### `defaultdict`
+- [简书：Python中collections.defaultdict()使用](https://www.jianshu.com/p/26df28b3bfc8)
+
 ### Issues
 - [Global, Local and nonlocal Variables](https://www.python-course.eu/python3_global_vs_local_variables.php)
 
@@ -471,6 +490,82 @@ sudo apt-get install bzip2
 <!--  -->
 
 
+# Vim
+## Vim packages manager [Vundle](https://github.com/VundleVim/Vundle.vim)
+***References:***
+- [简书：使用Vim插件管理器Vundle](https://www.jianshu.com/p/8d416ac4ad11)
+
+## `.vimrc` configurion
+```vim
+set paste " 取消粘贴时自动注释
+set nu!   " 显示行号
+set ts=4  " 设置tab键为4个空格
+set backspace=2 " 设置backspace删除
+```
+## Install vim 8 or Update vim 7 to vim 8
+Best way to install vim 8 on linux is building vim from [source code](https://github.com/vim/vim). And you should build vim with `python` and the `python` must be the original one, **not Anaconda**. 
+```bash
+sudo yum install -y ruby ruby-devel lua lua-devel luajit \
+luajit-devel ctags git python python-devel \
+python3 python3-devel tcl-devel \
+perl perl-devel perl-ExtUtils-ParseXS \
+perl-ExtUtils-XSpp perl-ExtUtils-CBuilder \
+perl-ExtUtils-Embed
+```
+
+```bash
+./configure --with-features=huge \
+			--enable-multibyte \
+			--enable-rubyinterp=yes \
+			--enable-pythoninterp=yes \
+			--with-python-config-dir=/usr/lib/python2.7/config \
+			--enable-perlinterp=yes \
+			--enable-luainterp=yes \
+			--enable-gui=gtk2 \
+			--enable-cscope \
+			--prefix=/usr/local
+```
+
+***References:***
+- [Github Valloric/YouCompleteMe Wiki: Building Vim from source](https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source)
+- [Blog: YouCompleteMe+anaconda+vim8.0自动补全](https://blog.csdn.net/u013806541/article/details/72057272)
+
+### Install `YouCompleteMe` from source
+- [YouCompleteMe](https://valloric.github.io/YouCompleteMe/#ubuntu-linux-x64)
+
+## Problems & Solutions
+### Error `swap file <xxxx.swap> already exists`
+Remove the `<.swap>` file.
+
+### Error when using vim to edit `.py`: `TabError: Inconsistent use of tabs and spaces in indentation`
+Set vim to convert tab into spaces
+```vim
+: set expandtab
+```
+***References:***
+- [stackoverflow: Replace Tab with Spaces in Vim](https://stackoverflow.com/questions/426963/replace-tab-with-spaces-in-vim)
+
+### Vim `Backspace` cannot delete
+```vim
+set backspace=2 " make backspace work like most other programs
+```
+
+***References:***
+- [FANDOM Vim Tips Wiki: Backspace and delete problems](http://vim.wikia.com/wiki/Backspace_and_delete_problems)
+
+### vundle install `YouCompleteMe`
+Report `"YouCompleteMe unavailable: requires Vim compiled with Python 2.x support" error`
+***References:***
+- [Github Valloric/YouCompleteMe Issue Report "YouCompleteMe unavailable: requires Vim compiled with Python 2.x support" error #1907](https://github.com/Valloric/YouCompleteMe/issues/1907)
+- [Blog: CENTOS7安装VIM插件YOUCOMPLETEME](http://dreamlikes.cn/archives/940)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
+
+
 # Other Tricks
 ## How to Generate ssh-key
 ```bash
@@ -535,3 +630,16 @@ Tensorflow: 实战Google深度学习框架PDF
 
 Hands-On Machine Learning with Scikit-Learn & Tensorflow
 - [Github apachecn/hands_on_Ml_with_Sklearn_and_TF](https://github.com/apachecn/hands_on_Ml_with_Sklearn_and_TF)
+
+
+## Windows远程登录Linux并显示图像
+- [Blog: windows 远程登陆linux并显示图像界面](https://blog.csdn.net/u013203733/article/details/65444084)
+
+## Understanding Region-based Fully Convolutional Networks(R-FCN) for object detection
+- [Medium Blog: Understanding Region-based Fully Convolutional Networks(R-FCN) for object detection](https://medium.com/@jonathan_hui/understanding-region-based-fully-convolutional-networks-r-fcn-for-object-detection-828316f07c99)
+
+## Ubuntu install Eclipse
+- [Blog: Ubuntu 16.04安装Eclipse + C/C++开发环境配置](https://blog.csdn.net/colin_lisicong/article/details/70939143)
+
+
+

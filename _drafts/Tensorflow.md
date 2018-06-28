@@ -131,10 +131,23 @@ Start Tensorboard
 $ tensorboard --logdir=<tensorflow run log path> [--port]
 ```
 
-
-
-
-
-
 # Websites
 - [Stanford CS 20: Tensorflow for Deep Learning Research](http://web.stanford.edu/class/cs20si/syllabus.html)
+
+
+
+# API
+## `tf`
+- `tf.reverse`: Reverse data in specific/given axis
+    Application: When using OpenCV read image as BRG, `tf.reverse` can convert it into RGB
+    ```python
+    output = tf.reverse(img_tensor, [-1])
+    ```
+
+- `tf.get_collection`: Get a list of `Variable` from a collection
+    ***References:***
+    - [Blog: 【TensorFlow动手玩】常用集合: Variable, Summary, 自定义](https://blog.csdn.net/shenxiaolu1984/article/details/52815641)
+
+## Save and Restore model
+***References:***
+- [CV-Tricks.com: A quick complete tutorial to save and restore Tensorflow models](http://cv-tricks.com/tensorflow-tutorial/save-restore-tensorflow-models-quick-complete-tutorial/)

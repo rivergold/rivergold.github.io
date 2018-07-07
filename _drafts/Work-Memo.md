@@ -213,133 +213,6 @@ model = load_lua(<torch model>)
 
 ## Basics
 
-### Insert element into list: `list.insert(<insert index>, element)`
-
-```
-a = [1,2,3]
-a.insert(2, 0)
-print(a)
->>> [1,2,0,3]
-```
-
-### Python multiprocessing
-
-***References:***
-
-- [Blog: Python多进程库multiprocessing中进程池Pool类的使用](https://blog.csdn.net/jinping_shi/article/details/52433867)
-- [Blog: Python 多进程 multiprocessing.Pool类详解](https://blog.csdn.net/SeeTheWorld518/article/details/49639651)
-
-When using `Pool` how to pass multiple arguments to function?
-
-```python
-from multiprocessing import Pool
-def func_worker(arg_1, arg_2):
-    <do what you want to>
-
-pool = Pool(4) # Using 4 core
-pool.starmap(func_worker, <data_need_processed>)
-```
-
-**Note:** Each element of <data_need_processed> is a list or tuple which contain both of `arg_1` and `arg_2`
-
-E.G.
-
-```python
-row_data = pd.read_csv('./image_row_data.csv')
-def download_worker(data_1, data_2):
-    image_name = data_1
-    url = data_2
-    url = 'http://' + url
-    logging.error(image_name)
-    urllib.request.urlretrieve(url, './images/' + image_name)
-
-pool = Pool(8)
-download_row_data =  list(zip(row_data.loc[:, 'img_name'], row_data.loc[:, 'url']))
-pool.starmap(download_worker, download_row_data)
-```
-
-***References:***
-
-- [stackoverflow: Python multiprocessing pool.map for multiple arguments](https://stackoverflow.com/questions/5442910/python-multiprocessing-pool-map-for-multiple-arguments)
-- [Rawidn's Blog: Python Pool.map多参数传递方法](https://www.rawidn.com/posts/Python-multiprocessing-for-multiple-arguments.html)
-- [CODE Q&A: Python多处理pool.map多个参数](https://code.i-harness.com/zh-CN/q/530d5e)
-
-### Logging
-
-Basic using of `logging`
-
-```python
-import logging
-# Config: output file, format, level
-logging.basicConfig(filename=<outputfile.log>, format='%(message)s', level=logging.DEBUG)
-logging.debug(<infor>)
-logging.info(<infor>)
-logging.warning(<infor>)
-logging.error(<infor>)
-logging.critical(<infor>)
-```
-
-level:
-    - `DEBUG`
-    - `INFO`
-    - `WARNING`
-    - `ERROR`
-    - `CRITICAL`
-
-`CRITICAL` is the highest level, when you set level as `CRITICAL`, other level information will not be print. The default level is `WARNING`.
-
-`format` will set the format of the logging information format. The default format is `%(levelname)s:%(name)s:%(message)s`. Other format seting can be get from [Python doc-LogRecord attributes](https://docs.python.org/3/library/logging.html#logrecord-attributes) and [简书: python3 logging 学习笔记](https://www.jianshu.com/p/4993b49b6888)
-
-***References:***
-
-- [Python doc: Logging HOWTO](https://docs.python.org/3/howto/logging.html)
-- [简书: python3 logging 学习笔记](https://www.jianshu.com/p/4993b49b6888)
-- [python3-cookbook: ](http://python3-cookbook-personal.readthedocs.io/zh_CN/latest/c13/p11_add_logging_to_simple_scripts.html)
-
-**Note:** By default, when you rerun python script, `logging` will not clear the pre `.log` file, it will add information at the end of the log file. If you want to clear the pre log file,
-one solution is to checking the file exist first and remove it before logging print.
-
-```python
-import os
-log_file_name = <file_name.log>
-if os.path.exit(log_file_name): os.remove(log_file_name)
-```
-
-***References:***
-
-- [stackoverflow: How to find if directory exists in Python](https://stackoverflow.com/questions/8933237/how-to-find-if-directory-exists-in-python)
-- [stackoverflow: How to delete a file or folder](https://stackoverflow.com/questions/6996603/how-to-delete-a-file-or-folder)
-
-
-### Download image from url
-
-***References:***
-
-- [stackoverflow: Downloading a picture via urllib and python](https://stackoverflow.com/questions/3042757/downloading-a-picture-via-urllib-and-python)
-- [stackoverflow: AttributeError: 'module' object has no attribute 'urlretrieve'](https://stackoverflow.com/questions/17960942/attributeerror-module-object-has-no-attribute-urlretrieve)
-
-Error `ConnectionResetError: [Errno 104] Connection reset by peer`: this error means that the request is so frequently, the server refuse some request. One solution is to do delay when download, here is an example:
-
-```python
-for url in urls:
-    for i in range(10):
-        try:
-            r = requests.get(url).content
-        except Exception, e:
-            if i >= 9:
-                do_some_log()
-            else:
-                time.sleep(0.5)
-        else:
-            time.sleep(0.1)
-            break
-     save_image(r)
-```
-
-***References:***
-
-- [segmentfault: Python 频繁请求问题: [Errno 104] Connection reset by peer](https://segmentfault.com/a/1190000007480913)
-
 ### `zip`
 
 - Combine two list:
@@ -759,6 +632,12 @@ font = Monospace 12
 
 - [Blog: 优雅地使用命令行：Tmux 终端复用](https://harttle.land/2015/11/06/tmux-startup.html)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 # 临时
 
 Tensorflow: 实战Google深度学习框架PDF
@@ -782,6 +661,4 @@ Hands-On Machine Learning with Scikit-Learn & Tensorflow
 ## Ubuntu install Eclipse
 
 - [Blog: Ubuntu 16.04安装Eclipse + C/C++开发环境配置](https://blog.csdn.net/colin_lisicong/article/details/70939143)
-
-
 

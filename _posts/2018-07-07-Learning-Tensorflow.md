@@ -1,33 +1,43 @@
 # Graphs
+
 > Tensorflow separates definition of computations from their execution.
 
 ## How tensorflow run
+
 1. Build a graph
 2. Use a session to execute operations in the graph
 
 ## What's a tensor
+
 **An n-dimensional matrix**
+
 - 0-d tensor: scalar(number)
 - 1-d tensor: vector
 - 2-d tensor: matrix
-...
+- ...
 
 In computation graph:
+
 - Nodes is: operators, variables or constants
--Edges: tensors
+
+- Edges: tensors
 
 ## Why graphs
+
 1. Save computation. Only run subgraphs that lead to the values you want to fetch.
 2. Break computation into small, differential pieces to facilitate auto-differentiation.
 3. Facilitate distributed computation, spread the work across multiple CPUs, GPUs, TPUs or other devices.
 
 # Constants
-```
+
+```python
 tf.constant(value, dtype=None, shape=None, name='Const', verify_shape=False)
 ```
 
 # Functions
+
 ## `tf`
+
 - **tf.Session()**
 
 - **tf.Graph()**
@@ -90,14 +100,14 @@ tf.constant(value, dtype=None, shape=None, name='Const', verify_shape=False)
     b = tf.constant([5, 5, 5], tf.float32)
     c = a + b
     with tf.Session() as sess:
-	    # feed [1,2,3] to placeholder a via the dict {a: [1, 2, 3]}
-	    print(sess.run(c, {a: [1, 2, 3]}))
+        # feed [1,2,3] to placeholder a via the dict {a: [1, 2, 3]}
+        print(sess.run(c, {a: [1, 2, 3]}))
     ```
     Feed value once at a time, such as one image for a epoch
     ```python
     with tf.Session() as sess:
-	    for a_value in list_of_values_for_a:
-		    print(sess.run(c, feed_dict={a: a_value}))
+        for a_value in list_of_values_for_a:
+            print(sess.run(c, feed_dict={a: a_value}))
 
 - **tf.train.Saver**
     **Save graph's variables in binary files**
@@ -121,25 +131,29 @@ tf.constant(value, dtype=None, shape=None, name='Const', verify_shape=False)
 
 - **tf.slice**: Extracts a slice from a tensor.
 
-
 # tf.summary and Tensorboard
 
-
 Start Tensorboard
-```sh
-$ tensorboard --logdir=<tensorflow run log path> [--port]
+
+```shell
+tensorboard --logdir=<tensorflow run log path> [--port]
 ```
 
 # Websites
+
 - [Stanford CS 20: Tensorflow for Deep Learning Research](http://web.stanford.edu/class/cs20si/syllabus.html)
 
 
 # tf.nn, tf.layers, tf.contrib区别
+
 ***References:***
+
 - [小鹏的专栏: tf API 研读1：tf.nn，tf.layers， tf.contrib概述](https://cloud.tencent.com/developer/article/1016697)
 
 # API
+
 ## `tf`
+
 - `tf.reverse`: Reverse data in specific/given axis
     Application: When using OpenCV read image as BRG, `tf.reverse` can convert it into RGB
     ```python
@@ -151,5 +165,6 @@ $ tensorboard --logdir=<tensorflow run log path> [--port]
     - [Blog: 【TensorFlow动手玩】常用集合: Variable, Summary, 自定义](https://blog.csdn.net/shenxiaolu1984/article/details/52815641)
 
 ## Save and Restore model
+
 ***References:***
 - [CV-Tricks.com: A quick complete tutorial to save and restore Tensorflow models](http://cv-tricks.com/tensorflow-tutorial/save-restore-tensorflow-models-quick-complete-tutorial/)

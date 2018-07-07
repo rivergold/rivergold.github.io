@@ -2,21 +2,35 @@ Python is a language which is flexible and easy to learn. And it has lots of con
 
 In this article, I summarized some useful modules and packages I have used for mackine learning and data science. Hope it will give you some help or guidance:smiley:.
 
+<!--  -->
+
 <br>
 
+***
+<!--  -->
+
 # Valuable Websites
+
 - [python3-cookbook](http://python3-cookbook.readthedocs.io/zh_CN/latest/index.html)
 - [Python Tips](http://book.pythontips.com/en/latest/index.html)
 - [Unofficial Windows Binaries for Python Extension Packages](http://www.lfd.uci.edu/~gohlke/pythonlibs/)
 
+<!--  -->
+
 <br>
 
+***
+<!--  -->
+
 # Python Build-in
+
 ## Variables
+
 Variable in Python is a label bound to a object, it means that variable is a reference of the object.<br>
 If you are a C++ programmer, you can think variable in Python as a pointer in C++ which point to the object.<br>
 
 **理解：** Python中的变量是对object的标注，也可以说是object的引用，而且这种引用是可以动态改变的。而C++中的Varible就是那个object, 而且Python中的reference与C++的reference是有不同的： C++的reference就代表了那个object，且不能改变，而Python中的reference(variable)可以改变其reference的object，是动态的。而且如果你是一个C++掌握者，Python的Variable更像是C++的pointer。
+
 ```python
 a = [1, 2, 3]
 b = a # b is a reference of object [1, 2, 3]
@@ -28,7 +42,9 @@ print(a)
 ```
 
 ## Function parameters as references
+
 Type of passing parameters to function:
+
 - **call by value:** the function gets a copy of the argument
 - **call by reference:** the function gets a pointer to the argument
 - **call by sharing:** the function gets a copy of the reference of the argument, it means that the parameters inside the function become a **alias** of the arguments.
@@ -36,7 +52,10 @@ Type of passing parameters to function:
 In Python, the function gets a copy of the arguments, but the arguments are always references.<br>
 **理解：** Python的函数传参，函数获得的是实参object的引用的拷贝<br>
 
+**Note:** Please read **Fluent Python** book.
+
 ## list
+
 - `zip(*iterables)`: Make an iterator that aggregates elements from each of the iterables.
     ```python
     x1 = [1, 2, 3]
@@ -56,11 +75,49 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
     ```
     ***Reference:***
     - [Python doc: 2. Built-in Functions: zip](https://docs.python.org/3/library/functions.html#zip)
+
+- `list.insert(index, element)`: Insert element into list
+    ```python
+    a = [1,2,3]
+    a.insert(2, 0)
+    print(a)
+    >>> [1,2,0,3]
+    ```
+
+### `zip`
+
+- Combine two list:
+    ```python
+    a = [1, 2, 3]
+    b = [4, 5, 6]
+    c = list(zip(a, b))
+    print(c)
+    >>> [(1, 4), (2, 5), (3, 6)]
+    ```
+    **理解:** `zip`就是将多个list对应位置上的element分别组合起来
+- Unzip a list of list/tuple
+    ```python
+    a = [1, 2, 3], [4, 5, 6], [7, 8, 9]
+    a1, a2, a3 = zip(*a)
+    print(a1, a3, a3)
+    >>> (1, 4, 7) (2, 5, 8), (3, 6, 9)
+    ```
+
+    **Note:** If you regard `a` as a matrix, `zip(*a)` will get each column of `a`.
+
+***References:***
+
+- [stackoverflow: How to unzip a list of tuples into individual lists? [duplicate]](https://stackoverflow.com/questions/12974474/how-to-unzip-a-list-of-tuples-into-individual-lists/12974504)
+- [stackoverflow: What does the Star operator mean? [duplicate]](https://stackoverflow.com/questions/2921847/what-does-the-star-operator-mean)
+
 ## dict
+
 - `dict1.update(dict2)`: Adds dictionary `dict2's` key-values pairs in to `dict1`. This function does not return anything.
+
 - `dict.pop(<key>)`: Delate a key of a dict
 
 ## string
+
 - Remove punctuation(标点符号) in a string using `str.translate(table)`
     ```python
     import string
@@ -70,17 +127,23 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
     print(data)
     >>> this is a test
     ```
+
 ***References:***
+
 - [Python3.6 doc str.translate](https://docs.python.org/3/library/stdtypes.html?highlight=maketrans#str.translate)
 
 ## Errors and Exceptions
+
 ### Raising exceptions
+
 The `raise` statement allows the programmer to force a specified exception to occur.
+
 ```python
 raise NameError('Error')
 ```
 
 ***References:***
+
 - [stackoverflow: Manually raising (throwing) an exception in Python](https://stackoverflow.com/questions/2052390/manually-raising-throwing-an-exception-in-python)
 - [Python tutorial: 错误与异常](http://www.pythondoc.com/pythontutorial3/errors.html)
 
@@ -90,8 +153,10 @@ raise NameError('Error')
 
 <br>
 
-# Modules:
-## pickle:
+# Modules
+
+## pickle
+
 1. What is pickle?
 
     [Offical introduction](https://docs.python.org/3/library/pickle.html) about pickle is
@@ -108,8 +173,8 @@ raise NameError('Error')
     - Load binary data in disk into python
     `loaded_data = pickle.load(file)`
 
-
 ## argparse
+
 1. What is argparse?
     _argparse_ is a parser for command-line options, arguments and sub-commands.
     [Offical introduction](https://docs.python.org/3/library/argparse.html) is  
@@ -143,7 +208,7 @@ raise NameError('Error')
         ```
 
         The input this in shell and get output
-        ```
+        ```shell
         $ python <script_name>.py 'It is a basic use of argparse' --name 'My name is Kevin Ho'
         [output]: It is a basic use of argparse
                   My name is Kevin Ho
@@ -162,6 +227,7 @@ raise NameError('Error')
 
 
 ## collections
+
 This module implements specialized container datatypes providing alternatives to Python’s general purpose built-in containers, dict, list, set, and tuple.
 
 - Reference
@@ -169,6 +235,7 @@ This module implements specialized container datatypes providing alternatives to
 
 
 ## codecs
+
 This module defines base classes for standard Python codecs (encoders and decoders) and provides access to the internal Python codec registry, which manages the codec and error handling lookup process.
 
 - Reference
@@ -176,21 +243,24 @@ This module defines base classes for standard Python codecs (encoders and decode
 
     - [Standard Encodings](https://docs.python.org/3/library/codecs.html#standard-encodings)
 
-
 ## shutil
+
 > The shutil module offers a number of high-level operations on files and collections of files. In particular, functions are provided which support file copying and removal.
 
 **How to rename a folder?**
+
 - Using `os.rename(<old folder path>, <new folder path>)`
 - Using `shutil.move(<old folder path>, <new folder path>)`
 
-**Reference**
+***Reference:***
+
 - [stackoverflow: How to rename a file using Python](https://stackoverflow.com/questions/2491222/how-to-rename-a-file-using-python)
 - [stackoverflow: When using python os.rmdir, get PermissionError: [WinError 5] Access is denied](https://stackoverflow.com/questions/36360167/when-using-python-os-rmdir-get-permissionerror-winerror-5-access-is-denied)
 
-
 ## random
+
 This module implements pseudo-random number generators for various distributions.
+
 - `random.seed(a=None, version=2)`
     Initialize the random number genearator
     ```python
@@ -223,7 +293,9 @@ This module implements pseudo-random number generators for various distributions
     ```
 
 ## Enum
+
 Enum in python
+
 ```python
 from enum import IntEnum
 class Color(IntEnum):
@@ -233,8 +305,10 @@ class Color(IntEnum):
 # get a list of this enum
 color = [x for x in Color]
 ```
+
 If we do not use `IntEnum`, another choice is
-```
+
+```python
 from enum import Enum
 class Color(Enum):
     BLUE = 0
@@ -245,7 +319,96 @@ color = [x.value for x in Color]
 ```
 
 ***References:***
+
 - [stackoverflow: How to get all values from python enum class?](https://stackoverflow.com/questions/29503339/how-to-get-all-values-from-python-enum-class)
+
+## multiprocessing
+
+***References:***
+
+- [Blog: Python多进程库multiprocessing中进程池Pool类的使用](https://blog.csdn.net/jinping_shi/article/details/52433867)
+- [Blog: Python 多进程 multiprocessing.Pool类详解](https://blog.csdn.net/SeeTheWorld518/article/details/49639651)
+
+**When using `Pool` how to pass multiple arguments to function?**
+
+```python
+from multiprocessing import Pool
+def func_worker(arg_1, arg_2):
+    <do what you want to>
+
+pool = Pool(4) # Using 4 core
+pool.starmap(func_worker, <data_need_processed>)
+```
+
+**Note:** Each element of <data_need_processed> is a list or tuple which contain both of `arg_1` and `arg_2`
+
+E.G.
+
+```python
+row_data = pd.read_csv('./image_row_data.csv')
+def download_worker(data_1, data_2):
+    image_name = data_1
+    url = data_2
+    url = 'http://' + url
+    logging.error(image_name)
+    urllib.request.urlretrieve(url, './images/' + image_name)
+
+pool = Pool(8)
+download_row_data =  list(zip(row_data.loc[:, 'img_name'], row_data.loc[:, 'url']))
+pool.starmap(download_worker, download_row_data)
+```
+
+***References:***
+
+- [stackoverflow: Python multiprocessing pool.map for multiple arguments](https://stackoverflow.com/questions/5442910/python-multiprocessing-pool-map-for-multiple-arguments)
+- [Rawidn's Blog: Python Pool.map多参数传递方法](https://www.rawidn.com/posts/Python-multiprocessing-for-multiple-arguments.html)
+- [CODE Q&A: Python多处理pool.map多个参数](https://code.i-harness.com/zh-CN/q/530d5e)
+
+## logging
+Basic using of `logging`
+
+```python
+import logging
+# Config: output file, format, level
+logging.basicConfig(filename=<outputfile.log>, format='%(message)s', level=logging.DEBUG)
+logging.debug(<infor>)
+logging.info(<infor>)
+logging.warning(<infor>)
+logging.error(<infor>)
+logging.critical(<infor>)
+```
+
+level:
+    - `DEBUG`
+    - `INFO`
+    - `WARNING`
+    - `ERROR`
+    - `CRITICAL`
+
+`CRITICAL` is the highest level, when you set level as `CRITICAL`, other level information will not be print. The default level is `WARNING`.
+
+`format` will set the format of the logging information format. The default format is `%(levelname)s:%(name)s:%(message)s`. Other format seting can be get from [Python doc-LogRecord attributes](https://docs.python.org/3/library/logging.html#logrecord-attributes) and [简书: python3 logging 学习笔记](https://www.jianshu.com/p/4993b49b6888)
+
+***References:***
+
+- [Python doc: Logging HOWTO](https://docs.python.org/3/howto/logging.html)
+- [简书: python3 logging 学习笔记](https://www.jianshu.com/p/4993b49b6888)
+- [python3-cookbook: ](http://python3-cookbook-personal.readthedocs.io/zh_CN/latest/c13/p11_add_logging_to_simple_scripts.html)
+
+**Note:** By default, when you rerun python script, `logging` will not clear the pre `.log` file, it will add information at the end of the log file. If you want to clear the pre log file,
+one solution is to checking the file exist first and remove it before logging print.
+
+```python
+import os
+log_file_name = <file_name.log>
+if os.path.exit(log_file_name): os.remove(log_file_name)
+```
+
+***References:***
+
+- [stackoverflow: How to find if directory exists in Python](https://stackoverflow.com/questions/8933237/how-to-find-if-directory-exists-in-python)
+- [stackoverflow: How to delete a file or folder](https://stackoverflow.com/questions/6996603/how-to-delete-a-file-or-folder)
+
 
 <br>
 
@@ -254,6 +417,7 @@ color = [x.value for x in Color]
 <br>
 
 # Packages:
+
 ## Matplotlib
 
 ### Tips
@@ -423,31 +587,37 @@ print(d.bar.x)
 <br> 
 
 # Python Tips:
+
 ## Change python packages download source.
-pip
-: - On Windows:
-    - New a folder called `pip` under path `c:/user/<your user name>/`, and new a file name `pip.ini`, write followings in it:
-        ```python
-        [global]
-        index-url = https://pypi.tuna.tsinghua.edu.cn/simple
-        ```
 
-: - On Linux:
-    - New a folder called `.pip` under `~/`, create a file named `pip.conf` and write the same as Windows in the file.<br>
+- **pip**
+    - On Windows:
+        - New a folder called `pip` under path `c:/user/<your user name>/`, and new a file name `pip.ini`, write followings in it:
+            ```python
+            [global]
+            index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+            ```
 
-conda
-: Input followings in terminal
-: ```python
-  conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-  conda config --set show_channel_urls yes
-  ```
+    - On Linux:
+        - New a folder called `.pip` under `~/`, create a file named `pip.conf` and write the same as Windows in the file.<br>
+
+- **conda**
+    Input followings in terminal
+
+    ```python
+    conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+    conda config --set show_channel_urls yes
+    ```
 
 ***Reference:***
+
 - [csdn: 更改pip源至国内镜像，显著提升下载速度](http://blog.csdn.net/zhangchilei/article/details/53893002)
 
 ## Organize your python module
+
 Assume that your module is like,
-```
+
+```bash
 package
   __init__.py
   |- subpackage1
@@ -480,25 +650,31 @@ from ..a import <method>
 ```
 
 ***Referneces:***
+
 - [python3-cookbook: 10.3 使用相对路径名导入包中子模块](http://python3-cookbook.readthedocs.io/zh_CN/latest/c10/p03_import_submodules_by_relative_names.html)
 
 ## Python script import from parent directory
+
 Assume you have some scripts like
-```
+
+```shell
 src
   |- part_1
       |- a.py
   |- part_2
       |- b.py
 ```
+
 And `b.py` want to use method or variable in `a.py`, one solution is to add parent path into `sys.path`
-```
+
+```python
 import sys
 sys.append('..')
 import a
 ```
 
 ## How print in one with dynamically refresh in Python?
+
 - Python3
     ```python
     print(data, end='\r', flush=True)
@@ -513,6 +689,7 @@ import a
     ```
 
 ## `format` print
+
 ```python
 x = 1234.56789
 
@@ -549,16 +726,20 @@ temp = temp = '{:0<10.2E}'.format(x)
 ```
 
 ***References:***
+
 - [python3-cookbook: 3.3 数字的格式化输出](http://python3-cookbook.readthedocs.io/zh_CN/latest/c03/p03_format_numbers_for_output.html)
 
 ## `enumerate` using details
-Common use is like followings,<br>
+
+Common use is like followings,
+
 ```python
 for counter, value in enumerate(some_list):
     print(counter, value)
 ```
 
-`enumerate(iterable, start=0)`, optional parameters `start` decide the start number of counter,<br>
+`enumerate(iterable, start=0)`, optional parameters `start` decide the start number of counter,
+
 ```python
 a = ['apple', 'banana', 'orange']
 for counter, value in enumerate(a, 1)
@@ -569,10 +750,12 @@ for counter, value in enumerate(a, 1)
 ```
 
 ***References:***
+
 - [Python Tips: 13. Enumerate](http://book.pythontips.com/en/latest/enumerate.html)
 
 
 ## Create a directory/folder if it does not exist
+
 ```python
 import os
 if not os.path.exists(<directory_path>):
@@ -580,10 +763,12 @@ if not os.path.exists(<directory_path>):
 ```
 
 Reference: 
+
 - [stackoverflow: How can I create a directory if it does not exist?](https://stackoverflow.com/questions/273192/how-can-i-create-a-directory-if-it-does-not-exist)
 
 
 ## How to run `pip` in python script?
+
 ```python
 import pip
 pip.main(['install', '-r'. 'requirements.txt'])
@@ -595,15 +780,48 @@ Reference
 
 
 ## Parallel in Python
+
 Reference
 : - [知乎专栏： Python多核并行计算](https://zhuanlan.zhihu.com/p/24311810)
 
 
 ## C++ Embed Python
+
 ### Reference
+
 - [Embedding Python in C/C++: Part I](https://www.codeproject.com/Articles/11805/Embedding-Python-in-C-C-Part-I)
 
 - [CSDN Blog: C++调用python](http://blog.csdn.net/marising/article/details/2917892)
+
+## Download image from url
+
+***References:***
+
+- [stackoverflow: Downloading a picture via urllib and python](https://stackoverflow.com/questions/3042757/downloading-a-picture-via-urllib-and-python)
+- [stackoverflow: AttributeError: 'module' object has no attribute 'urlretrieve'](https://stackoverflow.com/questions/17960942/attributeerror-module-object-has-no-attribute-urlretrieve)
+
+Error `ConnectionResetError: [Errno 104] Connection reset by peer`: this error means that the request is so frequently, the server refuse some request. One solution is to do delay when download, here is an example:
+
+```python
+for url in urls:
+    for i in range(10):
+        try:
+            r = requests.get(url).content
+        except Exception, e:
+            if i >= 9:
+                do_some_log()
+            else:
+                time.sleep(0.5)
+        else:
+            time.sleep(0.1)
+            break
+     save_image(r)
+```
+
+***References:***
+
+- [segmentfault: Python 频繁请求问题: [Errno 104] Connection reset by peer](https://segmentfault.com/a/1190000007480913)
+
 
 <br>
 

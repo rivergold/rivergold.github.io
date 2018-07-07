@@ -72,7 +72,6 @@ tf.constant(value, dtype=None, shape=None, name='Const', verify_shape=False)
         # Use the model
         ...
     ```
-
     - Init a single variable
         ```python
         a = tf.Variable(tf.zeros([10, 10]))
@@ -135,6 +134,9 @@ $ tensorboard --logdir=<tensorflow run log path> [--port]
 - [Stanford CS 20: Tensorflow for Deep Learning Research](http://web.stanford.edu/class/cs20si/syllabus.html)
 
 
+# tf.nn, tf.layers, tf.contrib区别
+***References:***
+- [小鹏的专栏: tf API 研读1：tf.nn，tf.layers， tf.contrib概述](https://cloud.tencent.com/developer/article/1016697)
 
 # API
 ## `tf`

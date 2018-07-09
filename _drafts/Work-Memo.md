@@ -638,6 +638,18 @@ font = Monospace 12
 ***
 <!--  -->
 
+# VSCode
+VSCode Setting Sync
+- [如何使用 VSCode 的 Setting Sync 插件](https://segmentfault.com/a/1190000010648319)
+
+## shortcut
+
+- `ctr` + `k`, then `o`: Open current file in new window
+- `ctr` + \`:  Open terminal
+
+***Referneces:***
+- [VS Code折腾记 - (2) 快捷键大全，没有更全](https://blog.csdn.net/crper/article/details/54099319)
+
 # 临时
 
 Tensorflow: 实战Google深度学习框架PDF
@@ -662,3 +674,38 @@ Hands-On Machine Learning with Scikit-Learn & Tensorflow
 
 - [Blog: Ubuntu 16.04安装Eclipse + C/C++开发环境配置](https://blog.csdn.net/colin_lisicong/article/details/70939143)
 
+# VNC
+
+- VNC client
+- VNC server
+
+## What is VNC
+
+***References:***
+
+- [StackExchange: Differences between VNC and ssh -X](https://unix.stackexchange.com/questions/1960/differences-between-vnc-and-ssh-x)
+
+## Install VNC-server on remote server
+
+1. Install `GNOME Desktop`
+2. Install `tigervnc-server`
+3. Config
+    `~/.vnc/xstartup`
+    ```bash
+    #!/bin/sh
+    [ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
+    [ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
+    xsetroot -solid grey
+    vncconfig -iconic &
+    x-terminal-emulator -geometry 80x24+10+10 -ls -title "$VNCDESKTOP Desktop" &
+    x-window-manager &
+    ```
+
+***References:***
+
+- [HowtoForge: VNC-Server installation on CentOS 7](https://www.howtoforge.com/vnc-server-installation-on-centos-7)
+- [CentOS: VNC(虚拟网络计算)](https://wiki.centos.org/zh/HowTos/VNC-Server)
+- [StackExchange: Why VNC not showing actual Remote Desktop](https://unix.stackexchange.com/questions/61750/why-vnc-not-showing-actual-remote-desktop)
+- [NDC HOST: How To Install X Server on a VPS (with VNC access)](https://www.ndchost.com/wiki/vps/x-server-vnc)
+- [怎样在 CentOS 7.0 上安装和配置 VNC 服务器](https://linux.cn/article-5335-1.html)
+- [CentOS7.2安装VNC，让Windows远程连接CentOS 7.2 图形化界面](http://blog.51cto.com/12217917/2060252)

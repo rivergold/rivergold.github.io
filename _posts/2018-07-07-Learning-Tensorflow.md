@@ -162,7 +162,22 @@ tensorboard --logdir=<tensorflow run log path> [--port]
 
 - `tf.get_collection`: Get a list of `Variable` from a collection
     ***References:***
+
     - [Blog: 【TensorFlow动手玩】常用集合: Variable, Summary, 自定义](https://blog.csdn.net/shenxiaolu1984/article/details/52815641)
+
+- `tf.clip_by_value(t, clip_value_min, clip_value_max, name=None)`: Clips tensor values to a specified min and max
+    ```python
+    a = np.array([[1,1,2,4], [3,4,5,8]])
+    with tf.Session() as sess:
+        print(sess.run(tf.clip_by_value(a, 2, 5)))
+    >>> [[2 2 2 4]
+         [3 4 5 5]]
+    ```
+
+- `tf.extract_image_patches(images, ksizes, strides, rates, padding, name=None)`: Extract `patches` from `images` and put them in the "depth" output dimension.
+
+    ***References:***
+    - [知乎: 关于tf.extract_image_patches的一些理解](https://zhuanlan.zhihu.com/p/37077403)
 
 ## Save and Restore model
 

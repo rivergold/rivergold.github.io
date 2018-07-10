@@ -150,6 +150,22 @@ tensorboard --logdir=<tensorflow run log path> [--port]
 
 - [小鹏的专栏: tf API 研读1：tf.nn，tf.layers， tf.contrib概述](https://cloud.tencent.com/developer/article/1016697)
 
+# Data formats
+
+- `N`
+- `H`
+- `W`
+- `C`
+
+- `NCHW` or `channels_first`
+- `NHWC` or `channels_last`
+
+`NHWC` is the TensorFlow default and `NCHW` is the optimal format to use when training on NVIDIA GPUs using cuDNN.
+
+***References:***
+
+- [Tensorflow doc: Performance Guide](https://www.tensorflow.org/performance/performance_guide)
+
 # API
 
 ## `tf`
@@ -159,6 +175,8 @@ tensorboard --logdir=<tensorflow run log path> [--port]
     ```python
     output = tf.reverse(img_tensor, [-1])
     ```
+
+- `tf.agrmax(ingput, axis=None, ...)`: Returns the index with the largest value across axes of a tensor.
 
 - `tf.get_collection`: Get a list of `Variable` from a collection
     ***References:***
@@ -178,6 +196,38 @@ tensorboard --logdir=<tensorflow run log path> [--port]
 
     ***References:***
     - [知乎: 关于tf.extract_image_patches的一些理解](https://zhuanlan.zhihu.com/p/37077403)
+
+- `tf.reduce_sum(input_tensor, axis=None, ...)`: Computes the sum of elements across dimensions of a tensor.
+
+- `tf.split(value, num_or_size_splits, axis=0, ...)`: Splits a tensor into sub tensors.
+    ```python
+    # Input: image, mask both are (h, w, 3)
+    image = np.expand_dims(image, 0)
+    mask = np.expand_dims(mask, 0)
+    input_image = np.concatenate([image, mask], axis=2)
+    #
+    batch_raw, masks_raw = tf.split(input_image, 2, axis=2)
+    ```
+
+## 'tf.nn'
+
+- `tf.nn.conv2d(input, filter, strides, padding, ...)`: Computes a 2-D convolution given 4-D `input` and `filter` tensors.
+
+- `tf.nn.conv2d_transpose(value, filter, output_shape, strides, padding='SAME', data_format='NHWC', name=None)`: The transpose of conv2d
+
+    **理解:** transpose convolution相当于一个在周围/中间进行了padding之后的卷积，本质上还是卷积，只不过由于在卷积前进行了padding，所提使得输出的图像大小增加了。See gif from [here](https://github.com/vdumoulin/conv_arithmetic).
+
+***References:***
+
+- [知乎: 关于tf中的conv2d_transpose的用法](https://zhuanlan.zhihu.com/p/31988761)
+- [简书: 理解tf.nn.conv2d和tf.nn.conv2d_transpose](https://www.jianshu.com/p/a897ed29a8a0)
+- [StackExchange: What are deconvolutional layers?](https://datascience.stackexchange.com/questions/6107/what-are-deconvolutional-layers)
+
+## `tf.layer`
+
+- `tf.layer.conv2d(inputs, filters, kernel_size, strides=(1, 1), ...)`: Functional interface for the 2D convolution layer.
+
+    **Note:** Pay a attention to the difference between `tf.nn.conv2d` and `tf.layer.conv2d`: `tf.nn.conv2d` is more basic, `filter` in it is `tensor`. Is calculate `input` and `filter` convlution. While `filter` in `tf.layer.conv2d` is a `int` number, and it creates tensor `filter` then does convolution calculation.
 
 ## Save and Restore model
 

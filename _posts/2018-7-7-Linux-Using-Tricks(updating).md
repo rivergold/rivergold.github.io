@@ -350,8 +350,7 @@ You can get the `.deb` from [here](https://www.gitkraken.com/) , and use `dpkg -
 
 **Problem&Solution:** If you double click the software icon, there is nothing happened. You'd better start the software by using command in terminal, and find what wrong during starting.
 
-- Ubuntu 18.04 can not start `Gitkraken`. Occur error about `libgnome-keyring.so.0: cannot open shared object file: No such file or 
-directory`
+- Ubuntu 18.04 can not start `Gitkraken`. Occur error about `libgnome-keyring.so.0: cannot open shared object file: No such file or directory`
 
     ***References:***
 
@@ -486,3 +485,22 @@ Configuration tips:
 ## System Monitor
 
 This software is default installed on Ubuntu. It makes inspecting `disk/cpu/memory` use condition simply.
+
+## Netease cloud music(网易云音乐)
+
+When start netease-cloud-music occur error `Local file: "" ("netease-cloud-music")`, you must start netease cloud music with `sudo`. One way to solve this trouble is to set `alias music="sudo netease-cloud-music"`
+
+***References:***
+
+- [知乎: Ubuntu 18.04 网易云音乐无法打开问题解决方案](https://zhuanlan.zhihu.com/p/37324458)
+
+- [知乎: 在Ubuntu 上有什么必装的实用软件？](https://www.zhihu.com/question/19811112)
+
+## Stardict
+
+Powerful dictionary on Linux.
+
+***References:***
+
+- [StarDict Dictionaries -- 星际译王词库 词典下载](http://download.huzheng.org/)
+- [Ubuntu 14.04 安装配置强大的星际译王（stardict）词典](https://blog.csdn.net/tecn14/article/details/25917149)

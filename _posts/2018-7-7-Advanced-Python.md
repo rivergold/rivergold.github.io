@@ -105,10 +105,9 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
 
     **Note:** If you regard `a` as a matrix, `zip(*a)` will get each column of `a`.
 
-***References:***
-
-- [stackoverflow: How to unzip a list of tuples into individual lists? [duplicate]](https://stackoverflow.com/questions/12974474/how-to-unzip-a-list-of-tuples-into-individual-lists/12974504)
-- [stackoverflow: What does the Star operator mean? [duplicate]](https://stackoverflow.com/questions/2921847/what-does-the-star-operator-mean)
+    ***References:***
+    - [stackoverflow: How to unzip a list of tuples into individual lists? [duplicate]](https://stackoverflow.com/questions/12974474/how-to-unzip-a-list-of-tuples-into-individual-lists/12974504)
+    - [stackoverflow: What does the Star operator mean? [duplicate]](https://stackoverflow.com/questions/2921847/what-does-the-star-operator-mean)
 
 ## dict
 
@@ -117,6 +116,26 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
 - `dict.pop(<key>)`: Delate a key of a dict
 
 ## string
+
+- `"` in str
+
+    ```python
+    a = '\"abc\"'
+    print(a)
+    >>> "abc"
+    ```
+
+- `str.replace`
+
+    ```python
+    <str>.replace(<old_str>, <new_str>)
+    ```
+
+    You can use it to delete character by replace `<old_str>` as `''`
+
+    ***References:***
+
+    - [stackoverflow: How to delete a character from a string using Python](https://stackoverflow.com/questions/3559559/how-to-delete-a-character-from-a-string-using-python)
 
 - Remove punctuation(标点符号) in a string using `str.translate(table)`
     ```python
@@ -128,24 +147,62 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
     >>> this is a test
     ```
 
-***References:***
+    ***References:***
+    - [Python3.6 doc str.translate](https://docs.python.org/3/library/stdtypes.html?highlight=maketrans#str.translate)
 
-- [Python3.6 doc str.translate](https://docs.python.org/3/library/stdtypes.html?highlight=maketrans#str.translate)
+## File IO
+
+- Copy file
+
+    ```python
+    import shutil
+    shutil.copy2(<from_path>, <to_path>)
+    ```
+
+    E.G
+
+    ```python
+    shutil.copy2('./test.jpg', '/data/test_dist.jpg')
+    ```
+
+    ***References:***s
+    - [stackoverflow: How do I copy a file in python?](https://stackoverflow.com/questions/123198/how-do-i-copy-a-file-in-python)
+
+- Move file
+
+    ```python
+    import os
+    import shutil
+    # Method 1:
+    os.rename("path/to/current/file.foo", "path/to/new/destination/for/file.foo")
+    # Method 2:
+    shutil.move("path/to/current/file.foo", "path/to/new/destination/for/file.foo")
+    ```
+
+    ***References:***
+    - [stackoverflow: How to move a file in Python](https://stackoverflow.com/questions/8858008/how-to-move-a-file-in-python)
 
 ## Errors and Exceptions
 
-### Raising exceptions
+- Raising exceptions
 
-The `raise` statement allows the programmer to force a specified exception to occur.
+    The `raise` statement allows the programmer to force a specified exception to occur.
 
-```python
-raise NameError('Error')
-```
+    ```python
+    raise NameError('Error')
+    ```
+    E.G.
 
-***References:***
+    ```python
+    img = cv2.imread(img_path)
+    if img is None :
+        raise IOError('Load img failed: ', img_path)
+    ```
 
-- [stackoverflow: Manually raising (throwing) an exception in Python](https://stackoverflow.com/questions/2052390/manually-raising-throwing-an-exception-in-python)
-- [Python tutorial: 错误与异常](http://www.pythondoc.com/pythontutorial3/errors.html)
+    ***References:***
+    - [stackoverflow: Manually raising (throwing) an exception in Python](https://stackoverflow.com/questions/2052390/manually-raising-throwing-an-exception-in-python)
+    - [Python tutorial: 错误与异常](http://www.pythondoc.com/pythontutorial3/errors.html)
+    - [RUNOOB.COM: Python异常处理](http://www.runoob.com/python/python-exceptions.html)
 
 <br>
 
@@ -233,6 +290,11 @@ This module implements specialized container datatypes providing alternatives to
 - Reference
     - [不可不知的Python模块: collections](http://www.zlovezl.cn/articles/collections-in-python/)
 
+### `defaultdict`
+
+***Referneces:***
+
+- [简书：Python中collections.defaultdict()使用](https://www.jianshu.com/p/26df28b3bfc8)
 
 ## codecs
 
@@ -453,7 +515,9 @@ if os.path.exit(log_file_name): os.remove(log_file_name)
 <br>
 
 ## Numpy
+
 ### Multiplication computation functions
+
 - `np.dot(x1, x2)`: Dot product
     Dot product of two arrays.
     For 2-D arrays it is equivalent to matrix multiplication, and for 1-D arrays to inner product of vectors (without complex conjugation). For N dimensions it is a sum product over the last axis of a and the second-to-last of b:
@@ -463,6 +527,7 @@ if os.path.exit(log_file_name): os.remove(log_file_name)
 **Note:** `np.dot()` performs a matrix-matrix or matrix-vector multiplication.
 
 ### Random
+
 - `np.random.seed(seed=None)`
     Seed the generator. **Note:** The seed is only work for once.
 
@@ -470,18 +535,21 @@ if os.path.exit(log_file_name): os.remove(log_file_name)
     Return a sample from the **standard normal** distribution.
 
 - `class np.random.RandomState(seed=None)`
-    ```
+    ```python
     r = np.random.RandomState(123)
     r.randn(2,2)
     ```
 
 ***References:***
+
 - [SciPy.org: Numpy Random sampling](https://docs.scipy.org/doc/numpy-1.13.0/reference/routines.random.html)
 
 ### Shape transform
+
 - `np.squeeze(a, axis=None)`: Remove single-dimensional entries from the shape of array.
 
 ### Change element value
+
 - `np.where(condition[, x, y])`: Return elements, either from x or y, depending on condition.
     ```python
     a = np.random.randn(2,2)
@@ -496,6 +564,7 @@ if os.path.exit(log_file_name): os.remove(log_file_name)
     - [Stackoverflow: convert numpy array to 0 or 1](https://stackoverflow.com/questions/45648668/convert-numpy-array-to-0-or-1)
 
 ### Create array
+
 - `np.meshgrid(x1, x2, ..., xn)`: Return coordinate matrices from coordinate vectors.
     ```python
     x = np.linspace(0, 1, nx)
@@ -507,30 +576,72 @@ if os.path.exit(log_file_name): os.remove(log_file_name)
     ***References:***
     - [deeplearning.ai: Planar data classification with one hidden layer/planar_utils.py](https://github.com/XingxingHuang/deeplearning.ai/blob/master/1_Neural%20Networks%20and%20Deep%20Learning/week3/Planar%20data%20classification%20with%20one%20hidden%20layer/planar_utils.py#L7)
 
-- Copy array
-    ```
-    a = np.zeros((2,2))
-    b = np.copy(a)
-    ```
-    **Note!** Numpy arrays work differently than lists do. When use `b = a[::]` in numpy, `b` is not a deep copy of a, but a view of a.
+### Copy array
 
-    ***References:***
-    - [stackoverflow: Numpy array assignment with copy](https://stackoverflow.com/questions/19676538/numpy-array-assignment-with-copy)
+```python
+a = np.zeros((2,2))
+b = np.copy(a)
+```
+
+**Note!** Numpy arrays work differently than lists do. When use `b = a[::]` in numpy, `b` is not a deep copy of a, but a view of a.
+
+***References:***
+
+- [stackoverflow: Numpy array assignment with copy](https://stackoverflow.com/questions/19676538/numpy-array-assignment-with-copy)
+
+### Copy in numpy
+
+***References:***
+
+- [CSDN:【Python】numpy中的copy问题详解](https://blog.csdn.net/u010099080/article/details/59111207)
+
+### `np.newaxis` add new axis to array
+
+```python
+x = np.array([1, 2, 3, 4])
+x = x[:, np.newaxis]
+print(x)
+>>> array([[1],
+           [2],
+           [3],
+           [4],
+           [5]])
+x = np.array(range(4)).reshape(2, 2)
+x = x[..., np.newaxis]
+print(x.shape)
+>>> (2, 2, 1)
+```
 
 <br>
 
 ## OpenCV
+
 Using `import cv2` to import OpenCV
+
+### Install `opencv-python`
+
+```shell
+pip install opencv-python
+```
+
+***References:***
+
+- [Pypi: opencv-python 3.4.1.15](https://pypi.org/project/opencv-python/)
+
 ### Rotate image
+
 Function: `cv2.warpAffine(img, M, dsize, flags=, borderMode=, borderValue=)`<br>
 We need `rotate center`, `degree` to calculate the rotate marix
+
 ```python
 # Calculate rotate matrix
 M = cv2.getRotationMatrix2D(rotate_center, degree)
 # Rotate
 img_rotated = cv2.warpAffine(img, M, img.shape[0:2])
 ```
+
 **Note:** `cv2.warpAffine` need the size of rotated image. So if you want to rotated without cropped, you need to calculate the size of rotated image manually
+
 ```python
 def rotate_image(mat, angle):
     height, width = mat.shape[:2]
@@ -552,22 +663,52 @@ def rotate_image(mat, angle):
 ```
 
 ***References***:
+
 - [OpenCV doc: warpAffine](https://docs.opencv.org/3.1.0/da/d54/group__imgproc__transform.html#ga0203d9ee5fcd28d40dbc4a1ea4451983)
 - [stackoverflow: Rotate an image without cropping in OpenCV in C++](https://stackoverflow.com/questions/22041699/rotate-an-image-without-cropping-in-opencv-in-c)
 
+### Problems & Solution
+
+- When OpenCV read color image, color information is stored as BGR, in order to convert to RGB
+
+    ```python
+    import cv2
+    import matplotlib.pyplot as plt
+    img = cv2.imread(<img_path>) # BRG
+    img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    plt.imshow(img_rgb)
+    plt.show()
+    ```
+    ***References:***
+    - [PHYSIOPHILE: WHY OPENCV USES BGR (NOT RGB)](https://physiophile.wordpress.com/2017/01/12/why-opencv-uses-bgr-not-rgb/)
+
+- When using OpenCV in IPython or Jupyter notebook, `cv2.imshow` and `cv2.waitKey(0)` cause crash
+
+    Solution: Add `cv2.destroyAllWindows()`
+    ```python
+    cv2.imshow('img', img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+    ```
+    ***References:***
+    - [Github Opencv/opencv Issues: opencv cv2.waitKey() do not work well with python idle or ipython](https://github.com/opencv/opencv/issues/6452)
+
 
 ## Cython
+
 **What is Cython?** The Cython language is a superset of the Python language that additionally supports calling C functions and declaring C types on variables and class attributes. This allows the compiler to generate very efficient C code from Cython code. 
  Cython是包含C数据类型的Python，Cython编译器会转化Python代码为C代码，这些C代码均可以调用Python/C的API
 
 ***References:***
+
 - [Github: cython/cython](https://github.com/cython/cython)
 - [Cython 0.28.2 documentation](http://docs.cython.org/en/latest/src/tutorial/)
 - [Gitbook: Cython官方文档中文版](https://moonlet.gitbooks.io/cython-document-zh_cn/content/ch1-basic_tutorial.html)
 
-
 ## easydict
+
 **EasyDict** allows to access dict values as attributes(works recursively).
+
 ```python
 from easydict import EasyDict as edict
 d = edict({'foo':3, 'bar':{'x':1, 'y':2}})
@@ -576,9 +717,9 @@ print(d.bar.x)
 ```
 
 ***Referneces:***
+
 - [Github: makinacorpus/easydict](https://github.com/makinacorpus/easydict)
 - [Github: endernewton/tf-faster-rcnn/lib/model/config.py](https://github.com/endernewton/tf-faster-rcnn/blob/master/lib/model/config.py)
-
 
 <br>
 
@@ -586,7 +727,7 @@ print(d.bar.x)
 
 <br> 
 
-# Python Tips:
+# Python Tips
 
 ## Change python packages download source.
 
@@ -627,7 +768,9 @@ package
       |- __init__.py
       |- b.py
 ```
+
 Each `__init__.py` is
+
 ```python
 # package's __init__py
 from . import subpackage1
@@ -643,8 +786,10 @@ from . import a
 # subpackage2's __init__py
 from . import b
 ```
+
 If `b.py` want to import method or variable in `a.py`,
-```
+
+```python
 # b.py
 from ..a import <method>
 ```
@@ -753,7 +898,6 @@ for counter, value in enumerate(a, 1)
 
 - [Python Tips: 13. Enumerate](http://book.pythontips.com/en/latest/enumerate.html)
 
-
 ## Create a directory/folder if it does not exist
 
 ```python
@@ -762,10 +906,9 @@ if not os.path.exists(<directory_path>):
     os.makedirs(<directory_path>)
 ```
 
-Reference: 
+***Reference:*** 
 
 - [stackoverflow: How can I create a directory if it does not exist?](https://stackoverflow.com/questions/273192/how-can-i-create-a-directory-if-it-does-not-exist)
-
 
 ## How to run `pip` in python script?
 
@@ -774,23 +917,22 @@ import pip
 pip.main(['install', '-r'. 'requirements.txt'])
 ```
 
-Reference
-: - [stackoverflow: use “pip install/uninstall” inside a python script](https://stackoverflow.com/questions/12937533/use-pip-install-uninstall-inside-a-python-script)
-: - [stackoverflow: How to pip install packages according to requirements.txt from a local directory?](https://stackoverflow.com/questions/7225900/how-to-pip-install-packages-according-to-requirements-txt-from-a-local-directory)
+***Reference:***
 
+- [stackoverflow: use “pip install/uninstall” inside a python script](https://stackoverflow.com/questions/12937533/use-pip-install-uninstall-inside-a-python-script)
+- [stackoverflow: How to pip install packages according to requirements.txt from a local directory?](https://stackoverflow.com/questions/7225900/how-to-pip-install-packages-according-to-requirements-txt-from-a-local-directory)
 
 ## Parallel in Python
 
-Reference
-: - [知乎专栏： Python多核并行计算](https://zhuanlan.zhihu.com/p/24311810)
+***Reference:***
 
+- [知乎专栏： Python多核并行计算](https://zhuanlan.zhihu.com/p/24311810)
 
 ## C++ Embed Python
 
-### Reference
+***Reference:***
 
 - [Embedding Python in C/C++: Part I](https://www.codeproject.com/Articles/11805/Embedding-Python-in-C-C-Part-I)
-
 - [CSDN Blog: C++调用python](http://blog.csdn.net/marising/article/details/2917892)
 
 ## Download image from url
@@ -830,7 +972,8 @@ for url in urls:
 <br>
 
 # Problems and Solutions:
+
 - `UnicodeEncodeError: 'ascii' codec can't encode character '\u22f1' in position 242`
     - [解决Python3下打印utf-8字符串出现UnicodeEncodeError的问题](https://www.binss.me/blog/solve-problem-of-python3-raise-unicodeencodeerror-when-print-utf8-string/)
 
-Continuously updated...
+**Continuously updated...**

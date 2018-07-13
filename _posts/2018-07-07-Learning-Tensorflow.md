@@ -229,6 +229,13 @@ tensorboard --logdir=<tensorflow run log path> [--port]
 
     **Note:** Pay a attention to the difference between `tf.nn.conv2d` and `tf.layer.conv2d`: `tf.nn.conv2d` is more basic, `filter` in it is `tensor`. Is calculate `input` and `filter` convlution. While `filter` in `tf.layer.conv2d` is a `int` number, and it creates tensor `filter` then does convolution calculation.
 
+## `tf.data`
+
+
+***References:***
+
+- [知乎: TensorFlow全新的数据读取方式：Dataset API入门教程](https://zhuanlan.zhihu.com/p/30751039)
+
 ## Save and Restore model
 
 ***References:***

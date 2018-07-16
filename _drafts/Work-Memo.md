@@ -239,12 +239,6 @@ model = load_lua(<torch model>)
 - [stackoverflow: How to unzip a list of tuples into individual lists? [duplicate]](https://stackoverflow.com/questions/12974474/how-to-unzip-a-list-of-tuples-into-individual-lists/12974504)
 - [stackoverflow: What does the Star operator mean? [duplicate]](https://stackoverflow.com/questions/2921847/what-does-the-star-operator-mean)
 
-### collections
-
-#### `defaultdict`
-
-- [简书：Python中collections.defaultdict()使用](https://www.jianshu.com/p/26df28b3bfc8)
-
 ### Issues
 
 - [Global, Local and nonlocal Variables](https://www.python-course.eu/python3_global_vs_local_variables.php)
@@ -350,34 +344,6 @@ df.loc[:10, '<col_name>']
 
 ## OpenCV
 
-### When OpenCV read color image, color information is stored as BGR, in order to convert to RGB
-
-```python
-import cv2
-import matplotlib.pyplot as plt
-img = cv2.imread(<img_path>) # BRG
-img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-plt.imshow(img_rgb)
-plt.show()
-```
-
-***References:***
-
-- [PHYSIOPHILE: WHY OPENCV USES BGR (NOT RGB)](https://physiophile.wordpress.com/2017/01/12/why-opencv-uses-bgr-not-rgb/)
-
-### When using OpenCV in IPython or Jupyter notebook, `cv2.imshow` and `cv2.waitKey(0)` cause crash.
-
-Solution: Add `cv2.destroyAllWindows()`
-
-```python
-cv2.imshow('img', img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-```
-
-***References:***
-
-- [Github Opencv/opencv Issues: opencv cv2.waitKey() do not work well with python idle or ipython](https://github.com/opencv/opencv/issues/6452)
 
 ## Anaconda
 

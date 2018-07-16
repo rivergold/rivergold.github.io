@@ -150,6 +150,27 @@ tensorboard --logdir=<tensorflow run log path> [--port]
 
 - [小鹏的专栏: tf API 研读1：tf.nn，tf.layers， tf.contrib概述](https://cloud.tencent.com/developer/article/1016697)
 
+
+
+# Tensorflow
+
+## Graphs and Sessions
+
+**tf.Graph** consists of **node (`tf.Operation`)** and **edge (`tf.Tensor`)**.
+
+**tf.Session** class represents a connection between the client program (your code write with Python or similar interface available in other languages) and and the C++ runtime. 
+A `tf.Session` object provides access to devices in the local machine, and remote devices using the distributed TensorFlow runtime.
+
+<p align="center"> 
+    <img src="http://ovvybawkj.bkt.clouddn.com/Blog/Tensorflow/Tensorflow-Graph_and_Session.png">
+</p>
+
+***References:***
+
+- [TensorFlow: 编程人员指南 *图表与会话*](https://www.tensorflow.org/programmers_guide/graphs?hl=zh-cn)
+
+> TensorFlow 使用 tf.Session 类来表示客户端程序（通常为 Python 程序，但也提供了其他语言的类似接口）与 C++ 运行时之间的连接。tf.Session 对象使我们能够访问本地机器中的设备和使用分布式 TensorFlow 运行时的远程设备。它还可缓存关于 tf.Graph 的信息，使您能够多次高效地运行同一计算。
+
 # Data formats
 
 - `N`
@@ -236,7 +257,54 @@ tensorboard --logdir=<tensorflow run log path> [--port]
 
 - [知乎: TensorFlow全新的数据读取方式：Dataset API入门教程](https://zhuanlan.zhihu.com/p/30751039)
 
-## Save and Restore model
+## `tf.estimator`
+
+### `tf.estimator.Estimator`
+
+Estimator will automatically write the following to disk:
+
+- checkpoints, which are version of the model created during training
+- event files, which contain information that **TensorBoard** uses to create visualizations
 
 ***References:***
+
+- [TensorFlow: Giude *Checkpoints*](https://www.tensorflow.org/guide/checkpoints)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
+
+# Tricks
+
+## Read data
+
+1. Save data as `TFRecord` into disk
+    <p align="center"> 
+        <img src="http://ovvybawkj.bkt.clouddn.com/Blog/Tensorflow/TF-Read-Data.png">
+    </p>
+
+2. Read data from `TFRecord` into `tf.data.Dataset`
+
+[Why use TFRecord?](https://www.quora.com/What-are-the-benefits-of-using-TFRecord-files)
+
+***References:***
+
+- [知乎: YJango：TensorFlow中层API Datasets+TFRecord的数据导入](https://zhuanlan.zhihu.com/p/33223782)
+- [Daniil's blog: Tfrecords Guide](http://warmspringwinds.github.io/tensorflow/tf-slim/2016/12/21/tfrecords-guide/)
+- [Stackoverflow: What are the advantages of using tf.train.SequenceExample over tf.train.Example for variable length features?](https://stackoverflow.com/questions/45634450/what-are-the-advantages-of-using-tf-train-sequenceexample-over-tf-train-example)
+
+
+## Save and Restore model
+
+TensorFlow provides two model formats:
+
+- checkpoints, which is a format dependent on the code that created the model.
+- SavedModel, which is a format independent of the code that created the model.
+
+***References:***
+
+- [TensorFlow: Guide *Checkpoints*](https://www.tensorflow.org/guide/checkpoints)
+- [Tensorflow: Guide *Save and Restore*](https://www.tensorflow.org/guide/saved_model)
 - [CV-Tricks.com: A quick complete tutorial to save and restore Tensorflow models](http://cv-tricks.com/tensorflow-tutorial/save-restore-tensorflow-models-quick-complete-tutorial/)

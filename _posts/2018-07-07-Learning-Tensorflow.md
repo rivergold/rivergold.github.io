@@ -162,7 +162,7 @@ tensorboard --logdir=<tensorflow run log path> [--port]
 A `tf.Session` object provides access to devices in the local machine, and remote devices using the distributed TensorFlow runtime.
 
 <p align="center"> 
-    <img src="http://ovvybawkj.bkt.clouddn.com/Blog/Tensorflow/Tensorflow-Graph_and_Session.png">
+    <img src="http://ovvybawkj.bkt.clouddn.com/Tensorflow-Graph_and_Session.png">
 </p>
 
 ***References:***
@@ -282,7 +282,7 @@ Estimator will automatically write the following to disk:
 
 1. Save data as `TFRecord` into disk
     <p align="center"> 
-        <img src="http://ovvybawkj.bkt.clouddn.com/Blog/Tensorflow/TF-Read-Data.png">
+        <img src="http://ovvybawkj.bkt.clouddn.com/TF-Read-Data.png">
     </p>
 
 2. Read data from `TFRecord` into `tf.data.Dataset`

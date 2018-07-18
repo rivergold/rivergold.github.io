@@ -693,6 +693,12 @@ def rotate_image(mat, angle):
     ***References:***
     - [Github Opencv/opencv Issues: opencv cv2.waitKey() do not work well with python idle or ipython](https://github.com/opencv/opencv/issues/6452)
 
+- When use relative path like `~/image/xxx.png`, `cv2.imread()` can not read image
+    **You'd better load image with absolute path!**
+
+    ***References:***
+    - [Github opencv/opencv: Different pathname resolving functionalities of imread in C++, Python](https://github.com/opencv/opencv/issues/7219)
+    - []()
 
 ## Cython
 

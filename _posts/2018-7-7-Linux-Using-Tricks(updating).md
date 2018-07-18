@@ -480,7 +480,16 @@ Configuration tips:
 
 ***References:***
 
-- [StackExchange-ask ubuntu: How to install cmake 3.2 on ubuntu 14.04?](https://askubuntu.com/questions/610291/how-to-install-cmake-3-2-on-ubuntu-14-04)
+- [StackExchange-ask ubuntu: How to install cmake 3.2 on ubuntu 14.04?](https://askubuntu.com/q./configure --with-features=huge \
+--enable-multibyte \
+--enable-rubyinterp=yes \
+--enable-python3interp=yes \
+--with-python3-config-dir=~/software/anaconda/bin/ \
+--enable-perlinterp=yes \
+--enable-luainterp=yes \
+--enable-gui=gtk2 \
+--enable-cscope \
+--prefix=/usr/localuestions/610291/how-to-install-cmake-3-2-on-ubuntu-14-04)
 
 ## System Monitor
 
@@ -504,3 +513,174 @@ Powerful dictionary on Linux.
 
 - [StarDict Dictionaries -- 星际译王词库 词典下载](http://download.huzheng.org/)
 - [Ubuntu 14.04 安装配置强大的星际译王（stardict）词典](https://blog.csdn.net/tecn14/article/details/25917149)
+
+## tmux
+
+> tmux is a terminal multiplexer: it enables a number of terminals to be created, accessed, and controlled from a single screen. tmux may be detached from a screen and continue running in the background, then later reattached.
+
+One useful function of `tmux` is **Keep run wihout exist when using ssh to remote server**
+
+Ubuntu can install by `sudo apt-get install tmux`
+
+**tmux tips:**
+
+- All tmux shortcuts need hit prefix `ctrl + b` and then
+- `d`: detach (tmux still run)
+
+***References:***
+
+- [GithubL ryerh/tmux-cheatsheet.markdown](https://gist.github.com/ryerh/14b7c24dfd623ef8edc7)
+- [Github: henrik/tmux_cheatsheet.markdown](https://gist.github.com/henrik/1967800)
+
+## vim
+
+### Install
+
+You'd better install Vim with `python` support. You can use `vim --version` to check if vim is installed with `python`
+
+Build `vim` from [source](https://github.com/vim/vim/releases):
+
+1. Install `python-dev`
+    - Ubuntu
+        ```shell
+        sudo apt-get install python3-dev
+        ```
+    - Centos
+        ```shell
+        yum install python36-devel
+        ```
+    ***Referneces:***
+    - [ubuntu packages: python3-dev (3.5.1-3)](https://packages.ubuntu.com/xenial/python3-dev)
+    - [stackoverflow: How to install python3-devel on red hat 7](https://stackoverflow.com/questions/43047284/how-to-install-python3-devel-on-red-hat-7)
+
+
+2. `cd` into vim folder
+3. Config
+    ```shell
+    ./configure --with-features=huge \
+    --enable-multibyte \
+    --enable-rubyinterp=yes \
+    --enable-python3interp=yes \
+    --with-python3-config-dir=~/software/anaconda/bin/ \
+    --enable-perlinterp=yes \
+    --enable-luainterp=yes \
+    --enable-gui=gtk2 \
+    --enable-cscope \
+    --prefix=/usr/local
+    ```
+    **Note:** vim can be built with python2 and python3, but when install `Youcompleteme`, it need only one python version. So, when you build vim, you'd better only choose on python version. If you want to build vim with python2, you need to change `--enable-python3interp=yes` to `--enable-pythoninterp=yes` and `--with-python3-config-dir=~/software/anaconda/bin/` to `--with-python-config-dir=/usr/lib/python2.7/config`
+4. `make -j8` and `sudo make install`
+5. Config `~/.vimrc`
+    ```vim
+    set paste " 取消粘贴时自动注释
+    set nu! " 显示行号
+    set expandtab "tab使用空格替换
+    set ts=4 " 设置tab键为4个空格
+    syntax on " 代码高亮
+    set backspace=2
+
+    set nocompatible              " be iMproved, required
+    filetype off                  " required
+**Config Youcompleteme**
+    " set the runtime path to include Vundle and initialize
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
+    " alternatively, pass a path where Vundle should install plugins
+    "call vundle#begin('~/some/path/here')
+
+    " let Vundle manage Vundle, required
+    Plugin 'VundleVim/Vundle.vim'
+
+    Plugin 'Valloric/YouCompleteMe'
+    "Plugin 'davidhalter/jedi-vim'
+
+    " All of your Plugins must be added before the following line
+    call vundle#end()            " required
+    filetype plugin indent on    " required
+    " To ignore plugin indent changes, instead use:
+    "filetype plugin on
+    "
+    " Brief help
+    " :PluginList       - lists configured plugins
+    " :PluginInstall    - installs plugins; append `!` to update or justluginUpdate
+    " :PluginSearch foo - searches for foo; append `!` to refresh local cache
+    " :PluginClean      - confirms removal of unused plugins; append `!` toto-approve removal
+    "
+    " see :h vundle for more details or wiki for FAQ
+    " Put your non-Plugin stuff after this line
+    ```
+
+
+### Problems & Solutions
+
+- Centos 7.2 install `python36-devel` occur error `Requires: libcrypto.so.10(openssl.1.0.2)(64bit)`
+    You need to update openssl from `1.0.1` to `1.0.2`. You nend download [openssl-libs-1.0.2k-12.el7.x86_64.rpm](https://centos.pkgs.org/7/centos-x86_64/openssl-libs-1.0.2k-12.el7.x86_64.rpm.html) and run `rpm -i openssl-libs-1.0.2k-12.el7.x86_64.rpm`. And then it may occur another error like `conflicts with file from package`, you can use `rpm -i --replacefiles openssl-libs-1.0.2k-12.el7.x86_64.rpm`
+
+    ***References:***
+    - [Blog: 解决CentOS下的conflicts with file from错误.](http://rayfuxk.iteye.com/blog/2280643)
+
+### Plugins
+
+#### Vundle
+
+Install
+
+```shell
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+```
+
+#### Youcompleteme
+
+You can install `Youcompleteme` using `vundle`, but it will take a long time. Here, we install it from source.
+
+1. **Make sure** your vim is build with python2 or python3
+2. Clone `Youcompleteme` source code into `~/.vim/bundle/`**Config Youcompleteme**
+    ```shell
+    git clone --recursive https://github.com/Valloric/YouCompleteMe.git
+    ```
+3. `cd ~/.vim/bundle/YouCompleteMe`
+    ```shell
+    python ./install.py
+    ```**Config Youcompleteme**
+    **N**Config Youcompleteme** here you need to use python2, if you**Config Youcompleteme**d to use python3
+
+***Refe**Config Youcompleteme**
+
+- [Gith**Config Youcompleteme**(https://github.com/Valloric/YouCompleteMe#ubuntu-linux-x64)
+- [简书: 一步一步带你安装史上最难安装的 vim 插件 —— YouCompleteMe](https://www.jianshu.com/p/d908ce81017a)
+
+**Problems & Solutions**
+
+- Using python3 run `python ./install.py` occur error `AttributeError: module 'enum' has no attribute 'IntFlag'`
+    You need to uninstall `enum34` by run `pip uninstall enum34`
+    ***References:***
+    - [stackoverflow: Why Python 3.6.1 throws AttributeError: module 'enum' has no attribute 'IntFlag'?](https://stackoverflow.com/questions/43124775/why-python-3-6-1-throws-attributeerror-module-enum-has-no-attribute-intflag)
+
+- Using python3 run `python ./install.py` occur error `File "/root/software/anaconda/lib/python3.6/site-packages/uuid.py", line 138 if not 0 <= time_low < 1<<32L:`
+    I solve this error by `pip uninstall uuid`
+
+### Configuration
+
+#### Basic
+
+```vim
+set paste " 取消粘贴时自动注释
+set nu! " 显示行号
+set expandtab "tab使用空格替换
+set ts=4 " 设置tab键为4个空格
+syntax on " 代码高亮
+set backspace=2 " 设置backspace可以删除
+```
+
+#### Youcompleteme
+
+```vim
+" Disable Preview Window
+set completeopt-=preview
+let g:ycm_add_preview_to_completeopt = 0
+```
+
+***References:***
+
+- [Blog: ubuntu下安装自动补全YouCompleteMe](https://www.cnblogs.com/litifeng/p/6671446.html)
+- [Github: Valloric/YouCompleteMe Issue: Auto close preview window after insertion not closing sometimes](https://github.com/Valloric/YouCompleteMe/issues/524)

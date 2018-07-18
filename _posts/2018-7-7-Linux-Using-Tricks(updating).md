@@ -634,19 +634,19 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 You can install `Youcompleteme` using `vundle`, but it will take a long time. Here, we install it from source.
 
 1. **Make sure** your vim is build with python2 or python3
-2. Clone `Youcompleteme` source code into `~/.vim/bundle/`**Config Youcompleteme**
+2. Clone `Youcompleteme` source code into `~/.vim/bundle/`
     ```shell
     git clone --recursive https://github.com/Valloric/YouCompleteMe.git
     ```
 3. `cd ~/.vim/bundle/YouCompleteMe`
     ```shell
     python ./install.py
-    ```**Config Youcompleteme**
-    **N**Config Youcompleteme** here you need to use python2, if you**Config Youcompleteme**d to use python3
+    ```
+    **Note:** If your vim is built with python2, here you need to use python2, if your vim is built with python3 here you need to use python3.
 
-***Refe**Config Youcompleteme**
+***References****
 
-- [Gith**Config Youcompleteme**(https://github.com/Valloric/YouCompleteMe#ubuntu-linux-x64)
+- [Gith Valloric/YouCompleteMe](https://github.com/Valloric/YouCompleteMe#ubuntu-linux-x64)
 - [简书: 一步一步带你安装史上最难安装的 vim 插件 —— YouCompleteMe](https://www.jianshu.com/p/d908ce81017a)
 
 **Problems & Solutions**

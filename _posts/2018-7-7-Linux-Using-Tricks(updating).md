@@ -1,6 +1,6 @@
 This article has recorded some tips and tricks for linux, especially for Ubuntu. All of these commands and tricks are sorted up with my using experience.
 
-# Linux Command Tips
+# Linux Tips
 
 ## Update `.barchrc`
 
@@ -240,6 +240,13 @@ There are two solutions:
 
 - [stackExchange: How to keep a python script running when I close putty](https://unix.stackexchange.com/questions/362115/how-to-keep-a-python-script-running-when-i-close-putty)
 
+## Ubuntu GUI show current folder path
+
+Using shortcut `ctr` + `l`, the gui will show current folder path.
+
+***References:***
+
+- [Blog: ubuntu 16.04 LTS - 显示文件路径](https://blog.csdn.net/chengyq116/article/details/78631110)
 <!--  -->
 <br>
 

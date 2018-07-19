@@ -572,16 +572,19 @@ Build `vim` from [source](https://github.com/vim/vim/releases):
 4. `make -j8` and `sudo make install`
 5. Config `~/.vimrc`
     ```vim
-    set paste " 取消粘贴时自动注释
-    set nu! " 显示行号
-    set expandtab "tab使用空格替换
-    set ts=4 " 设置tab键为4个空格
-    syntax on " 代码高亮
-    set backspace=2
-
     set nocompatible              " be iMproved, required
     filetype off                  " required
-**Config Youcompleteme**
+
+    set nu!
+    syntax on
+    set ts=4
+    set backspace=2
+    set expandtab
+
+    " Youcompleteme
+    set completeopt-=preview
+    let g:ycm_add_preview_to_completeopt = 0
+
     " set the runtime path to include Vundle and initialize
     set rtp+=~/.vim/bundle/Vundle.vim
     call vundle#begin()
@@ -591,8 +594,8 @@ Build `vim` from [source](https://github.com/vim/vim/releases):
     " let Vundle manage Vundle, required
     Plugin 'VundleVim/Vundle.vim'
 
+    " rivergold install:
     Plugin 'Valloric/YouCompleteMe'
-    "Plugin 'davidhalter/jedi-vim'
 
     " All of your Plugins must be added before the following line
     call vundle#end()            " required
@@ -602,14 +605,13 @@ Build `vim` from [source](https://github.com/vim/vim/releases):
     "
     " Brief help
     " :PluginList       - lists configured plugins
-    " :PluginInstall    - installs plugins; append `!` to update or justluginUpdate
+    " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
     " :PluginSearch foo - searches for foo; append `!` to refresh local cache
-    " :PluginClean      - confirms removal of unused plugins; append `!` toto-approve removal
+    " :PluginClean      - confirms removal of unused plugins; append `!` to    auto-approve removal
     "
     " see :h vundle for more details or wiki for FAQ
     " Put your non-Plugin stuff after this line
     ```
-
 
 ### Problems & Solutions
 
@@ -620,6 +622,8 @@ Build `vim` from [source](https://github.com/vim/vim/releases):
     - [Blog: 解决CentOS下的conflicts with file from错误.](http://rayfuxk.iteye.com/blog/2280643)
 
 ### Plugins
+
+When you want to enable or disable a plugin in vim, you need to add or change `Plugin '<plugin name>'` in `~/.vimrc`.
 
 #### Vundle
 

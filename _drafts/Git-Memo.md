@@ -1,7 +1,19 @@
-# Branch
+## Branch
 
-- New a branch: `git checkout -b <branch_name>`
-- Push branch into **remote**: `git push <remote_name> <branch_name>`
+- `git checkout -b <branch_name>`: New a branch
+- `git push <remote_name> <branch_name>`: Push branch into **remote**: 
+
+## From remote to local
+
+- `git fetch <remote_name> <remote_branch_name>`: Fetch code from remote but it will not change your local code
+
+- `git pull <remote_name> <remote_branch_name>:<local_branch_name>`: Pull a branch of remote and merge with local branch.
+
+- `git pull <remote_name> <remote_branch_name>`: Pull a branch of remote and merge with local master
+
+## From local to remote
+
+- `git push <remote_name> <local_branch_name>:<remote_branch_name>`
 
 ***Referneces:***
 

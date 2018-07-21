@@ -230,6 +230,12 @@ A `tf.Session` object provides access to devices in the local machine, and remot
     batch_raw, masks_raw = tf.split(input_image, 2, axis=2)
     ```
 
+- `tf.set_random_seed`
+
+***References:***
+
+- [TensorFlow api: tf.set_random_seed](https://www.tensorflow.org/api_docs/python/tf/set_random_seed)
+
 ## 'tf.nn'
 
 - `tf.nn.conv2d(input, filter, strides, padding, ...)`: Computes a 2-D convolution given 4-D `input` and `filter` tensors.
@@ -252,6 +258,9 @@ A `tf.Session` object provides access to devices in the local machine, and remot
 
 ## `tf.data`
 
+- `tf.data.Dataset`
+
+- `tf.data.Iterator`
 
 ***References:***
 
@@ -278,7 +287,7 @@ Estimator will automatically write the following to disk:
 
 # Tricks
 
-## Read data
+## TFRecord
 
 1. Save data as `TFRecord` into disk
     <p align="center"> 
@@ -308,3 +317,16 @@ TensorFlow provides two model formats:
 - [TensorFlow: Guide *Checkpoints*](https://www.tensorflow.org/guide/checkpoints)
 - [Tensorflow: Guide *Save and Restore*](https://www.tensorflow.org/guide/saved_model)
 - [CV-Tricks.com: A quick complete tutorial to save and restore Tensorflow models](http://cv-tricks.com/tensorflow-tutorial/save-restore-tensorflow-models-quick-complete-tutorial/)
+
+## Load data
+
+### Using `tf.data.Dataset`
+
+1. Construct a `Dataset` from some tensors in memory, you can use `tf.data.Dataset.from_tensors()` or `tf.data.Dataset.from_tensor_slices()`.
+2. If your input data are on disk in the recommended TFRecord format, you can construct a `tf.data.TFRecordDataset`.
+
+### Read imge
+```python
+img_string = tf.read_file(<img_path>)
+img_decoded = tf.image.decode_image(img_string)
+```

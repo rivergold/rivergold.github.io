@@ -329,4 +329,5 @@ TensorFlow provides two model formats:
 ```python
 img_string = tf.read_file(<img_path>)
 img_decoded = tf.image.decode_image(img_string)
+# img_decoded type is <class 'numpy.ndarray'>
 ```

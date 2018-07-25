@@ -1,7 +1,8 @@
 ## Branch
 
 - `git checkout -b <branch_name>`: New a branch
-- `git push <remote_name> <branch_name>`: Push branch into **remote**: 
+- `git push <remote_name> <local branch_name>:<remote_branch_name>`: Push branch into **remote**
+- ``
 
 ## From remote to local
 

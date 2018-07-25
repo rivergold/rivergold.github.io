@@ -484,19 +484,13 @@ Configuration tips:
     sudo apt-get update
     sudo apt-get install cmake-qt-gui
     ```
+- CentOS
+    Download cmake-3.3.2.rpm and cmake-gui-3.3.2 from [here](https://centos.pkgs.org/7/ghettoforge-plus-x86_64/cmake-gui-3.3.2-1.gf.el7.x86_64.rpm.html). Then use `rpm` tp install.
 
 ***References:***
 
-- [StackExchange-ask ubuntu: How to install cmake 3.2 on ubuntu 14.04?](https://askubuntu.com/q./configure --with-features=huge \
---enable-multibyte \
---enable-rubyinterp=yes \
---enable-python3interp=yes \
---with-python3-config-dir=~/software/anaconda/bin/ \
---enable-perlinterp=yes \
---enable-luainterp=yes \
---enable-gui=gtk2 \
---enable-cscope \
---prefix=/usr/localuestions/610291/how-to-install-cmake-3-2-on-ubuntu-14-04)
+- [StackExchange-ask ubuntu: How to install cmake 3.2 on ubuntu 14.04?](https://askubuntu.com/questions/610291/how-to-install-cmake-3-2-on-ubuntu)
+- [pkgs.org: cmake-gui-3.3.2-1.gf.el7.x86_64.rpm](https://centos.pkgs.org/7/ghettoforge-plus-x86_64/cmake-gui-3.3.2-1.gf.el7.x86_64.rpm.html)
 
 ## System Monitor
 

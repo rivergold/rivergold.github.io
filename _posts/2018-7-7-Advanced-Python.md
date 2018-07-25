@@ -471,6 +471,18 @@ if os.path.exit(log_file_name): os.remove(log_file_name)
 - [stackoverflow: How to find if directory exists in Python](https://stackoverflow.com/questions/8933237/how-to-find-if-directory-exists-in-python)
 - [stackoverflow: How to delete a file or folder](https://stackoverflow.com/questions/6996603/how-to-delete-a-file-or-folder)
 
+## string
+
+- `string.ascii_letters`: String of all lowercase and uppercase letter. `'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'`
+
+- `string.digtis`: String of all digits `'string.digits'`
+
+Generate random string
+```python
+import string
+import random
+random_str = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(<string length>)])
+```
 
 <br>
 
@@ -666,6 +678,25 @@ def rotate_image(mat, angle):
 
 - [OpenCV doc: warpAffine](https://docs.opencv.org/3.1.0/da/d54/group__imgproc__transform.html#ga0203d9ee5fcd28d40dbc4a1ea4451983)
 - [stackoverflow: Rotate an image without cropping in OpenCV in C++](https://stackoverflow.com/questions/22041699/rotate-an-image-without-cropping-in-opencv-in-c)
+
+## Put text
+
+- cv2.getTextSize(text, fontFace, fontScale, thickness): Return text size (w, h, baseline)
+
+```python
+font = cv2.Font_HERSHEY_SIMPLEX
+random_str = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(10)])
+font_scale = np.random.uniform(0.5, 1)
+thickness = random.randint(1, 3)
+(fw, fh), baseline = cv2.getTextSize(random_str, font, font_scale, thickness)
+x = random.randint(0, max(0, w - 1 - fw))
+y = random.randint(fh, h - 1 - baseline)
+color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+cv2.putText(img, random_str, (x, y), font, font_scale, color, thickness)
+```
+
+***References:***
+- [OpenCV doc: getTextSize](https://docs.opencv.org/3.3.1/d6/d6e/group__imgproc__draw.html#ga3d2abfcb995fd2db908c8288199dba82)
 
 ### Problems & Solution
 

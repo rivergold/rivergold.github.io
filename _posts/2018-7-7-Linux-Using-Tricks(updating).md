@@ -308,6 +308,25 @@ sudo ntfsfix /dev/sdb1
 - [Ask Xmodulo: How to fix “X11 forwarding request failed on channel 0”](http://ask.xmodulo.com/fix-broken-x11-forwarding-ssh.html)
 - [StackExchange: ssh returns message “X11 forwarding request failed on channel 1”](https://unix.stackexchange.com/questions/111519/ssh-returns-message-x11-forwarding-request-failed-on-channel-1)
 
+## Disable mouse middle button paste
+
+Input the followings in terminal
+
+```shell
+xmodmap -e "pointer = 1 25 3 4 5 6 7 8 9"
+```
+
+If you want to set this forever, edit `~/.Xmodmap`
+
+```shell
+pointer = 1 25 3 4 5 6 7 8 9
+```
+
+***References:***
+
+- [ubuntu问答: 如何禁用鼠标中键点击粘贴？](https://ubuntuqa.com/article/687.html)
+- [askubuntu: How do I disable middle mouse button click paste?](https://askubuntu.com/questions/4507/how-do-i-disable-middle-mouse-button-click-paste)
+
 <!--  -->
 <br>
 

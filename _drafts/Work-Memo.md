@@ -544,6 +544,12 @@ VSCode Setting Sync
 
 - `ctr` + `k`, then `o`: Open current file in new window
 - `ctr` + \`:  Open terminal
+- Format code:
+    - On Windows: `shift` + `alt` + 'f'
+    - On Mac: `shift` + `option` + `f`
+    - On Ubuntu: `ctrl` + `shift` + `i`
+    ***References:***
+    - [stackoverflow: How do you format code in Visual Studio Code (VSCode)](https://stackoverflow.com/questions/29973357/how-do-you-format-code-in-visual-studio-code-vscode) 
 
 ***Referneces:***
 - [VS Code折腾记 - (2) 快捷键大全，没有更全](https://blog.csdn.net/crper/article/details/54099319)

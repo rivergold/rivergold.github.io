@@ -467,6 +467,19 @@ Configuration tips:
 - [Github: robbyrussell/oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 - [LINUX大棚： Linux命令五分钟-用chsh选择shell](http://roclinux.cn/?p=739)
 
+### Plugins
+
+#### zsh-syntax-highlighting
+
+- Install
+    1. cd into `~/.oh-my-zsh/plugins`
+    2. `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting`
+    3. add `zsh-syntax-highlighting` into `~/.zshrc` `plugin`
+
+***References:***
+
+- [Github: zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
+
 ## Matlab
 
 1. Download matlab2016b from [baidu cloud](https://pan.baidu.com/s/1mi0PRqK#list/path=%2F).

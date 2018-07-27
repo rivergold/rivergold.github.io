@@ -679,7 +679,7 @@ def rotate_image(mat, angle):
 - [OpenCV doc: warpAffine](https://docs.opencv.org/3.1.0/da/d54/group__imgproc__transform.html#ga0203d9ee5fcd28d40dbc4a1ea4451983)
 - [stackoverflow: Rotate an image without cropping in OpenCV in C++](https://stackoverflow.com/questions/22041699/rotate-an-image-without-cropping-in-opencv-in-c)
 
-## Put text
+### Put text
 
 - cv2.getTextSize(text, fontFace, fontScale, thickness): Return text size (w, h, baseline)
 
@@ -697,6 +697,12 @@ cv2.putText(img, random_str, (x, y), font, font_scale, color, thickness)
 
 ***References:***
 - [OpenCV doc: getTextSize](https://docs.opencv.org/3.3.1/d6/d6e/group__imgproc__draw.html#ga3d2abfcb995fd2db908c8288199dba82)
+
+### Capturing mouse click events
+
+***References:***
+
+- [pyimagesearch: Capturing mouse click events with Python and OpenCV](https://www.pyimagesearch.com/2015/03/09/capturing-mouse-click-events-with-python-and-opencv/)
 
 ### Problems & Solution
 
@@ -1000,6 +1006,12 @@ for url in urls:
 ***References:***
 
 - [segmentfault: Python 频繁请求问题: [Errno 104] Connection reset by peer](https://segmentfault.com/a/1190000007480913)
+
+## Copy in Python
+
+***References:***
+
+- [Blog: Python正确复制列表的方法](https://www.cnblogs.com/ifantastic/p/3811145.html)
 
 
 <br>

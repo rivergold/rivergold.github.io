@@ -554,6 +554,12 @@ VSCode Setting Sync
 ***Referneces:***
 - [VS Code折腾记 - (2) 快捷键大全，没有更全](https://blog.csdn.net/crper/article/details/54099319)
 
+## VSCode edit remote file 
+
+***References:***
+
+- [Blog: 抛弃Vim! SSH也能用VSCode](https://lucien-x.github.io/2018/03/06/%E6%8A%9B%E5%BC%83Vim-SSH%E4%B9%9F%E8%83%BD%E7%94%A8VSCode/)
+
 # 临时
 
 Tensorflow: 实战Google深度学习框架PDF

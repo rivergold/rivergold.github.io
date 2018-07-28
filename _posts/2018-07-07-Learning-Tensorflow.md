@@ -187,6 +187,16 @@ A `tf.Session` object provides access to devices in the local machine, and remot
 
 - [Tensorflow doc: Performance Guide](https://www.tensorflow.org/performance/performance_guide)
 
+# Variable
+
+## `name_scope` and `variable_scope`
+
+***References:***
+
+- [知乎: tensorflow里面name_scope, variable_scope等如何理解？](https://www.zhihu.com/question/54513728)
+- [Blog: TensorFlow入门（七） 充分理解 name / variable_scope](https://blog.csdn.net/Jerr__y/article/details/70809528)
+- [Tensorflow Guide: Variable](https://www.tensorflow.org/guide/variables)
+
 # API
 
 ## `tf`

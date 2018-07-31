@@ -1,3 +1,45 @@
+# Git
+
+## GitKraken
+
+[Official doc](https://support.gitkraken.com/start-here/interface)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
+
+## Concept
+
+### Git workflow
+
+- `working tree`:
+- `index`: a **staging area** between your working directory and your repository.
+- `repository`: or repo
+    <p align="center">
+      <img src="http://ovvybawkj.bkt.clouddn.com/Blog/Gitgit-index.png" width="70%">
+    </p>
+
+***References:***
+
+- [backlog: Git workflow](https://backlog.com/git-tutorial/git-workflow/)
+
+### `reset` `soft` `hard` `mixed`
+
+***References:***
+- [Blog: git reset soft,hard,mixed之区别深解](https://www.cnblogs.com/kidsitcn/p/4513297.html)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
+
+## Others
+
+- [http://ohshitgit.com/](http://ohshitgit.com/)
+
 ## Branch
 
 - `git checkout -b <branch_name>`: New a branch
@@ -20,3 +62,17 @@
 
 - [git](https://git-scm.com/book/zh/v1/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%84%E6%96%B0%E5%BB%BA%E4%B8%8E%E5%90%88%E5%B9%B6)
 - [Blog: git常用命令](http://www.cnblogs.com/springbarley/archive/2012/11/03/2752984.html)
+
+# Tricks
+
+## Download a single file from Github
+
+***References:***
+
+- [stackoverflow: Download single files from GitHub](https://stackoverflow.com/questions/4604663/download-single-files-from-github)
+
+## Download a single folder or directory from a Github repo
+
+***References:***
+
+- [stackoverflow: Download a single folder or directory from a GitHub repo](https://stackoverflow.com/questions/7106012/download-a-single-folder-or-directory-from-a-github-repo)

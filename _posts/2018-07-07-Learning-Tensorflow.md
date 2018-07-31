@@ -289,6 +289,13 @@ Estimator will automatically write the following to disk:
 
 - [TensorFlow: Giude *Checkpoints*](https://www.tensorflow.org/guide/checkpoints)
 
+#### **Creating custom estimator**
+
+***References:***
+
+- [Tensorflow Guide: Creating Custom Estimators](https://www.tensorflow.org/guide/custom_estimators)
+- [Github: tensorflow/models/samples/core/get_started/custom_estimator.py](https://github.com/tensorflow/models/blob/master/samples/core/get_started/custom_estimator.py)
+
 <!--  -->
 <br>
 
@@ -328,6 +335,22 @@ TensorFlow provides two model formats:
 - [Tensorflow: Guide *Save and Restore*](https://www.tensorflow.org/guide/saved_model)
 - [CV-Tricks.com: A quick complete tutorial to save and restore Tensorflow models](http://cv-tricks.com/tensorflow-tutorial/save-restore-tensorflow-models-quick-complete-tutorial/)
 
+### Restore model weights from `checkpoint`
+One way is: write your model, and then:
+
+```python
+vars_list = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES)
+assign_ops = []
+for var in vars_list:
+    print(var.name)
+    vname = var.name
+    var_value = tf.contrib.framework.load_variable(<model_path>, vname)
+    assign_ops.append(tf.assign(var, var_value))
+sess.run(assign_ops)
+```
+
+**Note:** The `model_path` is a folder contain `checkpoint`.
+
 ## Load data
 
 ### Using `tf.data.Dataset`
@@ -339,5 +362,23 @@ TensorFlow provides two model formats:
 ```python
 img_string = tf.read_file(<img_path>)
 img_decoded = tf.image.decode_image(img_string)
-# img_decoded type is <class 'numpy.ndarray'>
 ```
+
+<!--  -->
+<br>
+
+***
+<!--  -->
+
+# Erros & Solutions
+
+- `TensorFlow ValueError: Cannot feed value of shape (1, 64, 64, 3) for Tensor u'Placeholder:0', which has shape '(1, ?, ?, 1)'`
+    It means that you feed wrong data shape into TensorFlow placeholder.
+
+    ***References:***
+    - [stackoverflow: TensorFlow ValueError: Cannot feed value of shape (64, 64, 3) for Tensor u'Placeholder:0', which has shape '(?, 64, 64, 3)'](https://stackoverflow.com/questions/40430186/tensorflow-valueerror-cannot-feed-value-of-shape-64-64-3-for-tensor-uplace)
+
+- `TensorFlow: “Attempting to use uninitialized value” in variable initialization`
+    It means that you run your sess without initialise Variables. May you run variable initialise and train/predict in two different session?
+    ***References:***
+    - [stackoverflow: TensorFlow: “Attempting to use uninitialized value” in variable initialization](https://stackoverflow.com/questions/44624648/tensorflow-attempting-to-use-uninitialized-value-in-variable-initialization/44630421)

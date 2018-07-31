@@ -247,6 +247,7 @@ Using shortcut `ctr` + `l`, the gui will show current folder path.
 ***References:***
 
 - [Blog: ubuntu 16.04 LTS - 显示文件路径](https://blog.csdn.net/chengyq116/article/details/78631110)
+
 <!--  -->
 <br>
 

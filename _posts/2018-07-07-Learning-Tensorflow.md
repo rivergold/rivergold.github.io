@@ -242,9 +242,13 @@ A `tf.Session` object provides access to devices in the local machine, and remot
 
 - `tf.set_random_seed`
 
-***References:***
+    ***References:***
 
-- [TensorFlow api: tf.set_random_seed](https://www.tensorflow.org/api_docs/python/tf/set_random_seed)
+    - [TensorFlow api: tf.set_random_seed](https://www.tensorflow.org/api_docs/python/tf/set_random_seed)
+
+- `tf.py_func()`: Call Python code in Tensorflow graph
+    ***References:***
+    - [TensorFlow Guide Importing Data: Applying arbitrary Python logic with tf.py_func()](https://www.tensorflow.org/guide/datasets)
 
 ## 'tf.nn'
 
@@ -359,9 +363,18 @@ sess.run(assign_ops)
 2. If your input data are on disk in the recommended TFRecord format, you can construct a `tf.data.TFRecordDataset`.
 
 ### Read imge
+
 ```python
 img_string = tf.read_file(<img_path>)
 img_decoded = tf.image.decode_image(img_string)
+```
+
+### Process image with OpenCV in TensorFLow
+
+```python
+def process():
+    pass
+x = tf.py_func(process, <input>, <data stype>)
 ```
 
 <!--  -->

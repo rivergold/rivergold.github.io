@@ -289,9 +289,39 @@ Estimator will automatically write the following to disk:
 - checkpoints, which are version of the model created during training
 - event files, which contain information that **TensorBoard** uses to create visualizations
 
+### `tf.estimator.RunConfig`
+
+```python
+estimator_config = tf.estimator.RunConfig(
+    save_checkpoints_secs = 2 * 60 # Save checkpoints every 20 minutes
+    keep_checkpoint_max = 10, # Retain the 10 most recent checkpoints
+    )
+classifier = tf.estimator.DNNClassifier(
+    feature_columns=my_feature_columns,
+    hidden_units=[10, 10],
+    n_classes=3,
+    model_dir='models/iris',
+    config=my_checkpointing_config)
+```
+
 ***References:***
 
-- [TensorFlow: Giude *Checkpoints*](https://www.tensorflow.org/guide/checkpoints)
+- [TensorFlow Guide: Checkpoints](https://www.tensorflow.org/guide/checkpoints#checkpointing_frequency)
+
+**Methods:**
+
+- `train`
+    ```python
+    train(input_fn,
+          hooks=None,
+          steps=None,
+          max_steps=None,
+          save_listeners=None)
+    ```
+
+***References:***
+
+- [TensorFlow API: tf.estimator.Estimator](https://www.tensorflow.org/api_docs/python/tf/estimator/Estimator#train)
 
 #### **Creating custom estimator**
 
@@ -376,6 +406,60 @@ def process():
     pass
 x = tf.py_func(process, <input>, <data stype>)
 ```
+
+<!--  -->
+<br>
+
+***
+<!--  -->
+
+# My Tensorflow Pipeline
+
+Mainly using functions:
+
+- `tf.data.Dataset`: Prepare data
+- `tf.estimator.Estimator`: Build model and train, evaluate and predict.
+
+## Training:
+
+Mainly using:
+
+- `tf.estimator.Estimator` method `train`
+- Functions in `tf.train`
+- And add some hooks into `tf.estimator.Estimator.train`
+
+***References:***
+
+- [TensorFlow API tf.estimator.Estimator.train](https://www.tensorflow.org/api_docs/python/tf/estimator/Estimator#train)
+- [TensorFlow API: Python API Guides Training](https://www.tensorflow.org/api_guides/python/train)
+- [TensorFLow API Python API Guides Training Hooks](https://www.tensorflow.org/api_guides/python/train#Training_Hooks)
+
+E.g.
+
+```python
+# Set up logging for predictions
+tensors_to_log = {"probabilities": "softmax_tensor"}
+logging_hook = tf.train.LoggingTensorHook(
+    tensors=tensors_to_log, every_n_iter=50)
+mnist_classifier.train(
+    input_fn=train_input_fn,
+    steps=20000,
+    hooks=[logging_hook])
+```
+
+### Change learning decay
+
+Find a decay function from [TensorFlow API Python API Guide Training/Decaying the learning rate](https://www.tensorflow.org/api_guides/python/train#Decaying_the_learning_rate), and then set it into one Optimizers.
+
+***References:***
+
+- [TensorFlow API: tf.train.exponential_decay](https://www.tensorflow.org/api_docs/python/tf/train/exponential_decay)
+
+### Load pre-trained model
+
+***References:***
+
+- [Github tensorflow/tensorflow Issues: Estimator should be able to partially load checkpoints #10155](https://github.com/tensorflow/tensorflow/issues/10155)
 
 <!--  -->
 <br>

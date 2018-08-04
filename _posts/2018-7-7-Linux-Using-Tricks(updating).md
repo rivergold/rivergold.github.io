@@ -328,6 +328,15 @@ pointer = 1 25 3 4 5 6 7 8 9
 - [ubuntu问答: 如何禁用鼠标中键点击粘贴？](https://ubuntuqa.com/article/687.html)
 - [askubuntu: How do I disable middle mouse button click paste?](https://askubuntu.com/questions/4507/how-do-i-disable-middle-mouse-button-click-paste)
 
+## Force reboot your Ubuntu desktop
+
+Press `ctrl` + `alt` + `sys rq(printscreen)` and then do not loose `ctrl` and `alt`, and press `r`
+
+***References:***
+
+- [简书: Ubuntu死机解决方法汇总](https://www.jianshu.com/p/36fb9eed82a3)
+
+
 <!--  -->
 <br>
 
@@ -722,3 +731,9 @@ let g:ycm_add_preview_to_completeopt = 0
 
 - [Blog: ubuntu下安装自动补全YouCompleteMe](https://www.cnblogs.com/litifeng/p/6671446.html)
 - [Github: Valloric/YouCompleteMe Issue: Auto close preview window after insertion not closing sometimes](https://github.com/Valloric/YouCompleteMe/issues/524)
+
+## Vutrl install ssr
+
+Get SSR install script from [here.](https://github.com/Alvin9999/new-pac/wiki/%E8%87%AA%E5%BB%BAss%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%95%99%E7%A8%8B)
+
+[Check if your vutrl vps IP is forbidden](https://www.vultrcn.com/11.html).

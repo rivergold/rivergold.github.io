@@ -289,6 +289,10 @@ Estimator will automatically write the following to disk:
 - checkpoints, which are version of the model created during training
 - event files, which contain information that **TensorBoard** uses to create visualizations
 
+#### `model_fn`
+
+A [good example](https://www.epubit.com/selfpublish/article/1156;jsessionid=63E557268B23BE8DE6E71F3AFDACD4B0) to write `model_fn` for `tf.estimator.Estimator` 
+
 ### `tf.estimator.RunConfig`
 
 ```python
@@ -406,6 +410,34 @@ def process():
     pass
 x = tf.py_func(process, <input>, <data stype>)
 ```
+
+## Using `tf.estimator.Estimator` train / fine-tune model
+
+### Notes
+
+- `tf.estimator.Estimator` will auto restore the last checkpoint from the `model_dir` when you restart it. 
+
+### Load a part of model from checkpoint
+
+There are two ways:
+
+- Using `RestoreHook`
+    ***References:***
+    - [Github tensorflow/tensorflow Issues: Support init_from_checkpoint and warm start with Distribution Strategy #19958](https://github.com/tensorflow/tensorflow/issues/19958)
+
+- Using `tf.train.init_from_checkpoint` in your `model_fn`
+    ***References:***
+    - [stackoverflow: Load checkpoint and finetuning using tf.estimator.Estimator](https://stackoverflow.com/questions/46423956/load-checkpoint-and-finetuning-using-tf-estimator-estimator?noredirect=1&lq=1)
+
+- Using `tf.estimator.WarmStartSettings`
+    ***References:***
+    - [TensorFlow API tf.estimator.WarmStartSettings](https://www.tensorflow.org/api_docs/python/tf/estimator/WarmStartSettings)
+
+### Using pre-trained model from TensorFlow Hub
+
+***References:***
+
+- [Medium: Using Inception-v3 from TensorFlow Hub for transfer learning](https://medium.com/@utsumuki_neko/using-inception-v3-from-tensorflow-hub-for-transfer-learning-a931ff884526)
 
 <!--  -->
 <br>

@@ -250,7 +250,7 @@ A `tf.Session` object provides access to devices in the local machine, and remot
     ***References:***
     - [TensorFlow Guide Importing Data: Applying arbitrary Python logic with tf.py_func()](https://www.tensorflow.org/guide/datasets)
 
-## 'tf.nn'
+## `tf.nn`
 
 - `tf.nn.conv2d(input, filter, strides, padding, ...)`: Computes a 2-D convolution given 4-D `input` and `filter` tensors.
 
@@ -333,6 +333,10 @@ classifier = tf.estimator.DNNClassifier(
 
 - [Tensorflow Guide: Creating Custom Estimators](https://www.tensorflow.org/guide/custom_estimators)
 - [Github: tensorflow/models/samples/core/get_started/custom_estimator.py](https://github.com/tensorflow/models/blob/master/samples/core/get_started/custom_estimator.py)
+
+## `tf.train`
+
+- `tf.train.get_global_step`: Get the global step tensor.
 
 <!--  -->
 <br>

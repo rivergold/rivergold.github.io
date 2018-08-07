@@ -735,7 +735,31 @@ cv2.putText(img, random_str, (x, y), font, font_scale, color, thickness)
 
     ***References:***
     - [Github opencv/opencv: Different pathname resolving functionalities of imread in C++, Python](https://github.com/opencv/opencv/issues/7219)
-    - []()
+
+### Read video
+
+- Load a video
+    ```python
+    cap = cv2.VideoCapture("demo.mp4")
+    ```
+
+- Get video frame number
+    ```python
+    cap = cv2.VideoCapture("video.mp4")
+    length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    print( length )
+    ```
+    ***References:***
+    - [stackoverflow: How to know total number of Frame in a file with cv2 in python](https://stackoverflow.com/questions/25359288/how-to-know-total-number-of-frame-in-a-file-with-cv2-in-python)
+
+- Get sepcific frames of the video:
+    ```python
+    cap.set(1, <sepcific frame id>)
+    ret, frame = cap.read()
+    ```
+    ***References:***
+    - [stackoverflow: Getting specific frames from VideoCapture opencv in python](https://stackoverflow.com/questions/33523751/getting-specific-frames-from-videocapture-opencv-in-python)
+    - [stackoverflow: OpenCV-Python cv2.CV_CAP_PROP_POS_FRAMES error](https://stackoverflow.com/questions/38563079/opencv-python-cv2-cv-cap-prop-pos-frames-error)
 
 ## Cython
 

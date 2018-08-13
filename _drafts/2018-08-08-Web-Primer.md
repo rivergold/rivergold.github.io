@@ -15,6 +15,8 @@
 
 ### Apache Config
 
+After you change the apache config, you'd have to run `sudo service apache2 restart` to restart apache to allow config update.
+
 #### Change listen port
 
 Change listen port in `/etc/apache2/ports.conf` and `/etc/apache2/sites-enabled/000-default.conf`

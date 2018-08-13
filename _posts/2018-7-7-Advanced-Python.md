@@ -736,7 +736,7 @@ cv2.putText(img, random_str, (x, y), font, font_scale, color, thickness)
     ***References:***
     - [Github opencv/opencv: Different pathname resolving functionalities of imread in C++, Python](https://github.com/opencv/opencv/issues/7219)
 
-### Read video
+### Read/Write video
 
 - Load a video
     ```python
@@ -760,6 +760,40 @@ cv2.putText(img, random_str, (x, y), font, font_scale, color, thickness)
     ***References:***
     - [stackoverflow: Getting specific frames from VideoCapture opencv in python](https://stackoverflow.com/questions/33523751/getting-specific-frames-from-videocapture-opencv-in-python)
     - [stackoverflow: OpenCV-Python cv2.CV_CAP_PROP_POS_FRAMES error](https://stackoverflow.com/questions/38563079/opencv-python-cv2-cv-cap-prop-pos-frames-error)
+
+- Write video
+    ```python
+    cap = cv2.VideoCapture(0)
+    frame_width = int(cap.get(3))
+    frame_height = int(cap.get(4))
+    out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
+    while(True):
+        ret, frame = cap.read()
+        if ret is True:
+            # Write the frame into the file 'output.avi'
+            out.write(frame)
+            # Display the resulting frame
+            cv2.imshow('frame',frame)
+            # Press Q on keyboard to stop recording
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+        else:
+            break
+    cap.release()
+    out.release()
+    ```
+
+    ***References:***
+    - [Learn OpenCV: Read, Write and Display a video using OpenCV ( C++/ Python )](https://www.learnopencv.com/read-write-and-display-a-video-using-opencv-cpp-python/)
+
+- Get video frame rate
+    ```python
+    video = cv2.VideoCapture(0)
+    fps = video.get(cv2.CAP_PROP_FPS)
+    ```
+
+    ***References:***
+    - [Learn OpenCV: How to find frame rate or frames per second (fps) in OpenCV (Python / C++)](https://www.learnopencv.com/how-to-find-frame-rate-or-frames-per-second-fps-in-opencv-python-cpp/)
 
 ## Cython
 
@@ -787,6 +821,23 @@ print(d.bar.x)
 
 - [Github: makinacorpus/easydict](https://github.com/makinacorpus/easydict)
 - [Github: endernewton/tf-faster-rcnn/lib/model/config.py](https://github.com/endernewton/tf-faster-rcnn/blob/master/lib/model/config.py)
+
+## conda
+
+- `conda creat -n <env name> python=<python version>`: Create a new env
+- `conda env list`: List all env
+- `conda env remove -n <env name>`: Remove a env
+- `conda activate <env name>`: Activate a env
+- `conda deactivate`: Deactivate to base
+
+## requests
+
+### How to post a opencv image?
+
+***References:***
+
+- [GitHubGist kylehounslow/client.py Send and receive images using Flask, Numpy and OpenCV](https://gist.github.com/kylehounslow/767fb72fde2ebdd010a0bf4242371594)
+- [Blog: python中将图片从客户端(client)推到(POST)到服务器端(server)的方法](https://www.cnblogs.com/arkenstone/p/7338241.html)
 
 <br>
 

@@ -407,6 +407,12 @@ img_string = tf.read_file(<img_path>)
 img_decoded = tf.image.decode_image(img_string)
 ```
 
+**Note:** TensorFlow decode image into RGB, it is different with OpenCV.
+
+***References:***
+
+- [TensorFlow API tf.image.decode_jpeg](https://www.tensorflow.org/api_docs/python/tf/image/decode_jpeg)
+
 ### Process image with OpenCV in TensorFLow
 
 ```python
@@ -443,6 +449,18 @@ There are two ways:
 
 - [Medium: Using Inception-v3 from TensorFlow Hub for transfer learning](https://medium.com/@utsumuki_neko/using-inception-v3-from-tensorflow-hub-for-transfer-learning-a931ff884526)
 
+### Initialise optimizer variables in TensorFlow
+
+***References:***
+
+- [stackoverflow: How to initialise only optimizer variables in Tensorflow?](https://stackoverflow.com/questions/41533489/how-to-initialise-only-optimizer-variables-in-tensorflow/45624533)
+
+### Using `tf.data.Dataset` how to feed into Session
+
+***References:***
+
+- [stackoverflow: How to use dataset in TensorFlow session for training](https://stackoverflow.com/questions/47577108/how-to-use-dataset-in-tensorflow-session-for-training)
+
 <!--  -->
 <br>
 
@@ -457,6 +475,12 @@ Mainly using functions:
 - `tf.estimator.Estimator`: Build model and train, evaluate and predict.
 
 ## Training:
+
+### Using Dataset
+
+***References:***
+
+- [Blog: Dataset API详解](http://yvelzhang.site/2017/11/03/Dataset%20API/)
 
 Mainly using:
 
@@ -497,6 +521,8 @@ Find a decay function from [TensorFlow API Python API Guide Training/Decaying th
 
 - [Github tensorflow/tensorflow Issues: Estimator should be able to partially load checkpoints #10155](https://github.com/tensorflow/tensorflow/issues/10155)
 
+
+
 <!--  -->
 <br>
 
@@ -515,3 +541,19 @@ Find a decay function from [TensorFlow API Python API Guide Training/Decaying th
     It means that you run your sess without initialise Variables. May you run variable initialise and train/predict in two different session?
     ***References:***
     - [stackoverflow: TensorFlow: “Attempting to use uninitialized value” in variable initialization](https://stackoverflow.com/questions/44624648/tensorflow-attempting-to-use-uninitialized-value-in-variable-initialization/44630421)
+
+- When import tensorflow, occur error `ImportError: libcublas.so.9.0: cannot open shared object file: No such file or director`
+    It means that maybe you use wrong `cuda` version. You need to set `export LD_LIBRARY_PATH=<your cuda install path>:$LD_LIBRARY_PATH`
+
+    ***References:***
+    - [Github tensorflow/tensorflow Issue: ImportError: libcublas.so.9.0: cannot open shared object file: No such file or directory #15604](https://github.com/tensorflow/tensorflow/issues/15604)
+    - [stackoverflow: ImportError: libcublas.so.9.0: cannot open shared object file](https://stackoverflow.com/questions/48428415/importerror-libcublas-so-9-0-cannot-open-shared-object-file)
+
+- When do `x / 127.5 - 1` occur error `TypeError: unsupported operand type(s) for /: 'Tensor' and 'float'`
+    Maybe your `x` is not `tf.float32`, you can try `x = tf.cast(x, tf.float32)`
+
+- When using `tf.data.Dataset` occur error `Tensorflow GetNext() failed because the iterator has not been initialized`
+
+    ***References:***
+    - [stackoverflow: Tensorflow GetNext() failed because the iterator has not been initialized](https://stackoverflow.com/questions/48443203/tensorflow-getnext-failed-because-the-iterator-has-not-been-initialized)
+    - [TensorFlow API make_initializable_iterator](https://www.tensorflow.org/api_docs/python/tf/data/Dataset#make_initializable_iterator)

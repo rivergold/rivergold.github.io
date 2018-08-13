@@ -336,6 +336,41 @@ Press `ctrl` + `alt` + `sys rq(printscreen)` and then do not loose `ctrl` and `a
 
 - [简书: Ubuntu死机解决方法汇总](https://www.jianshu.com/p/36fb9eed82a3)
 
+## Disable the `ublock your keyring` when you start Chrome
+
+Open `Settings` -> `Details` -> `Users` -> Off `Automatic Login`
+
+***References:***
+
+- [askubuntu: How to disable the “unlock your keyring” popup?](https://askubuntu.com/questions/495957/how-to-disable-the-unlock-your-keyring-popup)
+
+## Add `New Document` option in right click context menu
+
+```bash
+touch ~/Templates/Empty\ Document
+```
+
+***References:***
+
+- [Blog: Add ‘New Document’ Option in Right Click Context Menu in Ubuntu 18.04 [Quick Tip]](https://itsfoss.com/add-new-document-option/)
+
+## Restore `/home/<user>/Templates` when you delete it by mistake.
+
+Create a new folder named `Templates` in `/home/<your user name>` and edit `~.config/user-dirs.dirs` like
+```bash
+XDG_TEMPLATES_DIR="$HOME/Templates"
+```
+
+***References:***
+
+- [askubuntu: How do I restore the Templates folder in Ubuntu 18.04?](https://askubuntu.com/questions/1041732/how-do-i-restore-the-templates-folder-in-ubuntu-18-04)
+
+## When log in, dock disapper (TODO)
+
+***References:***
+
+- [Ubuntu: icons missing after 2 fingers/horizontal scrolling on the dock](https://bugs.launchpad.net/ubuntu/+source/gnome-shell-extension-ubuntu-dock/+bug/1717486)
+- [LinuxConfig: How to customize dock panel on Ubuntu 18.04 Bionic Beaver Linux](https://linuxconfig.org/how-to-customize-dock-panel-on-ubuntu-18-04-bionic-beaver-linux)
 
 <!--  -->
 <br>
@@ -732,8 +767,20 @@ let g:ycm_add_preview_to_completeopt = 0
 - [Blog: ubuntu下安装自动补全YouCompleteMe](https://www.cnblogs.com/litifeng/p/6671446.html)
 - [Github: Valloric/YouCompleteMe Issue: Auto close preview window after insertion not closing sometimes](https://github.com/Valloric/YouCompleteMe/issues/524)
 
-## Vutrl install ssr
+## Vutrl VPS install ssr
 
 Get SSR install script from [here.](https://github.com/Alvin9999/new-pac/wiki/%E8%87%AA%E5%BB%BAss%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%95%99%E7%A8%8B)
 
 [Check if your vutrl vps IP is forbidden](https://www.vultrcn.com/11.html).
+
+## Screen recorder: Kazam
+Install
+
+```bash
+sudo apt-get install kazam
+```
+
+***References:***
+
+- [Blog: 9 Best Screen Recorders For Linux](https://itsfoss.com/best-linux-screen-recorders/)
+- [askubuntu: How to install Kazam 1.5.3?](https://askubuntu.com/questions/766440/how-to-install-kazam-1-5-3)

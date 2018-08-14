@@ -484,6 +484,11 @@ import random
 random_str = ''.join([random.choice(string.ascii_letters + string.digits) for i in range(<string length>)])
 ```
 
+## json
+
+- `json.dumps`: `dict` to `string`
+- `json.load`: `string` to `dict`
+
 <br>
 
 * * *
@@ -839,6 +844,15 @@ print(d.bar.x)
 - [GitHubGist kylehounslow/client.py Send and receive images using Flask, Numpy and OpenCV](https://gist.github.com/kylehounslow/767fb72fde2ebdd010a0bf4242371594)
 - [Blog: python中将图片从客户端(client)推到(POST)到服务器端(server)的方法](https://www.cnblogs.com/arkenstone/p/7338241.html)
 
+## flask
+
+### Start a flask app
+
+***References:***
+
+- [Blog: Build a Flask App in 30 Minutes](https://stormpath.com/blog/build-a-flask-app-in-30-minutes)
+- [Blog: flask应用启动](https://blog.csdn.net/sinat_36651044/article/details/77532510)
+
 <br>
 
 * * *
@@ -1088,6 +1102,17 @@ for url in urls:
 
 - [Blog: Python正确复制列表的方法](https://www.cnblogs.com/ifantastic/p/3811145.html)
 
+## `*` and `**` in python
+
+This [stackoverflow answer](https://stackoverflow.com/questions/36901/what-does-double-star-asterisk-and-star-asterisk-do-for-parameters) show most use of `*` and `**`.
+And you can do like this:
+
+```python
+def fun(a, b):
+    print(a, b)
+data = (20, 30)
+fun(*data)
+```
 
 <br>
 

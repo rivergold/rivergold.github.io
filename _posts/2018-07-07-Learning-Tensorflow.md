@@ -363,7 +363,6 @@ classifier = tf.estimator.DNNClassifier(
 - [Daniil's blog: Tfrecords Guide](http://warmspringwinds.github.io/tensorflow/tf-slim/2016/12/21/tfrecords-guide/)
 - [Stackoverflow: What are the advantages of using tf.train.SequenceExample over tf.train.Example for variable length features?](https://stackoverflow.com/questions/45634450/what-are-the-advantages-of-using-tf-train-sequenceexample-over-tf-train-example)
 
-
 ## Save and Restore model
 
 TensorFlow provides two model formats:
@@ -378,6 +377,7 @@ TensorFlow provides two model formats:
 - [CV-Tricks.com: A quick complete tutorial to save and restore Tensorflow models](http://cv-tricks.com/tensorflow-tutorial/save-restore-tensorflow-models-quick-complete-tutorial/)
 
 ### Restore model weights from `checkpoint`
+
 One way is: write your model, and then:
 
 ```python
@@ -395,19 +395,32 @@ sess.run(assign_ops)
 
 ## Load data
 
-### Using `tf.data.Dataset`
+### `tf.data.Dataset`
 
 1. Construct a `Dataset` from some tensors in memory, you can use `tf.data.Dataset.from_tensors()` or `tf.data.Dataset.from_tensor_slices()`.
 2. If your input data are on disk in the recommended TFRecord format, you can construct a `tf.data.TFRecordDataset`.
+
+***References:***
+
+- [Blog: tensorflow中的dataset](http://d0evi1.com/tensorflow/datasets/)
+- [Towards Data Science: Epoch vs Batch Size vs Iterations](https://towardsdatascience.com/epoch-vs-iterations-vs-batch-size-4dfb9c7ce9c9)
 
 ### Read imge
 
 ```python
 img_string = tf.read_file(<img_path>)
-img_decoded = tf.image.decode_image(img_string)
+img_decoded = tf.image.decode_jpeg(img_string)
 ```
 
 **Note:** TensorFlow decode image into RGB, it is different with OpenCV.
+
+- `tf.image.decode_image`: not give the image shape
+- `tf.image.decode_jpeg` and `tf.image.decode_png` will give the image shape
+
+***References:***
+
+- [Github tensorflow/tensorflow Issue: tf.image.decode_image doesn't return tensor's shape #8551](https://github.com/tensorflow/tensorflow/issues/8551)
+- [stackoverflow: TensorFlow:ValueError: 'images' contains no shape](https://stackoverflow.com/questions/44942729/tensorflowvalueerror-images-contains-no-shape)
 
 ***References:***
 

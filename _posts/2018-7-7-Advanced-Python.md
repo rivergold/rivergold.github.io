@@ -471,6 +471,29 @@ if os.path.exit(log_file_name): os.remove(log_file_name)
 - [stackoverflow: How to find if directory exists in Python](https://stackoverflow.com/questions/8933237/how-to-find-if-directory-exists-in-python)
 - [stackoverflow: How to delete a file or folder](https://stackoverflow.com/questions/6996603/how-to-delete-a-file-or-folder)
 
+### logger and handler
+
+Here is a e.g.
+```python
+logger = logging.getLogger('log')
+logger.setLevel(logging.INFO)
+formatter = logging.Formatter('%(asctime)s: %(message)s')
+log_file_handler = logging.FileHandler('./test.log')
+log_file_handler.setFormatter(formatter)
+log_stream_handler = logging.StreamHandler()
+log_stream_handler.setFormatter(formatter)
+logger.addHandler(log_file_handler)
+logger.addHandler(log_stream_handler)
+for i in range(10):
+    logger.info(str(i))
+```
+
+***References:***
+
+- [简书: python logging模块使用教程](https://www.jianshu.com/p/feb86c06c4f4)
+- [Blog: Python标准模块logging](https://blog.csdn.net/fxjtoday/article/details/6307285)
+
+
 ## string
 
 - `string.ascii_letters`: String of all lowercase and uppercase letter. `'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'`

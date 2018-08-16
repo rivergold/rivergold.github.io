@@ -139,6 +139,8 @@ Start Tensorboard
 tensorboard --logdir=<tensorflow run log path> [--port]
 ```
 
+A example shows how to write `tf.summary`: [Blog: Tensorflow学习笔记——Summary用法](https://www.cnblogs.com/lyc-seu/p/8647792.html)
+
 # Websites
 
 - [Stanford CS 20: Tensorflow for Deep Learning Research](http://web.stanford.edu/class/cs20si/syllabus.html)

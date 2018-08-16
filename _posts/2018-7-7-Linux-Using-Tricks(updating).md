@@ -784,3 +784,11 @@ sudo apt-get install kazam
 
 - [Blog: 9 Best Screen Recorders For Linux](https://itsfoss.com/best-linux-screen-recorders/)
 - [askubuntu: How to install Kazam 1.5.3?](https://askubuntu.com/questions/766440/how-to-install-kazam-1-5-3)
+
+## FeedReader: RSS reader
+
+Install FeedReader from [here](https://github.com/jangernert/FeedReader)
+
+## Stretchly: Break time reminder app
+
+Install stretchly from [here](https://github.com/hovancik/stretchly)

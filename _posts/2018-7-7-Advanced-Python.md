@@ -862,6 +862,18 @@ print(d.bar.x)
 
 ### How to post a opencv image?
 
+First you need to know the `type` and `field` of your post. For example,
+```python
+# Post type: file
+# Post field: image
+url = <your url>
+img = cv2.imread(<img_path>)
+_, img_encoded = cv2.imencode('.jpg', img)
+files = [('image', img_encoded.tostring())]
+response = requests.post(url, files=files)
+print(response.text)
+```
+
 ***References:***
 
 - [GitHubGist kylehounslow/client.py Send and receive images using Flask, Numpy and OpenCV](https://gist.github.com/kylehounslow/767fb72fde2ebdd010a0bf4242371594)

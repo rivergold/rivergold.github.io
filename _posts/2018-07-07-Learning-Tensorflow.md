@@ -470,11 +470,19 @@ There are two ways:
 
 - [stackoverflow: How to initialise only optimizer variables in Tensorflow?](https://stackoverflow.com/questions/41533489/how-to-initialise-only-optimizer-variables-in-tensorflow/45624533)
 
+## Load Data with `tf.data.Dataset` 
+
 ### Using `tf.data.Dataset` how to feed into Session
 
 ***References:***
 
 - [stackoverflow: How to use dataset in TensorFlow session for training](https://stackoverflow.com/questions/47577108/how-to-use-dataset-in-tensorflow-session-for-training)
+
+### Load different dataset during train
+
+***References:***
+
+- [stackoverflow: How to use Tensorflow's tf.cond() with two different Dataset iterators without iterating both?](https://stackoverflow.com/questions/46622490/how-to-use-tensorflows-tf-cond-with-two-different-dataset-iterators-without-i)
 
 <!--  -->
 <br>
@@ -536,8 +544,6 @@ Find a decay function from [TensorFlow API Python API Guide Training/Decaying th
 
 - [Github tensorflow/tensorflow Issues: Estimator should be able to partially load checkpoints #10155](https://github.com/tensorflow/tensorflow/issues/10155)
 
-
-
 <!--  -->
 <br>
 
@@ -572,3 +578,19 @@ Find a decay function from [TensorFlow API Python API Guide Training/Decaying th
     ***References:***
     - [stackoverflow: Tensorflow GetNext() failed because the iterator has not been initialized](https://stackoverflow.com/questions/48443203/tensorflow-getnext-failed-because-the-iterator-has-not-been-initialized)
     - [TensorFlow API make_initializable_iterator](https://www.tensorflow.org/api_docs/python/tf/data/Dataset#make_initializable_iterator)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
+
+# QA
+
+## Tensorflow `tf.identity()` do for what?
+
+When I watch `Tensorflow Models/resnet_model.py`, it use `inputs = tf.identity(inputs, 'initial_conv')`. Here is a good explanation from [Zhihu](https://zhuanlan.zhihu.com/p/32540546)
+
+***References:***
+
+- [知乎: TensorFlow 的 Graph 计算流程控制](https://zhuanlan.zhihu.com/p/32540546)

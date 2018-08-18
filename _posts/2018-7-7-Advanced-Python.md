@@ -1149,6 +1149,12 @@ data = (20, 30)
 fun(*data)
 ```
 
+## Python extract commpressed file
+
+***References:***
+
+- [Blog: python解压压缩包的几种方法](https://blog.csdn.net/luoshengkim/article/details/46647423)
+
 <br>
 
 * * *

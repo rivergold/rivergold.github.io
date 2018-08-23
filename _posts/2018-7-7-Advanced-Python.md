@@ -888,6 +888,38 @@ print(response.text)
 - [Blog: Build a Flask App in 30 Minutes](https://stormpath.com/blog/build-a-flask-app-in-30-minutes)
 - [Blog: flask应用启动](https://blog.csdn.net/sinat_36651044/article/details/77532510)
 
+## PIL
+
+- Load and show image
+
+```python
+from PIL import Image
+img = Image.open(<img_path>)
+img.show()
+```
+
+**Note:** PIL save image as RGB.
+
+- Convet between PIL and numpy
+
+```python
+# Numpy to PIL
+img = Image.fromarray(<np.ndarray>)
+# PIL to Numpy
+img = np.array(<PIL.Image>)
+```
+
+***References:***
+
+- [Blog: PIL中的Image和numpy中的数组array相互转换](https://www.cnblogs.com/gongxijun/p/6114232.html)
+- [stackoverflow: How to convert a PIL Image into a numpy array?](https://stackoverflow.com/questions/384759/how-to-convert-a-pil-image-into-a-numpy-array)
+
+- Draw text
+
+***References:***
+
+- [Pillow(PIL Fork)](https://pillow.readthedocs.io/en/3.0.x/reference/ImageDraw.html#example-draw-partial-opacity-text)
+
 <br>
 
 * * *

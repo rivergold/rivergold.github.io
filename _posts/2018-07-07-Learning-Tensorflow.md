@@ -594,3 +594,14 @@ When I watch `Tensorflow Models/resnet_model.py`, it use `inputs = tf.identity(i
 ***References:***
 
 - [知乎: TensorFlow 的 Graph 计算流程控制](https://zhuanlan.zhihu.com/p/32540546)
+
+## Set learning rate decay in Tensorflow
+
+A common function is `tf.train.exponential_decay`. It use `global_step` to calculate learning rate. TensorFlow `Optimimizer.minimize` need a args `global_step`. `global_step` will add 1 each batch. So if you want to update learning rate in epoch, you need to set `decay_step=<step> * num_batch`
+
+***References:***
+
+- [知乎: Tensorflow中learning rate decay的奇技淫巧](https://zhuanlan.zhihu.com/p/32923584)
+- [知乎: 使用Tensorflow过程中遇到过哪些坑？](https://www.zhihu.com/question/269968195)
+- [stackoverflow: How to set adaptive learning rate for GradientDescentOptimizer?](https://stackoverflow.com/questions/33919948/how-to-set-adaptive-learning-rate-for-gradientdescentoptimizer/33922859)
+- [Blog: Tensorflow一些常用基本概念与函数（四）](https://www.cnblogs.com/wuzhitj/p/6648641.html)

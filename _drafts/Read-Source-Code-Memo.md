@@ -41,3 +41,21 @@ $inf{}$: 最大下界
 - [wiki: 最大下界](https://zh.wikipedia.org/wiki/%E6%9C%80%E5%A4%A7%E4%B8%8B%E7%95%8C)
 
 论文中的deconv的实现为：将图片resize为输入的两倍，之后进行卷积
+
+<br>
+
+
+***
+
+<br>
+
+# Image Inpainting for Irregular Holes Using Partial Convolutions
+
+- [Github naoto0804/pytorch-inpainting-with-partial-conv](https://github.com/naoto0804/pytorch-inpainting-with-partial-conv)
+
+## Key
+
+- Model input: img_with_hole, mask, range is `[0, 1]`, then normailze wih `transforms.Normalize(mean=opt.MEAN, std=opt.STD)`
+    - `mask=1`: image
+    - `mask=0`: hole
+- output: need to be `unnormalize` and then `* 255`

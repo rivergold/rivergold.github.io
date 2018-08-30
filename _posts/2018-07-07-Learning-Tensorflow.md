@@ -484,6 +484,55 @@ There are two ways:
 
 - [stackoverflow: How to use Tensorflow's tf.cond() with two different Dataset iterators without iterating both?](https://stackoverflow.com/questions/46622490/how-to-use-tensorflows-tf-cond-with-two-different-dataset-iterators-without-i)
 
+## Using `tf.train.Saver` to save and restore `checkpoint`
+
+### Save
+
+```python
+# Build your computing graph
+# ....
+saver = tf.train.Saver()
+
+# During training
+for epoch in range(num_epoch):
+    # ...
+    saver.save(sess, epoch)
+    # TODO
+```
+
+### Restore
+
+```python
+# Build your computing graph
+# ....
+saver = tf.train.Saver()
+saver.restore(sess, <checkpont_path>)
+```
+
+**Note**
+
+If you want to restore a `.ckpt` and continue to training, you should pay a attention to your learning rate decay. Because learning rate decay computation is related to `global_step`, you need set correct `global_step` to your learning reate decay.
+
+***References:***
+
+- []
+
+### Print tensor name and value in `.ckpt`
+
+```python
+import tensorflow as tf
+from tensorflow.python.tools.inspect_checkpoint import print_tensors_in_checkpoint_file
+# Print tensors name
+print_tensors_in_checkpoint_file(file_name=<ckpt_path>, tensor_name='', all_tensor_names=True, all_tensors=False)
+# Print tensors name and value
+print_tensors_in_checkpoint_file(file_name=<ckpt_path>, tensor_name='', all_tensor_names=True, all_tensors=True)
+```
+
+***References:***
+
+- [stackoverflow: How do I find the variable names and values that are saved in a checkpoint?](https://stackoverflow.com/questions/38218174/how-do-i-find-the-variable-names-and-values-that-are-saved-in-a-checkpoint)
+
+
 <!--  -->
 <br>
 

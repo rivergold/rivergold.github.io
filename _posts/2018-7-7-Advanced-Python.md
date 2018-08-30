@@ -54,6 +54,26 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
 
 **Note:** Please read **Fluent Python** book.
 
+## Introspection
+
+> In computer programming, `introspection` refers to the ability to examine someting to determine what it is, what it knows and what it is capcable of doing.
+在计算机编程中，自省是指这种能力：检查某些事物以确定它是什么、它知道什么以及它能做什么。
+
+***References:***
+
+- [IBM developerWorks: Guide to Python introspection](https://www.ibm.com/developerworks/library/l-pyint/index.html)
+
+### Frequently-used introspection function
+
+- `getattr()`: Return the value of the named attribute of an object. If not found, it returns the default value provided to the function.
+
+    It can be used to get dynamic attribute in Python
+
+    ***References:***
+    - [Programiz: Python getattr()](https://www.programiz.com/python-programming/methods/built-in/getattr)
+    - [stackoverflow: getting dynamic attribute in python](https://stackoverflow.com/questions/13595690/getting-dynamic-attribute-in-python)
+
+
 ## list
 
 - `zip(*iterables)`: Make an iterator that aggregates elements from each of the iterables.
@@ -892,33 +912,51 @@ print(response.text)
 
 - Load and show image
 
-```python
-from PIL import Image
-img = Image.open(<img_path>)
-img.show()
-```
+    ```python
+    from PIL import Image
+    img = Image.open(<img_path>)
+    img.show()
+    ```
 
 **Note:** PIL save image as RGB.
 
 - Convet between PIL and numpy
 
-```python
-# Numpy to PIL
-img = Image.fromarray(<np.ndarray>)
-# PIL to Numpy
-img = np.array(<PIL.Image>)
-```
+    ```python
+    # Numpy to PIL
+    img = Image.fromarray(<np.ndarray>)
+    # PIL to Numpy
+    img = np.array(<PIL.Image>)
+    ```
 
-***References:***
+    ***References:***
 
-- [Blog: PIL中的Image和numpy中的数组array相互转换](https://www.cnblogs.com/gongxijun/p/6114232.html)
-- [stackoverflow: How to convert a PIL Image into a numpy array?](https://stackoverflow.com/questions/384759/how-to-convert-a-pil-image-into-a-numpy-array)
+    - [Blog: PIL中的Image和numpy中的数组array相互转换](https://www.cnblogs.com/gongxijun/p/6114232.html)
+    - [stackoverflow: How to convert a PIL Image into a numpy array?](https://stackoverflow.com/questions/384759/how-to-convert-a-pil-image-into-a-numpy-array)
 
 - Draw text
 
-***References:***
+    ***References:***
 
-- [Pillow(PIL Fork)](https://pillow.readthedocs.io/en/3.0.x/reference/ImageDraw.html#example-draw-partial-opacity-text)
+    - [Pillow(PIL Fork)](https://pillow.readthedocs.io/en/3.0.x/reference/ImageDraw.html#example-draw-partial-opacity-text)
+
+    Get text size
+
+    ***References:***
+    - [Pillow: PIL.ImageDraw.ImageDraw.textsize](https://pillow.readthedocs.io/en/5.1.x/reference/ImageDraw.html)
+
+    Draw text stroke(文本影音)
+    ***References:***
+    - [Text Stroke(文本描边 CSS演示)](http://www.css88.com/tool/css3Preview/Text-Stroke.html)
+    - [stackoverflow: Is there a way to outline text with a dark line in PIL?](https://stackoverflow.com/questions/41556771/is-there-a-way-to-outline-text-with-a-dark-line-in-pil)
+    - [[Image-SIG] how to draw a stroke/outline around text with PIL?](https://mail.python.org/pipermail/image-sig/2009-May/005681.html)
+
+## ffmpeg
+
+- Cut video with `start time` and `end time`
+
+    ***References:***
+    - [stackoverflow: Cutting the videos based on start and end time using ffmpeg](https://stackoverflow.com/questions/18444194/cutting-the-videos-based-on-start-and-end-time-using-ffmpeg)
 
 <br>
 

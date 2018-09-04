@@ -59,6 +59,12 @@ sudo apt-get install oracle-java8-installer
 - `ctr + z`: suspend foreground processes
 - `ctr + c`: kill foregrousortednd processes
 
+When you suspend a process, if you want to recover it, using `jobs` and `fg`.
+
+***References:***
+
+- [StackExchange Unix & Linux: If you ^Z from a process, it gets “stopped”. How do you switch back in?](https://unix.stackexchange.com/questions/109536/if-you-z-from-a-process-it-gets-stopped-how-do-you-switch-back-in)
+
 ## Change `pip` and `conda` donload source
 
 - `pip`
@@ -525,6 +531,17 @@ Configuration tips:
 
 - [Github: zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
 
+### Problems & Solutions
+
+- `tab completion not working`
+    ***References:***
+    - [Github robbyrussell/oh-my-zsh Issue: tab completion not working #5651](https://github.com/robbyrussell/oh-my-zsh/issues/5651)
+
+- `apt-get remove eclipse*` `*` not work, occur `no matches found: *`
+    Edit `~/.zshrc` and add `setopt no_nomatch`
+    ***References:***
+    - [Blog: zsh不兼容的坑-zsh:no matches found](https://blog.csdn.net/u012675539/article/details/52079013)
+
 ## Matlab
 
 1. Download matlab2016b from [baidu cloud](https://pan.baidu.com/s/1mi0PRqK#list/path=%2F).
@@ -602,8 +619,11 @@ Ubuntu can install by `sudo apt-get install tmux`
 
 **tmux tips:**
 
-- All tmux shortcuts need hit prefix `ctrl + b` and then
+**All tmux shortcuts need hit prefix `ctrl + b` and then**
 - `d`: detach (tmux still run)
+- `[`: Scroll in tmux
+    ***References:***
+    - [StackExchange: How do I scroll in tmux?](https://superuser.com/questions/209437/how-do-i-scroll-in-tmux)
 
 ***References:***
 

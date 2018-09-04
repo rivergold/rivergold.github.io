@@ -224,6 +224,13 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
     - [Python tutorial: 错误与异常](http://www.pythondoc.com/pythontutorial3/errors.html)
     - [RUNOOB.COM: Python异常处理](http://www.runoob.com/python/python-exceptions.html)
 
+## Packages and `__init__.py`
+
+***References***
+
+- [python3-cookbook: 10.1 构建一个模块的层级包](https://python3-cookbook.readthedocs.io/zh_CN/latest/c10/p01_make_hierarchical_package_of_modules.html)
+- [stackoverflow: What's the difference between a Python module and a Python package?](https://stackoverflow.com/questions/7948494/whats-the-difference-between-a-python-module-and-a-python-package)
+
 <br>
 
 * * *
@@ -531,6 +538,19 @@ random_str = ''.join([random.choice(string.ascii_letters + string.digits) for i 
 
 - `json.dumps`: `dict` to `string`
 - `json.load`: `string` to `dict`
+
+## pathlib
+
+`from pathlib import Path`
+
+- `Path.glob(<path>)`: Glob the given pattern in the directory represented by this path, yielding all matching files (of any kind)
+
+    > The “**” pattern means “this directory and all subdirectories, recursively”. In other words, it enables recursive globbing.
+
+- `Path.rglob(<path>)`: This is like calling Path.glob() with “**” added in front of the given pattern
+    ***References:***
+    - [stackoverflow: Recursive sub folder search and return files in a list python](https://stackoverflow.com/questions/18394147/recursive-sub-folder-search-and-return-files-in-a-list-python)
+    - [Python doc: pathlib.Path.rglob](https://docs.python.org/3/library/pathlib.html#pathlib.Path.rglob)
 
 <br>
 
@@ -1224,6 +1244,30 @@ fun(*data)
 ***References:***
 
 - [Blog: python解压压缩包的几种方法](https://blog.csdn.net/luoshengkim/article/details/46647423)
+
+## Python list file in recursion
+
+Using `pathlib`
+
+```python
+from pathlib import Path
+result = list(Path(<base path>).rglob('*.jpg'))
+```
+
+***References:***
+
+- [stackoverflow: Recursive sub folder search and return files in a list python](https://stackoverflow.com/questions/18394147/recursive-sub-folder-search-and-return-files-in-a-list-python)
+
+## Python read file and remove `\n`
+
+```python
+with open(<file_path>) as file:
+    data = file.read().splitlines()
+```
+
+***References:***
+
+- [stackoverflow: Getting rid of \n when using .readlines() [duplicate]](https://stackoverflow.com/questions/15233340/getting-rid-of-n-when-using-readlines)
 
 <br>
 

@@ -1269,6 +1269,17 @@ with open(<file_path>) as file:
 
 - [stackoverflow: Getting rid of \n when using .readlines() [duplicate]](https://stackoverflow.com/questions/15233340/getting-rid-of-n-when-using-readlines)
 
+## Python class method name rule
+
+- `_name`: Project member
+- `name_`: In order to distinguish with Python **key word** 
+- `__name`: Private member
+- `__name__`: Python internal name
+
+***References:***
+
+- [知乎: Python的类的下划线命名有什么不同？](https://www.zhihu.com/question/19754941/answer/336260809)
+
 <br>
 
 * * *

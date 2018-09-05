@@ -20,6 +20,30 @@
 
 <br>
 
+## Key Concept
+
+### `loss.backward()`
+
+Computes `dloss/dx` for every parameter `x` which has `requires_grad=True`.
+
+***References:***
+
+- [PyTorch: What does the backward() function do?](https://discuss.pytorch.org/t/what-does-the-backward-function-do/9944)
+
+### `optimizer.step()`
+
+Update parameters based on the *current* gradient (stored in `.grad` attribute of the parameter) and the update rule.
+
+***References:***
+
+- [PyTorch: How are optimizer.step() and loss.backward() related?](https://discuss.pytorch.org/t/how-are-optimizer-step-and-loss-backward-related/7350/2)
+
+<br>
+
+***
+
+<br>
+
 ## Tips
 
 ### Init variable in layers
@@ -70,7 +94,7 @@ There may have 3 ways to update a part of parameters:
 
 - [PyTorch: Autograd mechanics](https://pytorch.org/docs/stable/notes/autograd.html)
 
-For example
+**For example**
 
 ```python
 x = torch.randn(2,2)
@@ -88,3 +112,25 @@ I would suggest zeroing the relevant gradients manually after calling loss.backw
 
 - [PyTorch: How can I update only a part of one weight in the backpropagation](https://discuss.pytorch.org/t/how-can-i-update-only-a-part-of-one-weight-in-the-backpropagation/15229)
 - [PyTorch: How to modify the gradient manually?](https://discuss.pytorch.org/t/how-to-modify-the-gradient-manually/7483)
+
+## Why and when use `loss.backward(retain_graph=True)`
+
+Suppose you build a network with two loss, and they share a part of layers. When you backward one loss, if you set `retain_graph=Flase`, PyTorch will free all tensor calculated during forward, and then another loss cannot backward.
+
+`retain_graph=True` can be used during GAN traning. When the batch is to train `G`, you need to set `d_loss.backward(retain_graph=True)`. Here is a example code from [Github: WonwoongCho/Generative-Inpainting-pytorch](https://github.com/WonwoongCho/Generative-Inpainting-pytorch/blob/master/run.py#L233).
+
+```python
+def backprop(self, D=True, G=True):
+    if D:
+        self.d_optimizer.zero_grad()
+        self.loss['d_loss'].backward(retain_graph=G)
+        self.d_optimizer.step()
+    if G:
+        self.g_optimizer.zero_grad()
+        self.loss['g_loss'].backward()
+        self.g_optimizer.step()
+```
+
+***References:***
+
+- [Blog: Pytorch中retain_graph参数的作用](https://oldpan.me/archives/pytorch-retain_graph-work)

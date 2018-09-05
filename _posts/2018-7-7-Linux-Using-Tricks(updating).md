@@ -373,10 +373,11 @@ XDG_TEMPLATES_DIR="$HOME/Templates"
 
 ## When log in, dock disapper (TODO)
 
+Using `tweaks` and `dash to dock` to set `gnome-dock`. And using `alt` + `F2` and then press `r` to restart `gnome-shell`.
+
 ***References:***
 
-- [Ubuntu: icons missing after 2 fingers/horizontal scrolling on the dock](https://bugs.launchpad.net/ubuntu/+source/gnome-shell-extension-ubuntu-dock/+bug/1717486)
-- [LinuxConfig: How to customize dock panel on Ubuntu 18.04 Bionic Beaver Linux](https://linuxconfig.org/how-to-customize-dock-panel-on-ubuntu-18-04-bionic-beaver-linux)
+- [Blog ubuntu 使用日常：18.04 中杂项处理 + 美化记录](https://hacpai.com/article/1527091030020)
 
 <!--  -->
 <br>
@@ -600,14 +601,23 @@ When start netease-cloud-music occur error `Local file: "" ("netease-cloud-music
 
 - [知乎: 在Ubuntu 上有什么必装的实用软件？](https://www.zhihu.com/question/19811112)
 
-## Stardict
+## GlodenDict
 
 Powerful dictionary on Linux.
 
+```bash
+sudo apt-get install goldendict
+sudo apt-get install goldendict-wordnet
+```
+
 ***References:***
 
+- [开源中国: ubuntu下安装GoldenDict替代有道词典--支持划词选词](https://my.oschina.net/u/1998467/blog/300643)
+
+<!-- ***References:***
+
 - [StarDict Dictionaries -- 星际译王词库 词典下载](http://download.huzheng.org/)
-- [Ubuntu 14.04 安装配置强大的星际译王（stardict）词典](https://blog.csdn.net/tecn14/article/details/25917149)
+- [Ubuntu 14.04 安装配置强大的星际译王（stardict）词典](https://blog.csdn.net/tecn14/article/details/25917149) -->
 
 ## tmux
 
@@ -812,3 +822,23 @@ Install FeedReader from [here](https://github.com/jangernert/FeedReader)
 ## Stretchly: Break time reminder app
 
 Install stretchly from [here](https://github.com/hovancik/stretchly)
+
+## Gnome Tweak Tool
+
+Tool for ubuntu to config gnome
+
+### Install
+
+```bash
+sudo apt-get install gnome-tweak-tool
+```
+
+***References:***
+
+- [Linux Config: How to install Tweak Tool on Ubuntu 18.04 Bionic Beaver Linux](https://linuxconfig.org/how-to-install-tweak-tool-on-ubuntu-18-04-bionic-beaver-linux)
+
+### Extentions
+
+- `dash to dock`
+    ***References:***
+    - [Dash to Dock GNOME Shell Extension](https://micheleg.github.io/dash-to-dock/download.html)

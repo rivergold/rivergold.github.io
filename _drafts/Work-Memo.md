@@ -619,3 +619,29 @@ Hands-On Machine Learning with Scikit-Learn & Tensorflow
 - [NDC HOST: How To Install X Server on a VPS (with VNC access)](https://www.ndchost.com/wiki/vps/x-server-vnc)
 - [怎样在 CentOS 7.0 上安装和配置 VNC 服务器](https://linux.cn/article-5335-1.html)
 - [CentOS7.2安装VNC，让Windows远程连接CentOS 7.2 图形化界面](http://blog.51cto.com/12217917/2060252)
+
+## 公司CentOS虚拟机配置
+
+# Install
+
+## `build essentials`
+
+```shell
+yum groupinstall "Development Tools"
+```
+
+***References:***
+
+- [51博客: 在CentOS 7和Ubuntu 14.03上安装Build Essentials](http://blog.51cto.com/sf1314/2112529)
+
+## Vim build and install
+
+### Problems & Solutions
+
+- error
+    ```shell
+    no terminal library found checking for tgetent()... configure: error: NOT FOUND!
+    You need to install a terminal library; for example ncurses. Or specify the name of the library with --with-tlib.
+    ```
+    ***References:***
+    - [Blog 程序员的自我修养: CentOS5.5编译安装gvim7.3 失败记录](http://www.cnblogs.com/xiekeli/archive/2012/08/06/2624729.html)

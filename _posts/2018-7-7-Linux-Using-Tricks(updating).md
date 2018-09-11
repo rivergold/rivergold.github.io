@@ -655,6 +655,10 @@ Build `vim` from [source](https://github.com/vim/vim/releases):
         ```
     - Centos
         ```shell
+        yum search python3 | grep devel
+        ```
+
+        ```shell
         yum install python36-devel
         ```
     ***Referneces:***

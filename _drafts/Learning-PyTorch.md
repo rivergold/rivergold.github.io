@@ -1,26 +1,10 @@
 # PyTorch
 
-## API
-
-### `torch.nn`
-
-### `torchvision`
-
-#### `torchvision.transorms`
-
-- `transforms.ToTensor()`: Convert `numpy.ndarray` or `PIL Image` into tensor. And it will convert range `[0, 255]` into `[0, 1]`
-
-    ***References:***
-    - [PyTorch Doc: torchvision.transforms.ToTensor](https://pytorch.org/docs/stable/torchvision/transforms.html#torchvision.transforms.ToTensor)
-    - [Jonathan Hui Blog: “PyTorch - Data loading, preprocess, display and torchvision.”](https://jhui.github.io/2018/02/09/PyTorch-Data-loading-preprocess_torchvision/)
-
-<br>
-
-***
-
-<br>
-
 ## Key Concept
+
+## Tensor
+
+A [`torch.Tensor`](https://pytorch.org/docs/stable/tensors.html#torch.Tensor.to) is a multi-dimensional matrix containing elements of a single data type.
 
 ### `loss.backward()`
 
@@ -37,6 +21,26 @@ Update parameters based on the *current* gradient (stored in `.grad` attribute o
 ***References:***
 
 - [PyTorch: How are optimizer.step() and loss.backward() related?](https://discuss.pytorch.org/t/how-are-optimizer-step-and-loss-backward-related/7350/2)
+
+<br>
+
+***
+
+<br>
+
+## API
+
+### `torch.nn`
+
+### `torchvision`
+
+#### `torchvision.transorms`
+
+- `transforms.ToTensor()`: Convert `numpy.ndarray` or `PIL Image` into tensor. And it will convert range `[0, 255]` into `[0, 1]`
+
+    ***References:***
+    - [PyTorch Doc: torchvision.transforms.ToTensor](https://pytorch.org/docs/stable/torchvision/transforms.html#torchvision.transforms.ToTensor)
+    - [Jonathan Hui Blog: “PyTorch - Data loading, preprocess, display and torchvision.”](https://jhui.github.io/2018/02/09/PyTorch-Data-loading-preprocess_torchvision/)
 
 <br>
 

@@ -470,7 +470,7 @@ There are two ways:
 
 - [stackoverflow: How to initialise only optimizer variables in Tensorflow?](https://stackoverflow.com/questions/41533489/how-to-initialise-only-optimizer-variables-in-tensorflow/45624533)
 
-## Load Data with `tf.data.Dataset` 
+## Load Data with `tf.data.Dataset`
 
 ### Using `tf.data.Dataset` how to feed into Session
 
@@ -532,6 +532,55 @@ print_tensors_in_checkpoint_file(file_name=<ckpt_path>, tensor_name='', all_tens
 
 - [stackoverflow: How do I find the variable names and values that are saved in a checkpoint?](https://stackoverflow.com/questions/38218174/how-do-i-find-the-variable-names-and-values-that-are-saved-in-a-checkpoint)
 
+## Save model as `.pb` and load without rebuild the network
+
+### Save Model
+
+```python
+import tensorflow as tf
+from tensorflow.python.save_model import tag_constants
+
+sess = tf.Session()
+... # Build your network
+# Saving
+inputs = {
+    'x_placeholder': _x,
+}
+outputs = {'output': model_output}
+tf.saved_model.simple_save(sess, 'path/to/your/location', inputs, outputs)
+```
+
+Your will see `saved_model.pb` and a folder `variables` in your path.
+
+### Load Model and Predict
+
+```python
+import tensorflow as tf
+from tensorflow.python.save_model import tag_constants
+
+sess = tf.Session()
+tf.saved_model.loader.load(sess, [tag_constants.SERVING], 'path/to/your/location')
+
+_x = sess.graph.get_tensor_by_name('<placeholder name>')
+_y = sess.graph.get_tensor_by_name('<output name>')
+
+sess.run(_y, feed_dict={_x: <data>})
+```
+
+**Note:** When you load model, and `get_tensor_by_name(<name>)`, the `name` must be the `Placeholder name` or `Variable name`, like `_x = tf.placeholder(tf.float32, shape=[1, 1], name='x_placeholder')`.
+
+For the output variable, if you don't knoe the name, you can use `_y = tf.identity(_y, name='y')`.
+
+***References:***
+
+- [stackoverflow: Tensorflow: how to save/restore a model?](https://stackoverflow.com/a/50852627/4636081)
+- [stackoverflow: How to rename a variable which respects the name scope?](https://stackoverflow.com/a/34399966/4636081)
+- [Medium Blog - MetaFLow: TensorFlow: How to freeze a model and serve it with a python API](https://blog.metaflow.fr/tensorflow-how-to-freeze-a-model-and-serve-it-with-a-python-api-d4f3596b3adc)
+- [TensorFLow Develop GUIDE: Save and Restore](https://www.tensorflow.org/guide/saved_model)
+
+**TODO**
+
+- [ ] How to freeze a model?
 
 <!--  -->
 <br>

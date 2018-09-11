@@ -978,6 +978,14 @@ print(response.text)
     ***References:***
     - [stackoverflow: Cutting the videos based on start and end time using ffmpeg](https://stackoverflow.com/questions/18444194/cutting-the-videos-based-on-start-and-end-time-using-ffmpeg)
 
+- Check video information: `ffmpeg -i xxx.mp4`
+
+    Video size information is `width * height`.
+    Video `720P`, here `720` is video's height.
+
+    ***References:***
+    - [Blog: ffmpeg查看视频信息](https://blog.csdn.net/caiqiiqi/article/details/74695819)
+
 <br>
 
 * * *

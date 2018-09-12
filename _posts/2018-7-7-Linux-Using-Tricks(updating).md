@@ -582,6 +582,14 @@ Configuration tips:
 - CentOS
     Download cmake-3.3.2.rpm and cmake-gui-3.3.2 from [here](https://centos.pkgs.org/7/ghettoforge-plus-x86_64/cmake-gui-3.3.2-1.gf.el7.x86_64.rpm.html). Then use `rpm` tp install.
 
+    **CentOS** using `yum` install `.rpm` and all all dependencies
+    ```shell
+    yum localinstall <rpm http link>
+    ```
+
+    ***References:***
+    - [stackoverflow: How to install rpm file along with its all dependencies?](https://superuser.com/questions/638616/how-to-install-rpm-file-along-with-its-all-dependencies)
+
 ***References:***
 
 - [StackExchange-ask ubuntu: How to install cmake 3.2 on ubuntu 14.04?](https://askubuntu.com/questions/610291/how-to-install-cmake-3-2-on-ubuntu)
@@ -642,11 +650,15 @@ Ubuntu can install by `sudo apt-get install tmux`
 
 ## vim
 
+## Tips
+
+- `find next`: `/` and then use `n` to the next
+
 ### Install
 
 You'd better install Vim with `python` support. You can use `vim --version` to check if vim is installed with `python`
 
-Build `vim` from [source](https://github.com/vim/vim/releases):
+**Build** `vim` from [source](https://github.com/vim/vim/releases) with Python:
 
 1. Install `python-dev`
     - Ubuntu
@@ -665,8 +677,8 @@ Build `vim` from [source](https://github.com/vim/vim/releases):
     - [ubuntu packages: python3-dev (3.5.1-3)](https://packages.ubuntu.com/xenial/python3-dev)
     - [stackoverflow: How to install python3-devel on red hat 7](https://stackoverflow.com/questions/43047284/how-to-install-python3-devel-on-red-hat-7)
 
-
 2. `cd` into vim folder
+
 3. Config
     ```shell
     ./configure --with-features=huge \
@@ -678,10 +690,22 @@ Build `vim` from [source](https://github.com/vim/vim/releases):
     --enable-luainterp=yes \
     --enable-gui=gtk2 \
     --enable-cscope \
-    --prefix=/usr/local
+    --prefix=/usr/local \
+    --enable-fail-if-missing
     ```
+
+    When config `vim` with `python`, it need `python-config` or `python3-config`, you can run `python3-config --configdir` to get path of `python3-config`.
+    
+    >  I would also recommend running configure with --enable-fail-if-missing so that the configure script will fail instead of quietly warning that it didn't find a python3 config directory or executable.
+    
     **Note:** vim can be built with python2 and python3, but when install `Youcompleteme`, it need only one python version. So, when you build vim, you'd better only choose on python version. If you want to build vim with python2, you need to change `--enable-python3interp=yes` to `--enable-pythoninterp=yes` and `--with-python3-config-dir=~/software/anaconda/bin/` to `--with-python-config-dir=/usr/lib/python2.7/config`
+
+    ***References:***
+    - [stackoverflow: VIM installation and Anaconda](https://stackoverflow.com/a/41917764/4636081)
+    - [vim - configure for python3 support but still shows -python3 in version information](https://stackoverflow.com/a/26443517/4636081)
+
 4. `make -j8` and `sudo make install`
+
 5. Config `~/.vimrc`
     ```vim
     set nocompatible              " be iMproved, required

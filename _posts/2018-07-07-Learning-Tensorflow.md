@@ -582,6 +582,44 @@ For the output variable, if you don't knoe the name, you can use `_y = tf.identi
 
 - [ ] How to freeze a model?
 
+## Set GPU using size
+
+### Set specific GPU devices
+
+Here are two method:
+
+```python
+import os
+os.environ('CUDA_VISIBLE_DEVICES') = '0'
+```
+
+or
+
+```shell
+CUDA_VISIBLE_DEVICES=0 python <your python script>
+```
+
+### Set fixed GPU memory for TensorFlow
+
+```python
+sess_config = tf.ConfigProto()
+sess_config.gpu_options.per_process_gpu_memory_fraction = 0.4
+sess = tf.Session(config=sess_config)
+```
+
+### Allow used GPU memory growth
+
+```python
+sess_config = tf.ConfigProto()
+sess_config.gpu_options.allow_growth = True
+sess = tf.Session(config=sess_config)
+```
+
+***References:***
+
+- [stackoverflow: How to prevent tensorflow from allocating the totality of a GPU memory?](https://stackoverflow.com/a/48214084/4636081)
+- [CSDN: Tensorflow与Keras自适应使用显存](https://blog.csdn.net/l297969586/article/details/78905087)
+
 <!--  -->
 <br>
 

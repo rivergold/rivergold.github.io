@@ -138,3 +138,20 @@ def backprop(self, D=True, G=True):
 ***References:***
 
 - [Blog: Pytorch中retain_graph参数的作用](https://oldpan.me/archives/pytorch-retain_graph-work)
+
+## Problems & Solutions
+
+### Error about `RuntimeError: Expected object of type torch.FloatTensor but found type torch.cuda.FloatTensor for argument #2 'other'`
+
+- **Be careful about your tensor and module type is `float` or `double`**
+    Some operations in PyTorch only support `float` not support `double` type. (**not sure**)
+    - Use `<tensor>.float()` or `<tensor>.double()` to set tensor and module type.
+
+    ***References:***
+    - [PyTorch: Problems with weight array of FloatTensor type in loss function](https://discuss.pytorch.org/t/problems-with-weight-array-of-floattensor-type-in-loss-function/381)
+
+- **Be careful about your tensor and module is on CPU or GPU**
+    - Use `<tensor>.cuda()` or `<tensor>.cpu()` to set tensor and module on what device.
+
+    ***References:***
+    - [PyTorch: Global GPU Flag](https://discuss.pytorch.org/t/global-gpu-flag/17195)

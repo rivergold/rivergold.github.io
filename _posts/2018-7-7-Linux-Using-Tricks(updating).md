@@ -409,6 +409,16 @@ sudo apt-get install quicksynergy
 sudo apt-get install filezilla
 ```
 
+### Config
+
+### Set remote not show hidden file
+
+Using `file filter` to realize this.
+
+***References:***
+
+- [FileZilla: Please do not show hidden file on SFTP](https://trac.filezilla-project.org/ticket/2685)
+
 ## sogou input
 
 1. First install `fcitx`. Because Ubuntu set `Ibus` as default keyboard input framework, we need change it.
@@ -825,11 +835,51 @@ let g:ycm_add_preview_to_completeopt = 0
 - [Blog: ubuntu下安装自动补全YouCompleteMe](https://www.cnblogs.com/litifeng/p/6671446.html)
 - [Github: Valloric/YouCompleteMe Issue: Auto close preview window after insertion not closing sometimes](https://github.com/Valloric/YouCompleteMe/issues/524)
 
-## Vutrl VPS install ssr
+## Vutrl VPS 
+
+### Install ssr
 
 Get SSR install script from [here.](https://github.com/Alvin9999/new-pac/wiki/%E8%87%AA%E5%BB%BAss%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%95%99%E7%A8%8B)
 
 [Check if your vutrl vps IP is forbidden](https://www.vultrcn.com/11.html).
+
+### Install git
+
+Set server:
+
+1. Install git: `yum install git`
+2.  
+
+***References:***
+
+- [Blog: 在VPS上搭建Git服务器](http://liujinlongxa.com/2016/08/07/%E5%9C%A8VPS%E4%B8%8A%E6%90%AD%E5%BB%BAGit%E6%9C%8D%E5%8A%A1%E5%99%A8/)
+- [Shelton Blog: 搭建自己的git服务器](http://shelton13.github.io/2016/11/21/%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84git%E6%9C%8D%E5%8A%A1%E5%99%A8/)
+- [Github LandChanning/DevNote 搭建Git服务器](https://github.com/LandChanning/DevNote/blob/master/20160716_%E6%90%AD%E5%BB%BAGit%E6%9C%8D%E5%8A%A1%E5%99%A8.md)
+
+#### Somethings about `ssh`
+
+`ssh` config file is in `/etc/ssh/sshd_config`
+
+```shell
+# Open rsa
+RSAAuthentication yes
+PubkeyAuthentication yes
+AuthorizedKeysFile .ssh/authorized_keys
+# Open password
+PermitEmptyPasswords no
+PasswordAuthentication yes
+```
+
+**注：** `ssh`可以设置成支持`ras`公钥秘钥的登录方式（需要你将自己电脑上的公钥放置到服务器的`authorized_keys`），同时也支持密码的登录
+
+After you change the `ssh_config`, you need to restart `ssh` by `sudo service sshd restart`.
+
+***References:***
+
+- [CentOS: Securing OpenSSH](https://wiki.centos.org/HowTos/Network/SecuringSSH)
+- [Blog: Vultr VPS SSH密钥登录](http://zlxdike.github.io/2017/05/28/Vultr-VPS-SSH%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95/)
+
+**遇到的问题:** 在Ubuntu下使用`ctr` + `c`拷贝`rsa_pub`时，出现在粘贴后第一行的字母丢失的问题，暂时还未解决。
 
 ## Screen recorder: Kazam
 Install

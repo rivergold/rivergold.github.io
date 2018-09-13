@@ -645,3 +645,31 @@ yum groupinstall "Development Tools"
     ```
     ***References:***
     - [Blog 程序员的自我修养: CentOS5.5编译安装gvim7.3 失败记录](http://www.cnblogs.com/xiekeli/archive/2012/08/06/2624729.html)
+
+# Project
+
+## Logger
+
+### Memo
+
+#### Python global logger
+
+***References:***
+
+- [stackoverflow: Python: logging module - globally](https://stackoverflow.com/a/7622029/4636081)
+
+#### Get Python module name
+
+***References:***
+
+- [stackoverflow: How can I access the current executing module or class name in Python?](https://stackoverflow.com/a/603460/4636081)
+- [stackoverflow: Python - get full package module name](https://stackoverflow.com/a/11705103/4636081)
+
+# Software
+
+## zotero
+
+文献管理软件
+
+- [zotero](https://www.zotero.org/download/)
+- [知乎: Zotero 5.0使用教程/坚果云同步盘和Zotero的配置过程详解](https://zhuanlan.zhihu.com/p/28325366)

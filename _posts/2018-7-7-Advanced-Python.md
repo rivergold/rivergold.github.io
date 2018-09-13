@@ -231,6 +231,14 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
 - [python3-cookbook: 10.1 构建一个模块的层级包](https://python3-cookbook.readthedocs.io/zh_CN/latest/c10/p01_make_hierarchical_package_of_modules.html)
 - [stackoverflow: What's the difference between a Python module and a Python package?](https://stackoverflow.com/questions/7948494/whats-the-difference-between-a-python-module-and-a-python-package)
 
+## Built-in Functions
+
+- `hasattr(object, name)`: Check to see if a object has the attribute
+
+***References:***
+
+- [Programiz: Python hasattr](https://www.programiz.com/python-programming/methods/built-in/hasattr)
+
 <br>
 
 * * *
@@ -308,6 +316,18 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
 
         - Parse arguments
             `args = parser.parse_args()`
+
+### Tips
+
+- `'action=store_true'`
+    ```python
+    parser.add_argument('--gpu', action='store_true')
+    ```
+    If you add `bool=True`, it will throw an error.
+
+    ***References:***
+
+    - [Python Issue 24754](https://bugs.python.org/issue24754)
 
 
 ## collections
@@ -692,6 +712,18 @@ print(x.shape)
 >>> (2, 2, 1)
 ```
 
+### `stack`
+
+- `stack`: stack list of np.ndarray along axis
+
+```python
+X=np.stack([np.array(self.plot_data['X'])] * len(self.plot_data['legend']), 1)
+```
+
+***References:***
+
+- [CSDN: Python numpy函数hstack() vstack() stack() dstack() vsplit() concatenate()](https://blog.csdn.net/garfielder007/article/details/51378296)
+
 <br>
 
 ## OpenCV
@@ -897,6 +929,14 @@ print(d.bar.x)
 - `conda env remove -n <env name>`: Remove a env
 - `conda activate <env name>`: Activate a env
 - `conda deactivate`: Deactivate to base
+
+### When in virtual environment, please use `conda` to install package instead of `pip`
+
+**`pip install` will install packages globally**
+
+***References:***
+
+- [Github ContinuumIO/anaconda-issues: Use 'pip install' in the virtual environment created by conda #1429](https://github.com/ContinuumIO/anaconda-issues/issues/1429)
 
 ## requests
 
@@ -1287,6 +1327,18 @@ with open(<file_path>) as file:
 ***References:***
 
 - [知乎: Python的类的下划线命名有什么不同？](https://www.zhihu.com/question/19754941/answer/336260809)
+
+## Covert string representation of list to list
+
+```python
+import ast
+x = "['a', 'b']"
+x = ast.literal_eval(x)
+```
+
+***References:***
+
+- [stackoverflow: Convert string representation of list to list](https://stackoverflow.com/a/1894296/4636081)
 
 <br>
 

@@ -1,12 +1,12 @@
 # PyTorch
 
-## Key Concept
+# Key Concept
 
 ## Tensor
 
 A [`torch.Tensor`](https://pytorch.org/docs/stable/tensors.html#torch.Tensor.to) is a multi-dimensional matrix containing elements of a single data type.
 
-### `loss.backward()`
+## `loss.backward()`
 
 Computes `dloss/dx` for every parameter `x` which has `requires_grad=True`.
 
@@ -14,7 +14,7 @@ Computes `dloss/dx` for every parameter `x` which has `requires_grad=True`.
 
 - [PyTorch: What does the backward() function do?](https://discuss.pytorch.org/t/what-does-the-backward-function-do/9944)
 
-### `optimizer.step()`
+## `optimizer.step()`
 
 Update parameters based on the *current* gradient (stored in `.grad` attribute of the parameter) and the update rule.
 
@@ -28,13 +28,13 @@ Update parameters based on the *current* gradient (stored in `.grad` attribute o
 
 <br>
 
-## API
+# API
 
-### `torch.nn`
+## `torch.nn`
 
-### `torchvision`
+## `torchvision`
 
-#### `torchvision.transorms`
+### `torchvision.transorms`
 
 - `transforms.ToTensor()`: Convert `numpy.ndarray` or `PIL Image` into tensor. And it will convert range `[0, 255]` into `[0, 1]`
 
@@ -48,9 +48,9 @@ Update parameters based on the *current* gradient (stored in `.grad` attribute o
 
 <br>
 
-## Tips
+# Tips
 
-### Init variable in layers
+## Init variable in layers
 
 **Example**
 
@@ -83,7 +83,7 @@ class PartialConv(nn.Module):
         self.input_conv.apply(weights_init('kaiming'))
 ```
 
-### Only update the parameters of a few nodes
+## Only update the parameters of a few nodes
 
 There may have 3 ways to update a part of parameters:
 
@@ -139,7 +139,37 @@ def backprop(self, D=True, G=True):
 
 - [Blog: Pytorch中retain_graph参数的作用](https://oldpan.me/archives/pytorch-retain_graph-work)
 
+<br>
+
+***
+
+<br>
+
+# visdom
+
+## Basics
+
+## Plotting
+
+### `vis.line(X, Y, opt, win)`
+
+- `Y`: `N` or `N * M` tensor that specifies the values of the `M` lines (that connect `N` points)
+- `win`: The window id. If you want to plot in the same window in different epoch.
+    **Note:** If you don't set `win`, `visdom` will built a new window every time when you plot.
+
 ## Problems & Solutions
+
+### Could not connect to Visdom server
+
+Maybe the data use pass to `vis.line` or other plot/show function is not right. Place check your data.
+
+<br>
+
+***
+
+<br>
+
+# Common Problems & Solutions
 
 ### Error about `RuntimeError: Expected object of type torch.FloatTensor but found type torch.cuda.FloatTensor for argument #2 'other'`
 

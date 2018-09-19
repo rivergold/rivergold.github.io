@@ -920,3 +920,23 @@ sudo apt-get install gnome-tweak-tool
 - `dash to dock`
     ***References:***
     - [Dash to Dock GNOME Shell Extension](https://micheleg.github.io/dash-to-dock/download.html)
+
+## LibreOffice
+
+### Using `simsun` in LibreOffice
+
+1. Prepare `simsun` and `微软雅黑`, you can download from [here](http://blog.51cto.com/geekz/716535)
+2. Copy `.tff` into `/user/share/fonts` and run `fc-cache-fv` update font cache.
+
+***References:***
+
+- [Blog: Ubuntu 字体美化-微软雅黑和宋体](http://blog.51cto.com/geekz/716535)
+- [LibreOffice: 适用于 LibreOffice 的中日韩字体](https://zh-cn.libreoffice.org/download/fonts/)
+
+## Shutter
+
+A screenshot software on Ubuntu. And you can set keyboard shotcut for it.
+
+***References:***
+
+- [Linux公社: Ubuntu 安装截图工具Shutter，并设置快捷键 Ctrl+Alt+A](https://www.linuxidc.com/Linux/2015-07/119753.htm)

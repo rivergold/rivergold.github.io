@@ -219,6 +219,20 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 docker run -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix 
 ```
 
+It may occur error:
+```shell
+No protocol specified
+QXcbConnection: Could not connect to display :0
+[1]    6407 abort (core dumped)  cmake-gui
+```
+
+Need run `xhost +local:docker`
+
+***References:***
+
+- [DOCKER COMMUNITY FORUMS: Start a GUI-Application as root in a Ubuntu Container](https://forums.docker.com/t/start-a-gui-application-as-root-in-a-ubuntu-container/17069)
+
+
 ## [Windows] How run linux gui in docker container on docker for windows?
 
 1. Install **Cygwin** with **Cygwin/x** on your computer.
@@ -297,7 +311,20 @@ SHELL ["/bin/bash", "-c"]
 - [Github moby/moby Issues: How to make builder RUN use /bin/bash instead of /bin/sh #7281](https://github.com/moby/moby/issues/7281)
 - [docker docs: run](https://docs.docker.com/engine/reference/builder/#run)
 
-## Problems and Solutions
+- `RUN cd <path>`: it only work at current command.
+    
+    ```dockerfile
+    # miniconda.sh in ~/software
+    RUN cd ~/software
+    RUN bash miniconda.sh
+    > error: cannot find miniconda.sh
+    ```
+
+### `COPY`
+
+`COPY [src] [dist]`: The dist path in docker container must be absolute path.
+
+## Tips
 
 ### `echo` string into file with line break
 
@@ -313,15 +340,44 @@ echo -e "\n<string>\n"
 ### Install `anaconda` in dockerfile
 
 ```docker
+# Method 1: From web and download install pack
 RUN ["/bin/bash", "-c", "wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O <path>/miniconda.sh"]
 RUN ["/bin/bash", "-c", "$HOME/miniconda.sh -b -p <path>/anaconda"]
-ENV PATH="$HOME/conda/bin:$PATH"
+
+# Method 2: Copy anaconda/miniconda.sh and install
+COPY ./Miniconda3-latest-Linux-x86_64.sh /root/software
+RUN cd /root/software &&  /bin/bash ./Miniconda3-latest-Linux-x86_64.sh -b -p /root/software/anaconda
+
+# Add conda into PATH
+ENV PATH="$HOME/anaconda/bin:$PATH"
 ```
+
+**Note** When I use `COPY ./Miniconda3-latest-Linux-x86_64.sh ~/software`, docker failed to copy file into `/root/software` and `bash` cannot find the file. But **absolute path** worked！
 
 ***References:***
 
 - [conda docs: Installing in silent mode](https://conda.io/docs/user-guide/install/macos.html#install-macos-silent)
 - [Gtihub: faircloth-lab/conda-recipes](https://github.com/faircloth-lab/conda-recipes/blob/master/docker/centos6-conda-build/Dockerfile)
+
+## Problems & Solutions
+
+### Dockerfile with CentOS `yum install xxx` occur error `Rpmdb checksum is invalid: dCDPT(pkg checksums): xxxx.amzn1`
+
+```docker
+RUN yum instal -y yum-plugin-ovl
+```
+
+***References:***
+
+- [AWS Discussion Forums: Rpmdb checksum is invalid on yum install, amazonlinux as a docker base](https://forums.aws.amazon.com/thread.jspa?threadID=244745)
+- [ORACLE: 2.6 Overlayfs Error with Docker](https://docs.oracle.com/cd/E93554_01/E69348/html/uek4-czc_xmc_xt.html)
+- [Github moby/moby: overlayfs fails to run container with a strange file checksum error #10180](https://github.com/moby/moby/issues/10180#issuecomment-378005800)
+
+
+### `COPY ../installer/Miniconda3-latest-Linux-x86_64.sh /root/software` occur error `COPY failed: Forbidden path outside the build context: ../installer/Miniconda3-latest-Linux-x86_64.sh`
+
+Please use absolute path.
+
 
 ## My dockerfile
 
@@ -329,26 +385,59 @@ ENV PATH="$HOME/conda/bin:$PATH"
 FROM nvidia/cuda:8.0-devel-ubuntu16.04
 
 SHELL ["/bin/bash", "-c"]
+# ADD ./sources.list /etc/apt/
+RUN sed -i s@http://archive.ubuntu.com/ubuntu/@http://mirrors.aliyun.com/ubuntu/@g /etc/apt/sources.list
 
-ADD ./sources.list /etc/apt/
-
-RUN apt-get update && apt-get install -y wget
+RUN apt-get update && apt-get install -y wget git
 
 RUN mkdir ~/software
+# ============================
+# Install zsh
+# ============================
+RUN apt-get -y install zsh
+RUN chsh -s $(which zsh)
+# RUN sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+COPY ./oh-my-zsh-install.sh /root/software
+RUN cd /root/software && bash oh-my-zsh-install.sh && rm -rf oh-my-zsh-install.sh
+RUN sed -i s@"ZSH_THEME=\"robbyrussell\""@"ZSH_THEME=\"ys\""@g ~/.zshrc
+SHELL ["/bin/zsh", "-c"]
+RUN source ~/.zshrc
 
-RUN ["/bin/bash", "-c", "wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /root/software/miniconda3.sh"]
 
-RUN cd ~/software && /bin/bash ./miniconda3.sh -b -p ~/software/anaconda
-ENV PATH ~/software/anaconda/bin:$PATH
+# ===================
+# Install miniconda
+# ===================
+# RUN ["/bin/bash", "-c", "wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /root/software/miniconda3.sh"]
+# RUN cd ~/software && /bin/bash ./miniconda3.sh -b -p ~/software/anaconda
+ADD ./Miniconda3-latest-Linux-x86_64.sh /root/software
+RUN cd ~/software && /bin/bash Miniconda3-latest-Linux-x86_64.sh -b -p ~/software/anaconda && rm -rf Miniconda3-latest-Linux-x86_64.sh
+ENV PATH="/root/software/anaconda/bin:${PATH}"
 
-
+# ===================
+# Config pip
+# ===================
 RUN mkdir ~/.pip && touch ~/.pip/pip.conf
-
 RUN echo -e "[global]\ntrusted-host=mirrors.aliyun.com\nindex-url=http://mirrors.aliyun.com/pypi/simple" >> ~/.pip/pip.conf
+RUN pip install --upgrade pip
 
-
-RUN pip --no-cache-dir install numpy, tensorflow-gpu
+# ============================
+# python packages
+# ============================
+RUN pip install numpy
 ```
+
+### Tips
+
+- `sed -i s@"ZSH_THEME=\"robbyrussell\""@"ZSH_THEME=\"ys\""@g ~/.zshrc`
+    `sed -i s@ZSH_THEME="robbyrussell"@ZSH_THEME="ys"@g ~/.zshrc` not work, if `"` in source or replace string.
+
+- `source ~/.zshrc` must use `zsh`, so need to set `SHELL ["/bin/zsh", "-c"]` before.
+
+- Dockerfile change `$PATH`
+    `ENV PATH=<path>:$PATH`
+    ***References:***
+    - [DOCKER COMMUNITY FORUMS: Change $PATH in ubuntu container so that it is accessible from outside the shell](https://forums.docker.com/t/change-path-in-ubuntu-container-so-that-it-is-accessible-from-outside-the-shell/19817/2)
+    - [stackoverflow: In a Dockerfile, How to update PATH environment variable?](https://stackoverflow.com/a/38742545/4636081)
 
 <!--  -->
 <br>

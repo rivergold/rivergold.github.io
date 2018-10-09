@@ -472,6 +472,21 @@ Caffe use a `im2col` to implement convolution, the key thought is:
 - [知乎：在Caffe中如何计算卷积](https://www.zhihu.com/question/28385679)
 - [Github Yangqing/caffe: Convolution in Caffe: a memo](https://github.com/Yangqing/caffe/wiki/Convolution-in-Caffe:-a-memo)
 
+<br>
+
+* * *
+
+<br>
+
+# Model Framework Convert
+
+## Caffe to IR
+
+***References:***
+
+- [PyTorch: Loading caffe models in pytorch](https://discuss.pytorch.org/t/loading-caffe-models-in-pytorch/20324)
+- [Github Microsoft/MMdnn How to add new type of layers in converting caffe model? #443](https://github.com/Microsoft/MMdnn/issues/443)
+
 
 <!-- # Ubuntu gcc from 5.x to 4.8
 ```bash

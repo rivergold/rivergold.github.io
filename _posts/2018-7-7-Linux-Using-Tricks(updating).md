@@ -940,3 +940,93 @@ A screenshot software on Ubuntu. And you can set keyboard shotcut for it.
 ***References:***
 
 - [Linux公社: Ubuntu 安装截图工具Shutter，并设置快捷键 Ctrl+Alt+A](https://www.linuxidc.com/Linux/2015-07/119753.htm)
+
+## VNC
+
+Install VNC server on Remote PC and use VNC client to get desktop of remote pc at local.
+
+### Install
+
+1. Install VNC server on Remote
+
+    ```shell
+    yum install tigervnc-server
+    ```
+
+2. Install GNOME Desktop
+
+    ```shell
+    yum groupinstall -y "GNOME Desktop"
+    ```
+
+    Then, you need to `reboot` your remote computer.
+
+3. Configure VNC Service
+
+    ```shell
+    cp /lib/systemd/system/vncserver@.service /etc/systemd/system/vncserver@:1.service 
+    ```
+
+    And then `vim` `vncserver@:1.service`,
+
+    ```vim
+    32 [Unit]
+    33 Description=Remote desktop service (VNC)
+    34 After=syslog.target network.target
+    35 
+    36 [Service]
+    37 Type=forking
+    38 # Clean any existing files in /tmp/.X11-unix environment
+    39 ExecStartPre=/bin/sh -c '/usr/bin/vncserver -kill %i > /dev/null 2>&1 || :'
+    40 ExecStart=/usr/sbin/runuser -l <USER> -c "/usr/bin/vncserver %i"
+    41 PIDFile=/home/<USER>/.vnc/%H%i.pid
+    42 ExecStop=/bin/sh -c '/usr/bin/vncserver -kill %i > /dev/null 2>&1 || :'
+    43 
+    44 [Install]
+    45 WantedBy=multi-user.target
+    ```
+    You need to set `<USER>` to your remote pc user, e.g. if your remote pc user is root, you need to set `<USER>` as `root`.
+
+4. Make config effective
+
+    ```shell
+    systemctl daemon-reload
+    ```
+
+5. Set password
+
+    ```shell
+    vncpassed
+    ```
+
+6. Start VNC
+
+    ```shell
+    systemctl enable vncserver@:1.service #设置开机启动
+    systemctl start vncserver@:1.service #启动vnc会话服务
+    systemctl status vncserver@:1.service #查看nvc会话服务状态
+    systemctl stop vncserver@:1.service #关闭nvc会话服务
+    netstat -lnt | grep 590*      #查看端口
+    ```
+
+7. COnfigure remote pc firewall to allow `5901`
+
+    ```shell
+    firewall-cmd --state
+    > running
+    # If not running
+    systemctl start firewalld
+    ```
+
+    Then allow `5901`
+
+    ```shell
+    firewall-cmd --permanent --zone=public --add-port=5901/tcp
+    ```
+
+8. Use VNC client to connect vnc
+
+***References:***
+
+- [Blog: CentOS7.2安装VNC，让Windows远程连接CentOS 7.2 图形化界面](http://blog.51cto.com/12217917/2060252)
+- [DigitalOcean: How To Install and Configure VNC Remote Access for the GNOME Desktop on CentOS 7](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-remote-access-for-the-gnome-desktop-on-centos-7)

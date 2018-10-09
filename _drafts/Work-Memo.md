@@ -599,17 +599,9 @@ Hands-On Machine Learning with Scikit-Learn & Tensorflow
 
 1. Install `GNOME Desktop`
 2. Install `tigervnc-server`
-3. Config
-    `~/.vnc/xstartup`
-    ```bash
-    #!/bin/sh
-    [ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
-    [ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
-    xsetroot -solid grey
-    vncconfig -iconic &
-    x-terminal-emulator -geometry 80x24+10+10 -ls -title "$VNCDESKTOP Desktop" &
-    x-window-manager &
-    ```
+3. Copy config file
+4. sys start
+
 
 ***References:***
 

@@ -465,6 +465,23 @@ RUN pip install numpy
 - [nvidia/cuda](https://hub.docker.com/r/nvidia/cuda/)
 - [dl-docker](https://github.com/floydhub/dl-docker): all-in-one docker image for deep learning.
 
+# Docker Images
+
+## Ubuntu 16.04
+
+### Some Problems
+
+- If you want to build vim 8.0 with python3.6, you need install `python3.6-dev`. But Ubuntu 16.04 not have this package.
+
+    ```shell
+    sudo add-apt-repository ppa:deadsnakes/ppa
+    ```
+
+    ***References:***
+
+    - [stackoverflow: Why can't I install python3.6-dev on Ubuntu16.04](https://stackoverflow.com/questions/43621584/why-cant-i-install-python3-6-dev-on-ubuntu16-04)
+    - [vsupalov: Developing With Python 3.6 on Ubuntu 16.04 LTS - Getting Started and Keeping Control](https://vsupalov.com/developing-with-python3-6-on-ubuntu-16-04/)
+
 <!--  -->
 <br>
 

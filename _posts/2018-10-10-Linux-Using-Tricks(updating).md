@@ -136,10 +136,16 @@ wget [options] <url>
 | Options |  whole  |                Description                         |
 |:--:|:------------:|:--------------------------------------------------:|
 | -c | --continue | Continue getting a partially-downloaded file. |
+| -O | --output-document=FILE  | Write documents to FILE (Change download file name) |
 
+Download batch url from txt
+
+```shell
+wget -r <downloadlink.txt>
+```
 
 ***References:***
-
+- [Blog: wget批量下载](http://tomrose.iteye.com/blog/1055640)
 - [每天一个linux命令（61）：wget命令](http://www.cnblogs.com/peida/archive/2013/03/18/2965369.html)
 - [Computer Hope: Linux wget command](https://www.computerhope.com/unix/wget.htm)
 
@@ -660,7 +666,7 @@ Ubuntu can install by `sudo apt-get install tmux`
 
 ## vim
 
-## Tips
+### Tips
 
 - `find next`: `/` and then use `n` to the next
 
@@ -1030,3 +1036,11 @@ Install VNC server on Remote PC and use VNC client to get desktop of remote pc a
 
 - [Blog: CentOS7.2安装VNC，让Windows远程连接CentOS 7.2 图形化界面](http://blog.51cto.com/12217917/2060252)
 - [DigitalOcean: How To Install and Configure VNC Remote Access for the GNOME Desktop on CentOS 7](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-remote-access-for-the-gnome-desktop-on-centos-7)
+
+## gnome-tweaks
+
+Free customization and settings manager for the GNOME desktop.
+
+***References:***
+
+- [LINUXCONFIG.org How to install Tweak Tool on Ubuntu 18.04 Bionic Beaver Linux](https://linuxconfig.org/how-to-install-tweak-tool-on-ubuntu-18-04-bionic-beaver-linux)

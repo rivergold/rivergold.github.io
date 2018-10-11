@@ -1026,6 +1026,21 @@ print(response.text)
     ***References:***
     - [Blog: ffmpeg查看视频信息](https://blog.csdn.net/caiqiiqi/article/details/74695819)
 
+## wget
+
+```shell
+pip install wget
+```
+
+```python
+import wget
+wget.download(<link>, out=<name>)
+```
+
+***References:***
+
+- [stackoverflow: Python equivalent of a given wget command](https://stackoverflow.com/a/28313383/4636081)
+
 <br>
 
 * * *

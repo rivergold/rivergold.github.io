@@ -1028,6 +1028,7 @@ Install VNC server on Remote PC and use VNC client to get desktop of remote pc a
 
     ```shell
     firewall-cmd --permanent --zone=public --add-port=5901/tcp
+    firewall-cmd --reload
     ```
 
 8. Use VNC client to connect vnc

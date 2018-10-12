@@ -572,6 +572,27 @@ random_str = ''.join([random.choice(string.ascii_letters + string.digits) for i 
     - [stackoverflow: Recursive sub folder search and return files in a list python](https://stackoverflow.com/questions/18394147/recursive-sub-folder-search-and-return-files-in-a-list-python)
     - [Python doc: pathlib.Path.rglob](https://docs.python.org/3/library/pathlib.html#pathlib.Path.rglob)
 
+## subprocess
+
+Run bash command in Python.
+
+```python
+import subprocess
+p = subprocess.Popen(<command>, shell=True, stdout=subprocess.PIPE)
+info, error = p.communicate()
+info = info.decode('utf-8')
+```
+
+- `shell=True`: If your `command` is written as `'ls -l'`, you need to set `shell=True`; if `command` is written as `['ls', '-l']`, you don't need to set `shell=False`.
+
+- `stdout=subprocess.PIPE`: Use `PIPE` to get stdout.
+
+***References:***
+
+- [stackoverflow: Actual meaning of 'shell=True' in subprocess](https://stackoverflow.com/questions/3172470/actual-meaning-of-shell-true-in-subprocess)
+- [Blog: python中的subprocess.Popen（）使用](https://www.cnblogs.com/zhoug2020/p/5079407.html)
+- [Linux运维笔记: Python subprocess模块](https://blog.linuxeye.cn/375.html)
+
 <br>
 
 * * *
@@ -1354,6 +1375,17 @@ x = ast.literal_eval(x)
 ***References:***
 
 - [stackoverflow: Convert string representation of list to list](https://stackoverflow.com/a/1894296/4636081)
+
+## Convert `byte` into string
+
+```python
+a = b'abcd'
+b = a.decode('utf-8')
+```
+
+***References:***
+
+- [stackoverflow: Convert bytes to a string?](https://stackoverflow.com/a/606199/4636081)
 
 <br>
 

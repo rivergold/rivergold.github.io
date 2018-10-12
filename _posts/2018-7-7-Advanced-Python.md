@@ -1371,14 +1371,13 @@ with open(<file_path>) as file:
 
 ## Python class method name rule
 
-- `_name`: Protected member
+- `_name`: Private or Protected member
 - `name_`: In order to distinguish with Python **key word** 
-- `__name`: Private member
 - `__name__`: Python internal name
 
 ***References:***
 
-- [知乎: Python的类的下划线命名有什么不同？](https://www.zhihu.com/question/19754941/answer/336260809)
+- [Google Python Style Guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md#3162-naming-convention)
 
 ## Covert string representation of list to list
 

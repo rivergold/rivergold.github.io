@@ -1128,6 +1128,22 @@ from . import a
 from . import b
 ```
 
+Then, you can import package like this,
+
+```python
+from package import subpackage1
+print(subpackage1.a.<variable>)
+```
+
+If your `subpackage1's __init__py` and `subpackage2's __init__py` are empty, you need
+
+```python
+import package.subpackage1 import a
+print(a.<variable>)
+# import package.subpackage1.a import <variable>
+# print(<variable>)
+```
+
 If `b.py` want to import method or variable in `a.py`,
 
 ```python
@@ -1355,7 +1371,7 @@ with open(<file_path>) as file:
 
 ## Python class method name rule
 
-- `_name`: Project member
+- `_name`: Protected member
 - `name_`: In order to distinguish with Python **key word** 
 - `__name`: Private member
 - `__name__`: Python internal name

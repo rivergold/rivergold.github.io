@@ -48,3 +48,17 @@ sudo ufw allow <your listen port>
 ***References:***
 
 - [Blog: Ubuntu默认防火墙安装、启用、配置、端口、查看状态相关信息](https://www.cnblogs.com/toughlife/p/5475615.html)
+
+<br>
+
+***
+
+<br>
+
+# TCP
+
+## Basics
+
+TCP client not need to specify the port.
+
+**理解：** TCP client不需要指定端口号

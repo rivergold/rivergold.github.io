@@ -1,8 +1,12 @@
 # Apache
 
-## Build a Simple Web File Server
+## Build a HTTP Server
 
-### Install
+- [APACHE HTTP Server Documentation Compiling and Installing](http://httpd.apache.org/docs/current/install.html#customize)
+
+### Ubuntu
+
+#### Install
 
 ***References:***
 
@@ -13,7 +17,7 @@
 - [简书: Linux搭建简单的http文件服务器](https://www.jianshu.com/p/e1a6219167cf)
 - [Blog: Ubuntu下Apache服务器的配置](https://www.ezlippi.com/blog/2016/01/apache-configuration-in-ubuntu.html)
 
-### Apache Config
+#### Apache Config
 
 After you change the apache config, you'd have to run `sudo service apache2 restart` to restart apache to allow config update.
 
@@ -30,6 +34,42 @@ sudo vim /etc/apache2/sites-enabled/000-default.conf
 
 - [TecMint: How to Change Apache HTTP Port in Linux](https://www.tecmint.com/change-apache-port-in-linux/)
 - [OSTechNix: How To Change Apache Default Port To A Custom Port](https://www.ostechnix.com/how-to-change-apache-ftp-and-ssh-default-port-to-a-custom-port-part-1/)
+
+### CentOS
+
+#### Install
+
+```shell
+sudo yum install httpd
+sudo systemctl enable httpd
+sudo systemctl start httpd
+```
+
+#### Configure
+
+Change http work folder `DocumentRoot`
+
+1. vim `/etc/httpd/conf/httpd.conf`
+    ```vim
+    #
+    121 # DocumentRoot "/var/www/html"
+    122 DocumentRoot "/data/www"
+    #
+    131 # <Directory "/var/www">
+    132 <Directory "/data/www">
+    #
+    141 #<Directory "/var/www/html">
+    142 <Directory "/data/www">
+    ```
+
+2. vim `/etc/httpd/conf.d/welcome.conf`
+    Comment all lines in this file.
+
+***References:***
+
+- [TecMint: How to Change Default Apache ‘DocumentRoot’ Directory in Linux](https://www.tecmint.com/change-root-directory-of-apache-web-server/)
+- [CSDN: Apache禁用测试页（默认页）](https://blog.csdn.net/Aguangg_6655_la/article/details/53915917)
+
 
 ### Problems & Solution
 

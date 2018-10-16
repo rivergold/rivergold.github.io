@@ -260,6 +260,17 @@ Using shortcut `ctr` + `l`, the gui will show current folder path.
 
 - [Blog: ubuntu 16.04 LTS - 显示文件路径](https://blog.csdn.net/chengyq116/article/details/78631110)
 
+## Show total number of files in folder
+
+```shell
+ls | wc -l
+```
+
+***References:***
+
+- [stackoverflow: Count number of files within a directory in Linux? [closed]](https://stackoverflow.com/questions/20895290/count-number-of-files-within-a-directory-in-linux)
+- [LinuxQuestion.org: How to find the total number of files in a folder](https://www.linuxquestions.org/questions/linux-newbie-8/how-to-find-the-total-number-of-files-in-a-folder-510009/)
+
 <!--  -->
 <br>
 

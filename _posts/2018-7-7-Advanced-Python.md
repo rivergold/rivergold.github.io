@@ -1279,6 +1279,16 @@ pip.main(['install', '-r'. 'requirements.txt'])
 - [stackoverflow: use “pip install/uninstall” inside a python script](https://stackoverflow.com/questions/12937533/use-pip-install-uninstall-inside-a-python-script)
 - [stackoverflow: How to pip install packages according to requirements.txt from a local directory?](https://stackoverflow.com/questions/7225900/how-to-pip-install-packages-according-to-requirements-txt-from-a-local-directory)
 
+## `pip` install set package version
+
+```shell
+pip install "package>=0.2,<0.3"
+```
+
+***References:***
+
+- [stackoverflow: How to pip install a package with min and max version range?](https://stackoverflow.com/questions/8795617/how-to-pip-install-a-package-with-min-and-max-version-range)
+
 ## Parallel in Python
 
 ***Reference:***

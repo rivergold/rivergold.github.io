@@ -232,6 +232,10 @@ Terminal=0
 
 And then, run `chmod +x <name>.desktop`
 
+***References:***
+
+- [Linux中国开源社区: 为你的 Linux 应用创建 .desktop 文件](https://linux.cn/article-9199-1.html)
+
 ## Keep run wihout exist when using ssh to remote server
 
 There are two solutions:

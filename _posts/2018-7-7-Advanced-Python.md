@@ -185,7 +185,7 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
     shutil.copy2('./test.jpg', '/data/test_dist.jpg')
     ```
 
-    ***References:***s
+    ***References:***
     - [stackoverflow: How do I copy a file in python?](https://stackoverflow.com/questions/123198/how-do-i-copy-a-file-in-python)
 
 - Move file
@@ -201,6 +201,23 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
 
     ***References:***
     - [stackoverflow: How to move a file in Python](https://stackoverflow.com/questions/8858008/how-to-move-a-file-in-python)
+
+- Delete file
+
+    ```python
+    os.remove() # removes a file.
+
+    os.rmdir() # removes an empty directory.
+
+    shutil.rmtree() # deletes a directory and all its contents.
+
+    pathlib.Path.unlink() # removes the file or symbolic link.
+
+    pathlib.Path.rmdir() # removes the empty directory.
+    ```
+
+    ***References:***
+    - [stackoverflow: Delete a file or folder](https://stackoverflow.com/a/6996628/4636081)
 
 ## Errors and Exceptions
 
@@ -473,7 +490,29 @@ pool.starmap(download_worker, download_row_data)
 - [Rawidn's Blog: Python Pool.map多参数传递方法](https://www.rawidn.com/posts/Python-multiprocessing-for-multiple-arguments.html)
 - [CODE Q&A: Python多处理pool.map多个参数](https://code.i-harness.com/zh-CN/q/530d5e)
 
+### Problems and Solutions
+
+#### Error when using `pool.join()`
+
+```shell
+"File ***/anaconda/lib/python3.6/multiprocessing/pool.py", line 545, in join
+    assert self._state in (CLOSE, TERMINATE)
+AssertionError
+```
+
+The correct way to use `pool.join()` is
+
+```python
+pool.close()
+pool.join()
+```
+
+***References:***
+
+- [CSDN: Python 多进程 multiprocessing.Pool类详解](https://blog.csdn.net/SeeTheWorld518/article/details/49639651)
+
 ## logging
+
 Basic using of `logging`
 
 ```python

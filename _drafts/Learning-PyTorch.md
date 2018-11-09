@@ -157,6 +157,17 @@ def backprop(self, D=True, G=True):
 - `win`: The window id. If you want to plot in the same window in different epoch.
     **Note:** If you don't set `win`, `visdom` will built a new window every time when you plot.
 
+### `vis.images(images, nrow=8, padding=2, win)`
+
+- `images`: as a `B * C * H * W` tensor (numpy is ok, list is ok)
+- `nrow`: Number of images in a row
+- `padding`: Padding around the image, equal padding around all 4 sides.
+
+***References:***
+
+- [Visdom: `vis.images`](images)
+- [Github: junyanz/pytorch-CycleGAN-and-pix2pix visualizer.py](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/2e04baaecab76e772cf36fb9ea2e3fe68fd72ba5/util/visualizer.py#L117)
+
 ## Problems & Solutions
 
 ### Could not connect to Visdom server
@@ -185,3 +196,7 @@ Maybe the data use pass to `vis.line` or other plot/show function is not right. 
 
     ***References:***
     - [PyTorch: Global GPU Flag](https://discuss.pytorch.org/t/global-gpu-flag/17195)
+
+### PyTorch `torch.utils.data.Dataset` return Python `list`
+
+It is not good to return `list` in `torch.utils.data.Dataset`, better use `numpy` or `Tensor`. If you use `list` as dataset label, PyTorch take each element in `list` as a label for a sample, not whole `list` as one label.

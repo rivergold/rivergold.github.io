@@ -632,6 +632,17 @@ info = info.decode('utf-8')
 - [Blog: python中的subprocess.Popen（）使用](https://www.cnblogs.com/zhoug2020/p/5079407.html)
 - [Linux运维笔记: Python subprocess模块](https://blog.linuxeye.cn/375.html)
 
+Run bash command with input
+
+```python
+p = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, executable='/bin/zsh')
+p.communicate(input='yes\n'.encode())
+```
+
+***References:***
+
+- [stackoverflow: Python - How do I pass a string into subprocess.Popen (using the stdin argument)?](https://stackoverflow.com/a/165662/4636081)
+
 <br>
 
 * * *
@@ -783,6 +794,24 @@ X=np.stack([np.array(self.plot_data['X'])] * len(self.plot_data['legend']), 1)
 ***References:***
 
 - [CSDN: Python numpy函数hstack() vstack() stack() dstack() vsplit() concatenate()](https://blog.csdn.net/garfielder007/article/details/51378296)
+
+### `np.tile(A, reps)`
+
+Construct an array by repeating `A` the number of times given by `reps`.
+
+E.g: convert `[1, H, W]` tensor into `[3, H, W]`.
+
+```python
+img_tensor = np.tile(img_tensor, (3, 3, 1))
+```
+
+***References:***
+
+- [SciPy.org numpy.tile](https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.tile.html)
+- [Github junyanz/pytorch-CycleGAN-and-pix2pix util.py](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/2e04baaecab76e772cf36fb9ea2e3fe68fd72ba5/util/util.py#L17)
+
+
+
 
 <br>
 
@@ -1450,6 +1479,17 @@ b = a.decode('utf-8')
 ***References:***
 
 - [stackoverflow: Convert bytes to a string?](https://stackoverflow.com/a/606199/4636081)
+
+## Python get caller info
+
+***References:***
+
+- [Blog: Python如何在函数内获取调用者信息](http://blog.0x01.site/2016/02/04/Python%E5%A6%82%E4%BD%95%E5%9C%A8%E5%87%BD%E6%95%B0%E5%86%85%E8%8E%B7%E5%8F%96%E8%B0%83%E7%94%A8%E8%80%85%E4%BF%A1%E6%81%AF/)
+
+## pip install via gitlab subdictionary
+
+- [stackoverflow: How can I install from a git subdirectory with pip?](https://stackoverflow.com/questions/13566200/how-can-i-install-from-a-git-subdirectory-with-pip)
+- [stackoverflow: pip install from git repo branch](https://stackoverflow.com/questions/20101834/pip-install-from-git-repo-branch)
 
 <br>
 

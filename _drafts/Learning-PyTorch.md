@@ -30,7 +30,21 @@ Update parameters based on the *current* gradient (stored in `.grad` attribute o
 
 # API
 
+## `torch.Tensor`
+
+### `torch.Tensor.view`
+
+***References:***
+
+- [python优先的深度学习框架: pytorch使用view(*args)在不改变张量数据的情况下随意改变张量的大小和形状](https://ptorch.com/news/59.html)
+
 ## `torch.nn`
+
+## `torch.optim`
+
+***References:***
+
+- [PyTorch Docs: TORCH.OPTIM](https://pytorch.org/docs/master/optim.html#how-to-adjust-learning-rate)
 
 ## `torchvision`
 
@@ -41,6 +55,21 @@ Update parameters based on the *current* gradient (stored in `.grad` attribute o
     ***References:***
     - [PyTorch Doc: torchvision.transforms.ToTensor](https://pytorch.org/docs/stable/torchvision/transforms.html#torchvision.transforms.ToTensor)
     - [Jonathan Hui Blog: “PyTorch - Data loading, preprocess, display and torchvision.”](https://jhui.github.io/2018/02/09/PyTorch-Data-loading-preprocess_torchvision/)
+
+## `torch.utils.data`
+
+### `torch.utils.data.Dataset`
+
+### Problems & Solutions
+
+#### `torch.utils.data.Dataset` return must be `tensor`, `numbers`, `dicts` or `lists` or `numpy`
+
+When I return `PIL.Image`, it occur error.
+
+```
+TypeError: batch must contain tensors, numbers, dicts or lists; found <class 'PIL.JpegImagePlugin.JpegImageFile'>
+```
+
 
 <br>
 
@@ -139,6 +168,19 @@ def backprop(self, D=True, G=True):
 
 - [Blog: Pytorch中retain_graph参数的作用](https://oldpan.me/archives/pytorch-retain_graph-work)
 
+## Get current `lr` from optimizer
+
+```python
+def get_lr(optimizer):
+    for param_group in optimizer.param_groups:
+        return param_group['lr']
+```
+
+***References:***
+
+- [stackoverflow: PyTorch - How to get learning rate during training?](https://stackoverflow.com/a/52671057/4636081)
+
+
 <br>
 
 ***
@@ -148,8 +190,6 @@ def backprop(self, D=True, G=True):
 # visdom
 
 ## Basics
-
-## Plotting
 
 ### `vis.line(X, Y, opt, win)`
 
@@ -168,6 +208,13 @@ def backprop(self, D=True, G=True):
 - [Visdom: `vis.images`](images)
 - [Github: junyanz/pytorch-CycleGAN-and-pix2pix visualizer.py](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/2e04baaecab76e772cf36fb9ea2e3fe68fd72ba5/util/visualizer.py#L117)
 
+### `vis.text`
+
+***References:***
+
+- [Visdom: `vis.text`](https://github.com/facebookresearch/visdom/blob/master/README.md#vistext)
+- [Github: facebookresearch/visdom how to plot multi lines text with '\n' #154](https://www.google.com.tw/search?q=visdom+text&oq=visdom+text&aqs=chrome..69i57.2433j0j1&sourceid=chrome&ie=UTF-8)
+
 ## Problems & Solutions
 
 ### Could not connect to Visdom server
@@ -177,8 +224,8 @@ Maybe the data use pass to `vis.line` or other plot/show function is not right. 
 <br>
 
 ***
-
 <br>
+
 
 # Common Problems & Solutions
 
@@ -200,3 +247,27 @@ Maybe the data use pass to `vis.line` or other plot/show function is not right. 
 ### PyTorch `torch.utils.data.Dataset` return Python `list`
 
 It is not good to return `list` in `torch.utils.data.Dataset`, better use `numpy` or `Tensor`. If you use `list` as dataset label, PyTorch take each element in `list` as a label for a sample, not whole `list` as one label.
+
+<br>
+
+***
+<br>
+
+# PyTorch on mobile
+
+PyTorch -> ONNX -> Caffe2
+
+(onnx-caffe2 is in caffe2 now)
+
+***References:***
+
+- [PyTorch: Pytorch model running in Android](https://discuss.pytorch.org/t/pytorch-model-running-in-android/27238/2)
+- [PyTorch 1.0 Doc: TRANSFERING A MODEL FROM PYTORCH TO CAFFE2 AND MOBILE USING ONNX](https://pytorch.org/tutorials/advanced/super_resolution_with_caffe2.html)
+- [Github onnx/tutorials: 
+Importing models from ONNX to Caffe2](https://github.com/onnx/tutorials/blob/master/tutorials/OnnxCaffe2Import.ipynb)
+
+## Problems
+
+### Speed
+
+- [Github onnx/onnx-caffe2: onnx-caffe2 is slower? #152](https://github.com/onnx/onnx-caffe2/issues/152)

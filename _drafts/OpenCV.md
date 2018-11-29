@@ -64,3 +64,22 @@ def rotate_image(mat, angle):
 - [OpenCV doc OpenCV-Python Tutorials: Image Processing in OpenCV: Geometric Transformations of Images](https://docs.opencv.org/3.2.0/da/d6e/tutorial_py_geometric_transformations.html)
 - [OpenCV doc: warpAffine](https://docs.opencv.org/3.1.0/da/d54/group__imgproc__transform.html#ga0203d9ee5fcd28d40dbc4a1ea4451983)
 - [stackoverflow: Rotate an image without cropping in OpenCV in C++](https://stackoverflow.com/questions/22041699/rotate-an-image-without-cropping-in-opencv-in-c)
+
+## Eroding and Dilating
+
+***References:***
+
+- [OpenCV Tutorial Image Processing: Eroding and Dilating](https://docs.opencv.org/3.4/db/df6/tutorial_erosion_dilatation.html)
+
+## HSV
+
+***References:***
+
+- [OpenCV-Python Tutorials Image Processing in OpenCV: Changing Colorspaces](https://docs.opencv.org/3.4/df/d9d/tutorial_py_colorspaces.html)
+- [stackoverflow: Exact Skin color HSV range](https://stackoverflow.com/a/8757076/4636081)
+
+## Object Tracking in OpenCV
+
+***References:***
+
+- [Learn OpenCV: Object Tracking using OpenCV (C++/Python)](https://www.learnopencv.com/object-tracking-using-opencv-cpp-python/)

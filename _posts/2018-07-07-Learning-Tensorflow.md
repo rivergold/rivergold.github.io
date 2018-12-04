@@ -251,6 +251,7 @@ A `tf.Session` object provides access to devices in the local machine, and remot
 - `tf.py_func()`: Call Python code in Tensorflow graph
     ***References:***
     - [TensorFlow Guide Importing Data: Applying arbitrary Python logic with tf.py_func()](https://www.tensorflow.org/guide/datasets)
+    - [stackoverflow: Output from TensorFlow `py_func` has unknown rank/shape](https://stackoverflow.com/questions/42590431/output-from-tensorflow-py-func-has-unknown-rank-shape)
 
 ## `tf.nn`
 

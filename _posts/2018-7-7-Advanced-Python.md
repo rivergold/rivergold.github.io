@@ -810,11 +810,6 @@ img_tensor = np.tile(img_tensor, (3, 3, 1))
 - [SciPy.org numpy.tile](https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.tile.html)
 - [Github junyanz/pytorch-CycleGAN-and-pix2pix util.py](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/blob/2e04baaecab76e772cf36fb9ea2e3fe68fd72ba5/util/util.py#L17)
 
-
-
-
-<br>
-
 ## OpenCV
 
 Using `import cv2` to import OpenCV
@@ -828,6 +823,14 @@ pip install opencv-python
 ***References:***
 
 - [Pypi: opencv-python 3.4.1.15](https://pypi.org/project/opencv-python/)
+
+### Basic functions
+
+- `cv2.normalize(img, None, 0, 255, cv2.NORM_MINMAX)`
+
+    ***References:***
+
+    - [Python cv2.normalize() Examples](https://www.programcreek.com/python/example/89398/cv2.normalize)
 
 ### Rotate image
 

@@ -199,24 +199,24 @@ A `tf.Session` object provides access to devices in the local machine, and remot
 - [Blog: TensorFlow入门（七） 充分理解 name / variable_scope](https://blog.csdn.net/Jerr__y/article/details/70809528)
 - [Tensorflow Guide: Variable](https://www.tensorflow.org/guide/variables)
 
-# API
+## API
 
-## `tf`
+### tf
 
-- `tf.reverse`: Reverse data in specific/given axis
+#### `tf.reverse`: Reverse data in specific/given axis
     Application: When using OpenCV read image as BRG, `tf.reverse` can convert it into RGB
     ```python
     output = tf.reverse(img_tensor, [-1])
     ```
 
-- `tf.agrmax(ingput, axis=None, ...)`: Returns the index with the largest value across axes of a tensor.
+#### `tf.agrmax(ingput, axis=None, ...)`: Returns the index with the largest value across axes of a tensor.
 
-- `tf.get_collection`: Get a list of `Variable` from a collection
+#### `tf.get_collection`: Get a list of `Variable` from a collection
     ***References:***
 
     - [Blog: 【TensorFlow动手玩】常用集合: Variable, Summary, 自定义](https://blog.csdn.net/shenxiaolu1984/article/details/52815641)
 
-- `tf.clip_by_value(t, clip_value_min, clip_value_max, name=None)`: Clips tensor values to a specified min and max
+#### `tf.clip_by_value(t, clip_value_min, clip_value_max, name=None)`: Clips tensor values to a specified min and max
     ```python
     a = np.array([[1,1,2,4], [3,4,5,8]])
     with tf.Session() as sess:
@@ -225,12 +225,12 @@ A `tf.Session` object provides access to devices in the local machine, and remot
          [3 4 5 5]]
     ```
 
-- `tf.extract_image_patches(images, ksizes, strides, rates, padding, name=None)`: Extract `patches` from `images` and put them in the "depth" output dimension.
+#### `tf.extract_image_patches(images, ksizes, strides, rates, padding, name=None)`: Extract `patches` from `images` and put them in the "depth" output dimension.
 
     ***References:***
     - [知乎: 关于tf.extract_image_patches的一些理解](https://zhuanlan.zhihu.com/p/37077403)
 
-- `tf.reduce_sum(input_tensor, axis=None, ...)`: Computes the sum of elements across dimensions of a tensor.
+#### `tf.reduce_sum(input_tensor, axis=None, ...)`: Computes the sum of elements across dimensions of a tensor.
 
 - `tf.split(value, num_or_size_splits, axis=0, ...)`: Splits a tensor into sub tensors.
     ```python
@@ -242,24 +242,42 @@ A `tf.Session` object provides access to devices in the local machine, and remot
     batch_raw, masks_raw = tf.split(input_image, 2, axis=2)
     ```
 
-- `tf.set_random_seed`
+#### `tf.set_random_seed`
 
     ***References:***
 
     - [TensorFlow api: tf.set_random_seed](https://www.tensorflow.org/api_docs/python/tf/set_random_seed)
 
-- `tf.py_func()`: Call Python code in Tensorflow graph
-    ***References:***
-    - [TensorFlow Guide Importing Data: Applying arbitrary Python logic with tf.py_func()](https://www.tensorflow.org/guide/datasets)
-    - [stackoverflow: Output from TensorFlow `py_func` has unknown rank/shape](https://stackoverflow.com/questions/42590431/output-from-tensorflow-py-func-has-unknown-rank-shape)
+#### `tf.py_func()`: Call Python code in Tensorflow graph
 
-## `tf.nn`
+***References:***
+    
+- [TensorFlow Guide Importing Data: Applying arbitrary Python logic with tf.py_func()](https://www.tensorflow.org/guide/datasets)
+- [stackoverflow: Output from TensorFlow `py_func` has unknown rank/shape](https://stackoverflow.com/questions/42590431/output-from-tensorflow-py-func-has-unknown-rank-shape)
 
-- `tf.nn.conv2d(input, filter, strides, padding, ...)`: Computes a 2-D convolution given 4-D `input` and `filter` tensors.
+Pass `string` into `tf.py_func`
 
-- `tf.nn.conv2d_transpose(value, filter, output_shape, strides, padding='SAME', data_format='NHWC', name=None)`: The transpose of conv2d
+```python
+def _parse_func(file_name):
+    # Read file
+    return np.ndarray
+dataset = tf.data.Dataset.from_tensor_slices((names_list))
+dataset = dataset.map(lambda filename: tf.py_func(_parse_func, [filename], tf.float32))
+```
 
-    **理解:** transpose convolution相当于一个在周围/中间进行了padding之后的卷积，本质上还是卷积，只不过由于在卷积前进行了padding，所提使得输出的图像大小增加了。See gif from [here](https://github.com/vdumoulin/conv_arithmetic).
+***References:***
+
+- [Github tensorflow/tensorflow: tf Dataset with tf.py_func doesn't work as the tutorial says #12396](https://github.com/tensorflow/tensorflow/issues/12396)
+
+***
+
+### tf.nn
+
+#### `tf.nn.conv2d(input, filter, strides, padding, ...)`: Computes a 2-D convolution given 4-D `input` and `filter` tensors.
+
+#### `tf.nn.conv2d_transpose(value, filter, output_shape, strides, padding='SAME', data_format='NHWC', name=None)`: The transpose of conv2d
+
+**理解:** transpose convolution相当于一个在周围/中间进行了padding之后的卷积，本质上还是卷积，只不过由于在卷积前进行了padding，所提使得输出的图像大小增加了。See gif from [here](https://github.com/vdumoulin/conv_arithmetic).
 
 ***References:***
 
@@ -267,25 +285,31 @@ A `tf.Session` object provides access to devices in the local machine, and remot
 - [简书: 理解tf.nn.conv2d和tf.nn.conv2d_transpose](https://www.jianshu.com/p/a897ed29a8a0)
 - [StackExchange: What are deconvolutional layers?](https://datascience.stackexchange.com/questions/6107/what-are-deconvolutional-layers)
 
-## `tf.layer`
+***
 
-- `tf.layer.conv2d(inputs, filters, kernel_size, strides=(1, 1), ...)`: Functional interface for the 2D convolution layer.
+### tf.layer
 
-    **Note:** Pay a attention to the difference between `tf.nn.conv2d` and `tf.layer.conv2d`: `tf.nn.conv2d` is more basic, `filter` in it is `tensor`. Is calculate `input` and `filter` convlution. While `filter` in `tf.layer.conv2d` is a `int` number, and it creates tensor `filter` then does convolution calculation.
+#### `tf.layer.conv2d(inputs, filters, kernel_size, strides=(1, 1), ...)`: Functional interface for the 2D convolution layer.
 
-## `tf.data`
+**Note:** Pay a attention to the difference between `tf.nn.conv2d` and `tf.layer.conv2d`: `tf.nn.conv2d` is more basic, `filter` in it is `tensor`. Is calculate `input` and `filter` convlution. While `filter` in `tf.layer.conv2d` is a `int` number, and it creates tensor `filter` then does convolution calculation.
 
-- `tf.data.Dataset`
+***
 
-- `tf.data.Iterator`
+### tf.data
+
+#### `tf.data.Dataset`
+
+#### `tf.data.Iterator`
 
 ***References:***
 
 - [知乎: TensorFlow全新的数据读取方式：Dataset API入门教程](https://zhuanlan.zhihu.com/p/30751039)
 
-## `tf.estimator`
+***
 
-### `tf.estimator.Estimator`
+### tf.estimator
+
+#### tf.estimator.Estimator
 
 Estimator will automatically write the following to disk:
 
@@ -296,7 +320,7 @@ Estimator will automatically write the following to disk:
 
 A [good example](https://www.epubit.com/selfpublish/article/1156;jsessionid=63E557268B23BE8DE6E71F3AFDACD4B0) to write `model_fn` for `tf.estimator.Estimator` 
 
-### `tf.estimator.RunConfig`
+#### `tf.estimator.RunConfig`
 
 ```python
 estimator_config = tf.estimator.RunConfig(
@@ -337,7 +361,7 @@ classifier = tf.estimator.DNNClassifier(
 - [Tensorflow Guide: Creating Custom Estimators](https://www.tensorflow.org/guide/custom_estimators)
 - [Github: tensorflow/models/samples/core/get_started/custom_estimator.py](https://github.com/tensorflow/models/blob/master/samples/core/get_started/custom_estimator.py)
 
-## `tf.train`
+### tf.train
 
 - `tf.train.get_global_step`: Get the global step tensor.
 

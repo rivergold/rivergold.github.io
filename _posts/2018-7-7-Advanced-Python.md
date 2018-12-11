@@ -602,14 +602,34 @@ random_str = ''.join([random.choice(string.ascii_letters + string.digits) for i 
 
 `from pathlib import Path`
 
-- `Path.glob(<path>)`: Glob the given pattern in the directory represented by this path, yielding all matching files (of any kind)
+### `Path.glob(<path>)`
 
-    > The “**” pattern means “this directory and all subdirectories, recursively”. In other words, it enables recursive globbing.
+Glob the given pattern in the directory represented by this path, yielding all matching files (of any kind)
 
-- `Path.rglob(<path>)`: This is like calling Path.glob() with “**” added in front of the given pattern
-    ***References:***
-    - [stackoverflow: Recursive sub folder search and return files in a list python](https://stackoverflow.com/questions/18394147/recursive-sub-folder-search-and-return-files-in-a-list-python)
-    - [Python doc: pathlib.Path.rglob](https://docs.python.org/3/library/pathlib.html#pathlib.Path.rglob)
+> The “**” pattern means “this directory and all subdirectories, recursively”. In other words, it enables recursive globbing.
+
+### `Path.rglob(<path>)`
+
+This is like calling Path.glob() with “**” added in front of the given pattern
+
+***References:***
+
+- [stackoverflow: Recursive sub folder search and return files in a list python](https://stackoverflow.com/questions/18394147/recursive-sub-folder-search-and-return-files-in-a-list-python)
+- [Python doc: pathlib.Path.rglob](https://docs.python.org/3/library/pathlib.html#pathlib.Path.rglob)
+
+### `Path.as_posix()`
+
+Return a string representation of the path with forward slashes (/)
+
+```python
+import cv2
+# p is img_path
+img = cv2.imread(p.as_posix())
+```
+
+***References:***
+
+- [Python doc: PurePath.as_posix()](https://docs.python.org/3/library/pathlib.html#pathlib.PurePath.as_posix)
 
 ## subprocess
 

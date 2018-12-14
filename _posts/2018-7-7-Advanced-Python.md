@@ -1042,17 +1042,20 @@ print(d.bar.x)
 - `conda activate <env name>`: Activate a env
 - `conda deactivate`: Deactivate to base
 
-### When in virtual environment, please use `conda` to install package instead of `pip`
+### Use `pip` with conda
 
-**`pip install` will install packages globally**
+When you want to use `conda env create` a new environment, you'd better use `conda env create -n <env_name> pip`. It will install pip in the virtual environment and allow you install package into the env and not influence the **base** env. 
+
+Tips: When the env has no packages you import in the script, if will use the base env's packages.
 
 ***References:***
 
+- [Conda doc: Installing non-conda packages](https://conda.io/docs/user-guide/tasks/manage-pkgs.html#installing-non-conda-packages)
 - [Github ContinuumIO/anaconda-issues: Use 'pip install' in the virtual environment created by conda #1429](https://github.com/ContinuumIO/anaconda-issues/issues/1429)
 
 ## requests
 
-### How to post a opencv image?
+### How to post a opencv image
 
 First you need to know the `type` and `field` of your post. For example,
 ```python

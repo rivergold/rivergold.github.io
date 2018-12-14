@@ -10,21 +10,11 @@
 ***
 <!--  -->
 
-## Concept
+<br>
 
-### Git workflow
+***
 
-- `working tree`:
-- `index`: a **staging area** between your working directory and your repository.
-- `repository`: or repo
-    <p align="center">
-      <img
-      src="https://rivergold-images-1258274680.cos.ap-chengdu.myqcloud.com/git-index.png?q-sign-algorithm=sha1&q-ak=AKIDBIevgMFRj61KAvJH0wrMbHKFiYL0Fi8S&q-sign-time=1544529129;1544530929&q-key-time=1544529129;1544530929&q-header-list=&q-url-param-list=&q-signature=8c7e3e234c04469478df6340dfe0ed125535d418&x-cos-security-token=1e92f604019d0d93df5cb871a1a3443eb030703510001" width="90%">
-    </p>
-
-***References:***
-
-- [backlog: Git workflow](https://backlog.com/git-tutorial/git-workflow/)
+<br>
 
 ## Common command
 
@@ -38,6 +28,7 @@ git submodule add <https> <path>
 
 - [简书: Git submodule 子模块的管理和使用](https://www.jianshu.com/p/9000cd49822c)
 
+### 
 
 ### `reset` `soft` `hard` `mixed`
 

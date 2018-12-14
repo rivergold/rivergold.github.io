@@ -1,9 +1,12 @@
 # Function
+
 ## Rotate Image
+
 - `cv::getRotationMatrix2D(Poiont2f center, double angle double scale)`
 - `cv::warpAffine`
 
-**C++**
+### C++
+
 ```C++
 Mat img_dst;
 Point2f center(img_src.cols / 2.0, img_src.rows / 2.0);
@@ -11,7 +14,8 @@ Mat R = getRotationMatrix2D(center, degree, 1.0);
 warpAffine(img_src, img_dst, R, img_src.size(), INTER_CUBIC, BORDER_CONSTANT, Scalar(128, 128, 128));
 ```
 
-**Python**
+### Python
+
 ```python  
 center = (img.shape[1] / 2, img.shape[0] / 2)
 degree = 30
@@ -23,7 +27,8 @@ dst = cv2.warpAffine(img, R, (img.shape[1], img.shape[0]),
 
 These method above will crop image as the same size of the input image. The following will show how to **do rotate without crop:**<br>
 
-**C++**
+### C++
+
 ```c++
 Mat img_dst;
 Point2f center(img_src.cols / 2.0, img_src.rows / 2.0);
@@ -37,9 +42,10 @@ R.at<double>(0, 2) += box.width / 2.0 - center.x;
 R.at<double>(1, 2) += box.height / 2.0 - center.y;
 
 warpAffine(img_src, img_dst, R, box.size(), INTER_CUBIC, BORDER_CONSTANT, Scalar(128, 128, 128));
-``` 
+```
 
-**Python**
+### Python
+
 ```python
 def rotate_image(mat, angle):
     height, width = mat.shape[:2]
@@ -64,6 +70,23 @@ def rotate_image(mat, angle):
 - [OpenCV doc OpenCV-Python Tutorials: Image Processing in OpenCV: Geometric Transformations of Images](https://docs.opencv.org/3.2.0/da/d6e/tutorial_py_geometric_transformations.html)
 - [OpenCV doc: warpAffine](https://docs.opencv.org/3.1.0/da/d54/group__imgproc__transform.html#ga0203d9ee5fcd28d40dbc4a1ea4451983)
 - [stackoverflow: Rotate an image without cropping in OpenCV in C++](https://stackoverflow.com/questions/22041699/rotate-an-image-without-cropping-in-opencv-in-c)
+
+### Rotate points on image
+
+```python
+img_h, img_w = raw_img.shape[:2]
+# rotate_M shape is (2, 3)
+rotate_M = cv2.getRotationMatrix2D((img_w / 2, img_h / 2), 30, 1)
+img_rotated = cv2.warpAffine(raw_img, rotate_M, (img_w, img_h))
+points = np.array(landmarks_106).reshape(106, 2)
+# points_ones shape is (106, 3)
+points_ones = np.hstack([points, ones])
+transformed_points = rotate_M.dot(points_ones.T).T
+```
+
+***References:***
+
+- [stackoverflow: How can I remap a point after an image rotation?](https://stackoverflow.com/a/38794480)
 
 ## Eroding and Dilating
 

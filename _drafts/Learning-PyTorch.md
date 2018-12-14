@@ -266,6 +266,39 @@ PyTorch -> ONNX -> Caffe2
 - [Github onnx/tutorials: 
 Importing models from ONNX to Caffe2](https://github.com/onnx/tutorials/blob/master/tutorials/OnnxCaffe2Import.ipynb)
 
+## Make caffe2 run on android
+
+1. Build caffe2 for android using `pytorch/scripts/build_android.sh`
+    - Change `gcc` to `clang`
+
+2. Set CMakeLists to contain **c10**, **caffe2**, **ATen** and **google** include files.
+
+    More details please look at the [AICamera_new](https://github.com/wangnamu/AICamera_new) project.
+
+    **Note:** The tensor value setting in this project is incorrect. The right way is from [caffe2_cpp_tutorial](https://github.com/leonardvandriel/caffe2_cpp_tutorial/blob/a6f772a4c19b293863f12494bcc3b6ac742d3961/src/caffe2/binaries/pretrained.cc#L85)
+
+3. Link `.so`
+
+***References:***
+
+- [Gtihub pytorch/pytorch: [Caffe2] Caffe2 for Android has no include files #14353](https://github.com/pytorch/pytorch/issues/14353)
+- [Gtihub wangnamu/AICamera_new](https://github.com/wangnamu/AICamera_new)
+- [Github leonardvandriel/caffe2_cpp_tutorial](https://github.com/leonardvandriel/caffe2_cpp_tutorial)
+
+## Caffe2
+
+### Build for android
+
+ok
+
+### Build for Linux
+
+failed
+
+### Tutorial
+
+- [Github leonardvandriel/caffe2_cpp_tutorial](https://github.com/leonardvandriel/caffe2_cpp_tutorial)
+
 ## Problems
 
 ### Speed

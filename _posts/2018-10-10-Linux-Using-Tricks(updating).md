@@ -508,6 +508,16 @@ Configuration tips:
       <img src="http://ovvybawkj.bkt.clouddn.com/linux/nautilus-actions-2" width="80%">
     </p>
 
+- Set unlimited scroll in terminator
+
+Teminator -> Preferences -> Profiles -> Scrolling and select inifinite scrollback.
+
+***References:***
+
+- [CSDN: linux 终端输出太多前面看不到的解决办法](https://blog.csdn.net/wuyu92877/article/details/74202163)
+- [CSDN: Linux终端内容太多无法全部显示](https://blog.csdn.net/wuyu92877/article/details/74202163)
+- [stackoverflow: Unlimited Scroll in Terminator](https://askubuntu.com/questions/618464/unlimited-scroll-in-terminator)
+
 **Some shortcuts**
 
 - Split terminals horizontally: `Ctrl + Shift + o`

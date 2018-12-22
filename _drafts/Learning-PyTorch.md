@@ -30,7 +30,18 @@ Update parameters based on the *current* gradient (stored in `.grad` attribute o
 
 # API
 
-## `torch.Tensor`
+## torch
+
+### `torch.where(condition, x, y)` $\rightarrow$ `Tensor`
+
+***References:***
+
+- [PyTorch doc: torch.where](https://pytorch.org/docs/master/torch.html#torch.where)
+- [PyTorch forum: About transform wing loss to pytorch](https://discuss.pytorch.org/t/about-transform-wing-loss-to-pytorch/20045)
+
+***
+
+## torch.Tensor
 
 ### `torch.Tensor.view`
 
@@ -38,7 +49,9 @@ Update parameters based on the *current* gradient (stored in `.grad` attribute o
 
 - [python优先的深度学习框架: pytorch使用view(*args)在不改变张量数据的情况下随意改变张量的大小和形状](https://ptorch.com/news/59.html)
 
-## `torch.nn`
+***
+
+## torch.nn
 
 ## `torch.optim`
 
@@ -46,7 +59,9 @@ Update parameters based on the *current* gradient (stored in `.grad` attribute o
 
 - [PyTorch Docs: TORCH.OPTIM](https://pytorch.org/docs/master/optim.html#how-to-adjust-learning-rate)
 
-## `torchvision`
+***
+
+## torchvision
 
 ### `torchvision.transorms`
 
@@ -56,7 +71,9 @@ Update parameters based on the *current* gradient (stored in `.grad` attribute o
     - [PyTorch Doc: torchvision.transforms.ToTensor](https://pytorch.org/docs/stable/torchvision/transforms.html#torchvision.transforms.ToTensor)
     - [Jonathan Hui Blog: “PyTorch - Data loading, preprocess, display and torchvision.”](https://jhui.github.io/2018/02/09/PyTorch-Data-loading-preprocess_torchvision/)
 
-## `torch.utils.data`
+***
+
+## torch.utils.data
 
 ### `torch.utils.data.Dataset`
 
@@ -112,6 +129,8 @@ class PartialConv(nn.Module):
         self.input_conv.apply(weights_init('kaiming'))
 ```
 
+***
+
 ## Only update the parameters of a few nodes
 
 There may have 3 ways to update a part of parameters:
@@ -146,6 +165,8 @@ I would suggest zeroing the relevant gradients manually after calling loss.backw
 - [PyTorch: How can I update only a part of one weight in the backpropagation](https://discuss.pytorch.org/t/how-can-i-update-only-a-part-of-one-weight-in-the-backpropagation/15229)
 - [PyTorch: How to modify the gradient manually?](https://discuss.pytorch.org/t/how-to-modify-the-gradient-manually/7483)
 
+***
+
 ## Why and when use `loss.backward(retain_graph=True)`
 
 Suppose you build a network with two loss, and they share a part of layers. When you backward one loss, if you set `retain_graph=Flase`, PyTorch will free all tensor calculated during forward, and then another loss cannot backward.
@@ -168,6 +189,8 @@ def backprop(self, D=True, G=True):
 
 - [Blog: Pytorch中retain_graph参数的作用](https://oldpan.me/archives/pytorch-retain_graph-work)
 
+***
+
 ## Get current `lr` from optimizer
 
 ```python
@@ -180,6 +203,25 @@ def get_lr(optimizer):
 
 - [stackoverflow: PyTorch - How to get learning rate during training?](https://stackoverflow.com/a/52671057/4636081)
 
+***
+
+## Set L1 or L2 regularization for the loss
+
+- L2 regularization: set `weight_decay` in `optim.SGD`
+
+- L1 regularization
+    ```python
+    l1_crit = nn.L1Loss(size_average=False)
+    l1_reg = 0
+    for param in model.parameters():
+        l1_reg += l1_crit(param)
+    lambda_l1 = 5e-4
+    loss += lambda_l1 * l1_reg
+    ```
+
+***References:***
+
+- [PyTorch forum: Simple L2 regularization?](https://discuss.pytorch.org/t/simple-l2-regularization/139/2)
 
 <br>
 
@@ -253,7 +295,7 @@ It is not good to return `list` in `torch.utils.data.Dataset`, better use `numpy
 ***
 <br>
 
-# PyTorch on mobile
+# PyTorch on Mobile
 
 PyTorch -> ONNX -> Caffe2
 

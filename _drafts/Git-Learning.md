@@ -47,6 +47,13 @@ Commit staged file into `Repository`.
 
 - [简书: Git submodule 子模块的管理和使用](https://www.jianshu.com/p/9000cd49822c)
 
+### `git reset [--hard|--soft|--mix]`
+
+***References:***
+
+- [stackoverflow: What's the difference between git reset --mixed, --soft, and --hard?](https://stackoverflow.com/questions/3528245/whats-the-difference-between-git-reset-mixed-soft-and-hard)
+- [git 7.7 Git 工具 - 重置揭密](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E7%BD%AE%E6%8F%AD%E5%AF%86)
+
 <br>
 
 ***

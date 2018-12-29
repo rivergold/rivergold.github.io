@@ -3,7 +3,13 @@
 ## PyTorch Internals
 
 - [PyTorch: A Tour of PyTorch Internals (Part I)](https://pytorch.org/blog/a-tour-of-pytorch-internals-1/)
-- []()
+- [PyTorch: PyTorch Internals Part II - The Build System](https://pytorch.org/blog/a-tour-of-pytorch-internals-2/)
+
+### PyTorch Code Structure
+
+- Raw C++
+- C++ warpped with PyObject
+- Pure Python
 
 ### How does PyTorch extend the Python interpreter to define a Tensor type that can be manipulated from Python code?
 
@@ -13,6 +19,7 @@ Based on *CPython*
 
 - Define `THPTensor`
 - Use `generic` to generate different type Tensor
+    Because of the old version `torch` is written in C, not supported Template, so using `generic` with macro. torch after 0.2 has **ATen** written in C++.
 
 ### How does PyTorch cwrap work to generate code for Tensor methods ?
 

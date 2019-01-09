@@ -73,7 +73,6 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
     - [Programiz: Python getattr()](https://www.programiz.com/python-programming/methods/built-in/getattr)
     - [stackoverflow: getting dynamic attribute in python](https://stackoverflow.com/questions/13595690/getting-dynamic-attribute-in-python)
 
-
 ## list
 
 - `zip(*iterables)`: Make an iterator that aggregates elements from each of the iterables.
@@ -103,6 +102,15 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
     print(a)
     >>> [1,2,0,3]
     ```
+
+- Check list is empty
+    ```python
+    a = []
+    if not a:
+        print('List is empty')
+    ```
+    ***References:***
+    - [stackoverflow: How do I check if a list is empty?](https://stackoverflow.com/questions/53513/how-do-i-check-if-a-list-is-empty)
 
 ### `zip`
 
@@ -243,8 +251,10 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
 
 ## Packages and `__init__.py`
 
-***References***
+**TBD**
 
+***References***
+- [Chris Yeh Blog: The Definitive Guide to Python import Statements](https://chrisyeh96.github.io/2017/08/08/definitive-guide-python-imports.html)
 - [python3-cookbook: 10.1 构建一个模块的层级包](https://python3-cookbook.readthedocs.io/zh_CN/latest/c10/p01_make_hierarchical_package_of_modules.html)
 - [stackoverflow: What's the difference between a Python module and a Python package?](https://stackoverflow.com/questions/7948494/whats-the-difference-between-a-python-module-and-a-python-package)
 
@@ -1189,9 +1199,11 @@ wget.download(<link>, out=<name>)
 
 - [csdn: 更改pip源至国内镜像，显著提升下载速度](http://blog.csdn.net/zhangchilei/article/details/53893002)
 
-## Organize your python module
+## Organize your python package
 
-Assume that your module is like,
+Assume that your package is like,
+
+**理解：** 通过`__init__`实现层级暴露
 
 ```bash
 package
@@ -1529,3 +1541,9 @@ b = a.decode('utf-8')
     - [解决Python3下打印utf-8字符串出现UnicodeEncodeError的问题](https://www.binss.me/blog/solve-problem-of-python3-raise-unicodeencodeerror-when-print-utf8-string/)
 
 **Continuously updated...**
+
+<br>
+
+* * *
+
+<br>

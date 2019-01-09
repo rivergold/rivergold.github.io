@@ -5,11 +5,17 @@
 - `working tree`:
 - `index`: a **staging area** between your working directory and your repository.
 - `repository`: or repo
-    <br>
-    <p align="center">
-      <img
-      src="https://rivergold-images-1258274680.cos.ap-chengdu.myqcloud.com/git-index.png?q-sign-algorithm=sha1&q-ak=AKIDLyeuzvSPVPTk6b5N8nLeI9vNhzL5y4XD&q-sign-time=1544779993;1544781793&q-key-time=1544779993;1544781793&q-header-list=&q-url-param-list=&q-signature=c5f889b2799233522d5437849c9517b463a3f4ab&x-cos-security-token=e52cdfff8d78dca2e4b3d8c6c60bc8ac1f4771b510001" width="90%">
-    </p>
+
+<p align="center">
+  <img
+  src="https://upload-images.jianshu.io/upload_images/9890707-d806fc0dc4bc8a75.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="80%">
+</p>
+
+<p align="center">
+  <img
+  src="https://upload-images.jianshu.io/upload_images/9890707-c32ab2866b185bdc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+  width="70%">
+</p>
 
 ***References:***
 

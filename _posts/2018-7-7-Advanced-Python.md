@@ -249,15 +249,6 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
     - [Python tutorial: 错误与异常](http://www.pythondoc.com/pythontutorial3/errors.html)
     - [RUNOOB.COM: Python异常处理](http://www.runoob.com/python/python-exceptions.html)
 
-## Packages and `__init__.py`
-
-**TBD**
-
-***References***
-- [Chris Yeh Blog: The Definitive Guide to Python import Statements](https://chrisyeh96.github.io/2017/08/08/definitive-guide-python-imports.html)
-- [python3-cookbook: 10.1 构建一个模块的层级包](https://python3-cookbook.readthedocs.io/zh_CN/latest/c10/p01_make_hierarchical_package_of_modules.html)
-- [stackoverflow: What's the difference between a Python module and a Python package?](https://stackoverflow.com/questions/7948494/whats-the-difference-between-a-python-module-and-a-python-package)
-
 ## Built-in Functions
 
 - `hasattr(object, name)`: Check to see if a object has the attribute
@@ -265,6 +256,16 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
 ***References:***
 
 - [Programiz: Python hasattr](https://www.programiz.com/python-programming/methods/built-in/hasattr)
+
+## Packages and `__init__.py`
+
+**TBD**
+
+***References***
+- [Chris Yeh Blog: The Definitive Guide to Python import Statements](https://chrisyeh96.github.io/2017/08/08/definitive-guide-python-imports.html)
+- [python3-cookbook: 10.1 构建一个模块的层级包](https://python3-cookbook.readthedocs.io/zh_CN/latest/c10/p01_make_hierarchical_package_of_modules.html)
+- [python3-cookbook: 使用相对路径名导入包中子模块](https://python3-cookbook.readthedocs.io/zh_CN/latest/c10/p03_import_submodules_by_relative_names.html)
+- [stackoverflow: What's the difference between a Python module and a Python package?](https://stackoverflow.com/questions/7948494/whats-the-difference-between-a-python-module-and-a-python-package)
 
 <br>
 

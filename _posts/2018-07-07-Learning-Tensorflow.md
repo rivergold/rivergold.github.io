@@ -34,6 +34,12 @@ In computation graph:
 tf.constant(value, dtype=None, shape=None, name='Const', verify_shape=False)
 ```
 
+<br>
+
+***
+
+<br>
+
 # Functions
 
 ## `tf`
@@ -644,6 +650,22 @@ sess = tf.Session(config=sess_config)
 
 - [stackoverflow: How to prevent tensorflow from allocating the totality of a GPU memory?](https://stackoverflow.com/a/48214084/4636081)
 - [CSDN: Tensorflow与Keras自适应使用显存](https://blog.csdn.net/l297969586/article/details/78905087)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
+
+## TensoFlow Lite
+
+### Convert
+
+#### Convert SavedModel into TFLite
+
+***References:***
+- [TensorFlow Lite Guide: Convert the model format](https://www.tensorflow.org/lite/devguide#2_convert_the_model_format)
+- [TensoFlow Lite Guide: Converter command-line examples](https://www.tensorflow.org/lite/convert/cmdline_examples#convert_a_tensorflow_graphdef_)
 
 <!--  -->
 <br>

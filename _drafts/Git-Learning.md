@@ -97,3 +97,22 @@ git submodule update --init --recursive
 ***
 
 ### To remote
+
+<br>
+
+***
+
+<br>
+
+# Tools
+
+## [Lepton][lepton_home]
+
+[lepton_home]: https://github.com/hackjutsu/Lepton
+
+A good code snippet manager based on Github Gist.
+
+***References:***
+
+- [What is the best code-snippets manager?](https://www.slant.co/topics/7247/~code-snippets-manager#10)
+

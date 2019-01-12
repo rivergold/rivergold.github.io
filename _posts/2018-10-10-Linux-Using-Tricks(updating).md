@@ -275,6 +275,19 @@ ls | wc -l
 - [stackoverflow: Count number of files within a directory in Linux? [closed]](https://stackoverflow.com/questions/20895290/count-number-of-files-within-a-directory-in-linux)
 - [LinuxQuestion.org: How to find the total number of files in a folder](https://www.linuxquestions.org/questions/linux-newbie-8/how-to-find-the-total-number-of-files-in-a-folder-510009/)
 
+## Install `.snap` software
+
+```bash
+sudo snap install <snap_file_name>
+#
+sudo snap install --dangerous <snap_file_name>
+```
+
+***References:***
+
+- [Ubuntu 16.04 LTS如何使用Snap软件包](https://www.sysgeek.cn/use-snap-packages-ubuntu-16-04/)
+- [ask ubuntu: Snap install failure: error: cannot find signatures with metadata for snap](https://askubuntu.com/questions/822765/snap-install-failure-error-cannot-find-signatures-with-metadata-for-snap)
+
 <!--  -->
 <br>
 

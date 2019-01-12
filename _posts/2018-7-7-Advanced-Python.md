@@ -267,6 +267,10 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
 - [python3-cookbook: 使用相对路径名导入包中子模块](https://python3-cookbook.readthedocs.io/zh_CN/latest/c10/p03_import_submodules_by_relative_names.html)
 - [stackoverflow: What's the difference between a Python module and a Python package?](https://stackoverflow.com/questions/7948494/whats-the-difference-between-a-python-module-and-a-python-package)
 
+## Class
+
+Member begin with `__` (e.g `__member_name`) is private member, will not be inherited into subclass.
+
 <br>
 
 * * *

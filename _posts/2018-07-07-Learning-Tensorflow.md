@@ -42,21 +42,22 @@ tf.constant(value, dtype=None, shape=None, name='Const', verify_shape=False)
 
 # Functions
 
-## `tf`
+## tf
 
-- **tf.Session()**
+### tf.Session()
 
-- **tf.Graph()**
+### tf.Graph()
 
-- **tf.InteractiveSession()**
-    A Tensorflow `Session` for use in interactive contexts, such as a shell.
-    ```python
-    sess = tf.InteractiveSession()
-    a = tf.constant(5)
-    b = tf.constant(6)
-    c = a * b
-    print(c.eval())
-    ```
+#### tf.InteractiveSession()
+A Tensorflow `Session` for use in interactive contexts, such as ashell.
+
+```python
+sess = tf.InteractiveSession()
+a = tf.constant(5)
+b = tf.constant(6)
+c = a * b
+print(c.eval())
+```
 
 - **Create constant tensor**
     - `tf.zeros(shape, dtype=tf.float32, name=None)`

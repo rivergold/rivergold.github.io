@@ -495,22 +495,6 @@ sess = tf.Session(config=sess_config)
 ***
 <!--  -->
 
-## TensoFlow Lite
-
-### Convert
-
-#### Convert SavedModel into TFLite
-
-***References:***
-- [TensorFlow Lite Guide: Convert the model format](https://www.tensorflow.org/lite/devguide#2_convert_the_model_format)
-- [TensoFlow Lite Guide: Converter command-line examples](https://www.tensorflow.org/lite/convert/cmdline_examples#convert_a_tensorflow_graphdef_)
-
-<!--  -->
-<br>
-
-***
-<!--  -->
-
 # My Tensorflow Pipeline
 
 Mainly using functions:
@@ -626,6 +610,163 @@ A common function is `tf.train.exponential_decay`. It use `global_step` to calcu
 - [知乎: 使用Tensorflow过程中遇到过哪些坑？](https://www.zhihu.com/question/269968195)
 - [stackoverflow: How to set adaptive learning rate for GradientDescentOptimizer?](https://stackoverflow.com/questions/33919948/how-to-set-adaptive-learning-rate-for-gradientdescentoptimizer/33922859)
 - [Blog: Tensorflow一些常用基本概念与函数（四）](https://www.cnblogs.com/wuzhitj/p/6648641.html)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
+
+# TFLite
+
+Begin with tensorflow >= 1.12, tflite is not in contrib.
+
+## Convert
+
+**Tips: Better to use SavedModel.**
+
+### Convert SavedModel into TFLite
+
+***References:***
+- [TensorFlow Lite Guide: Convert the model format](https://www.tensorflow.org/lite/devguide#2_convert_the_model_format)
+- [TensoFlow Lite Guide: Converter command-line examples](https://www.tensorflow.org/lite/convert/cmdline_examples#convert_a_tensorflow_graphdef_)
+
+***
+
+## Build
+
+**Note:** Better build in a docker container.
+
+1. Install Python, refer to [tensorflow build from src][tensorflow build from src].
+
+2. Install bazel, refer to [install bazel][install bazel].
+
+3. Run `./configure`, and set NDK and Android SDK path (**Please use ndk >= 18**).
+
+4. Edit `tensorflow/contrib/lite/build`, add followings
+
+    ```bash
+    cc_binary(
+        name = "libtensorflowLite.so",
+        linkopts=[
+            "-shared", 
+            "-Wl,-soname=libtensorflowLite.so",
+        ],
+        linkshared = 1,
+        copts = tflite_copts(),
+        deps = [
+            ":framework",
+            "//tensorflow/contrib/lite/kernels:builtin_ops",
+        ],
+    )
+    ```
+
+5. Build
+
+    - Android
+
+        ```bash
+        bazel build //tensorflow/contrib/lite:libtensorflowLite.so --crosstool_top=//external:android/crosstool --cpu=armeabi-v7a --host_crosstool_top=@bazel_tools//tools/cpp:toolchain --cxxopt="-std=c++11"
+        ```
+
+    - Linux
+
+        ```bash
+        bazel build //tensorflow/contrib/lite:libtensorflowLite.so --cxxopt="-std=c++11"
+        ```
+
+    step 3 and 4 refer to [stackoverflow][stackoverflow].
+
+[tensorflow build from src]: https://www.tensorflow.org/install/source?hl=zh-cn#setup_for_linux_and_macos
+[install bazel]: https://docs.bazel.build/versions/master/install.html
+[stackoverflow]: https://stackoverflow.com/questions/49834875/problems-with-using-tensorflow-lite-c-api-in-android-studio-project
+
+***Referneces:***
+
+- [stackoverflow: Problems with using tensorflow lite C++ API in Android Studio Project](https://stackoverflow.com/questions/49834875/problems-with-using-tensorflow-lite-c-api-in-android-studio-project)
+- [TensorFlow doc: 从源码构建](https://www.tensorflow.org/install/source?hl=zh-cn)
+- [Medium: Bazel build C++ Tensorflow Lite library for Android (without JNI)](https://medium.com/@punpun/bazel-build-c-tensorflow-lite-library-for-android-without-jni-f92b87aa9610)
+- [Blog: Tensorflow Lite编译](https://fucknmb.com/2017/11/17/Tensorflow-Lite%E7%BC%96%E8%AF%91/)
+- [Blog: Android App With Tflite C++ Api](http://www.sanjaynair.one/Android-App-With-Tflite-C++-API/)
+
+### [Android] Problems during buiding
+
+#### `WARNING: The following rc files are no longer being read, please transfer their contents or import their path into one of the standard rc files:/home/gopi/tensorflow/tools/bazel.rc`
+
+***Solution:***
+
+- [Github tensorflow/tensorflow: Build from source -> build the pip package -> GPU support -> bazel build -> ERROR: Config value cuda is not defined in any .rc file #23401](https://github.com/tensorflow/tensorflow/issues/23401#issuecomment-435827786)
+
+***
+
+## Using
+
+- Include:
+    - `flatbuffers`
+    - `tensorflow/lite`
+- Link
+    - `libtensorflowLite.so`
+
+Infer using TFLite C++ api, here is a example
+
+```c++
+#include "tensorflow/lite/kernels/register.h"
+#include "tensorflow/lite/model.h"
+#include "tensorflow/lite/string_util.h"
+
+tflite::FlatBufferModel model(path_to_model);
+tflite::ops::builtin::BuiltinOpResolver resolver;
+std::unique_ptr<tflite::Interpreter> interpreter;
+tflite::InterpreterBuilder(*model, resolver)(&interpreter);
+
+// Resize input tensors, if desired.
+// 
+
+interpreter->AllocateTensors();
+float* input = interpreter->typed_input_tensor<float>(0);
+
+// Fill `input` e.g. feed an image
+float* input interpreter->typed_input_tensor<float>(0);
+for (unsigned int i = 0; i < 128 * 128 * 3; ++i)
+{
+    input[i] = img_data[i];
+}
+
+interpreter->Invoke();
+float* output = interpreter->typed_output_tensor<float>(0);
+```
+
+***References:***
+
+- [TensorFlow doc guide: TensorFlow Lite APIs](https://www.tensorflow.org/lite/apis#c)
+
+### [Android] Problems during compile
+
+#### `undefined reference to 'tflite::InterpreterBuilder::operator()`
+
+***Solution:***
+
+You must use ndk18 to build the TFLite library and set `Android NDK location` as ndk18 path.
+
+**Important note:** ndk18 has removed `libgnustl` which is stl library for C++, replaced with `c++_static/c++_shared`, *refer to [NDK Revision History][NDK Revision History]*. So all your third party C++ libs should built with `c++_static/c++_shared` not with `libgnustl`. 
+
+And you need to set following in the android project app gradle:
+
+```bash
+externalNativeBuild {
+    cmake {
+        cppFlags "-std=c++11 -fopenmp -O3 -llog -landroid"
+        abiFilters "armeabi-v7a"
+        arguments '-DAPP_STL=c++_static
+    }
+}
+```
+
+`arguments '-DAPP_STL=c++_static` refer to [NDK C++ support][NDK C++ support]
+
+[NDK C++ support]: https://developer.android.com/ndk/guides/cpp-support?hl=zh-cn#header
+
+[NDK Revision History]: https://developer.android.com/ndk/downloads/revision_history
 
 <br>
 

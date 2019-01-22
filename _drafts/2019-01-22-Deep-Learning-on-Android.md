@@ -1,0 +1,74 @@
+# Deep Learning on Mobile Device
+
+## Build 3rdparty for Android
+
+- [Build]: Build from 3rdparty source;
+- [Compile]: Compile with 3rdparty api;
+- [Link]: Complie link 3rdparty 
+
+### OpenCV
+
+**Tips: Better use android sdk <= 23 to build opencv for android.**
+
+```bash
+cmake -DCMAKE_TOOLCHAIN_FILE=<ndk/android.toolchain.cmake> \
+      -DANDROID_ABI="armeabi-v7a" \
+      -DANDROID_STL=c++_static \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DANDROID_NATIVE_API_LEVEL=android-23 \
+      -DCMAKE_INSTALL_PREFIX=<install path> \
+      -DBUILD_JAVA=OFF -DBUILD_ANDROID_EXAMPLES=OFF ..
+```
+
+***References:***
+
+- [stackoverflow: NDK - problems after GNUSTL has been removed from the NDK (revision r18)](https://stackoverflow.com/questions/52410712/ndk-problems-after-gnustl-has-been-removed-from-the-ndk-revision-r18/52436751#52436751)
+- [Github opencv/opencv: SDK Tools, Revision 25.3.0 and OpenCVDetectAndroidSDK.cmake #8460](https://github.com/opencv/opencv/issues/8460#issuecomment-418232967): Solution for error `downgrade your Android sdk to 25.3.0`
+
+#### Problems & Solutions
+
+##### [Building] Error about `error: unknown directive .func png_read_filter_row_sub4_neon`
+
+***Solution:***
+
+```bash
+sudo apt install gcc-arm-linux-gnueabi
+```
+
+- [Linux公社: 解决一个Ubuntu中编译NEON优化的OpenCV的错误](https://www.linuxidc.com/Linux/2018-09/154272.htm)
+
+##### [Link] Error `Android Studio with NDK : link error : undefined reference to 'stderr'`
+
+***Solution:***
+
+Using android sdk version <= 23.
+
+- [stackoverflow: Android Studio with NDK : link error : undefined reference to 'stderr'](https://stackoverflow.com/questions/51767214/android-studio-with-ndk-link-error-undefined-reference-to-stderr)
+
+***
+
+### TFLite
+
+#### Problems & Solutions
+
+##### [Compile] Error run `interpreter->ResizeInputTensor(input, size)`
+
+***References:***
+
+- [腾讯云: tensorflow lite（tflite）在调整输入demonsion之后调用错误](https://cloud.tencent.com/developer/ask/200429)
+
+##### [Compile] Cannot set value to model
+
+Using `tflite_interpreter_ptr_->inputs().size()`, the input size is not fixed and will occur vary large number.
+
+***Solution:***
+
+- [Github tensorflow/tensorflow: TensorFlowlite 加载模型报 it is probably compressed](https://github.com/tensorflow/tensorflow/issues/22333)
+
+##### [Compile] Cannot find `flatbuffers/flatbuffers.h` head file
+
+Have a look at `third_party/flatbuffers/workspace.bzl`, download flatbuffer from the link and copy the include folder as flatbuffers include.
+
+***References:***
+
+- [Github tensorflow/tensorflow: cannot find "flatbuffers/flatbuffers.h" head file #21965](https://github.com/tensorflow/tensorflow/issues/21965)

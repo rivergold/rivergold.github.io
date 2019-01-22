@@ -1342,6 +1342,16 @@ temp = temp = '{:0<10.2E}'.format(x)
 
 - [python3-cookbook: 3.3 数字的格式化输出](http://python3-cookbook.readthedocs.io/zh_CN/latest/c03/p03_format_numbers_for_output.html)
 
+Print `{` in `format`
+
+```python
+print('{{}} {}'.format('abc'))
+```
+
+***References:***
+
+- [stackoverflow: How can I print literal curly-brace characters in python string and also use .format on it?](https://stackoverflow.com/questions/5466451/how-can-i-print-literal-curly-brace-characters-in-python-string-and-also-use-fo)
+
 ## `enumerate` using details
 
 Common use is like followings,

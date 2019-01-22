@@ -37,9 +37,18 @@ cd -
 ## Using command change Ubuntu download source<br>
 
 ```shell
-sed -is@http://archive.ubuntu.com/ubuntu/@https://mirrors.ustcedu.cn/ubuntu/@g /etc/apt/sources.list
-sed -i s@http://security.ubuntu.com/ubuntu/@http://mirrors.tuna.tsinghua.edu.cn/ubuntu/@g /etc/apt/sources.list
+sed -i s@http://archive.ubuntu.com/ubuntu/@<source you want to use>@g /etc/apt/sources.list
+sed -i s@http://security.ubuntu.com/ubuntu/@<source you want to use>@g /etc/apt/sources.list
 ```
+
+For example, change ubuntu 18.04 apt source to ali source.
+
+```shell
+sed -i s@http://archive.ubuntu.com/ubuntu/@http://mirrors.aliyun.com/ubuntu/@g /etc/apt/sources.list
+sed -i s@http://security.ubuntu.com/ubuntu/@http://mirrors.aliyun.com/ubuntu/@g /etc/apt/sources.list
+```
+
+[Ubuntu 原列表](http://wiki.ubuntu.org.cn/%E6%BA%90%E5%88%97%E8%A1%A8)
 
 ## Install Java on Ubuntu with apt-get
 

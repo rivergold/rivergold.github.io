@@ -1092,3 +1092,15 @@ Free customization and settings manager for the GNOME desktop.
 ***References:***
 
 - [LINUXCONFIG.org How to install Tweak Tool on Ubuntu 18.04 Bionic Beaver Linux](https://linuxconfig.org/how-to-install-tweak-tool-on-ubuntu-18-04-bionic-beaver-linux)
+
+## Lepton
+
+[Lepton][Lepton Home] is a lean code snippet manager based on GitHub Gist.
+
+Support:
+
+- macOS
+- Win
+- Linux
+
+[Lepton Home]: https://github.com/hackjutsu/Lepton

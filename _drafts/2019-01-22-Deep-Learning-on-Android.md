@@ -1,5 +1,88 @@
 # Deep Learning on Mobile Device
 
+**Improtant: You'd beeter write your code in C++, because it's easy to port.**
+
+## Caffe2
+
+**Note: PyTorch(>=1.0) has integrated caffe2, and you can build caffe2 in PyTorch source code.**
+
+PyTorch use onnx -> caffe2 to run on mobile devices.
+
+(caffe2 C++ api doc is not complete yet)
+
+### Good websites
+
+- [Github leonardvandriel/caffe2_cpp_tutorial][caffe2_cpp_tutorial]: Caffe2 C++ api examples
+
+[caffe2_cpp_tutorial]: https://github.com/leonardvandriel/caffe2_cpp_tutorial
+
+### Build
+
+#### Android
+
+1. Build caffe2 for android using `pytorch/scripts/build_android.sh`
+
+    **Note:** Change `gcc` to `clang`
+2. Set CMakeLists to contain **c10**, **caffe2**, **ATen** and **google** include files.
+
+    More details please look at the [AICamera_new](https://github.com/wangnamu/AICamera_new) project.
+
+    **Note:** The tensor value setting in this project is incorrect. The right way is from [Github/caffe2_cpp_tutorial][caffe2_cpp_tutorial].
+
+***References:***
+
+- [Gtihub pytorch/pytorch: [Caffe2] Caffe2 for Android has no include files #14353](https://github.com/pytorch/pytorch/issues/14353)
+- [Gtihub wangnamu/AICamera_new](https://github.com/wangnamu/AICamera_new)
+- [Github leonardvandriel/caffe2_cpp_tutorial](https://github.com/leonardvandriel/caffe2_cpp_tutorial)
+
+<br>
+
+***
+
+<br>
+
+## TFLite
+
+### Android
+
+#### Problems & Solutions
+
+##### [Compile] Error run `interpreter->ResizeInputTensor(input, size)`
+
+***References:***
+
+- [腾讯云: tensorflow lite（tflite）在调整输入demonsion之后调用错误](https://cloud.tencent.com/developer/ask/200429)
+
+##### [Compile] Cannot set value to model
+
+Using `tflite_interpreter_ptr_->inputs().size()`, the input size is not fixed and will occur vary large number.
+
+***Solution:***
+
+- [Github tensorflow/tensorflow: TensorFlowlite 加载模型报 it is probably compressed](https://github.com/tensorflow/tensorflow/issues/22333)
+
+##### [Compile] Cannot find `flatbuffers/flatbuffers.h` head file
+
+Have a look at `third_party/flatbuffers/workspace.bzl`, download flatbuffer from the link and copy the include folder as flatbuffers include.
+
+***References:***
+
+- [Github tensorflow/tensorflow: cannot find "flatbuffers/flatbuffers.h" head file #21965](https://github.com/tensorflow/tensorflow/issues/21965)
+
+##### [Compile] Result when set `interpreter->UseNNAPI(true)` is different
+
+When set `true`: result is right; when set `false`, result is very big and not correct.
+
+***Solution:***
+
+- [ ] TODO
+
+<br>
+
+***
+
+<br>
+
 ## Build 3rdparty for Android
 
 - [Build]: Build from 3rdparty source;
@@ -47,28 +130,3 @@ Using android sdk version <= 23.
 
 ***
 
-### TFLite
-
-#### Problems & Solutions
-
-##### [Compile] Error run `interpreter->ResizeInputTensor(input, size)`
-
-***References:***
-
-- [腾讯云: tensorflow lite（tflite）在调整输入demonsion之后调用错误](https://cloud.tencent.com/developer/ask/200429)
-
-##### [Compile] Cannot set value to model
-
-Using `tflite_interpreter_ptr_->inputs().size()`, the input size is not fixed and will occur vary large number.
-
-***Solution:***
-
-- [Github tensorflow/tensorflow: TensorFlowlite 加载模型报 it is probably compressed](https://github.com/tensorflow/tensorflow/issues/22333)
-
-##### [Compile] Cannot find `flatbuffers/flatbuffers.h` head file
-
-Have a look at `third_party/flatbuffers/workspace.bzl`, download flatbuffer from the link and copy the include folder as flatbuffers include.
-
-***References:***
-
-- [Github tensorflow/tensorflow: cannot find "flatbuffers/flatbuffers.h" head file #21965](https://github.com/tensorflow/tensorflow/issues/21965)

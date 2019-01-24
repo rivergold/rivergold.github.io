@@ -1,4 +1,4 @@
-# Deep Learning on Mobile Device
+# Deep Learning on Mobile Devices
 
 **Improtant: You'd beeter write your code in C++, because it's easy to port.**
 
@@ -128,5 +128,26 @@ Using android sdk version <= 23.
 
 - [stackoverflow: Android Studio with NDK : link error : undefined reference to 'stderr'](https://stackoverflow.com/questions/51767214/android-studio-with-ndk-link-error-undefined-reference-to-stderr)
 
+
+<br>
+
 ***
 
+<br>
+
+## Tricks
+
+### Move your code into android
+
+<p align="center">
+  <img
+  src="https://upload-images.jianshu.io/upload_images/9890707-092e5079a7724bbb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="80%">
+</p>
+
+**Very important:** In JNI, you must manage C++ memory yourself. It means when you new a memory area (using `new`), you must remember to delete it.
+
+```C++
+unsigned char *buf = new unsigned char[len];
+// ... do process
+delete buf;
+```

@@ -479,13 +479,28 @@ Using `file filter` to realize this.
 Good git client on Linux os.
 You can get the `.deb` from [here](https://www.gitkraken.com/) , and use `dpkg -i <gitkraken.deb>` to install it.
 
-**Problem&Solution:** If you double click the software icon, there is nothing happened. You'd better start the software by using command in terminal, and find what wrong during starting.
+### Problems & Solutions
 
-- Ubuntu 18.04 can not start `Gitkraken`. Occur error about `libgnome-keyring.so.0: cannot open shared object file: No such file or directory`
+#### [Error] Cannot start
 
-    ***References:***
+If you double click the software icon, there is nothing happened. You'd better start the software by using command in terminal, and find what wrong during starting.
 
-    - [StackExchange: Error running Gitkraken even though dependencies installed](https://superuser.com/questions/1233459/error-running-gitkraken-even-though-dependencies-installed)
+Ubuntu 18.04 can not start `Gitkraken`. Occur error about `libgnome-keyring.so.0: cannot open shared object file: No such file or directory`
+
+***References:***
+
+- [StackExchange: Error running Gitkraken even though dependencies installed](https://superuser.com/questions/1233459/error-running-gitkraken-even-though-dependencies-installed)
+
+#### [Error] `Inotify Limit Error`
+
+> Inotify (inode notify) is a Linux kernel subsystem that acts to extend filesystems to notice changes to the filesystem, and report those changes to applications.
+
+```bash
+su root
+echo 99999 > /proc/sys/fs/inotify/max_user_watches
+```
+
+Refer [Tech Sparx Blog: How to fix GitKraken Inotify Limit Error - upgrading Ubuntu/Linux inotify limits](https://techsparx.com/blog/2018/02/gitkraken-inotify.html)
 
 ## Terminator
 

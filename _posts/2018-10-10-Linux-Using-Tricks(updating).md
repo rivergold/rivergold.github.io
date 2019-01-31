@@ -430,6 +430,14 @@ Using `tweaks` and `dash to dock` to set `gnome-dock`. And using `alt` + `F2` an
 
 # Common Software
 
+## Rufus
+
+Ubuntu officially recommended tool to build bootable USB flash drives.
+
+***References:***
+
+- [CSDN: 在 Windows 中制作 Ubuntu 系统的USB启动盘](https://blog.csdn.net/u013553529/article/details/78307520)
+
 ## shadowsocks-qt-gui
 
 ```shell

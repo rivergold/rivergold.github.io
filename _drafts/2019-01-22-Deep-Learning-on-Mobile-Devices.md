@@ -177,7 +177,7 @@ Manual delete `.externalNativeBuild`
 
 # TVM
 
-## Basis
+## Basic Concepts
 
 ### LLVM
 
@@ -203,3 +203,17 @@ AMD's "CUDA"
 ***References:***
 
 - [CSDN: AMD ROCm 平台简介](https://blog.csdn.net/JackyTintin/article/details/74637157)
+
+<br>
+
+***
+
+<br>
+
+## TFLite to TVM
+
+***References:***
+
+- [知乎-蓝色专栏: 使用TVM支持TFLite（上）](https://zhuanlan.zhihu.com/p/55136595)
+- [知乎-蓝色专栏: 使用TVM支持TFLite（中）](https://zhuanlan.zhihu.com/p/55583443)
+- [TVM Docs-Tutorials: Compile TFLite Models](https://docs.tvm.ai/tutorials/frontend/from_tflite.html#sphx-glr-tutorials-frontend-from-tflite-py)

@@ -271,6 +271,15 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
 
 Member begin with `__` (e.g `__member_name`) is private member, will not be inherited into subclass.
 
+## Python package tools
+
+For example, `flatbuffers` use `.egg` to install into Python. When you delete the `flatbuffers-20190131040312-py3.7.egg`, it will can not be imported.
+
+***References:***
+
+- [Blog: Python 包管理工具解惑](https://blog.zengrong.net/post/2169.html)
+- [stackoverflow: Differences between distribute, distutils, setuptools and distutils2?](https://stackoverflow.com/questions/6344076/differences-between-distribute-distutils-setuptools-and-distutils2)
+
 <br>
 
 * * *

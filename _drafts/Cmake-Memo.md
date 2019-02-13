@@ -1,6 +1,6 @@
 # Cmake
 
-## Basics
+# Basics
 
 - `CMAKE_PREFIX_PATH` list of directories path to tell cmake where to search `find_package()`, `find_program()`, `find_library(), find_file()`
 
@@ -8,23 +8,25 @@
 
 - `set`
 
+<!--  -->
 <br>
 
 ***
 
 <br>
+<!--  -->
 
-## Tips
+# Tips
 
 ***References:***
 
 - [CSDN find_package与CMake如何查找链接库详解](https://blog.csdn.net/bytxl/article/details/50637277)
 
-### Set cmake to find Python
+## Set cmake to find Python
 
 `find_package( PythonInterp 3.5 REQUIRED )`
 
-### Set cmake to find boost
+## Set cmake to find boost
 
 ```makefile
 set(Boost_USE_STATIC_LIBS OFF) 
@@ -37,7 +39,7 @@ find_package(Boost REQUIRED COMPONENTS system)
 
 - [stackoverflow: How do you add Boost libraries in CMakeLists.txt?](https://stackoverflow.com/a/6646518/4636081)
 
-### Set cmake to find OpenCV
+## Set cmake to find OpenCV
 
 ```makefile
 find_package( OpenCV REQUIRED )
@@ -50,15 +52,23 @@ target_link_libraries( <your target> ${OpenCV_LIBS})
 
 - [OpenCV doc: Using OpenCV with gcc and CMake](https://docs.opencv.org/3.0.0/db/df5/tutorial_linux_gcc_cmake.html)
 
+## Create shared library from static library
+
+***References:***
+
+- [CMake org: [CMake] build a shared library from static libraries](https://cmake.org/pipermail/cmake/2008-March/020315.html)
+
+<!--  -->
 <br>
 
 ***
 
 <br>
+<!--  -->
 
-## Pratice
+# Pratice
 
-### Demo cmake build opencv
+## Demo cmake build opencv
 
 ```makefile
 PROJECT(Test)
@@ -79,7 +89,7 @@ target_link_libraries(Test libopencv_highgui.so libopencv_core.so libopencv_imgp
 
 - [CSDN CMakeLists.txt添加opencv库注意事项](https://blog.csdn.net/u012816621/article/details/51732932)
 
-### Don't use `link_directories`
+## Don't use `link_directories`
 
 **Please use `find_library` and `target_link_libraries`**.
 
@@ -87,8 +97,16 @@ target_link_libraries(Test libopencv_highgui.so libopencv_core.so libopencv_imgp
 
 - [stackoverflow: Cmake cannot find library using “link_directories”](https://stackoverflow.com/a/31471772/4636081)
 
-## Make Error
+<!--  -->
+<br>
 
-### `undefined reference to xxx`
+***
+
+<br>
+<!--  -->
+
+# Make Error
+
+## `undefined reference to xxx`
 
 It is a link error. You need to use `TARGET_LINK_LIBRARIES` in cmakelist to add `.so` to your target.

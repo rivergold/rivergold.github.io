@@ -21,11 +21,13 @@
 
 - [backlog: Git workflow](https://backlog.com/git-tutorial/git-workflow/)
 
+<!--  -->
 <br>
 
 ***
 
 <br>
+<!--  -->
 
 # Basic
 
@@ -60,11 +62,11 @@ Commit staged file into `Repository`.
 - [stackoverflow: What's the difference between git reset --mixed, --soft, and --hard?](https://stackoverflow.com/questions/3528245/whats-the-difference-between-git-reset-mixed-soft-and-hard)
 - [git 7.7 Git 工具 - 重置揭密](https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E7%BD%AE%E6%8F%AD%E5%AF%86)
 
+<!--  -->
 <br>
 
 ***
-
-<br>
+<!--  -->
 
 ## Remote
 
@@ -94,15 +96,88 @@ git submodule update --init --recursive
 
 - [stackoverflow: How to git clone including submodules?](https://stackoverflow.com/questions/3796927/how-to-git-clone-including-submodules)
 
+<!--  -->
+<br>
+
 ***
+<!--  -->
 
-### To remote
+## To remote
 
+<!--  -->
 <br>
 
 ***
 
 <br>
+<!--  -->
+
+# Tricks
+
+## Download a single file from Github
+
+***References:***
+
+- [stackoverflow: Download single files from GitHub](https://stackoverflow.com/questions/4604663/download-single-files-from-github)
+
+## Download a single folder or directory from a Github repo
+
+***References:***
+
+- [stackoverflow: Download a single folder or directory from a GitHub repo](https://stackoverflow.com/questions/7106012/download-a-single-folder-or-directory-from-a-github-repo)
+
+## Rebase vs Merge
+
+rebase: `rebase <from> onto <to>`
+
+You can get complete introduction from [Git: 6 Git 分支 - 分支的衍合][Git 6 分支 - 分支的衍合].
+
+And there is a [video][Gitkraken rebase vide] tell your how to use rebase in Gitkraken.
+
+[Gitkraken rebase vide]: https://www.youtube.com/watch?v=nAMbLbgxriI
+
+[Git 6 分支 - 分支的衍合]: https://git-scm.com/book/zh-tw/v1/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%84%E8%A1%8D%E5%90%88
+
+**Important: 不要给公共的branch换基**
+
+例如：绝对不能将master换基到别的分支上，但是可以将别的分支换基到master上。
+
+***References:***
+
+- [Bitbucket: Merging vs. Rebasing](https://www.atlassian.com/git/tutorials/merging-vs-rebasing)
+
+<!--  -->
+<br>
+
+***
+
+<br>
+<!--  -->
+
+# Problems & Solutions
+
+## `origin/dev` and `origin/master` is not at the same header
+
+When you change `dev` and want to merge `dev` into `master`, you will do:
+
+1. On `dev`, make a commit
+2. check out into `master`
+3. merge `dev` into `master`
+4. push `master` to `origin/master`
+
+After these operations, you will find that content of `dev` and `master` are same, but the `dev` is behind one commit of `master`. Your need to run followings additionally:
+
+1. Checkout to `dev`
+2. Fast-forward `dev` into `master`
+3. Push `dev` into `origin/dev`
+
+<!--  -->
+<br>
+
+***
+
+<br>
+<!--  -->
 
 # Tools
 

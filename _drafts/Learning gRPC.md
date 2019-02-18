@@ -4,6 +4,36 @@
 
 # Protobuf
 
+## Bacis
+
+### Example of `.proto`
+
+```protobuf
+syntax = "proto3";
+
+package face;
+
+service Face{
+    rpc DetectFace(Request) returns(Result) {}
+}
+
+message Request{
+    uint32 img_w = 1;
+    uint32 img_h = 2;
+    bytes img_data = 3;
+}
+
+message Result{
+    string message = 1;
+}
+```
+
+### What does `1`, `2`, `3` mean in protobuf
+
+***References:***
+
+- [stackoverflow: What does “1”, “2”, “3” mean in protobuf?](https://stackoverflow.com/a/9018294/4636081)
+
 ## Tricks
 
 ### numpy to protobuf

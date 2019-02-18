@@ -146,6 +146,12 @@ And there is a [video][Gitkraken rebase vide] tell your how to use rebase in Git
 
 - [Bitbucket: Merging vs. Rebasing](https://www.atlassian.com/git/tutorials/merging-vs-rebasing)
 
+## Code Review
+
+***References:***
+
+- [Blog: 基于GitLab的Code Review教程](https://ken.io/note/gitlab-code-review-tutorial)
+
 <!--  -->
 <br>
 

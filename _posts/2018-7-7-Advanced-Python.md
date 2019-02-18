@@ -1571,3 +1571,60 @@ b = a.decode('utf-8')
 * * *
 
 <br>
+
+# Python Performance Analysis
+
+Here are 
+
+Time:
+
+- Time function with decrorator
+- Build-in `timeit` module
+- Unix time command `/usr/bin/time`
+
+Memory:
+
+- `memory_profiler`
+- `heapy`
+
+## Time
+
+### Unix time command `/usr/bin/time`
+
+```shell
+/usr/bin/time -p python <python script>
+
+# Output
+real         0.02   # Total time
+user         0.01   # CPU time without kernel
+sys          0.00   # Kernel function time
+```
+
+## Memory
+
+### `memory_profiler`
+
+1. Install `conda install memory_profiler`
+
+2. Edit your code with `@profile`
+
+3. Run `python -m memory_profiler <your script>`
+
+You can use `mprof` to draw image of memory use:
+
+1. `mprof run <your script>`
+2. `mprof plot`
+
+***References:***
+
+- [PYPI: memory-profiler 0.55.0](https://pypi.org/project/memory-profiler/)
+
+#### Problems & Solutions
+
+##### Error `libc++abi.dylib: terminating with uncaught exception of type NSException`
+
+This error is caused by matplotlib, you need to change matplotlib backend.
+
+***Solution:***
+
+- [Github palantir/python-language-server: libc++abi.dylib: terminating with uncaught exception of type NSException | macOS #217](https://github.com/palantir/python-language-server/issues/217#issuecomment-364967166)

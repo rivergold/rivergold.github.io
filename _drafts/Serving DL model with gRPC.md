@@ -60,9 +60,31 @@ message Result{
 
 **At first, you need to read [What is gRPC](https://grpc.io/docs/guides/).**
 
+gRPC Stream
+
+***References:***
+
+- [segmentfault: 带入gRPC：gRPC Streaming, Client and Server](https://segmentfault.com/a/1190000016503114)
+
+gRPC异步
+
+***References:***
+
+- [Senlin's Blog: 谈谈 gRPC 的 C++ 异步编程](http://senlinzhan.github.io/2017/08/10/grpc-async/)
+
 ## gRPC for Python
 
-Example:
+### Install
+
+```bash
+pip install grpcio-tools
+```
+
+Ref [gRPC Basics - Python](https://grpc.io/docs/tutorials/basic/python.html#generating-client-and-server-code).
+
+**Note:** It is best to use `pip` instead of `conda` to install, because the version from `conda` is lower than `pip`.
+
+### Example
 
 ***References:***
 

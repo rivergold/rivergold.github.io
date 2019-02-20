@@ -297,6 +297,19 @@ sudo snap install --dangerous <snap_file_name>
 - [Ubuntu 16.04 LTS如何使用Snap软件包](https://www.sysgeek.cn/use-snap-packages-ubuntu-16-04/)
 - [ask ubuntu: Snap install failure: error: cannot find signatures with metadata for snap](https://askubuntu.com/questions/822765/snap-install-failure-error-cannot-find-signatures-with-metadata-for-snap)
 
+## Use `fd` instead of `find`
+
+`fd` is faster than `find`
+
+Install from [Github sharkdp/fd](https://github.com/sharkdp/fd)
+
+Common used command can be found from [here](https://github.com/sharkdp/fd#tutorial)
+
+***References:***
+
+- [Github sharkdp/fd](https://github.com/sharkdp/fd)
+- [Linux中国: Linux 中一种友好的 find 替代工具](https://linux.cn/article-9767-1.html)
+
 <!--  -->
 <br>
 

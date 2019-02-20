@@ -687,6 +687,12 @@ p.communicate(input='yes\n'.encode())
 
 - [stackoverflow: Python - How do I pass a string into subprocess.Popen (using the stdin argument)?](https://stackoverflow.com/a/165662/4636081)
 
+## concurrent
+
+***References:***
+
+- [掘金: Python广为使用的并发处理库futures使用入门与内部原理](https://juejin.im/post/5b1e36476fb9a01e4a6e02e4)
+
 <br>
 
 * * *

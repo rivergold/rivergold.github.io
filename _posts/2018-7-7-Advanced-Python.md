@@ -1559,6 +1559,41 @@ b = a.decode('utf-8')
 - [stackoverflow: How can I install from a git subdirectory with pip?](https://stackoverflow.com/questions/13566200/how-can-i-install-from-a-git-subdirectory-with-pip)
 - [stackoverflow: pip install from git repo branch](https://stackoverflow.com/questions/20101834/pip-install-from-git-repo-branch)
 
+## Get caller function name using `traceback` or `inspect`
+
+If you want to get the caller function name inside another function in Python, here are two ways:
+
+- Using `traceback`
+
+    ```python
+    import traceback
+
+    def fun_a():
+        fun_b()
+
+    def fun_b():
+        name = traceback.extract_stack()[-2][0]
+        print(name)
+    ```
+
+    Ref [CSDN: Python-被调用函数中获取调用函数信息](https://blog.csdn.net/crazycui/article/details/52129716) and [stackoverflow: Print current call stack from a method in Python code](https://stackoverflow.com/questions/1156023/print-current-call-stack-from-a-method-in-python-code)
+
+- Using `inspect`
+
+    ```python
+    import inspect
+
+    def fun_a():
+        fun_b()
+
+    def fun_b():
+        name = inspect.stack()[1][3]
+        print(name)
+    ```
+
+    Ref [stackoverflow: Getting the caller function name inside another function in Python?](https://stackoverflow.com/questions/900392/getting-the-caller-function-name-inside-another-function-in-python)
+
+
 <br>
 
 * * *

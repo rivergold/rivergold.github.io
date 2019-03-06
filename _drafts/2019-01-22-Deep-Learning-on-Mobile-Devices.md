@@ -128,6 +128,28 @@ Using android sdk version <= 23.
 
 - [stackoverflow: Android Studio with NDK : link error : undefined reference to 'stderr'](https://stackoverflow.com/questions/51767214/android-studio-with-ndk-link-error-undefined-reference-to-stderr)
 
+#### [NDK] When build opencv with `-DANDROID_STL=c++_static`, then use built opencv to build another lib with link with `c++_static` occur error like followings. But when link with `c++_shared`, no error occurs.
+
+```bash
+/home/rivergold/iqiyi/Project/Rivergold/OpenCV-Android/opencv-3.4.5/modules/core/src/logger.cpp:0: error: undefined reference to 'std::__ndk1::cerr'
+/home/rivergold/iqiyi/Project/Rivergold/OpenCV-Android/opencv-3.4.5/modules/core/src/logger.cpp:0: error: undefined reference to 'std::__ndk1::cout'
+/home/rivergold/iqiyi/Project/Rivergold/OpenCV-Android/opencv-3.4.5/modules/core/src/logger.cpp:0: error: undefined reference to 'std::__ndk1::cerr'
+/home/rivergold/software/Android-SDK/android-ndk-r19-linux-x86_64/android-ndk-r19/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include/c++/v1/ios:0: error: undefined reference to 'std::__ndk1::cerr'
+CMakeFiles/face_landmarks_detector.dir/mtcnn.cpp.o:mtcnn.cpp:function MTCNN::refine(std::__ndk1::vector<Bbox, std::__ndk1::allocator<Bbox> >&, int const&, int const&, bool): error: undefined reference to 'std::__ndk1::cout'
+clang++: error: linker command failed with exit code 1 (use -v to see invocation)
+CMakeFiles/face_landmarks_detector.dir/build.make:162: recipe for target 'libface_landmarks_detector.so' failed
+make[2]: *** [libface_landmarks_detector.so] Error 1
+CMakeFiles/Makefile2:67: recipe for target 'CMakeFiles/face_landmarks_detector.dir/all' failed
+make[1]: *** [CMakeFiles/face_landmarks_detector.dir/all] Error 2
+Makefile:83: recipe for target 'all' failed
+make: *** [all] Error 2
+```
+
+I think there are some things wrong in NDK `libstdc++.a`.
+
+**Note:** `libstdc++.a` path is `<ndk>/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/<SDK-Version>/libc++.so`
+
+
 <br>
 
 ***

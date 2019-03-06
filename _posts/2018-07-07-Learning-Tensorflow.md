@@ -746,7 +746,7 @@ float* output = interpreter->typed_output_tensor<float>(0);
 
 ***Solution:***
 
-You must use ndk18 to build the TFLite library and set `Android NDK location` as ndk18 path.
+You must use **ndk(>=18)** to build the TFLite library and set `Android NDK location` as ndk path.
 
 **Important note:** ndk18 has removed `libgnustl` which is stl library for C++, replaced with `c++_static/c++_shared`, *refer to [NDK Revision History][NDK Revision History]*. So all your third party C++ libs should built with `c++_static/c++_shared` not with `libgnustl`. 
 

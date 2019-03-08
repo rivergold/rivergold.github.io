@@ -234,6 +234,19 @@ def get_lr(optimizer):
 
 - [PyTorch forum: Simple L2 regularization?](https://discuss.pytorch.org/t/simple-l2-regularization/139/2)
 
+***
+
+## Train on GPU
+
+```python
+# Model
+model.cuda()
+# Tensor
+x = x.cuda()
+```
+
+Ref [PyTorch doc: torch.nn.Module](https://pytorch.org/docs/stable/nn.html#torch.nn.Module.cuda) and [PyTorch doc: torch.Tensor](https://pytorch.org/docs/stable/tensors.html#torch.Tensor.cuda).
+
 <!--  -->
 <br>
 

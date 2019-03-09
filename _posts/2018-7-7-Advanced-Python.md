@@ -178,6 +178,19 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
     ***References:***
     - [Python3.6 doc str.translate](https://docs.python.org/3/library/stdtypes.html?highlight=maketrans#str.translate)
 
+## `queue`
+
+```python
+import queue
+q = queue.Queue(10)
+for data in pre_frames.queue:
+    print(data)
+```
+
+***References:***
+
+- [stackoverflow: Can I get an item from a PriorityQueue without removing it yet?](https://stackoverflow.com/a/43960452/4636081)
+
 ## File IO
 
 - Copy file
@@ -1559,6 +1572,41 @@ b = a.decode('utf-8')
 - [stackoverflow: How can I install from a git subdirectory with pip?](https://stackoverflow.com/questions/13566200/how-can-i-install-from-a-git-subdirectory-with-pip)
 - [stackoverflow: pip install from git repo branch](https://stackoverflow.com/questions/20101834/pip-install-from-git-repo-branch)
 
+## Get caller function name using `traceback` or `inspect`
+
+If you want to get the caller function name inside another function in Python, here are two ways:
+
+- Using `traceback`
+
+    ```python
+    import traceback
+
+    def fun_a():
+        fun_b()
+
+    def fun_b():
+        name = traceback.extract_stack()[-2][0]
+        print(name)
+    ```
+
+    Ref [CSDN: Python-被调用函数中获取调用函数信息](https://blog.csdn.net/crazycui/article/details/52129716) and [stackoverflow: Print current call stack from a method in Python code](https://stackoverflow.com/questions/1156023/print-current-call-stack-from-a-method-in-python-code)
+
+- Using `inspect`
+
+    ```python
+    import inspect
+
+    def fun_a():
+        fun_b()
+
+    def fun_b():
+        name = inspect.stack()[1][3]
+        print(name)
+    ```
+
+    Ref [stackoverflow: Getting the caller function name inside another function in Python?](https://stackoverflow.com/questions/900392/getting-the-caller-function-name-inside-another-function-in-python)
+
+
 <br>
 
 * * *
@@ -1570,7 +1618,19 @@ b = a.decode('utf-8')
 - `UnicodeEncodeError: 'ascii' codec can't encode character '\u22f1' in position 242`
     - [解决Python3下打印utf-8字符串出现UnicodeEncodeError的问题](https://www.binss.me/blog/solve-problem-of-python3-raise-unicodeencodeerror-when-print-utf8-string/)
 
-**Continuously updated...**
+## Python 同级目录包导入问题，使用"."错误
+
+Ref to [曙暮之光: python 同级目录包导入问题，使用"."错误](https://www.cnblogs.com/liuda9495/p/8351978.html)
+
+## `python -m`
+
+Ref [python3-cookbook: 10.3 使用相对路径名导入包中子模块](https://python3-cookbook.readthedocs.io/zh_CN/latest/c10/p03_import_submodules_by_relative_names.html)
+
+***References:***
+
+- [Blog: Python自定义包下不同目录单元测试的导入错误](http://lessisbetter.site/2016/01/08/package-unittest-import-error/)
+- []()
+
 
 <br>
 

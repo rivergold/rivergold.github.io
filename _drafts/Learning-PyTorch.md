@@ -2,7 +2,7 @@
 
 # Key Concept
 
-## Tensor
+## `torch.Tensor`
 
 A [`torch.Tensor`](https://pytorch.org/docs/stable/tensors.html#torch.Tensor.to) is a multi-dimensional matrix containing elements of a single data type.
 
@@ -22,11 +22,13 @@ Update parameters based on the *current* gradient (stored in `.grad` attribute o
 
 - [PyTorch: How are optimizer.step() and loss.backward() related?](https://discuss.pytorch.org/t/how-are-optimizer-step-and-loss-backward-related/7350/2)
 
+<!--  -->
 <br>
 
 ***
 
 <br>
+<!--  -->
 
 # API
 
@@ -42,6 +44,14 @@ Update parameters based on the *current* gradient (stored in `.grad` attribute o
 ***
 
 ## torch.Tensor
+
+### `torch.Tensor.item()`
+
+Use torch.Tensor.item() to get a Python number from a tensor containing a single value
+
+Ref [PyTorch Docs 1.0.1: TORCH.TENSOR Warning](https://pytorch.org/docs/1.0.0/tensors.html)
+
+This will solve the  `IndexError: invalid index of a 0-dim tensor. Use tensor.item() to convert a 0-dim tensor to a Python number`.
 
 ### `torch.Tensor.view`
 
@@ -83,16 +93,17 @@ Update parameters based on the *current* gradient (stored in `.grad` attribute o
 
 When I return `PIL.Image`, it occur error.
 
-```
+```python
 TypeError: batch must contain tensors, numbers, dicts or lists; found <class 'PIL.JpegImagePlugin.JpegImageFile'>
 ```
 
-
+<!--  -->
 <br>
 
 ***
 
 <br>
+<!--  -->
 
 # Tips
 
@@ -223,11 +234,26 @@ def get_lr(optimizer):
 
 - [PyTorch forum: Simple L2 regularization?](https://discuss.pytorch.org/t/simple-l2-regularization/139/2)
 
+***
+
+## Train on GPU
+
+```python
+# Model
+model.cuda()
+# Tensor
+x = x.cuda()
+```
+
+Ref [PyTorch doc: torch.nn.Module](https://pytorch.org/docs/stable/nn.html#torch.nn.Module.cuda) and [PyTorch doc: torch.Tensor](https://pytorch.org/docs/stable/tensors.html#torch.Tensor.cuda).
+
+<!--  -->
 <br>
 
 ***
 
 <br>
+<!--  -->
 
 # visdom
 
@@ -263,18 +289,21 @@ def get_lr(optimizer):
 
 Maybe the data use pass to `vis.line` or other plot/show function is not right. Place check your data.
 
+<!--  -->
 <br>
 
 ***
-<br>
 
+<br>
+<!--  -->
 
 # Common Problems & Solutions
 
-### Error about `RuntimeError: Expected object of type torch.FloatTensor but found type torch.cuda.FloatTensor for argument #2 'other'`
+## Error about `RuntimeError: Expected object of type torch.FloatTensor but found type torch.cuda.FloatTensor for argument #2 'other'`
 
 - **Be careful about your tensor and module type is `float` or `double`**
     Some operations in PyTorch only support `float` not support `double` type. (**not sure**)
+
     - Use `<tensor>.float()` or `<tensor>.double()` to set tensor and module type.
 
     ***References:***

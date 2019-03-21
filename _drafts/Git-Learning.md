@@ -197,3 +197,8 @@ A good code snippet manager based on Github Gist.
 
 - [What is the best code-snippets manager?](https://www.slant.co/topics/7247/~code-snippets-manager#10)
 
+## meld
+
+### Config
+
+- [stackoverflow: Setting up and using Meld as your git difftool and mergetool](https://stackoverflow.com/a/34119867/4636081)

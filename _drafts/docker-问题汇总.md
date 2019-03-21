@@ -24,7 +24,79 @@ docker run -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix
 <br>
 <!--  -->
 
-# 环境配置
+# Docker Config
+
+## 改变存储位置
+
+推荐方法：修改`/etc/docker/daemon.json`(没有该文件的话，还请创建)中的`data-root`
+
+```json
+{
+    "runtimes": 
+    {
+        "nvidia": 
+        {
+            "path": "nvidia-container-runtime",
+            "runtimeArgs": []
+        }
+    },
+    "data-root": "/home/rivergold/software/docker"
+}
+```
+
+Ref [Docker doc: Custom Docker daemon options](https://docs.docker.com/config/daemon/#custom-docker-daemon-options)
+
+### 关于docker daemon的配置
+
+有很多种方式对docker daemon进行设置:
+
+- 官方推荐方式为修改`/etc/docker/daemon.json`
+
+- CentOS中可能需要修改`/etc/sysconfig/docker` (本质上还是通过配置`system`)
+
+***References:***
+
+- [Docker Doc: Daemon configuration file](https://docs.docker.com/engine/reference/commandline/dockerd//#daemon-configuration-file)
+- [Docker doc: Control Docker with systemd](https://docs.docker.com/config/daemon/systemd/)
+- [CSDN: 通过systemd配置Docker](https://blog.csdn.net/xingwangc2014/article/details/50513946)
+- [简书: docker daemon 配置文件](https://www.jianshu.com/p/2556a1c5d45d)
+- [Blog Jin-Yang: systemd 使用简介](https://jin-yang.github.io/post/linux-systemd.html)
+- [51CTO: 四个修改Docker默认存储位置的方法](https://blog.51cto.com/forangela/1949947)
+
+## Docker Storage
+
+devicemapper, overlay区别
+
+- [Docker doc: Docker storage drivers](https://docs.docker.com/storage/storagedriver/select-storage-driver/)
+
+### CentOS修改Container大小
+
+该方法在公司的docker中测试是可以的
+
+1. Edit `/etc/sysconfig/docker-storage`
+
+2. Add `--storage-opt dm.basesize=30G`
+
+    ```bash
+    DOCKER_DEFAULT_STORAGE_OPTIONS='--data-root /data/docker -s devicemapper --storage-opt dm.use_def    erred_removal=true --storage-opt dm.use_deferred_deletion=true --storage-opt dm.basesize=30G'
+    ```
+3. Deletet all file in docker data root, get path via `docker info`. Make a backup of all your images
+
+Ref [DOCKER COMMUNITY FORUMS: Increase container volume(disk) size](https://forums.docker.com/t/increase-container-volume-disk-size/1652/4)
+
+***References:***
+
+- [Blog hustcat: Docker内部存储结构（devicemapper）解析](http://hustcat.github.io/docker-devicemapper/)
+
+<!--  -->
+<br>
+
+***
+
+<br>
+<!--  -->
+
+# 使用docker部署环境
 
 ## Install miniconda occur `Miniconda3-4.5.12-Linux-x86_64.sh: line 346: bunzip2: command not found`
 
@@ -118,6 +190,45 @@ Error is followings:
 ```
 
 Ref [Nvidia Forums: Cuda 10.1: Nvidia, you're now "fixing" gcc bugs that gcc doesn't even have](https://devtalk.nvidia.com/default/topic/1048037/cuda-10-1-nvidia-you-re-now-quot-fixing-quot-gcc-bugs-that-gcc-doesn-t-even-have/?offset=10)
+
+***Solution***
+
+Use gcc 4.8.5 on CentOS 7
+
+Ref [Nvidia Cuda doc: 1.1. System Requirements](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#system-requirements)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
+
+### Build OpenCV from source
+
+#### Need
+
+- python-dev (include files and libs)
+- FFMPEG
+
+Ref [OpenCV doc: Installation in Linux](https://docs.opencv.org/3.4.5/d7/d9f/tutorial_linux_install.html)
+
+#### Ubuntu
+
+Ref [OpenCV doc: Installation in Linux](https://docs.opencv.org/3.4.5/d7/d9f/tutorial_linux_install.html)
+
+Install ffmpeg， ref [stackoverflow: opencv Unable to stop the stream: Inappropriate ioctl for device](https://stackoverflow.com/a/45893821/4636081)
+
+#### CentOS
+
+1. Install `python-devel`
+
+Ref [stackoverflow: How to install python developer package?](https://stackoverflow.com/questions/6230444/how-to-install-python-developer-package)
+
+- [ ] 未完成
+
+#### Check OpenCV build information
+
+- [Learn OpenCV: Get OpenCV Build Information ( getBuildInformation )](https://www.learnopencv.com/get-opencv-build-information-getbuildinformation/)
 
 <!--  -->
 <br>

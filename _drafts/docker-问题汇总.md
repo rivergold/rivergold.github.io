@@ -212,6 +212,20 @@ Ref [Nvidia Cuda doc: 1.1. System Requirements](https://docs.nvidia.com/cuda/cud
 
 Ref [OpenCV doc: Installation in Linux](https://docs.opencv.org/3.4.5/d7/d9f/tutorial_linux_install.html)
 
+【经验】：如果需要编译Python接口，需要注意的是：
+
+- 安装Python-dev
+    - [ ] 如果安装了anaconda，是不是就不用单独apt/yum install了？
+
+- cmake时，需要check一下cmake的输出，看下是否找到了对应的Python
+
+```bash
+cmake -DWITH_CUDA=1 \
+      -DCMAKE_INSTALL_PREFIX=/root/software/lib/opencv-3.4.5/build/install \
+      -DOPENCV_PYTHON3_VERSION=3.6.8 \
+      -DPYTHON3_EXECUTABLE=${ANACONDA_HOME}/envs/py3.6/bin/python3.6m  ..
+```
+
 #### Ubuntu
 
 Ref [OpenCV doc: Installation in Linux](https://docs.opencv.org/3.4.5/d7/d9f/tutorial_linux_install.html)
@@ -226,9 +240,44 @@ Ref [stackoverflow: How to install python developer package?](https://stackoverf
 
 - [ ] 未完成
 
+#### cmake时一些重要的显示信息
+
+make
+
+```bash
+[100%] Linking CXX shared module ../../lib/python3/cv2.cpython-36m-x86_64-linux-gnu.so
+[100%] Built target opencv_python3
+```
+
+make install
+
+```bash
+--   Python 3:
+--     Interpreter:                 /root/software/anaconda/envs/py3.6/bin/python3.6m (ver 3.6.8)
+--     Libraries:                   /root/software/anaconda/envs/py3.6/lib/libpython3.6m.so (ver 3.6.8)
+--     numpy:                       /root/software/anaconda/envs/py3.6/lib/python3.6/site-packages/numpy/core/include (ver 1.16.2)
+--     install path:                lib/python3.6/site-packages/cv2/python-3.6
+```
+
 #### Check OpenCV build information
 
 - [Learn OpenCV: Get OpenCV Build Information ( getBuildInformation )](https://www.learnopencv.com/get-opencv-build-information-getbuildinformation/)
+
+#### docker中编译好的OpenCV库在其他机器使用
+
+1. 查看一下编译好的库需要哪些其他动态链接库
+
+    ```bash
+    $ readefl -d <cv2.cpython-36m-x86_64-linux-gnu.so>
+    ```
+
+2. 配置`/etc/ld.so.conf.d/`, 添加改库需要的其他动态库的路径
+
+    ```bash
+    $ ldconfig
+    ```
+
+3. Run
 
 <!--  -->
 <br>

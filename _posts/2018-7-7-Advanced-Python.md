@@ -1607,6 +1607,14 @@ If you want to get the caller function name inside another function in Python, h
     Ref [stackoverflow: Getting the caller function name inside another function in Python?](https://stackoverflow.com/questions/900392/getting-the-caller-function-name-inside-another-function-in-python)
 
 
+### Print current properties and values of an object
+
+```python
+dir(<object>)
+```
+
+Ref [stackoverflow: Is there a built-in function to print all the current properties and values of an object?](https://stackoverflow.com/questions/192109/is-there-a-built-in-function-to-print-all-the-current-properties-and-values-of-a)
+
 <br>
 
 * * *

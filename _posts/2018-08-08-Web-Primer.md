@@ -111,3 +111,49 @@ What is [**Microservices**](https://www.redhat.com/zh/topics/microservices/what-
 ***References:***
 
 - [redhat: 什么是微服务？](https://www.redhat.com/zh/topics/microservices/what-are-microservices)
+
+<!--  -->
+<br>
+
+***
+
+<br>
+<!--  -->
+
+# 翻越长城墙
+
+## v2ray
+
+### 搭建
+
+Ref [Blog: 轻松搭建和配置V2Ray](https://mianao.info/2018/04/23/%E8%BD%BB%E6%9D%BE%E6%90%AD%E5%BB%BA%E5%92%8C%E9%85%8D%E7%BD%AEv2ray)
+
+#### 多人使用
+
+Ref [Github v2ray/v2ray-core: V2Ray多用户配置的正确姿势究竟是怎样？ #679](https://github.com/v2ray/v2ray-core/issues/679)
+
+### 客户端
+
+***References:***
+
+- [Blog: v2ray的第三方客户端](http://briteming.hatenablog.com/entry/2017/10/21/124645)
+
+#### Linux
+
+Ref [Linux 系统下v2ray客户端使用](https://octopuspalm.top/2018/08/18/Linux%20%E7%B3%BB%E7%BB%9F%E4%B8%8Bv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BD%BF%E7%94%A8/)
+
+```bash
+# 后台启动
+nohup ./v2ray &
+# 关闭
+pkill v2ray
+```
+
+Ref [makeuseof: 7 Different Ways To Kill Unresponsive Programs in Linux](https://www.makeuseof.com/tag/6-different-ways-to-end-unresponsive-programs-in-linux/)
+
+
+Error `nohup: failed to run command.:Permission denied`
+
+You can't call `nohup` on a shell construct such as alias, function or buildin. `nohup ./test.sh` is the correnct way to run.
+
+Ref [StackExchange: nohup: failed to run command `.': Permission denied](https://unix.stackexchange.com/questions/386545/nohup-failed-to-run-command-permission-denied)

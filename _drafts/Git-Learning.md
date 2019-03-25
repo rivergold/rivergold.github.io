@@ -201,4 +201,22 @@ A good code snippet manager based on Github Gist.
 
 ### Config
 
-- [stackoverflow: Setting up and using Meld as your git difftool and mergetool](https://stackoverflow.com/a/34119867/4636081)
+```bash
+[user]
+    email = hejing01@qiyi.com
+    name = Jing He
+[core]
+    autocrlf = input
+[diff]
+    tool = meld
+[difftool]
+    prompt = false
+[difftool "meld"]
+    cmd = /usr/bin/meld "$LOCAL" "$REMOTE"
+[merge]
+    tool = meld
+[mergetool "meld"]
+    cmd = /usr/bin/meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+```
+
+Ref [stackoverflow: Setting up and using Meld as your git difftool and mergetool](https://stackoverflow.com/a/34119867/4636081)

@@ -20,3 +20,9 @@
 
 - [Blog: linux动态库加载RPATH,RUNPATH 链接动态库](https://gotowqj.iteye.com/blog/1926771)
     *该博客所说的链接顺序是错的，但是其中其他的知识点可以参考*
+
+# Tricks
+
+## Cross compile to Windows from Liunx
+
+Ref [Array Fire: Cross Compile to Windows From Linux](https://arrayfire.com/cross-compile-to-windows-from-linux/)

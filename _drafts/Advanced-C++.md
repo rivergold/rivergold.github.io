@@ -78,6 +78,14 @@ up.reset(nullptr)
 - [cppreference.com: std::unique_ptr::reset](https://en.cppreference.com/w/cpp/memory/unique_ptr/reset)
 - [cppreference.com: how to delete unique_ptr](http://www.cplusplus.com/forum/general/119828/)
 
+## lvalue and rvalue
+
+An lvalue is an expression that refers to a memory location and allows us to take the address of that memory location via the & operator. An rvalue is an expression that is not an lvalue. Examples are
+
+Ref [Thomas Becker's Homepage: C++ Rvalue References Explained](http://thbecker.net/articles/rvalue_references/section_01.html)
+
+仔细品位[Move Semantics and Compiler Optimizations](http://thbecker.net/articles/rvalue_references/section_06.html)
+
 <!--  -->
 <br>
 

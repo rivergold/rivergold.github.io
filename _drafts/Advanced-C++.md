@@ -8,6 +8,12 @@ This specifier specifies that a constructor doesn't allow `implicit conversions`
 ***References:***
 - [cppreference: explicit specifier](http://en.cppreference.com/w/cpp/language/explicit)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## Constructor Initializers List Must Be Uesed
 
 - Members need to be initialized are `const` or references: because these types can only be initialized, they cannot be assigned.
@@ -20,9 +26,21 @@ This specifier specifies that a constructor doesn't allow `implicit conversions`
 
 - 需要初始化`const`成员或者`引用类型`的成员：因为这两种类型只能初始化，不能对其进行赋值。
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## `protected` Members
 
 a class uses `protected` for those members that it is willing to share with its `derived classes` but wants to protect from neneral access.
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## `public`, `private` and `protected` Inheritance
 
@@ -39,6 +57,12 @@ Derivation can only inheriate `public` and `protected` members from **base**, bu
 - [tutorialspoint: C++ Inheritance](https://www.tutorialspoint.com/cplusplus/cpp_inheritance.htm)
 - [blog: C++继承：公有，私有，保护](http://www.cnblogs.com/qlwy/archive/2011/08/25/2153584.html)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## Smart pointer
 
 ### How to release a `unique_ptr`
@@ -53,6 +77,36 @@ up.reset(nullptr)
 
 - [cppreference.com: std::unique_ptr::reset](https://en.cppreference.com/w/cpp/memory/unique_ptr/reset)
 - [cppreference.com: how to delete unique_ptr](http://www.cplusplus.com/forum/general/119828/)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
+
+## Copy Control
+
+When a object of a class type is copied, moved, assigned, and destroyed, it need:
+
+- copy constructor
+- copy-assignment operator
+- move constructor
+- move-assignment operator
+- desturctor
+
+### Copy initialization
+
+Happens:
+
+- Pass an object as an argument to a parameter of nonreference type
+    传递参数时，将object传递给非引用的参数
+- Return an object from a function tha has a nonreference retrun type
+    函数返回时，返回非引用类型的返沪值
+- Brace initialize the element in an array or the members of an aggregate class
+    大括号初始化数据、
+
+Copy initialization ordinarily use the copy constructor. But if a class has a move constructor, then copy initialaztion sometimes use the move constuctor instead of the copy constructor.
+
 
 <!--  -->
 <br>

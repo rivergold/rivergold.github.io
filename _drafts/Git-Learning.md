@@ -152,6 +152,14 @@ And there is a [video][Gitkraken rebase vide] tell your how to use rebase in Git
 
 - [Blog: 基于GitLab的Code Review教程](https://ken.io/note/gitlab-code-review-tutorial)
 
+## How to use Watch, Star and Fork
+
+- Watch: 关注这个项目的动态
+- Star: 对这个项目点赞
+- Fork: 相当于你自己有了一份原项目的拷贝，当然这个拷贝只是针对当时的项目文件，如果后续原项目文件发生改变，你必须通过其他的方式去同步
+
+Ref [简书: 如何用好 github 中的 watch、star、fork](https://www.jianshu.com/p/6c366b53ea41)
+
 <!--  -->
 <br>
 

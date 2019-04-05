@@ -139,3 +139,33 @@ This code is from `caffe/tools/caffe.cpp`. Here, `BewFunction` is a function poi
 ***References:***
 
 - [Blog: [C++语法]关键字typedef用法](http://www.cnblogs.com/SweetDream/archive/2006/05/10/395921.html)
+
+**注: C++ 11下最好使用`using` 代替`typedef`**
+
+<!--  -->
+<br>
+
+***
+<!--  -->
+
+## Calculate execution time
+
+```c++
+#include <chrono>
+
+auto start = chrono::steady_clock::now();
+// Code need to test time
+auto end = chrono::steady_clock::now();
+auto diff = end -start
+// Print
+cout << chrono::duration <double, milli> (diff).count() << " ms" << endl;
+// cout << chrono::duration <double, nano> (diff).count() << " ns" << endl;
+```
+
+Ref [stackoverflow: calculating execution time in c++](https://stackoverflow.com/a/47888078/4636081)
+
+<!--  -->
+<br>
+
+***
+<!--  -->

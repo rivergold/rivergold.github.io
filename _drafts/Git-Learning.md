@@ -31,6 +31,12 @@
 
 # Basic
 
+## Generate keys
+
+```bash
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
+
 ## Local
 
 ### `git status`

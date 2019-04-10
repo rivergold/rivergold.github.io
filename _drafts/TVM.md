@@ -19,12 +19,58 @@ vs. storage, vectorization, and parallelism.
 
 neon is Intel's reference deep learning framework committed to best performance on all hardware. Designed for ease-of-use and extensibility.
 
-# Linux
+# Install
 
-## List all sy
+## Install Android TVM RPC
+
+### TVM4J - Java Frontend for TVM Runtime
+
+Required
+
+- JDK
+- Maven
+
+Check JDK installed or not
 
 ```bash
-ls -la /var/www/ | grep "\->"
+java -version # this will check your jre version
+javac -version # this will check your java compiler version(JDK) if you installed
 ```
 
-Ref [StackExchange: How to list all symbolic links in a directory](https://askubuntu.com/questions/522051/how-to-list-all-symbolic-links-in-a-directory)
+- JRE: Java Runtime Environment
+- JDK: Java Development Kit
+- Maven: 一个项目管理和构建工具，主要做编译、测试、报告、打包、部署等操作完成项目的构建。
+
+Ref [stackoverflow: How to tell if JRE or JDK is installed](https://stackoverflow.com/questions/22539779/how-to-tell-if-jre-or-jdk-is-installed)
+
+***References:***
+
+- [知乎: JRE 和 JDK 的区别是什么？](https://www.zhihu.com/question/20317448)
+
+- [知乎: maven是干嘛的？](https://www.zhihu.com/question/20104186/answer/73797359)
+
+- [并发编程网: Maven入门指南（一）](http://ifeve.com/maven-1/)
+
+- [简书: java中的maven是干什么的](https://www.jianshu.com/p/3ed036e1c816)
+
+Install maven
+
+```bash
+sudo apt install maven
+mvn --version
+```
+
+Ref [Linuxize: How to Install Apache Maven on Ubuntu 18.04](https://linuxize.com/post/how-to-install-apache-maven-on-ubuntu-18-04/)
+
+```bash
+cd <tvm folder>
+make jvmpkg
+bash tests/scripts/task_java_unittest.sh
+make jvminstall
+```
+
+When I run `bash ` occur error like followings,
+
+```bash
+Failed to execute goal org.apache.maven.plugins:maven-checkstyle-plugin:2.17:check (default) on project tvm4j-core: Failed during checkstyle configuration: cannot initialize module TreeWalker - Property 'cacheFile' does not exist, please check the documentation
+```

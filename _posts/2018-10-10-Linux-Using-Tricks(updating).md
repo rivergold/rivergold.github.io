@@ -1140,3 +1140,15 @@ Support:
 - Linux
 
 [Lepton Home]: https://github.com/hackjutsu/Lepton
+
+## redshift
+
+Adjusts the color temperature of your screen
+
+[Redshift Home](https://github.com/jonls/redshift)
+
+Ubuntu install
+
+```bash
+sudo apt install redshift-gtk
+```

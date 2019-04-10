@@ -1,0 +1,11 @@
+# Basics
+
+# Install
+
+## Ubuntu
+
+
+
+```
+
+```

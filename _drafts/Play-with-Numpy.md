@@ -16,6 +16,19 @@ yy, xx = np.nonzero(img==255)
 
 - [Numpy Doc: numpy.nonzero](https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.nonzero.html)
 
+### `numpy.unique`
+
+Find the unique elements of an array.
+
+**Calculate element count in a ndarray**
+
+```python
+a = np.random.randn(4, 4)
+unique, counts = numpy.unique(a, return_counts=True)
+```
+
+Ref [stackoverflow: How to count the occurrence of certain item in an ndarray in Python?](https://stackoverflow.com/questions/28663856/how-to-count-the-occurrence-of-certain-item-in-an-ndarray-in-python)
+
 <!--  -->
 <br>
 

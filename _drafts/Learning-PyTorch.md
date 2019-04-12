@@ -59,6 +59,10 @@ This will solve the  `IndexError: invalid index of a 0-dim tensor. Use tensor.it
 
 - [python优先的深度学习框架: pytorch使用view(*args)在不改变张量数据的情况下随意改变张量的大小和形状](https://ptorch.com/news/59.html)
 
+### `torch.Tensor.unsqueeze(dim) -> Tensor`
+
+Returns a new tensor with a dimension of size one inserted at the specified position.
+
 ***
 
 ## torch.nn

@@ -24,17 +24,17 @@ Refer [stackoverflow: How do I tell if a regular file does not exist in Bash?][s
 
 - [IBM Developer: Bash 参数和参数扩展](https://www.ibm.com/developerworks/cn/linux/l-bash-parameters.html)
 
+<!--  -->
 <br>
 
 ***
 
 <br>
+<!--  -->
 
 # CMake
 
-## Common
-
-### Path
+## Path
 
 - `PROJECT_SOURCE_DIR`: Project root path
 
@@ -50,12 +50,59 @@ Refer [stackoverflow: How do I tell if a regular file does not exist in Bash?][s
     cmake ..
     # ${CMAKE_BINARY_DIR} is build/
     ```
+<!--  -->
+<br>
 
-### Tricks
+***
+<!--  -->
 
-#### Copy 3rdparty dynamic libs into the same folder as executable
+## pkg-config
 
-```cmake
+`pkg-config` will search `.pc` in `PKG_CONFIG_PATH`.
+
+When you set `CMAKE_PREFIX_PATH` for the `.pc`, `pkg-config` still cannot find it. You need to add the `.pc` path into `PKG_CONFIG_PATH` via followings,
+
+```makefile
+set($ENV{PKG_CONFIG_PATH} <pc path>)
+```
+
+Ref [stackoverflow: pkg-config cannot find .pc files although they are in the path](https://stackoverflow.com/questions/11303730/pkg-config-cannot-find-pc-files-although-they-are-in-the-path)
+
+***References:***
+
+- [stackoverflow: set PKG_CONFIG_PATH in cmake](https://stackoverflow.com/a/44487317/4636081): The most voted answer' method is not correct.
+
+<!--  -->
+<br>
+
+***
+
+<br>
+<!--  -->
+
+## Tricks
+
+### Set and Get Environment Variable
+
+- Get: `$ENV{PKG_CONFIG_PATH}`
+
+- Set: `set(ENV{PKG_CONFIG_PATH} <pc path>)`
+
+***References:***
+
+- [stackoverflow: set PKG_CONFIG_PATH in cmake](https://stackoverflow.com/a/44487317/4636081)
+- [CMake doc: ENV](https://cmake.org/cmake/help/v3.14/variable/ENV.html)
+- [CMake doc: Set Environment Variable](https://cmake.org/cmake/help/v3.14/command/set.html#set-environment-variable)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
+
+### Copy 3rdparty dynamic libs into the same folder as executable
+
+```makefile
 add_custom_command(TARGET <your_exe_name> POST_BUILD   # Adds a post-build event to MyTest
     COMMAND ${CMAKE_COMMAND} -E copy_if_different      # which executes "cmake - E copy_if_different..."
         "<your_3rdparty_lib>"                          # <--this is in-file

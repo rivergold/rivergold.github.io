@@ -1725,6 +1725,12 @@ dir(<object>)
 
 Ref [stackoverflow: Is there a built-in function to print all the current properties and values of an object?](https://stackoverflow.com/questions/192109/is-there-a-built-in-function-to-print-all-the-current-properties-and-values-of-a)
 
+### Compile Python package into dynamic library
+
+Ref [Jan Buchar Blog: Using Cython to protect a Python codebase](https://bucharjan.cz/blog/using-cython-to-protect-a-python-codebase.html)
+
+- [ ] TBD
+
 <br>
 
 * * *
@@ -1738,6 +1744,8 @@ Ref [stackoverflow: Is there a built-in function to print all the current proper
 
 ## Python 同级目录包导入问题，使用"."错误
 
+在package中使用`python script`时，相对目录会失效
+
 Ref to [曙暮之光: python 同级目录包导入问题，使用"."错误](https://www.cnblogs.com/liuda9495/p/8351978.html)
 
 ## `python -m`
@@ -1747,7 +1755,6 @@ Ref [python3-cookbook: 10.3 使用相对路径名导入包中子模块](https://
 ***References:***
 
 - [Blog: Python自定义包下不同目录单元测试的导入错误](http://lessisbetter.site/2016/01/08/package-unittest-import-error/)
-- []()
 
 
 <br>

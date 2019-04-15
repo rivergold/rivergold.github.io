@@ -4,6 +4,27 @@
 
 Ref [Numpy Doc: Indexing routines](https://docs.scipy.org/doc/numpy-1.15.0/reference/routines.indexing.html)
 
+### Condition indexing
+
+Better use `np.logical_and`,
+
+```python
+a = np.random.randn(5, 5, 3)
+a[np.logical_and(a[:,:,0]>0, a[:,:,1]>0)]
+```
+
+Ref [stackoverflow: Difference between 'and' (boolean) vs. '&' (bitwise) in python. Why difference in behavior with lists vs numpy arrays?](https://stackoverflow.com/q/22646463/4636081)
+
+Or you can using `() & ()`. Because there is no logical value of `ndarray`, so you need to use `&`.
+
+```python
+a = np.random.randn(5, 5, 3)
+a[(a[:,:,0]>0) & a[:,:,1]>1].shape
+>>> (3, 3)
+```
+
+Ref [Python Data Science Handbook: Comparisons, Masks, and Boolean Logic](https://jakevdp.github.io/PythonDataScienceHandbook/02.06-boolean-arrays-and-masks.html#Boolean-operators)
+
 ### `np.nonzero(a)`
 
 Return the indices of the elements that are non-zero.

@@ -559,11 +559,11 @@ Configuration tips:
     ```
     And set like this,
     <p align="center">
-      <img src="http://ovvybawkj.bkt.clouddn.com/linux/nautilus-actions-1" width="80%">
+      <img src="https://upload-images.jianshu.io/upload_images/9890707-c26500c03483e88e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="80%">
     </p>
     Set Terminator path and parameters `--working-directory=%d/%b`
     <p align="center">
-      <img src="http://ovvybawkj.bkt.clouddn.com/linux/nautilus-actions-2" width="80%">
+      <img src="https://upload-images.jianshu.io/upload_images/9890707-67e487b56b57153d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="80%">
     </p>
 
 - Set unlimited scroll in terminator

@@ -1309,6 +1309,8 @@ wget.download(<link>, out=<name>)
 
 - [stackoverflow: Python equivalent of a given wget command](https://stackoverflow.com/a/28313383/4636081)
 
+## Setuptools
+
 <br>
 
 * * *

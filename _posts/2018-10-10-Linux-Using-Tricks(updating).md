@@ -435,6 +435,19 @@ Using `tweaks` and `dash to dock` to set `gnome-dock`. And using `alt` + `F2` an
 
 - [Blog ubuntu 使用日常：18.04 中杂项处理 + 美化记录](https://hacpai.com/article/1527091030020)
 
+## Ubuntu reinstall GUI
+
+```bash
+sudo apt update && sudo apt upgrade --fix-missing
+```
+
+```bash
+sudo apt install --reinstall ubuntu-session gdm3
+```
+
+Ref [stackoverflow: GUI feature missing from full ubuntu installation 18.04](https://askubuntu.com/questions/1066048/gui-feature-missing-from-full-ubuntu-installation-18-04)
+
+
 <!--  -->
 <br>
 

@@ -26,3 +26,28 @@
 ## Cross compile to Windows from Liunx
 
 Ref [Array Fire: Cross Compile to Windows From Linux](https://arrayfire.com/cross-compile-to-windows-from-linux/)
+
+# LLVM
+
+The **LLVM** Compiler Infrastructure.
+
+典型的编译器架构:
+
+- Frontend(Parser): 负责将源码解析成语法书
+- Optimizer: 负责寻找程序逻辑中有没有可以简化的来提升执行速度
+- Backend(Code Generator): 生成低阶的机器码
+
+LLVM IR: LLVM定义的一种通用程序中间表示方法
+
+<p align="center">
+  <img
+  src="https://upload-images.jianshu.io/upload_images/9890707-0ced79013b8632aa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="80%">
+</p>
+
+Frontend 把原始语言的逻辑翻译成LLVM IR，Optimizer 把 LLVM IR 整理成效率更好的 LLVM IR、Backend 拿到 LLVM IR 來生成机器目标平台的机器语言。
+
+LLVM的Optimizer是由多个**Pass**组成
+
+一个LLVM Pass的input
+
+Ref [Medium: 編譯器 LLVM 淺淺玩](https://medium.com/@zetavg/%E7%B7%A8%E8%AD%AF%E5%99%A8-llvm-%E6%B7%BA%E6%B7%BA%E7%8E%A9-42a58c7a7309)

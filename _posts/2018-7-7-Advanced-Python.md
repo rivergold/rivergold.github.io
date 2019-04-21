@@ -40,6 +40,11 @@ b = [1, 2] # now b is a reference of another object: [1, 2]
 print(a)
 >>> [1, 2, 3]
 ```
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## Function parameters as references
 
@@ -53,6 +58,12 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
 **理解：** Python的函数传参，函数获得的是实参object的引用的拷贝<br>
 
 **Note:** Please read **Fluent Python** book.
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## Introspection
 
@@ -73,9 +84,43 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
     - [Programiz: Python getattr()](https://www.programiz.com/python-programming/methods/built-in/getattr)
     - [stackoverflow: getting dynamic attribute in python](https://stackoverflow.com/questions/13595690/getting-dynamic-attribute-in-python)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
+## Operators
+
+### `and` vs `bool`
+
+- `and`: Tests both expression are logically `True`
+
+- `&`: Used with `True / False` values, to test if both are `True`
+
+**理解:** and是判断逻辑与，而&是对两个变量进行的位操作（需要对两个）
+
+Ref [stackoverflow: Difference between 'and' (boolean) vs. '&' (bitwise) in python. Why difference in behavior with lists vs numpy arrays?](https://stackoverflow.com/a/22647006/4636081)
+
+由于numpy中的array没有logical value, 所以在numpy中进行以下操作时，需要使用`&`
+
+```python
+a = np.random.randn(5, 5, 3)
+a[(a[:,:,0]>0) & (a[:,:,1]>0)].shape
+# a[np.logical_and(a[:,:,0]>0, a[:,:,1]>0)] is better
+>>> (3, 3)
+```
+
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## list
 
 - `zip(*iterables)`: Make an iterator that aggregates elements from each of the iterables.
+
     ```python
     x1 = [1, 2, 3]
     x2 = [4, 5, 6]
@@ -83,7 +128,9 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
     list(zipped)
     >>> [(1, 4), (2, 5), (3, 6)]
     ```
+
     `zip()` in conjunction with the `*` operator can be used to unzip a list:
+
     ```python
     y = [(1, 4), (2, 5), (3, 6)]
     x1, x2 = zip(*y)
@@ -92,10 +139,12 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
     x2
     >>> (4, 5, 6)
     ```
+
     ***Reference:***
     - [Python doc: 2. Built-in Functions: zip](https://docs.python.org/3/library/functions.html#zip)
 
 - `list.insert(index, element)`: Insert element into list
+
     ```python
     a = [1,2,3]
     a.insert(2, 0)
@@ -104,17 +153,20 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
     ```
 
 - Check list is empty
+
     ```python
     a = []
     if not a:
         print('List is empty')
     ```
+
     ***References:***
     - [stackoverflow: How do I check if a list is empty?](https://stackoverflow.com/questions/53513/how-do-i-check-if-a-list-is-empty)
 
 ### `zip`
 
 - Combine two list:
+
     ```python
     a = [1, 2, 3]
     b = [4, 5, 6]
@@ -122,8 +174,11 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
     print(c)
     >>> [(1, 4), (2, 5), (3, 6)]
     ```
+
     **理解:** `zip`就是将多个list对应位置上的element分别组合起来
+
 - Unzip a list of list/tuple
+
     ```python
     a = [1, 2, 3], [4, 5, 6], [7, 8, 9]
     a1, a2, a3 = zip(*a)
@@ -137,11 +192,23 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
     - [stackoverflow: How to unzip a list of tuples into individual lists? [duplicate]](https://stackoverflow.com/questions/12974474/how-to-unzip-a-list-of-tuples-into-individual-lists/12974504)
     - [stackoverflow: What does the Star operator mean? [duplicate]](https://stackoverflow.com/questions/2921847/what-does-the-star-operator-mean)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## dict
 
 - `dict1.update(dict2)`: Adds dictionary `dict2's` key-values pairs in to `dict1`. This function does not return anything.
 
 - `dict.pop(<key>)`: Delate a key of a dict
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## string
 
@@ -166,6 +233,7 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
     - [stackoverflow: How to delete a character from a string using Python](https://stackoverflow.com/questions/3559559/how-to-delete-a-character-from-a-string-using-python)
 
 - Remove punctuation(标点符号) in a string using `str.translate(table)`
+
     ```python
     import string
     trans_table = str.maketrans('', '', str.punctuation)
@@ -177,6 +245,12 @@ In Python, the function gets a copy of the arguments, but the arguments are alwa
 
     ***References:***
     - [Python3.6 doc str.translate](https://docs.python.org/3/library/stdtypes.html?highlight=maketrans#str.translate)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## `queue`
 
@@ -190,6 +264,12 @@ for data in pre_frames.queue:
 ***References:***
 
 - [stackoverflow: Can I get an item from a PriorityQueue without removing it yet?](https://stackoverflow.com/a/43960452/4636081)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## File IO
 
@@ -240,6 +320,12 @@ for data in pre_frames.queue:
     ***References:***
     - [stackoverflow: Delete a file or folder](https://stackoverflow.com/a/6996628/4636081)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## Errors and Exceptions
 
 - Raising exceptions
@@ -262,6 +348,12 @@ for data in pre_frames.queue:
     - [Python tutorial: 错误与异常](http://www.pythondoc.com/pythontutorial3/errors.html)
     - [RUNOOB.COM: Python异常处理](http://www.runoob.com/python/python-exceptions.html)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## Built-in Functions
 
 - `hasattr(object, name)`: Check to see if a object has the attribute
@@ -269,6 +361,12 @@ for data in pre_frames.queue:
 ***References:***
 
 - [Programiz: Python hasattr](https://www.programiz.com/python-programming/methods/built-in/hasattr)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## Packages and `__init__.py`
 
@@ -280,9 +378,21 @@ for data in pre_frames.queue:
 - [python3-cookbook: 使用相对路径名导入包中子模块](https://python3-cookbook.readthedocs.io/zh_CN/latest/c10/p03_import_submodules_by_relative_names.html)
 - [stackoverflow: What's the difference between a Python module and a Python package?](https://stackoverflow.com/questions/7948494/whats-the-difference-between-a-python-module-and-a-python-package)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## Class
 
 Member begin with `__` (e.g `__member_name`) is private member, will not be inherited into subclass.
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## Python package tools
 
@@ -1199,6 +1309,8 @@ wget.download(<link>, out=<name>)
 
 - [stackoverflow: Python equivalent of a given wget command](https://stackoverflow.com/a/28313383/4636081)
 
+## Setuptools
+
 <br>
 
 * * *
@@ -1606,14 +1718,19 @@ If you want to get the caller function name inside another function in Python, h
 
     Ref [stackoverflow: Getting the caller function name inside another function in Python?](https://stackoverflow.com/questions/900392/getting-the-caller-function-name-inside-another-function-in-python)
 
-
-### Print current properties and values of an object
+## Print current properties and values of an object
 
 ```python
 dir(<object>)
 ```
 
 Ref [stackoverflow: Is there a built-in function to print all the current properties and values of an object?](https://stackoverflow.com/questions/192109/is-there-a-built-in-function-to-print-all-the-current-properties-and-values-of-a)
+
+## Compile Python package into dynamic library
+
+Ref [Jan Buchar Blog: Using Cython to protect a Python codebase](https://bucharjan.cz/blog/using-cython-to-protect-a-python-codebase.html)
+
+- [ ] TBD
 
 <br>
 
@@ -1628,6 +1745,8 @@ Ref [stackoverflow: Is there a built-in function to print all the current proper
 
 ## Python 同级目录包导入问题，使用"."错误
 
+在package中使用`python script`时，相对目录会失效
+
 Ref to [曙暮之光: python 同级目录包导入问题，使用"."错误](https://www.cnblogs.com/liuda9495/p/8351978.html)
 
 ## `python -m`
@@ -1637,7 +1756,6 @@ Ref [python3-cookbook: 10.3 使用相对路径名导入包中子模块](https://
 ***References:***
 
 - [Blog: Python自定义包下不同目录单元测试的导入错误](http://lessisbetter.site/2016/01/08/package-unittest-import-error/)
-- []()
 
 
 <br>

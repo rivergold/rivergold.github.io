@@ -435,6 +435,19 @@ Using `tweaks` and `dash to dock` to set `gnome-dock`. And using `alt` + `F2` an
 
 - [Blog ubuntu 使用日常：18.04 中杂项处理 + 美化记录](https://hacpai.com/article/1527091030020)
 
+## Ubuntu reinstall GUI
+
+```bash
+sudo apt update && sudo apt upgrade --fix-missing
+```
+
+```bash
+sudo apt install --reinstall ubuntu-session gdm3
+```
+
+Ref [stackoverflow: GUI feature missing from full ubuntu installation 18.04](https://askubuntu.com/questions/1066048/gui-feature-missing-from-full-ubuntu-installation-18-04)
+
+
 <!--  -->
 <br>
 
@@ -559,11 +572,11 @@ Configuration tips:
     ```
     And set like this,
     <p align="center">
-      <img src="http://ovvybawkj.bkt.clouddn.com/linux/nautilus-actions-1" width="80%">
+      <img src="https://upload-images.jianshu.io/upload_images/9890707-c26500c03483e88e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="80%">
     </p>
     Set Terminator path and parameters `--working-directory=%d/%b`
     <p align="center">
-      <img src="http://ovvybawkj.bkt.clouddn.com/linux/nautilus-actions-2" width="80%">
+      <img src="https://upload-images.jianshu.io/upload_images/9890707-67e487b56b57153d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="80%">
     </p>
 
 - Set unlimited scroll in terminator
@@ -1140,3 +1153,15 @@ Support:
 - Linux
 
 [Lepton Home]: https://github.com/hackjutsu/Lepton
+
+## redshift
+
+Adjusts the color temperature of your screen
+
+[Redshift Home](https://github.com/jonls/redshift)
+
+Ubuntu install
+
+```bash
+sudo apt install redshift-gtk
+```

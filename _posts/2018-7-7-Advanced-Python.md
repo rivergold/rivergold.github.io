@@ -163,6 +163,15 @@ a[(a[:,:,0]>0) & (a[:,:,1]>0)].shape
     ***References:***
     - [stackoverflow: How do I check if a list is empty?](https://stackoverflow.com/questions/53513/how-do-i-check-if-a-list-is-empty)
 
+- `list.append()`
+    
+    shadow copy or deep copy ?
+    **`append` is shadow copy**
+
+    ***References:***
+
+    - [RUNOOB.COM: Python append() 与深拷贝、浅拷贝](http://www.runoob.com/w3cnote/python-append-deepcopy.html)
+
 ### `zip`
 
 - Combine two list:
@@ -825,6 +834,15 @@ p.communicate(input='yes\n'.encode())
 # Packages:
 
 ## Matplotlib
+
+### Concept
+
+<p align="center">
+  <img
+  src="https://upload-images.jianshu.io/upload_images/9890707-234a58290805e2c8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="70%">
+</p>
+
+Ref [matplotlib tutorial: Parts of a Figure](https://matplotlib.org/tutorials/introductory/usage.html#parts-of-a-figure)
 
 ### Tips
 - Draw heatmap

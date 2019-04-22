@@ -68,6 +68,25 @@ Ref [Vulkan: Vulkan Tutorial](https://vulkan-tutorial.com/)
 
 - [Orchid Blog: ARM NEON优化（一）——NEON简介及基本架构](https://zyddora.github.io/2016/02/28/neon_1/)
 
+# OpenGL
+
+- [LearnOpenGL](https://learnopengl-cn.readthedocs.io/zh/latest/01%20Getting%20started/01%20OpenGL/)
+
 # Vulkan
 
+> Vulkan isn’t just a graphics API, it supports compute too!
+
+> Vulkan is an API (Application Programming Interface) for graphics and compute hardware
+
+## Vulkan Compute
+
+***References:***
+
+- [STEPHANIE HURLBURT Blog: Beginner-Friendly Vulkan Tutorials](http://stephaniehurlburt.com/blog/2017/7/14/beginner-friendly-vulkan-tutorials)
+
 - [phoronix: A Simple Dive Into Vulkan Compute Programming](https://www.phoronix.com/scan.php?page=news_item&px=Vulkan-Compute-Small-Sample)
+
+- [Github: Glavnokoman/vulkan-compute-example](https://github.com/Glavnokoman/vulkan-compute-example)
+
+- [Reddit: Vulkan Compute](https://www.reddit.com/r/vulkan/comments/5e3rhn/vulkan_compute/)
+

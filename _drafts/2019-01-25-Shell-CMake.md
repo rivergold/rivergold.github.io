@@ -50,11 +50,40 @@ Refer [stackoverflow: How do I tell if a regular file does not exist in Bash?][s
     cmake ..
     # ${CMAKE_BINARY_DIR} is build/
     ```
+
 <!--  -->
 <br>
 
 ***
 <!--  -->
+
+### Find Package
+
+#### Use pkg-config to find package
+
+```cmake
+set(CMAKE_PREFIX_PATH /usr/local/Cellar/glfw/3.2.1/lib/)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GLFW3 REQUIRED GLFW3)
+message("GLFW3 ${GLFW3_INCLUDE_DIRS}")
+include_directories(${GLFW3_INCLUDE_DIRS})
+# <XXX>_INCLUDE_DIRS
+# <XXX>_LINK_LIBRARIES
+```
+
+Ref [stackoverflow: What is the proper way to use `pkg-config` from `cmake`?](https://stackoverflow.com/a/29316084)
+
+***References:***
+
+- [CMake doc: FindPkgConfig](https://cmake.org/cmake/help/v3.14/module/FindPkgConfig.html)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
+
+### Tricks
 
 ## pkg-config
 

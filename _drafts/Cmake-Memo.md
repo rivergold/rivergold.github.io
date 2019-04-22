@@ -2,11 +2,31 @@
 
 # Basics
 
-- `CMAKE_PREFIX_PATH` list of directories path to tell cmake where to search `find_package()`, `find_program()`, `find_library(), find_file()`
+## `CMAKE_PREFIX_PATH`
 
-- `find_package()`
+list of directories path to tell cmake where to search `find_package()`, `find_program()`, `find_library(), find_file()`
 
-- `set`
+## `find_package()`
+
+## `add_definitions`
+
+Adds -D define flags to the compilation of source files.
+
+When the cpp file have `#ifdef` like followings:
+
+```c++
+#ifdef NDEBUG
+const bool enableValidationLayers = false;
+#else
+const bool enableValidationLayers = true;
+#endif
+```
+
+You can use `add_definitions` to collor it.
+
+Ref [stackoverflow: CMake: How to pass preprocessor macros](https://stackoverflow.com/a/9639605)
+
+## `set`
 
 <!--  -->
 <br>

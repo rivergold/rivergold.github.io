@@ -844,6 +844,10 @@ p.communicate(input='yes\n'.encode())
 
 Ref [matplotlib tutorial: Parts of a Figure](https://matplotlib.org/tutorials/introductory/usage.html#parts-of-a-figure)
 
+***References:***
+
+- [CSDN: OpenCV GrabCut算法 物体分割(python语言)](https://blog.csdn.net/qq_29300341/article/details/79026392)
+
 ### Tips
 - Draw heatmap
     ```python

@@ -825,6 +825,22 @@ p.communicate(input='yes\n'.encode())
 
 - [掘金: Python广为使用的并发处理库futures使用入门与内部原理](https://juejin.im/post/5b1e36476fb9a01e4a6e02e4)
 
+## ast
+
+Abstract syntax tree.
+
+### `ast.literal_eval(str)`
+
+```python
+print(ast.literal_eval('(12, 12, 12)'))
+>>> (12, 12, 12)
+```
+
+***References:***
+
+- [stackoverflow: Convert a String representation of a Dictionary to a dictionary?](https://stackoverflow.com/questions/988228/convert-a-string-representation-of-a-dictionary-to-a-dictionary)
+- [Python Doc: ast.literal_eval](https://docs.python.org/3/library/ast.html#ast.literal_eval)
+
 <br>
 
 * * *

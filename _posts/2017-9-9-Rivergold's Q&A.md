@@ -34,13 +34,25 @@ Maybe can download from [here](https://stackoverflow.com/questions/43621584/why-
 - [stackoverflow: What does it mean to “run library module as a script” with the “-m” option? [duplicate]](https://stackoverflow.com/questions/46319694/what-does-it-mean-to-run-library-module-as-a-script-with-the-m-option)
 - [stackoverflow: What does if __name__ == “__main__”: do?](https://stackoverflow.com/questions/419163/what-does-if-name-main-do)
 
-## Coding style
+## Google Coding style
 
 Base on [Google coding style](https://google.github.io/styleguide/)
 
 ### C++
 
 Private member name: `name_`
+
+```c++
+class TableInfo {
+  ...
+ private:
+  string table_name_;  // OK - underscore at end.
+  string tablename_;   // OK.
+  static Pool<TableInfo>* pool_;  // OK.
+};
+```
+
+Ref [Google C++ Style Guide: Variable Names](https://google.github.io/styleguide/cppguide.html#Variable_Names)
 
 ### Python
 

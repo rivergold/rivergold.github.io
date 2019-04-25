@@ -56,4 +56,4 @@ Ref [Google C++ Style Guide: Variable Names](https://google.github.io/styleguide
 
 ### Python
 
-Private member name: `_name`
+Private member name: `_name`, not truly private

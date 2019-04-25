@@ -395,7 +395,49 @@ for data in pre_frames.queue:
 
 ## Class
 
-Member begin with `__` (e.g `__member_name`) is private member, will not be inherited into subclass.
+Member begin with `_` (e.g `_member_name`) is private member, not truly private, but for code style.
+
+***References:***
+
+- [Hackenoon: Understanding the underscore( _ ) of Python](https://hackernoon.com/understanding-the-underscore-of-python-309d1a029edc)
+
+- [Igorsobreira Blog: Difference between _, __ and __xx__ in Python](http://igorsobreira.com/2010/09/16/difference-between-one-underline-and-two-underlines-in-python.html)
+
+<!-- will not be inherited into subclass. -->
+
+### property, setter and getter
+
+```python
+class Example(object):
+    def __init__(self):
+        self._a = None
+
+    @property
+    def a(self):
+        return self._a
+
+    @a.setter
+    def a(self, value):
+        return self._a = value
+```
+
+When you write like the followings, it will occur `RecursionError: maximum recursion depth exceeded while calling a Python object` error
+
+```python
+class Example(object):
+    def __init__(self):
+        self.a = None
+
+    @property
+    def a(self):
+        return self.a
+
+    @a.setter
+    def a(self, value):
+        return self.a = value
+```
+
+Ref [stackoverflow: Using Properties in Python clases cause “maximum recursion depth exceeded” [duplicate]](https://stackoverflow.com/questions/36931415/using-properties-in-python-clases-cause-maximum-recursion-depth-exceeded)
 
 <!--  -->
 <br>

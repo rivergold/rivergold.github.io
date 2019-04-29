@@ -134,3 +134,29 @@ Ref [CSDN: opencv 获取图像最大连通域 c++和python版](https://blog.csdn
 - [stackoverflow: Find and draw the largest contour in opencv on a specific color (Python)](https://stackoverflow.com/questions/44588279/find-and-draw-the-largest-contour-in-opencv-on-a-specific-color-python)
 
 - [OpenCV doc: OpenCV-Python Tutorials: Contour Features](https://docs.opencv.org/3.4/dd/d49/tutorial_py_contour_features.html)
+
+# Image file reading and writing
+
+## `imread`
+
+### Read image with alpha channel
+
+```python
+image = cv2.imread(<image_path>, flags=cv2.IMREAD_UNCHANGED)
+```
+
+Ref [OpenCV doc: Image file reading and writing - ImreadModes](https://docs.opencv.org/3.4.6/d4/da8/group__imgcodecs.html#ga61d9b0126a3e57d9277ac48327799c80)
+
+***References:***
+
+- [CSDN: opencv imread读取alpha通道](https://blog.csdn.net/jazywoo123/article/details/17353069)
+
+# Image Core
+
+## Operations on arrays
+
+### `addWeighted`
+
+Compose two image with alpha channel.
+
+Ref [OpenCV ansers: How to overlay an PNG image with alpha channel to another PNG?](https://answers.opencv.org/question/73016/how-to-overlay-an-png-image-with-alpha-channel-to-another-png/)

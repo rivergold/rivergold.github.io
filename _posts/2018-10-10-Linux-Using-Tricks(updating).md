@@ -1,5 +1,24 @@
 This article has recorded some tips and tricks for linux, especially for Ubuntu. All of these commands and tricks are sorted up with my using experience.
 
+# Basics
+
+## Partition
+
+<p align="center">
+  <img
+  src="https://upload-images.jianshu.io/upload_images/9890707-05de2dcd0ea5ad0f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="100%">
+</p>
+
+Ref [鸟哥的Linux私房菜]()
+
+### Install Ubuntu with UEFI
+
+If the other OS installed on your computer is UEFI, you must install Ubuntu with UEFI, if the OS installed with BIOS, you must install Ubuntu with BIOS.
+
+***References:***
+
+- [Ubuntu doc: UEFI](https://help.ubuntu.com/community/UEFI#Set_up_the_firmware_in_UEFI_or_BIOS.2FCSM.2FLegacy_mode)
+
 # Linux Tips
 
 ## Update `.barchrc`

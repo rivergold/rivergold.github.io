@@ -106,3 +106,57 @@ transformed_points = rotate_M.dot(points_ones.T).T
 ***References:***
 
 - [Learn OpenCV: Object Tracking using OpenCV (C++/Python)](https://www.learnopencv.com/object-tracking-using-opencv-cpp-python/)
+
+## Find Contours and max area object in image
+
+- 首先通过findContours函数找到二值图像中的所有边界(这块看需要调节里面的参数)
+- 然后通过contourArea函数计算每个边界内的面积
+- 最后通过fillConvexPoly函数将面积最大的边界内部涂成背景
+
+```python
+b, g, r, a cv2.split(img)
+kernel = np.one(30, 30), np.uint8)
+a = cv2.morphology(a, cv2.MORPH_OPENkernel)
+
+a_theshed, contour hierarchy cv2.findContours(a1, 2)
+if len(contours) 1:
+    c = m(contourskey=cvcontourArea)
+    a_max_area np.zero(img.shape[:2] np.uint8)
+    cvfillConvexPo(a_max_area, c1)
+    a *= a_max_area
+img = cv2.merge([bg, r, a])
+```
+
+Ref [CSDN: opencv 获取图像最大连通域 c++和python版](https://blog.csdn.net/xuyangcao123/article/details/81023732)
+
+***References:***
+
+- [stackoverflow: Find and draw the largest contour in opencv on a specific color (Python)](https://stackoverflow.com/questions/44588279/find-and-draw-the-largest-contour-in-opencv-on-a-specific-color-python)
+
+- [OpenCV doc: OpenCV-Python Tutorials: Contour Features](https://docs.opencv.org/3.4/dd/d49/tutorial_py_contour_features.html)
+
+# Image file reading and writing
+
+## `imread`
+
+### Read image with alpha channel
+
+```python
+image = cv2.imread(<image_path>, flags=cv2.IMREAD_UNCHANGED)
+```
+
+Ref [OpenCV doc: Image file reading and writing - ImreadModes](https://docs.opencv.org/3.4.6/d4/da8/group__imgcodecs.html#ga61d9b0126a3e57d9277ac48327799c80)
+
+***References:***
+
+- [CSDN: opencv imread读取alpha通道](https://blog.csdn.net/jazywoo123/article/details/17353069)
+
+# Image Core
+
+## Operations on arrays
+
+### `addWeighted`
+
+Compose two image with alpha channel.
+
+Ref [OpenCV ansers: How to overlay an PNG image with alpha channel to another PNG?](https://answers.opencv.org/question/73016/how-to-overlay-an-png-image-with-alpha-channel-to-another-png/)

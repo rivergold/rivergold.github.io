@@ -163,6 +163,15 @@ a[(a[:,:,0]>0) & (a[:,:,1]>0)].shape
     ***References:***
     - [stackoverflow: How do I check if a list is empty?](https://stackoverflow.com/questions/53513/how-do-i-check-if-a-list-is-empty)
 
+- `list.append()`
+    
+    shadow copy or deep copy ?
+    **`append` is shadow copy**
+
+    ***References:***
+
+    - [RUNOOB.COM: Python append() 与深拷贝、浅拷贝](http://www.runoob.com/w3cnote/python-append-deepcopy.html)
+
 ### `zip`
 
 - Combine two list:
@@ -386,7 +395,49 @@ for data in pre_frames.queue:
 
 ## Class
 
-Member begin with `__` (e.g `__member_name`) is private member, will not be inherited into subclass.
+Member begin with `_` (e.g `_member_name`) is private member, not truly private, but for code style.
+
+***References:***
+
+- [Hackenoon: Understanding the underscore( _ ) of Python](https://hackernoon.com/understanding-the-underscore-of-python-309d1a029edc)
+
+- [Igorsobreira Blog: Difference between _, __ and __xx__ in Python](http://igorsobreira.com/2010/09/16/difference-between-one-underline-and-two-underlines-in-python.html)
+
+<!-- will not be inherited into subclass. -->
+
+### property, setter and getter
+
+```python
+class Example(object):
+    def __init__(self):
+        self._a = None
+
+    @property
+    def a(self):
+        return self._a
+
+    @a.setter
+    def a(self, value):
+        return self._a = value
+```
+
+When you write like the followings, it will occur `RecursionError: maximum recursion depth exceeded while calling a Python object` error
+
+```python
+class Example(object):
+    def __init__(self):
+        self.a = None
+
+    @property
+    def a(self):
+        return self.a
+
+    @a.setter
+    def a(self, value):
+        return self.a = value
+```
+
+Ref [stackoverflow: Using Properties in Python clases cause “maximum recursion depth exceeded” [duplicate]](https://stackoverflow.com/questions/36931415/using-properties-in-python-clases-cause-maximum-recursion-depth-exceeded)
 
 <!--  -->
 <br>
@@ -816,6 +867,22 @@ p.communicate(input='yes\n'.encode())
 
 - [掘金: Python广为使用的并发处理库futures使用入门与内部原理](https://juejin.im/post/5b1e36476fb9a01e4a6e02e4)
 
+## ast
+
+Abstract syntax tree.
+
+### `ast.literal_eval(str)`
+
+```python
+print(ast.literal_eval('(12, 12, 12)'))
+>>> (12, 12, 12)
+```
+
+***References:***
+
+- [stackoverflow: Convert a String representation of a Dictionary to a dictionary?](https://stackoverflow.com/questions/988228/convert-a-string-representation-of-a-dictionary-to-a-dictionary)
+- [Python Doc: ast.literal_eval](https://docs.python.org/3/library/ast.html#ast.literal_eval)
+
 <br>
 
 * * *
@@ -825,6 +892,19 @@ p.communicate(input='yes\n'.encode())
 # Packages:
 
 ## Matplotlib
+
+### Concept
+
+<p align="center">
+  <img
+  src="https://upload-images.jianshu.io/upload_images/9890707-234a58290805e2c8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="70%">
+</p>
+
+Ref [matplotlib tutorial: Parts of a Figure](https://matplotlib.org/tutorials/introductory/usage.html#parts-of-a-figure)
+
+***References:***
+
+- [CSDN: OpenCV GrabCut算法 物体分割(python语言)](https://blog.csdn.net/qq_29300341/article/details/79026392)
 
 ### Tips
 - Draw heatmap

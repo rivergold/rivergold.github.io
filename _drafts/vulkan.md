@@ -1,6 +1,6 @@
 # Basics
 
-- [Vulkan Home](https://vulkan.lunarg.com/doc/sdk/latest/linux/getting_started.html)
+- [Vulkan Docs](https://vulkan.lunarg.com/doc/sdk/latest/linux/getting_started.html)
 
 # Install
 
@@ -45,3 +45,11 @@ Ref [stackoverflow: How to install intel graphics driver for using vulkan on Ubu
 - [Khronos: Conformant Products](https://www.khronos.org/conformance/adopters/conformant-products)
 - [01.org: INTEL® GRAPHICS FOR LINUX*](https://01.org/zh/node/18011)
     - INDUSTRY-LEADING OPEN SOURCE GRAPHICS DRIVERS
+
+## macOS
+
+Ref [Lunarg Doc macOS: Getting Started with the Vulkan SDK](https://vulkan.lunarg.com/doc/view/1.0.69.0/mac/getting_started.html)
+
+***References:***
+
+- [Khronos Forum Vulkan: Why does my vulkan instance have no any validation layers?](https://community.khronos.org/t/why-does-my-vulkan-instance-have-no-any-validation-layers/7007)

@@ -160,3 +160,35 @@ Ref [OpenCV doc: Image file reading and writing - ImreadModes](https://docs.open
 Compose two image with alpha channel.
 
 Ref [OpenCV ansers: How to overlay an PNG image with alpha channel to another PNG?](https://answers.opencv.org/question/73016/how-to-overlay-an-png-image-with-alpha-channel-to-another-png/)
+
+### `add`
+
+Add two image.
+
+[application] Alpha bleading
+
+Ref [Learn OpenCV: Alpha Blending using OpenCV (C++ / Python)](https://www.learnopencv.com/alpha-blending-using-opencv-cpp-python/)
+
+# OpenCV with other API
+
+## Wand
+
+### Wand -> OpenCV
+
+```python
+with WandImage(filename=source_file, resolution=(RESOLUTION,RESOLUTION)) as img:
+    img.format        = 'png'
+    # Fill image buffer with numpy array from blob
+    img_buffer=numpy.asarray(bytearray(img.make_blob()), dtype=numpy.uint8)
+image = cv2.imdecode(img_buffer, cv2.IMREAD_UNCHANGED)
+```
+
+Ref [stackoverflow: How to convert wand image object to open cv image (numpy array)](https://stackoverflow.com/questions/37015966/how-to-convert-wand-image-object-to-open-cv-image-numpy-array)
+
+### OpenCV -> Wand
+
+```python
+image = cv2.imread(<image path>)
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+image = np.transpose(image, (1, 0, 2))
+```

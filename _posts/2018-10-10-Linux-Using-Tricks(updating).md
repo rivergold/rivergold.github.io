@@ -466,6 +466,9 @@ sudo apt install --reinstall ubuntu-session gdm3
 
 Ref [stackoverflow: GUI feature missing from full ubuntu installation 18.04](https://askubuntu.com/questions/1066048/gui-feature-missing-from-full-ubuntu-installation-18-04)
 
+## Manage gcc version
+
+Ref [Linux公社: Ubuntu 18.04 下搭建 C/C++编译开发环境及GCC多版本切换](https://www.linuxidc.com/Linux/2019-04/158258.htm)
 
 <!--  -->
 <br>

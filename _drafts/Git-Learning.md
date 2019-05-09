@@ -213,6 +213,8 @@ A good code snippet manager based on Github Gist.
 
 ## meld
 
+Ref [Linux中国: 给中级 Meld 用户的有用技巧](https://linux.cn/article-8808-1.html)
+
 ### Config
 
 ```bash
@@ -230,7 +232,22 @@ A good code snippet manager based on Github Gist.
 [merge]
     tool = meld
 [mergetool "meld"]
-    cmd = /usr/bin/meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+    cmd = /usr/bin/meld "$REMOTE" "$MERGED" "$LOCAL" --output "$MERGED"
 ```
 
+**Note: I like current file into right hand window.**
+
 Ref [stackoverflow: Setting up and using Meld as your git difftool and mergetool](https://stackoverflow.com/a/34119867/4636081)
+
+### Run `git difftool`
+
+`$LOCAL`: pre-image (旧的)
+`$REMOTE`: post-image (新的)
+
+Ref [git docs](https://git-scm.com/docs/git-config#Documentation/git-config.txt-difftoollttoolgtcmd)
+
+### Run `git mergetool`
+
+Suppose current in `branch-a`, merge `branch-b` into `a`.
+
+`b ($REMOTE) -> a($LOCAL)`

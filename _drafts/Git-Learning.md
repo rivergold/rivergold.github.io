@@ -114,6 +114,30 @@ git submodule update --init --recursive
 <br>
 
 ***
+<!--  -->
+
+## Submodule
+
+### Check submodule
+
+```bash
+git submodule
+```
+
+### Update submodule with remote
+
+```bash
+git submodule update --remote
+```
+
+***References:***
+
+- [简书: Git submodule 子模块的管理和使用](https://www.jianshu.com/p/9000cd49822c)
+
+<!--  -->
+<br>
+
+***
 
 <br>
 <!--  -->

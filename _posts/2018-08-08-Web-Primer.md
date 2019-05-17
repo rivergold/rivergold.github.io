@@ -1,10 +1,156 @@
-# Basic understanding
+# Basic
+
+## Server & Client
 
 - [MDN web docs: Client-Server overview
 ](https://developer.mozilla.org/zh-CN/docs/learn/Server-side/First_steps/Client-Server_overview)
 
+## TCP
 
-# Apache
+TCP client not need to specify the port.
+
+**理解：** TCP client不需要指定端口号
+
+## Microservices(微服务)
+
+What is [**Microservices**](https://www.redhat.com/zh/topics/microservices/what-are-microservices)?
+
+***References:***
+
+- [redhat: 什么是微服务？](https://www.redhat.com/zh/topics/microservices/what-are-microservices)
+
+<!--  -->
+<br>
+
+***
+
+<br>
+<!--  -->
+
+# Common Commands
+
+## Config firewall to expose port
+
+### CentOS: `firewall-cmd`
+
+When change config of `firewall-cmd`, you need to run `firewall-cmd --reload` to make it take effect.
+
+- Install
+
+  ```bash
+  yum install firewalld firewall-config
+  ```
+
+- Start service
+
+  ```bash
+  systemctl enable firewalld.service
+  systemctl start firewalld.service
+  ```
+
+- Check firewall statUS
+
+  ```bash
+  systemctl status firewalld
+  ```
+
+- List all rules
+
+  ```bash
+  firewall-cmd --list-all
+  ```
+
+- Open port
+
+  ```bash
+  firewall-cmd --zone=public --add-port=8050/tcp --permanent
+  ```
+
+- Remove port
+
+  ```bash
+  firewall-cmd --zone=public --remove-port=8050/tcp --permanent
+  ```
+
+Ref [IBM 学习: 使用 firewalld 构建 Linux 动态防火墙](https://www.ibm.com/developerworks/cn/linux/1507_caojh/index.html)
+
+***References:***
+
+- [StackExchange serverfault: How to remove access to a port using firewall on Centos7?](https://serverfault.com/a/865041)
+
+### Ubuntu: `ufw`
+
+When added rule into ufw, ufw doest not need to reload to take effect.
+
+- Install
+
+  ```bash
+  sudo apt install ufw
+  ```
+
+- Enable ufw
+
+  ```bash
+  sudo ufw enable
+  ```
+
+- Disable ufw
+
+  ```bash
+  sudo ufw disable
+  ```
+
+- Check the default configuration
+
+  ```bash
+  sudo ufw show raw
+  ```
+
+- Allow connections to SSH
+
+  ```bash
+  sudo ufw allow ssh
+  # or
+  sudo ufw allow 22/tcp
+  ```
+
+- Enable other services
+
+  ```bash
+  sudo ufw allow 80/tcp
+  sudo ufw allow 443/tcp
+  sudo ufw allow 21/tcp
+  ```
+
+- Allow connections from specific IP addresses
+
+  ```bash
+  sudo ufw allow from 111.111.111.111
+  ```
+
+  Check the status:
+
+  ```bash
+  sudo ufw status
+  ```
+
+  Delete the rule:
+
+  ```bash
+  sudo ufw delete allow from 111.111.111.111
+  ```
+
+Ref [RoseHosting: How To Set Up a Firewall with UFW on Ubuntu 16.04](https://www.rosehosting.com/blog/set-up-firewall-with-ufw-on-ubuntu/)
+
+<!--  -->
+<br>
+
+***
+
+<br>
+<!--  -->
+
+# Using Apache Web server to Download File
 
 ## Build a HTTP Server
 
@@ -102,21 +248,93 @@ sudo ufw allow <your listen port>
 <br>
 <!--  -->
 
-# Basics
+# NFS Mount Remote folder
 
-## TCP
+- Server: `CentOS 7`
+- Client: `Ubuntu 18.04`
 
-TCP client not need to specify the port.
+## Server
 
-**理解：** TCP client不需要指定端口号
+1. **Check & Install dependences**
 
-## Microservices(微服务)
+    ```bash
+    rpm -qa | grep nfs-utils
+    rpm -qa | grep rpcbind
+    ```
 
-What is [**Microservices**](https://www.redhat.com/zh/topics/microservices/what-are-microservices)?
+    if not occur the packages, please install them:
+
+    ```bash
+    yum -y install nfs-utils
+    yum -y install rpcbind
+    ```
+
+2. **Edit `/etc/exports` to config access permission**
+
+    ```bash
+    <folder path you want to share> <ip of client>(rw,no_root_squash,no_all_squash,async)
+    ```
+
+    e.g.
+
+    ```bash
+    /nfs_test 192.168.1.5(rw,no_root_squash,no_all_squash,async)
+    ```
+
+3. **Config firewall**
+
+    NFS server need port 111 (TCP and UDP), port 2049 (TCP and UDP)
+
+    ```bash
+    firewall-cmd --permanent --zone=public --add-port=111/tcp
+    firewall-cmd --permanent --zone=public --add-port=111/udp
+    firewall-cmd --permanent --zone=public --add-port=2049/tcp
+    firewall-cmd --permanent --zone=public --add-port=2049/udp
+    firewall-cmd --reload
+    ```
+
+    Ref [StackExchange-serverfault: Which ports do I need to open in the firewall to use NFS?](https://serverfault.com/questions/377170/which-ports-do-i-need-to-open-in-the-firewall-to-use-nfs)
+
+4. **Start service**
+
+    ```bash
+    systemctl start rpcbind
+    systemctl start nfs
+    ```
+
+5. **If changed the config, refresh**
+
+    ```bash
+    exportfs -a
+    ```
+
+Ref [博客园: Linux下配置nfs并远程挂载](https://www.cnblogs.com/freeweb/p/6593861.html)
+
+## Client
+
+1. **Install**
+
+    ```bash
+    sudo apt install nfs-common
+    ```
+
+2. **Mount**
+
+    ```bash
+    sudo mount -t nfs <server ip>:<server folder path> <local mount path>
+    ```
+
+3. **Umount**
+
+    ```bash
+    sudo umount <local mount path>
+    ```
+
+Ref [CSDN: Ubuntu NFS 服务器客户端配置方法](https://blog.csdn.net/zhuxiaoping54532/article/details/53435158)
 
 ***References:***
 
-- [redhat: 什么是微服务？](https://www.redhat.com/zh/topics/microservices/what-are-microservices)
+- [Howtoing运维教程: 如何在Ubuntu 18.04上设置NFS挂载](https://www.howtoing.com/how-to-set-up-an-nfs-mount-on-ubuntu-18-04)
 
 <!--  -->
 <br>
@@ -125,6 +343,7 @@ What is [**Microservices**](https://www.redhat.com/zh/topics/microservices/what-
 
 <br>
 <!--  -->
+
 
 # 翻越长城墙
 

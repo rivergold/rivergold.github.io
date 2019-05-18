@@ -53,3 +53,23 @@ Ref [Lunarg Doc macOS: Getting Started with the Vulkan SDK](https://vulkan.lunar
 ***References:***
 
 - [Khronos Forum Vulkan: Why does my vulkan instance have no any validation layers?](https://community.khronos.org/t/why-does-my-vulkan-instance-have-no-any-validation-layers/7007)
+
+# Function
+
+## `xxxInfo` and `xxxProperties`
+
+- `xxxInfo`: paramters feed into vulkan sdk
+- `xxxProperties`: paramters get from vulkan sdk
+
+```c++
+uint32_t extensions_count = 0;
+VkResult result = VK_SUCCESS;
+result = vkEnumerateInstanceExtensionPropertie(nullptr, &extensions_count, nullptr);
+if ((result != VK_SUCCESS) || (extensions_count== 0)) {
+  std::cout << "Could not get the number ofInstance extensions." << std::endl;
+  return false;
+}
+```
+
+```c++
+```

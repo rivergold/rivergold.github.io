@@ -52,7 +52,7 @@ LLVM的Optimizer是由多个**Pass**组成
 
 Ref [Medium: 編譯器 LLVM 淺淺玩](https://medium.com/@zetavg/%E7%B7%A8%E8%AD%AF%E5%99%A8-llvm-%E6%B7%BA%E6%B7%BA%E7%8E%A9-42a58c7a7309)
 
-# 并发与并行
+# 并发与并行 (Concurrent & Parallel)
 
 > Rob Pike大神关于两者的阐述：“并发关乎结构，并行关乎执行”
 

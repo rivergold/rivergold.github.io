@@ -777,6 +777,16 @@ for i in range(10):
 - [简书: python logging模块使用教程](https://www.jianshu.com/p/feb86c06c4f4)
 - [Blog: Python标准模块logging](https://blog.csdn.net/fxjtoday/article/details/6307285)
 
+**Close logger:**
+
+```python
+handlers = self.log.handlers[:]
+for handler in handlers:
+    handler.close()
+    self.log.removeHandler(handler)
+```
+
+***References:*** [stackoverflow: python does not release filehandles to logfile](https://stackoverflow.com/questions/15435652/python-does-not-release-filehandles-to-logfile)
 
 ## string
 

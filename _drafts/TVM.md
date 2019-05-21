@@ -11,6 +11,12 @@ and the order of computation. We refer to these latter two concerns
 as the schedule, including choices of tiling, fusion, recomputation
 vs. storage, vectorization, and parallelism.
 
+## NNVM
+
+***References:***
+
+- [量子位: 陈天奇团队发布NNVM编译器，性能优于MXNet，李沐撰文介绍](https://zhuanlan.zhihu.com/p/29914989)
+
 ## Others
 
 ### NEON
@@ -18,6 +24,14 @@ vs. storage, vectorization, and parallelism.
 [Github: NervanaSystems/neon](https://github.com/NervanaSystems/neon)
 
 neon is Intel's reference deep learning framework committed to best performance on all hardware. Designed for ease-of-use and extensibility.
+
+<!--  -->
+<br>
+
+***
+
+<br>
+<!--  -->
 
 # Install
 

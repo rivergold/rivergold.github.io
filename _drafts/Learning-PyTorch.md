@@ -204,6 +204,8 @@ def backprop(self, D=True, G=True):
 
 - [Blog: Pytorch中retain_graph参数的作用](https://oldpan.me/archives/pytorch-retain_graph-work)
 
+- [jdhao's blog: Computational Graphs in PyTorch](https://jdhao.github.io/2017/11/12/pytorch-computation-graph/)
+
 ***
 
 ## Get current `lr` from optimizer

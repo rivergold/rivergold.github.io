@@ -34,34 +34,65 @@ Refer [stackoverflow: How do I tell if a regular file does not exist in Bash?][s
 
 # CMake
 
-## Path
+## Common Variable
 
-- `PROJECT_SOURCE_DIR`: Project root path
+- **`PROJECT_SOURCE_DIR`**: Top level source directory for the current project.
 
-- `CMAKE_CURRENT_SOURCE_DIR`: The path to the source directory currently being processed.
+    ```makefile
+    project(<project name>)
+    ```
 
-- `get_filename_component(PARENT_DIR ${MYPROJECT_DIR} DIRECTORY)`: Get parent path
+- **`CMAKE_SOURCE_DIR`**: This is the full path to the top level of the current CMake source tree. For an in-source build, this would be the same as `CMAKE_BINARY_DIR`.
 
-    Refer [stackoverflow: CMake : parent directory ?](https://stackoverflow.com/questions/7035734/cmake-parent-directory)
+- **`CMAKE_CURRENT_SOURCE_DIR`**: The path to the source directory currently being processed.
 
-- `CMAKE_BINARY_DIR`: The path to the top level of the build tree.
+- **`get_filename_component(PARENT_DIR ${MYPROJECT_DIR} DIRECTORY)`**: Get parent path
+
+    ***Ref:*** [stackoverflow: CMake : parent directory ?](https://stackoverflow.com/questions/7035734/cmake-parent-directory)
+
+- **`PROJECT_BINARY_DIR`**: Full path to build directory for project.
+
+    - in-source: Top level source directory for the current project.
+    - out-of-source: The directory of `cmake` command run.
+
+    ***Ref:*** [CSDN: CMake PROJECT_BINARY_DIR和PROJECT_SOURCE_DIR区别](https://blog.csdn.net/sukhoi27smk/article/details/46388711)
+
+<!-- - `CMAKE_BINARY_DIR`: The path to the top level of the build tree.
     ```bash
     mkdir build && cd build
     cmake ..
     # ${CMAKE_BINARY_DIR} is build/
-    ```
+    ``` -->
+
+***References:***
+
+- [维基教科书: CMake 入門/Out-of-source Build](https://zh.wikibooks.org/zh/CMake_%E5%85%A5%E9%96%80/Out-of-source_Build)
+
+### &clubs; Defferent between `PROJECT_variable` and `CMAKE_variable`
+
+`CMAKE_SOURCE_DIR` does indeed refer to the folder where the top-level CMakeLists.txt is defined.
+
+However, `PROJECT_SOURCE_DIR` refers to the folder of the CMakeLists.txt containing the most recent project() command. When sub-project `CMakeLists.txt` has `prject(<project name>)`, `PROJECT_SOURCE_DIR` in sub-project will be changed into sub-project path. 
+
+> This difference applies to all PROJECT_<var> vs CMAKE_<var> variables.
+
+**理解:** `PROJECT_`是会基于`prject()`的，而`CMAKE_`不会。
+
+***Ref:*** [stackoverflow: Are CMAKE_SOURCE_DIR and PROJECT_SOURCE_DIR the same in CMake?](https://stackoverflow.com/a/32030551/4636081)
 
 <!--  -->
 <br>
 
 ***
+
+<br>
 <!--  -->
 
-### Find Package
+## Find Package
 
-#### Use pkg-config to find package
+### Use pkg-config to find package
 
-```cmake
+```makefile
 set(CMAKE_PREFIX_PATH /usr/local/Cellar/glfw/3.2.1/lib/)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(GLFW3 REQUIRED GLFW3)
@@ -83,7 +114,23 @@ Ref [stackoverflow: What is the proper way to use `pkg-config` from `cmake`?](ht
 ***
 <!--  -->
 
-### Tricks
+## Install
+
+***Ref:*** [博客园: CMake手册详情 install](https://www.cnblogs.com/coderfenghc/archive/2012/08/12/2627561.html)
+
+***References:***
+
+- [维基教科书: CMake 入門/輸出位置與安裝](https://zh.wikibooks.org/zh/CMake_%E5%85%A5%E9%96%80/%E8%BC%B8%E5%87%BA%E4%BD%8D%E7%BD%AE%E8%88%87%E5%AE%89%E8%A3%9D)
+
+<!--  -->
+<br>
+
+***
+
+<br>
+<!--  -->
+
+## Tricks
 
 ## pkg-config
 
@@ -105,11 +152,7 @@ Ref [stackoverflow: pkg-config cannot find .pc files although they are in the pa
 <br>
 
 ***
-
-<br>
 <!--  -->
-
-## Tricks
 
 ### Set and Get Environment Variable
 

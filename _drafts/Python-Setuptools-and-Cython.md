@@ -1,3 +1,21 @@
+# Setuptools
+
+## `Extension`
+
+- [Python Doc: Extension arguments](https://docs.python.org/3/distutils/apiref.html?highlight=extension)
+
+## `Setup`
+
+- [Python Doc: Writing the Setup Script](https://docs.python.org/3/distutils/setupscript.html)
+
+<!--  -->
+<br>
+
+***
+
+<br>
+<!--  -->
+
 # Cython
 
 ## `.pyx`
@@ -10,9 +28,25 @@
 
 - `.pyx` can import C++ file
 
+<!--  -->
+<br>
+
+***
+
+<br>
+<!--  -->
+
 # Compile `.py` into `.so`
 
 ***Ref:*** [Jan Buchar Blog: Using Cython to protect a Python codebase](https://bucharjan.cz/blog/using-cython-to-protect-a-python-codebase.html)
+
+<!--  -->
+<br>
+
+***
+
+<br>
+<!--  -->
 
 # Compile C++ into `.so` for Python
 

@@ -893,6 +893,12 @@ print(ast.literal_eval('(12, 12, 12)'))
 - [stackoverflow: Convert a String representation of a Dictionary to a dictionary?](https://stackoverflow.com/questions/988228/convert-a-string-representation-of-a-dictionary-to-a-dictionary)
 - [Python Doc: ast.literal_eval](https://docs.python.org/3/library/ast.html#ast.literal_eval)
 
+## `configparser`
+
+Load config file.
+
+***Ref:*** [python3-cookbook: 13.10 读取配置文件](https://python3-cookbook.readthedocs.io/zh_CN/latest/c13/p10_read_configuration_files.html)
+
 <br>
 
 * * *

@@ -8,6 +8,14 @@
 
 - [Python Doc: Writing the Setup Script](https://docs.python.org/3/distutils/setupscript.html)
 
+***References:***
+
+- [Python doc: distutils.core.setup](https://docs.python.org/3/distutils/apiref.html?highlight=setup#distutils.core.setup)
+
+### `find_packages()`
+
+***Ref:*** [setuptools doc: Using find_packages()](https://setuptools.readthedocs.io/en/latest/setuptools.html#using-find-packages)
+
 <!--  -->
 <br>
 
@@ -59,3 +67,19 @@
 - [Medium: Making your C library callable from Python by wrapping it with Cython](https://medium.com/@shamir.stav_83310/making-your-c-library-callable-from-python-by-wrapping-it-with-cython-b09db35012a3)
 
 - [博客园: 非极大值抑制（NMS）的几种实现](https://www.cnblogs.com/king-lps/p/9031568.html)
+
+- [segmentfault: Python 中使用 C 代码：以 Numpy 为例](https://segmentfault.com/a/1190000000479951)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
+
+## Disribute package with shared library
+
+***References:***
+
+- [stackoverflow: Distribute a Python package with a compiled dynamic shared library](https://stackoverflow.com/questions/37316177/distribute-a-python-package-with-a-compiled-dynamic-shared-library)
+
+- [Github pytorch/pytorch: setup.py](https://github.com/pytorch/pytorch/blob/master/setup.py)

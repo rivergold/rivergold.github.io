@@ -20,6 +20,10 @@ PyTorch use onnx -> caffe2 to run on mobile devices.
 
 ### Android
 
+**Latest:** New PR by soumith solve the problem of Caffe2 on Anroid. [Here](https://github.com/pytorch/pytorch/pull/15509) is the issue and PR.
+
+**Old (still useful)**
+
 1. Build caffe2 for android using `pytorch/scripts/build_android.sh`
 
     **Note:** Change `gcc` to `clang`

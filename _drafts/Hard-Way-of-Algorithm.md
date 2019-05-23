@@ -2,6 +2,15 @@
 
 Keep learning new algorithms. Stay hungry, stay foolish.
 
+# Deep Learning
+
+## AutoML
+
+### Survey
+
+- [Survey on Automated Machine Learning](https://arxiv.org/abs/1904.12054)
+  Ref [机器之心: AutoML研究综述：让AI学习设计AI](https://www.jiqizhixin.com/articles/2019-05-08-2)
+
 ## Computer Vision
 
 ### Generate Heatmap

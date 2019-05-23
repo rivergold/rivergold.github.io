@@ -1187,3 +1187,26 @@ Ubuntu install
 ```bash
 sudo apt install redshift-gtk
 ```
+
+## nmon
+
+Performance Monitor for Linux.
+
+### Install
+
+TBD
+
+### Use
+
+- `q`: Exit
+- `h`: help
+- `r`: System information
+- `c`: CPU
+- `m`: Memory
+- `d`: Disk
+- `k`: Kernel
+- `n`: Network
+- `j`: file system
+- `t`: Top-processes
+
+Ref [Linux中国: 使用 Nmon 监控 Linux 的系统性能](https://linux.cn/article-6886-1.html)

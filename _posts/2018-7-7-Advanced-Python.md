@@ -777,6 +777,16 @@ for i in range(10):
 - [简书: python logging模块使用教程](https://www.jianshu.com/p/feb86c06c4f4)
 - [Blog: Python标准模块logging](https://blog.csdn.net/fxjtoday/article/details/6307285)
 
+**Close logger:**
+
+```python
+handlers = self.log.handlers[:]
+for handler in handlers:
+    handler.close()
+    self.log.removeHandler(handler)
+```
+
+***References:*** [stackoverflow: python does not release filehandles to logfile](https://stackoverflow.com/questions/15435652/python-does-not-release-filehandles-to-logfile)
 
 ## string
 
@@ -882,6 +892,12 @@ print(ast.literal_eval('(12, 12, 12)'))
 
 - [stackoverflow: Convert a String representation of a Dictionary to a dictionary?](https://stackoverflow.com/questions/988228/convert-a-string-representation-of-a-dictionary-to-a-dictionary)
 - [Python Doc: ast.literal_eval](https://docs.python.org/3/library/ast.html#ast.literal_eval)
+
+## `configparser`
+
+Load config file.
+
+***Ref:*** [python3-cookbook: 13.10 读取配置文件](https://python3-cookbook.readthedocs.io/zh_CN/latest/c13/p10_read_configuration_files.html)
 
 <br>
 

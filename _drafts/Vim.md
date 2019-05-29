@@ -84,7 +84,7 @@ git clone --recursive https://github.com/Valloric/YouCompleteMe.git
 ```bash
 cd YouCompleteMe
 # Use system Python (not Ananconda Python)
-/usr/bin/python3.7m install --clang-com --system-libclang
+/usr/bin/python3.7m install.py --clang-com --system-libclang
 ```
 
 **Why use `--system-libclang`:** [Gtihub Valloric/YouCompleteMe CMake Error at ycm/CMakeLists file DOWNLOAD HASH mismatch #1711](https://github.com/Valloric/YouCompleteMe/issues/1711#issuecomment-329520570)

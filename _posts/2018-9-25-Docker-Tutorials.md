@@ -59,6 +59,7 @@ docker cp <file name> container:<path>
 
 - [Stackoverflow: Copying files from host to Docker container](https://stackoverflow.com/questions/22907231/copying-files-from-host-to-docker-container)
 
+
 ## Convert container into image
 
 It is used to build new image from container.
@@ -323,6 +324,16 @@ SHELL ["/bin/bash", "-c"]
 ### `COPY`
 
 `COPY [src] [dist]`: The dist path in docker container must be absolute path.
+
+**Copy folder from host into container in shell:**
+
+```docker
+ADD go /usr/local/go
+# or
+COPY go /usr/local/go
+```
+
+***Ref:*** [stackoverflow: Copy directory to other directory at Docker using ADD command](https://stackoverflow.com/a/26504961/4636081)
 
 ## Tips
 

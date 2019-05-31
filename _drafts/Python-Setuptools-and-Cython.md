@@ -48,7 +48,57 @@
 
 ***Ref:*** [Jan Buchar Blog: Using Cython to protect a Python codebase](https://bucharjan.cz/blog/using-cython-to-protect-a-python-codebase.html)
 
-- [ ] Write a example 
+## Example
+
+1. Write your python scripts as **package**.
+
+    ```bash
+    - package_name
+        - __init__.py
+        - sub_package_1
+            - __init__.py
+            - module_1a.py
+            - module_1b.py
+        - sub_package_2
+            - __init__.py
+            - module_2a.py
+            - module_2b.py
+    ```
+
+2. Write `setup.py`
+
+    ```python
+    from setuptools import setup, find_packages
+    from setuptools.extension import Extension
+    from Cython.Build import cythonize
+    from Cython.Distutils import build_ext
+
+    setup(
+        name='your_package_name',
+        version="0.1",
+        # install_requires=['opencv-python<=3.4.5', 'numpy'],
+        ext_modules=cythonize(
+            [
+                Extension("package_name.*", ["package_name/*.py"]),
+                Extension("package_name.sub_package_1.*", ["package_name/sub_package_1/*.py"]),
+                Extension("package_name.sub_package_2.*", ["package_name/sub_package_2/*.py"]),
+                # 以上三行代码也可以整合为一行：
+                # Extension("package_name.*", ["package_name/**/*.py"]),
+            ],
+            build_dir="build",
+            compiler_directives=dict(
+                always_allow_keywords=True)),
+        cmdclass=dict(
+            build_ext=build_ext),
+        author="hejing, IQIYI IIG Chengdu AI",
+        author_email="hejing01@qiyi.com")
+    ```
+
+3. Build
+
+    ```bash
+    python setup.py build
+    ```
 
 <!--  -->
 <br>

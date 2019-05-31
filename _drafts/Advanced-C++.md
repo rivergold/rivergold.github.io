@@ -14,6 +14,21 @@ This specifier specifies that a constructor doesn't allow `implicit conversions`
 ***
 <!--  -->
 
+## `static`
+
+***Ref:*** [知乎: C/C++ 中的static关键字](https://zhuanlan.zhihu.com/p/37439983)
+
+***References:***
+
+- &Delta; [CSDN: C/C++---static函数，static成员函数，static变量，static成员变量 再来理一理](https://blog.csdn.net/FreeApe/article/details/50979425)
+- [CSDN: C++中Static作用和使用方法](https://blog.csdn.net/artechtor/article/details/2312766)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## Constructor Initializers List Must Be Uesed
 
 - Members need to be initialized are `const` or references: because these types can only be initialized, they cannot be assigned.

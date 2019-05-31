@@ -371,6 +371,30 @@ for data in pre_frames.queue:
 
 - [Programiz: Python hasattr](https://www.programiz.com/python-programming/methods/built-in/hasattr)
 
+## Magic Method
+
+- [极客学院: 定制类和魔法方法](https://wiki.jikexueyuan.com/project/explore-python/Class/magic_method.html)
+
+### `__getattr__`
+
+会在对象中不存在这个属性时调用，作为**兜底**操作
+
+```python
+class Example(object):
+    def __init__(self):
+        self.name = 'example'
+        self._data = {'a': 'a'}
+
+    def __getattr__(self, name):
+        return self._data[name]
+```
+
+***Ref:*** [知乎: Python实践51-特殊方法__getattr__和__getattribute__](https://zhuanlan.zhihu.com/p/34594638)
+
+### `__getitem__`
+
+Can use `instance[attr_name]` to get attribute.
+
 <!--  -->
 <br>
 
@@ -535,15 +559,28 @@ For example, `flatbuffers` use `.egg` to install into Python. When you delete th
 ### Tips
 
 - `'action=store_true'`
+
     ```python
     parser.add_argument('--gpu', action='store_true')
     ```
+
     If you add `bool=True`, it will throw an error.
 
     ***References:***
 
     - [Python Issue 24754](https://bugs.python.org/issue24754)
 
+
+- parse from dict
+
+    ```python
+    parser = argparse.ArgumentParser()
+    parser.add_argument('name')
+    parser.add_argument('--mode')
+    opt = parser.parse_args(['a', '--mode=b'])
+    ```
+
+    ***Ref:*** [Python Doc: argparse — Parser for command-line options, arguments and sub-commands](https://docs.python.org/3/library/argparse.html#option-value-syntax)
 
 ## collections
 
@@ -898,6 +935,18 @@ print(ast.literal_eval('(12, 12, 12)'))
 Load config file.
 
 ***Ref:*** [python3-cookbook: 13.10 读取配置文件](https://python3-cookbook.readthedocs.io/zh_CN/latest/c13/p10_read_configuration_files.html)
+
+## `os`
+
+### `os.path`
+
+[Python Doc: os.path — Common pathname manipulations](https://docs.python.org/3/library/os.path.html)
+
+#### `os.path.expanduser`
+
+Expand path with `~/`
+
+***Ref:*** [Blog: [Python] 使用 os.path.expanduser() 展開含有 "~" 的路徑](https://ephrain.net/python-%E4%BD%BF%E7%94%A8-os-path-expanduser-%E5%B1%95%E9%96%8B%E5%90%AB%E6%9C%89-%E7%9A%84%E8%B7%AF%E5%BE%91/)
 
 <br>
 

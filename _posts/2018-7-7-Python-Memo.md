@@ -372,6 +372,12 @@ for data in pre_frames.queue:
 
 - [Programiz: Python hasattr](https://www.programiz.com/python-programming/methods/built-in/hasattr)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## Magic Method
 
 - [极客学院: 定制类和魔法方法](https://wiki.jikexueyuan.com/project/explore-python/Class/magic_method.html)

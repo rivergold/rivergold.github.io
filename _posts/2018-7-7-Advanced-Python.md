@@ -344,6 +344,7 @@ for data in pre_frames.queue:
     ```python
     raise NameError('Error')
     ```
+
     E.G.
 
     ```python

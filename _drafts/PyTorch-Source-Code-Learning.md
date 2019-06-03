@@ -1,4 +1,8 @@
-<!-- # PyTorch Source Code -->
+# PyTorch Source
+
+- [Inside 245-5D: PyTorch internals](http://blog.ezyang.com/)
+
+    ***Ref:*** [机器学习研究会订阅号: 揭秘PyTorch内核！核心开发者亲自全景解读（47页PPT）](https://mp.weixin.qq.com/s?__biz=MzU1NTUxNTM0Mg==&mid=2247491033&idx=2&sn=9595f55c0394675dc7b1fe16ddeb8007&chksm=fbd27178cca5f86e643f47e159f967190ea7148a7d93a58a419836f472ad6e842af82ad8cce0&mpshare=1&scene=1&srcid=#rd)
 
 ## PyTorch Internals
 

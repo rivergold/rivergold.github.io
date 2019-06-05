@@ -146,6 +146,22 @@ Ref [RoseHosting: How To Set Up a Firewall with UFW on Ubuntu 16.04](https://www
 <br>
 
 ***
+<!--  -->
+
+## curl
+
+### curl post
+
+```bash
+curl -d "data=test" <http_address>
+```
+
+***Ref:*** [简书: CURL命令模拟Http Get/Post请求](https://www.jianshu.com/p/a8b648e96753)
+
+<!--  -->
+<br>
+
+***
 
 <br>
 <!--  -->
@@ -344,6 +360,62 @@ Ref [CSDN: Ubuntu NFS 服务器客户端配置方法](https://blog.csdn.net/zhux
 <br>
 <!--  -->
 
+# Flask
+
+- [Flask 中文](https://dormousehole.readthedocs.io/en/latest/)
+
+## Example
+
+```python
+from flask import Flask
+from flask import request
+
+app = Flask(__name__)
+
+@app.route('/', methods=['GET', 'POST'])
+def get_callback_data():
+    print('##Debug## method is {}'.format(request.method))
+    print(request.get_json())
+      if request.method == 'GET':
+          print(request.form['data'])
+          return 'ok'
+      elif request.method == 'POST':
+          print(request.form['data'])
+          return 'ok'
+      else:
+          raise ValueError('Only support GET or POST method.')
+```
+
+Run:
+
+```bash
+export FLASK_APP=<python_script_name>
+flask run --host=0.0.0.0
+```
+
+***Ref:*** [Flask Doc: 快速上手](https://dormousehole.readthedocs.io/en/latest/quickstart.html)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
+
+## Get request data
+
+```python
+data = request.get_json()
+```
+
+***Ref:*** [stackoverflow: How to get data received in Flask request](https://stackoverflow.com/questions/10434599/how-to-get-data-received-in-flask-request)
+
+<!--  -->
+<br>
+
+***
+
+<br>
+<!--  -->
 
 # 翻越长城墙
 

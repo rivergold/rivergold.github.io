@@ -151,7 +151,7 @@ Ref [OpenCV doc: Image file reading and writing - ImreadModes](https://docs.open
 
 - [CSDN: opencv imread读取alpha通道](https://blog.csdn.net/jazywoo123/article/details/17353069)
 
-# Image Core
+# Core Functionality
 
 ## Operations on arrays
 
@@ -168,6 +168,14 @@ Add two image.
 [application] Alpha bleading
 
 Ref [Learn OpenCV: Alpha Blending using OpenCV (C++ / Python)](https://www.learnopencv.com/alpha-blending-using-opencv-cpp-python/)
+
+# Image Processing
+
+## Histograms
+
+### `calcHist`
+
+***Ref:*** [CSDN: OpenCV Python教程（3、直方图的计算与显示）](https://blog.csdn.net/sunny2038/article/details/9097989)
 
 # OpenCV with other API
 

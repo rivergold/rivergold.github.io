@@ -546,6 +546,7 @@ For example, `flatbuffers` use `.egg` to install into Python. When you delete th
         ```
 
         The input this in shell and get output
+
         ```shell
         $ python <script_name>.py 'It is a basic use of argparse' --name 'My name is Kevin Ho'
         [output]: It is a basic use of argparse

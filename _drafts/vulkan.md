@@ -1,14 +1,16 @@
-# Good Books & Blogs
+# :large_blue_diamond:Good Books & Blogs
 
 - [Vulkan Docs](https://vulkan.lunarg.com/doc/sdk/latest/linux/getting_started.html)
 
 - [Glumes Blog: 进击的 Vulkan 移动开发（一）之今生前世](https://glumes.com/post/vulkan/vulkan-tutorial-concept/)
 
-# Example
+- [Vulkan in 30 minutes](https://renderdoc.org/vulkan-in-30-minutes.html)
+
+# :large_blue_diamond:Example
 
 - [Github: LunarG/VulkanSamples](https://github.com/LunarG/VulkanSamples)
 
-# Concept
+# :large_blue_diamond:Concept
 
 ## Validation Layer
 
@@ -46,7 +48,25 @@ TBD
 
 Each of the physical devices advertises one or more queues. These queues are categorized into different families, where each family has very specific functionalities.
 
-# Install
+## Image & Buffer
+
+我目前的理解，image和buffer都是对一段内存的表示，具体的不同还有待学习。
+
+***Ref:*** [知乎专栏-黑客与画家: 一分钟学 Vulkan 之 Image & Buffer](https://zhuanlan.zhihu.com/p/20758451)
+
+***References:***
+
+- [知乎专栏-黑客与画家: Texture 是什么？](https://zhuanlan.zhihu.com/p/26393153)
+
+<!--  -->
+<br>
+
+***
+
+<br>
+<!--  -->
+
+# :large_blue_diamond:Install
 
 - vulkan driver (Nivida, AMD, Intel)
 
@@ -98,7 +118,15 @@ Ref [Lunarg Doc macOS: Getting Started with the Vulkan SDK](https://vulkan.lunar
 
 - [Khronos Forum Vulkan: Why does my vulkan instance have no any validation layers?](https://community.khronos.org/t/why-does-my-vulkan-instance-have-no-any-validation-layers/7007)
 
-# Function
+<!--  -->
+<br>
+
+***
+
+<br>
+<!--  -->
+
+# :large_blue_diamond:Function
 
 ## `xxxInfo` and `xxxProperties`
 
@@ -115,7 +143,15 @@ if ((result != VK_SUCCESS) || (extensions_count== 0)) {
 }
 ```
 
-# Program
+<!--  -->
+<br>
+
+***
+
+<br>
+<!--  -->
+
+# :large_blue_diamond:Program
 
 ## Step
 
@@ -133,10 +169,27 @@ There are two methods to enable validation layer:
 export VK_INSTANCE_LAYERS=VK_LAYER_LUNARG_api_dump:VK_LAYER_LUNARG _core_validation
 ```
 
-# Tools
+<!--  -->
+<br>
+
+***
+
+<br>
+<!--  -->
+
+# :large_blue_diamond:Awesome Tools
 
 ## OpenVX
 
 ***References:*** 
 
 - [知乎: OpenCV和OpenVX有什么联系和区别？](https://www.zhihu.com/question/37894914)
+
+# TBD
+
+## Vulkan Compute
+
+- [Phoronix: A Simple Dive Into Vulkan Compute Programming](https://www.phoronix.com/scan.php?page=news_item&px=Vulkan-Compute-Small-Sample)
+- [Github Glavnokoman: Vulkan Compute Example](https://github.com/Glavnokoman/vulkan-compute-example)
+
+- [Descriptor Set Layouts and Pipeline Layouts](https://vulkan.lunarg.com/doc/view/1.0.26.0/linux/tutorial/html/08-init_pipeline_layout.html)

@@ -1,4 +1,4 @@
-# :large_blue_diamond:Good Books & Blogs
+# :seedling: Good Books & Blogs
 
 - [Vulkan Docs](https://vulkan.lunarg.com/doc/sdk/latest/linux/getting_started.html)
 
@@ -6,11 +6,11 @@
 
 - [Vulkan in 30 minutes](https://renderdoc.org/vulkan-in-30-minutes.html)
 
-# :large_blue_diamond:Example
+# :seedling: Example
 
 - [Github: LunarG/VulkanSamples](https://github.com/LunarG/VulkanSamples)
 
-# :large_blue_diamond:Concept
+# :seedling: Concept
 
 ## Validation Layer
 
@@ -46,7 +46,11 @@ TBD
 
 > A queue's responsibility is to gather the jobs (command buffers) and dispatch them to the physical device for processing.
 
+> **A queue is the abstracted mechanism used to submit commands to the hardware.** You will see later how a Vulkan application builds up a command buffer full of commands and then submits them onto a queue for asynchronous processing by the GPU hardware.
+
 Each of the physical devices advertises one or more queues. These queues are categorized into different families, where each family has very specific functionalities.
+
+**在创建`physical device`之后，在创建`device`之前，需要构建queue**
 
 ## Image & Buffer
 
@@ -58,6 +62,32 @@ Each of the physical devices advertises one or more queues. These queues are cat
 
 - [知乎专栏-黑客与画家: Texture 是什么？](https://zhuanlan.zhihu.com/p/26393153)
 
+## Command buffer & command pool
+
+向commonad buffer中注册需要在GPU上运行的command
+
+为了管理的方面，采用command buffer pool统一对command buffer进行管理。针对于不同类型的queue family，需要配置不同的command buffer pool。
+
+> Effectively, you would have to create a command buffer pool for each unique queue family that the application intends to use. Since you specified only one queue family when you created the device, one command buffer pool suffices for these samples.
+
+> Finishing the command buffer recording does not make the GPU do anything. In order for the GPU to process a command buffer, you must submit it onto the GPU's queue using vkQueueSubmit().
+
+## Render Pass
+
+是一个过程的集合
+
+- [ ] 不是很懂
+
+***References:***
+
+- [知乎专栏-一起学Vulkan图形开发: 入门：调试Vulkan Samples（七）——Render Pass](https://zhuanlan.zhihu.com/p/47769196)
+
+- [博客园: Vulkan Tutorial 13 Render passes](https://www.cnblogs.com/heitao/p/6979494.html)
+
+## Layout
+
+目前的理解为：一种描述某种类型的信息结构
+
 <!--  -->
 <br>
 
@@ -66,7 +96,7 @@ Each of the physical devices advertises one or more queues. These queues are cat
 <br>
 <!--  -->
 
-# :large_blue_diamond:Install
+# :seedling: Install
 
 - vulkan driver (Nivida, AMD, Intel)
 
@@ -126,7 +156,7 @@ Ref [Lunarg Doc macOS: Getting Started with the Vulkan SDK](https://vulkan.lunar
 <br>
 <!--  -->
 
-# :large_blue_diamond:Function
+# :seedling: Function
 
 ## `xxxInfo` and `xxxProperties`
 
@@ -151,7 +181,7 @@ if ((result != VK_SUCCESS) || (extensions_count== 0)) {
 <br>
 <!--  -->
 
-# :large_blue_diamond:Program
+# :seedling: Program
 
 ## Step
 
@@ -177,7 +207,7 @@ export VK_INSTANCE_LAYERS=VK_LAYER_LUNARG_api_dump:VK_LAYER_LUNARG _core_validat
 <br>
 <!--  -->
 
-# :large_blue_diamond:Awesome Tools
+# :seedling: Awesome Tools
 
 ## OpenVX
 

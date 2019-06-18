@@ -1,6 +1,6 @@
 This article has recorded some tips and tricks for linux, especially for Ubuntu. All of these commands and tricks are sorted up with my using experience.
 
-# Basics
+# :fallen_leaf:Basics
 
 ## Partition
 
@@ -19,7 +19,7 @@ If the other OS installed on your computer is UEFI, you must install Ubuntu with
 
 - [Ubuntu doc: UEFI](https://help.ubuntu.com/community/UEFI#Set_up_the_firmware_in_UEFI_or_BIOS.2FCSM.2FLegacy_mode)
 
-# Linux Tips
+# :fallen_leaf:Linux Tips
 
 ## Update `.barchrc`
 
@@ -335,7 +335,7 @@ Common used command can be found from [here](https://github.com/sharkdp/fd#tutor
 ***
 <!--  -->
 
-# Errors and Solutions
+# :fallen_leaf:Errors and Solutions
 
 ## Ubuntu error: 'apt-add-repository: command not found'<br>
 
@@ -476,7 +476,7 @@ Ref [Linux公社: Ubuntu 18.04 下搭建 C/C++编译开发环境及GCC多版本�
 ***
 <!--  -->
 
-# Common Software
+# :fallen_leaf:Common Software
 
 ## Rufus
 

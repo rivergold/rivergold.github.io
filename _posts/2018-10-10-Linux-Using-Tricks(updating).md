@@ -1,6 +1,6 @@
 This article has recorded some tips and tricks for linux, especially for Ubuntu. All of these commands and tricks are sorted up with my using experience.
 
-# Basics
+# :fallen_leaf:Basics
 
 ## Partition
 
@@ -19,7 +19,15 @@ If the other OS installed on your computer is UEFI, you must install Ubuntu with
 
 - [Ubuntu doc: UEFI](https://help.ubuntu.com/community/UEFI#Set_up_the_firmware_in_UEFI_or_BIOS.2FCSM.2FLegacy_mode)
 
-# Linux Tips
+<!--  -->
+<br>
+
+***
+
+<br>
+<!--  -->
+
+# :fallen_leaf:Linux Tips
 
 ## Update `.barchrc`
 
@@ -333,9 +341,11 @@ Common used command can be found from [here](https://github.com/sharkdp/fd#tutor
 <br>
 
 ***
+
+<br>
 <!--  -->
 
-# Errors and Solutions
+# :fallen_leaf:Errors and Solutions
 
 ## Ubuntu error: 'apt-add-repository: command not found'<br>
 
@@ -343,12 +353,24 @@ Common used command can be found from [here](https://github.com/sharkdp/fd#tutor
 apt-get install software-properties-common
 ```
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## Ubuntu error: `Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)`<br>
 
 ```shell
 sudo rm /var/cache/apt/archives/lock
 sudo rm /var/lib/dpkg/lock
 ```
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## `System program problem detected` occur when Ubuntu starts.
 
@@ -360,6 +382,12 @@ sudo rm /var/crash/*
 
 - [ask ubuntu: Getting “System program problem detected” pops up regularly after upgrade](https://askubuntu.com/questions/133385/getting-system-program-problem-detected-pops-up-regularly-after-upgrade/369297)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## `Error mounting /dev/sdb1`
 
 ```bash
@@ -370,18 +398,29 @@ sudo ntfsfix /dev/sdb1
 
 - [StackExchange: Error mounting /dev/sdb1 at /media/ on Ubuntu 14.04 LTS](https://askubuntu.com/questions/586308/error-mounting-dev-sdb1-at-media-on-ubuntu-14-04-lts)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## `ssh -X <user_name>@<ip>` occur error: `X11 forwarding request failed on channel 0`
 
 1. `sudo yum install xorg-x11-xauth`
+
 2. Change `/etc/ssh/sshd_config`
+
     ```bash
     X11Forwarding yes
     X11UseLocalhost no
     ```
+
 3. Reload ssh config
+
     ```bash
     sudo service sshd restart
     ```
+
 4. Install `cmake-gui` to have a try
 
 ***References:***
@@ -389,6 +428,12 @@ sudo ntfsfix /dev/sdb1
 - [stackoverflow: X11 forwarding request failed on channel 0](https://stackoverflow.com/questions/38961495/x11-forwarding-request-failed-on-channel-0)
 - [Ask Xmodulo: How to fix “X11 forwarding request failed on channel 0”](http://ask.xmodulo.com/fix-broken-x11-forwarding-ssh.html)
 - [StackExchange: ssh returns message “X11 forwarding request failed on channel 1”](https://unix.stackexchange.com/questions/111519/ssh-returns-message-x11-forwarding-request-failed-on-channel-1)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## Disable mouse middle button paste
 
@@ -409,6 +454,12 @@ pointer = 1 25 3 4 5 6 7 8 9
 - [ubuntu问答: 如何禁用鼠标中键点击粘贴？](https://ubuntuqa.com/article/687.html)
 - [askubuntu: How do I disable middle mouse button click paste?](https://askubuntu.com/questions/4507/how-do-i-disable-middle-mouse-button-click-paste)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## Force reboot your Ubuntu desktop
 
 Press `ctrl` + `alt` + `sys rq(printscreen)` and then do not loose `ctrl` and `alt`, and press `r`
@@ -417,6 +468,12 @@ Press `ctrl` + `alt` + `sys rq(printscreen)` and then do not loose `ctrl` and `a
 
 - [简书: Ubuntu死机解决方法汇总](https://www.jianshu.com/p/36fb9eed82a3)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## Disable the `ublock your keyring` when you start Chrome
 
 Open `Settings` -> `Details` -> `Users` -> Off `Automatic Login`
@@ -424,6 +481,12 @@ Open `Settings` -> `Details` -> `Users` -> Off `Automatic Login`
 ***References:***
 
 - [askubuntu: How to disable the “unlock your keyring” popup?](https://askubuntu.com/questions/495957/how-to-disable-the-unlock-your-keyring-popup)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## Add `New Document` option in right click context menu
 
@@ -434,6 +497,12 @@ touch ~/Templates/Empty\ Document
 ***References:***
 
 - [Blog: Add ‘New Document’ Option in Right Click Context Menu in Ubuntu 18.04 [Quick Tip]](https://itsfoss.com/add-new-document-option/)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## Restore `/home/<user>/Templates` when you delete it by mistake.
 
@@ -446,6 +515,12 @@ XDG_TEMPLATES_DIR="$HOME/Templates"
 
 - [askubuntu: How do I restore the Templates folder in Ubuntu 18.04?](https://askubuntu.com/questions/1041732/how-do-i-restore-the-templates-folder-in-ubuntu-18-04)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## When log in, dock disapper (TODO)
 
 Using `tweaks` and `dash to dock` to set `gnome-dock`. And using `alt` + `F2` and then press `r` to restart `gnome-shell`.
@@ -453,6 +528,12 @@ Using `tweaks` and `dash to dock` to set `gnome-dock`. And using `alt` + `F2` an
 ***References:***
 
 - [Blog ubuntu 使用日常：18.04 中杂项处理 + 美化记录](https://hacpai.com/article/1527091030020)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## Ubuntu reinstall GUI
 
@@ -466,6 +547,12 @@ sudo apt install --reinstall ubuntu-session gdm3
 
 Ref [stackoverflow: GUI feature missing from full ubuntu installation 18.04](https://askubuntu.com/questions/1066048/gui-feature-missing-from-full-ubuntu-installation-18-04)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## Manage gcc version
 
 Ref [Linux公社: Ubuntu 18.04 下搭建 C/C++编译开发环境及GCC多版本切换](https://www.linuxidc.com/Linux/2019-04/158258.htm)
@@ -474,9 +561,11 @@ Ref [Linux公社: Ubuntu 18.04 下搭建 C/C++编译开发环境及GCC多版本�
 <br>
 
 ***
+
+<br>
 <!--  -->
 
-# Common Software
+# :fallen_leaf:Common Software
 
 ## Rufus
 
@@ -485,6 +574,12 @@ Ubuntu officially recommended tool to build bootable USB flash drives.
 ***References:***
 
 - [CSDN: 在 Windows 中制作 Ubuntu 系统的USB启动盘](https://blog.csdn.net/u013553529/article/details/78307520)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## shadowsocks-qt-gui
 
@@ -496,11 +591,23 @@ sudo apt-get install shadowsocks-qt5
 
 And you also need to install Chrome or Firefox extension `switchyomega`, you can get it from [github: FelisCatus/SwitchyOmega](https://github.com/FelisCatus/SwitchyOmega/releases). And the configuration can be get from its [wiki](https://github.com/FelisCatus/SwitchyOmega/wiki/GFWList).
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## synergy
 
 ```bash
 sudo apt-get install quicksynergy
 ```
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## Filezilla
 
@@ -518,6 +625,12 @@ Using `file filter` to realize this.
 
 - [FileZilla: Please do not show hidden file on SFTP](https://trac.filezilla-project.org/ticket/2685)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## sogou input
 
 1. First install `fcitx`. Because Ubuntu set `Ibus` as default keyboard input framework, we need change it.
@@ -529,6 +642,12 @@ Using `file filter` to realize this.
     ```shell
     sudo dpkg -i install <sogou.deb>
     ```
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## Gitkraken
 
@@ -557,6 +676,12 @@ echo 99999 > /proc/sys/fs/inotify/max_user_watches
 ```
 
 Refer [Tech Sparx Blog: How to fix GitKraken Inotify Limit Error - upgrading Ubuntu/Linux inotify limits](https://techsparx.com/blog/2018/02/gitkraken-inotify.html)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## Terminator
 
@@ -628,6 +753,12 @@ Teminator -> Preferences -> Profiles -> Scrolling and select inifinite scrollbac
 - [ubuntu: Setting nautilus-open-terminal to launch Terminator rather than gnome-terminal](https://askubuntu.com/questions/76712/setting-nautilus-open-terminal-to-launch-terminator-rather-than-gnome-terminal)
 - [stackoverflow: Nautilus-actions in 18.04](https://askubuntu.com/questions/1030940/nautilus-actions-in-18-04)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## zsh and oh-my-zsh
 
 `zsh` is powerfull and beautiful shell for Unix, and `Oh my zsh` is an open source, community-driven framework for managing `zsh` configuration.
@@ -677,15 +808,23 @@ Teminator -> Preferences -> Profiles -> Scrolling and select inifinite scrollbac
     ***References:***
     - [Blog: zsh不兼容的坑-zsh:no matches found](https://blog.csdn.net/u012675539/article/details/52079013)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## Matlab
 
 1. Download matlab2016b from [baidu cloud](https://pan.baidu.com/s/1mi0PRqK#list/path=%2F).
+
 2. Mount install `.iso`
     ```shell
     sudo mkdir /media/matlab
     cd <matlab.iso path>
     sudo mount -o loop <matlab-d1.iso> /media/matlab
     ```
+
 3. Install
     ```shell
     sudo /media/matlab/install
@@ -698,6 +837,12 @@ Teminator -> Preferences -> Profiles -> Scrolling and select inifinite scrollbac
 ***Reference:***
 
 - [ubuntu 16.04 安装 matlab](http://blog.csdn.net/jesse_mx/article/details/53956358)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## cmake-gui
 
@@ -729,9 +874,21 @@ Teminator -> Preferences -> Profiles -> Scrolling and select inifinite scrollbac
 - [StackExchange-ask ubuntu: How to install cmake 3.2 on ubuntu 14.04?](https://askubuntu.com/questions/610291/how-to-install-cmake-3-2-on-ubuntu)
 - [pkgs.org: cmake-gui-3.3.2-1.gf.el7.x86_64.rpm](https://centos.pkgs.org/7/ghettoforge-plus-x86_64/cmake-gui-3.3.2-1.gf.el7.x86_64.rpm.html)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## System Monitor
 
 This software is default installed on Ubuntu. It makes inspecting `disk/cpu/memory` use condition simply.
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## Netease cloud music(网易云音乐)
 
@@ -742,6 +899,12 @@ When start netease-cloud-music occur error `Local file: "" ("netease-cloud-music
 - [知乎: Ubuntu 18.04 网易云音乐无法打开问题解决方案](https://zhuanlan.zhihu.com/p/37324458)
 
 - [知乎: 在Ubuntu 上有什么必装的实用软件？](https://www.zhihu.com/question/19811112)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## GlodenDict
 
@@ -760,6 +923,12 @@ sudo apt-get install goldendict-wordnet
 
 - [StarDict Dictionaries -- 星际译王词库 词典下载](http://download.huzheng.org/)
 - [Ubuntu 14.04 安装配置强大的星际译王（stardict）词典](https://blog.csdn.net/tecn14/article/details/25917149) -->
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## tmux
 
@@ -781,6 +950,12 @@ Ubuntu can install by `sudo apt-get install tmux`
 
 - [GithubL ryerh/tmux-cheatsheet.markdown](https://gist.github.com/ryerh/14b7c24dfd623ef8edc7)
 - [Github: henrik/tmux_cheatsheet.markdown](https://gist.github.com/henrik/1967800)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## vim
 
@@ -959,6 +1134,12 @@ let g:ycm_add_preview_to_completeopt = 0
 - [Blog: ubuntu下安装自动补全YouCompleteMe](https://www.cnblogs.com/litifeng/p/6671446.html)
 - [Github: Valloric/YouCompleteMe Issue: Auto close preview window after insertion not closing sometimes](https://github.com/Valloric/YouCompleteMe/issues/524)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## Vutrl VPS 
 
 ### Install ssr
@@ -1005,6 +1186,12 @@ After you change the `ssh_config`, you need to restart `ssh` by `sudo service ss
 
 **遇到的问题:** 在Ubuntu下使用`ctr` + `c`拷贝`rsa_pub`时，出现在粘贴后第一行的字母丢失的问题，暂时还未解决。
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## Screen recorder: Kazam
 Install
 
@@ -1017,13 +1204,31 @@ sudo apt-get install kazam
 - [Blog: 9 Best Screen Recorders For Linux](https://itsfoss.com/best-linux-screen-recorders/)
 - [askubuntu: How to install Kazam 1.5.3?](https://askubuntu.com/questions/766440/how-to-install-kazam-1-5-3)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## FeedReader: RSS reader
 
 Install FeedReader from [here](https://github.com/jangernert/FeedReader)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## Stretchly: Break time reminder app
 
 Install stretchly from [here](https://github.com/hovancik/stretchly)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## Gnome Tweak Tool
 
@@ -1045,6 +1250,12 @@ sudo apt-get install gnome-tweak-tool
     ***References:***
     - [Dash to Dock GNOME Shell Extension](https://micheleg.github.io/dash-to-dock/download.html)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## LibreOffice
 
 ### Using `simsun` in LibreOffice
@@ -1057,6 +1268,12 @@ sudo apt-get install gnome-tweak-tool
 - [Blog: Ubuntu 字体美化-微软雅黑和宋体](http://blog.51cto.com/geekz/716535)
 - [LibreOffice: 适用于 LibreOffice 的中日韩字体](https://zh-cn.libreoffice.org/download/fonts/)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## Shutter
 
 A screenshot software on Ubuntu. And you can set keyboard shotcut for it.
@@ -1064,6 +1281,12 @@ A screenshot software on Ubuntu. And you can set keyboard shotcut for it.
 ***References:***
 
 - [Linux公社: Ubuntu 安装截图工具Shutter，并设置快捷键 Ctrl+Alt+A](https://www.linuxidc.com/Linux/2015-07/119753.htm)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## VNC
 
@@ -1156,6 +1379,12 @@ Install VNC server on Remote PC and use VNC client to get desktop of remote pc a
 - [Blog: CentOS7.2安装VNC，让Windows远程连接CentOS 7.2 图形化界面](http://blog.51cto.com/12217917/2060252)
 - [DigitalOcean: How To Install and Configure VNC Remote Access for the GNOME Desktop on CentOS 7](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-remote-access-for-the-gnome-desktop-on-centos-7)
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## gnome-tweaks
 
 Free customization and settings manager for the GNOME desktop.
@@ -1163,6 +1392,12 @@ Free customization and settings manager for the GNOME desktop.
 ***References:***
 
 - [LINUXCONFIG.org How to install Tweak Tool on Ubuntu 18.04 Bionic Beaver Linux](https://linuxconfig.org/how-to-install-tweak-tool-on-ubuntu-18-04-bionic-beaver-linux)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## Lepton
 
@@ -1176,6 +1411,12 @@ Support:
 
 [Lepton Home]: https://github.com/hackjutsu/Lepton
 
+<!--  -->
+<br>
+
+***
+<!--  -->
+
 ## redshift
 
 Adjusts the color temperature of your screen
@@ -1187,6 +1428,12 @@ Ubuntu install
 ```bash
 sudo apt install redshift-gtk
 ```
+
+<!--  -->
+<br>
+
+***
+<!--  -->
 
 ## nmon
 
@@ -1210,3 +1457,49 @@ TBD
 - `t`: Top-processes
 
 Ref [Linux中国: 使用 Nmon 监控 Linux 的系统性能](https://linux.cn/article-6886-1.html)
+
+<!--  -->
+<br>
+
+***
+<!--  -->
+
+## zssh & rzsz
+
+### Install
+
+- Ubuntu: `sudo apt install zssh`
+
+Ref [博客园: linux 机器之间 zssh, rz, sz互相传输](https://www.cnblogs.com/strikebone/p/3454679.html)
+
+### Use
+
+Remote server (usually CentOS), need install `lrzsz`
+
+```bash
+yum install lrzsz
+```
+
+Ref [CSDN: linux CentOS 安装rz和sz命令 lrzsz](https://blog.csdn.net/jack85986370/article/details/51321475)
+
+#### Upload
+
+1. `ctr + @`: 切换到local
+2. `sz <file>`: 从local上传文件到remote
+
+#### Download
+
+1. `sz <file>` 在remote启动sz，准备发送文件
+2. `ctr + @`: 切换到local
+3. `cd <path>`: 进入到需要存储的路径
+4. `rz`: 接受文件
+
+***References:***
+
+- [Blog: zssh使用](https://phenix3443.github.io/notebook/ubuntu/zssh.html)
+
+<!--  -->
+<br>
+
+***
+<!--  -->

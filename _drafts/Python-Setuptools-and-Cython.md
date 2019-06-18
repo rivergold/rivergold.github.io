@@ -88,17 +88,28 @@
             build_dir="build",
             compiler_directives=dict(
                 always_allow_keywords=True)),
-        cmdclass=dict(
-            build_ext=build_ext),
-        author="hejing, IQIYI IIG Chengdu AI",
-        author_email="hejing01@qiyi.com")
+
+        # -----Copy other data into build
+        package_data={
+            '<package name>.<where to put data>': ['<>/<>/*']
+        },
+        # -----
+
+        author="your name",
+        author_email="you email")
     ```
 
 3. Build
 
     ```bash
     python setup.py build
+    # Force build
+    # python setup.py build --force
     ```
+
+***References:***
+
+- [Github Gist rivergold/setup_build_so.py](https://gist.github.com/rivergold/31195407e4dc95067bfd661797909dec)
 
 <!--  -->
 <br>

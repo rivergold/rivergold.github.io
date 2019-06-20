@@ -23,6 +23,25 @@ If the other OS installed on your computer is UEFI, you must install Ubuntu with
 <br>
 
 ***
+<!--  -->
+
+## Shell Pipe
+
+<p align="center">
+  <img
+  src="https://upload-images.jianshu.io/upload_images/9890707-f2ee87b539717d93.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="50%">
+</p>
+
+***Ref:*** [Linux学习: 聊聊 Linux 的匿名管道](https://mp.weixin.qq.com/s?__biz=MzI4MDEwNzAzNg==&mid=2649445728&idx=2&sn=72f798eb75f4d6ae096a248f5f81be3d&chksm=f3a27413c4d5fd0549b1dc7e3aa81b06f25ba6e9b3149ba66412dc26ab940bbdf11750ab6026&mpshare=1&scene=1&srcid=#rd)
+
+***References:***
+
+- [CSDN: Linux中>、>>](https://blog.csdn.net/hellozpc/article/details/46721811)
+
+<!--  -->
+<br>
+
+***
 
 <br>
 <!--  -->
@@ -1274,13 +1293,39 @@ sudo apt-get install gnome-tweak-tool
 ***
 <!--  -->
 
-## Shutter
+## flameshot
+
+A screenshot software on Linux
+
+### Install
+
+```bash
+sudo apt install  flameshot
+```
+
+### Config
+
+Set a shortcut for flameshot
+
+Open `Settings` -> `Devices` - > `Keyboard` -> Add new shotcut `Ctrl` + `Super` + `a`
+
+<p align="center">
+  <img
+  src="https://upload-images.jianshu.io/upload_images/9890707-5cce32c6eaf87f23.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="60%">
+</p>
+
+***References:***
+
+- [Linux中国: Flameshot：一个简洁但功能丰富的截图工具](https://linux.cn/article-10180-1.html)
+- [Linux中国: 在 Linux 下截屏并编辑的最佳工具](https://zhuanlan.zhihu.com/p/45919661)
+
+<!-- ### shutter
 
 A screenshot software on Ubuntu. And you can set keyboard shotcut for it.
 
 ***References:***
 
-- [Linux公社: Ubuntu 安装截图工具Shutter，并设置快捷键 Ctrl+Alt+A](https://www.linuxidc.com/Linux/2015-07/119753.htm)
+- [Linux公社: Ubuntu 安装截图工具Shutter，并设置快捷键 Ctrl+Alt+A](https://www.linuxidc.com/Linux/2015-07/119753.htm) -->
 
 <!--  -->
 <br>

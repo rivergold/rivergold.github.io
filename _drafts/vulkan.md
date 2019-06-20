@@ -1,3 +1,8 @@
+# Vulkan
+
+- [Vulkan](https://www.khronos.org/vulkan/)
+- [Vulkan SDK](https://vulkan.lunarg.com/)
+
 # :seedling: Good Books & Blogs
 
 - [Vulkan Docs](https://vulkan.lunarg.com/doc/sdk/latest/linux/getting_started.html)
@@ -86,7 +91,10 @@ Each of the physical devices advertises one or more queues. These queues are cat
 
 ## Layout
 
-目前的理解为：一种描述某种类型的信息结构
+- Descriptor Set Layout
+- Pipeline Layout
+
+目前的理解：Layout使用对配置的描述
 
 <!--  -->
 <br>
@@ -122,7 +130,7 @@ sudo add-apt-repository ppa:oibaf/graphics-drivers
 sudo apt install libvulkan1 mesa-vulkan-drivers vulkan-utils
 ```
 
-Test
+**Test**
 
 ```bash
 vulkaninfo | less

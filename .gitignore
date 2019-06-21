@@ -15,4 +15,5 @@ npm-debug.log*
 
 # -----rivergold add
 /.vscode/
+/**/.vscode/
 # -----

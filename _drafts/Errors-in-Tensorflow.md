@@ -130,7 +130,7 @@ tensorflow.python.training.basic_session_run_hooks.NanLossDuringTrainingError: N
 
 The loss is caused by `tf.truncated_normal_initializer()`. When I change it into `tf.keras.initializers.he_normal()`, the loss is ok.
 
-## `tf.layers.conv2d` cannot knoe the input shape.
+## `tf.layers.conv2d` cannot know the input shape.
 
 Using `tf.py_func` process tensor and put the return into model, the model layer cannot recognize the shape, and occur error like,
 
@@ -161,7 +161,7 @@ Traceback (most recent call last):
 ValueError: Input 0 of layer conv2d_1 is incompatible with the layer: its rank is undefined, but the layer requires a defined rank.
 ```
 
-***References:***
+**_References:_**
 
 - [Github tensorflow/tensorflow Issues: Dataset API does not pass dimensionality information for its output tensor #17059](https://github.com/tensorflow/tensorflow/issues/17059)
 - [Github tensorflow/tensorflow Issues: Feature Request: Setting the shape of a tf.data.Dataset if it cannot be inferred #16052](https://github.com/tensorflow/tensorflow/issues/16052)
@@ -170,14 +170,14 @@ ValueError: Input 0 of layer conv2d_1 is incompatible with the layer: its rank i
 **Final Solution:**
 `y.set_shape(inp.get_shape())`
 
-***Referneces:***
+**_Referneces:_**
 
 - [stackoverflow: Output from TensorFlow `py_func` has unknown rank/shape](https://stackoverflow.com/questions/42590431/output-from-tensorflow-py-func-has-unknown-rank-shape)
-
 
 ## Froget to cast raw image data into `tf.float32`, occur error `TypeError: Expected uint8, got 0.0 of type 'float' instead.`
 
 Error is,
+
 ```
 WARNING:tensorflow:Using temporary folder as model directory: /tmp/tmpkkthxfdh
 WARNING:tensorflow:Estimator's model_fn (<function srgan at 0x7f31dcc867b8>) includes params argument, but params are not passed to Estimator.

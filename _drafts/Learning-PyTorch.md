@@ -1,6 +1,6 @@
 # PyTorch
 
-# Key Concept
+# :fallen_leaf:Key Concept
 
 ## `torch.Tensor`
 
@@ -30,7 +30,7 @@ Update parameters based on the *current* gradient (stored in `.grad` attribute o
 <br>
 <!--  -->
 
-# API
+# :fallen_leaf:API
 
 ## torch
 
@@ -109,7 +109,7 @@ TypeError: batch must contain tensors, numbers, dicts or lists; found <class 'PI
 <br>
 <!--  -->
 
-# Tips
+# :fallen_leaf:Tips
 
 ## Init variable in layers
 
@@ -261,7 +261,7 @@ Ref [PyTorch doc: torch.nn.Module](https://pytorch.org/docs/stable/nn.html#torch
 <br>
 <!--  -->
 
-# visdom
+# :fallen_leaf:visdom
 
 ## Basics
 
@@ -303,7 +303,7 @@ Maybe the data use pass to `vis.line` or other plot/show function is not right. 
 <br>
 <!--  -->
 
-# Common Problems & Solutions
+# :fallen_leaf:Common Problems & Solutions
 
 ## Error about `RuntimeError: Expected object of type torch.FloatTensor but found type torch.cuda.FloatTensor for argument #2 'other'`
 
@@ -330,7 +330,7 @@ It is not good to return `list` in `torch.utils.data.Dataset`, better use `numpy
 ***
 <br>
 
-# PyTorch on Mobile
+# :fallen_leaf:PyTorch on Mobile
 
 PyTorch -> ONNX -> Caffe2
 
@@ -381,3 +381,29 @@ failed
 ### Speed
 
 - [Github onnx/onnx-caffe2: onnx-caffe2 is slower? #152](https://github.com/onnx/onnx-caffe2/issues/152)
+
+<!--  -->
+<br>
+
+***
+
+<br>
+<!--  -->
+
+# :fallen_leaf: Awesome Tools
+
+## TorchSnooper
+
+Debug PyTorch code using PySnooper
+
+- [Github zasdfgbnm/TorchSnooper](https://github.com/zasdfgbnm/TorchSnooper)
+
+***References:***
+
+- [机器学习算法与Python学习: PyTorch代码调试利器: 自动print每行代码的Tensor信息](https://mp.weixin.qq.com/s?__biz=MzIxODM4MjA5MA==&mid=2247489750&idx=3&sn=6504eec0570cc30291c21f4adec2ac72&chksm=97ea32b3a09dbba51a7736e3ac0a349ffc5d9b4f07089cbb6b2d1fd0e5b9e7890d8ce0a4a7b0&mpshare=1&scene=1&srcid=#rd)
+
+<!--  -->
+<br>
+
+***
+<!--  -->

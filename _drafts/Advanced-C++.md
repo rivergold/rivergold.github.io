@@ -1,32 +1,35 @@
-# Basics
+# :fallen_leaf:Basics
 
 ## `explicit`
 
 This specifier specifies that a constructor doesn't allow `implicit conversions` or `copy-initialization`.<br>
 **理解：** 该声明使得类的构造函数不允许隐式转换和拷贝初始化。
 
-***References:***
+**_References:_**
+
 - [cppreference: explicit specifier](http://en.cppreference.com/w/cpp/language/explicit)
 
 <!--  -->
 <br>
 
-***
+---
+
 <!--  -->
 
 ## `static`
 
-***Ref:*** [知乎: C/C++ 中的static关键字](https://zhuanlan.zhihu.com/p/37439983)
+**_Ref:_** [知乎: C/C++ 中的 static 关键字](https://zhuanlan.zhihu.com/p/37439983)
 
-***References:***
+**_References:_**
 
-- &Delta; [CSDN: C/C++---static函数，static成员函数，static变量，static成员变量 再来理一理](https://blog.csdn.net/FreeApe/article/details/50979425)
-- [CSDN: C++中Static作用和使用方法](https://blog.csdn.net/artechtor/article/details/2312766)
+- &Delta; [CSDN: C/C++---static 函数，static 成员函数，static 变量，static 成员变量 再来理一理](https://blog.csdn.net/FreeApe/article/details/50979425)
+- [CSDN: C++中 Static 作用和使用方法](https://blog.csdn.net/artechtor/article/details/2312766)
 
 <!--  -->
 <br>
 
-***
+---
+
 <!--  -->
 
 ## Constructor Initializers List Must Be Uesed
@@ -44,7 +47,8 @@ This specifier specifies that a constructor doesn't allow `implicit conversions`
 <!--  -->
 <br>
 
-***
+---
+
 <!--  -->
 
 ## `protected` Members
@@ -54,7 +58,8 @@ a class uses `protected` for those members that it is willing to share with its 
 <!--  -->
 <br>
 
-***
+---
+
 <!--  -->
 
 ## `public`, `private` and `protected` Inheritance
@@ -67,7 +72,7 @@ Derivation can only inheriate `public` and `protected` members from **base**, bu
 
 - `protected` inheritance: all `public` and `protected` members in **base** are `protected` in **derivation**
 
-***References:***
+**_References:_**
 
 - [tutorialspoint: C++ Inheritance](https://www.tutorialspoint.com/cplusplus/cpp_inheritance.htm)
 - [blog: C++继承：公有，私有，保护](http://www.cnblogs.com/qlwy/archive/2011/08/25/2153584.html)
@@ -75,7 +80,8 @@ Derivation can only inheriate `public` and `protected` members from **base**, bu
 <!--  -->
 <br>
 
-***
+---
+
 <!--  -->
 
 ## Smart pointer
@@ -88,7 +94,7 @@ std::unique_ptr<int> up(new int(5));
 up.reset(nullptr)
 ```
 
-***References:***
+**_References:_**
 
 - [cppreference.com: std::unique_ptr::reset](https://en.cppreference.com/w/cpp/memory/unique_ptr/reset)
 - [cppreference.com: how to delete unique_ptr](http://www.cplusplus.com/forum/general/119828/)
@@ -104,7 +110,8 @@ Ref [Thomas Becker's Homepage: C++ Rvalue References Explained](http://thbecker.
 <!--  -->
 <br>
 
-***
+---
+
 <!--  -->
 
 ## Copy Control
@@ -122,24 +129,66 @@ When a object of a class type is copied, moved, assigned, and destroyed, it need
 Happens:
 
 - Pass an object as an argument to a parameter of nonreference type
-    传递参数时，将object传递给非引用的参数
+  传递参数时，将 object 传递给非引用的参数
 - Return an object from a function tha has a nonreference retrun type
-    函数返回时，返回非引用类型的返沪值
+  函数返回时，返回非引用类型的返沪值
 - Brace initialize the element in an array or the members of an aggregate class
-    大括号初始化数据、
+  大括号初始化数据、
 
 Copy initialization ordinarily use the copy constructor. But if a class has a move constructor, then copy initialaztion sometimes use the move constuctor instead of the copy constructor.
 
+<!--  -->
+<br>
+
+---
+
+<!--  -->
+
+## `NULL` & `nullptr`
+
+**_Ref:_** [Quora: What's the difference between NULL and nullptr in C++?](https://www.quora.com/Whats-the-difference-between-NULL-and-nullptr-in-C++)
 
 <!--  -->
 <br>
 
-***
+---
+
+<!--  -->
+
+## Use `using namespace std` is bad
+
+**_Ref:_** [stackoverflow: Why is “using namespace std;” considered bad practice?](https://stackoverflow.com/questions/1452721/why-is-using-namespace-std-considered-bad-practice)
+
+<!--  -->
+<br>
+
+---
 
 <br>
 <!--  -->
 
-# Tricks
+# STL
+
+## vector
+
+### Init vector size
+
+```c++
+vector<int> a;
+a = vector<int>(10); // a size is 10
+```
+
+**_Ref:_** [stackoverflow: How to set initial size of std::vector?](https://stackoverflow.com/a/11457629)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# :fallen_leaf:Tricks
 
 ## Using `typedef` define a function pointer
 
@@ -151,16 +200,17 @@ BrewMap g_brew_map;
 
 This code is from `caffe/tools/caffe.cpp`. Here, `BewFunction` is a function pointer of a function `int ()`
 
-***References:***
+**_References:_**
 
-- [Blog: [C++语法]关键字typedef用法](http://www.cnblogs.com/SweetDream/archive/2006/05/10/395921.html)
+- [Blog: [C++语法]关键字 typedef 用法](http://www.cnblogs.com/SweetDream/archive/2006/05/10/395921.html)
 
-**注: C++ 11下最好使用`using` 代替`typedef`**
+**注: C++ 11 下最好使用`using` 代替`typedef`**
 
 <!--  -->
 <br>
 
-***
+---
+
 <!--  -->
 
 ## Calculate execution time
@@ -182,5 +232,28 @@ Ref [stackoverflow: calculating execution time in c++](https://stackoverflow.com
 <!--  -->
 <br>
 
-***
+---
+
+<br>
+<!--  -->
+
+# :fallen_leaf:Tools
+
+## fmt
+
+- [Github](https://github.com/fmtlib/fmt)
+
+Good format print for C++.
+
+**_Ref:_** [知乎: iostream 是 C++ 的缺陷吗，为什么？](https://www.zhihu.com/question/24076731)
+
+### Format String Syntax
+
+**_Ref:_** [fmt doc: Format String Syntax](https://fmt.dev/latest/syntax.html)
+
+<!--  -->
+<br>
+
+---
+
 <!--  -->

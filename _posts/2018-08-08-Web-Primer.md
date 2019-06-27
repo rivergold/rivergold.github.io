@@ -3,26 +3,26 @@
 ## Server & Client
 
 - [MDN web docs: Client-Server overview
-](https://developer.mozilla.org/zh-CN/docs/learn/Server-side/First_steps/Client-Server_overview)
+  ](https://developer.mozilla.org/zh-CN/docs/learn/Server-side/First_steps/Client-Server_overview)
 
 ## TCP
 
 TCP client not need to specify the port.
 
-**理解：** TCP client不需要指定端口号
+**理解：** TCP client 不需要指定端口号
 
 ## Microservices(微服务)
 
 What is [**Microservices**](https://www.redhat.com/zh/topics/microservices/what-are-microservices)?
 
-***References:***
+**_References:_**
 
 - [redhat: 什么是微服务？](https://www.redhat.com/zh/topics/microservices/what-are-microservices)
 
 <!--  -->
 <br>
 
-***
+---
 
 <br>
 <!--  -->
@@ -74,7 +74,7 @@ When change config of `firewall-cmd`, you need to run `firewall-cmd --reload` to
 
 Ref [IBM 学习: 使用 firewalld 构建 Linux 动态防火墙](https://www.ibm.com/developerworks/cn/linux/1507_caojh/index.html)
 
-***References:***
+**_References:_**
 
 - [StackExchange serverfault: How to remove access to a port using firewall on Centos7?](https://serverfault.com/a/865041)
 
@@ -140,12 +140,23 @@ When added rule into ufw, ufw doest not need to reload to take effect.
   sudo ufw delete allow from 111.111.111.111
   ```
 
+- Allow connections from specific IP addresses to specific port
+
+  ```bash
+  sudo ufw allow <source ip> to any port <destination port>
+  ```
+
 Ref [RoseHosting: How To Set Up a Firewall with UFW on Ubuntu 16.04](https://www.rosehosting.com/blog/set-up-firewall-with-ufw-on-ubuntu/)
+
+**_References:_**
+
+- [DigitalOcean: UFW Essentials: Common Firewall Rules and Commands](https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands)
 
 <!--  -->
 <br>
 
-***
+---
+
 <!--  -->
 
 ## curl
@@ -156,12 +167,12 @@ Ref [RoseHosting: How To Set Up a Firewall with UFW on Ubuntu 16.04](https://www
 curl -d "data=test" <http_address>
 ```
 
-***Ref:*** [简书: CURL命令模拟Http Get/Post请求](https://www.jianshu.com/p/a8b648e96753)
+**_Ref:_** [简书: CURL 命令模拟 Http Get/Post 请求](https://www.jianshu.com/p/a8b648e96753)
 
 <!--  -->
 <br>
 
-***
+---
 
 <br>
 <!--  -->
@@ -176,14 +187,14 @@ curl -d "data=test" <http_address>
 
 #### Install
 
-***References:***
+**_References:_**
 
 - [askubuntu: How to set up a simple file server?](https://askubuntu.com/questions/556858/how-to-set-up-a-simple-file-server)
 - [DigitalOcean: How To Install the Apache Web Server on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-16-04)
 - [How To Configure the Apache Web Server on an Ubuntu or Debian VPS](https://www.digitalocean.com/community/tutorials/how-to-configure-the-apache-web-server-on-an-ubuntu-or-debian-vps)
-- [知乎: 实现一个http服务器需要怎样进行？需要哪些知识呢？](https://www.zhihu.com/question/20199473)
-- [简书: Linux搭建简单的http文件服务器](https://www.jianshu.com/p/e1a6219167cf)
-- [Blog: Ubuntu下Apache服务器的配置](https://www.ezlippi.com/blog/2016/01/apache-configuration-in-ubuntu.html)
+- [知乎: 实现一个 http 服务器需要怎样进行？需要哪些知识呢？](https://www.zhihu.com/question/20199473)
+- [简书: Linux 搭建简单的 http 文件服务器](https://www.jianshu.com/p/e1a6219167cf)
+- [Blog: Ubuntu 下 Apache 服务器的配置](https://www.ezlippi.com/blog/2016/01/apache-configuration-in-ubuntu.html)
 
 #### Apache Config
 
@@ -198,7 +209,7 @@ sudo vim /etc/apache2/ports.conf
 sudo vim /etc/apache2/sites-enabled/000-default.conf
 ```
 
-***References:***
+**_References:_**
 
 - [TecMint: How to Change Apache HTTP Port in Linux](https://www.tecmint.com/change-apache-port-in-linux/)
 - [OSTechNix: How To Change Apache Default Port To A Custom Port](https://www.ostechnix.com/how-to-change-apache-ftp-and-ssh-default-port-to-a-custom-port-part-1/)
@@ -218,31 +229,32 @@ sudo systemctl start httpd
 Change http work folder `DocumentRoot`
 
 1. vim `/etc/httpd/conf/httpd.conf`
-    ```vim
-    #
-    121 # DocumentRoot "/var/www/html"
-    122 DocumentRoot "/data/www"
-    #
-    131 # <Directory "/var/www">
-    132 <Directory "/data/www">
-    #
-    141 #<Directory "/var/www/html">
-    142 <Directory "/data/www">
-    ```
+
+   ```vim
+   #
+   121 # DocumentRoot "/var/www/html"
+   122 DocumentRoot "/data/www"
+   #
+   131 # <Directory "/var/www">
+   132 <Directory "/data/www">
+   #
+   141 #<Directory "/var/www/html">
+   142 <Directory "/data/www">
+   ```
 
 2. vim `/etc/httpd/conf.d/welcome.conf`
-    Comment all lines in this file.
+   Comment all lines in this file.
 
-***References:***
+**_References:_**
 
 - [TecMint: How to Change Default Apache ‘DocumentRoot’ Directory in Linux](https://www.tecmint.com/change-root-directory-of-apache-web-server/)
-- [CSDN: Apache禁用测试页（默认页）](https://blog.csdn.net/Aguangg_6655_la/article/details/53915917)
+- [CSDN: Apache 禁用测试页（默认页）](https://blog.csdn.net/Aguangg_6655_la/article/details/53915917)
 
 ### Problems & Solution
 
 #### Show index not default index html
 
-***References:***
+**_References:_**
 
 - [askubuntu: Apache shows index of/ instead of default index html [duplicate]](https://askubuntu.com/questions/450211/apache-shows-index-of-instead-of-default-index-html)
 
@@ -252,14 +264,14 @@ Change http work folder `DocumentRoot`
 sudo ufw allow <your listen port>
 ```
 
-***References:***
+**_References:_**
 
-- [Blog: Ubuntu默认防火墙安装、启用、配置、端口、查看状态相关信息](https://www.cnblogs.com/toughlife/p/5475615.html)
+- [Blog: Ubuntu 默认防火墙安装、启用、配置、端口、查看状态相关信息](https://www.cnblogs.com/toughlife/p/5475615.html)
 
 <!--  -->
 <br>
 
-***
+---
 
 <br>
 <!--  -->
@@ -273,89 +285,89 @@ sudo ufw allow <your listen port>
 
 1. **Check & Install dependences**
 
-    ```bash
-    rpm -qa | grep nfs-utils
-    rpm -qa | grep rpcbind
-    ```
+   ```bash
+   rpm -qa | grep nfs-utils
+   rpm -qa | grep rpcbind
+   ```
 
-    if not occur the packages, please install them:
+   if not occur the packages, please install them:
 
-    ```bash
-    yum -y install nfs-utils
-    yum -y install rpcbind
-    ```
+   ```bash
+   yum -y install nfs-utils
+   yum -y install rpcbind
+   ```
 
 2. **Edit `/etc/exports` to config access permission**
 
-    ```bash
-    <folder path you want to share> <ip of client>(rw,no_root_squash,no_all_squash,async)
-    ```
+   ```bash
+   <folder path you want to share> <ip of client>(rw,no_root_squash,no_all_squash,async)
+   ```
 
-    e.g.
+   e.g.
 
-    ```bash
-    /nfs_test 192.168.1.5(rw,no_root_squash,no_all_squash,async)
-    ```
+   ```bash
+   /nfs_test 192.168.1.5(rw,no_root_squash,no_all_squash,async)
+   ```
 
 3. **Config firewall**
 
-    NFS server need port 111 (TCP and UDP), port 2049 (TCP and UDP)
+   NFS server need port 111 (TCP and UDP), port 2049 (TCP and UDP)
 
-    ```bash
-    firewall-cmd --permanent --zone=public --add-port=111/tcp
-    firewall-cmd --permanent --zone=public --add-port=111/udp
-    firewall-cmd --permanent --zone=public --add-port=2049/tcp
-    firewall-cmd --permanent --zone=public --add-port=2049/udp
-    firewall-cmd --reload
-    ```
+   ```bash
+   firewall-cmd --permanent --zone=public --add-port=111/tcp
+   firewall-cmd --permanent --zone=public --add-port=111/udp
+   firewall-cmd --permanent --zone=public --add-port=2049/tcp
+   firewall-cmd --permanent --zone=public --add-port=2049/udp
+   firewall-cmd --reload
+   ```
 
-    Ref [StackExchange-serverfault: Which ports do I need to open in the firewall to use NFS?](https://serverfault.com/questions/377170/which-ports-do-i-need-to-open-in-the-firewall-to-use-nfs)
+   Ref [StackExchange-serverfault: Which ports do I need to open in the firewall to use NFS?](https://serverfault.com/questions/377170/which-ports-do-i-need-to-open-in-the-firewall-to-use-nfs)
 
 4. **Start service**
 
-    ```bash
-    systemctl start rpcbind
-    systemctl start nfs
-    ```
+   ```bash
+   systemctl start rpcbind
+   systemctl start nfs
+   ```
 
 5. **If changed the config, refresh**
 
-    ```bash
-    exportfs -a
-    ```
+   ```bash
+   exportfs -a
+   ```
 
-Ref [博客园: Linux下配置nfs并远程挂载](https://www.cnblogs.com/freeweb/p/6593861.html)
+Ref [博客园: Linux 下配置 nfs 并远程挂载](https://www.cnblogs.com/freeweb/p/6593861.html)
 
 ## Client
 
 1. **Install**
 
-    ```bash
-    sudo apt install nfs-common
-    ```
+   ```bash
+   sudo apt install nfs-common
+   ```
 
 2. **Mount**
 
-    ```bash
-    sudo mount -t nfs <server ip>:<server folder path> <local mount path>
-    ```
+   ```bash
+   sudo mount -t nfs <server ip>:<server folder path> <local mount path>
+   ```
 
 3. **Umount**
 
-    ```bash
-    sudo umount <local mount path>
-    ```
+   ```bash
+   sudo umount <local mount path>
+   ```
 
 Ref [CSDN: Ubuntu NFS 服务器客户端配置方法](https://blog.csdn.net/zhuxiaoping54532/article/details/53435158)
 
-***References:***
+**_References:_**
 
-- [Howtoing运维教程: 如何在Ubuntu 18.04上设置NFS挂载](https://www.howtoing.com/how-to-set-up-an-nfs-mount-on-ubuntu-18-04)
+- [Howtoing 运维教程: 如何在 Ubuntu 18.04 上设置 NFS 挂载](https://www.howtoing.com/how-to-set-up-an-nfs-mount-on-ubuntu-18-04)
 
 <!--  -->
 <br>
 
-***
+---
 
 <br>
 <!--  -->
@@ -393,12 +405,13 @@ export FLASK_APP=<python_script_name>
 flask run --host=0.0.0.0
 ```
 
-***Ref:*** [Flask Doc: 快速上手](https://dormousehole.readthedocs.io/en/latest/quickstart.html)
+**_Ref:_** [Flask Doc: 快速上手](https://dormousehole.readthedocs.io/en/latest/quickstart.html)
 
 <!--  -->
 <br>
 
-***
+---
+
 <!--  -->
 
 ## Get request data
@@ -407,12 +420,12 @@ flask run --host=0.0.0.0
 data = request.get_json()
 ```
 
-***Ref:*** [stackoverflow: How to get data received in Flask request](https://stackoverflow.com/questions/10434599/how-to-get-data-received-in-flask-request)
+**_Ref:_** [stackoverflow: How to get data received in Flask request](https://stackoverflow.com/questions/10434599/how-to-get-data-received-in-flask-request)
 
 <!--  -->
 <br>
 
-***
+---
 
 <br>
 <!--  -->
@@ -423,21 +436,21 @@ data = request.get_json()
 
 ### 搭建
 
-Ref [Blog: 轻松搭建和配置V2Ray](https://mianao.info/2018/04/23/%E8%BD%BB%E6%9D%BE%E6%90%AD%E5%BB%BA%E5%92%8C%E9%85%8D%E7%BD%AEv2ray)
+Ref [Blog: 轻松搭建和配置 V2Ray](https://mianao.info/2018/04/23/%E8%BD%BB%E6%9D%BE%E6%90%AD%E5%BB%BA%E5%92%8C%E9%85%8D%E7%BD%AEv2ray)
 
 #### 多人使用
 
-Ref [Github v2ray/v2ray-core: V2Ray多用户配置的正确姿势究竟是怎样？ #679](https://github.com/v2ray/v2ray-core/issues/679)
+Ref [Github v2ray/v2ray-core: V2Ray 多用户配置的正确姿势究竟是怎样？ #679](https://github.com/v2ray/v2ray-core/issues/679)
 
 ### 客户端
 
-***References:***
+**_References:_**
 
-- [Blog: v2ray的第三方客户端](http://briteming.hatenablog.com/entry/2017/10/21/124645)
+- [Blog: v2ray 的第三方客户端](http://briteming.hatenablog.com/entry/2017/10/21/124645)
 
 #### Linux
 
-Ref [Linux 系统下v2ray客户端使用](https://octopuspalm.top/2018/08/18/Linux%20%E7%B3%BB%E7%BB%9F%E4%B8%8Bv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BD%BF%E7%94%A8/)
+Ref [Linux 系统下 v2ray 客户端使用](https://octopuspalm.top/2018/08/18/Linux%20%E7%B3%BB%E7%BB%9F%E4%B8%8Bv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BD%BF%E7%94%A8/)
 
 ```bash
 # 后台启动
@@ -447,7 +460,6 @@ pkill v2ray
 ```
 
 Ref [makeuseof: 7 Different Ways To Kill Unresponsive Programs in Linux](https://www.makeuseof.com/tag/6-different-ways-to-end-unresponsive-programs-in-linux/)
-
 
 Error `nohup: failed to run command.:Permission denied`
 

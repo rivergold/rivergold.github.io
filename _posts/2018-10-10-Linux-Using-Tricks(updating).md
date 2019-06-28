@@ -613,6 +613,21 @@ Ref [Linux 公社: Ubuntu 18.04 下搭建 C/C++编译开发环境及 GCC 多版�
 
 ---
 
+<!--  -->
+
+## `mount` and `umount`
+
+### Use `lsblk` to check all device on your compurter, and mount
+
+```bash
+mount /dev/<device name> <path you want to mount>
+```
+
+<!--  -->
+<br>
+
+---
+
 <br>
 <!--  -->
 

@@ -1027,9 +1027,9 @@ One useful function of `tmux` is **Keep run wihout exist when using ssh to remot
 
 Ubuntu can install by `sudo apt-get install tmux`
 
-**tmux tips:**
+### Tips
 
-**All tmux shortcuts need hit prefix `ctrl + b` and then**
+#### All tmux shortcuts need hit prefix `ctrl + b` and then\*\*
 
 - `d`: detach (tmux still run)
 - `[`: Scroll in tmux
@@ -1040,6 +1040,7 @@ Ubuntu can install by `sudo apt-get install tmux`
 
 - [GithubL ryerh/tmux-cheatsheet.markdown](https://gist.github.com/ryerh/14b7c24dfd623ef8edc7)
 - [Github: henrik/tmux_cheatsheet.markdown](https://gist.github.com/henrik/1967800)
+- [Blog: Tmux 使用手册](http://louiszhai.github.io/2017/09/30/tmux/)
 
 <!--  -->
 <br>
@@ -1635,6 +1636,32 @@ Ref [CSDN: linux CentOS 安装 rz 和 sz 命令 lrzsz](https://blog.csdn.net/jac
 **_References:_**
 
 - [Blog: zssh 使用](https://phenix3443.github.io/notebook/ubuntu/zssh.html)
+
+<!--  -->
+<br>
+
+---
+
+<!--  -->
+
+## rTorrent
+
+Linux download Torrent tool.
+
+### Install
+
+```bash
+# Ubuntu
+sudo apt install rTorrent
+# CentOS
+yum install rTorrent
+```
+
+**_Ref:_** [TecMint: 5 Linux Command Line Based Tools for Downloading Files and Browsing Websites](https://www.tecmint.com/linux-command-line-tools-for-downloading-files/)
+
+### Use
+
+**_Ref:_** [Linux 中国: rtorrent - 强大的命令行 BT 客户端](https://linux.cn/article-2064-1.html)
 
 <!--  -->
 <br>

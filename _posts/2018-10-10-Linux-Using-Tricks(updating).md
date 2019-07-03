@@ -628,6 +628,44 @@ mount /dev/<device name> <path you want to mount>
 
 ---
 
+<!--  -->
+
+## Compress & Decompress
+
+### `tar`
+
+### `7za`
+
+**Install**
+
+```bash
+# Ubuntu
+sudo apt install p7zip-full
+# CentOS
+yum install p7zip
+```
+
+**_Ref:_** [stackoverflow: How can I uncompress a \*.7z file?](https://askubuntu.com/questions/219392/how-can-i-uncompress-a-7z-file)
+
+**Decompress**
+
+```bash
+7za x <compress_file_name>
+```
+
+**_References:_**
+
+- [CSDN: linux 下安装 7z 命令及 7z 命令的使用](https://blog.csdn.net/whatday/article/details/50157273)
+
+### `zip`
+
+- [RUNOOB.com: Linux zip 命令](https://www.runoob.com/linux/linux-comm-zip.html)
+
+<!--  -->
+<br>
+
+---
+
 <br>
 <!--  -->
 

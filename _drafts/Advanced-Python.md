@@ -50,6 +50,29 @@ class Foo(metaclass=PrefixMetaclass):
 <br>
 <!--  -->
 
+# :fallen_leaf:Decorator
+
+**我的理解**:
+
+> 装饰器是可调用的对象，其参数是另一个函数（被装饰的函数）。装饰器可能会处理被装饰的函数，然后把他返回，或者将其替换成另一个函数或可调用对象。
+> 严格来说，装饰器只是语法糖。
+> 装饰器的一大特性是，能把被装饰的函数替换成其他函数。第二特性是，装饰器在加载模块时立即执行。
+
+## How to use
+
+**_References_**
+
+- [segmentfault: Python 装饰器使用指南](https://segmentfault.com/a/1190000010681026)
+- [简书: Python - 学装饰器之前，有几个点要理解](https://www.jianshu.com/p/1369d610f8bb)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # :fallen_leaf:Awesome Tricks
 
 ## Make Class like a `dict`
@@ -76,3 +99,28 @@ def set_random_seed(seed):
 ```
 
 **_Ref:_** [Github open-mmlab/mmdetection: mmdet/apis/env.py](https://github.com/open-mmlab/mmdetection/blob/58c415a069ceab37bab76c47da72824f4181cff6/mmdet/apis/env.py#L53)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# :fallen_leaf:Knowledge Points
+
+## Variable Scope
+
+**_Ref:_** [CSDN: Python 变量作用域](https://blog.csdn.net/cc7756789w/article/details/46635383)
+
+There are four type scope in Python:
+
+- L (Local) 局部作用域
+- E (Enclosing) 闭包函数外的函数中
+- G (Global) 全局作用域
+- B (Built-in) 内建作用域
+
+Python find variable in order of `L -> E -> G -> B`.
+
+Only `def`, `class` and `lambda` will change variable scope. Other like `if/elif/else`, `try/except`, `for/while`, `with` will not change variable scope.

@@ -365,6 +365,49 @@ Common used command can be found from [here](https://github.com/sharkdp/fd#tutor
 
 ---
 
+<!--  -->
+
+## `at`
+
+Do somethings at specific time.
+
+1. Write a shell script
+
+   ```shell
+   #!/bin/bash
+   echo <your password> | sudo -S <command>
+   ```
+
+   **_Ref:_** [stackoverflow: Use sudo with password as parameter [closed]](https://stackoverflow.com/a/11955358/4636081)
+
+2. Run
+
+   ```shell
+   at now + 1 minutes < <shell script>
+   # at 2:30 PM 07/22/2019
+   ```
+
+**_References:_**
+
+- [Computer Hope: Linux at, batch, atq, and atrm commands](https://www.computerhope.com/unix/uat.htm)
+
+### Check job and Remove job
+
+```shell
+# Check all job
+atq
+>>> job_id job_time user
+# Remove job
+at -r <job id>
+```
+
+**_Ref:_** [RCSG website: at -r](http://rcsg-gsir.imsb-dsgi.nrc-cnrc.gc.ca/documents/advanced/node159.html)
+
+<!--  -->
+<br>
+
+---
+
 <br>
 <!--  -->
 

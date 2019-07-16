@@ -26,18 +26,37 @@ If the other OS installed on your computer is UEFI, you must install Ubuntu with
 
 <!--  -->
 
-## Shell Pipe
+## shell Pipe
 
 <p align="center">
   <img
   src="https://upload-images.jianshu.io/upload_images/9890707-f2ee87b539717d93.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="50%">
 </p>
 
-**_Ref:_** [Linux 学习: 聊聊 Linux 的匿名管道](https://mp.weixin.qq.com/s?__biz=MzI4MDEwNzAzNg==&mid=2649445728&idx=2&sn=72f798eb75f4d6ae096a248f5f81be3d&chksm=f3a27413c4d5fd0549b1dc7e3aa81b06f25ba6e9b3149ba66412dc26ab940bbdf11750ab6026&mpshare=1&scene=1&srcid=#rd)
+<p align="center">
+  <img
+  src="https://upload-images.jianshu.io/upload_images/9890707-acfdf915e317f6bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="90%">
+</p>
+
+**Example:**
+
+```shell
+echo a | sudo -S apt search xxx
+```
+
+**_References:_**
+
+- [Linux 学习: 聊聊 Linux 的匿名管道](https://mp.weixin.qq.com/s?__biz=MzI4MDEwNzAzNg==&mid=2649445728&idx=2&sn=72f798eb75f4d6ae096a248f5f81be3d&chksm=f3a27413c4d5fd0549b1dc7e3aa81b06f25ba6e9b3149ba66412dc26ab940bbdf11750ab6026&mpshare=1&scene=1&srcid=#rd)
+
+- [linux shell 管道命令(pipe)使用及与 shell 重定向区别](https://www.cnblogs.com/chengmo/archive/2010/10/21/1856577.html)
+
+## shell Redirect
 
 **_References:_**
 
 - [CSDN: Linux 中>、>>](https://blog.csdn.net/hellozpc/article/details/46721811)
+
+- [Linux 中国: 理解 Bash 中的尖括号](https://zhuanlan.zhihu.com/p/56210435)
 
 <!--  -->
 <br>

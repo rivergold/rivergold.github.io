@@ -434,6 +434,114 @@ data = request.get_json()
 
 ## v2ray
 
+### Install
+
+**Server**
+
+```shell
+bash <(curl -s -L https://git.io/v2ray.sh)
+```
+
+- `TCP`
+- My default port `58888`
+
+Open firewall for your v2ray port.
+
+**_Ref:_** [233boy: V2Ray 搭建详细图文教程](https://github.com/233boy/v2ray/wiki/V2Ray%E6%90%AD%E5%BB%BA%E8%AF%A6%E7%BB%86%E5%9B%BE%E6%96%87%E6%95%99%E7%A8%8B)
+
+**Client**
+
+Download `v2ray-core` from [Github](https://github.com/v2ray/v2ray-core/releases).
+
+`Config.json` example:
+
+```json
+{
+  "log": {
+    "loglevel": "info"
+  },
+  "inbounds": [
+    {
+      // 本地代理
+      "port": 1089,
+      "protocol": "socks",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls"]
+      },
+      "settings": {
+        "udp": true // 开启 UDP 协议支持
+      }
+    },
+    {
+      "port": 8080,
+      "protocol": "http",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls"]
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "proxy-vmess",
+      "protocol": "vmess",
+      "settings": {
+        "vnext": [
+          {
+            "address": "<>", // 服务器的 IP
+            "port": <>, // 服务器的端口
+            "users": [
+              {
+                // id 就是 UUID，相当于用户密码
+                "id": "<>",
+                "alterId": 4
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tag": "direct",
+      "settings": {},
+      "protocol": "freedom"
+    }
+  ],
+  "dns": {
+    "server": ["8.8.8.8", "1.1.1.1"],
+    // 你的 IP 地址，用于 DNS 解析离你最快的 CDN
+    "clientIp": "203.208.40.63"
+  },
+  // 配置路由功能，绕过局域网和中国大陆地址
+  "routing": {
+    "domainStrategy": "IPOnDemand",
+    "rules": [
+      {
+        "type": "field",
+        "domain": [
+          // 默认跳过国内网站，如果想要代理某个国内网站可以添加到下列列表中
+          "cnblogs.com"
+        ],
+        "outboundTag": "proxy-vmess"
+      },
+      {
+        "type": "field",
+        "domain": ["geosite:cn"],
+        "outboundTag": "direct"
+      },
+      {
+        "type": "field",
+        "outboundTag": "direct",
+        "ip": ["geoip:cn", "geoip:private"]
+      }
+    ]
+  }
+}
+```
+
+**_Ref:_** [YEARLINY: 面向新手的 V2Ray 搭建指南](https://yuan.ga/v2ray-build-guide-for-novices/)
+
 ### 搭建
 
 Ref [Blog: 轻松搭建和配置 V2Ray](https://mianao.info/2018/04/23/%E8%BD%BB%E6%9D%BE%E6%90%AD%E5%BB%BA%E5%92%8C%E9%85%8D%E7%BD%AEv2ray)

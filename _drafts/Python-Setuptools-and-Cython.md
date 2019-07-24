@@ -1,3 +1,27 @@
+# Introduction
+
+## wrap C++ into Python == python bind to C++
+
+means Python code can call C++ function
+
+## Cython vs pybind11
+
+**_Ref:_** [Stefans Welt: Cython, pybind11, cffi – which tool should you choose?](http://blog.behnel.de/posts/cython-pybind11-cffi-which-tool-to-choose.html)
+
+## Wrap Python into C++
+
+It is common to wrap C++ into Python, wrap Python into C++ is not uncommonly used.
+
+**_Ref:_** [Python Doc: Embedding Python in Another Application](https://docs.python.org/3.7/extending/embedding.html)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # Setuptools
 
 ## `Extension`
@@ -25,6 +49,12 @@
 <!--  -->
 
 # Cython
+
+## Why and When to use
+
+If you are Python background, and want to gain the ability to do efficient native C/C++ operations.
+
+`Python` :arrow_forward: `C/C++`
 
 ## `.pyx`
 
@@ -156,10 +186,37 @@
 
 # pybind11
 
-PyTorch use pybind11 to create Python binding for C++ code.
+## Why and when to use
+
+If you are C++ background, it is easy to use pybind11 to wrap C++ (make Python bind to C++).
+
+`C++` :arrow_forward: `Python`
+
+**PyTorch use pybind11 to create Python binding for C++ code.**
 
 **_References:_**
 
 - [PyTorch Doc: Writing the C++ Op](https://pytorch.org/tutorials/advanced/cpp_extension.html#writing-the-c-op)
 
 - [Stefans Welt: Cython, pybind11, cffi – which tool should you choose?](http://blog.behnel.de/posts/cython-pybind11-cffi-which-tool-to-choose.html)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# Distribute
+
+**_Ref:_** [koala bear: Python application 的打包和发布——(上)](http://wsfdl.com/python/2015/09/06/Python%E5%BA%94%E7%94%A8%E7%9A%84%E6%89%93%E5%8C%85%E5%92%8C%E5%8F%91%E5%B8%83%E4%B8%8A.html)
+
+```python
+# Binary
+python setup bdist
+# Source
+python setup sdist
+```
+
+**_Ref:_** [stackoverflow: How to include package data with setuptools/distribute?](https://stackoverflow.com/questions/7522250/how-to-include-package-data-with-setuptools-distribute/14159430)

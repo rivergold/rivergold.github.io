@@ -24,21 +24,163 @@ It is common to wrap C++ into Python, wrap Python into C++ is not uncommonly use
 
 # Setuptools
 
+```shell
+- package_name
+    - __init__.py
+    - sub_package_1
+        - __init__.py
+        - module_1a.py
+        - module_1b.py
+    - sub_package_2
+        - __init__.py
+        - module_2a.py
+        - module_2b.py
+    - data
+        - data.txt
+    reamdme.txt
+```
+
+```python
+from setuptools import setup, find_packages
+from setuptools.extension import Extension
+
+from Cython.Build import cythonize
+from Cython.Distutils import build_ext
+
+setup(
+    name='package_name',
+    version="0.1",
+    packages=find_packages(),
+    # Uncomment to add install requires
+    # install_requires=['opencv-python<=3.4.5', 'numpy'],
+    ext_modules=cythonize(
+        [
+            Extension("package_name.*", ["package_name/**/*.py"]),
+        ],
+        build_dir="build",
+        compiler_directives=dict(always_allow_keywords=True)),
+    package_data={
+        # If any package contains *.txt files, include them:
+        '': ['*.txt'],
+        # And include any *.dat files found in the 'data' subdirectory
+        # of the 'package_name' package, also:
+        'package_name': ['data/*.txt']
+    },
+    # Uncomment to add new command function to do something.
+    # cmdclass=dict(build_ext=build_ext),
+    author="rivergold",
+    author_email="rivergold@126.com",
+    zip_safe=False,
+)
+```
+
+[Here](https://github.com/rivergold/Python-Packaging-Distribution-Example/tree/dev/build_python_to_so) is a example code to show how to use setuptools.
+
+**_Ref:_** [setuptools DOC: Including Data Files](https://setuptools.readthedocs.io/en/latest/setuptools.html#including-data-files)
+
+- [ ] `find_packages()` will include raw script .py and .so into distribution, how to exclude .py files? When comment `find_packages`, the distribution `bdist` will only contain `.so` but without data files.
+      Maybe work: First build Python script into `.so`, then use built `.so` file to set a new package, and then write a new setup.py and make a distribution.
+      Another way is to rewrite `build_py`. Ref to [stackoverflow: Exclude single source file from python bdist_egg or bdist_wheel](https://stackoverflow.com/a/50517893/4636081)
+
+- [ ] `package_dir` how to use?
+
+---
+
+## `find_packages(<path>)`
+
+Find all packages and add them into distribution.
+
+**_Ref:_** [setuptools doc: Using find_packages()](https://setuptools.readthedocs.io/en/latest/setuptools.html#using-find-packages)
+
+---
+
+## `package_data`
+
+Include data files. `xx: []` means that `xx` package should include what data files.
+
+**注:** 例如你想把`package_name`下的`data/data.txt`文件包含在 distribution 中， `package_data`的值为`'package_name': ['data/*.txt']`， 而不是`'package_name': ['package_name/data/*.txt']`
+
+---
+
 ## `Extension`
 
 - [Python Doc: Extension arguments](https://docs.python.org/3/distutils/apiref.html?highlight=extension)
 
-## `Setup`
+---
+
+## Use `setup.py`
+
+Run followings to get help
+
+```shell
+python setup.py --help-commands
+```
+
+```shell
+Standard commands:
+  build             build everything needed to install
+  build_py          "build" pure Python modules (copy to build directory)
+  build_ext         build C/C++ extensions (compile/link to build directory)
+  build_clib        build C/C++ libraries used by Python extensions
+  build_scripts     "build" scripts (copy and fixup #! line)
+  clean             clean up temporary files from 'build' command
+  install           install everything from build directory
+  install_lib       install all Python modules (extensions and pure Python)
+  install_headers   install C/C++ header files
+  install_scripts   install scripts (Python or otherwise)
+  install_data      install data files
+  sdist             create a source distribution (tarball, zip file, etc.)
+  register          register the distribution with the Python package index
+  bdist             create a built (binary) distribution
+  bdist_dumb        create a "dumb" built distribution
+  bdist_rpm         create an RPM distribution
+  bdist_wininst     create an executable installer for MS Windows
+  upload            upload binary package to PyPI
+
+Extra commands:
+  rotate            delete older distributions, keeping N newest files
+  develop           install package in 'development mode'
+  setopt            set an option in setup.cfg or another config file
+  saveopts          save supplied options to setup.cfg or other config file
+  egg_info          create a distribution's .egg-info directory
+  upload_sphinx     Upload Sphinx documentation to PyPI
+  install_egg_info  Install an .egg-info directory for the package
+  alias             define a shortcut to invoke one or more commands
+  easy_install      Find/get/install Python packages
+  bdist_egg         create an "egg" distribution
+  test              run unit tests after in-place build
+  build_sphinx      Build Sphinx documentation
+
+usage: setup.py [global_opts] cmd1 [cmd1_opts] [cmd2 [cmd2_opts] ...]
+   or: setup.py --help [cmd1 cmd2 ...]
+   or: setup.py --help-commands
+   or: setup.py cmd --help
+```
+
+**_Ref:_** [Getting Started With setuptools and setup.py: Using setup.py](https://pythonhosted.org/an_example_pypi_project/setuptools.html#using-setup-py)
+
+<!-- ## `Setup`
 
 - [Python Doc: Writing the Setup Script](https://docs.python.org/3/distutils/setupscript.html)
 
 **_References:_**
 
-- [Python doc: distutils.core.setup](https://docs.python.org/3/distutils/apiref.html?highlight=setup#distutils.core.setup)
+- [Python doc: distutils.core.setup](https://docs.python.org/3/distutils/apiref.html?highlight=setup#distutils.core.setup) -->
 
-### `find_packages()`
+---
 
-**_Ref:_** [setuptools doc: Using find_packages()](https://setuptools.readthedocs.io/en/latest/setuptools.html#using-find-packages)
+## Distribute
+
+**_Ref:_** [koala bear: Python application 的打包和发布——(上)](http://wsfdl.com/python/2015/09/06/Python%E5%BA%94%E7%94%A8%E7%9A%84%E6%89%93%E5%8C%85%E5%92%8C%E5%8F%91%E5%B8%83%E4%B8%8A.html)
+
+```python
+# Binary
+python setup bdist
+# Source
+python setup sdist
+```
+
+**_Ref:_** [stackoverflow: How to include package data with setuptools/distribute?](https://stackoverflow.com/questions/7522250/how-to-include-package-data-with-setuptools-distribute/14159430)
 
 <!--  -->
 <br>
@@ -207,16 +349,3 @@ If you are C++ background, it is easy to use pybind11 to wrap C++ (make Python b
 
 <br>
 <!--  -->
-
-# Distribute
-
-**_Ref:_** [koala bear: Python application 的打包和发布——(上)](http://wsfdl.com/python/2015/09/06/Python%E5%BA%94%E7%94%A8%E7%9A%84%E6%89%93%E5%8C%85%E5%92%8C%E5%8F%91%E5%B8%83%E4%B8%8A.html)
-
-```python
-# Binary
-python setup bdist
-# Source
-python setup sdist
-```
-
-**_Ref:_** [stackoverflow: How to include package data with setuptools/distribute?](https://stackoverflow.com/questions/7522250/how-to-include-package-data-with-setuptools-distribute/14159430)

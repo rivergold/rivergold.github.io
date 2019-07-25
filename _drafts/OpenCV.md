@@ -16,12 +16,12 @@ warpAffine(img_src, img_dst, R, img_src.size(), INTER_CUBIC, BORDER_CONSTANT, Sc
 
 ### Python
 
-```python  
+```python
 center = (img.shape[1] / 2, img.shape[0] / 2)
 degree = 30
 R = cv2.getRotationMatrix2D(center, degree, 1)
-dst = cv2.warpAffine(img, R, (img.shape[1], img.shape[0]), 
-                     flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_CONSTANT, 
+dst = cv2.warpAffine(img, R, (img.shape[1], img.shape[0]),
+                     flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_CONSTANT,
                      borderValue=(128,128,128))
 ```
 
@@ -66,7 +66,8 @@ def rotate_image(mat, angle):
     return rotated_mat
 ```
 
-***References:***
+**_References:_**
+
 - [OpenCV doc OpenCV-Python Tutorials: Image Processing in OpenCV: Geometric Transformations of Images](https://docs.opencv.org/3.2.0/da/d6e/tutorial_py_geometric_transformations.html)
 - [OpenCV doc: warpAffine](https://docs.opencv.org/3.1.0/da/d54/group__imgproc__transform.html#ga0203d9ee5fcd28d40dbc4a1ea4451983)
 - [stackoverflow: Rotate an image without cropping in OpenCV in C++](https://stackoverflow.com/questions/22041699/rotate-an-image-without-cropping-in-opencv-in-c)
@@ -84,34 +85,34 @@ points_ones = np.hstack([points, ones])
 transformed_points = rotate_M.dot(points_ones.T).T
 ```
 
-***References:***
+**_References:_**
 
 - [stackoverflow: How can I remap a point after an image rotation?](https://stackoverflow.com/a/38794480)
 
 ## Eroding and Dilating
 
-***References:***
+**_References:_**
 
 - [OpenCV Tutorial Image Processing: Eroding and Dilating](https://docs.opencv.org/3.4/db/df6/tutorial_erosion_dilatation.html)
 
 ## HSV
 
-***References:***
+**_References:_**
 
 - [OpenCV-Python Tutorials Image Processing in OpenCV: Changing Colorspaces](https://docs.opencv.org/3.4/df/d9d/tutorial_py_colorspaces.html)
 - [stackoverflow: Exact Skin color HSV range](https://stackoverflow.com/a/8757076/4636081)
 
 ## Object Tracking in OpenCV
 
-***References:***
+**_References:_**
 
 - [Learn OpenCV: Object Tracking using OpenCV (C++/Python)](https://www.learnopencv.com/object-tracking-using-opencv-cpp-python/)
 
 ## Find Contours and max area object in image
 
-- 首先通过findContours函数找到二值图像中的所有边界(这块看需要调节里面的参数)
-- 然后通过contourArea函数计算每个边界内的面积
-- 最后通过fillConvexPoly函数将面积最大的边界内部涂成背景
+- 首先通过 findContours 函数找到二值图像中的所有边界(这块看需要调节里面的参数)
+- 然后通过 contourArea 函数计算每个边界内的面积
+- 最后通过 fillConvexPoly 函数将面积最大的边界内部涂成背景
 
 ```python
 b, g, r, a cv2.split(img)
@@ -127,9 +128,9 @@ if len(contours) 1:
 img = cv2.merge([bg, r, a])
 ```
 
-Ref [CSDN: opencv 获取图像最大连通域 c++和python版](https://blog.csdn.net/xuyangcao123/article/details/81023732)
+Ref [CSDN: opencv 获取图像最大连通域 c++和 python 版](https://blog.csdn.net/xuyangcao123/article/details/81023732)
 
-***References:***
+**_References:_**
 
 - [stackoverflow: Find and draw the largest contour in opencv on a specific color (Python)](https://stackoverflow.com/questions/44588279/find-and-draw-the-largest-contour-in-opencv-on-a-specific-color-python)
 
@@ -147,9 +148,9 @@ image = cv2.imread(<image_path>, flags=cv2.IMREAD_UNCHANGED)
 
 Ref [OpenCV doc: Image file reading and writing - ImreadModes](https://docs.opencv.org/3.4.6/d4/da8/group__imgcodecs.html#ga61d9b0126a3e57d9277ac48327799c80)
 
-***References:***
+**_References:_**
 
-- [CSDN: opencv imread读取alpha通道](https://blog.csdn.net/jazywoo123/article/details/17353069)
+- [CSDN: opencv imread 读取 alpha 通道](https://blog.csdn.net/jazywoo123/article/details/17353069)
 
 # Core Functionality
 
@@ -175,7 +176,17 @@ Ref [Learn OpenCV: Alpha Blending using OpenCV (C++ / Python)](https://www.learn
 
 ### `calcHist`
 
-***Ref:*** [CSDN: OpenCV Python教程（3、直方图的计算与显示）](https://blog.csdn.net/sunny2038/article/details/9097989)
+**_Ref:_** [CSDN: OpenCV Python 教程（3、直方图的计算与显示）](https://blog.csdn.net/sunny2038/article/details/9097989)
+
+## Contours
+
+- [Finding contours in your image](https://docs.opencv.org/3.4.6/df/d0d/tutorial_find_contours.html)
+
+### Check if point inside contour
+
+**_Ref:_** [stackoverflow: How to check if point is placed inside contour?](https://stackoverflow.com/questions/50670326/how-to-check-if-point-is-placed-inside-contour)
+
+**_References:_** [OpenCV-Python Tutorials: Contours : More Functions](https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_imgproc/py_contours/py_contours_more_functions/py_contours_more_functions.html)
 
 # OpenCV with other API
 

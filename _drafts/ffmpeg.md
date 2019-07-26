@@ -36,3 +36,24 @@ ffmpeg -y -i <input_video> -ss <start_time> -to <end_time> -codec copy output.mp
 **_References:_**
 
 - [stackoverflow: Cut part from video file from start position to end position with FFmpeg [duplicate]](https://superuser.com/a/377407)
+
+<!--  -->
+<br>
+
+---
+
+<!--  -->
+
+## Get total frame number of a video
+
+```shell
+# Use ffmpeg
+ffmpeg -i <video_path>  -vcodec copy -acodec copy -f null /dev/null 2>&1 | grep 'frame=' | cut -f 2 -d ' '
+# Use ffprobe
+ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_frames <video_path>
+```
+
+**_References:_**
+
+- [腾讯云: 如何用 ffmpeg 取帧数？](https://cloud.tencent.com/developer/ask/103796)
+- [Quora: How do I calculate the number of all frames in a video, using FFmpeg?](https://qr.ae/TWvXzT)

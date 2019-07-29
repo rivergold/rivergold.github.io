@@ -172,6 +172,14 @@ Ref [Learn OpenCV: Alpha Blending using OpenCV (C++ / Python)](https://www.learn
 
 # Image Processing
 
+## Drawing Functions
+
+- [Doc](https://docs.opencv.org/3.4.5/d6/d6e/group__imgproc__draw.html)
+
+**These function will change raw input image.**
+
+**_Ref:_** [OpenCV-Python Tutorials-Gui Features in OpenCV: Drawing Functions in OpenCV](https://docs.opencv.org/master/dc/da5/tutorial_py_drawing_functions.html)
+
 ## Histograms
 
 ### `calcHist`

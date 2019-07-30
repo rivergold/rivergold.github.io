@@ -1,8 +1,14 @@
-# Vim
-
 # Build and Install
 
-***If you want to use vim with anaconda Python well, strongly suggest to build vim from source.***
+**If you want to use vim with anaconda Python well, strongly suggest to build vim from source.**
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
 
 # Config
 
@@ -28,7 +34,7 @@ Just edit vim `~/.vim_runtime/my_configs.vim`
 <!--  -->
 <br>
 
-***
+---
 
 <br>
 <!--  -->
@@ -56,12 +62,13 @@ Edit `my_configs.vim`
 colorscheme gruvbox
 ```
 
-***Ref:*** [Github morhetz/gruvbox: Installation](https://github.com/morhetz/gruvbox/wiki/Installation)
+**_Ref:_** [Github morhetz/gruvbox: Installation](https://github.com/morhetz/gruvbox/wiki/Installation)
 
 <!--  -->
 <br>
 
-***
+---
+
 <!--  -->
 
 ## YouCompleteMe
@@ -89,12 +96,24 @@ cd YouCompleteMe
 
 **Why use `--system-libclang`:** [Gtihub Valloric/YouCompleteMe CMake Error at ycm/CMakeLists file DOWNLOAD HASH mismatch #1711](https://github.com/Valloric/YouCompleteMe/issues/1711#issuecomment-329520570)
 
+### Use
+
+#### Navigate in complete box
+
+- `ctr` + `n`: down in complete box
+
+- `ctr` + `p`: up in complete box
+
+**_References:_**
+
+- [stackoverflow: Vim-style keys to navigate up and down in Omnicomplete box](https://stackoverflow.com/questions/21900031/vim-style-keys-to-navigate-up-and-down-in-omnicomplete-box)
+
 <!--  -->
 <br>
 
-***
-<!--  -->
+---
 
+<!--  -->
 
 ## NERD Tree
 
@@ -109,7 +128,7 @@ map <leader>nf :NERDTreeFind<cr>
 <!--  -->
 <br>
 
-***
+---
 
 <br>
 <!--  -->
@@ -138,7 +157,7 @@ endif
 <!--  -->
 <br>
 
-***
+---
 
 <br>
 <!--  -->
@@ -164,24 +183,25 @@ Maybe your llvm version is too low(need >= 7.0.0).
 
 - [ ] How to check llvm version ?
 
-***Ref:*** [Github Valloric/YouCompleteMe: When I enter VIM I get The ycmd server SHUT DOWN (restart with ':YcmRestartServer'). Unexpected error while loading the YCM core library. Type ':YcmToggleLogs ycmd_49739_stderr_rbhx3wqr.log' to check the logs #3236](https://github.com/Valloric/YouCompleteMe/issues/3236#issuecomment-439987788)
+**_Ref:_** [Github Valloric/YouCompleteMe: When I enter VIM I get The ycmd server SHUT DOWN (restart with ':YcmRestartServer'). Unexpected error while loading the YCM core library. Type ':YcmToggleLogs ycmd_49739_stderr_rbhx3wqr.log' to check the logs #3236](https://github.com/Valloric/YouCompleteMe/issues/3236#issuecomment-439987788)
 
-***References:***
+**_References:_**
 
-- [博客园: 发现vi出现此错误~/.vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so: undefined symbol: clang_getCompletionFixIt](https://www.cnblogs.com/dakewei/p/10491485.html)
+- [博客园: 发现 vi 出现此错误~/.vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so: undefined symbol: clang_getCompletionFixIt](https://www.cnblogs.com/dakewei/p/10491485.html)
 
-### [Install] When build YouCompleteMe occur error `make[3]: *** No rule to make target '/home/rivergold/software/anaconda/lib/python3.7/config-3.7m-x86_64-linux-gnu/libpython3.7m.so', needed by '/home/rivergold/.vim_runtime/my_plugins/YouCompleteMe/third_party/ycmd/ycm_core.so'.  Stop.`
+### [Install] When build YouCompleteMe occur error `make[3]: *** No rule to make target '/home/rivergold/software/anaconda/lib/python3.7/config-3.7m-x86_64-linux-gnu/libpython3.7m.so', needed by '/home/rivergold/.vim_runtime/my_plugins/YouCompleteMe/third_party/ycmd/ycm_core.so'. Stop.`
 
 When you build YouCompleteMe with Anaconda Python, maybe occur this error.
 
-***Ref:*** [CSDN: YouCompleteMe+anaconda+vim8.0自动补全](https://blog.csdn.net/u013806541/article/details/72057272)
+**_Ref:_** [CSDN: YouCompleteMe+anaconda+vim8.0 自动补全](https://blog.csdn.net/u013806541/article/details/72057272)
 
 - [ ] The solution is not good.
 
 <!--  -->
 <br>
 
-***
+---
+
 <!--  -->
 
 ## gruvbox
@@ -208,7 +228,7 @@ if exists('python_space_error_highlight')
 endif
 ```
 
-***Ref:*** [stackoverflow: How to stop Vim highlighting trailing whitespace in python files](https://stackoverflow.com/a/47588983/4636081)
+**_Ref:_** [stackoverflow: How to stop Vim highlighting trailing whitespace in python files](https://stackoverflow.com/a/47588983/4636081)
 
 <!-- # SpaceVim
 

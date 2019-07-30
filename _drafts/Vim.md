@@ -2,6 +2,133 @@
 
 **If you want to use vim with anaconda Python well, strongly suggest to build vim from source.**
 
+Download src from [Github](https://github.com/vim/vim/releases).
+
+Build vim need:
+
+- Python3 and python3-dev
+
+## Ubuntu
+
+### 1. Install `python-dev`\*\*
+
+```shell
+sudo apt-get install python3-dev
+# Pay attention to which your anaconda python version is.
+```
+
+### 2. run Config\*\*
+
+```shell
+cd vim
+./configure --with-features=huge \
+--enable-multibyte \
+--enable-rubyinterp=yes \
+# --enable-pythoninterp=yes \
+# --with-python-config-dir=/usr/lib/python2.7/config \
+--enable-python3interp=yes \
+--with-python3-config-dir=~/software/anaconda/bin/ \
+--enable-perlinterp=yes \
+--enable-luainterp=yes \
+--enable-gui=gtk2 \
+--enable-cscope \
+--prefix=/usr/local \
+--enable-fail-if-missing
+```
+
+When config vim, need `python-config` for Python2 and `python3-config` for Python3. You can run `python3-config --configdir` to get path of it.
+
+**Note-1:** I would also recommend running configure with --enable-fail-if-missing so that the configure script will fail instead of quietly warning that it didn't find a python3 config directory or executable.
+
+**Note-2:** vim can be built with python2 and python3, but when install `Youcompleteme`, it need only one python version. So, when you build vim, you'd better only choose on python version. If you want to build vim with python2, you need to change `--enable-python3interp=yes` to `--enable-pythoninterp=yes` and `--with-python3-config-dir=~/software/anaconda/bin/` to `--with-python-config-dir=/usr/lib/python2.7/config`
+
+**_References:_**
+
+- [stackoverflow: VIM installation and Anaconda](https://stackoverflow.com/a/41917764/4636081)
+
+- [vim - configure for python3 support but still shows -python3 in version information](https://stackoverflow.com/a/26443517/4636081)
+
+### 3. build
+
+```shell
+make -j8
+sudo make install
+```
+
+---
+
+## CentOS
+
+### 1. Install dependences
+
+```shell
+yum install -y ruby ruby-devel lua lua-devel luajit \
+luajit-devel ctags git python python-devel \
+tcl-devel \
+perl perl-devel perl-ExtUtils-ParseXS \
+perl-ExtUtils-XSpp perl-ExtUtils-CBuilder \
+perl-ExtUtils-Embed
+```
+
+**Install `python3-dev`**:
+
+```shell
+yum search python3 | grep devel
+yum install python3-dev
+```
+
+**_References:_**
+
+- [stackoverflow: How to install python3-devel on red hat 7](https://stackoverflow.com/questions/43047284/how-to-install-python3-devel-on-red-hat-7)
+
+#### **[Problems]**
+
+Centos 7.2 install `python36-devel` occur error `Requires: libcrypto.so.10(openssl.1.0.2)(64bit)`
+
+**Solution**
+
+You need to update openssl from `1.0.1` to `1.0.2`. You nend download [openssl-libs-1.0.2k-12.el7.x86_64.rpm](https://centos.pkgs.org/7/centos-x86_64/openssl-libs-1.0.2k-12.el7.x86_64.rpm.html) and run `rpm -i openssl-libs-1.0.2k-12.el7.x86_64.rpm`. And then it may occur another error like `conflicts with file from package`, you can use `rpm -i --replacefiles openssl-libs-1.0.2k-12.el7.x86_64.rpm`
+
+**_References:_**
+
+- [Blog: 解决 CentOS 下的 conflicts with file from 错误.](http://rayfuxk.iteye.com/blog/2280643)
+
+### 2. Config
+
+Same with Ubuntu
+
+### 3. Build
+
+Same with Ubuntu
+
+---
+
+## Test
+
+1. Run `vim --version` to check if vim support Python3, like `+python3`
+
+2. Run `vim` and input `:py3 pass`
+
+### Problems & Solutions
+
+#### [Error] Run `:py3 pass` occur: Cannot load python3.7m.a
+
+我是用的是 Anaconda 安装的 Python，其 python-config 在`${AnacondaHome}/lib/python3.7/config-3.7m-x86_64-linux-gnu/`. 在进行`./configure`时，显示 vim 链接的 python 库为`libpython3.7m.a`（`checking Python3's dll name... libpython3.7m.a`）, 由于该库为静态库，导致 vim 在启动时，无法加载 python 的动态库，从而导致失败，也无法成功使用 Youcompleteme。
+
+解决方法为：修改执行 vim 的`./configure`后的`src/auto/config.mk`，让其链接对应的动态库。需要稍微注意的点是如果`${AnacondaHome}/lib/python3.7/config-3.7m-x86_64-linux-gnu/`中没有`libpython3.7m.so`，还需要将该库软连接到该目录。
+
+```vim
+PYTHON3_CFLAGS  = -I/root/software/anaconda/include/python3.7m -pthread -DDYNAMIC_PYTHON3_DLL=\"libpython3.7m.so\"
+```
+
+由于 vim 开启时还需要动态加载 python 动态库，所以还需要将`libpython3.7m.so`添加到系统库的路径中。我采用的方法是：在`/etc/ld.so.conf.d/`中创建动态库路径，之后运行`ldconfig`使其生效。
+
+**_Ref:_** [Github vim/vim: Build from source linking to Anaconda python fails #2549](https://github.com/vim/vim/issues/2549#issuecomment-358535165)
+
+**_References:_**
+
+- [stackoverflow: VIM installation and Anaconda](https://stackoverflow.com/questions/29219553/vim-installation-and-anaconda)
+
 <!--  -->
 <br>
 

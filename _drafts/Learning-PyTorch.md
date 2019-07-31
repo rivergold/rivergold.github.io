@@ -67,6 +67,36 @@ Returns a new tensor with a dimension of size one inserted at the specified posi
 
 ## torch.nn
 
+### Container
+
+**Module**
+
+Base class for all
+
+**Sequential**
+
+In `nn.Sequential`, the `nn.Module` stored inside are connected in a cascaded way. And `nn.Sequential` has its own `forward()` method.
+
+**ModuleList**
+
+`nn.ModuleList` does not have a default `forward()` method, and `nn.Module` sotred inside are not connected. It just a container.
+
+**ModuleDict**
+
+It just a container, holds submodules in a dictionary.
+
+---
+
+**:thumbsup:When to use them?**
+
+- Usually, using `nn.Module` and `nn.Sequential` is enough.
+
+- When use `nn.ModuleList` and `nn.ModuleDict`, remember to implement `forward()` method.
+
+**_References:_**
+
+- [:thumbsup:PyTorch Forum: When should I use nn.ModuleList and when should I use nn.Sequential?](https://discuss.pytorch.org/t/when-should-i-use-nn-modulelist-and-when-should-i-use-nn-sequential/5463/4?u=rivergold)
+
 ## `torch.optim`
 
 **_References:_**
@@ -112,6 +142,20 @@ When I return `PIL.Image`, it occur error.
 ```python
 TypeError: batch must contain tensors, numbers, dicts or lists; found <class 'PIL.JpegImagePlugin.JpegImageFile'>
 ```
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# :fallen_leaf: PyTorch C++ Extensions
+
+- [Doc](CUSTOM C++ AND CUDA EXTENSIONS)
+
+> C++ extensions are a mechanism we have developed to allow users (you) to create PyTorch operators defined out-of-source, i.e. separate from the PyTorch backend. This approach is different from the way native PyTorch operations are implemented. C++ extensions are intended to spare you much of the boilerplate associated with integrating an operation with PyTorch’s backend while providing you with a high degree of flexibility for your PyTorch-based projects.
 
 <!--  -->
 <br>

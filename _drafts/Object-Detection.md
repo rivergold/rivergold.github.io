@@ -1,5 +1,9 @@
 # COCO
 
+1. Init coco with annotation file
+2. Get image_ids and categories
+3. Use image_id to get image infomation and annotation
+
 ```python
 from pycocotools.coco import COCO
 ```
@@ -25,6 +29,13 @@ image_ids = coco.getImgIds()
 categories = coco.loadCats(coco.getCatIds())
 print(categories)
 >>> [{'supercategory': 'person', 'id': 1, 'name': 'person'}, {'supercategory': 'vehicle', 'id': 2, 'name': 'bicycle'}, ...]
+```
+
+**Get Image**
+
+```python
+img_info = coco.loadImgs(img_id)[0]
+img_name = img_info['file_name']
 ```
 
 **Get Annotation**

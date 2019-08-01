@@ -103,6 +103,17 @@ It just a container, holds submodules in a dictionary.
 
 - [PyTorch Docs: TORCH.OPTIM](https://pytorch.org/docs/master/optim.html#how-to-adjust-learning-rate)
 
+## 'torch.nn.Module'
+
+### `torch.nn.Module.childre()`
+
+### `torch.nn.Module.modules()`
+
+### Module.children() vs Module.modules()
+
+**_Ref:_** [PyTorch Forum: Module.children() vs Module.modules()
+](https://discuss.pytorch.org/t/module-children-vs-module-modules/4551)
+
 ---
 
 ## torchvision

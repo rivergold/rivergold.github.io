@@ -1,5 +1,16 @@
 # Functions
 
+## Create
+
+### Create an empty ndarray
+
+```python
+a = np.zeros((0, 4))
+>>> array([], shape=(0, 4), dtype=float64)
+```
+
+**_Ref:_** [yhenon/pytorch-retinanet](https://github.com/yhenon/pytorch-retinanet/blob/1135e18b835481b18fd0d4e1613c87afc2bc7d46/dataloader.py#L86)
+
 ## Index
 
 Ref [Numpy Doc: Indexing routines](https://docs.scipy.org/doc/numpy-1.15.0/reference/routines.indexing.html)
@@ -33,7 +44,7 @@ Return the indices of the elements that are non-zero.
 yy, xx = np.nonzero(img==255)
 ```
 
-***References:***
+**_References:_**
 
 - [Numpy Doc: numpy.nonzero](https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.nonzero.html)
 
@@ -53,7 +64,7 @@ Ref [stackoverflow: How to count the occurrence of certain item in an ndarray in
 <!--  -->
 <br>
 
-***
+---
 
 <br>
 <!--  -->
@@ -77,7 +88,7 @@ Ref [Numpy doc: numpy.squeeze](https://docs.scipy.org/doc/numpy/reference/genera
 <!--  -->
 <br>
 
-***
+---
 
 <br>
 <!--  -->
@@ -98,15 +109,30 @@ def microstructure(l=256):
     return mask > mask.mean()
 ```
 
-***References:***
+**_References:_**
 
 - [Numpy Doc: numpy.random.RandomState](https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.RandomState.html)
-- [denny的学习专栏: python数字图像处理（18）：高级形态学处理](https://www.cnblogs.com/denny402/p/5166258.html)
+- [denny 的学习专栏: python 数字图像处理（18）：高级形态学处理](https://www.cnblogs.com/denny402/p/5166258.html)
 
 <!--  -->
 <br>
 
-***
+---
 
 <br>
 <!--  -->
+
+# Problems & Solutions
+
+## [Be Careful] When use `ndarray.astype(np.uint8)`, the value range is [0, 255], it will be overflow!
+
+E.g
+
+```python
+a = np.array([256])
+print(a)
+>>> [256]
+a = a.astype(np.uint8)
+print(a)
+>>> [0]
+```

@@ -105,6 +105,24 @@ def set_random_seed(seed):
 
 ---
 
+<!--  -->
+
+## Convert str into class object
+
+```python
+a = 'pow'
+b = eval(a)(2, 3)
+print(b)
+>>> 8
+```
+
+**_Ref:_** [stackoverflow: Convert string to Python class object?](https://stackoverflow.com/a/1178089)
+
+<!--  -->
+<br>
+
+---
+
 <br>
 <!--  -->
 

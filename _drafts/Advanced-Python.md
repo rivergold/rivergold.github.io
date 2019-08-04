@@ -142,3 +142,29 @@ There are four type scope in Python:
 Python find variable in order of `L -> E -> G -> B`.
 
 Only `def`, `class` and `lambda` will change variable scope. Other like `if/elif/else`, `try/except`, `for/while`, `with` will not change variable scope.
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# :fallen_leaf:Anaconda
+
+## Set `ananconda/bin` in `~/.zshrc`
+
+Edit `~/.zshrc`:
+
+```shell
+export PATH=~/software/anaconda/bin:$PATH
+```
+
+When use a new env which is different from the base, it's better to create new env for Python. Then a new folder `${ANANCONDA}/envs/<env_name>/` will created.
+
+When install some Python package, it will also install some third party libs which will be added into `ananconda/bin`. Because of `export PATH=~/software/anaconda/bin:$PATH`, `anaconda/bin` will takes precedence over `usr/bin`. So when you want to install a package via Anaconda and it maybe conflict with system libs, you should create a new conda env.
+
+**E.g.**
+
+When you want to use Python with FFMPEG, `pip install opencv-python` does not with FFMPEG. `conda install opencv` has FFMPEG, and it will install it in `anaconda/bin`, but this FFMPEG not build with X264 (--disable-libx264). So you shuold create a new env for this to avoid influencing the system env.

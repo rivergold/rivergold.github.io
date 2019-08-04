@@ -28,10 +28,16 @@ ffmpeg -ss <start_time> -t <duration> -i <intput_video> -vcodec copy -acodec cop
 **Accurate method**
 
 ```shell
+ffmpeg -ss 32.920 -to 35.720  -i <input_video> -c:v libx264 <output_video_path>
+```
+
+**_Ref:_** [stackoverflow: How to cut at exact frames using ffmpeg?](https://superuser.com/a/459488)
+
+<!-- ```shell
 ffmpeg -y -i <input_video> -ss <start_time> -to <end_time> -codec copy output.mp4
 ```
 
-**_Ref:_** [简书: FFmpeg 精准时间切割视频文件](https://zhuanlan.zhihu.com/p/28008666)
+**_Ref:_** [简书: FFmpeg 精准时间切割视频文件](https://zhuanlan.zhihu.com/p/28008666) -->
 
 **_References:_**
 

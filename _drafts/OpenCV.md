@@ -170,7 +170,7 @@ Add two image.
 
 Ref [Learn OpenCV: Alpha Blending using OpenCV (C++ / Python)](https://www.learnopencv.com/alpha-blending-using-opencv-cpp-python/)
 
-# Image Processing
+# `imgproc` Image Processing
 
 ## Drawing Functions
 
@@ -195,6 +195,19 @@ Ref [Learn OpenCV: Alpha Blending using OpenCV (C++ / Python)](https://www.learn
 **_Ref:_** [stackoverflow: How to check if point is placed inside contour?](https://stackoverflow.com/questions/50670326/how-to-check-if-point-is-placed-inside-contour)
 
 **_References:_** [OpenCV-Python Tutorials: Contours : More Functions](https://docs.opencv.org/3.0-beta/doc/py_tutorials/py_imgproc/py_contours/py_contours_more_functions/py_contours_more_functions.html)
+
+## Video I/O `videoio`
+
+### `class cv::VideoCapture`
+
+#### How write `h264` video with OpenCV
+
+You need to meet the following requirements:
+
+- FFMPEG is build with `x264`, run `ffmpeg` to check.
+- Your OpenCV is build with FFMPEG
+
+**_Ref:_** [stackoverflow: OpenCV encoding to H264](https://stackoverflow.com/questions/48817441/opencv-encoding-to-h264)
 
 # OpenCV with other API
 

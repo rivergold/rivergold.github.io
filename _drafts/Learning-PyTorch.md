@@ -69,25 +69,30 @@ Returns a new tensor with a dimension of size one inserted at the specified posi
 
 ### Container
 
-**Module**
+#### Module
 
 Base class for all
 
-**Sequential**
+#### Sequential
 
 In `nn.Sequential`, the `nn.Module` stored inside are connected in a cascaded way. And `nn.Sequential` has its own `forward()` method.
 
-**ModuleList**
+**E.g.**
+
+```python
+# Method 1: build from list
+# Method 2: build from OrderedDict
+```
+
+#### ModuleList
 
 `nn.ModuleList` does not have a default `forward()` method, and `nn.Module` sotred inside are not connected. It just a container.
 
-**ModuleDict**
+#### ModuleDict
 
 It just a container, holds submodules in a dictionary.
 
----
-
-**:thumbsup:When to use them?**
+#### :thumbsup:When to use them?
 
 - Usually, using `nn.Module` and `nn.Sequential` is enough.
 

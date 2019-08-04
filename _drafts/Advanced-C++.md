@@ -234,6 +234,19 @@ Ref [stackoverflow: calculating execution time in c++](https://stackoverflow.com
 
 ---
 
+<!--  -->
+
+## PImpl
+
+**Pointer to implementation**
+
+**_Ref:_** [知乎: 如何写 C++代码，才能在封装成 Dll 的同时，自己程序包含的额外头文件不用加载进来？](https://www.zhihu.com/question/336227826/answer/757634065?hb_wx_block=0&utm_source=ZHShareTargetIDMore&utm_medium=social&utm_oi=37839882420224)
+
+<!--  -->
+<br>
+
+---
+
 <br>
 <!--  -->
 

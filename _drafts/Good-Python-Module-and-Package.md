@@ -27,3 +27,19 @@ A wrapper of FFMPEG.
 - [Github](https://github.com/Ch00k/ffmpy)
 
 - [Doc](https://ffmpy-zh.readthedocs.io/zh/latest/index.html)
+
+# pyltp
+
+pyltp 是 语言技术平台（Language Technology Platform, LTP） 的 Python 封装。
+
+# Mutagen
+
+Mutagen is a Python module to handle audio metadata.
+
+# MoviePy
+
+MoviePy is a Python module for video editing, which can be used for basic operations (like cuts, concatenations, title insertions), video compositing (a.k.a. non-linear editing), video processing, or to create advanced effects. It can read and write the most common video formats, including GIF.
+
+# Chardet
+
+Chardet: The Universal Character Encoding Detector

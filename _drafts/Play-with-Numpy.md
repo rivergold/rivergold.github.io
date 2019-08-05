@@ -1,8 +1,6 @@
-# Functions
+# Create
 
-## Create
-
-### Create an empty ndarray
+## Create an empty ndarray
 
 ```python
 a = np.zeros((0, 4))
@@ -11,11 +9,19 @@ a = np.zeros((0, 4))
 
 **_Ref:_** [yhenon/pytorch-retinanet](https://github.com/yhenon/pytorch-retinanet/blob/1135e18b835481b18fd0d4e1613c87afc2bc7d46/dataloader.py#L86)
 
-## Index
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# Index
 
 Ref [Numpy Doc: Indexing routines](https://docs.scipy.org/doc/numpy-1.15.0/reference/routines.indexing.html)
 
-### Condition indexing
+## Condition indexing -- `logic`
 
 Better use `np.logical_and`,
 
@@ -36,7 +42,22 @@ a[(a[:,:,0]>0) & a[:,:,1]>1].shape
 
 Ref [Python Data Science Handbook: Comparisons, Masks, and Boolean Logic](https://jakevdp.github.io/PythonDataScienceHandbook/02.06-boolean-arrays-and-masks.html#Boolean-operators)
 
-### `np.nonzero(a)`
+---
+
+## Condition indexing -- `np.argwhere`
+
+```python
+a = np.array([1,2,3,4])
+b = np.argwhere(a>2)
+>>> array([[2],
+          [3]])
+```
+
+**_Ref:_** [Numpy Doc: numpy.argmax](https://docs.scipy.org/doc/numpy/reference/generated/numpy.argmax.html)
+
+---
+
+## `np.nonzero(a)`
 
 Return the indices of the elements that are non-zero.
 
@@ -48,7 +69,9 @@ yy, xx = np.nonzero(img==255)
 
 - [Numpy Doc: numpy.nonzero](https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.nonzero.html)
 
-### `numpy.unique`
+---
+
+## `numpy.unique`
 
 Find the unique elements of an array.
 
@@ -69,9 +92,9 @@ Ref [stackoverflow: How to count the occurrence of certain item in an ndarray in
 <br>
 <!--  -->
 
-## Shape
+# Shape
 
-### `np.squeeze(a, axis=None)`
+## `np.squeeze(a, axis=None)`
 
 Remove single-dimensional entries from the shape of an array.
 
@@ -93,9 +116,9 @@ Ref [Numpy doc: numpy.squeeze](https://docs.scipy.org/doc/numpy/reference/genera
 <br>
 <!--  -->
 
-## Random
+# Random
 
-### `np.random.RandomState`
+## `np.random.RandomState`
 
 ```python
 def microstructure(l=256):
@@ -124,7 +147,7 @@ def microstructure(l=256):
 
 # Problems & Solutions
 
-## [Be Careful] When use `ndarray.astype(np.uint8)`, the value range is [0, 255], it will be overflow!
+## :triangular_flag_on_post:[Be Careful] When use `ndarray.astype(np.uint8)`, the value range is [0, 255], it will be overflow!
 
 E.g
 

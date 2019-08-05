@@ -60,16 +60,11 @@ However, `PROJECT_SOURCE_DIR` refers to the folder of the CMakeLists.txt contain
 
 list of directories path to tell cmake where to search `find_package()`, `find_program()`, `find_library(), find_file()`
 
-<!--  -->
-<br>
-
 ---
-
-<!--  -->
 
 ## `find_package()`
 
-### &clubs; Use pkg-config to find package
+### :triangular_flag_on_post: Use pkg-config to find package
 
 ```makefile
 set(CMAKE_PREFIX_PATH /usr/local/Cellar/glfw/3.2.1/lib/)
@@ -87,12 +82,7 @@ Ref [stackoverflow: What is the proper way to use `pkg-config` from `cmake`?](ht
 
 - [CMake doc: FindPkgConfig](https://cmake.org/cmake/help/v3.14/module/FindPkgConfig.html)
 
-<!--  -->
-<br>
-
 ---
-
-<!--  -->
 
 ## `add_subdirectory`
 
@@ -136,12 +126,7 @@ add_definitions(-DNDEBUG)
 
 Ref [stackoverflow: CMake: How to pass preprocessor macros](https://stackoverflow.com/a/9639605)
 
-<!--  -->
-<br>
-
 ---
-
-<!--  -->
 
 ## `file`
 
@@ -156,12 +141,7 @@ file(GLOB SRC_LIST "*.cpp")
 - [CMake Doc: file](https://cmake.org/cmake/help/v3.14/command/file.html)
 - [stackoverflow: Automatically add all files in a folder to a target using CMake?](https://stackoverflow.com/a/3201211/4636081)
 
-<!--  -->
-<br>
-
 ---
-
-<!--  -->
 
 ## `install`
 
@@ -171,12 +151,15 @@ file(GLOB SRC_LIST "*.cpp")
 
 - [维基教科书: CMake 入門/輸出位置與安裝](https://zh.wikibooks.org/zh/CMake_%E5%85%A5%E9%96%80/%E8%BC%B8%E5%87%BA%E4%BD%8D%E7%BD%AE%E8%88%87%E5%AE%89%E8%A3%9D)
 
-<!--  -->
-<br>
-
 ---
 
-<!--  -->
+## `include`
+
+- [CMake Doc `include`](https://cmake.org/cmake/help/v3.15/command/include.html?highlight=include)
+
+Load and run CMake code from a file or module.
+
+---
 
 ## `set`
 

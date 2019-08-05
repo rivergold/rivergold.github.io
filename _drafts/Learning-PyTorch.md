@@ -2,6 +2,16 @@
 
 # :fallen_leaf:Key Concept
 
+## Dynamic Graph
+
+**理解:** 每次 forward 会重新建立一个图，backward 会释放；每次的图可以不一样。
+
+**_References：_**
+
+- [知乎: 如何理解 Pytorch 中的动态图计算？](https://www.zhihu.com/question/270313536/answer/354322604)
+
+- [知乎-Gemfield 专栏： PyTorch 的动态图(上)](https://zhuanlan.zhihu.com/p/61765561)
+
 ## `torch.Tensor`
 
 A [`torch.Tensor`](https://pytorch.org/docs/stable/tensors.html#torch.Tensor.to) is a multi-dimensional matrix containing elements of a single data type.

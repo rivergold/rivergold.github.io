@@ -152,6 +152,22 @@ Ref [OpenCV doc: Image file reading and writing - ImreadModes](https://docs.open
 
 - [CSDN: opencv imread 读取 alpha 通道](https://blog.csdn.net/jazywoo123/article/details/17353069)
 
+---
+
+## `imwrite`
+
+### Save JPG image quality
+
+**_Ref:_** [stackoverflow: OpenCV Python save jpg specifying quality; gives SystemError](https://stackoverflow.com/questions/10410521/opencv-python-save-jpg-specifying-quality-gives-systemerror)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # Core Functionality
 
 ## Operations on arrays

@@ -14,6 +14,81 @@
 <br>
 <!--  -->
 
+# :fallen_leaf:Magic Methods
+
+## Blogs
+
+- [A Guide to Python's Magic Methods](https://rszalski.github.io/magicmethods/)
+
+---
+
+## Controlling Attribute Access
+
+**_Ref:_** [Controlling Attribute Access](https://rszalski.github.io/magicmethods/#access)
+
+### `__getattr__(self, name)`
+
+当访问 class 的 object 的属性时，如果没有找到对应的属性时（内部出现`AttributeError`），会调用该函数。
+
+**Use `__getattr__` to create dynamic compositions**: [GitHub Gist example](https://gist.github.com/whanderley/3823224)
+
+### `__setattr__(self, name, value)`
+
+#### Be careful with recursion called
+
+```python
+def __setattr__(self, name, value):
+    self.name = value
+    # since every time an attribute is assigned, __setattr__() is called, this
+    # is recursion.
+    # so this really means self.__setattr__('name', value). Since the method
+    # keeps calling itself, the recursion goes on forever causing a crash
+
+def __setattr__(self, name, value):
+    self.__dict__[name] = value # assigning to the dict of names in the class
+    # define custom behavior here
+```
+
+### `__delattr__(self, name)`
+
+### `__getattribute__(self, name)`
+
+当访问 class 的 object 的属性时，该函数会被无条件调用；如果没有找到对应的属性，会出内部的`AttributeError`，这时如果定义了`__getattr__`函数，则会执行。
+
+**该函数不建议定义与使用**
+
+**_References:_**
+
+- [简书: Python **getattribute** vs **getattr** 浅谈](https://www.jianshu.com/p/885d59db57fc)
+
+### `@property`, `@xxx.setter`
+
+**_Ref:_** [segmentfault: python 学习笔记-使用@property、setter、deleter](https://segmentfault.com/a/1190000007984750)
+
+### 问题： `@property`与`__getattr__`的区别是什么
+
+- `@property`的作用是提供给用户 get 和 set 类的 object 属性的方法，属于面向对象编程中的封装概念
+
+- `__getattr__`的作用是无妨访问 class 的 object 的属性时，进行的操作
+
+可以仔细看下[PyTorch 源码中的`nn.Module`](https://github.com/pytorch/pytorch/blob/c002ede1075d05ab82e1d50fcc5f94ec1e0d95a9/torch/nn/modules/module.py#L577)的实现
+
+---
+
+## Pickle Object
+
+### `__getstate__`
+
+### `__setstate__`
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # :fallen_leaf:Class
 
 ## metaclass
@@ -81,12 +156,7 @@ Can use `[]` or `get` to get attribute in the class.
 
 **Good example: [Github open-mmlab: mmcv/mmcv/utils/config.py](https://github.com/open-mmlab/mmcv/blob/9097957434da1308739c03aff53ac147f1500c56/mmcv/utils/config.py#L142)**
 
-<!--  -->
-<br>
-
 ---
-
-<!--  -->
 
 ## Set random seed
 
@@ -100,12 +170,7 @@ def set_random_seed(seed):
 
 **_Ref:_** [Github open-mmlab/mmdetection: mmdet/apis/env.py](https://github.com/open-mmlab/mmdetection/blob/58c415a069ceab37bab76c47da72824f4181cff6/mmdet/apis/env.py#L53)
 
-<!--  -->
-<br>
-
 ---
-
-<!--  -->
 
 ## Convert str into class object
 
@@ -117,6 +182,41 @@ print(b)
 ```
 
 **_Ref:_** [stackoverflow: Convert string to Python class object?](https://stackoverflow.com/a/1178089)
+
+---
+
+## Compile `.py` into `.so`
+
+Rivergold write another [memo]() for compile Python script into dynamic libs.
+
+### Compiler Optimization
+
+#### Loss of precision
+
+E.g.
+
+```python
+a = 5
+b = 3
+c = a / b
+```
+
+After compiler optimization, c will be `int`, this may cause bug!!!
+
+Better change your code into:
+
+```python
+a = 5.
+b = 3.
+c = a / b
+# or
+def fun(a:float, b:float) -> float:
+    return a / b
+```
+
+**_References:_**
+
+- [知乎: Python 3 新特性：类型注解](https://zhuanlan.zhihu.com/p/37239021)
 
 <!--  -->
 <br>

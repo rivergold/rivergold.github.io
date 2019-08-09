@@ -65,3 +65,7 @@ ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_
 
 - [腾讯云: 如何用 ffmpeg 取帧数？](https://cloud.tencent.com/developer/ask/103796)
 - [Quora: How do I calculate the number of all frames in a video, using FFmpeg?](https://qr.ae/TWvXzT)
+
+# Build FFMPEG on CentOS
+
+**_Ref:_** [FFMPEG: Compile FFmpeg on CentOS](https://trac.ffmpeg.org/wiki/CompilationGuide/Centos)

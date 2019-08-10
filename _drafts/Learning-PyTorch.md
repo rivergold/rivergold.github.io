@@ -478,6 +478,10 @@ Debug PyTorch code using PySnooper
 
 - [机器学习算法与 Python 学习: PyTorch 代码调试利器: 自动 print 每行代码的 Tensor 信息](https://mp.weixin.qq.com/s?__biz=MzIxODM4MjA5MA==&mid=2247489750&idx=3&sn=6504eec0570cc30291c21f4adec2ac72&chksm=97ea32b3a09dbba51a7736e3ac0a349ffc5d9b4f07089cbb6b2d1fd0e5b9e7890d8ce0a4a7b0&mpshare=1&scene=1&srcid=#rd)
 
+## NVIDIA apex
+
+- [Github](https://github.com/NVIDIA/apex)
+
 <!--  -->
 <br>
 

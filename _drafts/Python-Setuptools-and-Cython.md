@@ -208,6 +208,35 @@ If you are Python background, and want to gain the ability to do efficient nativ
 
 - `.pyx` can import C++ file
 
+---
+
+## Compiler will do optimization when compile `.py` into `.so`
+
+E.g.
+
+```python
+a = 5
+b = 3
+c = a / b
+```
+
+After compiler optimization, c will be `int`, this may cause bug!!!
+
+Better change your code into:
+
+```python
+a = 5.
+b = 3.
+c = a / b
+# or
+def fun(a:float, b:float) -> float:
+    return a / b
+```
+
+**_References:_**
+
+- [知乎: Python 3 新特性：类型注解](https://zhuanlan.zhihu.com/p/37239021)
+
 <!--  -->
 <br>
 

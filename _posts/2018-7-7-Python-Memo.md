@@ -269,6 +269,16 @@ a[(a[:,:,0]>0) & (a[:,:,1]>0)].shape
 
   - [Python3.6 doc str.translate](https://docs.python.org/3/library/stdtypes.html?highlight=maketrans#str.translate)
 
+### `r` before string
+
+`r"""xxx"""` represents this is a **raw string**, which tells compiler do not do transferred meaning for this string.
+
+**理解:** `r`表示该字符串是 raw string，不需要进行转义。
+
+**_Ref:_** [CSND: Python 字符串前面加'r'](https://blog.csdn.net/orzlzro/article/details/6645909)
+
+Some function or class docstring will use raw string, E.g. [PyTorch source code](https://github.com/pytorch/pytorch/blob/c002ede1075d05ab82e1d50fcc5f94ec1e0d95a9/torch/nn/modules/module.py#L33).
+
 <!--  -->
 <br>
 

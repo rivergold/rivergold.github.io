@@ -9,12 +9,7 @@ This specifier specifies that a constructor doesn't allow `implicit conversions`
 
 - [cppreference: explicit specifier](http://en.cppreference.com/w/cpp/language/explicit)
 
-<!--  -->
-<br>
-
 ---
-
-<!--  -->
 
 ## `static`
 
@@ -24,6 +19,12 @@ This specifier specifies that a constructor doesn't allow `implicit conversions`
 
 - &Delta; [CSDN: C/C++---static 函数，static 成员函数，static 变量，static 成员变量 再来理一理](https://blog.csdn.net/FreeApe/article/details/50979425)
 - [CSDN: C++中 Static 作用和使用方法](https://blog.csdn.net/artechtor/article/details/2312766)
+
+---
+
+## `final`
+
+- [cppreference: final 说明符 (C++11 起)](https://zh.cppreference.com/w/cpp/language/final)
 
 <!--  -->
 <br>

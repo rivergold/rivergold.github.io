@@ -1,5 +1,17 @@
 # Common Command
 
+## Convert video type
+
+### Convert into H264
+
+```shell
+ffmpeg -i <input video> -c:v libx264 -c:a copy <output.mp4>
+```
+
+**_Ref:_** [stackoverflow: How to convert .ts file into a mainstream format losslessly?](https://askubuntu.com/questions/716424/how-to-convert-ts-file-into-a-mainstream-format-losslessly)
+
+---
+
 ## Extract 1 frame from a vide
 
 ```shell
@@ -8,12 +20,7 @@ ffmpeg -ss <time> -i <input_video> -vframes 1 -q:v 2 output.jpg
 
 **_Ref:_** [stackoverflow: How to extract 1 screenshot for a video with ffmpeg at a given time?](https://stackoverflow.com/questions/27568254/how-to-extract-1-screenshot-for-a-video-with-ffmpeg-at-a-given-time)
 
-<!--  -->
-<br>
-
 ---
-
-<!--  -->
 
 ## Split video
 
@@ -43,12 +50,7 @@ ffmpeg -y -i <input_video> -ss <start_time> -to <end_time> -codec copy output.mp
 
 - [stackoverflow: Cut part from video file from start position to end position with FFmpeg [duplicate]](https://superuser.com/a/377407)
 
-<!--  -->
-<br>
-
 ---
-
-<!--  -->
 
 ## Get total frame number of a video
 
@@ -63,3 +65,7 @@ ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_
 
 - [腾讯云: 如何用 ffmpeg 取帧数？](https://cloud.tencent.com/developer/ask/103796)
 - [Quora: How do I calculate the number of all frames in a video, using FFmpeg?](https://qr.ae/TWvXzT)
+
+# Build FFMPEG on CentOS
+
+**_Ref:_** [FFMPEG: Compile FFmpeg on CentOS](https://trac.ffmpeg.org/wiki/CompilationGuide/Centos)

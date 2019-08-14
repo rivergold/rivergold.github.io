@@ -68,4 +68,6 @@ ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_
 
 # Build FFMPEG on CentOS
 
+Download source code from [FFmpeg.org](https://ffmpeg.org/download.html)
+
 **_Ref:_** [FFMPEG: Compile FFmpeg on CentOS](https://trac.ffmpeg.org/wiki/CompilationGuide/Centos)

@@ -1,6 +1,6 @@
 # PyTorch
 
-## 学习过程
+# 学习过程
 
 1. Python part 的实现
 2. C++ part 的实现
@@ -8,7 +8,7 @@
 
 ---
 
-## Blogs
+# Blogs
 
 ### Inside 245-5D: PyTorch internals
 
@@ -21,6 +21,13 @@
 ### 知乎-Gemfield 专栏
 
 - [详解 Pytorch 中的网络构造](https://zhuanlan.zhihu.com/p/53927068)
+
+# 一些散碎的理解
+
+## stride
+
+stride = 当前的 index - 上一个的 index
+new_index = index + stride
 
 ---
 

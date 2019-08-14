@@ -343,3 +343,33 @@ execute pathogen#infect()
   **_References:_**
 
   - [Github Valloric/YouCompleteMe: CMake Error at ycm/CMakeLists file DOWNLOAD HASH mismatch #1711](https://github.com/Valloric/YouCompleteMe/issues/1711#issuecomment-329520570)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# Problems & Solutions
+
+## After `yum update`, CentOS cannot show Chinese character, all Chinese character are question mark, and occur `Failed to set locale, defaulting to C` error when using `yum`
+
+**Solution**
+
+```shell
+localedef -v -c -i en_US -f UTF-8 en_US.UTF-8
+```
+
+**_Ref:_** [stackoverflow: locale-gen command in centos6](https://unix.stackexchange.com/a/140303)
+
+**_References:_**
+
+- [CSDN: CentOS 下解决 ssh 登录 locale 警告](https://blog.csdn.net/Rainloving/article/details/69568618)
+
+- [博客园: CentOS 下通过 locale 来设置字符集](https://www.cnblogs.com/pengdonglin137/p/3532615.html)
+
+On Ubuntu, the command is `locale-gen en_US.UTF-8`
+
+**_Ref:_** [StackExchange-ask ubuntu: Ubuntu display Chinese Characters - Encoding Issue](https://askubuntu.com/questions/1070568/ubuntu-display-chinese-characters-encoding-issue)

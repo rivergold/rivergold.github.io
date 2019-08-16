@@ -50,13 +50,34 @@ echo a | sudo -S apt search xxx
 
 - [linux shell 管道命令(pipe)使用及与 shell 重定向区别](https://www.cnblogs.com/chengmo/archive/2010/10/21/1856577.html)
 
-## shell Redirect
+## :triangular_flag_on_post:shell Redirect
 
 **_References:_**
 
 - [CSDN: Linux 中>、>>](https://blog.csdn.net/hellozpc/article/details/46721811)
 
 - [Linux 中国: 理解 Bash 中的尖括号](https://zhuanlan.zhihu.com/p/56210435)
+
+- 0: stdin 标准输入
+- 1: stdout 标准输出
+- 2: stderr 标准错误
+
+:thumbsup: `ls 2>&1 > f.out`: 将 stderr 重定向到标准输出，再重定向到文件中
+
+**_Ref:_** [CSDN: make 2>&1 | tee log.txt 命令解析](https://blog.csdn.net/Dr_Unknown/article/details/76837708)
+
+---
+
+## `tee`
+
+E.g.
+
+```shell
+cd pytorch
+python setup.py install 2>&1 | tee build.log
+```
+
+**_Ref:_** [Github pytorch/pytorch: Makefile:140: recipe for target 'all' failed #17514](https://github.com/pytorch/pytorch/issues/17514#issuecomment-467995533)
 
 <!--  -->
 <br>

@@ -1,20 +1,30 @@
 # PyTorch
 
+**PyTorch is an optimized tensor library for deep learning using GPUs and CPUs.**
+
 # :fallen_leaf:Key Concept
 
 ## Dynamic Graph
+
+**Since PyTorch is a dynamic graph framework, we create a new graph on the fly at every iteration of a training loop.**
 
 **理解:** 每次 forward 会重新建立一个图，backward 会释放；每次的图可以不一样。
 
 **_References：_**
 
+- [PyTorch Blogs: PyTorch, a year in....](https://pytorch.org/blog/a-year-in/#performance)
+
 - [知乎: 如何理解 Pytorch 中的动态图计算？](https://www.zhihu.com/question/270313536/answer/354322604)
 
 - [知乎-Gemfield 专栏： PyTorch 的动态图(上)](https://zhuanlan.zhihu.com/p/61765561)
 
+---
+
 ## `torch.Tensor`
 
 A [`torch.Tensor`](https://pytorch.org/docs/stable/tensors.html#torch.Tensor.to) is a multi-dimensional matrix containing elements of a single data type.
+
+---
 
 ## `loss.backward()`
 
@@ -24,6 +34,8 @@ Computes `dloss/dx` for every parameter `x` which has `requires_grad=True`.
 
 - [PyTorch: What does the backward() function do?](https://discuss.pytorch.org/t/what-does-the-backward-function-do/9944)
 
+---
+
 ## `optimizer.step()`
 
 Update parameters based on the _current_ gradient (stored in `.grad` attribute of the parameter) and the update rule.
@@ -31,6 +43,56 @@ Update parameters based on the _current_ gradient (stored in `.grad` attribute o
 **_References:_**
 
 - [PyTorch: How are optimizer.step() and loss.backward() related?](https://discuss.pytorch.org/t/how-are-optimizer-step-and-loss-backward-related/7350/2)
+
+---
+
+## Tensor Comprehensions (TC)
+
+**Tensor Comprehensions (TC) is a tool that lowers the barrier for writing high-performance code. It generates GPU code from a simple high-level language and autotunes the code for specific input sizes.**
+
+**_References:_**
+
+- [PyTorch Blog: Tensor Comprehensions in PyTorch](https://pytorch.org/blog/tensor-comprehensions/)
+
+- [机器之心: 如何通过 PyTorch 上手 Tensor Comprehensions？](https://www.jiqizhixin.com/articles/2018-03-12-5)
+
+- [知乎: 如何看待 Tensor Comprehensions？与 TVM 有何异同？](https://www.zhihu.com/question/267167829)
+
+---
+
+## `torch.jit`
+
+**A just-in-time (JIT) compiler that at runtime takes your PyTorch models and rewrites them to run at production-efficiency.**
+
+**Uses the torch.jit compiler to export your model to a Python-free environment, and improving its performance.**
+
+- Tracing native python code
+
+- Compiling a subset of the python language annotated into a python-free intermediate representation
+
+### Tracing Mode
+
+`torch.jit.trace`, is a function that records all the native PyTorch operations performed in a code region, along with the data dependencies between them. `jit` only record native PyTorch operators.
+
+### Script Mode
+
+With an `@script` decorator, this annotation will transform your python function directly into high-performance C++ runtime.
+
+**_References:_**
+
+- [PyTorch Blog: The road to 1.0: production ready PyTorch](https://pytorch.org/blog/the-road-to-1_0/#production--pain-for-researchers)
+
+---
+
+## TorchScript
+
+**Based on JIT**
+
+**TorchScript is a way to create serializable and optimizable models from PyTorch code. Any TorchScript program can be saved from a Python process and loaded in a process where there is no Python dependency.**
+
+**_References:_**
+
+- [PyTorch: TorchScript](https://pytorch.org/docs/stable/jit.html#creating-torchscript-code)
 
 <!--  -->
 <br>

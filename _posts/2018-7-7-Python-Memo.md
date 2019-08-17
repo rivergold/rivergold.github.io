@@ -927,7 +927,75 @@ img = cv2.imread(p.as_posix())
 
 ## subprocess
 
-Run bash command in Python.
+### Basic Use
+
+```python
+import subprocess
+cmd = <your command> # E.g. 'ls'
+subprocess.run(cmd, shell=True)
+```
+
+- `shell=True`: If your `command` is written as `'ls -l'`, you need to set `shell=True`; if `command` is written as `['ls', '-l']`, you don't need to set `shell=False`.
+
+### :triangular_flag_on_post: Synchronous and asynchronous run
+
+`subprocess.run()` will wait for command to complete, so it is synchronous.
+
+**But**, if you write like this
+
+```python
+cmd = <your command>
+p = subprocess.Popen(cmd, shell=True)
+```
+
+This is asynchronous !
+
+E.g.
+
+```python
+cmd = 'echo subprocess'
+subprocess.run(cmd, shell=True)
+print('ok)
+>>> subprocess
+>>> ok
+# If you want to wait
+# p.wait()
+```
+
+```python
+cmd = 'echo subprocess'
+p = subprocess.Popen(cmd, shell=True)
+print('ok)
+>>> ok
+>>> subprocess
+```
+
+**_References:_**
+
+- [博客园: Python 多进程（1）——subprocess 与 Popen()](https://www.cnblogs.com/security-darren/p/4733368.html)
+
+- [stackoverflow: Why is subprocess.Popen not waiting until the child process terminates?](https://stackoverflow.com/questions/1541273/why-is-subprocess-popen-not-waiting-until-the-child-process-terminates?rq=1)
+
+---
+
+### Run bash command and get output
+
+```python
+import subprocess
+cmd = <your command> # E.g. 'ls'
+retval = subprocess.check_out(cmd, shell=True)
+print(retval.decode('utf-8))
+```
+
+**_Reference:_**
+
+- [python3-cookbook: 13.6 执行外部命令并获取它的输出](https://python3-cookbook.readthedocs.io/zh_CN/latest/c13/p06_executing_external_command_and_get_its_output.html)
+
+- [stackoverflow: Store output of subprocess.Popen call in a string](https://stackoverflow.com/questions/2502833/store-output-of-subprocess-popen-call-in-a-string)
+
+---
+
+<!-- Run bash command in Python.
 
 ```python
 import subprocess
@@ -935,8 +1003,6 @@ p = subprocess.Popen(<command>, shell=True, stdout=subprocess.PIPE)
 info, error = p.communicate()
 info = info.decode('utf-8')
 ```
-
-- `shell=True`: If your `command` is written as `'ls -l'`, you need to set `shell=True`; if `command` is written as `['ls', '-l']`, you don't need to set `shell=False`.
 
 - `stdout=subprocess.PIPE`: Use `PIPE` to get stdout.
 
@@ -955,7 +1021,7 @@ p.communicate(input='yes\n'.encode())
 
 **_References:_**
 
-- [stackoverflow: Python - How do I pass a string into subprocess.Popen (using the stdin argument)?](https://stackoverflow.com/a/165662/4636081)
+- [stackoverflow: Python - How do I pass a string into subprocess.Popen (using the stdin argument)?](https://stackoverflow.com/a/165662/4636081) -->
 
 ## concurrent
 

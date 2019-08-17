@@ -66,6 +66,30 @@ ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_
 - [腾讯云: 如何用 ffmpeg 取帧数？](https://cloud.tencent.com/developer/ask/103796)
 - [Quora: How do I calculate the number of all frames in a video, using FFmpeg?](https://qr.ae/TWvXzT)
 
+---
+
+## Get Video Information
+
+```shell
+ffprobe -print_format json <video>
+```
+
+**_References:_**
+
+- [Github Gist: jaivikram/getVideoDetails.py](https://gist.github.com/jaivikram/4690569)
+
+- [Github Gist: oldo/video-metada-finder.py](https://gist.github.com/oldo/dc7ee7f28851922cca09)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # Build FFMPEG on CentOS
+
+Download source code from [FFmpeg.org](https://ffmpeg.org/download.html)
 
 **_Ref:_** [FFMPEG: Compile FFmpeg on CentOS](https://trac.ffmpeg.org/wiki/CompilationGuide/Centos)

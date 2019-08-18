@@ -64,6 +64,10 @@ Paper note-2 explain this.
 
 - [知乎: faster rcnn 中 rpn 的 anchor，sliding windows，proposals？](https://www.zhihu.com/question/42205480/answer/525212289)
 
+- [物体检测中的 anchor](https://mingming97.github.io/2019/03/26/anchor%20in%20object%20detection/)
+
+- [Github rbgirshick/py-faster-rcnn: The problems about anchors ? #112](https://github.com/rbgirshick/py-faster-rcnn/issues/112)
+
 <!--  -->
 <br>
 

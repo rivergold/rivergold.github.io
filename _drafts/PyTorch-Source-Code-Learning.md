@@ -38,7 +38,19 @@
 stride = 当前的 index - 上一个的 index
 new_index = index + stride
 
----
+- Device dispatch
+
+- Type dispatch
+
+# Caffe2
+
+Caffe2 is static graph, like TensorFlow.
+
+- Blob
+- workspace: like `tf.Session`
+- net: Graph
+
+**_Ref:_** [caffe2 Doc: Caffe2 Concepts](https://caffe2.ai/docs/intro-tutorial.html)
 
 ## PyTorch Internals
 

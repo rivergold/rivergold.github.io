@@ -135,6 +135,28 @@ This will solve the `IndexError: invalid index of a 0-dim tensor. Use tensor.ite
 
 Returns a new tensor with a dimension of size one inserted at the specified position.
 
+### `torch.Tensor.is_contiguous()`
+
+:triangular_flag_on_post:**What ops make tensor uncontiguous?**
+
+- transpose or permute
+- some Select/Slice operations, especially those with stride>1, i.e. `tensor[::2]`
+- expand
+
+**_Ref:_** [PyTorch Forum: What ops make a tensor non contiguous?](https://discuss.pytorch.org/t/what-ops-make-a-tensor-non-contiguous/3676/2)
+
+### `torch.Tensor.size()`
+
+Get size of tensor.
+
+```python
+x = torch.randon(3, 4, 5)
+x.size()
+>>> torch.Size([3, 4, 5])
+x.size(0)
+>>> 3
+```
+
 ---
 
 ## torch.nn

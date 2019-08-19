@@ -1,6 +1,36 @@
 # Cmake
 
-# Common Variable
+## Books
+
+### An Introduction to Modern CMake
+
+- [GitBook](http://cliutils.gitlab.io/modern-cmake/)
+- [中文版](https://xiazuomo.gitbook.io/modern-cmake-chinese/)
+
+# Variable
+
+```shell
+set(MY_VARIABLE "value")
+```
+
+The names of variables are usually all caps.
+
+## Cache Variable
+
+```shell
+set(MY_CACHE_VARIABLE "VALUE" CACHE STRING "Description")
+```
+
+## Environment Variables
+
+```shell
+# set
+set(ENV{variable_name} value)
+# get
+$ENV{variable_name}
+```
+
+## Common Variable
 
 - **`PROJECT_SOURCE_DIR`**: Top level source directory for the current project.
 
@@ -45,6 +75,15 @@ However, `PROJECT_SOURCE_DIR` refers to the folder of the CMakeLists.txt contain
 **理解:** `PROJECT_`是会基于`prject()`的，而`CMAKE_`不会。
 
 **_Ref:_** [stackoverflow: Are CMAKE_SOURCE_DIR and PROJECT_SOURCE_DIR the same in CMake?](https://stackoverflow.com/a/32030551/4636081)
+
+## Properties
+
+THe other way for CMake to store information.
+
+```shell
+set_property(TARGET TargetName
+             PROPERTY CXX_STANDARD 11)
+```
 
 <!--  -->
 <br>
@@ -162,6 +201,31 @@ Load and run CMake code from a file or module.
 ---
 
 ## `set`
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# CMake Project Structure
+
+```shell
+- Project
+    - .gitignore
+```
+
+**`cmake` folder**
+
+`cmake` folder: has all of your helper modules. This is where your `Find*.cmake` files go.
+
+To add this folder to your CMake path:
+
+```shell
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
+```
 
 <!--  -->
 <br>
@@ -365,3 +429,11 @@ target_link_libraries(Test libopencv_highgui.so libopencv_core.so libopencv_imgp
 ## `undefined reference to xxx`
 
 It is a link error. You need to use `TARGET_LINK_LIBRARIES` in cmakelist to add `.so` to your target.
+
+# Concept
+
+## `include(ExternalProject)`
+
+**_References:_**
+
+- [Blog: cmake 和其他构建工具协同使用](http://aicdg.com/oldblog/c++/2017/02/04/cmake-externalproject.html)

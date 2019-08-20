@@ -42,6 +42,8 @@ $ENV{variable_name}
 
 - **`CMAKE_CURRENT_SOURCE_DIR`**: The path to the source directory currently being processed.
 
+- **`CMAKE_BINARY_DIR`**: The path to the top level of the build tree.
+
 - **`get_filename_component(PARENT_DIR ${MYPROJECT_DIR} DIRECTORY)`**: Get parent path
 
   **_Ref:_** [stackoverflow: CMake : parent directory ?](https://stackoverflow.com/questions/7035734/cmake-parent-directory)
@@ -84,6 +86,28 @@ THe other way for CMake to store information.
 set_property(TARGET TargetName
              PROPERTY CXX_STANDARD 11)
 ```
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# Scope
+
+## `add_subdirectory` scope
+
+As mentioned in the documentation of the [set](https://cmake.org/cmake/help/latest/command/set.html) command, each directory added with `add_subdirectory` or each function declared with `function` creates a new scope.
+
+The new child scope inherits all variable definitions from its parent scope. Variable assignments in the new child scope with the set command will only be visible in the child scope unless the `PARENT_SCOPE` option is used.
+
+`add_subdirectory`的 scope 会继承父 scope。
+
+**_References:_**
+
+- [stackoverflow: cmake variable scope, add_subdirectory](https://stackoverflow.com/a/6891527/4636081)
 
 <!--  -->
 <br>
@@ -201,6 +225,60 @@ Load and run CMake code from a file or module.
 ---
 
 ## `set`
+
+---
+
+## `include_directories`
+
+All targets in this CMakeList, as well as those in all subdirectories added after the point of its call, will have the path `include_path` added to their include path.
+
+## `target_include_directories`
+
+has target scope—it adds `include_path` to the include path for `target`
+
+**_Ref:_** [stackoverflow: What is the difference between include_directories and target_include_directories in CMake?](https://stackoverflow.com/a/31969632/4636081)
+
+---
+
+## `target_link_libraries`
+
+When someone want to compile other target depend on this target, `PUBLIC`, `PRIVATE` and `INTERFACE` will have different influence.
+
+E.g.
+
+```shell
+add_library(archive archive.cpp)
+target_compile_definitions(archive INTERFACE USING_ARCHIVE_LIB)
+
+add_library(serialization serialization.cpp)
+target_compile_definitions(serialization INTERFACE USING_SERIALIZATION_LIB)
+
+add_library(archiveExtras extras.cpp)
+target_link_libraries(archiveExtras PUBLIC archive)
+target_link_libraries(archiveExtras PRIVATE serialization)
+# archiveExtras is compiled with -DUSING_ARCHIVE_LIB
+# and -DUSING_SERIALIZATION_LIB
+
+add_executable(consumer consumer.cpp)
+# consumer is compiled with -DUSING_ARCHIVE_LIB
+target_link_libraries(consumer archiveExtras)
+```
+
+Because `archive` is a `PUBLIC` dependency of `archiveExtras`, the usage requirements of it are propagated to `consumer` too. Because `serialization` is a PRIVATE dependency of `archiveExtras`, the usage requirements of it are not propagated to `consumer`.
+
+**:triangular_flag_on_post:Rule of Thumb:**
+
+When and which to use:
+
+- `PUBLIC`: Your target source files and header files include the link library's header
+- `PRIVATE`: Only your target source files but not header files include the link library's header
+- `INTERFACE`: Only your target header files but not source files include the link library;s header
+
+**_References:_**
+
+- [stackoverflow: CMake target_link_libraries Interface Dependencies](https://stackoverflow.com/questions/26037954/cmake-target-link-libraries-interface-dependencies)
+
+- [CMake Doc: cmake-buildsystem(7) - Transitive Usage Requirements](https://cmake.org/cmake/help/v3.15/manual/cmake-buildsystem.7.html#transitive-usage-requirements)
 
 <!--  -->
 <br>
@@ -437,3 +515,13 @@ It is a link error. You need to use `TARGET_LINK_LIBRARIES` in cmakelist to add 
 **_References:_**
 
 - [Blog: cmake 和其他构建工具协同使用](http://aicdg.com/oldblog/c++/2017/02/04/cmake-externalproject.html)
+
+# tmp
+
+## `add_custom_command` and `add_custom_target`
+
+**_References:_**
+
+- [GitHub Gist: socantre/CMakeLists.txt](https://gist.github.com/socantre/7ee63133a0a3a08f3990)
+
+- [GitHub Gist: baiwfg2/CMakeLists.txt](https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609)

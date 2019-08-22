@@ -43,3 +43,13 @@ MoviePy is a Python module for video editing, which can be used for basic operat
 # Chardet
 
 Chardet: The Universal Character Encoding Detector
+
+# lxml
+
+- [Home](https://lxml.de/compatibility.html)
+
+## Write xml with order
+
+**_References:_**
+
+- [stackoverflow: Can ElementTree be told to preserve the order of attributes?](https://stackoverflow.com/a/48407639/4636081)

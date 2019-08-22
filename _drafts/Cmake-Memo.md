@@ -280,6 +280,50 @@ When and which to use:
 
 - [CMake Doc: cmake-buildsystem(7) - Transitive Usage Requirements](https://cmake.org/cmake/help/v3.15/manual/cmake-buildsystem.7.html#transitive-usage-requirements)
 
+---
+
+## `add_custom_command` and `add_custom_target`
+
+When you want to run third-party command in CMake, you may need `add_custom_command` and `add_custom_target`.
+
+For example, in PyTorch source `cmake/Codegen.cmake`, it use Python to run `aten/src/ATen/gen.py` to generate some `ATen` source `.cpp` and `.h` from template to achieve generic programming.
+
+:thumbsup:[Here](https://gist.github.com/socantre/7ee63133a0a3a08f3990) is a common use example of `add_custom_command` and `add_custom_target`:
+
+```shell
+set(LIBFOO_TAR_HEADERS
+  "${CMAKE_CURRENT_BINARY_DIR}/include/foo/foo.h"
+  "${CMAKE_CURRENT_BINARY_DIR}/include/foo/foo_utils.h"
+)
+
+add_custom_command(OUTPUT ${LIBFOO_TAR_HEADERS}
+  COMMAND ${CMAKE_COMMAND} -E tar xzf "${CMAKE_CURRENT_SOURCE_DIR}/libfoo/foo.tar"
+  COMMAND ${CMAKE_COMMAND} -E touch ${LIBFOO_TAR_HEADERS}
+  WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/include/foo"
+  DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/libfoo/foo.tar"
+  COMMENT "Unpacking foo.tar"
+  VERBATIM
+)
+
+add_custom_target(libfoo_untar DEPENDS ${LIBFOO_TAR_HEADERS})
+
+add_library(foo INTERFACE)
+target_include_directories(foo INTERFACE "${CMAKE_CURRENT_BINARY_DIR}/include/foo")
+target_link_libraries(foo INTERFACE ${FOO_LIBRARIES})
+```
+
+**核心理解:** 由于 cmake 的构建系统需要以 target 为基础，但是执行第三方命名时（例如，创建新的文件），该过程没有形成 target。因此为了将此 command 纳入到 cmake 的构建系统中，首先，采用`add_custom_command`执行该 command，并以 OUTPUT 作为输出的表达，**这仅仅是一个对输出的表达！**；然后，通过`add_custom_target`将之前的输出表达纳入到 cmake 的 target 构建体系中。
+
+针对于这个问题， [Sam Thursfield's Blog: CMake: dependencies between targets and files and custom commands](https://samthursfield.wordpress.com/2015/11/21/cmake-dependencies-between-targets-and-files-and-custom-commands/)写的很好。
+
+**_References:_**
+
+- :thumbsup:[GitHub Gist: socantre/CMakeLists.txt](https://gist.github.com/socantre/7ee63133a0a3a08f3990)
+
+- :thumbsup:[Sam Thursfield's Blog: CMake: dependencies between targets and files and custom commands](https://samthursfield.wordpress.com/2015/11/21/cmake-dependencies-between-targets-and-files-and-custom-commands/)
+
+- [GitHub Gist: baiwfg2/CMakeLists.txt](https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609): references in it is very good.
+
 <!--  -->
 <br>
 
@@ -515,13 +559,3 @@ It is a link error. You need to use `TARGET_LINK_LIBRARIES` in cmakelist to add 
 **_References:_**
 
 - [Blog: cmake 和其他构建工具协同使用](http://aicdg.com/oldblog/c++/2017/02/04/cmake-externalproject.html)
-
-# tmp
-
-## `add_custom_command` and `add_custom_target`
-
-**_References:_**
-
-- [GitHub Gist: socantre/CMakeLists.txt](https://gist.github.com/socantre/7ee63133a0a3a08f3990)
-
-- [GitHub Gist: baiwfg2/CMakeLists.txt](https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609)

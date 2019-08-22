@@ -168,6 +168,31 @@ Copy initialization ordinarily use the copy constructor. But if a class has a mo
 <br>
 <!--  -->
 
+# Class
+
+## `friend`
+
+**友元声明出现于类体内，并向一个函数或另一个类授予对包含友元声明的类的私有及受保护成员的访问权**
+
+**_Ref:_** [cppreferences.com: 友元声明](https://zh.cppreference.com/w/cpp/language/friend)
+
+简答的理解 e.g
+
+```c++
+class A{
+    int data;
+    friend B:B(char); // B是A的友元，B可以访问A的private和protected的成员
+}
+```
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # STL
 
 ## vector
@@ -271,3 +296,19 @@ Good format print for C++.
 ---
 
 <!--  -->
+
+# 临时记录
+
+## `mutable`
+
+**_References:_**
+
+- [Blog: C++ 中的 mutable 关键字](https://liam.page/2017/05/25/the-mutable-keyword-in-Cxx/)
+
+## `std::atomic`
+
+> C++中对共享数据的存取在并发条件下可能会引起 data race 的 undifined 行为，需要限制并发程序以某种特定的顺序执行，有两种方式：使用 mutex 保护共享数据，原子操作：针对原子类型操作要不一步完成，要么不做，不可能出现操作一半被切换 CPU，这样防止由于多线程指令交叉执行带来的可能错误。非原子操作下，某个线程可能看见的是一个其它线程操作未完成的数据
+
+**_References:_**
+
+- [CSDN: C++并发实战 16: std::atomic 原子操作](https://blog.csdn.net/liuxuejiang158blog/article/details/17413149)

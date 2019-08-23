@@ -312,3 +312,87 @@ Good format print for C++.
 **_References:_**
 
 - [CSDN: C++并发实战 16: std::atomic 原子操作](https://blog.csdn.net/liuxuejiang158blog/article/details/17413149)
+
+## `#pragma`
+
+**_References:_**
+
+- [CSDN: c++中#pragma 用法详解](https://blog.csdn.net/piaoxuezhong/article/details/58586014)
+
+## `constexpr`
+
+**C++11**
+
+**_References:_**
+
+- [cppreference.com: constexpr 说明符(C++11 起)](https://zh.cppreference.com/w/cpp/language/constexpr)
+
+- [知乎: C++ const 和 constexpr 的区别？](https://www.zhihu.com/question/35614219/answer/63798713)
+
+## `noexcept`
+
+**C++11**
+
+**_References:_**
+
+- [cppreference.com: noexcept 运算符 (C++11 起)](https://zh.cppreference.com/w/cpp/language/noexcept)
+
+## `std::is_name`
+
+**_References:_**
+
+- [cppreference.com: std::is_same](https://zh.cppreference.com/w/cpp/types/is_same)
+
+## Class template
+
+**_References:_**
+
+- [cppreference.com: Class template](https://en.cppreference.com/w/cpp/language/class_template)
+
+- [GeeksforGeeks: perm_identity Templates in C++](https://www.geeksforgeeks.org/templates-cpp/)
+
+### Class template with multiple parameters
+
+**_References:_**
+
+- [GeeksforGeeks: Class template with multiple parameters](https://www.geeksforgeeks.org/class-template-multiple-parameters/)
+
+### `typename` and `class`
+
+现在的理解：在大部分的情况下，`typename`和`class`是一样的，但是最好对于类类型的声明用`class`，普通类型的声明用`typename`
+
+**_References:_**
+
+- [stackoverflow: Use 'class' or 'typename' for template parameters? [duplicate]](https://stackoverflow.com/a/213146/4636081)
+
+- [Blog: C++ 中的 typename 及 class 关键字的区别](https://liam.page/2018/03/16/keywords-typename-and-class-in-Cxx/)
+
+## `std::is_convertible`
+
+**_References:_**
+
+- [cppreference.com: std::is_convertible](https://en.cppreference.com/w/cpp/types/is_convertible)
+
+## `std::move`
+
+我目前的理解: 移交控制权
+
+**_References:_**
+
+- [cppreferences.com: 引用声明](https://zh.cppreference.com/w/cpp/language/reference)
+
+## rhs: right hand side
+
+**_References:_** [Cprogramming.com: rhs?](https://cboard.cprogramming.com/cplusplus-programming/34762-rhs.html)
+
+## `shared_ptr` to stack object
+
+**_References:_**
+
+- [stackoverflow: c++ create shared_ptr to stack object](https://stackoverflow.com/questions/38855343/c-create-shared-ptr-to-stack-object)
+
+## `shared_ptr`
+
+**_References:_**
+
+- [简书: C++11 智能指针](https://www.jianshu.com/p/e4919f1c3a28)

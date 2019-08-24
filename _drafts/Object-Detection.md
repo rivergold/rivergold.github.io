@@ -78,6 +78,16 @@ Paper note-2 explain this.
 
 # COCO
 
+## :triangular_flag_on_post:Information
+
+There are 91 classes in the coco paper. But in 2014 and 2017 dataset, there are 80 classes in it.
+
+**_References:_**
+
+- [Amikelive | Technology Blog: What Object Categories / Labels Are In COCO Dataset?](https://tech.amikelive.com/)
+
+## Load COCO dataset
+
 1. Init coco with annotation file
 2. Get image_ids and categories
 3. Use image_id to get image infomation and annotation

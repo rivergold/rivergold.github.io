@@ -185,6 +185,17 @@ print(b)
 
 ---
 
+## `exec` run str as Python code
+
+```python
+str_code = 'a = 1'
+exec(str_code)
+print(a)
+>>> 1
+```
+
+---
+
 ## Compile `.py` into `.so`
 
 Rivergold write another [memo]() for compile Python script into dynamic libs.
@@ -217,6 +228,23 @@ def fun(a:float, b:float) -> float:
 **_References:_**
 
 - [知乎: Python 3 新特性：类型注解](https://zhuanlan.zhihu.com/p/37239021)
+
+---
+
+## `format` with name arguments
+
+E.g.
+
+```python
+x = 1
+print('{x} is {x}'.format(x=x))
+# print('{} is {}'.format(x, x))
+# Pylint occur: Duplicate string formatting argument 'axis', consider passing as named argument
+```
+
+**_References:_**
+
+- [stackoverflow: format strings and named arguments in Python](https://stackoverflow.com/questions/17895835/format-strings-and-named-arguments-in-python)
 
 <!--  -->
 <br>

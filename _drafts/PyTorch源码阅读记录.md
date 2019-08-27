@@ -168,3 +168,17 @@ Non-uniform memory access
 **_References:_**
 
 - [Wiki: 非均匀访存模型](https://zh.wikipedia.org/wiki/%E9%9D%9E%E5%9D%87%E5%8C%80%E8%AE%BF%E5%AD%98%E6%A8%A1%E5%9E%8B)
+
+# 边编译边了解
+
+## `aten/src/ATen/gen.py`
+
+```shell
+python ../aten/src/ATen/gen.py --source-path ../aten/src/ATen --install_dir /home/rivergold/Documents/RiverGold/Learn-From-Src/pytorch/tmp_build/aten/src/ATen ../aten/src/ATen/Declarations.cwrap ../aten/src/THNN/generic/THNN.h ../aten/src/THCUNN/generic/THCUNN.h ../aten/src/ATen/nn.yaml ../aten/src/ATen/native/native_functions.yaml  --output-dependencies /home/rivergold/Documents/RiverGold/Learn-From-Src/pytorch/tmp_build/aten/src/ATen/generated_cpp.txt
+```
+
+## `gen_op.py`
+
+```shell
+python /home/rivergold/Documents/RiverGold/Learn-From-Src/pytorch/caffe2/contrib/aten/gen_op.py --aten_root=/home/rivergold/Documents/RiverGold/Learn-From-Src/pytorch/aten --template_dir=/home/rivergold/Documents/RiverGold/Learn-From-Src/pytorch/caffe2/contrib/aten --yaml_dir=/home/rivergold/Documents/RiverGold/Learn-From-Src/pytorch/tmp_build/aten/src/ATen --install_dir=/home/rivergold/Documents/RiverGold/Learn-From-Src/pytorch/tmp_build/contrib/aten --aten_root=/home/rivergold/Documents/RiverGold/Learn-From-Src/pytorch/aten
+```

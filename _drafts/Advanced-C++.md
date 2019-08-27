@@ -381,6 +381,8 @@ Good format print for C++.
 
 - [cppreferences.com: 引用声明](https://zh.cppreference.com/w/cpp/language/reference)
 
+- [知乎: 关于 C++右值及 std::move()的疑问？](https://www.zhihu.com/question/50652989)
+
 ## rhs: right hand side
 
 **_References:_** [Cprogramming.com: rhs?](https://cboard.cprogramming.com/cplusplus-programming/34762-rhs.html)
@@ -396,3 +398,34 @@ Good format print for C++.
 **_References:_**
 
 - [简书: C++11 智能指针](https://www.jianshu.com/p/e4919f1c3a28)
+
+## 智能指针
+
+目前的理解，智能指针是一个类，其对普通指针和引用计数进行了封装
+
+**_References:_**
+
+- [博客园: C++11 中智能指针的原理、使用、实现](https://www.cnblogs.com/wxquare/p/4759020.html)
+- [博客园: C++ 引用计数技术及智能指针的简单实现](https://www.cnblogs.com/QG-whz/p/4777312.html)
+
+### 侵入式智能指针
+
+引用技术是放在 Object 的类里面，
+
+侵入式智能指针的性能更好
+
+> From PyTorch: intrusive_ptr<T> is an alternative to shared_ptr<T> that has better performance because it does the refcounting intrusively
+
+**_References:_**
+
+- :thumbsup::triangular_flag_on_post:[CSDN: C++侵入式智能指针的实现](https://blog.csdn.net/jiange_zh/article/details/52512337)
+
+**理解**
+
+PyTorch 中的`c10/util/intrusive_ptr.h`中的`intrusive_ptr_target`就是[CSDN: C++侵入式智能指针的实现](https://blog.csdn.net/jiange_zh/article/details/52512337)这里所说的:
+
+> 1.将引用计数变量从资源类中抽离出来，封装成一个基类，该基类包含了引用计数变量。如果一个类想使用智能指针，则只需要继承自该基类即可；
+
+`intrusive_ptr_target`是所有需要使用侵入式引用计数的类的基类
+
+PyTorch 的核心 Tensor 是`aten/src/ATen/core.Tensor.h`中声明的`class CAFFE2_API Tensor`。其采用 Pimpl 形式（指向实现的指针），impl 为`impl_`，这是一个`c10::intrusive_ptr`,其指向的是`TensorImpl`，`TensorImpl`继承了`intrusive_ptr_target`

@@ -63,6 +63,113 @@ cd cmake/
 python ../aten/src/ATen/gen.py --source-path ../aten/src/ATen --install_dir /home/rivergold/Documents/RiverGold/Learn-From-Src/pytorch/tmp_build/aten/src/ATen ../aten/src/ATen/Declarations.cwrap ../aten/src/THNN/generic/THNN.h ../aten/src/THCUNN/generic/THCUNN.h ../aten/src/ATen/nn.yaml ../aten/src/ATen/native/native_functions.yaml  --output-dependencies /home/rivergold/Documents/RiverGold/Learn-From-Src/pytorch/tmp_build/aten/src/ATen/generated_cpp.txt
 ```
 
+## `cmake/Codegen.cmake`
+
+```shell
+  FOREACH(i RANGE ${NUM_CPU_CAPABILITY_NAMES})
+    FOREACH(IMPL ${cpu_kernel_cpp_in})
+      string(REPLACE "${CMAKE_CURRENT_LIST_DIR}/../aten/src/ATen/" "" NAME ${IMPL})
+      LIST(GET CPU_CAPABILITY_NAMES ${i} CPU_CAPABILITY)
+      SET(NEW_IMPL ${CMAKE_BINARY_DIR}/aten/src/ATen/${NAME}.${CPU_CAPABILITY}.cpp)
+      CONFIGURE_FILE(${IMPL} ${NEW_IMPL} COPYONLY)
+      SET(cpu_kernel_cpp ${NEW_IMPL} ${cpu_kernel_cpp}) # Create list of copies
+      LIST(GET CPU_CAPABILITY_FLAGS ${i} FLAGS)
+      IF(MSVC)
+        SET(MACRO_FLAG "/DCPU_CAPABILITY=${CPU_CAPABILITY} /DCPU_CAPABILITY_${CPU_CAPABILITY}")
+      ELSE(MSVC)
+        SET(MACRO_FLAG "-DCPU_CAPABILITY=${CPU_CAPABILITY} -DCPU_CAPABILITY_${CPU_CAPABILITY}")
+      ENDIF(MSVC)
+      SET_SOURCE_FILES_PROPERTIES(${NEW_IMPL} PROPERTIES COMPILE_FLAGS "${FLAGS} ${MACRO_FLAG}")
+    ENDFOREACH()
+  ENDFOREACH()
+  list(APPEND ATen_CPU_SRCS ${cpu_kernel_cpp})
+```
+
+这里赋值的`ATen_CPU_SRCS`会在多个地方使用
+
+`CONFIGURE_FILE(input_file, output_file)`
+
+这里会生成`build/aten/src/ATen/native/cpu/<name1>.cpp.<name2>.cpp`文件：
+
+- `name1`: 对应与`aten/src/ATen/native/cpu/*.cpp`的文件名
+- `name2`: `DEFAULT`, `AVX2`等
+
+```shell
+├── Activation.cpp
+├── avx_mathfun.h
+├── BinaryOpsKernel.cpp
+├── CopyKernel.cpp
+├── CrossKernel.cpp
+├── DistanceOpsKernel.cpp
+├── FillKernel.cpp
+├── GridSamplerKernel.cpp
+├── GridSamplerKernel.h
+├── IndexKernel.cpp
+├── Intrinsics.h
+├── IsContiguous.h
+├── layer_norm_kernel.cpp
+├── layer_norm_kernel.h
+├── LerpKernel.cpp
+├── Loops.h
+├── README.md
+├── Reduce.h
+├── ReduceOpsKernel.cpp
+├── SoftMaxKernel.cpp
+├── SoftmaxKernel.h
+├── SortingKernel.cpp
+├── TensorCompareKernel.cpp
+├── TensorCompareKernel.h
+└── UnaryOpsKernel.cpp
+```
+
+```shell
+  SET(GEN_COMMAND
+      "${PYTHON_EXECUTABLE}" ${CMAKE_CURRENT_LIST_DIR}/../aten/src/ATen/gen.py
+      --source-path ${CMAKE_CURRENT_LIST_DIR}/../aten/src/ATen
+      --install_dir ${CMAKE_BINARY_DIR}/aten/src/ATen
+      ${GEN_ROCM_FLAG}
+      ${cwrap_files}
+  )
+```
+
+生成`build/aten/src/ATen`
+
+```shell
+├── core_tmp
+│   ├── Tensor.h
+│   └── TensorMethods.h
+├── CPUType.cpp
+├── CPUType.h
+├── CUDAType.cpp
+├── CUDAType.h
+├── Declarations.yaml
+├── ExtensionBackendRegistration.h
+├── Functions.h
+├── generated_cpp.txt
+├── generated_cpp.txt-core
+├── generated_cpp.txt-cuda
+├── LegacyTHFunctionsCPU.cpp
+├── LegacyTHFunctionsCPU.h
+├── LegacyTHFunctionsCUDA.cpp
+├── LegacyTHFunctionsCUDA.h
+├── MkldnnCPUType.cpp
+├── MkldnnCPUType.h
+├── MSNPUType.cpp
+├── MSNPUType.h
+├── NativeFunctions.h
+├── QuantizedCPUType.cpp
+├── QuantizedCPUType.h
+├── RegistrationDeclarations.h
+├── SparseCPUType.cpp
+├── SparseCPUType.h
+├── SparseCUDAType.cpp
+├── SparseCUDAType.h
+├── TypeDefault.cpp
+├── TypeDefault.h
+├── XLAType.cpp
+└── XLAType.h
+```
+
 # 问题
 
 - [ ] dispatch mechanism
@@ -171,6 +278,10 @@ Non-uniform memory access
 
 # 边编译边了解
 
+## `python setup.py build`
+
+- [ ] upload `build.log`
+
 ## `aten/src/ATen/gen.py`
 
 ```shell
@@ -182,3 +293,21 @@ python ../aten/src/ATen/gen.py --source-path ../aten/src/ATen --install_dir /hom
 ```shell
 python /home/rivergold/Documents/RiverGold/Learn-From-Src/pytorch/caffe2/contrib/aten/gen_op.py --aten_root=/home/rivergold/Documents/RiverGold/Learn-From-Src/pytorch/aten --template_dir=/home/rivergold/Documents/RiverGold/Learn-From-Src/pytorch/caffe2/contrib/aten --yaml_dir=/home/rivergold/Documents/RiverGold/Learn-From-Src/pytorch/tmp_build/aten/src/ATen --install_dir=/home/rivergold/Documents/RiverGold/Learn-From-Src/pytorch/tmp_build/contrib/aten --aten_root=/home/rivergold/Documents/RiverGold/Learn-From-Src/pytorch/aten
 ```
+
+# 重点知识总结
+
+## 主要目录
+
+- c10
+- aten
+- caffe2
+- torch
+
+目前 PyTorch 的核心算子都在 aten 的 ATen 中
+
+torch 中定义大部分的 autograd，以及 Python 如何调用底层的 aten
+
+## Dispatch
+
+- Device
+- Type

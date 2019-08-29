@@ -311,3 +311,131 @@ torch 中定义大部分的 autograd，以及 Python 如何调用底层的 aten
 
 - Device
 - Type
+
+# `aten/src/ATen/native`
+
+`native_functions.yaml`注册了 ATen 中的函数，
+`dispatch`定义了如何分发到具体的函数
+
+**_References:_**
+
+- [pytorch/aten/src/ATen/native/README.md](https://github.com/pytorch/pytorch/blob/master/aten/src/ATen/native/README.md)
+
+## `aten/src/ATen/gen.py`
+
+会生成
+
+```shell
+ATen/NativeFunctions.h
+ATen/LegacyTHFunctionsCPU.h
+
+```
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# Python bind C++
+
+## `PyMethodDef`
+
+`torch/csrc/Module.cpp`
+
+```c++
+static PyMethodDef TorchMethods[] = {
+  {"_initExtension",  (PyCFunction)THPModule_initExtension,   METH_O,       nullptr},
+  {"_autograd_init",  (PyCFunction)THPAutograd_initExtension, METH_NOARGS,  nullptr},
+  {"_add_docstr",     (PyCFunction)THPModule_addDocStr,       METH_VARARGS, nullptr},
+  {"_init_names",     (PyCFunction)THPModule_initNames,       METH_O,       nullptr},
+  {"_has_distributed",(PyCFunction)THPModule_hasDistributed,  METH_NOARGS,  nullptr},
+...
+```
+
+`"_initExtension"`是在 Python 的函数名，`THPModule_initExtension`是封装了对应 C++函数的`PyObject`
+
+```c++
+// Callback for python part. Used for additional initialization of python classes
+static PyObject * THPModule_initExtension(PyObject *_unused, PyObject *shm_manager_path)
+{
+  HANDLE_TH_ERRORS
+  if (!THPUtils_checkString(shm_manager_path)) {
+    THPUtils_setError("initialization error - expected bytes/string object as shm_manager_path!");
+    return nullptr;
+  }
+...
+```
+
+**_References:_**
+
+- [博客园: 使用 C 语言扩展 Python(一)](https://www.cnblogs.com/phinecos/archive/2010/05/17/1737033.html)
+
+---
+
+## `PyModuleDef`
+
+```c++
+static struct PyModuleDef torchmodule = {
+    PyModuleDef_HEAD_INIT,
+    "torch._C",
+    nullptr,
+    -1,
+    methods.data()
+};
+ASSERT_TRUE(module = PyModule_Create(&torchmodule));
+```
+
+`torch._C`为模块名，其方法有`methods`
+
+**_References:_**
+
+- [Blog: 为 PYTHON 写 C 的扩展](https://jmpews.github.io/2016/12/10/python/%E4%B8%BApython%E5%86%99C%E7%9A%84%E6%89%A9%E5%B1%95/)
+
+---
+
+##
+
+`torch/csrc/Module.cpp`
+
+```c++
+THPSize_init(module);
+```
+
+`torch/csrc/Size.cpp`
+
+```c++
+PyTypeObject THPSizeType = {
+  PyVarObject_HEAD_INIT(nullptr, 0)
+  "torch.Size",                          /* tp_name */
+  sizeof(THPSize),                       /* tp_basicsize */
+  0,                                     /* tp_itemsize */
+  nullptr,                                     /* tp_dealloc */
+  nullptr,                                     /* tp_print */
+  nullptr,                                     /* tp_getattr */
+  nullptr,                                     /* tp_setattr */
+  nullptr,                                     /* tp_reserved */
+// ...
+}
+
+void THPSize_init(PyObject *module)
+{
+  if (PyType_Ready(&THPSizeType) < 0) {
+    throw python_error();
+  }
+  Py_INCREF(&THPSizeType);
+  if (PyModule_AddObject(module, "Size", (PyObject*)&THPSizeType) < 0) {
+    throw python_error();
+  }
+}
+```
+
+**总结：** 原始的 Python bind C++的过程是：
+
+1. 包装对应的 C++函数成为`PyObject`
+2. 调用`PyMethodDef`注册`PyObject`为 Python 的一个函数
+3. 调用`PyModuleDef`注册多个`PyMethodDef`成为`Module`
+4. 调用`PyModule_Create`生成`Module`
+5. 可以调用`PyModule_ADDObject`向第 4 步生成的`Module`中继续添加`PyObject`

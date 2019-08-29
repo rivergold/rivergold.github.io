@@ -393,11 +393,15 @@ Good format print for C++.
 
 - [stackoverflow: c++ create shared_ptr to stack object](https://stackoverflow.com/questions/38855343/c-create-shared-ptr-to-stack-object)
 
+---
+
 ## `shared_ptr`
 
 **_References:_**
 
 - [简书: C++11 智能指针](https://www.jianshu.com/p/e4919f1c3a28)
+
+---
 
 ## 智能指针
 
@@ -429,3 +433,27 @@ PyTorch 中的`c10/util/intrusive_ptr.h`中的`intrusive_ptr_target`就是[CSDN:
 `intrusive_ptr_target`是所有需要使用侵入式引用计数的类的基类，其内部有技术的变量
 
 PyTorch 的核心 Tensor 是`aten/src/ATen/core.Tensor.h`中声明的`class CAFFE2_API Tensor`。其采用 Pimpl 形式（指向实现的指针），impl 为`impl_`，这是一个`c10::intrusive_ptr`,其指向的是`TensorImpl`，`TensorImpl`继承了`intrusive_ptr_target`
+
+---
+
+## `<functional>`
+
+**_References:_**
+
+- [Blog: C++ 11 STL | functional 标准库](https://www.sczyh30.com/posts/C-C/cpp-stl-functional/)
+
+### `std::functional`
+
+**_References:_**
+
+- [CSDN: C++11 新特性之 std::function](https://blog.csdn.net/wangshubo1989/article/details/49134235)
+
+---
+
+## <numbers>
+
+头文件 `<numbers>` 提供数个数学常数，例如 std::numbers::pi 或 std::numbers::sqrt2
+
+**_References:_**
+
+- [cppreference.com: 数值库](https://zh.cppreference.com/w/cpp/numeric)

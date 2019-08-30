@@ -176,6 +176,7 @@ python ../aten/src/ATen/gen.py --source-path ../aten/src/ATen --install_dir /hom
 - [x] add_custom_target
 - [ ] 侵入式指针
 - [ ] weak references
+- [ ] `globalATenDispatch`
 
 # 零散的理解
 
@@ -396,7 +397,7 @@ ASSERT_TRUE(module = PyModule_Create(&torchmodule));
 
 ---
 
-##
+## Python 端`torch`添加 wrapped C++
 
 `torch/csrc/Module.cpp`
 
@@ -439,3 +440,105 @@ void THPSize_init(PyObject *module)
 3. 调用`PyModuleDef`注册多个`PyMethodDef`成为`Module`
 4. 调用`PyModule_Create`生成`Module`
 5. 可以调用`PyModule_ADDObject`向第 4 步生成的`Module`中继续添加`PyObject`
+
+Python 体系中的 Tensor 和 Function 会继承了 warp C++之后的`torch._C._TensorBase`和`torch._C._FunctionBase`
+
+---
+
+## c10 注册机制
+
+`c10/util/Registry.h`
+
+`#define C10_DECLARE_REGISTRY` -> `#define C10_DECLARE_TYPED_REGISTRY`: 实例化`c10::Registry`
+
+`C10_REGISTER_CREATOR` -> `C10_REGISTER_TYPED_CREATOR`: 实例化`static`的`c10::Registerer`
+
+```c++
+#define C10_DECLARE_REGISTRY(RegistryName, ObjectType, ...) \
+  C10_DECLARE_TYPED_REGISTRY(                               \
+      RegistryName, std::string, ObjectType, std::unique_ptr, ##__VA_ARGS__)
+
+#define C10_DEFINE_REGISTRY(RegistryName, ObjectType, ...) \
+  C10_DEFINE_TYPED_REGISTRY(                               \
+      RegistryName, std::string, ObjectType, std::unique_ptr, ##__VA_ARGS__)
+
+#define C10_REGISTER_CREATOR(RegistryName, key, ...) \
+  C10_REGISTER_TYPED_CREATOR(RegistryName, #key, __VA_ARGS__)
+
+// ......
+
+#define C10_DECLARE_TYPED_REGISTRY(                                        \
+    RegistryName, SrcType, ObjectType, PtrType, ...)                       \
+  C10_IMPORT ::c10::Registry<SrcType, PtrType<ObjectType>, ##__VA_ARGS__>* \
+  RegistryName();                                                          \
+  typedef ::c10::Registerer<SrcType, PtrType<ObjectType>, ##__VA_ARGS__>   \
+      Registerer##RegistryName
+
+#define C10_DEFINE_TYPED_REGISTRY(                                         \
+    RegistryName, SrcType, ObjectType, PtrType, ...)                       \
+  C10_EXPORT ::c10::Registry<SrcType, PtrType<ObjectType>, ##__VA_ARGS__>* \
+  RegistryName() {                                                         \
+    static ::c10::Registry<SrcType, PtrType<ObjectType>, ##__VA_ARGS__>*   \
+        registry = new ::c10::                                             \
+            Registry<SrcType, PtrType<ObjectType>, ##__VA_ARGS__>();       \
+    return registry;                                                       \
+  }
+
+// Note(Yangqing): The __VA_ARGS__ below allows one to specify a templated
+// creator with comma in its templated arguments.
+#define C10_REGISTER_TYPED_CREATOR(RegistryName, key, ...)                  \
+  static Registerer##RegistryName C10_ANONYMOUS_VARIABLE(g_##RegistryName)( \
+      key, RegistryName(), ##__VA_ARGS__);
+
+#define C10_REGISTER_TYPED_CREATOR_WITH_PRIORITY(                           \
+    RegistryName, key, priority, ...)                                       \
+  static Registerer##RegistryName C10_ANONYMOUS_VARIABLE(g_##RegistryName)( \
+      key, priority, RegistryName(), ##__VA_ARGS__);
+```
+
+---
+
+# Ops Dispath
+
+`aten/src/ATen/native/DispatchStub.h`
+
+> 在 PyTorch 的运行中，tensor 之间的加法会调用到 add_stub，并被分发到上述定义的 add_kernel 函数上
+
+```C++
+// Implements instruction set specific function dispatch.
+//
+// Kernels that may make use of specialized instruction sets (e.g. AVX) are
+// compiled multiple times with different compiler flags (e.g. -mavx). A
+// DispatchStub contains a table of function pointers for a kernel. At runtime,
+// the fastest available kernel is chosen based on the features reported by
+// cpuinfo.
+
+// Example:
+//
+// In native/MyKernel.h:
+//   using fn_type = void(*)(const Tensor& x);
+//   DECLARE_DISPATCH(fn_type, stub);
+//
+// In native/MyKernel.cpp
+//   DEFINE_DISPATCH(stub);
+//
+// In native/cpu/MyKernel.cpp:
+//   namespace {
+//     // use anonymous namespace so that different cpu versions won't conflict
+//     void kernel(const Tensor& x) { ... }
+//   }
+//   REGISTER_DISPATCH(stub, &kernel);
+//
+// To call:
+//   stub(kCPU, tensor);
+```
+
+# 问题
+
+## 动态链接库中的全局变量
+
+**_References:_**
+
+- [owent.net: C++又一坑:动态链接库中的全局变量](https://owent.net/2014/962.html)
+
+知识点: 静态变量会在程序 startup 时（在 main 函数之前前）就会进行初始化

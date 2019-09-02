@@ -20,6 +20,12 @@ This specifier specifies that a constructor doesn't allow `implicit conversions`
 - &Delta; [CSDN: C/C++---static 函数，static 成员函数，static 变量，static 成员变量 再来理一理](https://blog.csdn.net/FreeApe/article/details/50979425)
 - [CSDN: C++中 Static 作用和使用方法](https://blog.csdn.net/artechtor/article/details/2312766)
 
+> static 成员函数里面不能访问非静态成员变量，也不能调用非静态成员函数
+
+**_References:_**
+
+- [CSDN: C/C++---static 函数，static 成员函数，static 变量，static 成员变量 再来理一理](https://blog.csdn.net/FreeApe/article/details/50979425)
+
 ---
 
 ## `final`
@@ -457,3 +463,19 @@ PyTorch 的核心 Tensor 是`aten/src/ATen/core.Tensor.h`中声明的`class CAFF
 **_References:_**
 
 - [cppreference.com: 数值库](https://zh.cppreference.com/w/cpp/numeric)
+
+---
+
+## `inline`
+
+**_References:_**
+
+- [CSDN: c++ 内联函数（一看就懂）](https://blog.csdn.net/BjarneCpp/article/details/76044493)
+
+---
+
+## `reinterpret_cast`
+
+**_References:_**
+
+- [cppreference.com: reinterpret_cast 转换](https://zh.cppreference.com/w/cpp/language/reinterpret_cast)

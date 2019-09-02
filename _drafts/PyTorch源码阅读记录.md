@@ -533,6 +533,325 @@ Python 体系中的 Tensor 和 Function 会继承了 warp C++之后的`torch._C.
 //   stub(kCPU, tensor);
 ```
 
+# 尝试理解
+
+## Python 端的`torch.add`调用到后端的过程
+
+1.  `import torch`会`import torch._C`
+2.  `torch._C`中有名叫`_TensorBase`的 PyObject
+    `torch/csrc/autograd/python_variable.cpp`:
+
+    ```c++
+    PyModule_AddObject(module, "_TensorBase",   (PyObject *)&THPVariableType);
+    ```
+
+3.  `THPVariableType`这个 PyObject 中的`tp_methods`注册了`add`方法
+
+    `torch/csrc/autograd/python_variable.cpp`
+
+    ```c++
+    static std::vector<PyMethodDef> methods;
+    THPUtils_addPyMethodDefs(methods, torch::autograd::variable_methods);
+    THPUtils_addPyMethodDefs(methods, extra_methods);
+    THPVariableType.tp_methods = methods.data();
+    ```
+
+    `torch/csrc/autograd/python_variable_methods.cpp`
+
+    ```c++
+    PyMethodDef variable_methods[] = {
+    // ...
+     {"abs", (PyCFunction)THPVariable_abs, METH_NOARGS, NULL},
+    // ...
+    ```
+
+4.  `THPVariable_abs`是对`dispatch_add_`的封装
+
+    ```c++
+    static PyObject * THPVariable_add(PyObject* self_, PyObject* args, PyObject* kwargs)
+    {
+    HANDLE_TH_ERRORS
+    static PythonArgParser parser({
+        "add(Scalar alpha, Tensor other)|deprecated",
+        "add(Tensor other, *, Scalar alpha=1)",
+    }, /*traceable=*/true);
+    auto& self = reinterpret_cast<THPVariable*>(self_)->cdata;
+    ParsedArgs<3> parsed_args;
+    auto r = parser.parse(args, kwargs, parsed_args);
+
+    if (r.idx == 0) {
+        return wrap(dispatch_add(self, r.scalar(0), r.tensor(1)));
+    } else if (r.idx == 1) {
+        return wrap(dispatch_add(self, r.tensor(0), r.scalar(1)));
+    }
+    Py_RETURN_NONE;
+    END_HANDLE_TH_ERRORS
+    }
+    ```
+
+5.  `dispatch_add_`
+
+    `torch/csrc/autograd/generated/python_variable_methods.cpp`
+
+    ```c++
+    inline Tensor dispatch_add_(Tensor & self, const Tensor & other, Scalar alpha) {
+
+    AutoNoGIL no_gil;
+    return self.add_(other, alpha);
+    }
+    ```
+
+6.  `dispatch_add_`会调用`Tensor.add`
+
+    `torch/csrc/autograd/generated/python_variable_methods_dispatch.h`
+
+7.  `Tensor.add`函数定义在`aten/src/ATen/core/TensorMethods.h`(该文件在 CMakeLists 编译时，还会被拷贝到`build/aten/src/ATen/core_tmp/TensorMethods.h`)
+
+    ```c++
+    inline Tensor & Tensor::add_(const Tensor & other, Scalar alpha) {
+        static auto table = globalATenDispatch().getOpTable("aten::add_(Tensor(a!) self, Tensor other, *, Scalar alpha=1) -> Tensor(a!)");
+        return table->getOp<Tensor & (Tensor &, const Tensor &, Scalar)>(tensorTypeIdToBackend(type_id()), is_variable())(*this, other, alpha);
+    }
+    ```
+
+8.  `globalATenDispath()`定义在`aten/src/ATen/core/ATenDispatch.cpp`，采用函数内的`static`（局部 static 变量）实现的单例模式
+
+    ```c++
+    #include <ATen/core/ATenDispatch.h>
+
+    namespace at {
+
+    ATenDispatch & globalATenDispatch() {
+    static ATenDispatch singleton;
+    return singleton;
+    }
+
+    } // namespace at
+    ```
+
+9.  `ATenDispatch`定义在`aten/src/ATen/core/ATenDispatch.h`中，该 dispatch 将会逐步被 c10 dispatcher 取代，从`v1.2.0`之后，开发者`smessmer`和`li-roy`已经开始着手进行该工作了
+
+    Github issues and pull request:
+
+    - [Plan for Migrating ATen ops to the c10 dispatcher #24132](https://github.com/pytorch/pytorch/issues/24132)
+
+    ```c++
+    // This dispatch class serves as a replacement for our previous dispatch
+    // mechanism, in which all functions were members of a Type class. A derived
+    // class existed for each backend (and Variable), and the vtable was used to
+    // dispatch to the correct implementation. This class is to be replaced by
+    // the c10 dispatcher when it supports all argument and return types.
+    // This implementation opts to store implementations in a table of void*.
+
+    // ATenOpTable stores the implementations for each backend, in addition to
+    // an implementation for variables.
+    class CAFFE2_API ATenOpTable {
+        // ...
+    ```
+
+    问题：
+
+    - [ ] 为什么要做这项工作？会提速吗？针对于移动端？
+    - [ ] c10 中的 two types of operators - boxed ones and unboxed ones 指的是什么
+          **_References:_**
+      - [Medium: Deep Learning meets PyTorch (part-2)](https://medium.com/@duyanhnguyen_38925/deep-learning-meets-pytorch-part-2-1524a4345aa9)
+
+
+    对于PyTorch的dispatch机制，请到[这里]()了解
+
+10. Variable 的 Ops 在哪注册的？
+
+**这里所说的是 CPU 的函数的注册, GPU 下的同理**
+
+`torch/csrc/autograd/generated/VariableTypeEverything.cpp`
+
+```c++
+static auto& registerer = globalATenDispatch()
+  .registerVariableOp<Tensor (const Tensor &, Scalar)>("aten::__and__(Tensor self, Scalar other) -> Tensor", &VariableType::__and__)
+  .registerVariableOp<Tensor (const Tensor &, const Tensor &)>("aten::__and__(Tensor self, Tensor other) -> Tensor", &VariableType::__and__)
+// ......
+```
+
+这里调用`globalATenDispatch`依次注册`VariableType`中定义的 Ops 函数
+
+struct `VariableType`定义在`torch/csrc/autograd/generated/VariableType.h`中
+
+11. Variable 的 Ops 在哪实现的？
+
+`torch/csrc/autograd/generated/VariableType_0`, `torch/csrc/autograd/generated/VariableType_1`, `torch/csrc/autograd/generated/VariableType_2`, `torch/csrc/autograd/generated/VariableType_3`, `torch/csrc/autograd/generated/VariableType_4`这 5 个文件分别按部分实现了 Variable 的所有 Ops。这 5 个 cpp 文件是以`tools/autograd/templates/VariableType.cpp`为模板 codegen 生成的。
+
+12. Variable 的 Ops 是如何实现的？
+
+整体流程参考[PyTorch internals: Anatomy of a kernel](http://blog.ezyang.com/2019/05/pytorch-internals/)
+
+**理解：** 除去一些前处理和后处理，其核心代码还是使用的`at`的`Tensor`操作
+
+### 对 Python 调用到 C++底层的举例
+
+Python 端常用的代码
+
+```python
+import torch
+torch.nn.functional.conv1d()
+```
+
+该函数定义在`torch/nn/functional.py`中：
+
+```python
+conv1d = _add_docstr(torch.conv1d, r"""
+```
+
+Python 的`torch`module 在`torch/__init__.py`中运行了`from torch._C import *`
+
+**如何调用到底层的？或者说是如何 dispatch 的？**
+
+首先给出结论，Python 端`torch.nn.functional.conv1d()`调用的是`aten/src/ATen/native/Convolution.cpp`里的:
+
+```c++
+at::Tensor conv2d(
+    const Tensor& input, const Tensor& weight, const Tensor& bias,
+    IntArrayRef stride, IntArrayRef padding, IntArrayRef dilation, int64_t groups) {
+  return at::convolution(input, weight, bias, stride, padding, dilation,
+                         false, {{0, 0}}, groups);
+}
+```
+
+`at::convolution`在`torch/include/ATen/Functions.h`(该文件是由`aten/src/ATen/gen.py`生成的)，该文件声明、定义了 ATen 的 Functions。
+
+之后利用`globalATenDispatch`机制完成 Device 的 dispatch, dispatch 中注册的是`& VariableType::convolution`
+
+（暂时不是很确定）CPU 下，其底层调用的是定义在`build/aten/src/ATen/TypeDefault.cpp`中的`TypeDefulat::convolution()`，其底层调用的是 `at::native::_convolution`
+
+```c++
+Tensor TypeDefault::convolution(const Tensor & input, const Tensor & weight, const Tensor & bias, IntArrayRef stride, IntArrayRef padding, IntArrayRef dilation, bool transposed, IntArrayRef output_padding, int64_t groups) {
+#ifdef BUILD_NAMEDTENSOR
+    if (input.is_named() || weight.is_named() || bias.is_named()) {
+        AT_ERROR("convolution: no named inference rule implemented.");
+    }
+#endif
+    const OptionalDeviceGuard device_guard(device_of(input));
+    return at::native::convolution(input, weight, bias, stride, padding, dilation, transposed, output_padding, groups);
+}
+Tensor TypeDefault::_convolution(const Tensor & input, const Tensor & weight, const Tensor & bias, IntArrayRef stride, IntArrayRef padding, IntArrayRef dilation, bool transposed, IntArrayRef output_padding, int64_t groups, bool benchmark, bool deterministic, bool cudnn_enabled) {
+#ifdef BUILD_NAMEDTENSOR
+    if (input.is_named() || weight.is_named() || bias.is_named()) {
+        AT_ERROR("_convolution: no named inference rule implemented.");
+    }
+#endif
+    const OptionalDeviceGuard device_guard(device_of(input));
+    return at::native::_convolution(input, weight, bias, stride, padding, dilation, transposed, output_padding, groups, benchmark, deterministic, cudnn_enabled);
+}
+```
+
+`at::native::convolution`定义在`aten/src/ATen/native/Convolution.cpp`
+
+现在说明下 Python 端是如何逐步调用到 C++底层的`at::Tensor conv2d()`的，我们采用倒叙的方式，即 C++底层的`at::Tensor conv2d()`是如何被 Python 端逐步调用到的
+
+1. `at::conv2d`会在`torch/csrc/autograd/generated/pytorch_torch_functions_dispatch.h`中被包含在`inline Tensor dispatch_conv2d`中
+
+```c++
+inline Tensor dispatch_conv2d(const Tensor & input, const Tensor & weight, const Tensor & bias, IntArrayRef stride, IntArrayRef padding, IntArrayRef dilation, int64_t groups) {
+
+  AutoNoGIL no_gil;
+  return at::conv2d(input, weight, bias, stride, padding, dilation, groups);
+}
+```
+
+2. `dispatch_conv2d`会被`torch/csrc/autograd/generated/python_torch_functions.cpp`中的`PyObject * THPVariable_conv2d`做 C++ wrap
+
+```c++
+static PyObject * THPVariable_conv2d(PyObject* self_, PyObject* args, PyObject* kwargs)
+{
+  HANDLE_TH_ERRORS
+  static PythonArgParser parser({
+    "conv2d(Tensor input, Tensor weight, Tensor? bias=None, IntArrayRef[2] stride=1, IntArrayRef[2] padding=0, IntArrayRef[2] dilation=1, int64_t groups=1)",
+  }, /*traceable=*/false);
+
+  ParsedArgs<7> parsed_args;
+  auto r = parser.parse(args, kwargs, parsed_args);
+
+  if (r.idx == 0) {
+    return wrap(dispatch_conv2d(r.tensor(0), r.tensor(1), r.tensor(2), r.intlist(3), r.intlist(4), r.intlist(5), r.toInt64(6)));
+  }
+  Py_RETURN_NONE;
+  END_HANDLE_TH_ERRORS
+}
+```
+
+3. `THPVariable_conv2d`会在同文件`torch/csrc/autograd/generated/python_torch_functions.cpp`下，以 Python 名为`conv2d`存储在`static PyMethodDef torch_functions[]`
+
+```c++
+static PyMethodDef torch_functions[] = {
+// ......
+  {"conv2d", (PyCFunction)THPVariable_conv2d, METH_VARARGS | METH_KEYWORDS | METH_STATIC, NULL},
+// ......
+```
+
+4. `torch_functions`会在同文件下`torch/csrc/autograd/generated/python_torch_functions.cpp`，封装进`static PyTypeObject THPVariableFunctions`，成为`PyTypeObject THPVariableFunctions`的方法
+
+```c++
+static PyTypeObject THPVariableFunctions = {
+  PyVarObject_HEAD_INIT(NULL, 0)
+  "torch._C._VariableFunctions",         /* tp_name */
+// ......
+  torch_functions,                       /* tp_methods */
+// ......
+```
+
+5. `THPVariableFunctions`会被在同一文件下的`torch/csrc/autograd/generated/python_torch_functions.cpp`函数`void initTorchFunctions(PyObject* module)`以`_VariableFunctions`为名字添加至`torch._C`中
+
+```c++
+void initTorchFunctions(PyObject* module) {
+  if (PyType_Ready(&THPVariableFunctions) < 0) {
+    throw python_error();
+  }
+  Py_INCREF(&THPVariableFunctions);
+  if (PyModule_AddObject(module, "_VariableFunctions", (PyObject*)&THPVariableFunctions) < 0) {
+    throw python_error();
+  }
+}
+```
+
+6. `void initTorchFunctions`会在`torch/csrc/autograd/python_variable.cpp`中被`bool THPVariable_initModule(PyObject *module)`调用
+
+```c++
+bool THPVariable_initModule(PyObject *module)
+{
+  static std::vector<PyMethodDef> methods;
+  THPUtils_addPyMethodDefs(methods, torch::autograd::variable_methods);
+  THPUtils_addPyMethodDefs(methods, extra_methods);
+  THPVariableType.tp_methods = methods.data();
+  if (PyType_Ready(&THPVariableType) < 0)
+    return false;
+  Py_INCREF(&THPVariableType);
+  PyModule_AddObject(module, "_TensorBase",   (PyObject *)&THPVariableType);
+  torch::autograd::initTorchFunctions(module);
+  torch::autograd::initTensorImplConversion(module);
+  return true;
+}
+```
+
+7. `bool THPVariable_initModule`会在`torch/csrc/Module.cpp`中被`PyObject* initModule()`调用注册到`torch._C中`
+
+# PyTorch 的 dispatch 的分发机制
+
+首先需要明确，PyTorch 的分发机制存在两部分，
+
+1. 首先，对于 device 的分发，确定该操作是在`enum class Backend { CPU, CUDA, HIP, SparseCPU, SparseCUDA, SparseHIP, MSNPU, XLA, QuantizedCPU, ComplexCPU, ComplexCUDA, Undefined, MkldnnCPU, NumOptions };`哪个**Backend**上运行的
+2. 之后，对于 type 的分发，确定该操作是对 int, float 还是 xxx
+
+v1.2.0 中对于 Tensor 的 op 是基于 ATen 的 dispather 实现的，目前开发者们正在逐步使用`c10 dispatcher`逐步取代 ATen 的 dispatcher，为什么这么做暂时我还没用弄明白
+
+## ATen 的 Dispatcher
+
+`ATenDispatch`会维护一个`std::unordered_map<std::string, ATenOpTable> op_tables_;`，每一个 op 对应一个 ATenOpTable。
+
+`ATenOpTable`维护了两种 ops，一种是`VariableOp`，一种是`BaseOp`，在`getOp`时会根据`is_variable`来判断是获取哪种的 op，`getOp`返回的是函数指针
+
+`getBaseOp`需要根据`Backend`的值来获取到对应 device 上的方法
+
+`getVariableOp`则不需要根据`Backend`来判断
+
 # 问题
 
 ## 动态链接库中的全局变量
@@ -542,3 +861,11 @@ Python 体系中的 Tensor 和 Function 会继承了 warp C++之后的`torch._C.
 - [owent.net: C++又一坑:动态链接库中的全局变量](https://owent.net/2014/962.html)
 
 知识点: 静态变量会在程序 startup 时（在 main 函数之前前）就会进行初始化
+
+```
+
+```
+
+```
+
+```

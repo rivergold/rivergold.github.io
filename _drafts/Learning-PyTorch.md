@@ -397,10 +397,10 @@ def get_lr(optimizer):
 
 ---
 
-## Train on GPU
+## :triangular_flag_on_post:Run on GPU
 
 ```python
-# Model
+# Model: modifies in-place
 model.cuda()
 # Tensor
 x = x.cuda()

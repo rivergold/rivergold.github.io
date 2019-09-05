@@ -289,6 +289,22 @@ endif
 <br>
 <!--  -->
 
+# Tips
+
+## Reload file
+
+`:e`
+
+**_Ref:_** [stackoverflow: refresh changed content of file opened in vi(m)](https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # Problems & Solutions
 
 ## YouCompleteMe

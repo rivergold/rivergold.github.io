@@ -754,6 +754,8 @@ yum install p7zip
 
 # :fallen_leaf:Common Software
 
+- :thumbsup:[码农有道: 15 个超赞超牛逼的 Linux 工具，提高效率的同时增加乐趣！](https://mp.weixin.qq.com/s?__biz=MzIwNTc4NTEwOQ==&mid=2247487175&idx=2&sn=8c3e5b629b31c0c9232d14c73d5b4833&chksm=972adfbda05d56ab26a26ee1f51c4b8cb3d8d9f5be95cc9e782afffcfa4681017dc942605eec&mpshare=1&scene=1&srcid=&sharer_sharetime=1567609815220&sharer_shareid=cc363ceb86aab466ef27b423dcb88157#rd)
+
 ## Rufus
 
 Ubuntu officially recommended tool to build bootable USB flash drives.
@@ -1783,6 +1785,52 @@ yum install rTorrent
 ### Use
 
 **_Ref:_** [Linux 中国: rtorrent - 强大的命令行 BT 客户端](https://linux.cn/article-2064-1.html)
+
+<!--  -->
+<br>
+
+---
+
+<!--  -->
+
+## ag
+
+Faster than grep and ack
+
+### Install
+
+**Ubuntu**
+
+```shell
+sudo apt install silversearcher-ag
+```
+
+**_References:_**
+
+- [Ming's Blog: the silver searcher：快如闪电的 grep](https://bitmingw.com/2017/10/08/fast-grep-the-silver-searcher/)
+
+<!--  -->
+<br>
+
+---
+
+<!--  -->
+
+## tig
+
+Very good tool for command git
+
+### Install
+
+**Ubuntu**
+
+```shell
+sudo apt install tig
+```
+
+**_References:_**
+
+- [掘进: tig — 让 git 命令行可视化](https://juejin.im/post/5afabcb1f265da0b886d92b6)
 
 <!--  -->
 <br>

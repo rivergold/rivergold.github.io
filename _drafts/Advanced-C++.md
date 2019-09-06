@@ -1,5 +1,7 @@
 # :fallen_leaf:Basics
 
+## Declare & Define
+
 ## `explicit`
 
 This specifier specifies that a constructor doesn't allow `implicit conversions` or `copy-initialization`.<br>

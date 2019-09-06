@@ -269,6 +269,16 @@ a[(a[:,:,0]>0) & (a[:,:,1]>0)].shape
 
   - [Python3.6 doc str.translate](https://docs.python.org/3/library/stdtypes.html?highlight=maketrans#str.translate)
 
+### `str.rstrip()`
+
+Remove letter to the right of the string
+
+```python
+a = '123  '
+print(a.rstrip())
+>>> 123
+```
+
 ### `r` before string
 
 `r"""xxx"""` represents this is a **raw string**, which tells compiler do not do transferred meaning for this string.

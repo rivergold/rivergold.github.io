@@ -399,14 +399,25 @@ def get_lr(optimizer):
 
 ## :triangular_flag_on_post:Run on GPU
 
+- `nn.Module`: change device in-place
+- `Tensor`: Return new `Tensor` with specific device
+
 ```python
-# Model: modifies in-place
+# Method-1
+# Module: modifies in-place
 model.cuda()
-# Tensor
+# Tensor: need to return new
 x = x.cuda()
+# Method-2
+model.to(torch.device('cuda:0'))
+x = x.to(torch.device('cuda:0'))
 ```
 
-Ref [PyTorch doc: torch.nn.Module](https://pytorch.org/docs/stable/nn.html#torch.nn.Module.cuda) and [PyTorch doc: torch.Tensor](https://pytorch.org/docs/stable/tensors.html#torch.Tensor.cuda).
+**_References:_**
+
+- [PyTorch doc: torch.nn.Module](https://pytorch.org/docs/stable/nn.html#torch.nn.Module.cuda)
+- [PyTorch doc: torch.Tensor](https://pytorch.org/docs/stable/tensors.html#torch.Tensor.cuda)
+- [PyTorch doc: torch.nn.Module.to](https://pytorch.org/docs/stable/nn.html#torch.nn.Module.cuda)
 
 <!--  -->
 <br>

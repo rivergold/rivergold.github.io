@@ -399,6 +399,26 @@ def get_lr(optimizer):
 
 ## :triangular_flag_on_post:Run on GPU
 
+- [PyTorch doc: TORCH.CUDA](https://pytorch.org/docs/stable/cuda.html)
+
+### Check if GPU is available
+
+```python
+has_gpu = torch.cuda.is_available()
+```
+
+**_References:_**
+
+- [Github: eriklindernoren/PyTorch-YOLOv3](https://github.com/eriklindernoren/PyTorch-YOLOv3/blob/47b7c912877ca69db35b8af3a38d6522681b3bb3/train.py#L44)
+
+### Get GPU num
+
+```python
+num_gpu = torch.cuda.device_count()
+```
+
+### Move to GPU
+
 - `nn.Module`: change device in-place
 - `Tensor`: Return new `Tensor` with specific device
 

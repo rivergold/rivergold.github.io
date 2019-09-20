@@ -2,6 +2,8 @@
 
 ## Declare & Define
 
+---
+
 ## `explicit`
 
 This specifier specifies that a constructor doesn't allow `implicit conversions` or `copy-initialization`.<br>
@@ -109,6 +111,11 @@ up.reset(nullptr)
 - [cppreference.com: how to delete unique_ptr](http://www.cplusplus.com/forum/general/119828/)
 
 ## lvalue and rvalue
+
+**_References:_**
+
+- :thumbsup:[简书: C++11 中的左值、右值和将亡值](https://www.jianshu.com/p/4538483a1d8a)
+- :thumbsup:[知乎-专栏: C++右值引用](https://zhuanlan.zhihu.com/p/54050093)
 
 An lvalue is an expression that refers to a memory location and allows us to take the address of that memory location via the & operator. An rvalue is an expression that is not an lvalue. Examples are
 

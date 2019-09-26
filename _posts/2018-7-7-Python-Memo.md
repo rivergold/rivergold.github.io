@@ -2139,3 +2139,46 @@ This error is caused by matplotlib, you need to change matplotlib backend.
 **_Solution:_**
 
 - [Github palantir/python-language-server: libc++abi.dylib: terminating with uncaught exception of type NSException | macOS #217](https://github.com/palantir/python-language-server/issues/217#issuecomment-364967166)
+
+<br>
+
+---
+
+<br>
+
+# Python Custom Sort Key Function
+
+```python
+def intra_frame_filter_person_bboxes(person_bboxes, scores=None):
+    """[summary]
+
+    Arguments:
+        person_bboxes {[type]} -- [description]
+
+    Keyword Arguments:
+        scores {[type]} -- [description] (default: {None})
+
+    Returns:
+        [type] -- [description]
+    """
+    keep_top_n = 3
+
+    def sorted_key_func(lhs_data, rhs_data):
+        lhs_bbox_area = utils.bbox.calculate_area(lhs_data[0])
+        rhs_bbox_area = utils.bbox.calculate_area(rhs_data[0])
+        return -1 if lhs_bbox_area >= rhs_bbox_area else -1
+
+    indexes = range(len(person_bboxes))
+    bboxes, indexes = zip(*sorted(zip(person_bboxes, indexes),
+                                  key=functools.cmp_to_key(sorted_key_func)))
+    bboxes = np.array(bboxes)
+    if scores:
+        scores_sorted = [scores[each_index] for each_index in indexes]
+    return indexes[:keep_top_n], bboxes[:keep_top_n], scores_sorted[:keep_top_n]
+```
+
+**_References:_**
+
+- [CSDN: python3 sorted 如何自定义排序标准](https://blog.csdn.net/u012436149/article/details/79952975)
+
+- [stackoverflow: Python: sort a list and change another one consequently](https://stackoverflow.com/questions/2732994/python-sort-a-list-and-change-another-one-consequently)

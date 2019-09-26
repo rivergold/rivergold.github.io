@@ -399,14 +399,45 @@ def get_lr(optimizer):
 
 ## :triangular_flag_on_post:Run on GPU
 
+- [PyTorch doc: TORCH.CUDA](https://pytorch.org/docs/stable/cuda.html)
+
+### Check if GPU is available
+
 ```python
-# Model: modifies in-place
-model.cuda()
-# Tensor
-x = x.cuda()
+has_gpu = torch.cuda.is_available()
 ```
 
-Ref [PyTorch doc: torch.nn.Module](https://pytorch.org/docs/stable/nn.html#torch.nn.Module.cuda) and [PyTorch doc: torch.Tensor](https://pytorch.org/docs/stable/tensors.html#torch.Tensor.cuda).
+**_References:_**
+
+- [Github: eriklindernoren/PyTorch-YOLOv3](https://github.com/eriklindernoren/PyTorch-YOLOv3/blob/47b7c912877ca69db35b8af3a38d6522681b3bb3/train.py#L44)
+
+### Get GPU num
+
+```python
+num_gpu = torch.cuda.device_count()
+```
+
+### Move to GPU
+
+- `nn.Module`: change device in-place
+- `Tensor`: Return new `Tensor` with specific device
+
+```python
+# Method-1
+# Module: modifies in-place
+model.cuda()
+# Tensor: need to return new
+x = x.cuda()
+# Method-2
+model.to(torch.device('cuda:0'))
+x = x.to(torch.device('cuda:0'))
+```
+
+**_References:_**
+
+- [PyTorch doc: torch.nn.Module](https://pytorch.org/docs/stable/nn.html#torch.nn.Module.cuda)
+- [PyTorch doc: torch.Tensor](https://pytorch.org/docs/stable/tensors.html#torch.Tensor.cuda)
+- [PyTorch doc: torch.nn.Module.to](https://pytorch.org/docs/stable/nn.html#torch.nn.Module.cuda)
 
 <!--  -->
 <br>

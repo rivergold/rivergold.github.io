@@ -373,6 +373,17 @@ endif
 
 **_Ref:_** [stackoverflow: How to stop Vim highlighting trailing whitespace in python files](https://stackoverflow.com/a/47588983/4636081)
 
+# Vim Shortcut
+
+## Sacv and exit
+
+- `ZZ`: Save and exit
+- `ZQ`: Exit without saving
+
+**_References:_**
+
+- [How To Exit Vim? Multiple Ways To Quit Vim Editor](https://itsfoss.com/how-to-exit-vim/)
+
 <!-- # SpaceVim
 
 ## Install

@@ -53,3 +53,15 @@ Chardet: The Universal Character Encoding Detector
 **_References:_**
 
 - [stackoverflow: Can ElementTree be told to preserve the order of attributes?](https://stackoverflow.com/a/48407639/4636081)
+
+# Fuzzy Matching
+
+字符串模糊匹配
+
+**_References:_**
+
+- [腾讯云: python 实现字符串模糊匹配](https://cloud.tencent.com/developer/article/1086980)
+
+## fuzzywuzzy
+
+- [Github](https://github.com/seatgeek/fuzzywuzzy)

@@ -80,6 +80,12 @@ ffprobe -print_format json <video>
 
 - [Github Gist: oldo/video-metada-finder.py](https://gist.github.com/oldo/dc7ee7f28851922cca09)
 
+## Add audio into video
+
+```shell
+ffmpeg -i <audio_path> -i <video_path> -codec copy <output_path>
+```
+
 <!--  -->
 <br>
 

@@ -79,6 +79,23 @@ python setup.py install 2>&1 | tee build.log
 
 **_Ref:_** [Github pytorch/pytorch: Makefile:140: recipe for target 'all' failed #17514](https://github.com/pytorch/pytorch/issues/17514#issuecomment-467995533)
 
+---
+
+## Install Ubuntu
+
+### Build USB Flash
+
+Using [**UNetbootin**](https://unetbootin.github.io/) to build USB Flash.
+
+**Note:**
+
+- rufus not support legacy
+- UltraISO not support legacy
+
+**_References:_**
+
+- [知乎: Ubuntu 安装时遇到的一些问题](https://zhuanlan.zhihu.com/p/70758540)
+
 <!--  -->
 <br>
 

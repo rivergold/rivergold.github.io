@@ -69,7 +69,7 @@ def __setattr__(self, name, value):
 
 - `@property`的作用是提供给用户 get 和 set 类的 object 属性的方法，属于面向对象编程中的封装概念
 
-- `__getattr__`的作用是无妨访问 class 的 object 的属性时，进行的操作
+- `__getattr__`的作用是无法访问 class 的 object 的属性时，进行的操作
 
 可以仔细看下[PyTorch 源码中的`nn.Module`](https://github.com/pytorch/pytorch/blob/c002ede1075d05ab82e1d50fcc5f94ec1e0d95a9/torch/nn/modules/module.py#L577)的实现
 
@@ -116,6 +116,12 @@ class Foo(metaclass=PrefixMetaclass):
     def bar(self):
         print('bar')
 ```
+
+## Initialization and Cleanup
+
+**_References:_**
+
+- :thumbsup:[Python 3 Patterns, Recipes and Idioms: Initialization and Cleanup](https://python-3-patterns-idioms-test.readthedocs.io/en/latest/InitializationAndCleanup.html)
 
 <!--  -->
 <br>

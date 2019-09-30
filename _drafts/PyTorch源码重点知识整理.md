@@ -161,3 +161,48 @@
 
 - [知乎-Gemfield: PyTorch 的 Tensor(中)](https://zhuanlan.zhihu.com/p/64135058)
 - [PyTorch internals: Autograd](http://blog.ezyang.com/2019/05/pytorch-internals/)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# 最新理解
+
+## RegisterOperators
+
+E.g.
+
+```c++
+static auto registerer = torch::RegisterOperators()
+  .op(torch::RegisterOperators::options()
+    .schema("aten::abs_(Tensor(a!) self) -> Tensor(a!)")
+    .impl_unboxedOnlyKernel<Tensor & (Tensor &), &CPUType::abs_>(TensorTypeId::CPUTensorId)
+    .aliasAnalysis(c10::AliasAnalysisKind::FROM_SCHEMA))
+  .op // ...
+```
+
+`c10::RegisterOperators`:
+
+```c++
+  /**
+   * Call this to register an operator. See class doc comment for examples.
+   */
+  RegisterOperators&& op(Options&& options) && {
+    checkSchemaAndRegisterOp_(std::move(options));
+    return std::move(*this);
+  }
+```
+
+`options`是`c10::RegisterOperators`的`static`函数，其返回一个`Options`的实例化对象
+
+`schema`, `impl_unboxedOnlyKernel`和`aliasAnalysis`都是`Options`类的方法，这些函数的返回类型都是右值引用`Options &&`
+
+...
+
+注册后的结果是，所有注册的函数都会被添加到`namespace c10`下的`std::vector<OperatorRegistrar> registrars_;`中，之后由`c10::Dispatch`进行分发
+
+`RegisterOperators`和`Options`的注册过程均采用右值引用的方式，这样做的目的是减少拷贝

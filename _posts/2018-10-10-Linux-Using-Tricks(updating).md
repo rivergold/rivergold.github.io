@@ -1867,3 +1867,29 @@ sudo apt install tig
 **_References:_**
 
 - [Harker' Blog: Centos 7 安装 Proxychains 实现 Linux 代理](http://www.harker.cn/archives/proxychains.html)
+
+---
+
+## Eclipse
+
+```shell
+sudo apt install default-jre
+sudo snap install --classic eclipse
+```
+
+**_References:_**
+
+- [stackoverflow: Eclipse doesn't start on Ubuntu 18.04](https://askubuntu.com/questions/1031171/eclipse-doesnt-start-on-ubuntu-18-04)
+
+---
+
+## snap
+
+Snap download is very slow.
+
+1. Download snap file from [uApp Explorer](https://uappexplorer.com/snap/ubuntu/eclipse)
+2. Install via `sudo snap install xxx.snap --dangerous`
+
+**_References:_**
+
+- [CSDN: ubuntu 使用 snap 下载速度慢](https://blog.csdn.net/qf0129/article/details/91873740)

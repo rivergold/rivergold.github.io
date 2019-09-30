@@ -488,3 +488,30 @@ PyTorch 的核心 Tensor 是`aten/src/ATen/core.Tensor.h`中声明的`class CAFF
 **_References:_**
 
 - [cppreference.com: reinterpret_cast 转换](https://zh.cppreference.com/w/cpp/language/reinterpret_cast)
+
+---
+
+## && after class method
+
+```c++
+template<class KernelFunctor, class... ConstructorParameters>
+// enable_if: only enable it if KernelFunctor is actually a functor
+guts::enable_if_t<guts::is_functor<KernelFunctor>::value, Options&&> kernel(TensorTypeId dispatch_key, ConstructorParameters&&... constructorParameters) && {
+      static_assert(std::is_base_of<OperatorKernel, KernelFunctor>::value, "Tried to register a kernel functor using the kernel<Functor>() API, but it doesn't inherit from c10::OperatorKernel. Please have the functor inherit from it.");
+      static_assert(std::is_constructible<KernelFunctor, ConstructorParameters...>::value, "Wrong argument list for constructor of kernel functor. The arguments to kernel<Functor>(arguments...) must match one of the constructors of Functor.");
+
+      return std::move(*this).kernelFunctor<KernelFunctor, false>(dispatch_key, std::forward<ConstructorParameters>(constructorParameters)...);
+    }
+```
+
+**_References:_**
+
+- [知乎: c++成员函数声明()后加&或&&表示什么？](https://www.zhihu.com/question/47163104/answer/104614784)
+
+---
+
+## `std::enable_if`
+
+**_References:_**
+
+- [Blog: std::enable_if 的几种用法](https://yixinglu.gitlab.io/enable_if.html)

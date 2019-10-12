@@ -443,6 +443,12 @@ void THPSize_init(PyObject *module)
 
 Python 体系中的 Tensor 和 Function 会继承了 warp C++之后的`torch._C._TensorBase`和`torch._C._FunctionBase`
 
+**_References:_**
+
+- [Blog: 使用 C 写 Python 的模块](https://www.zouyesheng.com/python-module-c.html)
+- [ c-extension-tutorial](https://llllllllll.github.io/c-extension-tutorial/index.html)
+- [博客园: 使用 C 语言扩展 Python(一)](https://www.cnblogs.com/phinecos/archive/2010/05/17/1737033.html?login=1)
+
 ---
 
 ## c10 注册机制

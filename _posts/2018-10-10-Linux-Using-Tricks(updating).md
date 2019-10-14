@@ -1149,6 +1149,12 @@ sudo apt-get install goldendict-wordnet
 
 - [开源中国: ubuntu 下安装 GoldenDict 替代有道词典--支持划词选词](https://my.oschina.net/u/1998467/blog/300643)
 
+### Config
+
+**_References:_**
+
+- [简书: Linux 安装多功能词典 GoldenDict](https://www.jianshu.com/p/1af17b722991)
+
 <!-- ***References:***
 
 - [StarDict Dictionaries -- 星际译王词库 词典下载](http://download.huzheng.org/)

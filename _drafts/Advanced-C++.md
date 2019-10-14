@@ -200,6 +200,35 @@ class A{
 }
 ```
 
+---
+
+## Call superclass constructor
+
+```c++
+#include <iostream>
+
+class Parent {
+public:
+  int data;
+};
+
+class Child : public Parent {
+public:
+  Child(Parent const &rhs) : Parent(rhs){};
+};
+
+int main() {
+  Parent parent = Parent();
+  parent.data = 10;
+  Child child = Child(parent);
+  std::cout << child.data << std::endl;
+}
+```
+
+**_References:_**
+
+- [stackoverflow: What are the rules for calling the superclass constructor?](https://stackoverflow.com/questions/120876/what-are-the-rules-for-calling-the-superclass-constructor)
+
 <!--  -->
 <br>
 

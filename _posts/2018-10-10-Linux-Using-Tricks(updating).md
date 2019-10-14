@@ -1834,6 +1834,12 @@ sudo apt install silversearcher-ag
 
 - [Ming's Blog: the silver searcher：快如闪电的 grep](https://bitmingw.com/2017/10/08/fast-grep-the-silver-searcher/)
 
+### Usage
+
+**_References:_**
+
+- [Ming's blog: the silver searcher：快如闪电的 grep](https://bitmingw.com/2017/10/08/fast-grep-the-silver-searcher/)
+
 <!--  -->
 <br>
 

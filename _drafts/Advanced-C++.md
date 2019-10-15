@@ -202,7 +202,7 @@ class A{
 
 ---
 
-## Call superclass constructor
+## Call base class constructor
 
 ```c++
 #include <iostream>
@@ -544,3 +544,39 @@ guts::enable_if_t<guts::is_functor<KernelFunctor>::value, Options&&> kernel(Tens
 **_References:_**
 
 - [Blog: std::enable_if 的几种用法](https://yixinglu.gitlab.io/enable_if.html)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# AQ
+
+## 什么时候需要使用`noexcept`?
+
+TODO:
+
+## `explicit`的作用是什么?
+
+TODO:
+
+**_References:_**
+
+- [博客园: C++ 隐式类类型转换](https://www.cnblogs.com/QG-whz/p/4472566.html)
+
+e.g.,
+
+PyTorch 中对`implicit`的 constuctor 进行了注释
+
+```c++
+  // "Downcasts" a `Tensor` into a `Variable`. Only call this on tensors you
+  // know are Variables.
+  /*implicit*/ Variable(at::Tensor const& rhs) : at::Tensor(rhs) {
+    TORCH_CHECK(
+        is_variable() || !defined(),
+        "Tensor that was converted to Variable was not actually a Variable");
+  }
+```

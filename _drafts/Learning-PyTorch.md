@@ -260,6 +260,22 @@ TypeError: batch must contain tensors, numbers, dicts or lists; found <class 'PI
 <br>
 <!--  -->
 
+# Autograd
+
+## :triangular_flag_on_post:Get intermidiate variable grad
+
+**_References:_**
+
+- [stackoverflow: Why does autograd not produce gradient for intermediate variables?](https://stackoverflow.com/questions/45988168/why-does-autograd-not-produce-gradient-for-intermediate-variables)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # :fallen_leaf: PyTorch C++ Extensions
 
 - [Doc](CUSTOM C++ AND CUDA EXTENSIONS)

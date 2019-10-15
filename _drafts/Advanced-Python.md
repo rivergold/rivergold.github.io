@@ -252,6 +252,27 @@ print('{x} is {x}'.format(x=x))
 
 - [stackoverflow: format strings and named arguments in Python](https://stackoverflow.com/questions/17895835/format-strings-and-named-arguments-in-python)
 
+---
+
+## subprocess
+
+### Basic use
+
+- [ ] TBD
+
+### [Error] Bash -o: command not found
+
+You'd better use `""` with your params in bash command.
+
+```python
+command = 'youtube-dl -f 130 your_url -o "{}"'.format('your_save_path')
+subprocess.run(command, shell=True, executable="/bin/bash")
+```
+
+**_References:_**
+
+- [stackoverflow: -o: command not found](https://superuser.com/questions/201408/o-command-not-found/201409)
+
 <!--  -->
 <br>
 

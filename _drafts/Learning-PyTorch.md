@@ -22,7 +22,17 @@
 
 ## `torch.Tensor`
 
-A [`torch.Tensor`](https://pytorch.org/docs/stable/tensors.html#torch.Tensor.to) is a multi-dimensional matrix containing elements of a single data type.
+A [`torch.Tensor`](https://pytorch.org/docs/stable/tensors.html#torch.Tensor.to) is a class, which is a multi-dimensional matrix containing elements of a single data type.
+
+### :triangular_flag_on_post:Distinguish between the use of `torch.Tensor` and `torch.tensor`
+
+- `torch.Tensor` is a class
+
+- `torch.tensor` is a function to crate new tensor, when you want to create new Tensor, you need to use this function.
+
+**_References:_**
+
+- [stackoverflow: What is the difference between torch.tensor and torch.Tensor?](https://stackoverflow.com/questions/51911749/what-is-the-difference-between-torch-tensor-and-torch-tensor)
 
 ---
 

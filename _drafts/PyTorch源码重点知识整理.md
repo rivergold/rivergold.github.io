@@ -206,3 +206,20 @@ static auto registerer = torch::RegisterOperators()
 注册后的结果是，所有注册的函数都会被添加到`namespace c10`下的`std::vector<OperatorRegistrar> registrars_;`中，之后由`c10::Dispatch`进行分发
 
 `RegisterOperators`和`Options`的注册过程均采用右值引用的方式，这样做的目的是减少拷贝，且在其作用完成后，就会被释放。
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# TH to ATen
+
+## 参考
+
+### `pow`的实现
+
+- [Issue: Port `pow` operator from the TH code to Aten #23492](https://github.com/pytorch/pytorch/pull/23492)
+- [PR: Migrate `pow` and `pow_` from the TH to Aten (CPU) #24750](https://github.com/pytorch/pytorch/issues/24750)

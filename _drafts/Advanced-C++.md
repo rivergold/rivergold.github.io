@@ -229,6 +229,20 @@ int main() {
 
 - [stackoverflow: What are the rules for calling the superclass constructor?](https://stackoverflow.com/questions/120876/what-are-the-rules-for-calling-the-superclass-constructor)
 
+---
+
+## Difference between `class` and `struct`
+
+Only two differences:
+
+- Default inherited permission: `class` is `private`, `struct` is `public`
+
+- Default member access permission: `class` is `private`, `struct` is `public`
+
+**_References:_**
+
+- [CSDN: c++ struct 与 class 的区别](https://blog.csdn.net/hustyangju/article/details/24350175)
+
 <!--  -->
 <br>
 
@@ -580,3 +594,41 @@ PyTorch 中对`implicit`的 constuctor 进行了注释
         "Tensor that was converted to Variable was not actually a Variable");
   }
 ```
+
+## `static_cast`
+
+TODO:
+
+## lambda 表达式的捕获列表
+
+e.g. `Pytorch-aten/src/ATen/native/cpu/PowKernel.cpp`,
+
+```c++
+void pow_tensor_tensor_kernel(TensorIterator& iter) {
+  if (isFloatingType(iter.dtype())) {
+    AT_DISPATCH_FLOATING_TYPES(iter.dtype(), "pow", [&]() {
+      using Vec = Vec256<scalar_t>;
+      cpu_kernel_vec(iter,
+        [=](scalar_t base, scalar_t exp) -> scalar_t {
+          return std::pow(base, exp);
+        },
+        [&](Vec base, Vec exp) -> Vec {
+          return base.pow(exp);
+        }
+      );
+    });
+  } else {
+    AT_DISPATCH_INTEGRAL_TYPES(iter.dtype(), "pow", [&]() {
+      cpu_kernel(iter,
+        [=](scalar_t base, scalar_t exp) -> scalar_t {
+          return std::pow(base, exp);
+        }
+      );
+    });
+  }
+}
+```
+
+**_References:_**
+
+- [简书: lambda 表达式 C++11](https://www.jianshu.com/p/923d11151027)

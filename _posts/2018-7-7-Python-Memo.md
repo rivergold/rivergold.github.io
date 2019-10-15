@@ -240,6 +240,10 @@ a[(a[:,:,0]>0) & (a[:,:,1]>0)].shape
   a = '\"abc\"'
   print(a)
   >>> "abc"
+  # format
+  a = '"{}"'.format(123)
+  print(a)
+  >>> "123"
   ```
 
 - `str.replace`

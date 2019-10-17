@@ -235,6 +235,17 @@ cd YouCompleteMe
 
 - [stackoverflow: Vim-style keys to navigate up and down in Omnicomplete box](https://stackoverflow.com/questions/21900031/vim-style-keys-to-navigate-up-and-down-in-omnicomplete-box)
 
+### Problem & Solution
+
+#### [Error] `import ycm_core as ycm_core`
+
+1. `cd YouCompleteMe/third_party/ycmd`
+2. `ldd ./ycm_core.so` to check which dynamic library is not work
+
+**_Referneces:_**
+
+- [Youcomplete 完全安装](https://my.oschina.net/pointeraddress/blog/855916)
+
 <!--  -->
 <br>
 

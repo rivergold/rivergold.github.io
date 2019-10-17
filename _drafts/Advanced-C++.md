@@ -603,6 +603,14 @@ TODO:
 
 e.g. `Pytorch-aten/src/ATen/native/cpu/PowKernel.cpp`,
 
+TODO:
+
+- `[]`
+- `[=]`
+- `[&]`
+- `[this]`
+- ...
+
 ```c++
 void pow_tensor_tensor_kernel(TensorIterator& iter) {
   if (isFloatingType(iter.dtype())) {
@@ -629,6 +637,85 @@ void pow_tensor_tensor_kernel(TensorIterator& iter) {
 }
 ```
 
+Here is an [example](https://github.com/rivergold/Cpp11/blob/master/cpp11/lambda_function.cc).
+
 **_References:_**
 
 - [简书: lambda 表达式 C++11](https://www.jianshu.com/p/923d11151027)
+- [CSDN: C++11 中的 Lambda 表达式构成之——捕获值列表](https://blog.csdn.net/zh379835552/article/details/19542181)
+
+---
+
+## 指向函数指针的指针
+
+E.g. from PyTorch `aten/src/ATen/native/DispatchStub.h`
+
+```c++
+template <typename rT, typename T, typename... Args>
+// @rivergold: rT (*)(Args...) 是函数指针，但在DispatchStub定义时，typename rT 为函数指针
+struct CAFFE2_API DispatchStub<rT (*)(Args...), T> {
+  using FnPtr = rT (*) (Args...);
+
+  DispatchStub() = default;
+  DispatchStub(const DispatchStub&) = delete;
+  DispatchStub& operator=(const DispatchStub&) = delete;
+
+  template <typename... ArgTypes>
+  rT operator()(DeviceType device_type, ArgTypes&&... args) {
+    if (device_type == DeviceType::CPU) {
+      if (!cpu_dispatch_ptr) {
+        cpu_dispatch_ptr = choose_cpu_impl();
+      }
+      return (*cpu_dispatch_ptr)(std::forward<ArgTypes>(args)...);
+    } else if (device_type == DeviceType::CUDA) {
+      AT_ASSERTM(cuda_dispatch_ptr, "DispatchStub: missing CUDA kernel");
+      return (*cuda_dispatch_ptr)(std::forward<ArgTypes>(args)...);
+    } else if (device_type == DeviceType::HIP) {
+      AT_ASSERTM(hip_dispatch_ptr, "DispatchStub: missing HIP kernel");
+      return (*hip_dispatch_ptr)(std::forward<ArgTypes>(args)...);
+    } else {
+      AT_ERROR("DispatchStub: unsupported device type", device_type);
+    }
+  }
+
+  // ...
+}
+```
+
+### 函数指针
+
+基本格式:
+
+```c++
+data_type (*func_pointer) (data_type arg1, data_type arg2, ..., data_type argn)
+```
+
+**_References:_**
+
+- [RUNOOB.COM: C++ 函数指针 & 类成员函数指针](https://www.runoob.com/w3cnote/cpp-func-pointer.html)
+
+---
+
+## 模板特化
+
+TODO:
+
+**_References:_**
+
+- [cppreference.com: 显式（全）模板特化](https://zh.cppreference.com/w/cpp/language/template_specialization)
+- [Harttle Land Blog: C++模板的偏特化与全特化](https://harttle.land/2015/10/03/cpp-template.html)
+
+### 类模板成员特化
+
+E.g. from `aten/src/ATen/native/DispatchStub.h:147`
+
+```c++
+#define REGISTER_ARCH_DISPATCH(name, arch, fn) \
+  template <> decltype(fn) DispatchStub<decltype(fn), struct name>::arch = fn;
+```
+
+Here is an [example](https://github.com/rivergold/Cpp11/blob/master/cpp11/class_template_member_specialization.cc)
+
+**_References:_**
+
+- [CSDN: 特化类模板成员](https://blog.csdn.net/isscollege/article/details/75050179)

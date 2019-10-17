@@ -1905,3 +1905,23 @@ Snap download is very slow.
 **_References:_**
 
 - [CSDN: ubuntu 使用 snap 下载速度慢](https://blog.csdn.net/qf0129/article/details/91873740)
+
+---
+
+## mpv
+
+Good video player on Linux.
+
+### Config
+
+Edit `~/.config/mpv/mpv.conf`
+
+#### Window size
+
+```shell
+geometry=50%x50%
+```
+
+**_References:_**
+
+- [Github mpv-player/mpv: Want to start mpv in a default window size and position #4724](https://github.com/mpv-player/mpv/issues/4724)

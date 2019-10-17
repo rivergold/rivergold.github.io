@@ -223,3 +223,19 @@ static auto registerer = torch::RegisterOperators()
 
 - [Issue: Port `pow` operator from the TH code to Aten #23492](https://github.com/pytorch/pytorch/pull/23492)
 - [PR: Migrate `pow` and `pow_` from the TH to Aten (CPU) #24750](https://github.com/pytorch/pytorch/issues/24750)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# AQ
+
+## `scalar_t`
+
+e.g. in `aten/src/ATen/native/cpu/PowKernel.cpp`
+
+TODO:

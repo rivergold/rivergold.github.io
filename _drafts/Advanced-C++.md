@@ -1,6 +1,31 @@
 # :fallen_leaf:Basics
 
-## Declare & Define
+## Distinguish Declare & Define
+
+---
+
+## Distinguish function & method
+
+---
+
+## Polymorphism
+
+- 编译期多态: 模板
+- 运行期多态: 动态绑定，主要通过虚函数实现
+
+**_References:_**
+
+- [CSDN: 多态性之编译期多态和运行期多态(C++版)](https://blog.csdn.net/dan15188387481/article/details/49667389)
+
+## Virtual Function
+
+子类 override 父类的虚函数
+
+动态绑定： 声明基类的指针，利用该指针指向任意一个子类对象，调用相应的虚函数
+
+**_References:_**
+
+- [知乎: C++虚函数的作用是什么?](https://www.zhihu.com/question/23971699)
 
 ---
 

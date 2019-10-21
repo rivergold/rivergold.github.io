@@ -298,6 +298,12 @@ if exists('python_space_error_highlight')
     unlet python_space_error_highlight
 endif
 " -----
+
+" -----Shortcut
+:cmap qq q!
+" open number
+:cmap <leader>n set nu
+:cmap <leader>cn set nu!
 ```
 
 <!--  -->

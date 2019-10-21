@@ -263,6 +263,14 @@ map <leader>nb :NERDTreeFromBookmark
 map <leader>nf :NERDTreeFind<cr>
 ```
 
+### Shortcut
+
+- Hold `ctr`, `w` + `w`: switch between edit window and tree window
+
+**_References:_**
+
+- [简书: Vim 插件--Nerdtree 的使用及快捷键](https://www.jianshu.com/p/e58d92c65695)
+
 <!--  -->
 <br>
 

@@ -17,6 +17,8 @@
 
 - [CSDN: 多态性之编译期多态和运行期多态(C++版)](https://blog.csdn.net/dan15188387481/article/details/49667389)
 
+---
+
 ## Virtual Function
 
 子类 override 父类的虚函数
@@ -279,6 +281,18 @@ Only two differences:
 **_References:_**
 
 - [CSDN: c++ struct 与 class 的区别](https://blog.csdn.net/hustyangju/article/details/24350175)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# Template
+
+模板代码在编译时会展开成 C++代码
 
 <!--  -->
 <br>

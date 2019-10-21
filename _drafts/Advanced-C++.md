@@ -17,6 +17,18 @@ This specifier specifies that a constructor doesn't allow `implicit conversions`
 
 ## `static`
 
+### static variable
+
+### static function
+
+### static data member
+
+### static method
+
+- 出现在类体外的方法定义不用写 statice 关键字
+- 只能访问类中的 statice 成员
+- 由于没有`this`指针的额外开销，静态方法比类的非静态方法要快一些
+
 **_Ref:_** [知乎: C/C++ 中的 static 关键字](https://zhuanlan.zhihu.com/p/37439983)
 
 **_References:_**

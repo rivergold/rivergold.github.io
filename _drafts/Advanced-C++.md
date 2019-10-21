@@ -15,7 +15,9 @@
 
 **_References:_**
 
-- [CSDN: 多态性之编译期多态和运行期多态(C++版)](https://blog.csdn.net/dan15188387481/article/details/49667389)
+- :thumbsup:[CSDN: 多态性之编译期多态和运行期多态(C++版)](https://blog.csdn.net/dan15188387481/article/details/49667389)
+- :thumbsup:[CSDN: C++ 什么是多态，多态的用途](https://blog.csdn.net/shihuboke/article/details/79333585)
+- :thumbsup:[CSDN: C++ 对比虚函数的动态绑定](https://blog.csdn.net/hairetz/article/details/4266404)
 
 ---
 

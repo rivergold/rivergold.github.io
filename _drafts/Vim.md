@@ -8,6 +8,10 @@ Build vim need:
 
 - Python3 and python3-dev
 
+**Note:**
+
+- Use system default gcc
+
 ## Ubuntu
 
 ### 1. Install `python-dev`\*\*
@@ -19,8 +23,27 @@ sudo apt-get install python3-dev
 
 ### 2. run Config\*\*
 
+Use `./configure --help` to get command list
+
+**Latest vim version**
+
 ```shell
-cd vim
+./configure --with-features=huge \
+--enable-multibyte \
+--enable-rubyinterp=yes \
+--enable-python3interp=yes \
+--with-python3-command=/root/software/anaconda/bin/python \
+--enable-perlinterp=yes \
+--enable-luainterp=yes \
+--enable-gui=gtk2 \
+--enable-cscope \
+--prefix=/usr/local \
+--enable-fail-if-missing
+```
+
+**Older version**
+
+```shell
 ./configure --with-features=huge \
 --enable-multibyte \
 --enable-rubyinterp=yes \
@@ -100,6 +123,28 @@ Same with Ubuntu
 ### 3. Build
 
 Same with Ubuntu
+
+---
+
+## Build Problems & Solutions
+
+### [Configure Error] `no terminal library found`
+
+**Ubuntu**
+
+```shell
+sudo apt install libncurses5-dev
+```
+
+**CentOS**
+
+```shell
+yum install ncurses-devel.x86_64
+```
+
+**_References:_**
+
+- [CSDN: CentOS 编译 vim no terminal library found](https://blog.csdn.net/cuijianzhi/article/details/78652745)
 
 ---
 

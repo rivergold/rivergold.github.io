@@ -1,3 +1,17 @@
+# :fallen_leaf:CentOS 源
+
+- [清华源](https://mirror.tuna.tsinghua.edu.cn/help/centos/)
+
+- [阿里源](https://opsx.alibaba.com/mirror)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # :fallen_leaf:Gcc Version Management
 
 ## What is SCL
@@ -128,10 +142,36 @@ scl enable devtoolset-7 bash
 If you want to enable devtool as default, you need to add followings into your `~/.zshrc` or `~/.bashrc`
 
 ```shell
+# Ubuntu
 source scl_source enable devtoolset-8
+# CentOS
+source /opt/rh/devtoolset-7/enable
 ```
 
 Ref [StackExchange: How to permanently enable scl CentOS 6.4?](https://unix.stackexchange.com/questions/175851/how-to-permanently-enable-scl-centos-6-4)
+
+---
+
+## LLVM
+
+### Install
+
+```shell
+yum install llvm-toolset-7
+```
+
+### Enable
+
+```shell
+scl enable llvm-toolset-7 zsh
+
+# vim ~/.zshrc add
+source /opt/rh/llvm-toolset-7/enable
+```
+
+**_References:_**
+
+- [stackoverflow: How to install Clang and LLVM 3.9 on CentOS 7](https://stackoverflow.com/questions/44219158/how-to-install-clang-and-llvm-3-9-on-centos-7)
 
 <!--  -->
 <br>

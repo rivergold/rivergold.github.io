@@ -232,6 +232,20 @@ static auto registerer = torch::RegisterOperators()
 <br>
 <!--  -->
 
+# Build PyTorch with clang
+
+**_References:_**
+
+- [PyTorch Forum: Current way to compile from source](https://discuss.pytorch.org/t/current-way-to-compile-from-source/19635)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # AQ
 
 ## `scalar_t`
@@ -239,3 +253,29 @@ static auto registerer = torch::RegisterOperators()
 e.g. in `aten/src/ATen/native/cpu/PowKernel.cpp`
 
 TODO:
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# Build Error
+
+## [CMake Configuring] Could not find OpenMP
+
+```cmake
+-- Could NOT find OpenMP_C (missing: OpenMP_C_FLAGS OpenMP_C_LIB_NAMES)
+-- Could NOT find OpenMP_CXX (missing: OpenMP_CXX_FLAGS OpenMP_CXX_LIB_NAMES)
+-- Could NOT find OpenMP (missing: OpenMP_C_FOUND OpenMP_CXX_FOUND)
+CMake Error at third_party/ideep/mkl-dnn/cmake/OpenMP.cmake:115 (message):
+  OpenMP library could not be found.  Proceeding might lead to highly
+  sub-optimal performance.
+Call Stack (most recent call first):
+  third_party/ideep/mkl-dnn/CMakeLists.txt:76 (include)
+
+
+-- Configuring incomplete, errors occurred!
+```

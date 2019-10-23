@@ -224,6 +224,34 @@ Copy initialization ordinarily use the copy constructor. But if a class has a mo
 <br>
 <!--  -->
 
+# :triangular_flag_on_post:C++ Compilation
+
+## C++ compiler
+
+- gcc (g++)
+- clang (clang++)
+- ...
+
+gcc 要更常用一些
+
+## 编译过程
+
+- :triangular_flag_on_post:C++语言支持“分离编译”（separate compilation）
+- `Template`模板不支持“分别编译”
+
+**_References:_**
+
+- :thumbsup:[CSDN: 分离式编译模式](https://blog.csdn.net/JIEJINQUANIL/article/details/50984347)
+- :thumbsup:[CSDN: C++ 函数模板与分离编译模式](https://blog.csdn.net/K346K346/article/details/49500635): 模板不支持分离编译
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # Class
 
 ## `friend`

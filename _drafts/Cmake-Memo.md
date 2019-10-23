@@ -480,6 +480,18 @@ add_custom_command(TARGET <your_exe_name> POST_BUILD   # Adds a post-build event
 
 Refer [stackoverflow: How to copy DLL files into the same folder as the executable using CMake?](https://stackoverflow.com/questions/10671916/how-to-copy-dll-files-into-the-same-folder-as-the-executable-using-cmake)
 
+---
+
+## Config compiler
+
+```shell
+CC=clang CXX=clang++ cmake ..
+```
+
+**_References::_**
+
+- [stackoverflow: Switching between GCC and Clang/LLVM using CMake](https://stackoverflow.com/questions/7031126/switching-between-gcc-and-clang-llvm-using-cmake)
+
 <!--  -->
 <br>
 

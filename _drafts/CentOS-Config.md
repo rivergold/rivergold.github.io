@@ -12,7 +12,7 @@
 <br>
 <!--  -->
 
-# :fallen_leaf:Gcc Version Management
+# :fallen_leaf:gcc Version Management
 
 ## What is SCL
 
@@ -62,9 +62,12 @@ Ref [博客园: CentOS yum 源的配置与使用](https://www.cnblogs.com/mchina
 
 - zsh
 - devtool
+  - dev-toolset
+  - llvm
 - Python
 - vim
 - cmake
+- git
 
 ## zsh
 
@@ -383,6 +386,19 @@ execute pathogen#infect()
   **_References:_**
 
   - [Github Valloric/YouCompleteMe: CMake Error at ycm/CMakeLists file DOWNLOAD HASH mismatch #1711](https://github.com/Valloric/YouCompleteMe/issues/1711#issuecomment-329520570)
+
+---
+
+## git
+
+```shell
+yum install http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-2.noarch.rpm
+yum install git
+```
+
+**_References:_**
+
+- [stackoverflow: How to install latest version of git on CentOS 7.x/6.x](https://stackoverflow.com/questions/21820715/how-to-install-latest-version-of-git-on-centos-7-x-6-x)
 
 <!--  -->
 <br>

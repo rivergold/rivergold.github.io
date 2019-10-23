@@ -182,6 +182,16 @@ python setup sdist
 
 **_Ref:_** [stackoverflow: How to include package data with setuptools/distribute?](https://stackoverflow.com/questions/7522250/how-to-include-package-data-with-setuptools-distribute/14159430)
 
+---
+
+## Set package version
+
+Edit your package `__init__.py`, and add `__version__ = vx.x`
+
+**_References:_**
+
+- [stackoverflow: Standard way to embed version into python package?](https://stackoverflow.com/questions/458550/standard-way-to-embed-version-into-python-package)
+
 <!--  -->
 <br>
 

@@ -1,3 +1,7 @@
+# Good Blog
+
+- [Github Gist protrolium/ffmpeg.md](https://gist.github.com/protrolium/e0dbd4bb0f1a396fcb55)
+
 # Common Command
 
 ## Convert video type
@@ -85,6 +89,39 @@ ffprobe -print_format json <video>
 ```shell
 ffmpeg -i <audio_path> -i <video_path> -codec copy <output_path>
 ```
+
+---
+
+## Set log level
+
+```shell
+{ "quiet"  , AV_LOG_QUIET   },
+{ "panic"  , AV_LOG_PANIC   },
+{ "fatal"  , AV_LOG_FATAL   },
+{ "error"  , AV_LOG_ERROR   },
+{ "warning", AV_LOG_WARNING },
+{ "info"   , AV_LOG_INFO    },
+{ "verbose", AV_LOG_VERBOSE },
+{ "debug"  , AV_LOG_DEBUG   },
+{ "trace"  , AV_LOG_TRACE   },
+```
+
+```shell
+ffmpeg -loglevel warning ...
+```
+
+**_References:_**
+
+- [简书: ffmpeg # 利用 loglevel 控制打印日志的信息](https://www.jianshu.com/p/2be79f17e271)
+- [stackoverflow: How can I make ffmpeg be quieter/less verbose?](https://superuser.com/questions/326629/how-can-i-make-ffmpeg-be-quieter-less-verbose)
+
+---
+
+## Write text into video
+
+**_References:_**
+
+- [stackoverflow: Using hex colors with ffmpeg's showwaves](https://stackoverflow.com/questions/45885460/using-hex-colors-with-ffmpegs-showwaves)
 
 <!--  -->
 <br>

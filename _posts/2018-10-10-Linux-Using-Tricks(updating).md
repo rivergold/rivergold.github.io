@@ -769,6 +769,26 @@ yum install p7zip
 <br>
 <!--  -->
 
+# ssh
+
+## Generate ssh key
+
+```shell
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
+
+**_References:_**
+
+- [Github Help: Generating a new SSH key and adding it to the ssh-agent](https://help.github.com/en/enterprise/2.16/user/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # :fallen_leaf:Common Software
 
 - :thumbsup:[码农有道: 15 个超赞超牛逼的 Linux 工具，提高效率的同时增加乐趣！](https://mp.weixin.qq.com/s?__biz=MzIwNTc4NTEwOQ==&mid=2247487175&idx=2&sn=8c3e5b629b31c0c9232d14c73d5b4833&chksm=972adfbda05d56ab26a26ee1f51c4b8cb3d8d9f5be95cc9e782afffcfa4681017dc942605eec&mpshare=1&scene=1&srcid=&sharer_sharetime=1567609815220&sharer_shareid=cc363ceb86aab466ef27b423dcb88157#rd)

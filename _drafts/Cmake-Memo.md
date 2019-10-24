@@ -324,6 +324,26 @@ target_link_libraries(foo INTERFACE ${FOO_LIBRARIES})
 
 - [GitHub Gist: baiwfg2/CMakeLists.txt](https://gist.github.com/baiwfg2/39881ba703e9c74e95366ed422641609): references in it is very good.
 
+---
+
+## :triangular_flag_on_post:CMake Generator
+
+A generator may be selected via the `cmake(1)` -G option, interactively in `cmake-gui(1)`, or via the `CMAKE_GENERATOR` environment variable.
+
+**_References:_**
+
+- :thumbsup:[CMake doc: CMAKE_GENERATOR](https://cmake.org/cmake/help/latest/variable/CMAKE_GENERATOR.html)
+
+E.g., set cmake generator as ninja
+
+```shell
+# Method-1: cmake
+cmake -GNinja ..
+# Method-2: cmake environment
+# Edit CMakeLists.txt
+set(CMAKE_GENERATOR "Ninja")
+```
+
 <!--  -->
 <br>
 

@@ -1896,6 +1896,31 @@ sudo apt install tig
 
 ### Install
 
+1. Clone source
+
+   ```shell
+   git clone https://github.com/rofl0r/proxychains-ng.git
+   ```
+
+2. Build
+
+   ```shell
+   cd proxychains-ng
+   ./configure --prefix=/usr --sysconfdir=/etc
+   make
+   make install
+   make install-config
+   cd .. && rm -rf proxychains-ng
+   ```
+
+3. Config
+
+   Edit `/etc/proxychains.conf`
+
+   ```conf
+   socks5 <ip> <port>
+   ```
+
 **_References:_**
 
 - [Harker' Blog: Centos 7 安装 Proxychains 实现 Linux 代理](http://www.harker.cn/archives/proxychains.html)

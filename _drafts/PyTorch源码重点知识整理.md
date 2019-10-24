@@ -262,9 +262,21 @@ TODO:
 <br>
 <!--  -->
 
-# Build Error
+# Build from PyTorch Source
 
-## [CMake Configuring] Could not find OpenMP
+**_References:_**
+
+- [PyTorch Home](https://pytorch.org/get-started/locally/)
+
+## 编译时间
+
+- CPU: 8 core
+
+---
+
+## Error
+
+### [CMake Configuring] Could not find OpenMP
 
 ```cmake
 -- Could NOT find OpenMP_C (missing: OpenMP_C_FLAGS OpenMP_C_LIB_NAMES)
@@ -279,3 +291,61 @@ Call Stack (most recent call first):
 
 -- Configuring incomplete, errors occurred!
 ```
+
+_*Solution:*_
+
+TODO:
+
+### [Use PyTorch] cmake cannot find `public/xxx.cmake`
+
+```cmake
+CMake Error at /home/ubtuntu/pytorch/build/Caffe2Config.cmake:14 (include):
+  include could not find load file:
+
+    /home/ubtuntu/pytorch/build/public/utils.cmake
+```
+
+Same error from website:
+
+- [Github facebookresearch/Detectron: make ops fails with pytorch compiled from source #715](https://github.com/facebookresearch/Detectron/issues/715)
+- [Github pytorch/pytorch: [Caffe2] Caffe2Config.cmake #15009](https://github.com/pytorch/pytorch/issues/15009)
+
+**Solution:**
+
+TODO:
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# PyTorch
+
+## Config PyTorch in CMake
+
+cmake need to find `TorchConfig.cmake` to config PyTorch, `TorchConfig.cmake` often in path `<pytorch_root_dir>/torch/share/cmake/Torch`
+
+CMakeLists.txt
+
+```cmake
+# PyTorch
+set(CMAKE_PREFIX_PATH /root/rivergold-project/pytorch/torch/share/cmake/Torch)
+find_package(Torch REQUIRED)
+message("Torch Found: ${TORCH_FOUND}")
+message("Torch include_dir: ${TORCH_INCLUDE_DIRS}")
+message("Torch libs: ${TORCH_LIBRARIES}")
+include_directories(${TORCH_INCLUDE_DIRS})
+
+list(APPEND SRC test_pytorch.cc)
+
+add_executable(test_pytorch ${SRC})
+target_link_libraries(test_pytorch ${TORCH_LIBRARIES})
+```
+
+**_References:_**
+
+- [PyTorch doc: PYTORCH C++ API](https://pytorch.org/cppdocs/)
+- [Github pytorch/pytorch [Caffe2] Caffe2Config.cmake #15009](https://github.com/pytorch/pytorch/issues/15009)

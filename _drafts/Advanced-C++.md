@@ -811,6 +811,107 @@ Here is an [example](https://github.com/rivergold/Cpp11/blob/master/cpp11/class_
 
 # Development Environment
 
+## Install `gcc/g++` from apt or yum
+
+**Ubuntu**
+
+```shell
+sudo apt install build-essential
+```
+
+- [build-essential](https://packages.ubuntu.com/bionic/build-essential)
+
+**CentOS**
+
+```shell
+yum install centos-release-scl
+yum-config-manager --enable rhel-server-rhscl-7-rpms
+yum install devtoolset-7
+# Enable
+scl enable devtoolset-7 bash
+```
+
+---
+
 ## clang
 
 ### clang vs gcc
+
+After gcc 5.0, clang has no obvious advantage.
+
+---
+
+## ninja
+
+- [简书: 使用 Ninja 代替 make](https://www.jianshu.com/p/d118615c1943)
+
+`build.ninja` 文件类似于 `Makefile`
+
+### Install
+
+```shell
+pip install ninja
+```
+
+### Use ninja as cmake generator
+
+Use `-G` to set cmake generator.
+
+```shell
+# Method-1
+cmake -GNinja ..
+# Method-2: edit CMakeLists.txt
+set(CMAKE_GENERATOR "Ninja")
+```
+
+**_References:_**
+
+- :thumbsup:[CMake doc: cmake-generators(7)](https://cmake.org/cmake/help/v3.16/manual/cmake-generators.7.html)
+- [rivergold.site: CMake Memo](TODO:)
+
+---
+
+## Config / Change GCC/G++ version
+
+**Ubuntu**
+
+1. Add ppa `ubuntu-toolchain-r/test`
+
+   New version gcc/g++ is in `ppa:ubuntu-toolchain-r/test`
+
+   ```shell
+   sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+   ```
+
+2. Install GCC and G++
+
+   ```shell
+   sudo apt install gcc-7 g++-7 gcc-8 g++-8 gcc-9 g++-9
+   ```
+
+3. Config each version priority
+
+   E.g. use gcc-9 as default
+
+   ```shell
+    sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 90 --slave /usr/bin/g++ g++ /usr/bin/g++-9
+    sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 80 --slave /usr/bin/g++ g++ /usr/bin/g++-8
+    sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 70 --slave /usr/bin/g++ g++ /usr/bin/g++-7
+   ```
+
+4. If want to change default version
+
+   ```shell
+   sudo update-alternatives --config gcc
+   ```
+
+**_References:_**
+
+- :thumbsup::thumbsup::thumbsup:[sysgeek: 如何在 Ubuntu 18.04 LTS 系统中安装多版本 GCC 编译器](https://www.sysgeek.cn/ubuntu-install-gcc-compiler/)
+- [stackoverflow: install gcc-9 on Ubuntu 18.04?](https://askubuntu.com/questions/1140183/install-gcc-9-on-ubuntu-18-04)
+
+---
+
+## Use `conda` to manage develop environment?
+
+conda is not good to manage gcc/g++ version. Please use Linux OS system path to manage them.

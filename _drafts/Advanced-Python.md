@@ -298,6 +298,54 @@ Python find variable in order of `L -> E -> G -> B`.
 
 Only `def`, `class` and `lambda` will change variable scope. Other like `if/elif/else`, `try/except`, `for/while`, `with` will not change variable scope.
 
+---
+
+## import
+
+### import within package
+
+```shell
+package
+    - __init__.py
+    - sub1
+        - __init__.py
+        - a.py
+    - sub2
+        - __init__.py
+        - b.py
+    c.py
+d.py
+```
+
+```python
+# d.py
+import package.sub1.a
+from package import sub1
+import package.sub1.a
+from package import sub1.a # Error
+```
+
+```python
+# c.py
+from . import sub1
+from .sub1 import a
+from . import sub1.a # Error
+```
+
+:triangular_flag_on_post:**Conclusion**:
+
+```python
+# in c.py
+from . import x -> ok
+from . import x.xx -> error: SyntaxError: invalid syntax # 不能这样写 from x import xx.xxx
+# in a.py
+import ..sub2 as sub2 -> error: SyntaxError: invalid syntax # 不能这样写 import ..xx
+```
+
+**_References:_**
+
+- [博客园: python 基础之---import 与 from...import....](https://www.cnblogs.com/ptfblog/archive/2012/07/15/2592122.html)
+
 <!--  -->
 <br>
 

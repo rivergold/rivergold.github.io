@@ -274,6 +274,17 @@ TODO:
 
 ---
 
+## Third Party
+
+### MKL-DNN
+
+**_References:_**
+
+- [Github intel/mkl-dnn: who can explain the association among MKL, MKLML, MKLDNN #102](https://github.com/intel/mkl-dnn/issues/102)
+- [ApacheMXNet 博客: 用 Intel MKL-DNN 加速 CPU 上的深度学习](https://zh.mxnet.io/blog/mkldnn)
+
+---
+
 ## Error
 
 ### [CMake Configuring] Could not find OpenMP

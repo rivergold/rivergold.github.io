@@ -151,6 +151,37 @@ up.reset(nullptr)
 - [cppreference.com: std::unique_ptr::reset](https://en.cppreference.com/w/cpp/memory/unique_ptr/reset)
 - [cppreference.com: how to delete unique_ptr](http://www.cplusplus.com/forum/general/119828/)
 
+---
+
+## rvalue
+
+- 一个对象是右值意味着对其可以实施移动语义
+
+- 移动语义的含义：资源所有权的转让
+
+- 函数的返回值为右值
+
+**_References:_**
+
+- :thumbsup:[sczyh30: Modern C++ | 移动语义与完美转发 | Universal Reference](https://www.sczyh30.com/posts/C-C/cpp-move-semantic/)
+- :thumbsup:[Book: Effective Modern C++: 绪论]()
+
+---
+
+## `std::move`
+
+- `std::move`本质：函数模板
+
+- `std::move` 的作用: 把接受的实参转化为右值引用并返回
+
+> 右值是可以实施移动的，所以在一个对象上实施了`std::move`，就是告诉编译器该对象具备可以移动的条件。
+
+**_References:_**
+
+- :thumbsup:[Book: Effective Modern C++: 第 5 章 右值引用、移动语义和完美转发]()
+
+---
+
 ## lvalue and rvalue
 
 **_References:_**

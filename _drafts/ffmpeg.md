@@ -137,9 +137,21 @@ Download source code from [FFmpeg.org](https://ffmpeg.org/download.html)
 
 **_Ref:_** [FFMPEG: Compile FFmpeg on CentOS](https://trac.ffmpeg.org/wiki/CompilationGuide/Centos)
 
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # Problems & Solutions
 
 ## Variable FPS
+
+Use `mediainfo` to check if the video has variable fps.
+
+- [mediainfo](https://mediaarea.net/en/MediaInfo/Download)
 
 **_Ref:_** [VideoHelp Forum: Constant frame rate with H264 ts stream
 ](https://forum.videohelp.com/threads/365853-Constant-frame-rate-with-H264-ts-stream)

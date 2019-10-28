@@ -945,4 +945,44 @@ set(CMAKE_GENERATOR "Ninja")
 
 ## Use `conda` to manage develop environment?
 
+No, do not use `conda` to manage c++ develop environment.
+
 conda is not good to manage gcc/g++ version. Please use Linux OS system path to manage them.
+
+But you can use conda to install some tools (such as ffmpeg, ccache) and set them into `PATH` to use. But I prefer to download the source and build.
+
+---
+
+## ccache
+
+### Install
+
+- [Github](https://github.com/ccache/ccache/blob/master/doc/INSTALL.md)
+
+Build from source.
+
+```shell
+cd ccache
+./configure --with-libb2-from-internet --with-libzstd-from-internet --prefix=<path you want to install>
+make -j8
+make instal
+```
+
+To use ccache, you need to link `ccache` as `cc`, `c++`, `gcc` and `g++`
+
+```shell
+ln -s <ccache_install_dir>/bin/ccache <ccache_install_dir>/bin/cc
+ln -s <ccache_install_dir>/bin/ccache <ccache_install_dir>/bin/c++
+ln -s <ccache_install_dir>/bin/ccache <ccache_install_dir>/bin/gcc
+ln -s <ccache_install_dir>/bin/ccache <ccache_install_dir>/bin/g++
+```
+
+Edit `~/.zshrc`
+
+```shell
+export PATH=<ccache_install_dir>/bin:$PATH
+```
+
+**_References:_**
+
+- :thumbsup:[Github pytorch/CONTRIBUTING.md Make no-op build fast](https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md#make-no-op-build-fast)

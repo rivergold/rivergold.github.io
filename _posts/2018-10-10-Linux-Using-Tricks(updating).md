@@ -1783,7 +1783,7 @@ Ref [Linux 中国: 使用 Nmon 监控 Linux 的系统性能](https://linux.cn/ar
 
 <!--  -->
 
-## zssh & rzsz
+## :triangular_flag_on_post:zssh & rzsz
 
 ### Install
 

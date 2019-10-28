@@ -87,6 +87,14 @@ set_property(TARGET TargetName
              PROPERTY CXX_STANDARD 11)
 ```
 
+---
+
+## `.cmake`
+
+**_References:_**
+
+- [stackoverflow: What is the purpose of a .cmake file?](https://stackoverflow.com/questions/46456498/what-is-the-purpose-of-a-cmake-file)
+
 <!--  -->
 <br>
 

@@ -761,6 +761,18 @@ yum install p7zip
 
 - [RUNOOB.com: Linux zip 命令](https://www.runoob.com/linux/linux-comm-zip.html)
 
+---
+
+## List all symbolic links
+
+```shell
+ls -la /var/www/ | grep "\->"
+```
+
+**_References:_**
+
+- [stackoverflow: How to list all symbolic links in a directory](https://askubuntu.com/a/522054)
+
 <!--  -->
 <br>
 

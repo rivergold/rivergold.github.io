@@ -379,6 +379,64 @@ for data in pre_frames.queue:
 
 <!--  -->
 
+## datetime
+
+- :thumbsup:[strftime format](http://strftime.org/): Explain what `%M`, `%s` means
+
+### Convert string into time
+
+```python
+from datetime import datetime
+
+datetime_object = datetime.strptime('Jun 1 2005  1:33PM', '%b %d %Y %I:%M%p')
+```
+
+**_References:_**
+
+- :thumbsup::thumbsup:[stackoverflow: Converting string into datetime](https://stackoverflow.com/questions/466345/converting-string-into-datetime)
+- [python3-cookbook: 3.15 字符串转换为日期](https://python3-cookbook.readthedocs.io/zh_CN/latest/c03/p15_convert_strings_into_datetimes.html)
+
+### Calculate the difference between two datetime objects
+
+```python
+start_time = datetime.strptime('1:20', '%M:%S')
+end_time = datetime.strptime('2:10', '%M:%S')
+diff_time = (end_time - start_time).total_seconds()
+print(diff_time)
+>>> 50.0
+```
+
+**_References:_**
+
+- [stackoverflow: Python - Calculate the difference between two datetime.time objects](https://stackoverflow.com/questions/43305577/python-calculate-the-difference-between-two-datetime-time-objects/43308104)
+
+<!--  -->
+<br>
+
+---
+
+<!--  -->
+
+## Counter
+
+```python
+data = '12:45:56'
+num_each_char = Counter(data)
+print(num_each_char[':'])
+>>> 3
+```
+
+**_References:_**
+
+- [stackoverflow: How do I find the duplicates in a list and create another list with them?](https://stackoverflow.com/questions/9835762/how-do-i-find-the-duplicates-in-a-list-and-create-another-list-with-them)
+
+<!--  -->
+<br>
+
+---
+
+<!--  -->
+
 ## Errors and Exceptions
 
 - Raising exceptions

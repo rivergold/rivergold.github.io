@@ -1,11 +1,44 @@
-# Cmake
+# Good References
 
-## Books
+## Book
 
 ### An Introduction to Modern CMake
 
 - [GitBook](http://cliutils.gitlab.io/modern-cmake/)
 - [中文版](https://xiazuomo.gitbook.io/modern-cmake-chinese/)
+
+## Blog
+
+- :thumbsup::thumbsup::thumbsup:[Medium: CMake Tutorial](https://medium.com/@onur.dundar1/cmake-tutorial-585dd180109b): An overall introduction for cmake.
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# Key Concept
+
+## `.cmake`
+
+`.cmake` file can be considered as a module for CMakeLists.txt. CMakeLists.txt uses `include` command to import `.cmake`.
+
+In `.cmake`, you can write some cmake command, define function and MACRO.
+
+**_References:_**
+
+- [stackoverflow: What is the purpose of a .cmake file?](https://stackoverflow.com/questions/46456498/what-is-the-purpose-of-a-cmake-file)
+- [CSDN: cmake 中的 include 指令（.cmake 文件/MACRO 宏/function 函数）](https://blog.csdn.net/qq_38410730/article/details/102677143)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
 
 # Variable
 
@@ -86,14 +119,6 @@ THe other way for CMake to store information.
 set_property(TARGET TargetName
              PROPERTY CXX_STANDARD 11)
 ```
-
----
-
-## `.cmake`
-
-**_References:_**
-
-- [stackoverflow: What is the purpose of a .cmake file?](https://stackoverflow.com/questions/46456498/what-is-the-purpose-of-a-cmake-file)
 
 <!--  -->
 <br>

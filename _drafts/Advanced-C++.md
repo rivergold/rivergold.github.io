@@ -1,3 +1,9 @@
+# :fallen_leaf:Code Style
+
+## Google Style
+
+- [Google C++ Style Guide](https://guiquanz.gitbooks.io/google-cc-style-guide/index.html)
+
 # :fallen_leaf:Basics
 
 ## Distinguish Declare & Define
@@ -128,28 +134,6 @@ Derivation can only inheriate `public` and `protected` members from **base**, bu
 
 - [tutorialspoint: C++ Inheritance](https://www.tutorialspoint.com/cplusplus/cpp_inheritance.htm)
 - [blog: C++继承：公有，私有，保护](http://www.cnblogs.com/qlwy/archive/2011/08/25/2153584.html)
-
-<!--  -->
-<br>
-
----
-
-<!--  -->
-
-## Smart pointer
-
-### How to release a `unique_ptr`
-
-```c++
-std::unique_ptr<int> up(new int(5));
-// Release and delete
-up.reset(nullptr)
-```
-
-**_References:_**
-
-- [cppreference.com: std::unique_ptr::reset](https://en.cppreference.com/w/cpp/memory/unique_ptr/reset)
-- [cppreference.com: how to delete unique_ptr](http://www.cplusplus.com/forum/general/119828/)
 
 ---
 
@@ -840,7 +824,75 @@ Here is an [example](https://github.com/rivergold/Cpp11/blob/master/cpp11/class_
 <br>
 <!--  -->
 
-# Development Environment
+# :fallen_leaf:Smart pointer
+
+## `std::unique_ptr`
+
+- [cppreference](https://zh.cppreference.com/w/cpp/memory/unique_ptr)
+
+### `std::unique_ptr<T,Deleter>::reset`
+
+- [cppreference](https://zh.cppreference.com/w/cpp/memory/unique_ptr/reset)
+
+**_References:_**
+
+- [stackoverflow: Why doesn't make_unique work with unique_ptr::reset?](https://stackoverflow.com/questions/22796788/why-doesnt-make-unique-work-with-unique-ptrreset)
+
+**Set std::unique_ptr into nullptr**
+
+```c++
+std::unique_ptr<int> p = std::make_unique<int>(new int);
+p.reset(nullptr);
+```
+
+---
+
+## `std::make_unique`
+
+- [cppreference](https://en.cppreference.com/w/cpp/memory/unique_ptr/make_unique)
+
+**Constructs an object of type T and wraps it in a `std::unique_ptr`.**
+
+**_References:_**
+
+- [CSDN: c++11 条款 21：尽量使用 std::make_unique 和 std::make_shared 而不直接使用 new](https://blog.csdn.net/coolmeme/article/details/43405155)
+
+---
+
+## `std::shared_ptr`
+
+TODO:
+
+## `std::make_shared`
+
+TODO:
+
+## Tricks
+
+TODO: tidy this
+
+### How to release a `unique_ptr`
+
+```c++
+std::unique_ptr<int> up(new int(5));
+// Release and delete
+up.reset(nullptr)
+```
+
+**_References:_**
+
+- [cppreference.com: std::unique_ptr::reset](https://en.cppreference.com/w/cpp/memory/unique_ptr/reset)
+- [cppreference.com: how to delete unique_ptr](http://www.cplusplus.com/forum/general/119828/)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# :fallen_leaf:Development Environment
 
 ## Install `gcc/g++` from apt or yum
 
@@ -899,6 +951,14 @@ set(CMAKE_GENERATOR "Ninja")
 
 - :thumbsup:[CMake doc: cmake-generators(7)](https://cmake.org/cmake/help/v3.16/manual/cmake-generators.7.html)
 - [rivergold.site: CMake Memo](TODO:)
+
+## ninja vs make
+
+When compiling an already compiled project, ninja is much faster than make.
+
+**_References:_**
+
+- :thumbsup:[Blog: Make vs Ninja Performance Comparison](https://hamelot.io/programming/make-vs-ninja-performance-comparison/)
 
 ---
 

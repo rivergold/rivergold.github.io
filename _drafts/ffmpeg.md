@@ -123,6 +123,26 @@ ffmpeg -loglevel warning ...
 
 - [stackoverflow: Using hex colors with ffmpeg's showwaves](https://stackoverflow.com/questions/45885460/using-hex-colors-with-ffmpegs-showwaves)
 
+---
+
+## Add image into video
+
+***References:***
+
+- [stackoverflow: Add an image overlay in front of video using ffmpeg](https://video.stackexchange.com/questions/12105/add-an-image-overlay-in-front-of-video-using-ffmpeg)
+
+---
+
+## Scale video resolution
+
+```shell
+ffmpeg -i <in_video_path> -vf scale=<to_w>:<to_h> <out_video_path>
+```
+
+***References:***
+
+- [Blog: 使用ffmpeg修改视频文件的分辨率](https://blog.p2hp.com/archives/5512)
+
 <!--  -->
 <br>
 
@@ -136,6 +156,13 @@ ffmpeg -loglevel warning ...
 Download source code from [FFmpeg.org](https://ffmpeg.org/download.html)
 
 **_Ref:_** [FFMPEG: Compile FFmpeg on CentOS](https://trac.ffmpeg.org/wiki/CompilationGuide/Centos)
+
+## Install via conda
+
+***References:***
+
+- [stackoverflow: How to use libx264 ffmpeg in conda environment?](https://superuser.com/questions/1420351/how-to-use-libx264-ffmpeg-in-conda-environment)
+
 
 <!--  -->
 <br>

@@ -127,7 +127,7 @@ ffmpeg -loglevel warning ...
 
 ## Add image into video
 
-***References:***
+**_References:_**
 
 - [stackoverflow: Add an image overlay in front of video using ffmpeg](https://video.stackexchange.com/questions/12105/add-an-image-overlay-in-front-of-video-using-ffmpeg)
 
@@ -139,9 +139,9 @@ ffmpeg -loglevel warning ...
 ffmpeg -i <in_video_path> -vf scale=<to_w>:<to_h> <out_video_path>
 ```
 
-***References:***
+**_References:_**
 
-- [Blog: 使用ffmpeg修改视频文件的分辨率](https://blog.p2hp.com/archives/5512)
+- [Blog: 使用 ffmpeg 修改视频文件的分辨率](https://blog.p2hp.com/archives/5512)
 
 <!--  -->
 <br>
@@ -159,10 +159,24 @@ Download source code from [FFmpeg.org](https://ffmpeg.org/download.html)
 
 ## Install via conda
 
-***References:***
+```shell
+conda install x264=='1!152.20180717' ffmpeg=4.0.2 -c conda-forge
+conda install opencv
+```
+
+**_References:_**
 
 - [stackoverflow: How to use libx264 ffmpeg in conda environment?](https://superuser.com/questions/1420351/how-to-use-libx264-ffmpeg-in-conda-environment)
 
+---
+
+## Use Static
+
+Google serach `ffmpeg static build`. Download it and add into `PATH`
+
+**_References:_**
+
+- [John Van Sickle](https://www.johnvansickle.com/)
 
 <!--  -->
 <br>

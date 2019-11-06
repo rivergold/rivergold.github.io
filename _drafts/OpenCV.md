@@ -1,3 +1,18 @@
+# Install
+
+## Install OpenCV with FFMpeg wich x264
+
+Best way is to build ffmpeg and opencv from source.
+
+### Dev
+
+In Python Env, fast way is to install it with conda
+
+```shell
+conda install x264=='1!152.20180717' ffmpeg=4.0.2 -c conda-forge
+conda install opencv
+```
+
 # Function
 
 ## Rotate Image

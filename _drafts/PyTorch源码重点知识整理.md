@@ -393,3 +393,125 @@ target_link_libraries(test_pytorch ${TORCH_LIBRARIES})
 
 - [PyTorch doc: PYTORCH C++ API](https://pytorch.org/cppdocs/)
 - [Github pytorch/pytorch [Caffe2] Caffe2Config.cmake #15009](https://github.com/pytorch/pytorch/issues/15009)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# `native_functions.yaml`参数理解整理
+
+基础格式
+
+```yaml
+- func: func_name(ArgType arg0[=default], ArgType arg1[=default], ...) -> Return
+  variants: function, method
+  dispatch:
+    CPU: func_cpu
+    CUDA: func_cuda
+```
+
+## References
+
+- :thumbsup::triangular_flag_on_post:[PyTorch Forum: How to create a new torch.function() method?](https://discuss.pytorch.org/t/how-to-create-a-new-torch-function-method/21899)
+
+- [Github pytorch/pytorch: More structured alternative to native_functions.yaml #12417](https://github.com/pytorch/pytorch/issues/12417)
+
+---
+
+## `func`
+
+参数类型符号(Argument types)理解:
+
+- `Tensor`: `const Tensor&`
+- `Tensor(a)` : `const Tensor&`, 接受、返回操作同一段 data 的变量
+  - **理解:** 针对于 PyTorch 中 op 返回的是 Tensor view 的情况。请在`native_functions.yaml`中搜索`Tensor(a)`, 可以看到基本上都是 view 的操作
+- `Tensor(a!)`: `Tensor&`, 参数的 member 数据会发生变化
+
+### `Tensor(a)`
+
+在`native_functions.yaml`中使用的不多，主要针对于 view 的操作，内部多使用 `std::move`并配合 Tensor 的移动构造函数
+
+E.g.
+
+```yaml
+- func: alias(Tensor(a) self) -> Tensor(a)
+  use_c10_dispatcher: unboxed_only
+  variants: method, function
+  supports_named_tensor: True
+```
+
+Function `Tensor alias(const Tensor& self) { ... }` in `aten/src/ATen/native/TensorShape.cpp`
+
+注意其在最后返回的是`self_ = Tensor(std::move(impl));`
+
+### Problem & Solution
+
+#### [Build Error] libtorch.so: undefined reference to `at::native::rivergold_test(at::Tensor const&)`
+
+```shell
+FAILED: bin/conv_to_nnpack_transform_test
+: && /root/software/ccache/install/bin/c++  -Wno-deprecated -fvisibility-inlines-hidden -fopenmp -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -O2 -fPIC -Wno-narrowing -Wall -Wextra -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wno-unused-result -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Wno-stringop-overflow -DHAVE_AVX_CPU_DEFINITION -DHAVE_AVX2_CPU_DEFINITION -O2  -rdynamic caffe2/CMakeFiles/conv_to_nnpack_transform_test.dir/transforms/conv_to_nnpack_transform_test.cc.o  -o bin/conv_to_nnpack_transform_test  -Wl,-rpath,/root/rivergold-project/pytorch/build/lib: lib/libgtest_main.a -Wl,--no-as-needed,/root/rivergold-project/pytorch/build/lib/libtorch.so -Wl,--as-needed lib/libprotobuf.a lib/libc10.so lib/libmkldnn.a lib/libgtest.a -lpthread && :
+/root/rivergold-project/pytorch/build/lib/libtorch.so: undefined reference to `at::native::rivergold_test(at::Tensor const&)'
+collect2: error: ld returned 1 exit status
+```
+
+本质原因是: `native_functions.yaml`中说明的 Argument types 和 `.cpp`写的不一致，或者是写法不符合要求。查看方法：`build/aten/src/ATen/Declarations.yaml`中的函数说明，看是否是你想要的
+
+错误举例
+
+```yaml
+- func: rivergold_test(Tensor(a!) self) -> Tensor(a!)
+  dispatch:
+    CPU: rivergold_test
+```
+
+```shell
+>>>Debug: rivergold_test
+>>>Debug return_arguments: [{'type': 'Tensor', 'name': 'result', 'annotation': 'a!', 'output': True}]
+>>>Debug arguments: [{'type': 'Tensor', 'name': 'self', 'is_nullable': False, 'annotation': 'a!'}]
+{'mode': 'native', 'schema_string': 'aten::rivergold_test(Tensor(a!) self) -> Tensor(a!)', 'name': 'rivergold_test', 'operator_name': 'rivergold_test', 'overload_name': '', 'inplace': False, 'return': [{'type': 'Tensor', 'name': 'result', 'annotation': 'a!', 'output': True}], 'variants': ['function'], 'requires_tensor': False, 'matches_jit_signature': True, 'cpu_half': False, 'cpu_bfloat16': False, 'cpu_bool': False, 'cuda_bool': False, 'deprecated': False, 'device_guard': True, 'supports_named_tensor': False, 'use_c10_dispatcher': 'no', 'category_override': '', 'arguments': [{'type': 'Tensor', 'name': 'self', 'is_nullable': False, 'annotation': 'a!'}], 'type_method_definition_dispatch': {'CPU': 'rivergold_test'}, 'python_module': ''}
+```
+
+```yaml
+# build/aten/src/ATen/Declarations.yaml
+- name: rivergold_test
+  operator_name: rivergold_test
+  overload_name: ""
+  use_c10_dispatcher: "no"
+  category_override: ""
+  matches_jit_signature: true
+  schema_string: aten::rivergold_test(Tensor(a!) self) -> Tensor(a!)
+  method_prefix_derived: ""
+  arguments:
+    - annotation: a!
+      dynamic_type: Tensor
+      is_nullable: false
+      name: self
+      type: const Tensor &
+  method_of:
+    - Type
+    - namespace
+  mode: native
+  python_module: ""
+  returns:
+    - dynamic_type: Tensor
+      name: result
+      type: Tensor
+  inplace: false
+  is_factory_method: null
+  abstract: true
+  requires_tensor: false
+  device_guard: true
+  with_gil: false
+  deprecated: false
+```
+
+---
+
+## `variants`
+
+- By default, ATen generates only the function variant for a native function.

@@ -402,6 +402,12 @@ target_link_libraries(test_pytorch ${TORCH_LIBRARIES})
 <br>
 <!--  -->
 
+# `native_functions.yaml`的作用
+
+- 充当说明、配置文件的角色
+- 作为`aten/src/ATen/gen.py`输入的一部分，用于生成`build/aten/src/ATen/Declarations.yaml`
+- 说明`at::native`中有哪些函数，这些函数的参数类型、返回值是什么，说明 Dispatch 具体分发到哪个函数
+
 # `native_functions.yaml`参数理解整理
 
 基础格式
@@ -447,6 +453,154 @@ E.g.
 Function `Tensor alias(const Tensor& self) { ... }` in `aten/src/ATen/native/TensorShape.cpp`
 
 注意其在最后返回的是`self_ = Tensor(std::move(impl));`
+
+### `Tensor(a!)`
+
+PyTorch 在编译时会调用 `at`
+
+:triangular_flag_on_post:**如果不是以下的情况，对于`Tensor(a!)`的格式，PyTorch 会修改为`const Tensor &`的参数类型**
+
+PyTorch 的实现代码在[aten/src/ATen/function_wrapper.py#L1086](https://github.com/rivergold/pytorch/blob/fe31df3a57c82a639ed0005714075e120d17c837/aten/src/ATen/function_wrapper.py#L1086)
+
+```python
+if (option['inplace'] and argument['name'] == 'self') or argument.get('output', False):
+    # ...
+```
+
+- `option['inplace'] and argument['name'] == self`
+- `output`字段在`argument`中: `output`字段表示该`argument`是不是输出变量， `output`字段默认是没有的
+
+E.g.
+
+**return**
+
+```python
+[{"type": "Tensor", "name": "result", "annotation": "a!", "output": True}]
+```
+
+**arguments**
+
+```python
+[
+    {"type": "Tensor", "name": "out", "is_nullable": False, "annotation": "a!", "kwarg_only": False, "output": True},
+    {"type": "Tensor", "name": "self", "is_nullable": False, "annotation": None},
+    {"type": "Tensor", "name": "exponent", "is_nullable": False, "annotation": None}
+]
+```
+
+**option**
+
+```python
+{
+    "mode": "native",
+    "schema_string": "aten::pow.Tensor_Tensor_out(Tensor self, Tensor exponent, *, Tensor(a!) out) -> Tensor(a!)",
+    "name": "pow_out",
+    "operator_name": "pow",
+    "overload_name": "Tensor_Tensor_out",
+    "inplace": False,
+    "return": [{
+        "type": "Tensor",
+        "name": "out",
+        "is_nullable": False,
+        "annotation": "a!",
+        "kwarg_only": False,
+        "output": True
+    }],
+    "variants": ["function"],
+    "requires_tensor": False,
+    "matches_jit_signature": True,
+    "cpu_half": False,
+    "cpu_bfloat16": False,
+    "cpu_bool": False,
+    "cuda_bool": False,
+    "deprecated": False,
+    "device_guard": True,
+    "supports_named_tensor": True,
+    "use_c10_dispatcher": "no",
+    "category_override": "",
+    "arguments": [{
+        "type": "Tensor",
+        "name": "out",
+        "is_nullable": False,
+        "annotation": "a!",
+        "kwarg_only": False,
+        "output": True
+    }, {
+        "type": "Tensor",
+        "name": "self",
+        "is_nullable": False,
+        "annotation": None
+    }, {
+        "type": "Tensor",
+        "name": "exponent",
+        "is_nullable": False,
+        "annotation": None
+    }],
+    "type_method_definition_dispatch": {
+        "CPU": "pow_out",
+        "CUDA": "pow_out"
+    },
+    "python_module":
+    ""
+}
+```
+
+#### 如果想要实现`output`字段，需要：
+
+1. `native_functions.yaml`中定义：
+
+   ```yaml
+   - func: rivergold_test(Tensor self, *, Tensor(a!) out) -> Tensor(a!)
+       dispatch:
+       CPU: rivergold_test_out
+
+   - func: rivergold_test.raw(Tensor self) -> Tensor
+       dispatch:
+       CPU: rivergold_test
+   ```
+
+   根据[`aten/src/ATen/native_parse.py#L183`](https://github.com/rivergold/pytorch/blob/fe31df3a57c82a639ed0005714075e120d17c837/aten/src/ATen/native_parse.py#L183r)
+
+   ```python
+   for argument in arguments:
+   if argument['type'] == "Tensor" and \
+           argument['annotation'] and \
+           re.match(r'^(.*!)$', argument['annotation']) and \
+           argument.get('kwarg_only'):
+       argument['output'] = True
+       argument['kwarg_only'] = False
+       arguments_out.append(argument)
+       is_out_fn = True
+   ```
+
+   - 必须有`*`
+   - 必须有 return `Tensor(a!)`
+   - dispatch 到的函数必须有 `function_name_out`
+
+2. 在`aten/src/ATen/native`中添加实现的`.cpp`文件： `aten/src/ATen/native/rivergold_test.cpp`
+
+   ```c++
+    #include <ATen/ATen.h>
+
+    namespace at {
+    namespace native {
+    Tensor& rivergold_test_out(Tensor& result, const Tensor& base) {
+    return result;
+    }
+
+    Tensor rivergold_test(const Tensor& base){
+    Tensor result = at::empty_like(base);
+    return native::rivergold_test_out(result, base);
+    }
+
+    } // namespace native
+    } // namespace at
+   ```
+
+   - `rivergold_test`的参数必须叫`base`
+
+<!-- - `func_name` 为`_`结尾的且参数名为`self`的：表示该函数会原地修改输入的变量值
+- 从`native_functions.yaml`解析出的 key 值`output = False`的：查看`build/aten/src/ATen/Declarations.yaml`中`return`的`ouput`，一种是`output: True`，另一种是没有`output`字段；另外在`aten/src/ATen/native_parse.py`将所有的`declaration`都 print 出来，发现没有`return`的`output`为`False`的情况，所以可以判断没有这类的情况; 即便**函数的返回值为`void`**，其对应的`declaration`的`output`也为`True` -->
 
 ### Problem & Solution
 

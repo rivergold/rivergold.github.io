@@ -339,6 +339,10 @@ Only two differences:
 
 模板代码在编译时会展开成 C++代码
 
+## Blog
+
+- :thumbsup::thumbsup:[CSDN: C++ Template 基础篇（二）：类模板](https://blog.csdn.net/lezardfu/article/details/57416241)
+
 <!--  -->
 <br>
 
@@ -742,7 +746,9 @@ Here is an [example](https://github.com/rivergold/Cpp11/blob/master/cpp11/lambda
 
 ---
 
-## 指向函数指针的指针
+<!-- 这部分的理解是错的： 这里不是指向函数指针的是指针，是DispatchStub类模板的特化-->
+
+<!-- ## 指向函数指针的指针
 
 E.g. from PyTorch `aten/src/ATen/native/DispatchStub.h`
 
@@ -776,9 +782,9 @@ struct CAFFE2_API DispatchStub<rT (*)(Args...), T> {
 
   // ...
 }
-```
+``` -->
 
-### 函数指针
+## 函数指针
 
 基本格式:
 
@@ -789,6 +795,21 @@ data_type (*func_pointer) (data_type arg1, data_type arg2, ..., data_type argn)
 **_References:_**
 
 - [RUNOOB.COM: C++ 函数指针 & 类成员函数指针](https://www.runoob.com/w3cnote/cpp-func-pointer.html)
+
+**Question:**
+
+```c++
+void func(int a, int b){
+    cout << a + b <<endl;
+}
+# Difference when in decltype?
+void (*p)(int, int) = func;
+void (*p)(int, int) = &func
+```
+
+**_References:_**
+
+- [知乎: 对于 C/C++ 函数指针的困惑？](https://www.zhihu.com/question/53523381)
 
 ---
 
@@ -801,7 +822,16 @@ TODO:
 - [cppreference.com: 显式（全）模板特化](https://zh.cppreference.com/w/cpp/language/template_specialization)
 - [Harttle Land Blog: C++模板的偏特化与全特化](https://harttle.land/2015/10/03/cpp-template.html)
 
-### 类模板成员特化
+### 类模板特化-1
+
+**Come from** [Github pytorch-memo](https://github.com/rivergold/pytorch/blob/dfa48f9942e95b13875c4b8841e1a3c01f3638a6/aten/src/ATen/native/DispatchStub.h#L59)
+
+**_References:_**
+
+- :thumbsup::thumbsup:[CSDN: C++ Template 基础篇（二）：类模板](https://blog.csdn.net/lezardfu/article/details/57416241)
+- [腾讯云: C++模板特化与偏特化](https://cloud.tencent.com/developer/article/1347877)
+
+### 类模板特化-2
 
 E.g. from `aten/src/ATen/native/DispatchStub.h:147`
 

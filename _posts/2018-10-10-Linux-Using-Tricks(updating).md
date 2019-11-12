@@ -1982,3 +1982,34 @@ geometry=50%x50%
 **_References:_**
 
 - [Github mpv-player/mpv: Want to start mpv in a default window size and position #4724](https://github.com/mpv-player/mpv/issues/4724)
+
+---
+
+## snap
+
+### Config snap proxy
+
+```shell
+sudo systemctl edit snapd
+```
+
+Add followings
+
+```shell
+[Service]
+Environment=http_proxy=http://proxy:port
+Environment=https_proxy=http://proxy:port
+```
+
+E.g. socks5
+
+```shell
+[Service]
+Environment=http_proxy=socks5://proxy:port
+Environment=https_proxy=socks5://proxy:port
+```
+
+**_References:_**
+
+- [简书: 为 Snapd 设置代理](https://www.jianshu.com/p/0891648b657a)
+- [博客园: snap 设置 sock 代理](https://www.cnblogs.com/chilono/p/10597835.html)

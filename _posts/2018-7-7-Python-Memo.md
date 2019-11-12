@@ -1150,13 +1150,50 @@ data = OrderedDict([('a', 1), ('b', 2)])
 
 **_Ref:_** [PyTorch Doc: torch.nn.Sequential(\*args)](https://pytorch.org/docs/stable/nn.html#sequential)
 
+---
+
+## re
+
+### `re.sub(pattern, repl, string, count=0, flags=0)`
+
+#### `repl`: string
+
+#### `repl`: function
+
+**Come from:** [Github pytorch-memo](https://github.com/rivergold/pytorch/blob/cc06e2f9479b8fc09e4557eeba6a0806c66ed160/aten/src/ATen/code_template.py#L71)
+
+```python
+import re
+
+number_mapping = {'1': 'one',
+                  '2': 'two',
+                  '3': 'three'}
+s = "1 testing 2 3"
+print(re.sub(r'\d', lambda x: number_mapping[x.group()], s))
+>>> one testing two three
+```
+
+**_References:_**
+
+- [stackoverflow: Passing a function to re.sub in Python](https://stackoverflow.com/questions/18737863/passing-a-function-to-re-sub-in-python)
+
+### `re.DOTALL` and `re.MULTILINE`
+
+**Come from:** [Github pytorch-memo](https://github.com/rivergold/pytorch/blob/cc06e2f9479b8fc09e4557eeba6a0806c66ed160/aten/src/ATen/code_template.py#L25)
+
+- `re.MULTILINE`: re 会对每行进行单独匹配
+
+**_References:_**
+
+- :thumbsup:[Blog: Python 正则表达式里的单行 s 和多行 m 模式](https://www.lfhacks.com/tech/python-re-single-multiline)
+
 <br>
 
 ---
 
 <br>
 
-# Packages:
+# Packages
 
 ## Matplotlib
 

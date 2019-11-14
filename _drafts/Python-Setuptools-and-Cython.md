@@ -298,7 +298,8 @@ def fun(a:float, b:float) -> float:
            ],
            build_dir="build",
            compiler_directives=dict(
-               always_allow_keywords=True)),
+               always_allow_keywords=True),
+           compiler_directives={'language_level' : "3"}),
 
        # -----Copy other data into build
        package_data={
@@ -321,6 +322,25 @@ def fun(a:float, b:float) -> float:
 **_References:_**
 
 - [Github Gist rivergold/setup_build_so.py](https://gist.github.com/rivergold/31195407e4dc95067bfd661797909dec)
+
+## :triangular_flag_on_post::triangular_flag_on_post::triangular_flag_on_post:Specify Python 3 source in Cython's setup.py
+
+When you use Python3, it is very important to set `compiler_directives={'language_level' : "3"}` into `cythonize` in `setup.py`.
+
+Because division operation in Python2 cython will not convert int into float. So if you do this in your Pyhton script:
+
+```python
+def func():
+    a = len('a')
+    b = len('abc')
+    return a / b
+```
+
+After compile it into dynamic lib `.so`, the result will be zero !!!
+
+**_References:_**
+
+- [stackoverflow: Cython optimize Python script int divided by int into zero [duplicate]](https://stackoverflow.com/questions/58832967/cython-optimize-python-script-int-divided-by-int-into-zero)
 
 <!--  -->
 <br>

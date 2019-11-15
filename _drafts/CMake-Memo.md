@@ -624,3 +624,29 @@ It is a link error. You need to use `TARGET_LINK_LIBRARIES` in cmakelist to add 
 **_References:_**
 
 - [Blog: cmake 和其他构建工具协同使用](http://aicdg.com/oldblog/c++/2017/02/04/cmake-externalproject.html)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# Path
+
+## CMAKE_SOURCE_DIR
+
+Root project directory.
+
+**理解:** 运行`cmake`所执行的最顶层的`CMakeLists.txt`所在的 directory
+
+---
+
+## CMAKE_CURRENT_LIST_DIR
+
+When `.cmake`, use `CMAKE_CURRENT_LIST_DIR` to current `.cmake` directory.
+
+**_References:_**
+
+- [stackoverflow: In CMake, how can I find the directory of an included file?](https://stackoverflow.com/a/12854575/4636081)

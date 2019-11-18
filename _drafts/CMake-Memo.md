@@ -10,6 +10,7 @@
 ## Blog
 
 - :thumbsup::thumbsup::thumbsup:[Medium: CMake Tutorial](https://medium.com/@onur.dundar1/cmake-tutorial-585dd180109b): An overall introduction for cmake.
+- [Green Memory: CMake 学习笔记](https://blog.gmem.cc/cmake-study-note)
 
 <!--  -->
 <br>

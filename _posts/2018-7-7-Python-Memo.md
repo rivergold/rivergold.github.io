@@ -964,6 +964,12 @@ random_str = ''.join([random.choice(string.ascii_letters + string.digits) for i 
 - `json.dumps`: `dict` to `string`
 - `json.load`: `string` to `dict`
 
+### Save json with utf-8
+
+**_References:_**
+
+- [stackoverflow: Saving utf-8 texts in json.dumps as UTF8, not as \u escape sequence](https://stackoverflow.com/questions/18337407/saving-utf-8-texts-in-json-dumps-as-utf8-not-as-u-escape-sequence)
+
 ## pathlib
 
 `from pathlib import Path`

@@ -143,6 +143,14 @@ ffmpeg -i <in_video_path> -vf scale=<to_w>:<to_h> <out_video_path>
 
 - [Blog: 使用 ffmpeg 修改视频文件的分辨率](https://blog.p2hp.com/archives/5512)
 
+---
+
+## Concat videos
+
+**_References:_**
+
+- [stackoverflow: How to concatenate two MP4 files using FFmpeg?](https://stackoverflow.com/a/11175851/4636081)
+
 <!--  -->
 <br>
 

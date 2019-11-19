@@ -407,12 +407,7 @@ flask run --host=0.0.0.0
 
 **_Ref:_** [Flask Doc: 快速上手](https://dormousehole.readthedocs.io/en/latest/quickstart.html)
 
-<!--  -->
-<br>
-
 ---
-
-<!--  -->
 
 ## Get request data
 
@@ -421,6 +416,20 @@ data = request.get_json()
 ```
 
 **_Ref:_** [stackoverflow: How to get data received in Flask request](https://stackoverflow.com/questions/10434599/how-to-get-data-received-in-flask-request)
+
+---
+
+## Params with url
+
+```python
+@app.route('/param', methods=['GET', 'POST'])
+def get_callback_data(param):
+    print(param)
+```
+
+**_References:_**
+
+- [CSDN: Flask 带参 URL 传值的方法](https://blog.csdn.net/weixin_36380516/article/details/80008496)
 
 <!--  -->
 <br>

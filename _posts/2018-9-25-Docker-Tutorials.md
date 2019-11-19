@@ -172,7 +172,7 @@ sed -i s@<needed replace content>@<replace content>@g <file path>
 E.g.
 
 ```shell
-sed -i s@http://archive.ubuntu.com/ubuntu/@http://mirrors.tuna.tsinghua.edu.cn/ubuntu/@g /etc/apt/sources.list
+sed -i s@http://archive.ubuntu.com/ubuntu/@http://mirrors.aliyun.com/ubuntu/@g /etc/apt/sources.list
 ```
 
 After you change the source list, you need to update it to let it work via `sudo apt-get update`
@@ -246,8 +246,8 @@ Need run `xhost +local:docker`
    `bash docker run --it -e DISPLAY=<your computer ip>:0.0 <image> /bin/bash`
    **Problem & Solution**
 
-- Error: `xhost: unable to open display`(\*[ref](https://forums.freebsd.org/threads/50613/))  
-   Use `rm ~/.Xauthority`, then try again previous steps.
+- Error: `xhost: unable to open display`(\*[ref](https://forums.freebsd.org/threads/50613/))
+  Use `rm ~/.Xauthority`, then try again previous steps.
 
 **_References_**
 

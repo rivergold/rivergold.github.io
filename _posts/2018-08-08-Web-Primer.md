@@ -1,9 +1,11 @@
-# Basic
+# :fallen_leaf:Basic
 
 ## Server & Client
 
 - [MDN web docs: Client-Server overview
   ](https://developer.mozilla.org/zh-CN/docs/learn/Server-side/First_steps/Client-Server_overview)
+
+---
 
 ## TCP
 
@@ -27,7 +29,7 @@ What is [**Microservices**](https://www.redhat.com/zh/topics/microservices/what-
 <br>
 <!--  -->
 
-# Common Commands
+# :fallen_leaf:Common Commands
 
 ## Config firewall to expose port
 
@@ -177,11 +179,69 @@ curl -d "data=test" <http_address>
 <br>
 <!--  -->
 
-# Using Apache Web server to Download File
+# :fallen_leaf:Setup Apache File Server
 
-## Build a HTTP Server
+## Setup a HTTP Server
 
 - [APACHE HTTP Server Documentation Compiling and Installing](http://httpd.apache.org/docs/current/install.html#customize)
+
+---
+
+## Install
+
+**Ubuntu**
+
+```shell
+sudo apt install apache2
+```
+
+**CentOS**
+
+```shell
+sudo yum install httpd
+sudo systemctl enable httpd
+sudo systemctl start httpd
+```
+
+## Config
+
+**Ubuntu**
+
+Edit `/etc/apache2/sites-available/000-default.conf`
+
+Change `DocumentRoot` to your path.
+
+```conf
+DocumentRoot /path/to/my/project
+```
+
+Then, run `sudo systemctl restart apache2` to restart apache2 service.
+
+**_References:_**
+
+- :thumbsup:[stackoverflow: Change Apache document root folder to secondary hard drive](https://askubuntu.com/a/738527)
+
+---
+
+## Problem & Solution
+
+### When visit apache web, occur `Forbidden You don't have permission to access / on this server`
+
+This is because the `Require` is `denied`.
+
+**Solution**
+
+Edit `/etc/apache2`
+
+```conf
+<Directory />
+    Options Indexes FollowSymLinks Includes ExecCGI
+    AllowOverride All
+    Require all granted
+</Directory>
+```
+
+---
 
 ### Ubuntu
 
@@ -225,6 +285,8 @@ sudo systemctl start httpd
 ```
 
 #### Configure
+
+TODO: update
 
 Change http work folder `DocumentRoot`
 
@@ -276,7 +338,7 @@ sudo ufw allow <your listen port>
 <br>
 <!--  -->
 
-# NFS Mount Remote folder
+# :fallen_leaf:NFS Mount Remote folder
 
 - Server: `CentOS 7`
 - Client: `Ubuntu 18.04`
@@ -338,6 +400,8 @@ sudo ufw allow <your listen port>
 
 Ref [博客园: Linux 下配置 nfs 并远程挂载](https://www.cnblogs.com/freeweb/p/6593861.html)
 
+---
+
 ## Client
 
 1. **Install**
@@ -372,7 +436,7 @@ Ref [CSDN: Ubuntu NFS 服务器客户端配置方法](https://blog.csdn.net/zhux
 <br>
 <!--  -->
 
-# Flask
+# :fallen_leaf:Flask
 
 - [Flask 中文](https://dormousehole.readthedocs.io/en/latest/)
 
@@ -439,7 +503,7 @@ def get_callback_data(param):
 <br>
 <!--  -->
 
-# 翻越长城墙
+# :fallen_leaf:翻越长城墙
 
 ## v2ray
 
@@ -583,6 +647,8 @@ Error `nohup: failed to run command.:Permission denied`
 You can't call `nohup` on a shell construct such as alias, function or buildin. `nohup ./test.sh` is the correnct way to run.
 
 Ref [StackExchange: nohup: failed to run command `.': Permission denied](https://unix.stackexchange.com/questions/386545/nohup-failed-to-run-command-permission-denied)
+
+---
 
 ## GFWList
 

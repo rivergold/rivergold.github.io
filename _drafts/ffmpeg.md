@@ -151,6 +151,31 @@ ffmpeg -i <in_video_path> -vf scale=<to_w>:<to_h> <out_video_path>
 
 - [stackoverflow: How to concatenate two MP4 files using FFmpeg?](https://stackoverflow.com/a/11175851/4636081)
 
+## Concat audio
+
+```shell
+ffmpeg -i "concat:<audio_1>|<audio_2>" -acodec copy <output_audio>
+```
+
+**_References:_**
+
+- [stackoverflow: How to join/merge many mp3 files?](https://superuser.com/a/314245)
+
+---
+
+## Replace video audio
+
+```shell
+# Erase video raw audio
+ffmpeg -i <input_video> -codec copy -an <output_video>
+# Add new audio
+ffmpeg -i <audio_path> -i <video_path> -codec copy -shortest <output_path>
+```
+
+**_References:_**
+
+- [Blog: Replacing video audio using ffmpeg](https://ochremusic.com/2016/07/05/replacing-video-audio-using-ffmpeg/)
+
 <!--  -->
 <br>
 
@@ -165,7 +190,25 @@ Download source code from [FFmpeg.org](https://ffmpeg.org/download.html)
 
 **_Ref:_** [FFMPEG: Compile FFmpeg on CentOS](https://trac.ffmpeg.org/wiki/CompilationGuide/Centos)
 
-## Install via conda
+---
+
+## Use Static
+
+Download static build from [here](https://johnvansickle.com/ffmpeg/).
+
+<!-- Google serach `ffmpeg static build`. Download it and add into `PATH`
+
+**_References:_**
+
+- [John Van Sickle](https://www.johnvansickle.com/) -->
+
+---
+
+## Install via conda for opencv
+
+Install this and then uninstall ffmpeg, just for opencv to support reading and writing x264.
+
+**注意：** 使用一下命令安装支持读写 x264 的 OpenCV，之后再删除通过 conda 安装的 ffmpeg，改为静态库版本。因为通过 conda 安装的 ffmpeg 不支持 mp3 的读写。
 
 ```shell
 conda install x264=='1!152.20180717' ffmpeg=4.0.2 -c conda-forge
@@ -175,16 +218,6 @@ conda install opencv
 **_References:_**
 
 - [stackoverflow: How to use libx264 ffmpeg in conda environment?](https://superuser.com/questions/1420351/how-to-use-libx264-ffmpeg-in-conda-environment)
-
----
-
-## Use Static
-
-Google serach `ffmpeg static build`. Download it and add into `PATH`
-
-**_References:_**
-
-- [John Van Sickle](https://www.johnvansickle.com/)
 
 <!--  -->
 <br>

@@ -280,3 +280,25 @@ def read_gif(in_gif_path):
 **_References:_**
 
 - [stackoverflow: How to read gif from url using opencv (python)](https://stackoverflow.com/questions/48163539/how-to-read-gif-from-url-using-opencv-python)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# 羽化操作
+
+羽化 = 边缘模糊
+
+1. 模糊整张图片
+2. 找到边缘
+3. 将模糊的边缘和没有模糊的内部结合起来
+
+TODO:
+
+**_References:_**
+
+- :thumbsup:[stackoverflow: How to blur/ feather the edges of an object in an image using Opencv](https://stackoverflow.com/questions/55066764/how-to-blur-feather-the-edges-of-an-object-in-an-image-using-opencv)

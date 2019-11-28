@@ -14,14 +14,14 @@ Build vim need:
 
 ## Ubuntu
 
-### 1. Install `python-dev`\*\*
+### 1. Install `python-dev`
 
 ```shell
 sudo apt-get install python3-dev
 # Pay attention to which your anaconda python version is.
 ```
 
-### 2. run Config\*\*
+### 2. Run Config
 
 Use `./configure --help` to get command list
 
@@ -145,6 +145,16 @@ yum install ncurses-devel.x86_64
 **_References:_**
 
 - [CSDN: CentOS 编译 vim no terminal library found](https://blog.csdn.net/cuijianzhi/article/details/78652745)
+
+### [Make Error] `libpython3.7m.a unable to compile: unrecognized relocation 0x2a in section text`
+
+**Solution**
+
+This is because gcc version is too old (4.8.5). Upgrade your gcc into 7 or 8.
+
+**_References:_**
+
+- [stackoverflow: unable to compile: unrecognized relocation 0x2a in section text](https://stackoverflow.com/a/55793498/4636081)
 
 ---
 

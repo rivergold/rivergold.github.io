@@ -11,6 +11,7 @@ Build vim need:
 **Note:**
 
 - Use system default gcc
+- :triangular_flag_on_post:If you want to avoid much more build error, you'd better use system Python instead of Anaconda python to build vim
 
 ## Ubuntu
 
@@ -156,6 +157,10 @@ This is because gcc version is too old (4.8.5). Upgrade your gcc into 7 or 8.
 
 - [stackoverflow: unable to compile: unrecognized relocation 0x2a in section text](https://stackoverflow.com/a/55793498/4636081)
 
+### [Link Error] such sa `ld error libpython3.7m` xxx version not matched
+
+Do not build with anaconda python, build with system python3.6.
+
 ---
 
 ## Test
@@ -300,6 +305,52 @@ cd YouCompleteMe
 **_Referneces:_**
 
 - [Youcomplete 完全安装](https://my.oschina.net/pointeraddress/blog/855916)
+
+#### [Error] `The ycmd server SHUT DOWN (restart with ':YcmRes...cmd_61292_stderr_8f1czxtp.log' to check the logs.`
+
+```shell
+ImportError: /root/.vim_runtime/my_plugins/YouCompleteMe/third_party/ycmd/ycm_core.so: undefined symbol: clang_getCompletionFixIt
+```
+
+**Solution:**
+
+This is becasue your system libclang is too old (I use libclang-5.0 and occurs this error).
+
+You should build via following command, without `--system-libclang`, and YouCompleteMe will auto download new latest libclang.
+
+```shell
+/usr/bin/python3.6 install.py --clang-com
+```
+
+**_References:_**
+
+- :thumbsup:[Github ycm-core/YouCompleteMe: Linker error building clang-completer #3244](https://github.com/ycm-core/YouCompleteMe/issues/3244#issuecomment-442372170)
+
+#### [Using Error] When open vim, occur `Found /Users/username/.ycm_extra_conf.py. Load?` every time
+
+```shell
+Found /Users/username/.ycm_extra_conf.py. Load?
+
+(Question can be turned off with options, see YCM docs)
+[O]k, (C)ancel
+```
+
+**Solution:**
+
+```shell
+# Edit .vimrc
+let g:ycm_confirm_extra_conf = 0
+```
+
+**_References:_**
+
+- [Blog: 解决安装 YouCompleteMe 与 Vim 版本不兼容问](https://www.cnblogs.com/marsggbo/p/10039199.html)
+
+#### [Using Error] Using vim open cpp file, occur `AttributeError: 'module' object has no attribute 'FlagsForFile'`
+
+**_References:_**
+
+- :thumbsup:[Github ycm-core/YouCompleteMe: AttributeError: 'module' object has no attribute 'FlagsForFile' #2249](https://github.com/ycm-core/YouCompleteMe/issues/2249#issuecomment-471360094)
 
 <!--  -->
 <br>

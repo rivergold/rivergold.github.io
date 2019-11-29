@@ -348,6 +348,41 @@ let g:ycm_confirm_extra_conf = 0
 
 #### [Using Error] Using vim open cpp file, occur `AttributeError: 'module' object has no attribute 'FlagsForFile'`
 
+Create `.yum_c-c++_conf.py` into `/root/.vim_runtime`
+
+```python
+import os
+import ycm_core
+
+flags = [
+  '-Wall',
+  '-Wextra',
+  '-Werror',
+  '-Wno-long-long',
+  '-Wno-variadic-macros',
+  '-fexceptions',
+  '-ferror-limit=10000',
+  '-DNDEBUG',
+  '-std=c99',
+  '-xc',
+  '-isystem/usr/include/',
+  ]
+
+SOURCE_EXTENSIONS = [ '.cpp', '.cxx', '.cc', '.c', ]
+
+def FlagsForFile( filename, **kwargs ):
+  return {
+  'flags': flags,
+  'do_cache': True
+  }
+```
+
+Then edit `~/.vim_runtime/my_configs.vim`
+
+```shell
+let g:ycm_global_ycm_extra_conf = "~/.vim_runtime/.ycm_c-c++_conf.py"
+```
+
 **_References:_**
 
 - :thumbsup:[Github ycm-core/YouCompleteMe: AttributeError: 'module' object has no attribute 'FlagsForFile' #2249](https://github.com/ycm-core/YouCompleteMe/issues/2249#issuecomment-471360094)

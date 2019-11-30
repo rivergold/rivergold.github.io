@@ -144,6 +144,7 @@ def rotate_image(mat, angle):
 - [OpenCV doc OpenCV-Python Tutorials: Image Processing in OpenCV: Geometric Transformations of Images](https://docs.opencv.org/3.2.0/da/d6e/tutorial_py_geometric_transformations.html)
 - [OpenCV doc: warpAffine](https://docs.opencv.org/3.1.0/da/d54/group__imgproc__transform.html#ga0203d9ee5fcd28d40dbc4a1ea4451983)
 - [stackoverflow: Rotate an image without cropping in OpenCV in C++](https://stackoverflow.com/questions/22041699/rotate-an-image-without-cropping-in-opencv-in-c)
+- [CSDN: 旋转变换（一）旋转矩阵](https://blog.csdn.net/csxiaoshui/article/details/65446125): 旋转矩阵的是怎么计算的
 
 ### Rotate points on image
 

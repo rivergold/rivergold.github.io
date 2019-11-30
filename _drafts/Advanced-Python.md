@@ -154,6 +154,28 @@ class Foo(metaclass=PrefixMetaclass):
 <br>
 <!--  -->
 
+# High Performance
+
+## Good Blogs
+
+- [Python Bites: 5 tips to speed up your Python code](https://pybit.es/faster-python.html)
+
+## list comprehensions vs `map`
+
+> @python doc: Besides the syntactic benefit of list comprehensions, they are often as fast or faster than equivalent use of map.
+
+**_References:_**
+
+- [Python Doc: PerformanceTips](https://wiki.python.org/moin/PythonSpeed/PerformanceTips)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # :fallen_leaf:Awesome Tricks
 
 ## Make Class like a `dict`

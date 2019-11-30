@@ -464,6 +464,20 @@ at -r <job id>
 
 **_Ref:_** [RCSG website: at -r](http://rcsg-gsir.imsb-dsgi.nrc-cnrc.gc.ca/documents/advanced/node159.html)
 
+---
+
+## `mv`
+
+### Move multi files into directory
+
+```shell
+mv -t <directory> file1 file2 file3
+```
+
+***References:***
+
+- [stackoverflow: How to move multiple files at once to a specific destination directory?](https://askubuntu.com/a/217067)
+
 <!--  -->
 <br>
 

@@ -186,9 +186,45 @@ ffmpeg -i <audio_path> -i <video_path> -codec copy -shortest <output_path>
 
 # Build FFMPEG on CentOS
 
+## Static
+
 Download source code from [FFmpeg.org](https://ffmpeg.org/download.html)
 
 **_Ref:_** [FFMPEG: Compile FFmpeg on CentOS](https://trac.ffmpeg.org/wiki/CompilationGuide/Centos)
+
+---
+
+## Shared
+
+**:triangular_flag_on_post:注意：** 当编译动态库版本的 ffmpeg 时，其依赖也需要编译成动态库版本。如果需要编译动态库版本的 OpenCV，ffmpeg 也需要使用动态库
+
+**_References:_**
+
+- :thumbsup:[stackoverflow: FFmpeg doesn't compile with shared libraries](https://stackoverflow.com/questions/32785279/ffmpeg-doesnt-compile-with-shared-libraries)
+
+### Problem & Solution
+
+#### libaom.a cannot be used when making a shared object
+
+```shell
+/usr/bin/ld: /home/rivergold/software/lib/ffmpeg/ffmpeg-build/lib/libaom.a(noise_model.c.o): relocation R_X86_64_PC32 against symbol `stderr@@GLIBC_2.2.5' can not be used when making a shared object; recompile with -fPIC
+```
+
+**_Solution:_**
+
+Build libaom with enable shared libs.
+
+```shell
+# libaom
+cd ${FFPEG_SOURCE_DIR} &&
+    mkdir -p aom_build &&
+    cd aom_build &&
+    PATH="$PREFIX_DIR/bin:$PATH" cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="$PREFIX_DIR" -DBUILD_SHARED_LIBS=on -DENABLE_NASM=on ../aom &&
+    PATH="$PREFIX_DIR/bin:$PATH" make &&
+    make install
+```
+
+**注意：** [ffmpeg 官网的教程](https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu)仅说明了如何编译 static 版本的 ffmpeg，且编译`libaom`的参数`ENABLE_SHARED`在 CMakeLists.txt 中没有记录，需要改为`BUILD_SHARED_LIBS`
 
 ---
 

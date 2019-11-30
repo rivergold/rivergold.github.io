@@ -11,17 +11,18 @@ Build vim need:
 **Note:**
 
 - Use system default gcc
+- :triangular_flag_on_post:If you want to avoid much more build error, you'd better use system Python instead of Anaconda python to build vim
 
 ## Ubuntu
 
-### 1. Install `python-dev`\*\*
+### 1. Install `python-dev`
 
 ```shell
 sudo apt-get install python3-dev
 # Pay attention to which your anaconda python version is.
 ```
 
-### 2. run Config\*\*
+### 2. Run Config
 
 Use `./configure --help` to get command list
 
@@ -145,6 +146,20 @@ yum install ncurses-devel.x86_64
 **_References:_**
 
 - [CSDN: CentOS 编译 vim no terminal library found](https://blog.csdn.net/cuijianzhi/article/details/78652745)
+
+### [Make Error] `libpython3.7m.a unable to compile: unrecognized relocation 0x2a in section text`
+
+**Solution**
+
+This is because gcc version is too old (4.8.5). Upgrade your gcc into 7 or 8.
+
+**_References:_**
+
+- [stackoverflow: unable to compile: unrecognized relocation 0x2a in section text](https://stackoverflow.com/a/55793498/4636081)
+
+### [Link Error] such sa `ld error libpython3.7m` xxx version not matched
+
+Do not build with anaconda python, build with system python3.6.
 
 ---
 
@@ -290,6 +305,87 @@ cd YouCompleteMe
 **_Referneces:_**
 
 - [Youcomplete 完全安装](https://my.oschina.net/pointeraddress/blog/855916)
+
+#### [Error] `The ycmd server SHUT DOWN (restart with ':YcmRes...cmd_61292_stderr_8f1czxtp.log' to check the logs.`
+
+```shell
+ImportError: /root/.vim_runtime/my_plugins/YouCompleteMe/third_party/ycmd/ycm_core.so: undefined symbol: clang_getCompletionFixIt
+```
+
+**Solution:**
+
+This is becasue your system libclang is too old (I use libclang-5.0 and occurs this error).
+
+You should build via following command, without `--system-libclang`, and YouCompleteMe will auto download new latest libclang.
+
+```shell
+/usr/bin/python3.6 install.py --clang-com
+```
+
+**_References:_**
+
+- :thumbsup:[Github ycm-core/YouCompleteMe: Linker error building clang-completer #3244](https://github.com/ycm-core/YouCompleteMe/issues/3244#issuecomment-442372170)
+
+#### [Using Error] When open vim, occur `Found /Users/username/.ycm_extra_conf.py. Load?` every time
+
+```shell
+Found /Users/username/.ycm_extra_conf.py. Load?
+
+(Question can be turned off with options, see YCM docs)
+[O]k, (C)ancel
+```
+
+**Solution:**
+
+```shell
+# Edit .vimrc
+let g:ycm_confirm_extra_conf = 0
+```
+
+**_References:_**
+
+- [Blog: 解决安装 YouCompleteMe 与 Vim 版本不兼容问](https://www.cnblogs.com/marsggbo/p/10039199.html)
+
+#### [Using Error] Using vim open cpp file, occur `AttributeError: 'module' object has no attribute 'FlagsForFile'`
+
+Create `.yum_c-c++_conf.py` into `/root/.vim_runtime`
+
+```python
+import os
+import ycm_core
+
+flags = [
+  '-Wall',
+  '-Wextra',
+  '-Werror',
+  '-Wno-long-long',
+  '-Wno-variadic-macros',
+  '-fexceptions',
+  '-ferror-limit=10000',
+  '-DNDEBUG',
+  '-std=c99',
+  '-xc',
+  '-isystem/usr/include/',
+  ]
+
+SOURCE_EXTENSIONS = [ '.cpp', '.cxx', '.cc', '.c', ]
+
+def FlagsForFile( filename, **kwargs ):
+  return {
+  'flags': flags,
+  'do_cache': True
+  }
+```
+
+Then edit `~/.vim_runtime/my_configs.vim`
+
+```shell
+let g:ycm_global_ycm_extra_conf = "~/.vim_runtime/.ycm_c-c++_conf.py"
+```
+
+**_References:_**
+
+- :thumbsup:[Github ycm-core/YouCompleteMe: AttributeError: 'module' object has no attribute 'FlagsForFile' #2249](https://github.com/ycm-core/YouCompleteMe/issues/2249#issuecomment-471360094)
 
 <!--  -->
 <br>

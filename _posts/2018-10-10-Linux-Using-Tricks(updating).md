@@ -201,16 +201,20 @@ When you suspend a process, if you want to recover it, using `jobs` and `fg`.
 
 ## `tar`
 
-- compress
-  ```bash
-  tar -czvf <file_name>.tar.gz <folder need compressed>
-  tar -cjvf <file_name>.tar.bz2
-  ```
-- uncompress
-  ```bash
-  tar -xzvf <file_name>.tar.gz
-  tar -xjvf <file_name>.tar.bz2
-  ```
+**Compress**
+
+```bash
+tar -czvf <file_name>.tar.gz <folder need compressed>
+tar -cjvf <file_name>.tar.bz2
+```
+
+**Uncompress**
+
+```bash
+tar -xzvf <file_name>.tar.gz
+tar -xjvf <file_name>.tar.bz2
+```
+
 - `-c`: 建立一个压缩档案
 - `-x`: 解压一个压缩档案
 - `-z`: 是否具有`gzip`属性

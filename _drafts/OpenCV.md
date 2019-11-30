@@ -1,3 +1,61 @@
+# OpenCV 4.0
+
+## Blogs
+
+- [知乎: 一文看懂 OpenCV 4.0 所有新特性](https://zhuanlan.zhihu.com/p/51094657)
+
+# Build From Source
+
+- [OpenCV doc: Installation in Linux](https://docs.opencv.org/4.1.2/d7/d9f/tutorial_linux_install.html): Not very complete.
+
+---
+
+## Build only with Python3
+
+```shell
+cmake {...} -DPYTHON_DEFAULT_EXECUTABLE=$(which python3) ..
+```
+
+**_References:_**
+
+- [stackoverflow: how to build opencv for python3 when both python2 and python3 are installed](https://stackoverflow.com/a/39409570/4636081)
+
+---
+
+## Build with FFMPEG
+
+Build ffmpeg with shared library, please ref [Build ffmpeg from source]()
+
+```shell
+# FFMPEG
+FFMPEG_DIR="/home/rivergold/software/lib/ffmpeg/ffmpeg-build"
+export LD_LIBRARY_PATH=${FFMPEG_DIR}/lib:${LD_LIBRARY_PATH}
+export PKG_CONFIG_PATH=${FFMPEG_DIR}/lib/pkgconfig:$PKG_CONFIG_PATH
+export PKG_CONFIG_LIBDIR=${FFMPEG_DIR}/lib/:$PKG_CONFIG_LIBDIR
+
+cmake {...} -D WITH_FFMPEG=ON ..
+```
+
+**_References:_**
+
+- [stackoverflow: Configure and Build OpenCV to Custom FFMPEG Install](https://stackoverflow.com/questions/12427928/configure-and-build-opencv-to-custom-ffmpeg-install)
+
+## Problem & Solution
+
+### Error `ffmpeg libavcodec.a -fPIC`
+
+```shell
+libavcodec.a(vc1dsp_mmx.o): relocation R_X86_64_PC32 against symbol `ff_pw_9' can not be used when making a shared object; recompile with -fPIC
+```
+
+**Solution**
+
+Build ffmpeg as shared library.
+
+**_References:_**
+
+- [OpenCV forum: OpenCV 3.0 won't compile with FFMPEG support?](https://answers.opencv.org/question/63331/opencv-30-wont-compile-with-ffmpeg-support/)
+
 # Install
 
 ## Install OpenCV with FFMpeg wich x264

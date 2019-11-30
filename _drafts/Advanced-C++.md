@@ -158,7 +158,7 @@ Derivation can only inheriate `public` and `protected` members from **base**, bu
 
 - `std::move` 的作用: 把接受的实参转化为右值引用并返回
 
-> 右值是可以实施移动的，所以在一个对象上实施了`std::move`，就是告诉编译器该对象具备可以移动的条件。
+> @rivergold: 右值是可以实施移动的，所以在一个对象上实施了`std::move`，就是告诉编译器该对象具备可以移动的条件。
 
 **_References:_**
 
@@ -1076,3 +1076,21 @@ export PATH=<ccache_install_dir>/bin:$PATH
 **_References:_**
 
 - :thumbsup:[Github pytorch/CONTRIBUTING.md Make no-op build fast](https://github.com/pytorch/pytorch/blob/master/CONTRIBUTING.md#make-no-op-build-fast)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# C++ 11
+
+## Use `emplace_back` instead of `push_back`
+
+> @rivergold: 由于`emplace_back`是直接在容器内进行构造，所以避免了复制或者是移动操作
+
+**_References:_**
+
+- [实战 c++中的 vector 系列: 知道 emplace_back 为何优于 push_back 吗？](https://www.kancloud.cn/wangshubo1989/vector/101113)

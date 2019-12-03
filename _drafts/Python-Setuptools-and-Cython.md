@@ -408,3 +408,11 @@ If you are C++ background, it is easy to use pybind11 to wrap C++ (make Python b
 
 <br>
 <!--  -->
+
+# 临时
+
+## Uninstall `python setup.py install`
+
+**_References:_**
+
+- :thumbsup:[stackoverflow: python setup.py uninstall](https://stackoverflow.com/a/1550235/4636081)

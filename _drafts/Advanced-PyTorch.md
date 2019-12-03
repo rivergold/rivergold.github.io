@@ -19,6 +19,11 @@ Which not change or copy data, but change metadata of tensor.
 - `transpose`
 - `select`
 
+**_References:_**
+
+- [PyTorch Forum: Does select and narrow return a view or copy](https://discuss.pytorch.org/t/does-select-and-narrow-return-a-view-or-copy/289)
+- [知乎: PyTorch 中的 contiguous](https://zhuanlan.zhihu.com/p/64551412)
+
 ---
 
 # Setup PyTorch C++ Env

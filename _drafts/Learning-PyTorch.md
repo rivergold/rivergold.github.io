@@ -629,3 +629,41 @@ Debug PyTorch code using PySnooper
 ---
 
 <!--  -->
+
+# C++ API
+
+## 临时
+
+### Get data value from tensor
+
+**_References:_**
+
+- [Github pytorch/pytorch: at::Tensor::data() is deprecated but no other way is suggested for cpp extensions #28472](https://github.com/pytorch/pytorch/issues/28472)
+
+### torch::max(tensor)
+
+Return `std::tuple`
+
+### tensor.item<float>()
+
+**_References:_**
+
+- [PyTorch Forum: How to convert tensor entry to a float or double?](https://discuss.pytorch.org/t/how-to-convert-tensor-entry-to-a-float-or-double/45220)
+
+### Indexing
+
+**_References:_**
+
+- [PyTorch Forum: Indexing using the C++ APIs](https://discuss.pytorch.org/t/indexing-using-the-c-apis/35997)
+
+### Some Good References
+
+- [火星寻冰日志: PyTorch C++ 使用笔记](http://ghostblog.lyq.me/pytorch-cpp/)
+
+- [PyTorch Forum: Survey: What are you using the C++ API for?](https://discuss.pytorch.org/t/survey-what-are-you-using-the-c-api-for/55163)
+
+### Conditional Indexing
+
+**_References:_**
+
+- [PyTorch Forum: [ATen] C++ API: Equivalent to Conditional Index](https://discuss.pytorch.org/t/aten-c-api-equivalent-to-conditional-index/15682)

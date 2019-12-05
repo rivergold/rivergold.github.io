@@ -54,9 +54,26 @@ TODO
 
 ---
 
-## Indexing
+# :fallen_leaf:Indexing
 
-### [Error] `error: no match for ‘operator[]’ (operand types are ‘unsigned char*’ and ‘at::Tensor’)`
+## `torch::index`
+
+`torch::index` is the implementation for Python indexing (e.g. `x[tensor1, tensor2]`)
+
+```c++
+// E.g.
+auto x = torch::rand({10, 5});
+cout << x << endl;
+cout << x.index((x.slice(1, 4, 5) > 0.5).squeeze()) << endl;
+```
+
+**_References:_**
+
+- :thumbsup:[PyTorch Forum: Row-wise Element Indexing in PyTorch for C++](https://discuss.pytorch.org/t/row-wise-element-indexing-in-pytorch-for-c/30705/2?u=rivergold)
+
+---
+
+## [Error] `error: no match for ‘operator[]’ (operand types are ‘unsigned char*’ and ‘at::Tensor’)`
 
 ```c++
 auto x = torch::rand({5});
@@ -71,6 +88,8 @@ for (auto i = 0; i < idxes.size(0); ++i)
 ```
 
 **Solution:**
+
+TODO: `tensor.item` is very slow
 
 `auto idx = idxes[i];` -> `auto idx = idxes[i].item<int>();`
 

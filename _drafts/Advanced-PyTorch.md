@@ -1,3 +1,29 @@
+# Install
+
+Highly recommended install PyTorch follow [official website: pytorch.org](https://pytorch.org/)
+
+:triangular_flag_on_post:**cpu**
+
+```shell
+pip3 install torch==1.3.1+cpu torchvision==0.4.2+cpu -f https://download.pytorch.org/whl/torch_stable.html
+```
+
+> @rivergold: 针对于 CPU 版本，强烈建议追加`+cpu`方法安装！如果仅通过`pip install torch`，Pypi 的源可能会存在 Caffe2 编译依赖 Cuda 的问题，会导致你在编译 C++文件依赖 libtorch 时出现问题
+
+**Cuda**
+
+```shell
+pip3 install torch torchvision
+```
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # Common Ops
 
 ## `select`
@@ -25,6 +51,28 @@ Using `select` in C++ to achieve `tensor[:]` indexing in Python.
 ## `slice`
 
 TODO
+
+---
+
+## Indexing
+
+### [Error] `error: no match for ‘operator[]’ (operand types are ‘unsigned char*’ and ‘at::Tensor’)`
+
+```c++
+auto x = torch::rand({5});
+auto x_ptr = x.data_ptr<float>();
+auto idxes = torch::argsort(x, 0, true);
+for (auto i = 0; i < idxes.size(0); ++i)
+{
+    auto idx = idxes[i];
+    std::cout << x_ptr[idx] << std::endl; // Error
+    std::cout << x[idx] << std::endl;     // Ok
+}
+```
+
+**Solution:**
+
+`auto idx = idxes[i];` -> `auto idx = idxes[i].item<int>();`
 
 <!--  -->
 <br>
@@ -131,6 +179,10 @@ torch::Tensor nms(torch::Tensor dets, float thresh) {
 ```
 
 > @rivergold: fast one 的样例使用`select`和`contiguous`操作分别读取`x1, x2, y1, y2`
+
+## Use `data_ptr` instead of `tensor[i].item<float>()` to speed up
+
+> :triangular_flag_on_post: @rivergold: `tensor[i].item<float>()` is very very slow !!!
 
 <!--  -->
 <br>

@@ -24,6 +24,24 @@ pip3 install torch torchvision
 <br>
 <!--  -->
 
+# Environment
+
+## Set VSCode to find `torch/torch.h`
+
+:triangular_flag_on_post:`torch/torch.h` is in `${libtorch_base_dir}/include/torch/csrc/api/include`
+
+**_References:_**
+
+- [PyTorch Forum: Where to find <torch/torch.h>?](https://discuss.pytorch.org/t/where-to-find-torch-torch-h/59908/2?u=rivergold)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # Common Ops
 
 ## `select`

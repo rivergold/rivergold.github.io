@@ -141,3 +141,18 @@ Chardet: The Universal Character Encoding Detector
 **_References:_**
 
 - [脚本之家: 10 种检测 Python 程序运行时间、CPU 和内存占用的方法](https://www.jb51.net/article/63244.htm)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# Other
+
+- bleach
+- chardet: Python3 自带
+- mock: 单元测试
+- networkx: 用于构建和操作复杂的图结构，提供分析图的算法

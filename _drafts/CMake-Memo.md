@@ -151,6 +151,34 @@ The new child scope inherits all variable definitions from its parent scope. Var
 <br>
 <!--  -->
 
+# :fallen_leaf:set
+
+## Set cache variable
+
+Cache variable has default value, and you can use `cmake -DVARIABLENAME=xxx` to change it.
+
+```shell
+set(<variable_name> <variable_value> CACHE <type> <docstring> FORCE)
+# E.g.
+set(My_VARIABLE "example" CACHE STRING "This is an example" FORCE)
+```
+
+- `FORCE`: If `FORCE` is specified, the value of the cache variable is set, even if the variable is already in the cache.
+
+**_References:_**
+
+- [CMake doc: set](https://cmake.org/cmake/help/latest/command/set.html)
+- [An Introduction to Modern CMake: Cache Variables](https://cliutils.gitlab.io/modern-cmake/chapters/basics/variables.html)
+- [stackoverflow: Why do I need FORCE to override a CMake option?](https://stackoverflow.com/questions/39588836/why-do-i-need-force-to-override-a-cmake-option)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # Common Command
 
 ## `CMAKE_PREFIX_PATH`

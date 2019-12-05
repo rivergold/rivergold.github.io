@@ -179,6 +179,22 @@ set(My_VARIABLE "example" CACHE STRING "This is an example" FORCE)
 <br>
 <!--  -->
 
+# :fallen_leaf:option
+
+Provides an option for the user to select as `ON` or `OFF`. If no initial `<value>` is provided, `OFF` is used.
+
+```shell
+option(<variable> "<help_text>" [value])
+```
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # Common Command
 
 ## `CMAKE_PREFIX_PATH`

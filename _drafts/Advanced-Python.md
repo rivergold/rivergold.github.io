@@ -154,6 +154,34 @@ class Foo(metaclass=PrefixMetaclass):
 <br>
 <!--  -->
 
+# :fallen_leaf:itertools
+
+## Combinations two lists
+
+```shell
+> a = [1, 2]
+> b = [4, 5]
+> [[1, 4], [2, 4], [1, 5], [2, 5]]
+```
+
+Use `itertools.product`
+
+```python
+c = itertools.product(a, b)
+```
+
+**_References:_**
+
+- :thumbsup:[stackoverflow: combinations between two lists?](https://stackoverflow.com/a/34032549/4636081)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # High Performance
 
 ## Good Blogs

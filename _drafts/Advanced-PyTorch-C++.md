@@ -277,6 +277,7 @@ TorchScript a representation of a PyTorch model that can be understood, compiled
 2. Add `static auto registry = torch::RegisterOperators("module_name::func_name", &func);`
 3. Write CMakeLists.txt and build
 4. In Python, `torch.ops.load_library('<dynamic_lib_name>')`
+5. Call `torch.ops.<module_name>.func`
 
 Here is a `CMakeLists.txt` example:
 
@@ -295,11 +296,11 @@ find_package(Torch REQUIRED)
 include_directories("/home/rivergold/software/anaconda/include/python3.7m")
 
 # Define our library target
-add_library(<lib_name> SHARED <cpp_files>)
+add_library(<dynamic_lib_name> SHARED <cpp_files>)
 # Enable C++11
-target_compile_features(<lib_name> PRIVATE cxx_range_for)
+target_compile_features(<dynamic_lib_name> PRIVATE cxx_range_for)
 # Link against LibTorch
-target_link_libraries(<lib_name> "${TORCH_LIBRARIES}")
+target_link_libraries(<dynamic_lib_name> "${TORCH_LIBRARIES}")
 ```
 
 <!--  -->
@@ -319,7 +320,7 @@ C++ Extensions offer a simple yet powerful way of accessing all of the above int
 ## Use steps
 
 1. Write cpp file with `#include <torch/extension.h>`
-2. Add `PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) { m.def("<module_name>", &func_name, "description"); }`
+2. Add `PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) { m.def("<func_name>", &func, "description"); }`
 3. Write `setup.py`, use `cpp_extension.CppExtension` build build and install
 4. Run `import <module_name>` and use
 

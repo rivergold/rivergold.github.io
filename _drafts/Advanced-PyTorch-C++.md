@@ -119,6 +119,34 @@ TODO: `tensor.item` is very slow
 <br>
 <!--  -->
 
+# :fallen_leaf:Size
+
+## `tensor.sizes()`
+
+```c++
+auto x = torch::randn({10, 5});
+cout << x.sizes() << endl;
+>>> [10, 5]
+```
+
+---
+
+## `tensor.size(dim)`
+
+```c++
+auto x = torch::randn({10, 5});
+cout << x.size(0) << endl;
+>>> 10
+```
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # Awesome Trick
 
 ## Use `tensor.contiguous()` to speed up
@@ -126,6 +154,8 @@ TODO: `tensor.item` is very slow
 > @rivergold: 使用`tensor.contiguous()`会使得 PyTorch 的 tensort 变量的底层 data 数据索引是连续的，虽然`contiguous`会 copy 数据，但是该方法使用空间换时间，对于操作不是很大的张量时，有一定加速效果。
 
 E.g. two implementation of nms:
+
+TODO: 这个例子中使用了`tensor.item<>()`，导致运行速度很慢，之后会修改该样例
 
 **Slow one**
 
@@ -220,6 +250,91 @@ torch::Tensor nms(torch::Tensor dets, float thresh) {
 ## Use `data_ptr` instead of `tensor[i].item<float>()` to speed up
 
 > :triangular_flag_on_post: @rivergold: `tensor[i].item<float>()` is very very slow !!!
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# :fallen_leaf:TorchScript
+
+- [PyTorch doc: PYTORCH C++ API - TorchScript](https://pytorch.org/cppdocs/#torchscript)
+
+TorchScript a representation of a PyTorch model that can be understood, compiled and serialized by the TorchScript compiler.
+
+- A mechanism for loading and executing serialized TorchScript models defined in Python;
+- An API for defining custom operators that extend the TorchScript standard library of operations;
+- Just-in-time compilation of TorchScript programs from C++.
+
+> @rivergold: PyTorch 采用 JIT 将 C++代码编译为 IR，之后可以被 Python 或者是 C++使用
+
+## Use Steps
+
+1. Write cpp file with `#include <torch/script.h>`
+2. Add `static auto registry = torch::RegisterOperators("module_name::func_name", &func);`
+3. Write CMakeLists.txt and build
+4. In Python, `torch.ops.load_library('<dynamic_lib_name>')`
+
+Here is a `CMakeLists.txt` example:
+
+```shell
+cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
+project(<project_name>)
+
+set(LIBTORCH_DIR
+    "/home/rivergold/software/anaconda/lib/python3.7/site-packages/torch/share/cmake"
+)
+message("${LIBTORCH_DIR}")
+set(CMAKE_PREFIX_PATH ${LIBTORCH_DIR})
+find_package(Torch REQUIRED)
+
+# Include Python3 include dir
+include_directories("/home/rivergold/software/anaconda/include/python3.7m")
+
+# Define our library target
+add_library(<lib_name> SHARED <cpp_files>)
+# Enable C++11
+target_compile_features(<lib_name> PRIVATE cxx_range_for)
+# Link against LibTorch
+target_link_libraries(<lib_name> "${TORCH_LIBRARIES}")
+```
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# :fallen_leaf:C++ Extension
+
+- [PyTorch doc: PYTORCH C++ API - C++ Extensions](https://pytorch.org/cppdocs/#c-extensions)
+
+C++ Extensions offer a simple yet powerful way of accessing all of the above interfaces for the purpose of extending regular Python use-cases of PyTorch. C++ extensions are most commonly used to implement custom operators in C++ or CUDA to accelerate research in vanilla PyTorch setups. The C++ extension API does not add any new functionality to the PyTorch C++ API. Instead, it provides integration with Python setuptools as well as JIT compilation mechanisms that allow access to ATen, the autograd and other C++ APIs from Python.
+
+## Use steps
+
+1. Write cpp file with `#include <torch/extension.h>`
+2. Add `PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) { m.def("<module_name>", &func_name, "description"); }`
+3. Write `setup.py`, use `cpp_extension.CppExtension` build build and install
+4. Run `import <module_name>` and use
+
+Here is a `setup.py` example:
+
+```python
+from setuptools import setup, Extension
+from torch.utils import cpp_extension
+
+setup(name='<module_name>',
+    ext_modules=[cpp_extension.CppExtension('module_name', ['cpp_file_path'])],
+    cmdclass={'build_ext': cpp_extension.BuildExtension})
+```
+
+TODO: Update cpp file finder, without absolute path.
 
 <!--  -->
 <br>

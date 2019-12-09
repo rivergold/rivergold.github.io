@@ -474,7 +474,7 @@ at -r <job id>
 mv -t <directory> file1 file2 file3
 ```
 
-***References:***
+**_References:_**
 
 - [stackoverflow: How to move multiple files at once to a specific destination directory?](https://askubuntu.com/a/217067)
 
@@ -1986,6 +1986,10 @@ Snap download is very slow.
 ## mpv
 
 Good video player on Linux.
+
+**_References:_**
+
+- [Linux 中国: MPV 播放器：Linux 下的极简视频播放器](https://linux.cn/article-9980-1.html)
 
 ### Config
 

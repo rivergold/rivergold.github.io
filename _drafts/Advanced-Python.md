@@ -73,6 +73,10 @@ def __setattr__(self, name, value):
 
 可以仔细看下[PyTorch 源码中的`nn.Module`](https://github.com/pytorch/pytorch/blob/c002ede1075d05ab82e1d50fcc5f94ec1e0d95a9/torch/nn/modules/module.py#L577)的实现
 
+### `__getitem__` and `__setitem__`
+
+TODO
+
 ---
 
 ## Pickle Object

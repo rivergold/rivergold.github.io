@@ -77,6 +77,14 @@ def __setattr__(self, name, value):
 
 TODO
 
+### `getattr` and `setattr`
+
+TODO
+
+**_References:_**
+
+- :star2:[stackvoerflow: Python Newbie: using eval() to assign a value to a self.variable](https://stackoverflow.com/questions/38154901/python-newbie-using-eval-to-assign-a-value-to-a-self-variable)
+
 ---
 
 ## Pickle Object

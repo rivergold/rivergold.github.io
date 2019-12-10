@@ -409,10 +409,11 @@ If you are C++ background, it is easy to use pybind11 to wrap C++ (make Python b
 <br>
 <!--  -->
 
-# 临时
+# Uninstall `python setup.py install`
 
-## Uninstall `python setup.py install`
+1. `pip freeze | grep <package_name>`
+2. `pip uninstall <package_name>`
 
 **_References:_**
 
-- :thumbsup:[stackoverflow: python setup.py uninstall](https://stackoverflow.com/a/1550235/4636081)
+- :thumbsup:[stackoverflow: python setup.py uninstall](https://stackoverflow.com/a/12797865/4636081)

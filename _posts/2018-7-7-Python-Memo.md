@@ -2287,3 +2287,19 @@ def intra_frame_filter_person_bboxes(person_bboxes, scores=None):
 - [CSDN: python3 sorted 如何自定义排序标准](https://blog.csdn.net/u012436149/article/details/79952975)
 
 - [stackoverflow: Python: sort a list and change another one consequently](https://stackoverflow.com/questions/2732994/python-sort-a-list-and-change-another-one-consequently)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# Tricks
+
+## Finding the mode of a list
+
+**_References:_**
+
+- [stackoverflow: Finding the mode of a list](https://stackoverflow.com/a/10797913/4636081)

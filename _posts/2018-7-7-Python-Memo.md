@@ -2182,6 +2182,20 @@ Ref [python3-cookbook: 10.3 使用相对路径名导入包中子模块](https://
 
 - [Blog: Python 自定义包下不同目录单元测试的导入错误](http://lessisbetter.site/2016/01/08/package-unittest-import-error/)
 
+## Long string into muilti line
+
+```python
+data = (
+    'a-{} ',
+    'b-{} ',
+    'c-{} '
+).format(1, 2, ,3)
+```
+
+**_References:_**
+
+- [stackoverflow: Pythonic way to create a long multi-line string](https://stackoverflow.com/questions/10660435/pythonic-way-to-create-a-long-multi-line-string)
+
 <br>
 
 ---

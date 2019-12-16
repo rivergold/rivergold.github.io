@@ -669,3 +669,45 @@ collect2: error: ld returned 1 exit status
 ## `variants`
 
 - By default, ATen generates only the function variant for a native function.
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# ``
+
+输入`aten/src/ATen/native/native_functions.yaml`等配置文件
+解析出 top_env
+根据模板，进行匹配并替换，写出`build/aten/src/ATen/Declarations.yaml` .cpp .h 的文件
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# torchvision
+
+torchvision 通过调用 torch 的**Torchscript**注册机制，将新增的函数添加至 torch 中。注册是在[torchvision/csrc/vision.cpp](https://github.com/pytorch/vision/blob/d88d8961ae51507d0cb680329d985b1488b1b76b/torchvision/csrc/vision.cpp#L41)中实现的
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# TorchScript
+
+## What is TorchScript
+
+**_References:_**
+
+- :thumbsup:[stackoverflow: What are Torch Scripts in PyTorch?](https://stackoverflow.com/questions/53900396/what-are-torch-scripts-in-pytorch)

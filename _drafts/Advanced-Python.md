@@ -135,6 +135,12 @@ class Foo(metaclass=PrefixMetaclass):
 
 - :thumbsup:[Python 3 Patterns, Recipes and Idioms: Initialization and Cleanup](https://python-3-patterns-idioms-test.readthedocs.io/en/latest/InitializationAndCleanup.html)
 
+---
+
+## `super()`
+
+- :thumbsup::thumbsup::thumbsup:[Blog: Python: super 没那么简单](https://mozillazg.com/2016/12/python-super-is-not-as-simple-as-you-thought.html)
+
 <!--  -->
 <br>
 
@@ -205,6 +211,30 @@ c = itertools.product(a, b)
 ## Multi Process
 
 TODO:
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# :fallen_leaf:Exception
+
+## Get exception type
+
+```python
+try:
+    # do something
+except Exception as e:
+    print('{}: {}'.format(type(e).__name__, e))
+```
+
+**_References:_**
+
+- :thumbsup:[stackoverflow: python: How do I know what type of exception occurred?](https://stackoverflow.com/a/9824050/4636081)
+- [Python3-cookbook: 14.7 捕获所有异常](https://python3-cookbook.readthedocs.io/zh_CN/latest/c14/p07_catching_all_exceptions.html)
 
 <!--  -->
 <br>

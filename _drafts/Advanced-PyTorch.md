@@ -128,7 +128,37 @@ for module in m.named_modules():
 
 ## InternalLayerGetter
 
+> @rivergold: 使用`nn.ModuleDict`和`nn.Module.named_children()`从`in_model`中构建可以返回中间层输出结果的`Module`
+
 ```python
+from collections import OrderedDict
+import torch
+import torch.nn as nn
+
+
 class InternalLayerGetter(nn.ModuleDict):
-    pass
+    def __init__(self, in_model, internal_layer_names):
+        # Inspect
+        if not set(internal_layer_names.keys()).issubset(
+            [name for name, _ in in_model.named_children()]):
+            raise ValueError('Internal_layer_names not in model')
+
+        self.internal_layer_names = internal_layer_names.copy()
+        tmp_internal_layer_names = internal_layer_names.copy()
+        modules = OrderedDict()
+        for name, module in in_model.named_children():
+            modules[name] = module
+            if name in internal_layer_names.keys():
+                tmp_internal_layer_names.pop(name)
+            if not tmp_internal_layer_names:
+                break
+        super().__init__(modules)
+
+    def forward(self, x):
+        out = OrderedDict()
+        for name, module in self.named_children():
+            x = module(x)
+            if name in self.internal_layer_names.keys():
+                out[self.internal_layer_names[name]] = x
+        return out
 ```

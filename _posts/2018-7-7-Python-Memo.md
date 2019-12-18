@@ -2365,3 +2365,67 @@ res = re.findall(r'[]', x) # ERROR, 因为[]在正则表达式中有特殊的含
 
 - :thumbsup::thumbsup:[JournalDev: Python Raw String](https://www.journaldev.com/23598/python-raw-string)
 - :triangular_flag_on_post::thumbsup::thumbsup::thumbsup:[stackoverflow: Why can't Python's raw string literals end with a single backslash?](https://stackoverflow.com/a/19654184/4636081)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# String Encode and Decode
+
+- 字符集： 为每一个「字符」分配一个唯一的 ID，这个 ID 学名叫做：**码位** Code Point
+- 编码规则：将码位转化为字节序列，将字节序列转化为码位的规则
+
+E.g.
+
+- Unicode: 字符集
+- utf-8：编码规则
+
+**_References:_**
+
+- [知乎: Unicode 和 UTF-8 有什么区别？](https://www.zhihu.com/question/23374078/answer/24385963)
+
+> @rivergold: encode: 将字符码位编码为字节序列；decode：将字节序列解码为字符码位。
+
+> @rivergold: 人类定义了不同的字符集标准，例如：Unicode，ASCII， GB2312 等，每种字符集的编解码方式都不一样。当字符串所采用的字符集和编码方式不匹配，或者字节序列解码的方式不匹配时，都可能会出错。
+
+Python 采用 Unicode 作为字符集标准，默认采用 utf-8 作为编码规则
+
+E.g.
+
+```python
+# ~~~~~~
+# Encode
+# ~~~~~~
+x = 'Hello' # Python字符串采用Unicode字符集
+print(x.encode('utf-8')) # 采用utf-8规则编码
+>>> b'Hello'
+print(x.encode('ascii')) # 采用ascii规则编码
+>>> b'Hello'
+
+x = '你好' # Python字符串采用Unicode字符集
+print(x.encode('utf-8')) # 采用utf-8规则编码
+>>> b'\xe4\xbd\xa0\xe5\xa5\xbd'
+print(x.encode('ascii')) # 采用ascii规则编码，ascii不支持中文
+>>> UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-1: ordinal not in range(128)
+
+# ~~~~~~
+# Decode
+# ~~~~~~
+x = b'\xe4\xbd\xa0\xe5\xa5\xbd'
+print(x.decode('utf-8')) # 采用utf-8规则解码
+>>> 你好
+print(x.decode('ascii')) # 采用ascii规则解码
+>>> UnicodeDecodeError: 'ascii' codec can't decode byte 0xe4 in position 0: ordinal not in range(128)
+```
+
+> :triangular_flag_on_post::triangular_flag_on_post::triangular_flag_on_post:@rivergold: 在进行文件读写时，一定要指定`encoding=xxx`指定文件的编码方式。
+
+## chardet
+
+[Github](https://github.com/chardet/chardet)
+
+A package for character encoding.

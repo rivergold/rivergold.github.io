@@ -20,6 +20,8 @@ print(x.size())
 - :thumbsup::thumbsup::thumbsup:[stackoverflow: In Python NumPy what is a dimension and axis?](https://stackoverflow.com/a/19390939/4636081)
 - [Blog: NUMPY AXES EXPLAINED](https://www.sharpsightlabs.com/blog/numpy-axes-explained/)
 
+---
+
 ## `torch.stack` vs `torch.cat`
 
 > @rivergold: `torch.stack`会增加 n-dimension，而`torch.cat`不会增加 n-dimension, 而会增加某个 dimensionde 上的值
@@ -116,6 +118,30 @@ for module in m.named_modules():
 
 - :thumbsup:[PyTorch Forum: Module.children() vs Module.modules()](https://discuss.pytorch.org/t/module-children-vs-module-modules/4551/4?u=rivergold)
 
+---
+
+## Loss
+
+> @rivergold loss 是`nn.Module`类型。所以如果要自定义 loss，需要继承至`nn.Module`
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# torch.hub
+
+[PyTorch doc: TORCH.HUB](https://pytorch.org/docs/stable/hub.html)
+
+Pytorch Hub is a pre-trained model repository designed to facilitate research reproducibility.
+
+## PyTorch Hub
+
+[PyTorch Hub](https://pytorch.org/hub/)
+
 <!--  -->
 <br>
 
@@ -126,7 +152,7 @@ for module in m.named_modules():
 
 # Tricks
 
-## InternalLayerGetter
+## :bulb::bulb::bulb:InternalLayerGetter
 
 > @rivergold: 使用`nn.ModuleDict`和`nn.Module.named_children()`从`in_model`中构建可以返回中间层输出结果的`Module`
 

@@ -1160,6 +1160,10 @@ data = OrderedDict([('a', 1), ('b', 2)])
 
 ## re
 
+### `r'\n'`
+
+> @rivergold: 字符串前面加入`r`，表明该字符串的转义字符不起作用
+
 ### `re.sub(pattern, repl, string, count=0, flags=0)`
 
 #### `repl`: string
@@ -2317,3 +2321,47 @@ def intra_frame_filter_person_bboxes(person_bboxes, scores=None):
 **_References:_**
 
 - [stackoverflow: Finding the mode of a list](https://stackoverflow.com/a/10797913/4636081)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# re
+
+[Python doc: re --- 正则表达式操作](https://docs.python.org/zh-cn/3/library/re.html)
+
+- backslash: `\`
+- Escape sequence: 转义序列
+
+[Python Escape Sequence table](https://docs.python.org/2.0/ref/strings.html)
+
+## raw string
+
+> From Python's tutorial: When an '**r**' or '**R**' prefix is present, a character following a backslash is included in the string without change, and all backslashes are left in the string
+
+> From stackoverflow: Any character following a backslash **is** part of raw string.
+
+> @rivergold: 在编程语言中的`\`反斜杠会将其后的某些特殊字符进行转义，而`raw string`会是字符串中的`\`后面的字符得以保留。但是在 raw_string 中`\`不能单独出现，也就是说，其后必须得有字符，且不能是`'`和`"`
+
+> @rivergold: 在编程语言中的字符串有转义序列，例如`\n`, `\t`等，在正则表达式中也有转义序列，例如`\d`, `\w`等等。在`re`中使用 raw string 的目的是为了在我们不想让字符串中的`\字符`被转义时少写`\`而使用的
+
+E.g.
+
+```python
+x = '[]abc'
+# 我们想找到是否含有[]
+res = re.findall(r'\[\]', x)
+print(res)
+>>> ['[]']
+
+res = re.findall(r'[]', x) # ERROR, 因为[]在正则表达式中有特殊的含义，表示字符集合
+```
+
+**_References:_**
+
+- :thumbsup::thumbsup:[JournalDev: Python Raw String](https://www.journaldev.com/23598/python-raw-string)
+- :triangular_flag_on_post::thumbsup::thumbsup::thumbsup:[stackoverflow: Why can't Python's raw string literals end with a single backslash?](https://stackoverflow.com/a/19654184/4636081)

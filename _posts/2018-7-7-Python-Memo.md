@@ -2429,3 +2429,31 @@ print(x.decode('ascii')) # 采用ascii规则解码
 [Github](https://github.com/chardet/chardet)
 
 A package for character encoding.
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# Position argument & Keyword argument
+
+## :triangular_flag_on_post:You can pass keyword argument into function with position argument
+
+E.g.
+
+```python
+def fun(a, b):
+    print(a + b)
+
+fun(a=1, b=2)
+>>> 3
+```
+
+**_References:_**
+
+- [Blog: Keyword (Named) Arguments in Python: How to Use Them](https://treyhunner.com/2018/04/keyword-arguments-in-python/)
+
+---

@@ -141,6 +141,69 @@ class Foo(metaclass=PrefixMetaclass):
 
 - :thumbsup::thumbsup::thumbsup:[Blog: Python: super 没那么简单](https://mozillazg.com/2016/12/python-super-is-not-as-simple-as-you-thought.html)
 
+---
+
+## :triangular_flag_on_post::triangular_flag_on_post::triangular_flag_on_post:Rewrite Class `__setattr__` and `__getattr__`
+
+> @rivergold: Use `super().__setattr__` to init, otherwise will occur `RecursionError: maximum recursion depth exceeded while calling a Python object`, because follow in loop of call `__getattr__`.
+
+```python
+from pathlib import Path
+import yaml
+
+
+class Config(object):
+    def __init__(self, cfg=None, filename=None):
+        # self._cfg = cfg.copy()          ERROR
+        # self._cfg_filename = filename   ERROR
+        super().__setattr__('_cfg', cfg.copy())
+        super().__setattr__('_cfg_filename', filename)
+
+    @staticmethod
+    def from_file(file_path):
+        file_path = Path(file_path).resolve()
+
+        if not file_path.exists():
+            log_info = '{} not exist'.format(file_path.as_posix())
+            raise IOError(log_info)
+
+        with file_path.open('r', encoding='utf-8') as f:
+            cfg_dict = yaml.load(f, Loader=yaml.FullLoader)
+
+        return Config(cfg=cfg_dict, filename=file_path.name)
+
+    def __getitem__(self, name):
+        return self._cfg.get(name)
+
+    def __setitem__(self, name, value):
+        self._cfg[name] = value
+
+    def __getattr__(self, name):
+        return self._cfg.get(name)
+
+    def __setattr__(self, name, value):
+        self._cfg[name] = value
+
+    def __iter__(self):
+        return iter(self._cfg)
+```
+
+***注: *出现以上 RecursionError 错误的情况，类似于下面的这个例子：**
+
+```python
+class BadCase(object):
+    def __init__(self):
+        self.a = None
+
+    @property
+    def a(self):
+        return self.a # 一直在获取a属性的死循环中
+
+    @a.setter
+    def a(self, value):
+        self.a = value
+```
+
 <!--  -->
 <br>
 

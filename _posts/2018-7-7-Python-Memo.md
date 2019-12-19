@@ -2456,4 +2456,18 @@ fun(a=1, b=2)
 
 - [Blog: Keyword (Named) Arguments in Python: How to Use Them](https://treyhunner.com/2018/04/keyword-arguments-in-python/)
 
+<!--  -->
+<br>
+
 ---
+
+<br>
+<!--  -->
+
+# When need to use staticmethod
+
+> @rivergold: 当你需要编写的 standalone 函数需要放到类里面时（因为该函数和类有比较强的设计逻辑关系），你需要将这个 standalone 函数移到类里面并标明为`@staticmethod`
+
+**_References:_**
+
+- [stackoverflow: Why do we use @staticmethod?](https://stackoverflow.com/a/23508293/4636081)

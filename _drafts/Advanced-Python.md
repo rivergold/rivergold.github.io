@@ -235,6 +235,44 @@ class BadCase(object):
 <br>
 <!--  -->
 
+# :fallen_leaf:Iterator
+
+<p align="center">
+  <img
+  src="https://upload-images.jianshu.io/upload_images/9890707-d5f332064127fc07.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="80%">
+</p>
+
+> @rivergold: Object 有`__iter__`方法时，其是可迭代对象，即`iter(object)`会返回迭代器；如果 Object 有`__next__`方法时，其是迭代器
+
+- `iter()`将可迭代对象转化为迭代器
+- 带有`__next__`方法的对象是迭代器
+
+**_References:_**
+
+- :thumbsup:[Blog: 完全理解 Python 迭代对象、迭代器、生成器](https://foofish.net/iterators-vs-generators.html)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# Generator
+
+**_References:_**
+
+- [Blog: Python Generator](https://lotabout.me/2017/Python-Generator/)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # :fallen_leaf:itertools
 
 ## Combinations two lists

@@ -176,6 +176,8 @@ usage: setup.py [global_opts] cmd1 [cmd1_opts] [cmd2 [cmd2_opts] ...]
 ```python
 # Binary
 python setup bdist
+# Binary wheel
+python setup bdist_wheel
 # Source
 python setup sdist
 ```
@@ -417,3 +419,25 @@ If you are C++ background, it is easy to use pybind11 to wrap C++ (make Python b
 **_References:_**
 
 - :thumbsup:[stackoverflow: python setup.py uninstall](https://stackoverflow.com/a/12797865/4636081)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# Pypi
+
+## Publish package into pypi
+
+1. Write your packe code and test it
+2. Write `setup.py`
+3. `python setup.py bdist_wheel`
+4. `twine upload dist/*`
+5. Install `pip install <your package_name>`
+
+**_References:_**
+
+- [Medium: How to upload your python package to PyPi](https://medium.com/@joel.barmettler/how-to-upload-your-python-package-to-pypi-65edc5fe9c56)

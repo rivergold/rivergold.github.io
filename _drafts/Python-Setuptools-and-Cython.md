@@ -438,11 +438,15 @@ If you are C++ background, it is easy to use pybind11 to wrap C++ (make Python b
 4. `twine upload dist/*`
 5. Install `pip install <your package_name>`
 
-**Note:** Pypi upload url is `https://upload.pypi.org/legacy/`, you can run `twine upload --repository-url https://upload.pypi.org/legacy/ dist/*`
+**Note:** Pypi upload url is `https://upload.pypi.org/legacy/` and `https://test.pypi.org/legacy/`, you can run `twine upload --repository-url https://upload.pypi.org/legacy/ dist/*`
+
+> @rivergold: Better use upload package into `https://test.pypi.org/legacy/` to test if the package is ok. Then release it into `https://upload.pypi.org/legacy/`
 
 **_References:_**
 
 - [Medium: How to upload your python package to PyPi](https://medium.com/@joel.barmettler/how-to-upload-your-python-package-to-pypi-65edc5fe9c56)
+- [Pypi.org FAQ: Why am I getting a "Filename or contents already exists" or "Filename has been previously used" error?](https://pypi.org/help/#file-name-reuse)
+- [stackoverflow: not able to update my package on pypi.org](https://stackoverflow.com/q/50436171/4636081)
 
 ---
 

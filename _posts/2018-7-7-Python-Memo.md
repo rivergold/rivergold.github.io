@@ -2366,6 +2366,26 @@ res = re.findall(r'[]', x) # ERROR, 因为[]在正则表达式中有特殊的含
 - :thumbsup::thumbsup:[JournalDev: Python Raw String](https://www.journaldev.com/23598/python-raw-string)
 - :triangular_flag_on_post::thumbsup::thumbsup::thumbsup:[stackoverflow: Why can't Python's raw string literals end with a single backslash?](https://stackoverflow.com/a/19654184/4636081)
 
+---
+
+## re.sub
+
+### Replace part of string
+
+E.g.
+
+```python
+in_text = '你好 再见'
+partten = re.compile(r'([\w\u4e00-\u9fa5]{1})\s+([\u4e00-\u9fa5]{1})')
+out_text = partten.sub(r'\1,\2', in_text)
+print(out_text)
+>>> 你好,再见
+```
+
+**_References:_**
+
+- [stackoverflow: python regular expression “\1”](https://stackoverflow.com/questions/20802056/python-regular-expression-1/20802130)
+
 <!--  -->
 <br>
 

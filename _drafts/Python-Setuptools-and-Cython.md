@@ -438,6 +438,22 @@ If you are C++ background, it is easy to use pybind11 to wrap C++ (make Python b
 4. `twine upload dist/*`
 5. Install `pip install <your package_name>`
 
+**Note:** Pypi upload url is `https://upload.pypi.org/legacy/`, you can run `twine upload --repository-url https://upload.pypi.org/legacy/ dist/*`
+
 **_References:_**
 
 - [Medium: How to upload your python package to PyPi](https://medium.com/@joel.barmettler/how-to-upload-your-python-package-to-pypi-65edc5fe9c56)
+
+---
+
+## Wheel name means what ?
+
+```shell
+<package_name>-<package_version>-<python_version>-<abi_version>-<platform>.whl
+```
+
+You can run `python setup.py bdist_wheel --help` get how to set these.
+
+**_References:_**
+
+- [stackoverflow: Wheel files : What is the meaning of “none-any” in protobuf-3.4.0-py2.py3-none-any.whl](https://stackoverflow.com/questions/46915070/wheel-files-what-is-the-meaning-of-none-any-in-protobuf-3-4-0-py2-py3-none-a?noredirect=1&lq=1)

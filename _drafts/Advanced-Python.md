@@ -224,8 +224,15 @@ class BadCase(object):
 
 **_References_**
 
+- :thumbsup:[FOOFISH-PYTHON 之禅: 理解 Python 装饰器看这一篇就够了](https://foofish.net/python-decorator.html)
 - [segmentfault: Python 装饰器使用指南](https://segmentfault.com/a/1190000010681026)
 - [简书: Python - 学装饰器之前，有几个点要理解](https://www.jianshu.com/p/1369d610f8bb)
+
+## Where to use Decorator
+
+**_References:_**
+
+- [stackoverflow: What are some common uses for Python decorators? [closed]](https://stackoverflow.com/questions/489720/what-are-some-common-uses-for-python-decorators)
 
 <!--  -->
 <br>

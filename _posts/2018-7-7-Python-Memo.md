@@ -1754,7 +1754,8 @@ wget.download(<link>, out=<name>)
     - New a folder called `pip` under path `c:/user/<your user name>/`, and new a file name `pip.ini`, write followings in it:
       ```python
       [global]
-      index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+      index-url = https://mirrors.aliyun.com/pypi/simple
+      trusted-host =  mirrors.aliyun.com
       ```
 
   - On Linux:
@@ -1770,7 +1771,7 @@ wget.download(<link>, out=<name>)
 
 **_Reference:_**
 
-- [csdn: 更改 pip 源至国内镜像，显著提升下载速度](http://blog.csdn.net/zhangchilei/article/details/53893002)
+- [segmentfault: pip 设置阿里云的镜像源，速度超级快](https://segmentfault.com/a/1190000006111096)
 
 ## Organize your python package
 

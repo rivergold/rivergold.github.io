@@ -261,7 +261,7 @@ wget [options] <url>
 Download batch url from txt
 
 ```shell
-wget -r <downloadlink.txt>
+wget -i <downloadlink.txt>
 ```
 
 **_References:_**

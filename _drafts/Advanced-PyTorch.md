@@ -136,13 +136,27 @@ for module in m.named_modules():
 
 ## sampler
 
+---
+
 ## collate_fn
 
 > @PyTorch: You can use your own collate_fn to process the list of samples to form a batch.
 
+You can define your own `collate_fn` to realize a dataloader with variable-size input.
+
 **_References:_**
 
 - :thumbsup:[PyTorch Forum: How to use collate_fn()](https://discuss.pytorch.org/t/how-to-use-collate-fn/27181/2?u=rivergold)
+- :thumbsup:[PyTorch Forum: How to create a dataloader with variable-size input](https://discuss.pytorch.org/t/how-to-create-a-dataloader-with-variable-size-input/8278/2)
+
+---
+
+## pin_memory
+
+**_References:_**
+
+- [PyTorch Forum: What is the disadvantage of using pin_memory?](https://discuss.pytorch.org/t/what-is-the-disadvantage-of-using-pin-memory/1702)
+- [PyTorch Forum: When to set pin_memory to true?](https://discuss.pytorch.org/t/when-to-set-pin-memory-to-true/19723/2)
 
 <!--  -->
 <br>

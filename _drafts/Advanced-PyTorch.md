@@ -132,6 +132,26 @@ for module in m.named_modules():
 <br>
 <!--  -->
 
+# :fallen_leaf:DataLoader
+
+## sampler
+
+## collate_fn
+
+> @PyTorch: You can use your own collate_fn to process the list of samples to form a batch.
+
+**_References:_**
+
+- :thumbsup:[PyTorch Forum: How to use collate_fn()](https://discuss.pytorch.org/t/how-to-use-collate-fn/27181/2?u=rivergold)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # torch.hub
 
 [PyTorch doc: TORCH.HUB](https://pytorch.org/docs/stable/hub.html)

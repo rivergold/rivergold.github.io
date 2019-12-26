@@ -352,7 +352,25 @@ except Exception as e:
 <br>
 <!--  -->
 
-# High Performance
+# :fallen_leaf:Functools
+
+## partial
+
+Partial functions allow us to fix a certain number of arguments of a function and generate a new function.
+
+**_References:_**
+
+- [GeeksforGeeks: Partial Functions in Python](https://www.geeksforgeeks.org/partial-functions-python/)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# :fallen_leaf:High Performance
 
 ## Good Blogs
 

@@ -124,6 +124,32 @@ for module in m.named_modules():
 
 > @rivergold loss 是`nn.Module`类型。所以如果要自定义 loss，需要继承至`nn.Module`
 
+---
+
+## torch.nn.functional
+
+```python
+import torch.nn.functional as F
+```
+
+### torch.nn.functional.pad
+
+[PyTorch doc](https://pytorch.org/docs/stable/nn.functional.html#torch.nn.functional.pad)
+
+:triangular_flag_on_post:E.g.
+
+```python
+x = torch.randn(1, 1, 5, 5)
+y = F.pad(x, (0, 3, 0, 3))
+print(y.size())
+>>> torch.Size([1, 1, 8, 8])
+y = F.pad(x, (0, 2, 0, 3, 0, 3))
+print(y.size())
+>>> torch.Size([1, 4, 8, 7])
+```
+
+> @rivergold `pad size`是成对出现的，靠前的 size 描述是对靠后的 dim(dim 的值大)的 pad
+
 <!--  -->
 <br>
 

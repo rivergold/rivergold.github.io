@@ -160,7 +160,15 @@ print(y.size())
 
 # :fallen_leaf:DataLoader
 
+[PyTorch doc](https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader)
+
 ## sampler
+
+> @rivergold: 本质上，sampler 是一个迭代器（也可以是一个生成器），用来产生 DataLoader 所需要的 index
+
+**_References:_**
+
+- :thumbsup: :thumbsup: :thumbsup::triangular_flag_on_post::triangular_flag_on_post::triangular_flag_on_post:[Detectron2: TrainingSampler](https://github.com/facebookresearch/detectron2/blob/ef096f9b2fbedca335f7476b715426594673f463/detectron2/data/samplers/distributed_sampler.py#L12)
 
 ---
 
@@ -183,6 +191,18 @@ You can define your own `collate_fn` to realize a dataloader with variable-size 
 
 - [PyTorch Forum: What is the disadvantage of using pin_memory?](https://discuss.pytorch.org/t/what-is-the-disadvantage-of-using-pin-memory/1702)
 - [PyTorch Forum: When to set pin_memory to true?](https://discuss.pytorch.org/t/when-to-set-pin-memory-to-true/19723/2)
+
+---
+
+## DataLoader Tricks
+
+### :triangular_flag_on_post:sampler confict with `shuffle=True`
+
+When set `sampler=xxx`, must use `shuffle=False`. If not, will occur error `ValueError: sampler option is mutually exclusive with shuffle`
+
+**_References:_**
+
+- [Blog: ValueError sampler is mutually exclusive with shuffle](http://www.iterate.site/post/01-%E6%8E%A2%E7%B4%A2/04-%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8/11-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6/11-pytorch/valueerror-sampler-is-mutually-exclusive-with-shuffle/)
 
 <!--  -->
 <br>

@@ -258,6 +258,14 @@ class BadCase(object):
 
 - :thumbsup:[Blog: 完全理解 Python 迭代对象、迭代器、生成器](https://foofish.net/iterators-vs-generators.html)
 
+---
+
+## Iterable
+
+可迭代的对象
+
+> @Fluent Python: 使用 iter 内置函数可以获取迭代器对象。如果对象实现了能返回迭代器的`__iter__`方法，那么对象就是可迭代的。序列都是可以迭代的：`__getitem__`方法，而且其参数是从零开始的索引，这种对象也可以迭代。
+
 <!--  -->
 <br>
 
@@ -267,6 +275,14 @@ class BadCase(object):
 <!--  -->
 
 # Generator
+
+> @rivergold: 生成器也是迭代器，只不过是使用了`yeild`或`yeild from`。
+
+## Generator Function
+
+生成器函数
+
+> :bulb::bulb::bulb:@Fluent Python: 只要 Python 函数的定义体中有`yeild`关键字，该函数就是生成器函数。调用生成器函数时，会返回一个生成器对象。
 
 **_References:_**
 

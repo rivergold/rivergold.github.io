@@ -281,7 +281,7 @@ class BadCase(object):
 **_References:_**
 
 - :thumbsup:[zetcode: Python iterators and generators](http://zetcode.com/lang/python/itergener/)
-- - [知乎: 如何更好地理解 Python 迭代器和生成器？](https://www.zhihu.com/question/20829330)
+- [知乎: 如何更好地理解 Python 迭代器和生成器？](https://www.zhihu.com/question/20829330/answer/133606850)
 
 ---
 
@@ -319,7 +319,7 @@ class BadCase(object):
 
 # Generator
 
-> @rivergold: 生成器也是迭代器，只不过是使用了`yeild`或`yeild from`。
+> @rivergold: 生成器也是迭代器，只不过是使用了`yeild`或`yeild from`。Python 使用生成器对惰性计算(lazy evaluation)提供了支持。
 
 ## Generator Function
 

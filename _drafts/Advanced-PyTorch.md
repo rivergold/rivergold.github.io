@@ -204,6 +204,20 @@ When set `sampler=xxx`, must use `shuffle=False`. If not, will occur error `Valu
 
 - [Blog: ValueError sampler is mutually exclusive with shuffle](http://www.iterate.site/post/01-%E6%8E%A2%E7%B4%A2/04-%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8/11-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6/11-pytorch/valueerror-sampler-is-mutually-exclusive-with-shuffle/)
 
+### :bulb::triangular_flag_on_post:Generate infinite data stream for training
+
+**Key point**:
+
+- torch.utils.data.Dataset
+- torch.utils.data.Sampler
+- Python generator
+
+> @rivergold: 将 Sampler 和 Python 的生成器结合在一起，一直产生在样本总数以内的 index，以阻止 DataLoader 抛出 StopIteration 的异常
+
+**_References:_**
+
+- :thumbsup::thumbsup::thumbsup:[Detectron2: TrainingSampler](https://github.com/facebookresearch/detectron2/blob/ef096f9b2fbedca335f7476b715426594673f463/detectron2/data/samplers/distributed_sampler.py#L12)
+
 <!--  -->
 <br>
 

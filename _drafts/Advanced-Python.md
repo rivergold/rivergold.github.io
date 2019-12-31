@@ -14,6 +14,18 @@
 <br>
 <!--  -->
 
+# :fallen_leaf:Glossary
+
+:star2:[Python doc: Glossary](https://docs.python.org/3.8/glossary.html#term-duck-typing)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # :fallen_leaf:Magic Methods
 
 ## Blogs

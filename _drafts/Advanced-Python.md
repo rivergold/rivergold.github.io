@@ -276,6 +276,17 @@ class BadCase(object):
 
 # :fallen_leaf:Iterator
 
+> **Iterator** is an object which allows a programmer to traverse through all the element of a collection, regardless of its specific implementation.
+
+**_References:_**
+
+- :thumbsup:[zetcode: Python iterators and generators](http://zetcode.com/lang/python/itergener/)
+- - [知乎: 如何更好地理解 Python 迭代器和生成器？](https://www.zhihu.com/question/20829330)
+
+---
+
+## Iterator Protocol
+
 <p align="center">
   <img
   src="https://upload-images.jianshu.io/upload_images/9890707-d5f332064127fc07.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="80%">
@@ -319,6 +330,12 @@ class BadCase(object):
 **_References:_**
 
 - [Blog: Python Generator](https://lotabout.me/2017/Python-Generator/)
+
+---
+
+## yeild from
+
+将生成移交给子生成器
 
 <!--  -->
 <br>

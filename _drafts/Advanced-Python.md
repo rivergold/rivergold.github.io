@@ -101,6 +101,26 @@ TODO
 <br>
 <!--  -->
 
+# Protocol and Duck Typing
+
+Interface: 接口
+Protocol: 协议
+Duck Typing: 鸭子协议
+
+> @rivergold: 协议是非正式的接口
+
+**_References:_**
+
+- :thumbsup::thumbsup::thumbsup:[Book: 协议和鸭子类型](http://blog.hszofficial.site/TutorialForPython/%E8%AF%AD%E6%B3%95%E7%AF%87/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%83%AF%E7%94%A8%E6%B3%95/%E5%8D%8F%E8%AE%AE%E4%B8%8E%E6%8E%A5%E5%8F%A3%E4%B8%8E%E6%8A%BD%E8%B1%A1%E5%9F%BA%E7%B1%BB.html)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # :fallen_leaf:Class
 
 ## metaclass

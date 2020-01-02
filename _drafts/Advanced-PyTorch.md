@@ -226,6 +226,38 @@ When set `sampler=xxx`, must use `shuffle=False`. If not, will occur error `Valu
 <br>
 <!--  -->
 
+# Random Seed
+
+[PyTorch doc: REPRODUCIBILITY](https://pytorch.org/docs/stable/notes/randomness.html)
+
+> @rivergold: 当代码中使用到了 random number generator 来产生随机数时，如果想要复现同样的实验结果，需要给所有的 random number generator 设置随机种子
+
+**PyTorch**
+
+```python
+seed = 123
+torch.manual_seed(seed)
+```
+
+**Numpy**
+
+```python
+seed = 123
+np.random.seed(seed)
+```
+
+**_References:_**
+
+- :thumbsup:[PyTorch Forum: What is manual_seed?](https://discuss.pytorch.org/t/what-is-manual-seed/5939/2?u=rivergold)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # torch.hub
 
 [PyTorch doc: TORCH.HUB](https://pytorch.org/docs/stable/hub.html)

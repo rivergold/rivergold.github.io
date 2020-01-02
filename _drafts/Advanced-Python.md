@@ -309,6 +309,28 @@ class BadCase(object):
 
 > @Fluent Python: 使用 iter 内置函数可以获取迭代器对象。如果对象实现了能返回迭代器的`__iter__`方法，那么对象就是可迭代的。序列都是可以迭代的：`__getitem__`方法，而且其参数是从零开始的索引，这种对象也可以迭代。
 
+---
+
+## itertools
+
+### Combinations two lists
+
+```shell
+> a = [1, 2]
+> b = [4, 5]
+> [[1, 4], [2, 4], [1, 5], [2, 5]]
+```
+
+Use `itertools.product`
+
+```python
+c = itertools.product(a, b)
+```
+
+**_References:_**
+
+- :thumbsup:[stackoverflow: combinations between two lists?](https://stackoverflow.com/a/34032549/4636081)
+
 <!--  -->
 <br>
 
@@ -336,34 +358,6 @@ class BadCase(object):
 ## yeild from
 
 将生成移交给子生成器
-
-<!--  -->
-<br>
-
----
-
-<br>
-<!--  -->
-
-# :fallen_leaf:itertools
-
-## Combinations two lists
-
-```shell
-> a = [1, 2]
-> b = [4, 5]
-> [[1, 4], [2, 4], [1, 5], [2, 5]]
-```
-
-Use `itertools.product`
-
-```python
-c = itertools.product(a, b)
-```
-
-**_References:_**
-
-- :thumbsup:[stackoverflow: combinations between two lists?](https://stackoverflow.com/a/34032549/4636081)
 
 <!--  -->
 <br>

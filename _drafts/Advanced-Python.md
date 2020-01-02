@@ -375,9 +375,21 @@ c = itertools.product(a, b)
 
 - [简书: python 之 ThreadPoolExecutor](https://www.jianshu.com/p/1ed39de60cb6)
 
+---
+
 ## Multi Process
 
 TODO:
+
+### Multi process will deep copy global variable by default
+
+> @rivergold: Python 多进程默认不共享全局变量，而是会将全局变量拷贝到各个进程的内存中。如果需要共享数据，需要采用进程间的通信。
+
+**_References:_**
+
+- [CSDN: Python 多进程默认不能共享全局变量](https://blog.csdn.net/houyanhua1/article/details/78236514)
+- [stackoverflow: Globals variables and Python multiprocessing [duplicate]](https://stackoverflow.com/a/11215750/4636081)
+-
 
 <!--  -->
 <br>

@@ -16,6 +16,11 @@ pip3 install torch==1.3.1+cpu torchvision==0.4.2+cpu -f https://download.pytorch
 pip3 install torch torchvision
 ```
 
+## CUDA Version
+
+pytorch=1.3.1: CUDA=10.1
+pytorch=1.2.0: CUDA=10.0
+
 <!--  -->
 <br>
 

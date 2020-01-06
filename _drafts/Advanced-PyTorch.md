@@ -314,3 +314,34 @@ class InternalLayerGetter(nn.ModuleDict):
                 out[self.internal_layer_names[name]] = x
         return out
 ```
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
+# Errors & Solutions
+
+## [PyTorch=1.2.0] `ModuleNotFoundError: No module named 'past'`
+
+```shell
+    from caffe2.python import workspace
+  File "/root/software/anaconda/lib/python3.7/site-packages/caffe2/python/workspace.py", line 15, in <module>
+    from past.builtins import basestring
+ModuleNotFoundError: No module named 'past'
+```
+
+**Solution**
+
+```shell
+pip install future
+```
+
+**_References:_**
+
+- [Github nilmtk/nilmtk: ModuleNotFoundError: No module named 'past' #548](https://github.com/nilmtk/nilmtk/issues/548)
+
+---

@@ -2,6 +2,7 @@
 
 - zsh
 - build-essential
+- zssh & rzsz
 - Python
 - vim
 - cmake
@@ -43,6 +44,18 @@ alias rm='echo "rm is disabled, use trash or /bin/rm instead."'
 ```shell
 sudo apt install build-essential
 ```
+
+---
+
+## zssh
+
+```shell
+sudo apt install zssh
+```
+
+**_References:_**
+
+- [博客园: linux 机器之间 zssh, rz, sz 互相传输](https://www.cnblogs.com/strikebone/p/3454679.html)
 
 ---
 

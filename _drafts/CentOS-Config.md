@@ -68,6 +68,7 @@ Ref [博客园: CentOS yum 源的配置与使用](https://www.cnblogs.com/mchina
 - vim
 - cmake
 - git
+- rzsz
 
 ## zsh
 
@@ -399,6 +400,18 @@ yum install git
 **_References:_**
 
 - [stackoverflow: How to install latest version of git on CentOS 7.x/6.x](https://stackoverflow.com/questions/21820715/how-to-install-latest-version-of-git-on-centos-7-x-6-x)
+
+---
+
+## rzsz
+
+```bash
+yum install lrzsz
+```
+
+**_References:_**
+
+- [CSDN: linux CentOS 安装 rz 和 sz 命令 lrzsz](https://blog.csdn.net/jack85986370/article/details/51321475)
 
 <!--  -->
 <br>

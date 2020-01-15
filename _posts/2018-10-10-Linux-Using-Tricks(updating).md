@@ -891,17 +891,29 @@ Using `file filter` to realize this.
 
 <!--  -->
 
-## sogou input
+## Sogou Input
 
 1. First install `fcitx`. Because Ubuntu set `Ibus` as default keyboard input framework, we need change it.
+
    ```bash
    sudo apt-get install fcitx
    ```
+
 2. Go to `System Settings` -> `Language Support`, change `Keyboard input method system` as `fcitx`
+
 3. Download Sogou input method from [here](https://pinyin.sogou.com/linux/?r=pinyin)
+
    ```shell
    sudo dpkg -i install <sogou.deb>
    ```
+
+4. Reboot
+
+5. Double click keyboard logo and choose `Configure Current Input Method`
+
+**_References:_**
+
+- :thumbsup:[CSDN: Ubuntu18.04 下安装搜狗输入法](https://blog.csdn.net/lupengCSDN/article/details/80279177)
 
 <!--  -->
 <br>
@@ -1022,6 +1034,20 @@ Teminator -> Preferences -> Profiles -> Scrolling and select inifinite scrollbac
 - [简书： 5 分钟入手 Terminator](http://www.jianshu.com/p/cee2de32ca28)
 - [ubuntu: Setting nautilus-open-terminal to launch Terminator rather than gnome-terminal](https://askubuntu.com/questions/76712/setting-nautilus-open-terminal-to-launch-terminator-rather-than-gnome-terminal)
 - [stackoverflow: Nautilus-actions in 18.04](https://askubuntu.com/questions/1030940/nautilus-actions-in-18-04)
+
+### Close title bar
+
+Edit `~/.config/terminator/config`
+
+```config
+[profiles]
+  [[default]]
+    show_titlebar = false
+```
+
+**_References:_**
+
+- [LinuxQuestions.org: Terminator on-start title bar, how to disable](https://www.linuxquestions.org/questions/linux-software-2/terminator-on-start-title-bar-how-to-disable-4175473921/)
 
 <!--  -->
 <br>

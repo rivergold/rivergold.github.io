@@ -179,6 +179,98 @@ curl -d "data=test" <http_address>
 <br>
 <!--  -->
 
+# :fallen_leaf:Nignx File Server
+
+## Install
+
+**CentOS**
+
+```shell
+yum install nignx
+```
+
+---
+
+## Start
+
+```shell
+nignx
+```
+
+---
+
+## Stop
+
+```shell
+killall nginx
+```
+
+---
+
+## Config
+
+**CentOS**
+
+Config file path is `/etc/nginx/nginx.conf`
+
+1. Check nignx user
+
+   ```shell
+   ps aux | grep "nginx: worker process"
+   ```
+
+   **_References:_**
+
+   - [CSDN: 解决 Nginx 出现 403 forbidden (13: Permission denied)报错的四种方法](https://blog.csdn.net/onlysunnyboy/article/details/75270533)
+
+2. Set user
+
+   ```shell
+   user root root;
+   ```
+
+3. Inspect permission
+
+   ```shell
+   ll your_path
+   chown -R root:root <your_path>
+   chmod -R 755 <your_path>
+   ```
+
+4. Set root
+
+   ```shell
+   root <your_path>
+   ```
+
+---
+
+## Problem & Solution
+
+### 403 Forbidden
+
+Check log file ``, show
+
+```shell
+426782#0: *2 directory index of "/var/www/html/" is forbidden
+```
+
+**Solution:**
+
+Edit `/etc/nginx/nginx.conf`, add `autoindex on;` after `root your_path;`
+
+**_References:_**
+
+- :thumbsup:[博客园: 关于 Nginx 403 forbidden 错误踩的坑 directory index of "/xx/xx/xx/" is forbidden](https://www.cnblogs.com/Cong0ks/p/11958846.html)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # :fallen_leaf:Setup Apache File Server
 
 ## Setup a HTTP Server
@@ -288,20 +380,27 @@ sudo systemctl start httpd
 
 TODO: update
 
-Change http work folder `DocumentRoot`
+1. Edit `/etc/httpd/conf/httpd.conf`
 
-1. vim `/etc/httpd/conf/httpd.conf`
+   ```shell
+   # Before
+   <Directory "/var/www">
+       AllowOverride None
+       # Allow open access:
+       Require all granted
+   </Directory>
 
-   ```vim
-   #
-   121 # DocumentRoot "/var/www/html"
-   122 DocumentRoot "/data/www"
-   #
-   131 # <Directory "/var/www">
-   132 <Directory "/data/www">
-   #
-   141 #<Directory "/var/www/html">
-   142 <Directory "/data/www">
+   # Further relax access to the default document root:
+   <Directory "/var/www/html">
+
+   # After
+   <Directory "your_path">
+       AllowOverride None
+       # Allow open access:
+       Require all granted
+   </Directory>
+   # Further relax access to the default document root:
+   <Directory "your_path">
    ```
 
 2. vim `/etc/httpd/conf.d/welcome.conf`

@@ -659,6 +659,21 @@ guts::enable_if_t<guts::is_functor<KernelFunctor>::value, Options&&> kernel(Tens
 
 - [Blog: std::enable_if 的几种用法](https://yixinglu.gitlab.io/enable_if.html)
 
+---
+
+## `std::function`
+
+> @rivergold: std::function<return_object> 表示一个可调用对象
+
+### Example
+
+[Taichi: taichi/program.h](https://github.com/rivergold/taichi/blob/bcd573b6e4b49bb57de3b63d45ba427b393cf3c7/taichi/program.h#L147)
+
+**_References:_**
+
+- [博客园: C++ 11 std::function std::bind 使用](https://www.cnblogs.com/DswCnblog/p/5630067.html)
+- [码农场: C++11 std::function 用法](https://www.hankcs.com/program/cpp/c11-std-function-usage.html)
+
 <!--  -->
 <br>
 

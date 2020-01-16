@@ -34,8 +34,33 @@ Build-in class: `NodeTransformer`
 
 ---
 
+### compile
+
+**_References:_**
+
+- :thumbsup:[Programiz: Python compile()](https://www.programiz.com/python-programming/methods/built-in/compile)
+
+---
+
 ## Convert Python AST into LLVM IR
 
 **_References:_**
 
 - [Github numba/llvmlite: Generate LLVM IR from CPython ast? #488](https://github.com/numba/llvmlite/issues/488)
+
+---
+
+## Question
+
+### :star2:pybind11 如何处理从 Python 传递函数到 C++的？
+
+基于 C++的`std::function`
+
+[Taichi: taichi/python_bindings.cpp](https://github.com/rivergold/taichi/blob/4514d5834bcc05ec5ef4aeb4c4ce7a149d98970d/taichi/python_bindings.cpp#L163)
+[Taichi: taichi/program.h](https://github.com/rivergold/taichi/blob/bcd573b6e4b49bb57de3b63d45ba427b393cf3c7/taichi/program.h#L147)
+
+### C++的代码中为什么需要使用 KernelProxy 和 Kernel?
+
+[Taichi: taichi/program.h](https://github.com/rivergold/taichi/blob/bcd573b6e4b49bb57de3b63d45ba427b393cf3c7/taichi/program.h#L129)
+
+~~> @rivergold: 是不是因为 pybind11 无法支持对`std::function`的封装，所以用 KernelProxy 把参数为`std::function`的函数封装进入 struct，来解决这个问题？~~

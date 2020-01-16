@@ -441,6 +441,22 @@ Partial functions allow us to fix a certain number of arguments of a function an
 <br>
 <!--  -->
 
+# Module-`inspect`
+
+[Python doc: inspect Inspect live objects](https://docs.python.org/zh-cn/3.7/library/inspect.html)
+
+## Example
+
+[Taichi: kernel-materialize](https://github.com/rivergold/taichi/blob/686a0eea32088798ba21a60f78c1255fa1f5e4f0/python/taichi/lang/kernel.py#L182)
+
+<!--  -->
+<br>
+
+---
+
+<br>
+<!--  -->
+
 # :fallen_leaf:High Performance
 
 ## Good Blogs

@@ -64,3 +64,13 @@ Build-in class: `NodeTransformer`
 [Taichi: taichi/program.h](https://github.com/rivergold/taichi/blob/bcd573b6e4b49bb57de3b63d45ba427b393cf3c7/taichi/program.h#L129)
 
 ~~> @rivergold: 是不是因为 pybind11 无法支持对`std::function`的封装，所以用 KernelProxy 把参数为`std::function`的函数封装进入 struct，来解决这个问题？~~
+
+### [Pybind11] `py::gil_scoped_release release;`的作用是什么？
+
+[Taichi: taichi/python_bindings.cpp](https://github.com/rivergold/taichi/blob/4514d5834bcc05ec5ef4aeb4c4ce7a149d98970d/taichi/python_bindings.cpp#L167)
+
+### Python 文档生成与托管
+
+**_References:_**
+
+- [Github taichi-dev/taichi: Documentation #15](https://github.com/taichi-dev/taichi/issues/15)

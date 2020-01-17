@@ -1914,6 +1914,7 @@ sudo apt install silversearcher-ag
 
 **_References:_**
 
+- :thumbsup:[博客园: ag 命令的帮助文档](https://www.cnblogs.com/michael-xiang/p/10466890.html)
 - [Ming's blog: the silver searcher：快如闪电的 grep](https://bitmingw.com/2017/10/08/fast-grep-the-silver-searcher/)
 
 <!--  -->

@@ -422,6 +422,18 @@ cmake -GNinja ..
 set(CMAKE_GENERATOR "Ninja")
 ```
 
+---
+
+## Set c++ standard
+
+```shell
+set(CMAKE_CXX_STANDARD 11)
+```
+
+**_References:_**
+
+- :thumbsup:[Crascit Professional CMake: A Practical Guide](https://crascit.com/2015/03/28/enabling-cxx11-in-cmake/)
+
 <!--  -->
 <br>
 

@@ -18,6 +18,16 @@
 
 - [stackoverflow: What does a double colon followed by an equals sign (::=) mean in programming documentation?](https://stackoverflow.com/questions/9196066/what-does-a-double-colon-followed-by-an-equals-sign-mean-in-programming-do)
 
+---
+
+## `error: no template named 'make_unique' in namespace std`
+
+`make_unique` is in c++14
+
+**_References:_**
+
+- [stackoverflow: error::make_unique is not a member of ‘std’](https://stackoverflow.com/questions/24609271/errormake-unique-is-not-a-member-of-std)
+
 <!--  -->
 <br>
 

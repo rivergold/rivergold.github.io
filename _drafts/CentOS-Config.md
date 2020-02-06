@@ -442,3 +442,17 @@ localedef -v -c -i en_US -f UTF-8 en_US.UTF-8
 On Ubuntu, the command is `locale-gen en_US.UTF-8`
 
 **_Ref:_** [StackExchange-ask ubuntu: Ubuntu display Chinese Characters - Encoding Issue](https://askubuntu.com/questions/1070568/ubuntu-display-chinese-characters-encoding-issue)
+
+---
+
+## Warning `/bin/sh: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)` in shell
+
+**Solution:**
+
+```shell
+localedef -i en_US -f UTF-8 en_US.UTF-8
+```
+
+**_References:_**
+
+- [CSDN: /bin/sh: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)](https://blog.csdn.net/u013000139/article/details/81395140)

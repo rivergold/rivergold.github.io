@@ -1,8 +1,18 @@
 # :fallen_leaf:CentOS 源
 
-- [清华源](https://mirror.tuna.tsinghua.edu.cn/help/centos/)
+Recommend using Ali source.
 
-- [阿里源](https://opsx.alibaba.com/mirror)
+[阿里源](http://mirrors.aliyun.com/repo/)
+
+```shell
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+```
+
+**_References:_**
+
+- [掘金: 「亲测有效」CentOS 解决 yum 命令出现 doesn't have enough cached 的问题](https://juejin.im/post/5d53d5ece51d4561e224a314)
+
+[清华源](https://mirror.tuna.tsinghua.edu.cn/help/centos/)
 
 <!--  -->
 <br>

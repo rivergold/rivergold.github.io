@@ -8,6 +8,13 @@ Recommend using Ali source.
 wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 ```
 
+Update yum cache
+
+```shell
+yum clean all
+yum makecache
+```
+
 **_References:_**
 
 - [掘金: 「亲测有效」CentOS 解决 yum 命令出现 doesn't have enough cached 的问题](https://juejin.im/post/5d53d5ece51d4561e224a314)
@@ -59,6 +66,12 @@ Ref [StackExchange: How to permanently enable scl CentOS 6.4?](https://unix.stac
 Ref [博客园: CentOS yum 源的配置与使用](https://www.cnblogs.com/mchina/archive/2013/01/04/2842275.html)
 
 - [ ] 还没有测试过
+
+## Delete repo in yum
+
+```shell
+yum remove centos-release-scl
+```
 
 <!--  -->
 <br>
@@ -186,6 +199,7 @@ source /opt/rh/llvm-toolset-7/enable
 **_References:_**
 
 - [stackoverflow: How to install Clang and LLVM 3.9 on CentOS 7](https://stackoverflow.com/questions/44219158/how-to-install-clang-and-llvm-3-9-on-centos-7)
+- [Kuan-Yi Li's Blog: Installing Developer Toolset on RHEL-based Distributions](https://blog.abysm.org/2016/03/installing-developer-toolset-rhel-based-distributions/)
 
 <!--  -->
 <br>

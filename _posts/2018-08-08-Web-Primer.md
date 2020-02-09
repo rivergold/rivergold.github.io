@@ -263,6 +263,12 @@ Edit `/etc/nginx/nginx.conf`, add `autoindex on;` after `root your_path;`
 
 - :thumbsup:[博客园: 关于 Nginx 403 forbidden 错误踩的坑 directory index of "/xx/xx/xx/" is forbidden](https://www.cnblogs.com/Cong0ks/p/11958846.html)
 
+### Chinese character not unrecognizable
+
+**_References:_**
+
+- [Blog: nginx 设置目录浏览及中文乱码问题解决](https://wangheng.org/nginx-set-directory-browsing-and-solve-the-problem-of-chinese-garbled.html)
+
 <!--  -->
 <br>
 
@@ -752,3 +758,50 @@ Ref [StackExchange: nohup: failed to run command `.': Permission denied](https:/
 ## GFWList
 
 - [GFWList](https://github.com/gfwlist/gfwlist)
+
+---
+
+# Build nginx
+
+## Download Source
+
+[nginx.org](http://nginx.org/en/download.html)
+
+---
+
+## Build
+
+```shell
+./configure \
+--prefix=/root/software/tool/nginx/nginx-1.16.1/install \
+--with-http_ssl_module \
+--add-module=/root/software/tool/nginx/nginx-upload-module-2.2
+```
+
+**_References:_**
+
+- [segmentfault: 编译安装 Nginx 1.14](https://segmentfault.com/a/1190000015992091)
+
+---
+
+## Problem & Solution
+
+### During build occur `fatal error: md5.h: No such file or directory`
+
+Downloaded `ngx_http_upload_module` source code has bug, need to change other version.
+
+```shell
+wget https://github.com/Austinb/nginx-upload-module/archive/2.2.zip
+```
+
+**_References:_**
+
+- [SundayLE Blog: Nginx 编译](https://www.sundayle.com/nginx/)
+
+### make install occur `make: 'install' is up to date.`
+
+Some file or dictionary has same name, you need to delete them.
+
+**_References:_**
+
+- [CSDN: makefile 出现“is up to date”提示的修改方法](https://blog.csdn.net/beizhetaiyangxingzou/article/details/39967149)

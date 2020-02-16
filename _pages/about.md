@@ -1,7 +1,7 @@
 ---
 layout: single
 permalink: /pages/About
-title: About
+title: About Me
 subtitle: A man loves freedom, machine learning and data mining.
 excerpt: "_Stay Hungry, Stay Foolish.<br> A learning route of computer vision and machine learning._"
 header:

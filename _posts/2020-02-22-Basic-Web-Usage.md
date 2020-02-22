@@ -1,19 +1,29 @@
-# :fallen_leaf:Basic
+---
+title: "Basics Web Usage"
+categories:
+  - memo
+tags:
+  - linux
+  - tool
+  - memo
+---
 
-## Server & Client
+Some tools and tricks about web.
+
+## :fallen_leaf:Basic
+
+### Server & Client
 
 - [MDN web docs: Client-Server overview
   ](https://developer.mozilla.org/zh-CN/docs/learn/Server-side/First_steps/Client-Server_overview)
 
----
-
-## TCP
+### TCP
 
 TCP client not need to specify the port.
 
-**理解：** TCP client 不需要指定端口号
+> @rivergold: 在创建TCP连接时，客户端不需要TCP不需要指定端口号
 
-## Microservices(微服务)
+### Microservices(微服务)
 
 What is [**Microservices**](https://www.redhat.com/zh/topics/microservices/what-are-microservices)?
 
@@ -21,199 +31,199 @@ What is [**Microservices**](https://www.redhat.com/zh/topics/microservices/what-
 
 - [redhat: 什么是微服务？](https://www.redhat.com/zh/topics/microservices/what-are-microservices)
 
-<!--  -->
-<br>
+## :fallen_leaf:Firewall Config Command
 
----
+### CentOS `firewall-cmd`
 
-<br>
-<!--  -->
+#### Install
 
-# :fallen_leaf:Common Commands
+```shell
+yum install firewalld firewall-config
+```
 
-## Config firewall to expose port
+#### Start service
 
-### CentOS: `firewall-cmd`
+```shell
+systemctl enable firewalld.service
+systemctl start firewalld.service
+```
 
-When change config of `firewall-cmd`, you need to run `firewall-cmd --reload` to make it take effect.
+#### Check status
 
-- Install
+```shell
+systemctl status firewalld
+```
 
-  ```bash
-  yum install firewalld firewall-config
-  ```
+#### List all rules
 
-- Start service
+```shell
+firewall-cmd --list-all
+```
 
-  ```bash
-  systemctl enable firewalld.service
-  systemctl start firewalld.service
-  ```
+#### Open port
 
-- Check firewall statUS
+```shell
+firewall-cmd --zone=public --add-port=8050/tcp --permanent
+```
 
-  ```bash
-  systemctl status firewalld
-  ```
+#### Close port
 
-- List all rules
+```shell
+firewall-cmd --zone=public --remove-port=8050/tcp --permanent
+```
 
-  ```bash
-  firewall-cmd --list-all
-  ```
-
-- Open port
-
-  ```bash
-  firewall-cmd --zone=public --add-port=8050/tcp --permanent
-  ```
-
-- Remove port
-
-  ```bash
-  firewall-cmd --zone=public --remove-port=8050/tcp --permanent
-  ```
-
-Ref [IBM 学习: 使用 firewalld 构建 Linux 动态防火墙](https://www.ibm.com/developerworks/cn/linux/1507_caojh/index.html)
+**:triangular_flag_on_post:When change config of `firewall-cmd`, you need to run `firewall-cmd --reload` to make it take effect.**
 
 **_References:_**
+
+[IBM 学习: 使用 firewalld 构建 Linux 动态防火墙](https://www.ibm.com/developerworks/cn/linux/1507_caojh/index.html)
 
 - [StackExchange serverfault: How to remove access to a port using firewall on Centos7?](https://serverfault.com/a/865041)
 
-### Ubuntu: `ufw`
+### Ubuntu `ufw`
 
-When added rule into ufw, ufw doest not need to reload to take effect.
+#### Install
 
-- Install
-
-  ```bash
-  sudo apt install ufw
-  ```
-
-- Enable ufw
-
-  ```bash
-  sudo ufw enable
-  ```
-
-- Disable ufw
-
-  ```bash
-  sudo ufw disable
-  ```
-
-- Check the default configuration
-
-  ```bash
-  sudo ufw show raw
-  ```
-
-- Allow connections to SSH
-
-  ```bash
-  sudo ufw allow ssh
-  # or
-  sudo ufw allow 22/tcp
-  ```
-
-- Enable other services
-
-  ```bash
-  sudo ufw allow 80/tcp
-  sudo ufw allow 443/tcp
-  sudo ufw allow 21/tcp
-  ```
-
-- Allow connections from specific IP addresses
-
-  ```bash
-  sudo ufw allow from 111.111.111.111
-  ```
-
-  Check the status:
-
-  ```bash
-  sudo ufw status
-  ```
-
-  Delete the rule:
-
-  ```bash
-  sudo ufw delete allow from 111.111.111.111
-  ```
-
-- Allow connections from specific IP addresses to specific port
-
-  ```bash
-  sudo ufw allow <source ip> to any port <destination port>
-  ```
-
-Ref [RoseHosting: How To Set Up a Firewall with UFW on Ubuntu 16.04](https://www.rosehosting.com/blog/set-up-firewall-with-ufw-on-ubuntu/)
-
-**_References:_**
-
-- [DigitalOcean: UFW Essentials: Common Firewall Rules and Commands](https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands)
-
-<!--  -->
-<br>
-
----
-
-<!--  -->
-
-## curl
-
-### curl post
-
-```bash
-curl -d "data=test" <http_address>
+```shell
+sudo apt install ufw
 ```
 
-**_Ref:_** [简书: CURL 命令模拟 Http Get/Post 请求](https://www.jianshu.com/p/a8b648e96753)
+#### Enable ufw
 
-<!--  -->
-<br>
+```shell
+sudo ufw enable
+```
 
----
+#### Disable ufw
 
-<br>
-<!--  -->
+```shell
+sudo ufw disable
+```
 
-# :fallen_leaf:Nignx File Server
+#### Check the default configuration
 
-## Install
+```shell
+sudo ufw show raw
+```
+
+#### All connections to SSH
+
+```shell
+sudo ufw allow ssh
+# or
+sudo ufw allow 22/tcp
+```
+
+#### Enable other services
+
+```shell
+# Some examples
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 21/tcp
+```
+
+#### Allow connection from specific IP address
+
+```shell
+sudo ufw allow from <from_ip>
+# Allow connection from specific IP addresses to specific port
+sudo ufw allow <from_ip> to any port <to_port>
+```
+
+Check status
+
+```shell
+sudo ufw status
+```
+
+Delete rule
+
+```shell
+sudo ufw delete from <from_ip>
+```
+
+***References:***
+
+- [RoseHosting: How To Set Up a Firewall with UFW on Ubuntu 16.04](https://www.rosehosting.com/blog/set-up-firewall-with-ufw-on-ubuntu/)
+- [DigitalOcean: UFW Essentials: Common Firewall Rules and Commands](https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands)
+
+**When added rule into ufw, ufw doest not need to reload to take effect.**
+
+## :fallen_leaf:Nginx File Server
+
+使用Nginx搭建文件服务器，方便查看远程服务器上的实验结果。
+
+**注:** Nginx也是支持上传的，只是我现在搭建的还不够好。
+
+### Install
 
 **CentOS**
 
 ```shell
-yum install nignx
+yum install nginx
 ```
 
----
-
-## Start
+**Ubuntu**
 
 ```shell
-nignx
+sudo apt install nginx
 ```
 
----
+**Build from source**
 
-## Stop
+Download Source from [nginx.org](http://nginx.org/en/download.html)
+
+Build
+
+```shell
+./configure \
+--prefix=/root/software/tool/nginx/nginx-1.16.1/install \
+--with-http_ssl_module \
+--add-module=/root/software/tool/nginx/nginx-upload-module-2.2
+```
+
+**_References:_**
+
+- [segmentfault: 编译安装 Nginx 1.14](https://segmentfault.com/a/1190000015992091)
+
+#### During build occur `fatal error: md5.h: No such file or directory`
+
+Downloaded `ngx_http_upload_module` source code has bug, need to change other version.
+
+```shell
+wget https://github.com/Austinb/nginx-upload-module/archive/2.2.zip
+```
+
+**_References:_**
+
+- [SundayLE Blog: Nginx 编译](https://www.sundayle.com/nginx/)
+
+#### make install occur `make: 'install' is up to date.`
+
+Some file or dictionary has same name, you need to delete them.
+
+**_References:_**
+
+- [CSDN: makefile 出现“is up to date”提示的修改方法](https://blog.csdn.net/beizhetaiyangxingzou/article/details/39967149)
+
+### Start Service
+
+```shell
+nginx
+```
+
+### Stop Service
 
 ```shell
 killall nginx
 ```
 
----
-
-## Config
-
-**CentOS**
+### Config
 
 Config file path is `/etc/nginx/nginx.conf`
 
-1. Check nignx user
+1. Check nginx user
 
    ```shell
    ps aux | grep "nginx: worker process"
@@ -237,55 +247,66 @@ Config file path is `/etc/nginx/nginx.conf`
    chmod -R 755 <your_path>
    ```
 
-4. Set root
+4. Edit `nginx.conf`
 
    ```shell
-   root <your_path>
+   http {
+        log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                        '$status $body_bytes_sent "$http_referer" '
+                        '"$http_user_agent" "$http_x_forwarded_for"';
+
+        access_log  /var/log/nginx/access.log  main;
+
+        sendfile            on;
+        tcp_nopush          on;
+        tcp_nodelay         on;
+        keepalive_timeout   65;
+        types_hash_max_size 2048;
+
+        include             /etc/nginx/mime.types;
+        default_type        application/octet-stream;
+
+        # Load modular configuration files from the /etc/nginx/conf.d directory.
+        # See http://nginx.org/en/docs/ngx_core_module.html#include
+        # for more information.
+        include /etc/nginx/conf.d/*.conf;
+
+        # ----------You need to edit-----------
+        charset utf-8,gbk; # 开始中文支持
+        autoindex_exact_size off; # 文件大小显示为Mb代替bytes
+        # ----------You need to edit-----------
+
+   server {
+        listen       80 default_server;
+        listen       [::]:80 default_server;
+        server_name  _;
+        root         /usr/share/nginx/html;
+
+        # Load configuration files for the default server block.
+        include /etc/nginx/default.d/*.conf;
+
+        # ----------You need to edit-----------
+        location / {
+              root /data;
+              autoindex on; # 显示root下的文件目录
+        }
+        # ----------You need to edit-----------
    ```
-
----
-
-## Problem & Solution
-
-### 403 Forbidden
-
-Check log file ``, show
-
-```shell
-426782#0: *2 directory index of "/var/www/html/" is forbidden
-```
-
-**Solution:**
-
-Edit `/etc/nginx/nginx.conf`, add `autoindex on;` after `root your_path;`
 
 **_References:_**
 
 - :thumbsup:[博客园: 关于 Nginx 403 forbidden 错误踩的坑 directory index of "/xx/xx/xx/" is forbidden](https://www.cnblogs.com/Cong0ks/p/11958846.html)
-
-### Chinese character not unrecognizable
-
-**_References:_**
-
 - [Blog: nginx 设置目录浏览及中文乱码问题解决](https://wangheng.org/nginx-set-directory-browsing-and-solve-the-problem-of-chinese-garbled.html)
 
-<!--  -->
-<br>
+## :fallen_leaf:Setup Apache File Server
 
----
+Apache是我在使用Nginx之前所使用的，Apache相比于Nginx要更庞大一点，而我的需求仅是简单的文件传输，所以便更换成了Nginx。
 
-<br>
-<!--  -->
-
-# :fallen_leaf:Setup Apache File Server
-
-## Setup a HTTP Server
+### Setup a HTTP Server
 
 - [APACHE HTTP Server Documentation Compiling and Installing](http://httpd.apache.org/docs/current/install.html#customize)
 
----
-
-## Install
+### Install
 
 **Ubuntu**
 
@@ -301,7 +322,7 @@ sudo systemctl enable httpd
 sudo systemctl start httpd
 ```
 
-## Config
+### Config
 
 **Ubuntu**
 
@@ -319,11 +340,9 @@ Then, run `sudo systemctl restart apache2` to restart apache2 service.
 
 - :thumbsup:[stackoverflow: Change Apache document root folder to secondary hard drive](https://askubuntu.com/a/738527)
 
----
+### Problem & Solution
 
-## Problem & Solution
-
-### When visit apache web, occur `Forbidden You don't have permission to access / on this server`
+#### When visit apache web, occur `Forbidden You don't have permission to access / on this server`
 
 This is because the `Require` is `denied`.
 
@@ -338,8 +357,6 @@ Edit `/etc/apache2`
     Require all granted
 </Directory>
 ```
-
----
 
 ### Ubuntu
 
@@ -435,44 +452,38 @@ sudo ufw allow <your listen port>
 
 - [Blog: Ubuntu 默认防火墙安装、启用、配置、端口、查看状态相关信息](https://www.cnblogs.com/toughlife/p/5475615.html)
 
-<!--  -->
-<br>
+## :fallen_leaf:NFS Mount Remote folder
 
----
-
-<br>
-<!--  -->
-
-# :fallen_leaf:NFS Mount Remote folder
+基于Linux实现远程文件夹的挂载，从而实验远程文件的编辑。但使用体验的话还是偏慢，感觉不是很方便。这里就记录一下，但不推荐使用。
 
 - Server: `CentOS 7`
 - Client: `Ubuntu 18.04`
 
-## Server
+### Server
 
 1. **Check & Install dependences**
 
-   ```bash
+   ```shell
    rpm -qa | grep nfs-utils
    rpm -qa | grep rpcbind
    ```
 
    if not occur the packages, please install them:
 
-   ```bash
+   ```shell
    yum -y install nfs-utils
    yum -y install rpcbind
    ```
 
 2. **Edit `/etc/exports` to config access permission**
 
-   ```bash
+   ```shell
    <folder path you want to share> <ip of client>(rw,no_root_squash,no_all_squash,async)
    ```
 
    e.g.
 
-   ```bash
+   ```shell
    /nfs_test 192.168.1.5(rw,no_root_squash,no_all_squash,async)
    ```
 
@@ -480,7 +491,7 @@ sudo ufw allow <your listen port>
 
    NFS server need port 111 (TCP and UDP), port 2049 (TCP and UDP)
 
-   ```bash
+   ```shell
    firewall-cmd --permanent --zone=public --add-port=111/tcp
    firewall-cmd --permanent --zone=public --add-port=111/udp
    firewall-cmd --permanent --zone=public --add-port=2049/tcp
@@ -492,22 +503,21 @@ sudo ufw allow <your listen port>
 
 4. **Start service**
 
-   ```bash
+   ```shell
    systemctl start rpcbind
    systemctl start nfs
    ```
 
 5. **If changed the config, refresh**
 
-   ```bash
+   ```shell
    exportfs -a
    ```
 
 Ref [博客园: Linux 下配置 nfs 并远程挂载](https://www.cnblogs.com/freeweb/p/6593861.html)
 
----
 
-## Client
+### Client
 
 1. **Install**
 
@@ -527,25 +537,16 @@ Ref [博客园: Linux 下配置 nfs 并远程挂载](https://www.cnblogs.com/fre
    sudo umount <local mount path>
    ```
 
-Ref [CSDN: Ubuntu NFS 服务器客户端配置方法](https://blog.csdn.net/zhuxiaoping54532/article/details/53435158)
-
 **_References:_**
 
+- [CSDN: Ubuntu NFS 服务器客户端配置方法](https://blog.csdn.net/zhuxiaoping54532/article/details/53435158)
 - [Howtoing 运维教程: 如何在 Ubuntu 18.04 上设置 NFS 挂载](https://www.howtoing.com/how-to-set-up-an-nfs-mount-on-ubuntu-18-04)
 
-<!--  -->
-<br>
-
----
-
-<br>
-<!--  -->
-
-# :fallen_leaf:Flask
+## :fallen_leaf:Flask
 
 - [Flask 中文](https://dormousehole.readthedocs.io/en/latest/)
 
-## Example
+### Example
 
 ```python
 from flask import Flask
@@ -574,21 +575,23 @@ export FLASK_APP=<python_script_name>
 flask run --host=0.0.0.0
 ```
 
-**_Ref:_** [Flask Doc: 快速上手](https://dormousehole.readthedocs.io/en/latest/quickstart.html)
+**_References:_**
 
----
+- [Flask Doc: 快速上手](https://dormousehole.readthedocs.io/en/latest/quickstart.html)
 
-## Get request data
+### Get request data
 
 ```python
 data = request.get_json()
 ```
 
-**_Ref:_** [stackoverflow: How to get data received in Flask request](https://stackoverflow.com/questions/10434599/how-to-get-data-received-in-flask-request)
+**_References:_**
+
+- [stackoverflow: How to get data received in Flask request](https://stackoverflow.com/questions/10434599/how-to-get-data-received-in-flask-request)
 
 ---
 
-## Params with url
+### Params with url
 
 ```python
 @app.route('/param', methods=['GET', 'POST'])
@@ -600,17 +603,19 @@ def get_callback_data(param):
 
 - [CSDN: Flask 带参 URL 传值的方法](https://blog.csdn.net/weixin_36380516/article/details/80008496)
 
-<!--  -->
-<br>
+## :fallen_leaf:科学上网
 
----
+关于科学上网，折腾了很久，搭建过shaodowsocks和V2ray，使用过Vultr和Linode。整体速度也都还行，但是由于需要花费一定时间维护（大部分时间是IP被封了换机器）。最终我决定还是投入到[just my socks](https://justmysocks.net/)的怀抱，不折腾了。
 
-<br>
-<!--  -->
+### Tools
 
-# :fallen_leaf:翻越长城墙
+#### SwitchyOmega
 
-## v2ray
+一款好用的用于管理proxy代理规则的浏览器插件
+
+相应的代理规则可以从[GFWList](https://github.com/gfwlist/gfwlist)找到更新链接。
+
+<!-- ### v2ray
 
 ### Install
 
@@ -752,56 +757,5 @@ Error `nohup: failed to run command.:Permission denied`
 You can't call `nohup` on a shell construct such as alias, function or buildin. `nohup ./test.sh` is the correnct way to run.
 
 Ref [StackExchange: nohup: failed to run command `.': Permission denied](https://unix.stackexchange.com/questions/386545/nohup-failed-to-run-command-permission-denied)
+ -->
 
----
-
-## GFWList
-
-- [GFWList](https://github.com/gfwlist/gfwlist)
-
----
-
-# Build nginx
-
-## Download Source
-
-[nginx.org](http://nginx.org/en/download.html)
-
----
-
-## Build
-
-```shell
-./configure \
---prefix=/root/software/tool/nginx/nginx-1.16.1/install \
---with-http_ssl_module \
---add-module=/root/software/tool/nginx/nginx-upload-module-2.2
-```
-
-**_References:_**
-
-- [segmentfault: 编译安装 Nginx 1.14](https://segmentfault.com/a/1190000015992091)
-
----
-
-## Problem & Solution
-
-### During build occur `fatal error: md5.h: No such file or directory`
-
-Downloaded `ngx_http_upload_module` source code has bug, need to change other version.
-
-```shell
-wget https://github.com/Austinb/nginx-upload-module/archive/2.2.zip
-```
-
-**_References:_**
-
-- [SundayLE Blog: Nginx 编译](https://www.sundayle.com/nginx/)
-
-### make install occur `make: 'install' is up to date.`
-
-Some file or dictionary has same name, you need to delete them.
-
-**_References:_**
-
-- [CSDN: makefile 出现“is up to date”提示的修改方法](https://blog.csdn.net/beizhetaiyangxingzou/article/details/39967149)

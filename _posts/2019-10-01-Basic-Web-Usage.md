@@ -1,11 +1,11 @@
 ---
 title: "Basics Web Usage"
+last_modified_at: 2020-02-22
 categories:
-  - memo
+  - Memo
 tags:
-  - linux
-  - tool
-  - memo
+  - Linux
+  - Tool
 ---
 
 Some tools and tricks about web.
@@ -21,7 +21,7 @@ Some tools and tricks about web.
 
 TCP client not need to specify the port.
 
-> @rivergold: 在创建TCP连接时，客户端不需要TCP不需要指定端口号
+> @rivergold: 在创建 TCP 连接时，客户端不需要 TCP 不需要指定端口号
 
 ### Microservices(微服务)
 
@@ -143,7 +143,7 @@ Delete rule
 sudo ufw delete from <from_ip>
 ```
 
-***References:***
+**_References:_**
 
 - [RoseHosting: How To Set Up a Firewall with UFW on Ubuntu 16.04](https://www.rosehosting.com/blog/set-up-firewall-with-ufw-on-ubuntu/)
 - [DigitalOcean: UFW Essentials: Common Firewall Rules and Commands](https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands)
@@ -152,9 +152,9 @@ sudo ufw delete from <from_ip>
 
 ## :fallen_leaf:Nginx File Server
 
-使用Nginx搭建文件服务器，方便查看远程服务器上的实验结果。
+使用 Nginx 搭建文件服务器，方便查看远程服务器上的实验结果。
 
-**注:** Nginx也是支持上传的，只是我现在搭建的还不够好。
+**注:** Nginx 也是支持上传的，只是我现在搭建的还不够好。
 
 ### Install
 
@@ -300,7 +300,7 @@ Config file path is `/etc/nginx/nginx.conf`
 
 ## :fallen_leaf:Setup Apache File Server
 
-Apache是我在使用Nginx之前所使用的，Apache相比于Nginx要更庞大一点，而我的需求仅是简单的文件传输，所以便更换成了Nginx。
+Apache 是我在使用 Nginx 之前所使用的，Apache 相比于 Nginx 要更庞大一点，而我的需求仅是简单的文件传输，所以便更换成了 Nginx。
 
 ### Setup a HTTP Server
 
@@ -454,7 +454,7 @@ sudo ufw allow <your listen port>
 
 ## :fallen_leaf:NFS Mount Remote folder
 
-基于Linux实现远程文件夹的挂载，从而实验远程文件的编辑。但使用体验的话还是偏慢，感觉不是很方便。这里就记录一下，但不推荐使用。
+基于 Linux 实现远程文件夹的挂载，从而实验远程文件的编辑。但使用体验的话还是偏慢，感觉不是很方便。这里就记录一下，但不推荐使用。
 
 - Server: `CentOS 7`
 - Client: `Ubuntu 18.04`
@@ -515,7 +515,6 @@ sudo ufw allow <your listen port>
    ```
 
 Ref [博客园: Linux 下配置 nfs 并远程挂载](https://www.cnblogs.com/freeweb/p/6593861.html)
-
 
 ### Client
 
@@ -605,13 +604,13 @@ def get_callback_data(param):
 
 ## :fallen_leaf:科学上网
 
-关于科学上网，折腾了很久，搭建过shaodowsocks和V2ray，使用过Vultr和Linode。整体速度也都还行，但是由于需要花费一定时间维护（大部分时间是IP被封了换机器）。最终我决定还是投入到[just my socks](https://justmysocks.net/)的怀抱，不折腾了。
+关于科学上网，折腾了很久，搭建过 shaodowsocks 和 V2ray，使用过 Vultr 和 Linode。整体速度也都还行，但是由于需要花费一定时间维护（大部分时间是 IP 被封了换机器）。最终我决定还是投入到[just my socks](https://justmysocks.net/)的怀抱，不折腾了。
 
 ### Tools
 
 #### SwitchyOmega
 
-一款好用的用于管理proxy代理规则的浏览器插件
+一款好用的用于管理 proxy 代理规则的浏览器插件
 
 相应的代理规则可以从[GFWList](https://github.com/gfwlist/gfwlist)找到更新链接。
 
@@ -758,4 +757,3 @@ You can't call `nohup` on a shell construct such as alias, function or buildin. 
 
 Ref [StackExchange: nohup: failed to run command `.': Permission denied](https://unix.stackexchange.com/questions/386545/nohup-failed-to-run-command-permission-denied)
  -->
-

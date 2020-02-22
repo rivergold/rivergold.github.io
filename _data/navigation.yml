@@ -2,6 +2,8 @@
 main:
   - title: "Post"
     url: /pages/my_posts
+  - title: "Category"
+    url: /pages/Category
   - title: "Github"
     url: https://github.com/rivergold/
   - title: "About"

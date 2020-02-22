@@ -1,5 +1,5 @@
 ---
-layout: archive
+layout: posts
 permalink: /pages/my_posts
 title: "Post"
 author_profile: true
@@ -9,6 +9,6 @@ header:
 ---
 
 <!-- <h2>Post</h2> -->
-{% for post in site.posts %}
+<!-- {% for post in site.posts %}
   {% include archive-single.html %}
-{% endfor %}
+{% endfor %} -->

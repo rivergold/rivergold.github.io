@@ -1,4 +1,17 @@
-# Basics
+---
+title: "PyTorch and Numpy Common Ops Collation"
+last_modified_at: 2020-02-22
+categories:
+  - Memo
+tags:
+  - PyTorch
+  - Python
+  - Numpy
+---
+
+A collation of common ops in PyTorch and Numpy.
+
+## :fallen_leaf:Basics
 
 Most operations has `variable.func` and `package.func`.
 
@@ -14,11 +27,9 @@ Most operations has `variable.func` and `package.func`.
 
 Note: if example code use `package.func`, it means that there is no `variable.func` for this operation.
 
----
+### View
 
-## View
-
-### Numpy check is view or not
+#### Numpy check is view or not
 
 ```python
 a = np.array([[1, 2, 3], [4, 5, 6]])
@@ -34,9 +45,7 @@ print(b.flags['OWNDATA'])
 
 **_Ref:_** [stackoverflow: How can I tell if NumPy creates a view or a copy?](https://stackoverflow.com/questions/11524664/how-can-i-tell-if-numpy-creates-a-view-or-a-copy)
 
----
-
-## Broadcasting
+### Broadcasting
 
 Broadcasting only process when the operation is element-wise operation.
 
@@ -44,7 +53,7 @@ Broadcasting only process when the operation is element-wise operation.
 
 **In order to broadcast, the size of the trailing axes for both arrays in an operation must either be the same size or one of them must be one.**
 
-**将参与计算操作的两个矩阵的 size 进行右对齐，对应位置的维度要么相等，要么其中一个为 1**
+@rivergold: **将参与计算操作的两个矩阵的 size 进行右对齐，对应位置的维度要么相等，要么其中一个为 1**
 
 E.G.
 
@@ -62,17 +71,7 @@ Result	(4d array)	8 x	7 x	6 x	5
 
 **_Ref:_** [Numpy doc: Array Broadcasting in Numpy](https://docs.scipy.org/doc/numpy/user/theory.broadcasting.html#array-broadcasting-in-numpy)
 
-<!--  -->
-<br>
-
----
-
-<br>
-<!--  -->
-
-# Common Operations
-
-## Index
+## :fallen_leaf:Index
 
 **Numpy**
 
@@ -145,9 +144,7 @@ print(y)
 
 ```
 
----
-
-## flatten
+## :fallen_leaf:Flatten
 
 Convert $n \times w$ to 1-D vector.
 
@@ -174,9 +171,7 @@ y = x.flatten()
 
 Note: `torch.Tensor.view(-1)` has the same effect with `np.ndarray.ravel()`.
 
----
-
-## squeeze
+## :fallen_leaf:Squeeze
 
 Remove dimensions which size is 1.
 
@@ -207,9 +202,7 @@ print(y, y.size())
 >>> tensor([ 0.0000, -0.7718]) torch.Size([2])
 ```
 
----
-
-## unsqueeze
+## :fallen_leaf:Unsqueeze
 
 Insert new dimension before a axis.
 
@@ -236,9 +229,7 @@ print(y, y.size())
 >>> tensor([[1, 2, 3]]) torch.Size([1, 3])
 ```
 
----
-
-## Swap Axis
+## :fallen_leaf:Swap Axis
 
 **Numpy**
 
@@ -263,9 +254,7 @@ print(y.size())
 >>> torch.Size([3, 4, 2])
 ```
 
----
-
-## Clip value
+## :fallen_leaf:Clip Value
 
 **Numpy**
 
@@ -291,11 +280,9 @@ print(y)
 >>> tensor([0., 3.])
 ```
 
----
+## :fallen_leaf:Max
 
-## max
-
-### One array or tensor
+### Single Array or Tensor
 
 **Numpy**
 
@@ -338,7 +325,7 @@ print(idx)
 >>> tensor([1, 0])
 ```
 
-### Two array or tensor
+### Two Array or Tensor
 
 **Numpy**
 
@@ -360,9 +347,7 @@ print(y.size())
 >>> torch.Size([3, 2])
 ```
 
----
-
-## argmax
+## :fallen_leaf:Argmax
 
 Returns the indices of the maximum values of a tensor across a dimension.
 
@@ -384,9 +369,7 @@ print(idx)
 >>> tensor([1, 0])
 ```
 
----
-
-## where
+## :fallen_leaf:Where
 
 **Numpy**
 
@@ -418,9 +401,7 @@ print(idx_1)
 >>> tensor([1, 0, 1])
 ```
 
----
-
-## argsort
+## :fallen_leaf:Argsort
 
 **numpy**
 
@@ -446,9 +427,7 @@ idxes = torch.argsort(x)
 idxes = torch.argsort(x[:, -1], descending=True)
 ```
 
----
-
-# concate
+## :fallen_leaf:Concate
 
 - [ ] TBD
 
@@ -456,14 +435,6 @@ idxes = torch.argsort(x[:, -1], descending=True)
 
 **PyTorch**
 
-<!--  -->
-<br>
-
----
-
-<br>
-<!--  -->
-
-# PyTorch `cat` vs `stack`
+### PyTorch `cat` vs `stack`
 
 **_Ref:_** [stackoverflow: What's the difference between torch.stack() and torch.cat() functions?](https://stackoverflow.com/questions/54307225/whats-the-difference-between-torch-stack-and-torch-cat-functions/54307331)

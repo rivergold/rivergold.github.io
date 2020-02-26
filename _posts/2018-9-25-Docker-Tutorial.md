@@ -1,104 +1,112 @@
-<!-- # _Docker_ -->
+---
+title: "Docker Tutorial"
+last_modified_at: 2020-02-22
+categories:
+  - Memo
+tags:
+  - Docker
+  - Tool
+---
 
 This is a tutorial about base operation of Docker.
 
-# Common Commands:
+## :fallen_leaf:Docker Introduction
 
-## List all installed images
+- [Docker Toolbox, Docker Machine, Docker Compose, Docker WHAT!?](https://nickjanetakis.com/blog/docker-toolbox-docker-machine-docker-compose-docker-wtf)
+- [Docker Explained](https://www.digitalocean.com/community/tutorials/docker-explained-using-dockerfiles-to-automate-building-of-images)
 
-```bash
+[ref_1]: http://stackoverflow.com/questions/22907231/copying-files-from-host-to-docker-container
+[ref_2]: https://rominirani.com/docker-on-windows-mounting-host-directories-d96f3f056a2c#.8tny4uf9o
+[ref_3]: https://github.com/gopherds/gophernotes/issues/6
+
+## :fallen_leaf:Common Commands
+
+### List All Images
+
+```shell
 docker images
 ```
 
-## List all containers
+### List All Containers
 
-```bash
+```shell
 docker ps -a
 ```
 
-## Stop all containers
+### Stop All Containers
 
-```bash
+```shell
 docker stop $(docker ps -a -q)
 ```
 
 `-q(--quiet)`: Only display numeric IDs.
 
-## Remove a container
+### Remove a Container
 
-```bash
+```shell
 docker rm <contrain name>
 ```
 
-## Remove all containers.<br>
+### Remove All containers
 
-```bash
+```shell
 docker rm $(docker ps -a -q)
 ```
 
-## Remove a image
+### Remove Image
 
-```bash
+```shell
 docker rmi <image name and tag>
 ```
 
-## Run a container which is already exiting
+### Run a Container Which is Already Exiting
 
-```bash
+```shell
 docker start <container_id or name>
 docker exec -ti <container_id or name> /bin/bash
 ```
 
-## Copy file from host into container in shell
+### Copy File from Host into Container in Shell
 
-```bash
+```shell
 docker cp <file name> container:<path>
 ```
 
-**_References:_**
+**_Ref_** [Stackoverflow: Copying files from host to Docker container](https://stackoverflow.com/questions/22907231/copying-files-from-host-to-docker-container)
 
-- [Stackoverflow: Copying files from host to Docker container](https://stackoverflow.com/questions/22907231/copying-files-from-host-to-docker-container)
-
-## Convert container into image
+### Convert Container into Image
 
 It is used to build new image from container.
 
-```bash
+```shell
 docker commit <container name/id> <image name>
 ```
 
-## Save docker image into host disk
+### Save Docker Image into Host Disk
 
-Often save docker image as .tar
+Often save docker image as `.tar` or `.zip`
 
-```
+```shell
 docker save -o <path you want to save> <image name and tag>
 ```
 
-## Load docker image from disk
+### Load Docker Image from Fisk
 
-```
+```shell
 docker load -i <image file path>
 ```
 
-<!--  -->
-<br>
+## :fallen_leaf:Tips & Tricks
 
----
-
-<!--  -->
-
-# Tips & Tricks
-
-## Install Docker CE for Ubuntu
+### Install Docker CE for Ubuntu
 
 - [docker docs: Get Docker CE for Ubuntu](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/)
 
-## Set docker run path.
+### Set docker Data Path
 
 Default path is /var/lib/docker, it is not good for images and container to be in `/`. The solution is to add `data-root` to `/etc/docker/daemon.json`
 
-```bash
+```shell
 {
     "data-root": <path>,
 }
@@ -106,66 +114,74 @@ Default path is /var/lib/docker, it is not good for images and container to be i
 
 **Note:** Line in `.json` must be end with `,` excpect for the last line.
 
-**_Reference:_**
+**_References:_**
 
 - [Github-moby/moby: Deprecate --graph flag; Replace with --data-root #28696](https://github.com/moby/moby/pull/28696)
 - [docker docs: Configure the Docker daemon](https://docs.docker.com/engine/admin/#configure-the-docker-daemon)
 - [archlinux: Docker](https://wiki.archlinux.org/index.php/Docker)
 
-## Set docker accelerator with ali yun
+### Set Docker Accelerator with ALi Yun
 
 1. Get your docker accelerator address from your [Container Hub](https://cr.console.aliyun.com/) in Ali yun.
+
 2. Add `registry-mirrors` to `/etc/docker/daemon.json`
-   ```bash
+
+   ```shell
    "registry-mirrors": ["<your accelerate address>"],
    ```
+
 3. Reload and restart `docker`
    `bash sudo systemctl daemon-reload sudo systemctl restart docker`
-   **_References:_**
 
-- [阿里云栖社区： Docker 镜像加速器](https://yq.aliyun.com/articles/29941)
+**_Ref_** [阿里云栖社区： Docker 镜像加速器](https://yq.aliyun.com/articles/29941)
 
-## Run docker without `sudo`
+### Run Docker Without `sudo`
 
 1. Create the `docker` group
-   ```bash
+
+   ```shell
    sudo groupadd docker
    ```
+
 2. Add your user to the `docker` group
-   ```bash
+
+   ```shell
    sudo usermod -aG docker $USER
    ```
+
 3. Log out and log back
 
-**_References:_**
+**_Ref_** [docker docs: Manage Docker as a non-root user](https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user)
 
-- [docker docs: Manage Docker as a non-root user](https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user)
-
-## Using **nvidia-docker** run cuda in docker container.
+### Using **nvidia-docker** run CUDA in Docker Container
 
 Install **nvidia-docker** from [Github-NVIDIA/nvidia-docker](https://github.com/NVIDIA/nvidia-docker) and create new container with `nvidia-docker`<br>
 
-**Problems and Solutions**:
+#### Problems and Solutions
 
-- `Error: Could not load UVM kernel module. Is nvidia-modprobe installed?`
-  Install `nvidia-modprobe`([\*ref](https://askubuntu.com/questions/841824/how-to-install-nvidia-modprobe))<br>
+##### `Error: Could not load UVM kernel module. Is nvidia-modprobe installed?`
 
-  ```shell
-  sudo apt-add-repository multiverse
-  sudo apt update
-  sudo apt install nvidia-modprobe
-  ```
+Install `nvidia-modprobe`
 
-- `Error response from daemon: create nvidia_driver_352.63: create nvidia_driver_352.63: Error looking up volume plugin nvidia-docker: plugin not found.`
-  1. Check the status of the plugin using via `service nvidia-docker status` or `systemctl status nvidia-docker`
-  2. run `sudo nvidia-docker-plugin` in shell
-  3. restart docker `sudo restart docker`
-  4. logout
-  5. test `nvidia-docker run --rm nvidia/cuda nvidia-smi` again
+**_Ref_** [stackoverflow: How to install nvidia-modprobe](https://askubuntu.com/questions/841824/how-to-install-nvidia-modprobe)
 
-## Change Ubuntu download source with command, using `sed`<br>
+```shell
+sudo apt-add-repository multiverse
+sudo apt update
+sudo apt install nvidia-modprobe
+```
 
-```bash
+##### `Error response from daemon: create nvidia_driver_352.63: create nvidia_driver_352.63: Error looking up volume plugin nvidia-docker: plugin not found.`
+
+1. Check the status of the plugin using via `service nvidia-docker status` or `systemctl status nvidia-docker`
+2. run `sudo nvidia-docker-plugin` in shell
+3. restart docker `sudo restart docker`
+4. logout
+5. test `nvidia-docker run --rm nvidia/cuda nvidia-smi` again
+
+### Change Ubuntu Download Source with Command, using `sed`
+
+```shell
 sed -i s@<needed replace content>@<replace content>@g <file path>
 ```
 
@@ -175,25 +191,21 @@ E.g.
 sed -i s@http://archive.ubuntu.com/ubuntu/@http://mirrors.aliyun.com/ubuntu/@g /etc/apt/sources.list
 ```
 
-After you change the source list, you need to update it to let it work via `sudo apt-get update`
+After you change the source list, you need to update it to let it work via `sudo apt update`
 
-**_References:_**
+**_Ref_** [Ubuntu 中文 Wiki: 下载源](https://wiki.ubuntu.com.cn/%E6%BA%90%E5%88%97%E8%A1%A8)
 
-- [Ubuntu 中文 Wiki: 下载源](https://wiki.ubuntu.com.cn/%E6%BA%90%E5%88%97%E8%A1%A8)
-
-## How to use jupyter notebook in docker? localhost:8888 not work?
+### How to Use Jupyter Notebook in Docker? `localhost:8888` not work
 
 The ip of container in docker is 0.0.0.0, but default ip address in jupyter is 127.0.0.1. So we should change jupyter notebook ip if we want to use it on our host computer. Input `jupyter note --ip=0.0.0.0` in your docker container and then open localhost:8888 in your browser, and see it will work ok.
 
-**_References:_**
+**_Ref_** [Github-gopherdata/gophernotes](https://github.com/gopherdata/gophernotes/issues/6)
 
-- [Github-gopherdata/gophernotes](https://github.com/gopherdata/gophernotes/issues/6)
-
-## When delete image, error `Can’t delete image with children occur.
+### When Delete image, error `Can’t delete image with children occur`
 
 Use `docker inspect --format='{{.Id}} {{.Parent}}' $(docker images --filter since=<image_id> -q)`. And then delete sub_image using `docker rmi {sub_image_id}`
 
-## [Windows] Using python in Docker Linex container, has error like `UnicodeEncodeError: 'ascii' codec can't encode character '\u22f1' in position 242`
+### [Windows] Using python in Docker Linex container, has error like `UnicodeEncodeError: 'ascii' codec can't encode character '\u22f1' in position 242`
 
 ```python
 import sys
@@ -209,13 +221,11 @@ import io
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 ```
 
-**_References:_**
+**_Ref_** [解决 Python3 下打印 utf-8 字符串出现 UnicodeEncodeError 的问题](https://www.binss.me/blog/solve-problem-of-python3-raise-unicodeencodeerror-when-print-utf8-string/)
 
-- [解决 Python3 下打印 utf-8 字符串出现 UnicodeEncodeError 的问题](https://www.binss.me/blog/solve-problem-of-python3-raise-unicodeencodeerror-when-print-utf8-string/)
+### Run GUI in Docker Container on Docker for Ubuntu
 
-## Run gui in docker container on docker for Ubuntu
-
-```bash
+```shell
 docker run -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix
 ```
 
@@ -229,25 +239,27 @@ QXcbConnection: Could not connect to display :0
 
 Need run `xhost +local:docker`
 
-**_References:_**
+**_Ref_** [DOCKER COMMUNITY FORUMS: Start a GUI-Application as root in a Ubuntu Container](https://forums.docker.com/t/start-a-gui-application-as-root-in-a-ubuntu-container/17069)
 
-- [DOCKER COMMUNITY FORUMS: Start a GUI-Application as root in a Ubuntu Container](https://forums.docker.com/t/start-a-gui-application-as-root-in-a-ubuntu-container/17069)
-
-## [Windows] How run linux gui in docker container on docker for windows?
+### [Windows] How Run Linux gui in Docker Container on Docker for Windows?
 
 1. Install **Cygwin** with **Cygwin/x** on your computer.
 2. In cygwin terminal, run
+
    ```shell
    export DISPLAY=<your-machine-ip>:0.0
    startxwin -- -listen tcp &
    xhost + <your computer ip>
    ```
+
 3. In your powershell, run
    `bash docker run --it -e DISPLAY=<your computer ip>:0.0 <image> /bin/bash`
-   **Problem & Solution**
 
-- Error: `xhost: unable to open display`(\*[ref](https://forums.freebsd.org/threads/50613/))
-  Use `rm ~/.Xauthority`, then try again previous steps.
+#### Problem & Solution
+
+##### Error: `xhost: unable to open display`
+
+Use `rm ~/.Xauthority`, then try again previous steps.
 
 **_References_**
 
@@ -256,52 +268,41 @@ Need run `xhost +local:docker`
 - [Stackoverflow: How to run GUI application from linux container in Window using Docker?](http://stackoverflow.com/questions/29844237/how-to-run-gui-application-from-linux-container-in-window-using-docker)
 - [Linux: Running GUI apps with Docker](http://fabiorehm.com/blog/2014/09/11/running-gui-apps-with-docker/)
 
-## [Windows] On docker for Windows, how host computer powershell direct ping to container(container ip is 172.17.0.1)?
+### [Windows] On docker for Windows, How Host Computer powershell Direct ping to Container (container ip is 172.17.0.1)?
 
 Run docker container with `--net=<net bridge>`, set a net bridge for container.
 
-## [Windows] How to share fold betweent host and container on Docker for Windows?
+### [Windows] How to Share Fold Between Host and Container on Docker for Windows?
 
 1. Open Docker for Windows
 2. Set `Shared Drives`
 3. run docker contrainer with `-v [fold path on host]:[fold path on contrainer]`
 
-**_References:_**
+**_Ref_** [Romin Irani’s Blog: Docker on Windows — Mounting Host Directories](https://rominirani.com/docker-on-windows-mounting-host-directories-d96f3f056a2c)
 
-- [Romin Irani’s Blog: Docker on Windows — Mounting Host Directories](https://rominirani.com/docker-on-windows-mounting-host-directories-d96f3f056a2c)
-
-## Docker container connect to host via port `8080`
+### Docker Container Connect to Host via Port `8080`
 
 `docker run` with `-P`
 
 By default, docker container's 8080 port doesn's connect to any port of host, so container cannot access to host. `-P` will ask Docker to give container a random port to the host.
 
-**_Ref:_** [Docker-从入门到实践: 映射容器端口到宿主主机的实现](https://yeasy.gitbooks.io/docker_practice/advanced_network/port_mapping.html)
+**_Ref_** [Docker-从入门到实践: 映射容器端口到宿主主机的实现](https://yeasy.gitbooks.io/docker_practice/advanced_network/port_mapping.html)
 
-<!--  -->
-<br>
+## :fallen_leaf:Dockerfile
 
----
+### Command
 
-<!--  -->
-
-# Dockerfile
-
-## Command
-
-### `ENV`
+#### `ENV`
 
 Edit `path` in dockerfile
 
-```bash
+```shell
 ENV PATH $PATH:~/software/anaconda/bin
 ```
 
-**_References:_**
+**_Ref_** [stackoverflow: condas `source activate virtualenv` does not work within Dockerfile](https://stackoverflow.com/questions/37945759/condas-source-activate-virtualenv-does-not-work-within-dockerfile)
 
-- [stackoverflow: condas `source activate virtualenv` does not work within Dockerfile](https://stackoverflow.com/questions/37945759/condas-source-activate-virtualenv-does-not-work-within-dockerfile)
-
-### `RUN`
+#### `RUN`
 
 - `RUN <command>`: the command is run in a shell, which by defalut is `/bin/sh -c`
 - `RUN ["executable", "param1", "param2"]`
@@ -312,21 +313,22 @@ So, if you use `RUN source ~/.bashrc`, if will occur **error** `source: not foun
 SHELL ["/bin/bash", "-c"]
 ```
 
-**_Referneces:_**
+**_References:_**
 
 - [stackoverflow: Using the RUN instruction in a Dockerfile with 'source' does not work](https://stackoverflow.com/questions/20635472/using-the-run-instruction-in-a-dockerfile-with-source-does-not-work)
 - [Github moby/moby Issues: How to make builder RUN use /bin/bash instead of /bin/sh #7281](https://github.com/moby/moby/issues/7281)
 - [docker docs: run](https://docs.docker.com/engine/reference/builder/#run)
 
-- `RUN cd <path>`: it only work at current command.
-  ```dockerfile
-  # miniconda.sh in ~/software
-  RUN cd ~/software
-  RUN bash miniconda.sh
-  > error: cannot find miniconda.sh
-  ```
+`RUN cd <path>`: it only work at current command.
 
-### `COPY`
+```dockerfile
+# miniconda.sh in ~/software
+RUN cd ~/software
+RUN bash miniconda.sh
+> error: cannot find miniconda.sh
+```
+
+#### `COPY`
 
 `COPY [src] [dist]`: The dist path in docker container must be absolute path.
 
@@ -340,11 +342,9 @@ COPY go /usr/local/go
 
 **_Ref:_** [stackoverflow: Copy directory to other directory at Docker using ADD command](https://stackoverflow.com/a/26504961/4636081)
 
-## Tips
+#### `echo` string into file with line break
 
-### `echo` string into file with line break
-
-```bash
+```shell
 echo -e "\n<string>\n"
 ```
 
@@ -353,7 +353,7 @@ echo -e "\n<string>\n"
 - [stackoverflow: Echo newline in Bash prints literal \n](https://stackoverflow.com/questions/8467424/echo-newline-in-bash-prints-literal-n)
 - [Blog: linux echo 命令的-n、-e 两个参数](http://blog.sina.com.cn/s/blog_4da051a6010184uk.html)
 
-### Install `anaconda` in dockerfile
+#### Install `anaconda` in Dockerfile
 
 ```docker
 # Method 1: From web and download install pack
@@ -375,9 +375,9 @@ ENV PATH="$HOME/anaconda/bin:$PATH"
 - [conda docs: Installing in silent mode](https://conda.io/docs/user-guide/install/macos.html#install-macos-silent)
 - [Gtihub: faircloth-lab/conda-recipes](https://github.com/faircloth-lab/conda-recipes/blob/master/docker/centos6-conda-build/Dockerfile)
 
-## Problems & Solutions
+### Problems & Solutions
 
-### Dockerfile with CentOS `yum install xxx` occur error `Rpmdb checksum is invalid: dCDPT(pkg checksums): xxxx.amzn1`
+#### Dockerfile with CentOS `yum install xxx` occur error `Rpmdb checksum is invalid: dCDPT(pkg checksums): xxxx.amzn1`
 
 ```docker
 RUN yum instal -y yum-plugin-ovl
@@ -389,11 +389,11 @@ RUN yum instal -y yum-plugin-ovl
 - [ORACLE: 2.6 Overlayfs Error with Docker](https://docs.oracle.com/cd/E93554_01/E69348/html/uek4-czc_xmc_xt.html)
 - [Github moby/moby: overlayfs fails to run container with a strange file checksum error #10180](https://github.com/moby/moby/issues/10180#issuecomment-378005800)
 
-### `COPY ../installer/Miniconda3-latest-Linux-x86_64.sh /root/software` occur error `COPY failed: Forbidden path outside the build context: ../installer/Miniconda3-latest-Linux-x86_64.sh`
+#### `COPY ../installer/Miniconda3-latest-Linux-x86_64.sh /root/software` occur error `COPY failed: Forbidden path outside the build context: ../installer/Miniconda3-latest-Linux-x86_64.sh`
 
 Please use absolute path.
 
-## My dockerfile
+### My DockerFile
 
 ```docker
 FROM nvidia/cuda:8.0-devel-ubuntu16.04
@@ -442,65 +442,31 @@ RUN pip install numpy
 
 ### Tips
 
-- `sed -i s@"ZSH_THEME=\"robbyrussell\""@"ZSH_THEME=\"ys\""@g ~/.zshrc`
-  `sed -i s@ZSH_THEME="robbyrussell"@ZSH_THEME="ys"@g ~/.zshrc` not work, if `"` in source or replace string.
+#### `sed -i s@"ZSH_THEME=\"robbyrussell\""@"ZSH_THEME=\"ys\""@g ~/.zshrc`
 
-- `source ~/.zshrc` must use `zsh`, so need to set `SHELL ["/bin/zsh", "-c"]` before.
+`sed -i s@ZSH_THEME="robbyrussell"@ZSH_THEME="ys"@g ~/.zshrc` not work, if `"` in source or replace string.
 
-- Dockerfile change `$PATH`
-  `ENV PATH=<path>:$PATH`
-  **_References:_**
-  - [DOCKER COMMUNITY FORUMS: Change \$PATH in ubuntu container so that it is accessible from outside the shell](https://forums.docker.com/t/change-path-in-ubuntu-container-so-that-it-is-accessible-from-outside-the-shell/19817/2)
-  - [stackoverflow: In a Dockerfile, How to update PATH environment variable?](https://stackoverflow.com/a/38742545/4636081)
+#### `source ~/.zshrc` must use `zsh`, so need to set `SHELL ["/bin/zsh", "-c"]` before
 
-<!--  -->
-<br>
+#### Dockerfile change `$PATH`, `ENV PATH=<path>:$PATH`
 
----
+**_References:_**
 
-<!--  -->
+- [DOCKER COMMUNITY FORUMS: Change \$PATH in ubuntu container so that it is accessible from outside the shell](https://forums.docker.com/t/change-path-in-ubuntu-container-so-that-it-is-accessible-from-outside-the-shell/19817/2)
+- [stackoverflow: In a Dockerfile, How to update PATH environment variable?](https://stackoverflow.com/a/38742545/4636081)
 
-# Docker Introduction
+#### If you want to build vim 8.0 with python3.6, you need install `python3.6-dev`. But Ubuntu 16.04 not have this package.
 
-- [Docker Toolbox, Docker Machine, Docker Compose, Docker WHAT!?](https://nickjanetakis.com/blog/docker-toolbox-docker-machine-docker-compose-docker-wtf)
-- [Docker Explained](https://www.digitalocean.com/community/tutorials/docker-explained-using-dockerfiles-to-automate-building-of-images)
+```shell
+sudo add-apt-repository ppa:deadsnakes/ppa
+```
 
-[ref_1]: http://stackoverflow.com/questions/22907231/copying-files-from-host-to-docker-container
-[ref_2]: https://rominirani.com/docker-on-windows-mounting-host-directories-d96f3f056a2c#.8tny4uf9o
-[ref_3]: https://github.com/gopherds/gophernotes/issues/6
+**_References:_**
 
-<!--  -->
-<br>
+- [stackoverflow: Why can't I install python3.6-dev on Ubuntu16.04](https://stackoverflow.com/questions/43621584/why-cant-i-install-python3-6-dev-on-ubuntu16-04)
+- [vsupalov: Developing With Python 3.6 on Ubuntu 16.04 LTS - Getting Started and Keeping Control](https://vsupalov.com/developing-with-python3-6-on-ubuntu-16-04/)
 
----
-
-<!--  -->
-
-# Valuble Docker Images
+## :fallen_leaf:Good Docker Images
 
 - [nvidia/cuda](https://hub.docker.com/r/nvidia/cuda/)
 - [dl-docker](https://github.com/floydhub/dl-docker): all-in-one docker image for deep learning.
-
-# Docker Images
-
-## Ubuntu 16.04
-
-### Some Problems
-
-- If you want to build vim 8.0 with python3.6, you need install `python3.6-dev`. But Ubuntu 16.04 not have this package.
-
-  ```shell
-  sudo add-apt-repository ppa:deadsnakes/ppa
-  ```
-
-  **_References:_**
-
-  - [stackoverflow: Why can't I install python3.6-dev on Ubuntu16.04](https://stackoverflow.com/questions/43621584/why-cant-i-install-python3-6-dev-on-ubuntu16-04)
-  - [vsupalov: Developing With Python 3.6 on Ubuntu 16.04 LTS - Getting Started and Keeping Control](https://vsupalov.com/developing-with-python3-6-on-ubuntu-16-04/)
-
-<!--  -->
-<br>
-
----
-
-<!--  -->

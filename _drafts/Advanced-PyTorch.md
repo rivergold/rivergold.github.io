@@ -10,19 +10,15 @@ tags:
 
 Some advanced usage of PyTorch.
 
-## Dynamic Graph
+## :fallen_leaf:Dynamic Graph
 
 > @rivergold: 在 forward 中构建图，在 backward 中析构图
 
----
-
-## DataLoader
+## :fallen_leaf:DataLoader
 
 TODO
 
----
-
-## Data Parallel
+## :fallen_leaf:Data Parallel
 
 :thumbsup:[PyTorch Tutorial: MULTI-GPU EXAMPLES](https://pytorch.org/tutorials/beginner/former_torchies/parallelism_tutorial.html)
 
@@ -41,16 +37,10 @@ if torch.cuda.device_count() > 1:
 
 TODO: how weights update?
 
-**_References:_**
+**_Ref_** [PyTorch Tutorial: DATA PARALLELISM](https://pytorch.org/tutorials/beginner/blitz/data_parallel_tutorial.html)
 
-- [PyTorch Tutorial: DATA PARALLELISM](https://pytorch.org/tutorials/beginner/blitz/data_parallel_tutorial.html)
-
----
-
-## Distributed Data Parallel
+## :fallen_leaf:Distributed Data Parallel
 
 关于 Distributed Data Parallel 和上一节的 Data Parallel 的区别，可以阅读[Distributed data parallel training in Pytorch](https://yangkky.github.io/2019/07/08/distributed-pytorch-tutorial.html)。
 
-**_References:_**
-
-- [知乎: Pytorch 中的 Distributed Data Parallel 与混合精度训练（Apex）](https://zhuanlan.zhihu.com/p/105755472?utm_source=ZHShareTargetIDMore&utm_medium=social&utm_oi=37839882420224)
+**_Ref_** :thumbsup:[知乎: Pytorch 中的 Distributed Data Parallel 与混合精度训练（Apex）](https://zhuanlan.zhihu.com/p/105755472?utm_source=ZHShareTargetIDMore&utm_medium=social&utm_oi=37839882420224)

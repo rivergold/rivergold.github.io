@@ -1,5 +1,5 @@
 ---
-title: "PyTorch and Numpy Common Ops Collation"
+title: "PyTorch and Numpy Common Ops Collection"
 last_modified_at: 2020-02-22
 categories:
   - Memo

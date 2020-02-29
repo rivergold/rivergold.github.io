@@ -1,5 +1,5 @@
 ---
-title: "VSCode-Configuration"
+title: "VSCode Configuration"
 last_modified_at: 2020-02-22
 categories:
   - Memo

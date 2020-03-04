@@ -18,6 +18,10 @@ A collection of awesome paper, major in face detection, face alignment, image in
 
 A collection about many tasks and dataset about face.
 
+### Dataset
+
+- [WIDER FACE](http://shuoyang1213.me/WIDERFACE/)
+
 ### [(arxiv-2019) RetinaFace: Single-stage Dense Face Localisation in the Wild](https://arxiv.org/abs/1905.00641)
 
 #### Source Code

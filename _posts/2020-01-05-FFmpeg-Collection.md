@@ -1,16 +1,17 @@
 ---
-title: "FFMPEG血泪史"
+title: "FFmpeg Collection"
+last_modified_at: 2020-03-05
 categories:
-  - memo
+  - Memo
 tags:
-  - ffmpeg
-  - tool
-  - memo
+  - FFmpeg
+  - Tool
+  - Memo
 ---
 
-一部 FFmpeg 使用的血泪史
+FFmpeg collection and memo.
 
-## Install
+## :thumbsup:Install
 
 ### Use Static Builds
 
@@ -71,6 +72,25 @@ cd ${FFPEG_SOURCE_DIR} &&
 
 [mediainfo](https://mediaarea.net/en/MediaInfo/Download) is a very good tool to get media information. And [pymediainfo](https://github.com/sbraz/pymediainfo) is Python API of mediainfo.
 
+### Install mediainfo
+
+**CentOS**
+
+<p align="center">
+  <img
+  src="https://i.loli.net/2020/03/05/vUnITafzWMYqtmF.png" width="90%">
+</p>
+
+1. Download `CLI`, `libmediainfo` and `libzen`
+
+2. Install
+
+   ```shell
+   rpm -i libzen
+   rpm -i libmediainfo
+   rpm cli
+   ```
+
 ## :fallen_leaf: Change Video Format
 
 ```shell
@@ -109,13 +129,23 @@ ffmpeg -i in.ts -c:v libx264 -b:v 20M -c:a copy out.mp4
 
 **_Ref_** [stackoverflow: How to convert .ts file into a mainstream format losslessly?](https://askubuntu.com/questions/716424/how-to-convert-ts-file-into-a-mainstream-format-losslessly)
 
-## Extrac Frame from Video
+## Extract Frame from Video
+
+### Extract One Frame
 
 ```shell
 ffmpeg -ss <time> -i <input_video> -vframes 1 -q:v 2 output.jpg
 ```
 
 **_Ref_** [stackoverflow: How to extract 1 screenshot for a video with ffmpeg at a given time?](https://stackoverflow.com/questions/27568254/how-to-extract-1-screenshot-for-a-video-with-ffmpeg-at-a-given-time)
+
+### Extract All Frame
+
+```shell
+ffmpeg -loglevel warning -y -vsync 0 -i <in_video_path> -vf "select=between(n\,1\,300000)*not(mod(n\,1))" -q:v 0 -deinterlace frm_%d.jpg
+```
+
+> @rivergold: 该命令会舍弃视频的第一帧（0 号帧）。因为 FFmpeg 导出图片时 index 是从 1 开始计数的，如果舍弃第一帧，则帧号与从 0 开始计数的方式保持一致。
 
 ## Cut Video
 

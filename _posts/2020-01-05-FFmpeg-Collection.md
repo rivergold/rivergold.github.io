@@ -11,7 +11,7 @@ tags:
 
 FFmpeg collection and memo.
 
-## :thumbsup:Install
+## :fallen_leaf:Install
 
 ### Use Static Builds
 
@@ -129,7 +129,7 @@ ffmpeg -i in.ts -c:v libx264 -b:v 20M -c:a copy out.mp4
 
 **_Ref_** [stackoverflow: How to convert .ts file into a mainstream format losslessly?](https://askubuntu.com/questions/716424/how-to-convert-ts-file-into-a-mainstream-format-losslessly)
 
-## Extract Frame from Video
+## :fallen_leaf:Extract Frame from Video
 
 ### Extract One Frame
 
@@ -147,7 +147,7 @@ ffmpeg -loglevel warning -y -vsync 0 -i <in_video_path> -vf "select=between(n\,1
 
 > @rivergold: 该命令会舍弃视频的第一帧（0 号帧）。因为 FFmpeg 导出图片时 index 是从 1 开始计数的，如果舍弃第一帧，则帧号与从 0 开始计数的方式保持一致。
 
-## Cut Video
+## :fallen_leaf:Cut Video
 
 ```shell
 # start_time, end_time
@@ -180,13 +180,15 @@ ffmpeg -y -i <input_video> -ss <start_time> -to <end_time> -codec copy output.mp
 
 - [stackoverflow: Cut part from video file from start position to end position with FFmpeg [duplicate]](https://superuser.com/a/377407)
 
-## Change Video Resolution
+## :fallen_leaf:Change Video Resolution
 
 ```shell
-ffmpeg -i <in_video_path> -vf scale=<w>:<h> <out_video_path>
+ffmpeg -i <in_video_path> -vf scale=<new_w>:<new_h> <out_video_path>
 ```
 
-## Get Video Frame Number
+**_Ref_** [Blog: 使用 ffmpeg 修改视频文件的分辨率](https://blog.p2hp.com/archives/5512)
+
+## :fallen_leaf:Get Video Frame Number
 
 ```shell
 # Use ffmpeg
@@ -200,9 +202,7 @@ ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_
 - [腾讯云: 如何用 ffmpeg 取帧数？](https://cloud.tencent.com/developer/ask/103796)
 - [Quora: How do I calculate the number of all frames in a video, using FFmpeg?](https://qr.ae/TWvXzT)
 
----
-
-## Get Video Information
+## :fallen_leaf:Get Video Information
 
 ```shell
 ffprobe -print_format json <video>
@@ -214,13 +214,13 @@ ffprobe -print_format json <video>
 
 - [Github Gist: oldo/video-metada-finder.py](https://gist.github.com/oldo/dc7ee7f28851922cca09)
 
-## Add audio into video
+## :fallen_leaf:Add audio into video
 
 ```shell
 ffmpeg -i <audio_path> -i <video_path> -codec copy <output_path>
 ```
 
-## Set Log Level
+## :fallen_leaf:Set Log Level
 
 ```shell
 { "quiet"  , AV_LOG_QUIET   },
@@ -243,25 +243,15 @@ ffmpeg -loglevel warning ...
 - [简书: ffmpeg # 利用 loglevel 控制打印日志的信息](https://www.jianshu.com/p/2be79f17e271)
 - [stackoverflow: How can I make ffmpeg be quieter/less verbose?](https://superuser.com/questions/326629/how-can-i-make-ffmpeg-be-quieter-less-verbose)
 
-## Write Text into Video
+## :fallen_leaf:Write Text into Video
 
 **_Ref_** [stackoverflow: Using hex colors with ffmpeg's showwaves](https://stackoverflow.com/questions/45885460/using-hex-colors-with-ffmpegs-showwaves)
 
-## Add Image into Video
+## :fallen_leaf:Add Image into Video
 
 **_Ref_** [stackoverflow: Add an image overlay in front of video using ffmpeg](https://video.stackexchange.com/questions/12105/add-an-image-overlay-in-front-of-video-using-ffmpeg)
 
----
-
-## Change Video Resolution
-
-```shell
-ffmpeg -i <in_video_path> -vf scale=<new_w>:<new_h> <out_video_path>
-```
-
-**_Ref_** [Blog: 使用 ffmpeg 修改视频文件的分辨率](https://blog.p2hp.com/archives/5512)
-
-## Concat
+## :fallen_leaf:Concat
 
 ### Concat Video
 
@@ -275,7 +265,7 @@ ffmpeg -i "concat:<audio_1>|<audio_2>" -acodec copy <output_audio>
 
 **_Ref:_** [stackoverflow: How to join/merge many mp3 files?](https://superuser.com/a/314245)
 
-## Replace Video Audio
+## :fallen_leaf:Replace Video Audio
 
 ```shell
 # Erase video raw audio

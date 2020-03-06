@@ -1,6 +1,6 @@
 ---
 title: "FFmpeg Collection"
-last_modified_at: 2020-03-05
+last_modified_at: 2020-03-06
 categories:
   - Memo
 tags:
@@ -180,7 +180,11 @@ ffmpeg -y -i <input_video> -ss <start_time> -to <end_time> -codec copy output.mp
 
 - [stackoverflow: Cut part from video file from start position to end position with FFmpeg [duplicate]](https://superuser.com/a/377407)
 
----
+## Change Video Resolution
+
+```shell
+ffmpeg -i <in_video_path> -vf scale=<w>:<h> <out_video_path>
+```
 
 ## Get Video Frame Number
 

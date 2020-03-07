@@ -2,11 +2,11 @@
 title: "Tensorboard"
 last_modified_at: 2020-03-04
 categories:
-  - memo
+  - Memo
 tags:
-  - pytorch
-  - tool
-  - memo
+  - Pytorch
+  - Tool
+  - Memo
 ---
 
 General usage of Tensorboard.

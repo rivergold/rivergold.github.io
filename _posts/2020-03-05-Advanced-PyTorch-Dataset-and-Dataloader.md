@@ -1,5 +1,5 @@
 ---
-title: "Advanced PyTorch-Dataset and DataLoader"
+title: "[Advanced PyTorch] Dataset and DataLoader"
 last_modified_at: 2020-03-05
 categories:
   - Memo
@@ -9,7 +9,7 @@ tags:
   - Memo
 ---
 
-Understand PyTorch Dataset and DataLoader.
+Understand usage of PyTorch Dataset and DataLoader.
 
 ## :fallen_leaf:Dataset
 

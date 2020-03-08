@@ -1,5 +1,5 @@
 ---
-title: "[Advanced-PyTorch] Basics"
+title: "[Advanced PyTorch] Basics"
 last_modified_at: 2020-03-06
 categories:
   - Memo

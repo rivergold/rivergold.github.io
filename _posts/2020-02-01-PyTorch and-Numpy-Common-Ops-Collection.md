@@ -101,9 +101,41 @@ print(y.size())
 >>> torch.Size([2, 3, 1])
 ```
 
-### :triangular_flag_on_post:Index with array/Tensor
+### :triangular_flag_on_post:Index with array / Tensor
 
+**Numpy**
+
+```python
+x = np.array([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
+y = x[[0, 1], :]
+print(y)
+>>> array([[0, 1, 2],
+           [3, 4, 5]])
+y = x[[0, 1], [0, 1]]
+print(y)
+>>> array([0, 4])
 ```
+
+**PyTorch**
+
+```python
+x = torch.tensor([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
+y = x[[0, 1]]
+# Or
+y = x[[0, 1], :]
+print(y)
+>>> tensor([[0, 1, 2],
+            [3, 4, 5]])
+y = x[[0, 1], [0, 1]]
+print(y)
+>>> tensor([0, 4])
+```
+
+### Index Special Position
+
+#### Case-1
+
+```shell
 0, 1, 2
 3, 4, 5  -> how to get [2, 4, 8]
 6, 7, 8
@@ -118,12 +150,14 @@ idx = np.array([2, 1, 2])
 y = x[range(x.shape[0]), idx]
 print(y)
 >>> array([2, 4, 8])
+# !!! Important !!!
 # Can not do via [:, idx], because it will select idx on each row
 y = x[:, idx]
 print(y)
 >>> array([[2, 1, 2],
            [5, 4, 5],
            [8, 7, 8]])
+
 ```
 
 **PyTorch**
@@ -135,13 +169,84 @@ idx = torch.tensor([2, 1, 2])
 y = x[range(x.size(0)), idx]
 print(y)
 >>> tensor([2, 4, 8])
+# !!! Important !!!
 # Can not do via [:, idx], because it will select idx on each row
 y = x[:, idx]
 print(y)
 >>> tensor([[2, 1, 2],
             [5, 4, 5],
             [8, 7, 8]])
+```
 
+#### Case-2
+
+```shell
+0, 1, 2
+3, 4, 5
+6, 7, 8
+-> how to get
+[[2],
+ [4],
+ [8]]
+```
+
+**Numpy**
+
+```python
+x = np.array([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
+idx = np.array([2, 1, 2])
+y = x[range(x.shape[0]), idx]
+y = np.expand_dims(y, 1)
+print(y)
+>>> array([[2],
+           [4],
+           [8]])
+```
+
+**PyTorch**
+
+```python
+x = torch.tensor([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
+idx = torch.tensor([2, 1, 2])
+y = x.gather(1, idx.unsqueeze(1))
+print(y)
+>>> tensor([[2],
+            [4],
+            [8]])
+```
+
+### Select Row or Colum
+
+```shell
+0, 1, 2
+3, 4, 5
+6, 7, 8
+-> How to get
+[[0],
+ [3],
+ [6]]
+```
+
+**Numpy**
+
+```python
+x = np.array([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
+y = x.take([0], axis=1)
+print(y)
+>>> array([[0],
+           [3],
+           [6]])
+```
+
+**PyTorch**
+
+```python
+x = torch.tensor([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
+y = x.index_select(1, torch.tensor([0]))
+print(y)
+>>> tensor([[0],
+            [3],
+            [6]])
 ```
 
 ## :fallen_leaf:Flatten
@@ -437,4 +542,41 @@ idxes = torch.argsort(x[:, -1], descending=True)
 
 ### PyTorch `cat` vs `stack`
 
+- `stack` will increase dim
+- `cat` won't increase dim
+
 **_Ref:_** [stackoverflow: What's the difference between torch.stack() and torch.cat() functions?](https://stackoverflow.com/questions/54307225/whats-the-difference-between-torch-stack-and-torch-cat-functions/54307331)
+
+## :fallen_leaf:Sort
+
+```shell
+ 0, 1, 2
+-1, 4, 5
+-2, 7, 8
+-> How to get
+-2, 7, 8
+-1, 4, 5
+ 0, 1, 2
+```
+
+**Numpy**
+
+```python
+x = np.array([[0, 1, 2], [-1, 4, 5], [-2, 7, 8]])
+y = x[x[:, 0].argsort()]
+print(y)
+>>> array([[-2,  7,  8],
+           [-1,  4,  5],
+           [ 0,  1,  2]])
+```
+
+**PyTorch**
+
+```python
+x = torch.tensor([[0, 1, 2], [-1, 4, 5], [-2, 7, 8]])
+y = x[x[:, 0].argsort()]
+print(y)
+>>> tensor([[-2,  7,  8],
+            [-1,  4,  5],
+            [ 0,  1,  2]])
+```

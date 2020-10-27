@@ -336,6 +336,12 @@ Sync your VSCode settings via Gist.
 
 **_Ref_** [Settings Sync](https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync)
 
+### Better Comments
+
+- `!`
+- `?`
+- `TODO`
+
 ### TODO-highlight & TODO Tree
 
 #### Set color

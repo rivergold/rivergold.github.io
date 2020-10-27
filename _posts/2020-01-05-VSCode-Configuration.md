@@ -416,9 +416,19 @@ Use VSCode in web server, recommended use this tool!
 
 [Github](https://github.com/cdr/code-server)
 
+#### Install
+
+```shell
+curl -fsSL https://code-server.dev/install.sh | sh
+```
+
 #### Basic Use
 
 ```shell
+# Method-1
+vim ~/.config/code-server/config.yaml
+systemctl enable --now code-server@root
+# Method-2
 export PASSWORD="<>your_password"
 code-server --host 0.0.0.0 --port 8080
 ```

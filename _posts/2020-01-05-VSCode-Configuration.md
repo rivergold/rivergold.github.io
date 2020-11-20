@@ -465,12 +465,16 @@ Some extension is differnt from raw VSCode extension
 
 Updating
 
+- :thumbsup: Better Comments
+- :thumbsup: Remote
 - Bookmarks
-- Bracket Pair Colorizer
+- :thumbsup: Bracket Pair Colorizer
 - Code Spell Checker
-- GitLens
+- :thumbsup: GitLens
 - Git History
-- Material Icon Theme
+- :thumbsup: Python Docstring Generator
+- :thumbsup: Markdown All in One
+- :thumbsup: Material Icon Theme
 - Path Intellisense
 - Project Manager
 - prototxt
@@ -478,11 +482,13 @@ Updating
 - Settings Sync
 - SFTP
 - shell-format
+- :thumbsup: Todo Tree
 - TODO Highlight
-- Todo Tree
 - vscode-fileheader
 - vscode-icons
 - vscode-json
+- Sort-Json objects
+- YAML
 
 ### Settings
 
@@ -555,7 +561,7 @@ DerivePointerAlignment: false
 ### Python 开发环境搭建
 
 - vscode plugin: Python
-- vscode plugin: autoDocstring
+- vscode plugin: Python Docstring Generator (Set Google format)
 - Anaconda
 - pylint
 - yapf

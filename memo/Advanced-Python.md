@@ -339,34 +339,6 @@ c = itertools.product(a, b)
 <br>
 <!--  -->
 
-# Generator
-
-> @rivergold: 生成器也是迭代器，只不过是使用了`yeild`或`yeild from`。Python 使用生成器对惰性计算(lazy evaluation)提供了支持。
-
-## Generator Function
-
-生成器函数
-
-> :bulb::bulb::bulb:@Fluent Python: 只要 Python 函数的定义体中有`yeild`关键字，该函数就是生成器函数。调用生成器函数时，会返回一个生成器对象。
-
-**_References:_**
-
-- [Blog: Python Generator](https://lotabout.me/2017/Python-Generator/)
-
----
-
-## yeild from
-
-将生成移交给子生成器
-
-<!--  -->
-<br>
-
----
-
-<br>
-<!--  -->
-
 # :fallen_leaf:Concurrent
 
 ## Multi Thread
@@ -380,16 +352,6 @@ c = itertools.product(a, b)
 ## Multi Process
 
 TODO:
-
-### Multi process will deep copy global variable by default
-
-> @rivergold: Python 多进程默认不共享全局变量，而是会将全局变量拷贝到各个进程的内存中。如果需要共享数据，需要采用进程间的通信。
-
-**_References:_**
-
-- [CSDN: Python 多进程默认不能共享全局变量](https://blog.csdn.net/houyanhua1/article/details/78236514)
-- [stackoverflow: Globals variables and Python multiprocessing [duplicate]](https://stackoverflow.com/a/11215750/4636081)
--
 
 <!--  -->
 <br>

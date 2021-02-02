@@ -13,7 +13,7 @@ tags:
 
 <p align="center">
   <img
-  src="https://upload-images.jianshu.io/upload_images/9890707-d5f332064127fc07.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" width="80%">
+  src="https://i.loli.net/2021/02/02/Hkf7xFOUINGKZQB.png" width="80%">
 </p>
 
 ## :fallen_leaf:核心概念

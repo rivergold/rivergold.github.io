@@ -377,6 +377,12 @@ Support clang.
 
 **_Ref:_** [知乎: Visual Studio Code 如何编写运行 C、C++ 程序？](https://www.zhihu.com/question/30315894)
 
+### koroFileHeader
+
+***References:***
+
+- [Github: OBKoro1/koro1FileHeader: 配置字段](https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE%E5%AD%97%E6%AE%B5)
+
 ## :fallen_leaf:Remote Edit Extension
 
 ### sftp
@@ -485,6 +491,7 @@ Updating
 - :thumbsup: Todo Tree
 - TODO Highlight
 - vscode-fileheader
+- koroFileHeader
 - vscode-icons
 - vscode-json
 - Sort-Json objects
@@ -516,6 +523,13 @@ Updating
         "backgroundColor": "rgba(100,149,237,0.9)"
     }
 ],
+"fileheader.customMade": {
+    // 头部注释默认字段
+    "Author": "hejing05",
+    "Date": "Do not edit", // 设置后默认设置文件生成时间
+    "LastEditTime": "Do not edit", // 设置后，保存文件更改默认更新最后编辑时间
+    "Description": ""
+}
 ```
 
 ### C++ 开发环境搭建

@@ -1,0 +1,691 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Git Memo | Rivergold's Blog</title><meta name="keywords" content="git"><meta name="author" content="rivergold"><meta name="copyright" content="rivergold"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="Some basic git usages and tricks. 🍂Good Tutorials Pro Git 中文版 GitHub 漫游指南  References:  知乎: 一些关于 Git 的学习资源 知乎: 如何在 GitHub 上做一个优秀的贡献者？  🍂ConceptGit workflow HEAD: TODO working tree: 工作区 index: a stag">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git Memo">
+<meta property="og:url" content="https://rivergold.github.io/2022/02/27/git-memo/index.html">
+<meta property="og:site_name" content="Rivergold&#39;s Blog">
+<meta property="og:description" content="Some basic git usages and tricks. 🍂Good Tutorials Pro Git 中文版 GitHub 漫游指南  References:  知乎: 一些关于 Git 的学习资源 知乎: 如何在 GitHub 上做一个优秀的贡献者？  🍂ConceptGit workflow HEAD: TODO working tree: 工作区 index: a stag">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://rivergold.github.io/images/home.jpg">
+<meta property="article:published_time" content="2022-02-27T03:23:35.000Z">
+<meta property="article:modified_time" content="2022-03-05T02:58:05.847Z">
+<meta property="article:author" content="rivergold">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rivergold.github.io/images/home.jpg"><link rel="shortcut icon" href="/images/website.png"><link rel="canonical" href="https://rivergold.github.io/2022/02/27/git-memo/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Git Memo',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-03-05 10:58:05'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/images/bio.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">2</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">1</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/images/home.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Rivergold's Blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Git Memo</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-02-27T03:23:35.000Z" title="Created 2022-02-27 11:23:35">2022-02-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-03-05T02:58:05.847Z" title="Updated 2022-03-05 10:58:05">2022-03-05</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Git Memo"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>Some basic git usages and tricks.</p>
+<h2 id="fallen-leaf-Good-Tutorials"><a href="#fallen-leaf-Good-Tutorials" class="headerlink" title=":fallen_leaf:Good Tutorials"></a><span class="github-emoji"><span>🍂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f342.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>Good Tutorials</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://bingohuang.gitbooks.io/progit2/content/">Pro Git 中文版</a></li>
+<li><a target="_blank" rel="noopener" href="http://github.phodal.com/">GitHub 漫游指南</a></li>
+</ul>
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/32379998?utm_source=ZHShareTargetIDMore&amp;utm_medium=social&amp;utm_oi=37839882420224">知乎: 一些关于 Git 的学习资源</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/310488111/answer/585336948?utm_source=ZHShareTargetIDMore&amp;utm_medium=social&amp;utm_oi=37839882420224">知乎: 如何在 GitHub 上做一个优秀的贡献者？</a></li>
+</ul>
+<h2 id="fallen-leaf-Concept"><a href="#fallen-leaf-Concept" class="headerlink" title=":fallen_leaf:Concept"></a><span class="github-emoji"><span>🍂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f342.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>Concept</h2><h3 id="Git-workflow"><a href="#Git-workflow" class="headerlink" title="Git workflow"></a>Git workflow</h3><ul>
+<li><code>HEAD</code>: TODO</li>
+<li><code>working tree</code>: 工作区</li>
+<li><code>index</code>: a <strong>staging area</strong> between your working directory and your repository.</li>
+<li><code>repository</code>: or repo</li>
+</ul>
+<p align="center">
+  <img src="https://i.loli.net/2020/02/20/1VT9wlzJgIv6hoi.png" width="80%">
+</p>
+
+<p align="center">
+  <img src="https://i.loli.net/2020/02/20/CzpSm5FBP3MYdtO.png" width="70%">
+</p>
+
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://backlog.com/git-tutorial/git-workflow/">backlog: Git workflow</a></li>
+</ul>
+<h3 id="Changelog"><a href="#Changelog" class="headerlink" title="Changelog"></a>Changelog</h3><p>用来记录 repo 的相关迭代信息</p>
+<p><strong><em>Ref:</em></strong> <a target="_blank" rel="noopener" href="https://github.com/olivierlacan/keep-a-changelog/blob/master/CHANGELOG.md">Github olivierlacan/keep-a-changelog</a></p>
+<h3 id="Licenses"><a href="#Licenses" class="headerlink" title="Licenses"></a>Licenses</h3><p>许可</p>
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/phodal/licenses">Github: phodal/licenses</a></li>
+</ul>
+<h3 id="WIP"><a href="#WIP" class="headerlink" title="WIP"></a>WIP</h3><p>On GitHub, pull requests are prefixed by [WIP] to indicate that the pull requestor：</p>
+<ul>
+<li>has not yet finished his work on the code (thus, work in progress), but</li>
+<li>looks for have some initial feedback (early-pull strategy)</li>
+<li>wants to use the continuous integration infrastructure of the project. For instance, TravisCI, CodeCov, and codacy.</li>
+</ul>
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/15763059/github-what-is-a-wip-branch">stackoverflow: GitHub: What is a “wip” branch?</a></li>
+</ul>
+<h3 id="gitignore"><a href="#gitignore" class="headerlink" title="gitignore"></a>gitignore</h3><ul>
+<li><span class="github-emoji"><span>👍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><a target="_blank" rel="noopener" href="https://www.atlassian.com/git/tutorials/saving-changes/gitignore">Bitbucket: .gitignore</a></li>
+</ul>
+<h4 id="triangular-flag-on-post-Ignore-a-folder-without-a-specific-file"><a href="#triangular-flag-on-post-Ignore-a-folder-without-a-specific-file" class="headerlink" title=":triangular_flag_on_post:Ignore a folder without a specific file"></a><span class="github-emoji"><span>🚩</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f6a9.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>Ignore a folder without a specific file</h4><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># </span><span class="language-bash">OK</span></span><br><span class="line">/test/*</span><br><span class="line">!/test/README.txt</span><br><span class="line"><span class="meta"># </span><span class="language-bash">Failed</span></span><br><span class="line">/test/</span><br><span class="line">!/test/README.txt</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="Ignore-filename-contain-parttern"><a href="#Ignore-filename-contain-parttern" class="headerlink" title="Ignore filename contain parttern"></a>Ignore filename contain parttern</h4><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">**.vscode** # 忽略所有文件名中包含`.vscode`的文件</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>Ref:</em></strong> <a target="_blank" rel="noopener" href="https://stackoverflow.com/a/32335752/4636081">stackoverflow: git ignore filenames which contain <pattern to="" ignore=""></pattern></a></p>
+<h2 id="fallen-leaf-Generate-Key"><a href="#fallen-leaf-Generate-Key" class="headerlink" title=":fallen_leaf:Generate Key"></a><span class="github-emoji"><span>🍂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f342.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>Generate Key</h2><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C "your_email@example.com"</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://help.github.com/en/enterprise/2.18/user/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Github Help: Generating a new SSH key and adding it to the ssh-agent</a></li>
+</ul>
+<h2 id="fallen-leaf-git-config"><a href="#fallen-leaf-git-config" class="headerlink" title=":fallen_leaf:git config"></a><span class="github-emoji"><span>🍂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f342.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>git config</h2><h3 id="username-and-email"><a href="#username-and-email" class="headerlink" title="username and email"></a>username and email</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://help.github.com/en/github/using-git/setting-your-username-in-git">Github Help: Setting your username in Git</a></li>
+</ul>
+<p><strong>Print current username and email</strong></p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config user.name</span><br><span class="line">git config user.email</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://alvinalexander.com/git/git-show-change-username-email-address">Blog: How to show or change your Git username or email address</a></li>
+</ul>
+<h4 id="Set-global-user-name-and-email"><a href="#Set-global-user-name-and-email" class="headerlink" title="Set global user name and email"></a>Set global user name and email</h4><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># </span><span class="language-bash">username</span></span><br><span class="line">git config --global user.name "&lt;your name&gt;"</span><br><span class="line"><span class="meta"># </span><span class="language-bash">email</span></span><br><span class="line">git config --global user.email "&lt;your email&gt;"</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="Set-single-repo-user-name-and-email"><a href="#Set-single-repo-user-name-and-email" class="headerlink" title="Set single repo user name and email"></a>Set single repo user name and email</h4><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># </span><span class="language-bash">username</span></span><br><span class="line">git config user.name "&lt;your name&gt;"</span><br><span class="line"><span class="meta"># </span><span class="language-bash">email</span></span><br><span class="line">git config user.email "&lt;your email&gt;"</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="fallen-leaf-git-clone"><a href="#fallen-leaf-git-clone" class="headerlink" title=":fallen_leaf:git clone"></a><span class="github-emoji"><span>🍂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f342.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>git clone</h2><h3 id="Clone-a-specific-tag"><a href="#Clone-a-specific-tag" class="headerlink" title="Clone a specific tag"></a>Clone a specific tag</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone &lt;git ssh&gt;</span><br><span class="line">git checkout tags/&lt;tag_name&gt; -b &lt;new_branch_name&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>Ref:</em></strong> <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/791959/download-a-specific-tag-with-git">stackoverflow: Download a specific tag with Git</a></p>
+<h2 id="fallen-leaf-git-checkout"><a href="#fallen-leaf-git-checkout" class="headerlink" title=":fallen_leaf:git checkout"></a><span class="github-emoji"><span>🍂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f342.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>git checkout</h2><h3 id="Checkout-into-a-specific-tag"><a href="#Checkout-into-a-specific-tag" class="headerlink" title="Checkout into a specific tag"></a>Checkout into a specific tag</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;tag_name&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/DinnerHowe/article/details/79082769">CSDN: git 切换到某个 tag</a></li>
+</ul>
+<h3 id="Checkout-new-branch-from-a-specific-tag"><a href="#Checkout-new-branch-from-a-specific-tag" class="headerlink" title="Checkout new branch from a specific tag"></a>Checkout new branch from a specific tag</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b &lt;branch_name&gt; &lt;tag_name&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Checkout-new-branch-from-remote"><a href="#Checkout-new-branch-from-remote" class="headerlink" title="Checkout new branch from remote"></a>Checkout new branch from remote</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b &lt;local_branch_name&gt; &lt;remote_name&gt;/&lt;remote_branch_name&gt;</span><br><span class="line">git checkout -t &lt;remote_name&gt;/&lt;branch_name&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>Ref:</em></strong> <a target="_blank" rel="noopener" href="https://stackoverflow.com/a/1783426/4636081">stackoverflow: How do I check out a remote Git branch?</a></p>
+<h3 id="Rename-local-and-remote-branch-name"><a href="#Rename-local-and-remote-branch-name" class="headerlink" title="Rename local and remote branch name"></a>Rename local and remote branch name</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># </span><span class="language-bash">1. Rename <span class="built_in">local</span> branch</span></span><br><span class="line">git branch -m new-name</span><br><span class="line"><span class="meta"># </span><span class="language-bash">1. If you are on a differnet branch</span></span><br><span class="line">git branch -m old-name new-name</span><br><span class="line"><span class="meta"># </span><span class="language-bash">2. Delete the old-name remote branch and push the new-name <span class="built_in">local</span> branch</span></span><br><span class="line">git push origin :old-name new-name</span><br><span class="line"><span class="meta"># </span><span class="language-bash">3. Rest the upstream branch <span class="keyword">for</span> the new-name <span class="built_in">local</span> branch.</span></span><br><span class="line"><span class="meta"># </span><span class="language-bash">Switch to the branch and <span class="keyword">then</span></span></span><br><span class="line">git push origin -u new-name</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://multiplestates.wordpress.com/2015/02/05/rename-a-local-and-remote-branch-in-git/">Blog: Rename a local and remote branch in git</a></li>
+</ul>
+<h2 id="fallen-leaf-git-reset"><a href="#fallen-leaf-git-reset" class="headerlink" title=":fallen_leaf:git reset"></a><span class="github-emoji"><span>🍂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f342.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>git reset</h2><p>TODO</p>
+<ul>
+<li>hard:</li>
+<li>soft:</li>
+<li>mix:</li>
+</ul>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard commit_id</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><span class="github-emoji"><span>👍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kidsitcn/p/4513297.html">博客园: git reset soft,hard,mixed 之区别深解</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ezhchai/article/details/79387369">CSDN: git reset 版本回退</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/3528245/whats-the-difference-between-git-reset-mixed-soft-and-hard">stackoverflow: What’s the difference between git reset –mixed, –soft, and –hard?</a></li>
+<li><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E7%BD%AE%E6%8F%AD%E5%AF%86">git 7.7 Git 工具 - 重置揭密</a></li>
+</ul>
+<hr>
+<h3 id="Reset-remote-url"><a href="#Reset-remote-url" class="headerlink" title="Reset remote url"></a>Reset remote url</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin &lt;new_url&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/a/2432799/4636081">stackoverflow: How to change the URI (URL) for a remote Git repository?</a></li>
+</ul>
+<h2 id="fallen-leaf-git-rm"><a href="#fallen-leaf-git-rm" class="headerlink" title=":fallen_leaf:git rm"></a><span class="github-emoji"><span>🍂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f342.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>git rm</h2><h3 id="Untrack-tracked-file"><a href="#Untrack-tracked-file" class="headerlink" title="Untrack tracked file"></a>Untrack tracked file</h3><p>Assume you have commit your .vscode, and now you don’t want to track it anymore.</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm -r --cached .vscode</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/9368394/untrack-tracked-file-in-git-but-only-in-specific-branch">stackoverflow: Untrack tracked file in Git — but only in specific branch?</a></li>
+</ul>
+<h2 id="fallen-leaf-git-rebase"><a href="#fallen-leaf-git-rebase" class="headerlink" title=":fallen_leaf:git rebase"></a><span class="github-emoji"><span>🍂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f342.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>git rebase</h2><ul>
+<li><span class="github-emoji"><span>👍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>👍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><a target="_blank" rel="noopener" href="https://www.git-tower.com/learn/git/ebook/cn/command-line/advanced-topics/rebase">TOWER: Rebase 代替合并</a></li>
+<li><span class="github-emoji"><span>👍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>👍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>👍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><a target="_blank" rel="noopener" href="https://stackoverflow.com/a/16956062/4636081">stackoverflow: Git merge master into feature branch</a></li>
+</ul>
+<h3 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h3><h3 id="1-命令的含义"><a href="#1-命令的含义" class="headerlink" title="1. 命令的含义"></a>1. 命令的含义</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout barnch-A # you are on branch-a</span><br><span class="line">git rebase branch-B # rebase A on top of B</span><br></pre></td></tr></tbody></table></figure>
+
+<p>这条命令的含义是： 将 <code>branch-A</code> 搬移到 <code>branch-B</code> 上，即这条命令改变的是<code>branch-A</code>，对<code>branch-A</code>进行了换基操作。</p>
+<ul>
+<li><code>LOCAL</code>: <code>branch-B</code></li>
+<li><code>REMOTE</code>: <code>branch-A</code></li>
+</ul>
+<p><strong><em>Ref:</em></strong> <span class="github-emoji"><span>👍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>👍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>👍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><a target="_blank" rel="noopener" href="https://stackoverflow.com/a/3052118/4636081">stackoverflow: git rebase, keeping track of ‘local’ and ‘remote’</a></p>
+<h3 id="2-切记"><a href="#2-切记" class="headerlink" title="2. 切记"></a>2. 切记</h3><p>如果你想向公共的分支提交 commit，只能使用 merge 的方式。即：不要在公共的分支上执行<code>git rebase xxx</code>， <strong>only rebase private branches</strong></p>
+<p>公共分支：该分支会接受多人的 commit</p>
+<p>因为在公共的分支上执行<code>git rebase xxx</code>会导致公共分支的 commit 记录发生变化，从而导致别人的公共分支和你的不一样，该问题会很严重</p>
+<p>因此，在 Github 中如果你想给开源仓库的 master 提交代码，需要提 pull request，当 request 被同意时，Github 会采用 pull 的方式将你的提交 merge 到主分支上。</p>
+<h3 id="3-同步上下游分支"><a href="#3-同步上下游分支" class="headerlink" title="3. 同步上下游分支"></a>3. 同步上下游分支</h3><p>更新合作分支到自己的开发分支时的操作：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git checkout self-branch # 你的开发分支</span><br><span class="line">git rebase remote-branch</span><br><span class="line">解决冲突 (配合meld)</span><br><span class="line">git rebase --continue</span><br></pre></td></tr></tbody></table></figure>
+
+<ol>
+<li>下游分支更新上游分支内容的时候使用 rebase</li>
+<li>上游分支合并下游分支内容的时候使用 merge</li>
+<li>更新当前分支的内容时一定要使用 –rebase 参数</li>
+</ol>
+<p><strong><em>Ref:</em></strong> <span class="github-emoji"><span>👍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/34197548">知乎: GIT 使用 rebase 和 merge 的正确姿势</a></p>
+<h3 id="4-解决-rebase-冲突"><a href="#4-解决-rebase-冲突" class="headerlink" title="4. 解决 rebase 冲突"></a>4. 解决 rebase 冲突</h3><ol>
+<li>git mergetool</li>
+<li>git rebase –continute</li>
+<li>重复 1 和 2，直到没有冲突</li>
+</ol>
+<p><strong><em>Ref:</em></strong> <a target="_blank" rel="noopener" href="https://hmgle.github.io/git/2013/08/22/git-rebase.html">Blog: git rebase 冲突解决步骤</a></p>
+<h2 id="fallen-leaf-git-fetch"><a href="#fallen-leaf-git-fetch" class="headerlink" title=":fallen_leaf:git fetch"></a><span class="github-emoji"><span>🍂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f342.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>git fetch</h2><p>TODO: FETCH_HEAD 和 HEAD 的区别</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch &lt;remote_name&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>@rivergold: 这条命令的含义是：从 remote 获取最新的 commit 并更新<code>FETCH_HEAD</code></p>
+</blockquote>
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/riddle1981/article/details/74938111">CSDN: 详解 git fetch 与 git pull 的区别</a></li>
+</ul>
+<p>After <code>git fetch</code>, you can run <code>git merge</code> to merge <code>FETCH_HEAD</code> into current branch.</p>
+<h3 id="Fetch-a-specific-tag"><a href="#Fetch-a-specific-tag" class="headerlink" title="Fetch a specific tag"></a>Fetch a specific tag</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch [remote] &lt;tag_name&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>E.g.</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch pytorch v1.3.0</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/45338495/fetch-a-single-tag-from-remote-repository">stackoverflow: Fetch a single tag from remote repository</a></li>
+</ul>
+<h2 id="fallen-leaf-git-merge"><a href="#fallen-leaf-git-merge" class="headerlink" title=":fallen_leaf:git merge"></a><span class="github-emoji"><span>🍂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f342.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>git merge</h2><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout branch-A # you are on branch-A</span><br><span class="line">git merge branch-B # merge B into A</span><br></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>@rivergold: 这条命令的含义是：将 <code>branch-B</code> <code>merge</code> 到当前所处的 <code>branch-A</code> 中</p>
+</blockquote>
+<ul>
+<li><code>LOCAL</code>: <code>branch-A</code></li>
+<li><code>REMOTE</code>: <code>branch-B</code></li>
+</ul>
+<p><strong><em>Ref:</em></strong> <span class="github-emoji"><span>👍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>👍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>👍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><a target="_blank" rel="noopener" href="https://stackoverflow.com/a/3052118/4636081">stackoverflow: git rebase, keeping track of ‘local’ and ‘remote’</a></p>
+<h2 id="fallen-leaf-git-pull"><a href="#fallen-leaf-git-pull" class="headerlink" title=":fallen_leaf:git pull"></a><span class="github-emoji"><span>🍂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f342.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>git pull</h2><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># </span><span class="language-bash">you are branch-1</span></span><br><span class="line">git pull</span><br></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>@rivergold: 这条命令的含义是：从远端 fetch branch-1 并 merge 到当前本地的 branch-1 中</p>
+</blockquote>
+<h3 id="Pull-from-a-local-branch"><a href="#Pull-from-a-local-branch" class="headerlink" title="Pull from a local branch"></a>Pull from a local branch</h3><p>When finish Gitlab or Github merge request / pull request, because of Gitlab or Github use <code>git merge</code> with <code>--no-ff</code>, <code>HEAD</code> of <code>dev</code> will fall behind <code>HEAD</code> of <code>master</code>. You need to do followings to fast-forward <code>HEAD</code> of <code>dev</code> to <code>master</code>.</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br><span class="line">git pull</span><br><span class="line">git checkout dev</span><br><span class="line">git pull . master</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p><code>.</code>: means from local not remote</p>
+</li>
+<li><p><code>git pull . master</code>: means pull from <code>local:master</code> into current <code>dev</code></p>
+</li>
+</ul>
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/5613902/how-to-pull-from-a-local-branch-into-another-one">stackoverflow: How to “pull” from a local branch into another one?</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://samuelgruetter.net/blog/2018/08/31/git-ffwd-without-checkout/">Samuel Gruetter Blog Git: Fast-forwarding a branch without checking it out</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://ariya.io/2013/09/fast-forward-git-merge">ariya.io: Fast-Forward Git Merge</a></p>
+</li>
+</ul>
+<h2 id="fallen-leaf-git-push"><a href="#fallen-leaf-git-push" class="headerlink" title=":fallen_leaf:git push"></a><span class="github-emoji"><span>🍂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f342.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>git push</h2><h3 id="Delete-remote-branch"><a href="#Delete-remote-branch" class="headerlink" title="Delete remote branch"></a>Delete remote branch</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push &lt;remote_name&gt; --delete &lt;branch_name&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://koukia.ca/delete-a-local-and-a-remote-git-branch-61df0b10d323">medium: Delete a local and a remote GIT branch</a></li>
+</ul>
+<h2 id="fallen-leaf-git-clean"><a href="#fallen-leaf-git-clean" class="headerlink" title=":fallen_leaf:git clean"></a><span class="github-emoji"><span>🍂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f342.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>git clean</h2><h3 id="Delete-untracked-files"><a href="#Delete-untracked-files" class="headerlink" title="Delete untracked files"></a>Delete untracked files</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clean -nf</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Delete-untracked-files-and-directory"><a href="#Delete-untracked-files-and-directory" class="headerlink" title="Delete untracked files and directory"></a>Delete untracked files and directory</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clean -nfd</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Use-n-simulate-what-will-delete"><a href="#Use-n-simulate-what-will-delete" class="headerlink" title="Use -n simulate what will delete"></a>Use <code>-n</code> simulate what will delete</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clean -nfd</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ronnyjiang/article/details/53507306">CSDN: 删除 git 库中 untracked files（未监控）的文件</a></li>
+</ul>
+<h2 id="fallen-leaf-git-stash"><a href="#fallen-leaf-git-stash" class="headerlink" title=":fallen_leaf: git stash"></a><span class="github-emoji"><span>🍂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f342.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> git stash</h2><h3 id="git-stash-with-custom-message"><a href="#git-stash-with-custom-message" class="headerlink" title="git stash with custom message"></a>git stash with custom message</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash serve "your message"</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>Ref:</em></strong> <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/11269256/how-to-name-and-retrieve-a-stash-by-name-in-git">stackoverflow: How to name and retrieve a stash by name in git?</a></p>
+<h2 id="fallen-leaf-git-remote"><a href="#fallen-leaf-git-remote" class="headerlink" title=":fallen_leaf: git remote"></a><span class="github-emoji"><span>🍂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f342.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> git remote</h2><h3 id="Refresh-remote-branches"><a href="#Refresh-remote-branches" class="headerlink" title="Refresh remote branches"></a>Refresh remote branches</h3><p>When you delete remote branch, and you want to make your local remote branch as same as remote.</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote update &lt;remote_name&gt; --prune</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>Ref:</em></strong> <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/36358265/when-does-git-refresh-the-list-of-remote-branches">stackoverflow: When does Git refresh the list of remote branches?</a></p>
+<h2 id="fallen-leaf-git-tag"><a href="#fallen-leaf-git-tag" class="headerlink" title=":fallen_leaf: git tag"></a><span class="github-emoji"><span>🍂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f342.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> git tag</h2><h3 id="List-tags"><a href="#List-tags" class="headerlink" title="List tags"></a>List tags</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>Ref:</em></strong> <a target="_blank" rel="noopener" href="https://stackoverflow.com/a/1064505/4636081">stackoverflow: How to list all Git tags?</a></p>
+<h3 id="Create-tag"><a href="#Create-tag" class="headerlink" title="Create tag"></a>Create tag</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag &lt;tag_name&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="Create-annotated-tag"><a href="#Create-annotated-tag" class="headerlink" title="Create annotated tag"></a>Create annotated tag</h4><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag &lt;tag_name&gt; -a</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="Create-tag-on-specific-commit-id"><a href="#Create-tag-on-specific-commit-id" class="headerlink" title="Create tag on specific commit id"></a>Create tag on specific commit id</h4><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag &lt;tag_name&gt; &lt;commit_id&gt; -a</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Push-tag-to-remote"><a href="#Push-tag-to-remote" class="headerlink" title="Push tag to remote"></a>Push tag to remote</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin &lt;tag_name&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>References</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/a/18223354/4636081">stackoverflow: Create a tag in a GitHub repository</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/4404172/how-to-tag-an-older-commit-in-git">stackoverflow: How to tag an older commit in Git?</a></li>
+</ul>
+<h3 id="Update-local-tags-from-remote"><a href="#Update-local-tags-from-remote" class="headerlink" title="Update local tags from remote"></a>Update local tags from remote</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git featch --tags</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>Ref:</em></strong> <a target="_blank" rel="noopener" href="https://stackoverflow.com/a/8433371/4636081">stackoverflow: If a git tag changes on remote, a git fetch does not update it locally. Is this a bug?</a></p>
+<h3 id="Delete-tag"><a href="#Delete-tag" class="headerlink" title="Delete tag"></a>Delete tag</h3><h4 id="Delete-local-tag"><a href="#Delete-local-tag" class="headerlink" title="Delete local tag"></a>Delete local tag</h4><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -d &lt;tag_name&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="Delete-remote-tag"><a href="#Delete-remote-tag" class="headerlink" title="Delete remote tag"></a>Delete remote tag</h4><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push --delete origin &lt;tag_name&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>Ref:</em></strong> <a target="_blank" rel="noopener" href="https://devconnected.com/how-to-delete-local-and-remote-tags-on-git/">devconnected: How To Delete Local and Remote Tags on Git</a></p>
+<h2 id="fallen-leaf-git-submodule"><a href="#fallen-leaf-git-submodule" class="headerlink" title=":fallen_leaf: git submodule"></a><span class="github-emoji"><span>🍂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f342.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> git submodule</h2><p>TODO: update</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">git doc: 7.11 Git Tools - Submodules</a></li>
+<li><span class="github-emoji"><span>👍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>👍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><a target="_blank" rel="noopener" href="https://medium.com/faun/git-submodule-cheatsheet-29a3bfe443c3">Medium: Git Submodule Cheatsheet</a></li>
+</ul>
+<h3 id="git-submodule-sync"><a href="#git-submodule-sync" class="headerlink" title="git submodule sync"></a><code>git submodule sync</code></h3><p>Synchronizes submodules’ remote URL configuration setting to the value specified in <code>.gitmodules</code>.</p>
+<p><strong>理解:</strong> 更新<code>.gitmodules</code>中的一些配置信息</p>
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/45678862/git-submodule-update-vs-git-submodule-sync/45679261">stackoverflow: git submodule update vs git submodule sync</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/33739376/git-submodule-sync-command-what-is-it-for/33739770">stackoverflow: git submodule sync command - what is it for?</a></li>
+</ul>
+<h3 id="Problem-amp-Solution"><a href="#Problem-amp-Solution" class="headerlink" title="Problem &amp; Solution"></a>Problem &amp; Solution</h3><h3 id="Error-git-submodule-update-init-recursive-occur-error-Server-does-not-allow-request-for-unadvertised-object-xxxx"><a href="#Error-git-submodule-update-init-recursive-occur-error-Server-does-not-allow-request-for-unadvertised-object-xxxx" class="headerlink" title="[Error] git submodule update --init --recursive occur error: Server does not allow request for unadvertised object xxxx"></a>[Error] <code>git submodule update --init --recursive</code> occur <code>error: Server does not allow request for unadvertised object xxxx</code></h3><p><strong>Error</strong></p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">error: Server does not allow request for unadvertised object 7f523de651585fe25cade462efccca647dcc8d02</span><br><span class="line">Fetched in submodule path 'third_party/sleef', but it did not contain 7f523de651585fe25cade462efccca647dcc8d02. Direct fetching of that commit failed.</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>Solution</strong></p>
+<p>Run <code>git submodule sync</code> first</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git submodule sync</span><br><span class="line">git submodule update --init --recursive</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><span class="github-emoji"><span>👍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><a target="_blank" rel="noopener" href="https://github.com/AppImage/AppImageKit/issues/511#issuecomment-341885789">Github AppImage/AppImageKit error: Server does not allow request for unadvertised object #511</a></li>
+<li><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97">git doc: 7.11 Git 工具 - 子模块</a></li>
+</ul>
+<p><strong>理解:</strong></p>
+<ul>
+<li>main repo</li>
+<li>submodule</li>
+</ul>
+<h3 id="Update-submodule-to-the-latest-commit-with-origin"><a href="#Update-submodule-to-the-latest-commit-with-origin" class="headerlink" title="Update submodule to the latest commit with origin"></a>Update submodule to the latest commit with origin</h3><p>TODO: 确认最正确的使用</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git submodule sync</span><br><span class="line">git submodule update --init --recursive # 和submodule的repo的origin同步</span><br><span class="line"><span class="meta"># </span><span class="language-bash">git submodule update --remote</span></span><br><span class="line"><span class="meta"># </span><span class="language-bash">Update specific submodule</span></span><br><span class="line">git submodule update --init --recursive &lt;specific path to submodule&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/5828324/update-git-submodule-to-latest-commit-on-origin">stackoverflow: Update Git submodule to latest commit on origin</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/16728866/how-to-only-update-specific-git-submodules">stackoverflow: How to only update specific git submodules?</a></li>
+</ul>
+<h3 id="Reset-submodule"><a href="#Reset-submodule" class="headerlink" title="Reset submodule"></a>Reset submodule</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># </span><span class="language-bash">In main repo</span></span><br><span class="line">git reset --hard</span><br><span class="line"><span class="meta"># </span><span class="language-bash">Update submodule</span></span><br><span class="line">git submodule update --recursive</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/a/43303392/4636081">stackoverflow: How to revert a Git Submodule pointer to the commit stored in the containing repository?</a></li>
+</ul>
+<h3 id="Remove-submodule"><a href="#Remove-submodule" class="headerlink" title="Remove submodule"></a>Remove submodule</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># </span><span class="language-bash">Remove the submodule entry from .git/config</span></span><br><span class="line">git submodule deinit -f path/to/submodule</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta"># </span><span class="language-bash">Remove the submodule directory from the superproject<span class="string">'s .git/modules directory</span></span></span><br><span class="line">rm -rf .git/modules/path/to/submodule</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta"># </span><span class="language-bash"><span class="string">Remove the entry in .gitmodules and remove the submodule directory located at path/to/submodule</span></span></span><br><span class="line">git rm -f path/to/submodule</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/a/21211232/4636081">stackoverflow: How do I remove a submodule?</a></li>
+</ul>
+<h3 id="经验总结（感觉不太对）"><a href="#经验总结（感觉不太对）" class="headerlink" title="经验总结（感觉不太对）"></a>经验总结（感觉不太对）</h3><ul>
+<li>使用<code>git submodule update --recursive</code>代替<code>git submodule update</code></li>
+<li><code>git submodule update</code>会更新 submodule 到该仓库的最新的 commit，但是最细你的 commit 可能不支持现有的 main repo，所以可能需要把 submodule <code>git reset</code>到某个版本</li>
+</ul>
+<h2 id="fallen-leaf-tig"><a href="#fallen-leaf-tig" class="headerlink" title=":fallen_leaf:tig"></a><span class="github-emoji"><span>🍂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f342.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>tig</h2><p>A very good terminal git tool.</p>
+<h3 id="Build-from-Source"><a href="#Build-from-Source" class="headerlink" title="Build from Source"></a>Build from Source</h3><h4 id="Install-ncurses-to-support-Chinese"><a href="#Install-ncurses-to-support-Chinese" class="headerlink" title="Install ncurses to support Chinese"></a>Install ncurses to support Chinese</h4><p><strong>Ubuntu</strong></p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install install libncurses5-dev libncursesw5-dev</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>CentOS</strong></p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install ncurses-devel</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>Ref:</em></strong> <a target="_blank" rel="noopener" href="https://www.cyberciti.biz/faq/linux-install-ncurses-library-headers-on-debian-ubuntu-centos-fedora/">How To Install ncurses Library on a Linux</a></p>
+<h4 id="Build"><a href="#Build" class="headerlink" title="Build"></a>Build</h4><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">make configure # Only run if you are building from the Git repository</span><br><span class="line"><span class="meta"># </span><span class="language-bash">Ubuntu</span></span><br><span class="line">./configure LDFLAGS=-L/usr/local/opt/ncurses/lib CPPFLAGS=-I/usr/local/opt/ncurses/include</span><br><span class="line"><span class="meta"># </span><span class="language-bash">CentOS</span></span><br><span class="line">./configure LDFLAGS=-L/usr/lib64 CPPFLAGS=-I/usr/include</span><br><span class="line">make -j8</span><br><span class="line">make install</span><br></pre></td></tr></tbody></table></figure>
+
+<p>Check if tig build with ncursesw or not</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$ </span><span class="language-bash">tig --version</span></span><br><span class="line"></span><br><span class="line">tig version 2.5.1</span><br><span class="line">ncursesw version 5.9.20130511</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>Ref:</em></strong> <a target="_blank" rel="noopener" href="https://github.com/jonas/tig/blob/master/INSTALL.adoc#installation-using-configure">tig: Installation using configure</a></p>
+<h3 id="Bacis-Command"><a href="#Bacis-Command" class="headerlink" title="Bacis Command"></a>Bacis Command</h3><ul>
+<li>In <code>view-status</code>: <code>e</code>: edit file</li>
+<li>Refresh: <code>R</code> or <code>F5</code></li>
+</ul>
+<h4 id="Create-new-branch"><a href="#Create-new-branch" class="headerlink" title="Create new branch"></a>Create new branch</h4><p>Edit <code>~/.tigrc</code>, add followings:</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bind branch N !@git branch %(prompt)</span><br><span class="line">bind branch D !?@git branch -d %(branch)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>In <code>view-refs</code>: <code>n</code></p>
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/jonas/tig/issues/88">Github - jonas/tig: Create new branch command #88</a></li>
+</ul>
+<h4 id="Checkout-into-branch"><a href="#Checkout-into-branch" class="headerlink" title="Checkout into branch"></a>Checkout into branch</h4><p>In <code>view-refs</code>: <code>C</code></p>
+<h4 id="Edit-file"><a href="#Edit-file" class="headerlink" title="Edit file"></a>Edit file</h4><p>In <code>view-status</code>: <code>e</code></p>
+<h4 id="Show-commit-id-in-main-view"><a href="#Show-commit-id-in-main-view" class="headerlink" title="Show commit id in main view"></a>Show commit id in main view</h4><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:toggle id</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>Ref:</em></strong> <a target="_blank" rel="noopener" href="https://github.com/jonas/tig/issues/340#issuecomment-458072445">Github-jonas/tig: Feature Request: Ability to show short commit hash in main view #340</a></p>
+<h3 id="Config-vim-as-default-git-editor"><a href="#Config-vim-as-default-git-editor" class="headerlink" title="Config vim as default git editor"></a>Config <code>vim</code> as default git editor</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.editor "vim"</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/a/2596835/4636081">How do I make Git use the editor of my choice for commits?</a></li>
+</ul>
+<h3 id="tigrc"><a href="#tigrc" class="headerlink" title="tigrc"></a>tigrc</h3><p>Config example is in <a target="_blank" rel="noopener" href="https://github.com/jonas/tig/blob/master/tigrc">Github jonas/tig: tigrc</a></p>
+<p>My <code>~/.tigrc</code> is like followings</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bind branch N !@git branch %(prompt)</span><br><span class="line">bind branch D !?@git branch -d %(branch)</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="Problem-amp-Solution-1"><a href="#Problem-amp-Solution-1" class="headerlink" title="Problem &amp; Solution"></a>Problem &amp; Solution</h3><h4 id="When-run-tig-occur-tig-No-revisions-match-the-given-arguments"><a href="#When-run-tig-occur-tig-No-revisions-match-the-given-arguments" class="headerlink" title="When run tig, occur tig: No revisions match the given arguments."></a>When run <code>tig</code>, occur <code>tig: No revisions match the given arguments.</code></h4><p>When you run <code>tig</code> in an empty git, it will occur this error.</p>
+<p><strong>Solution:</strong></p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tig status</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://good5dog5.github.io/2016/03/31/tig-note/">Blog: tig 使用筆記</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/jonas/tig/issues/435">Github jonas/tig tig: No revisions match the given arguments. #435</a></li>
+</ul>
+<h2 id="fallen-leaf-Tricks"><a href="#fallen-leaf-Tricks" class="headerlink" title=":fallen_leaf:Tricks"></a><span class="github-emoji"><span>🍂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f342.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>Tricks</h2><h3 id="Fork-and-keep-update-with-raw-repo"><a href="#Fork-and-keep-update-with-raw-repo" class="headerlink" title="Fork and keep update with raw repo"></a>Fork and keep update with raw repo</h3><ol>
+<li><p><code>git remote add &lt;forked_upstream_name&gt; &lt;forked_upstream_url&gt;</code></p>
+</li>
+<li><p><code>git checkout master</code></p>
+</li>
+<li><p><code>git fetch &lt;forked_upstream_name&gt;</code></p>
+</li>
+<li><p><code>git rebase &lt;forked_upstream_name&gt;/master</code></p>
+</li>
+</ol>
+<p>E.g.</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># </span><span class="language-bash">After fork pytorch/pytorch</span></span><br><span class="line">git remote add pytorch https://github.com/pytorch/pytorch.git</span><br><span class="line">git checkout master</span><br><span class="line">git fetch pytorch</span><br><span class="line">git merge pytorch/master</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/840ea273f25a">简书: 如何解决 github fork 之后 更新问题</a></li>
+</ul>
+<h3 id="Good-way-of-setting-Github-notifications"><a href="#Good-way-of-setting-Github-notifications" class="headerlink" title="Good way of setting Github notifications"></a>Good way of setting Github notifications</h3><ul>
+<li><span class="github-emoji"><span>👍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> <span class="github-emoji"><span>👍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><a target="_blank" rel="noopener" href="https://github.com/cssmagic/blog/issues/49">Github cssmagic/blog: 如何正确接收 GitHub 的消息邮件 #49</a></li>
+</ul>
+<h3 id="References-for-how-to-replay-in-PR"><a href="#References-for-how-to-replay-in-PR" class="headerlink" title="References for how to replay in PR"></a>References for how to replay in PR</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/pytorch/pytorch/pull/30152">pytorch/pytorch: Move hardtanh activation to Aten(CPU, CUDA) #30152</a></li>
+</ul>
+<h3 id="Download-a-single-file-from-Github"><a href="#Download-a-single-file-from-Github" class="headerlink" title="Download a single file from Github"></a>Download a single file from Github</h3><p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/4604663/download-single-files-from-github">stackoverflow: Download single files from GitHub</a></li>
+</ul>
+<h3 id="Merge"><a href="#Merge" class="headerlink" title="Merge"></a>Merge</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000013753251">segmentfault: 理解 git 结构与简单操作（四）合并分支的方法与策略</a></li>
+</ul>
+<h3 id="Download-a-single-folder-or-directory-from-a-Github-repo"><a href="#Download-a-single-folder-or-directory-from-a-Github-repo" class="headerlink" title="Download a single folder or directory from a Github repo"></a>Download a single folder or directory from a Github repo</h3><p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/7106012/download-a-single-folder-or-directory-from-a-github-repo">stackoverflow: Download a single folder or directory from a GitHub repo</a></li>
+</ul>
+<h3 id="Rebase-vs-Merge"><a href="#Rebase-vs-Merge" class="headerlink" title="Rebase vs Merge"></a>Rebase vs Merge</h3><p>rebase: <code>rebase &lt;from&gt; onto &lt;to&gt;</code></p>
+<p>You can get complete introduction from <a target="_blank" rel="noopener" href="https://git-scm.com/book/zh-tw/v1/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%84%E8%A1%8D%E5%90%88">Git: 6 Git 分支 - 分支的衍合</a>.</p>
+<p>And there is a <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=nAMbLbgxriI">video</a> tell your how to use rebase in Gitkraken.</p>
+<p><strong>Important: 不要给公共的 branch 换基</strong></p>
+<p>例如：绝对不能将 master 换基到别的分支上，但是可以将别的分支换基到 master 上。</p>
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.atlassian.com/git/tutorials/merging-vs-rebasing">Bitbucket: Merging vs. Rebasing</a></li>
+</ul>
+<h3 id="Code-Review"><a href="#Code-Review" class="headerlink" title="Code Review"></a>Code Review</h3><p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://ken.io/note/gitlab-code-review-tutorial">Blog: 基于 GitLab 的 Code Review 教程</a></li>
+</ul>
+<h3 id="How-to-use-Watch-Star-and-Fork"><a href="#How-to-use-Watch-Star-and-Fork" class="headerlink" title="How to use Watch, Star and Fork"></a>How to use Watch, Star and Fork</h3><ul>
+<li>Watch: 关注这个项目的动态</li>
+<li>Star: 对这个项目点赞</li>
+<li>Fork: 相当于你自己有了一份原项目的拷贝，当然这个拷贝只是针对当时的项目文件，如果后续原项目文件发生改变，你必须通过其他的方式去同步</li>
+</ul>
+<p>Ref <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6c366b53ea41">简书: 如何用好 github 中的 watch、star、fork</a></p>
+<h3 id="Merge-two-repos"><a href="#Merge-two-repos" class="headerlink" title="Merge two repos"></a>Merge two repos</h3><p>Assum you want to merge <code>repo1</code> into <code>repo2</code></p>
+<ol>
+<li><p>Add <code>repo1</code> into <code>repo2</code> remote</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add &lt;remote name&gt; &lt;repo1 ssh&gt;</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>Checkout repo1 to local</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch -a</span><br><span class="line">git checkout -b repo1 &lt;remote name&gt;/&lt;branch name&gt;</span><br></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>Merge repo1 into repot-master</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br><span class="line">git merge repo1</span><br></pre></td></tr></tbody></table></figure>
+
+<p>If occur error <code>fatal: refusing to merge unrelated histories</code></p>
+<p>Run:</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge repo1 --allow-unrelated-histories</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>References:</em></strong> <a target="_blank" rel="noopener" href="https://blog.csdn.net/wd2014610/article/details/80854807">CSDN: 解决 Git 中 fatal: refusing to merge unrelated histories</a></p>
+</li>
+</ol>
+<p><strong><em>References:</em></strong> <a target="_blank" rel="noopener" href="https://blog.csdn.net/gouboft/article/details/8450696">CSDN: 合并两个 git 仓库</a></p>
+<h3 id="Keep-gitignore-file-when-switch-branch"><a href="#Keep-gitignore-file-when-switch-branch" class="headerlink" title="Keep gitignore file when switch branch"></a>Keep gitignore file when switch branch</h3><p>If your file is tracked before, and you want to ignore it.</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">rm</span> --cached file_path</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>Ref:</em></strong> <a target="_blank" rel="noopener" href="http://cn.voidcc.com/question/p-volmanrm-hr.html">VoidCC: GIT：切换分支时如何保留忽略的文件？</a></p>
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/337aeafc2f40">简书: git rm 与 git rm –cached</a></li>
+</ul>
+<h3 id="Pull-Request"><a href="#Pull-Request" class="headerlink" title="Pull Request"></a>Pull Request</h3><p><strong><em>References:</em></strong></p>
+<ul>
+<li><span class="github-emoji"><span>👍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><a target="_blank" rel="noopener" href="https://blog.csdn.net/yxys01/article/details/78316649">CSDN: Github 使用之 Pull Request 的正确打开方式（如何在 GitHub 上贡献开源项目）</a></li>
+<li><span class="github-emoji"><span>👍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/51199833">知乎: GitHub Pull Request 入门</a></li>
+</ul>
+<h3 id="List-remote-tags"><a href="#List-remote-tags" class="headerlink" title="List remote tags"></a>List remote tags</h3><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git ls-remote --tag [remote_name]</span><br><span class="line"><span class="meta"># </span><span class="language-bash">Example-1</span></span><br><span class="line">git ls-remote --tag</span><br><span class="line"><span class="meta"># </span><span class="language-bash">Example-2</span></span><br><span class="line">git ls-remote --tag pytorch</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/25984310/how-to-see-remote-tags">stackoverflow: How to see remote tags?</a></li>
+</ul>
+<h3 id="Create-independent-branch"><a href="#Create-independent-branch" class="headerlink" title="Create independent branch"></a>Create independent branch</h3><p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/504f26d59bc8">简书: 创建 Git 独立分支</a></li>
+<li><span class="github-emoji"><span>👍</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><a target="_blank" rel="noopener" href="https://www.cnblogs.com/huangtailang/p/4748075.html">博客园: Git 以分支的方式同时管理多个项目</a></li>
+</ul>
+<h2 id="fallen-leaf-Problems-amp-Solutions"><a href="#fallen-leaf-Problems-amp-Solutions" class="headerlink" title=":fallen_leaf:Problems &amp; Solutions"></a><span class="github-emoji"><span>🍂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f342.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>Problems &amp; Solutions</h2><h3 id="origin-dev-and-origin-master-is-not-at-the-same-header"><a href="#origin-dev-and-origin-master-is-not-at-the-same-header" class="headerlink" title="origin/dev and origin/master is not at the same header"></a><code>origin/dev</code> and <code>origin/master</code> is not at the same header</h3><p>When you change <code>dev</code> and want to merge <code>dev</code> into <code>master</code>, you will do:</p>
+<ol>
+<li>On <code>dev</code>, make a commit</li>
+<li>check out into <code>master</code></li>
+<li>merge <code>dev</code> into <code>master</code></li>
+<li>push <code>master</code> to <code>origin/master</code></li>
+</ol>
+<p>After these operations, you will find that content of <code>dev</code> and <code>master</code> are same, but the <code>dev</code> is behind one commit of <code>master</code>. Your need to run followings additionally:</p>
+<ol>
+<li>Checkout to <code>dev</code></li>
+<li>Fast-forward <code>dev</code> into <code>master</code></li>
+<li>Push <code>dev</code> into <code>origin/dev</code></li>
+</ol>
+<h2 id="fallen-leaf-Tools"><a href="#fallen-leaf-Tools" class="headerlink" title=":fallen_leaf:Tools"></a><span class="github-emoji"><span>🍂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f342.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>Tools</h2><h3 id="VSCode"><a href="#VSCode" class="headerlink" title="VSCode"></a>VSCode</h3><p>Good plugins:</p>
+<ul>
+<li>Git History: show git history</li>
+<li>GitLens: git command</li>
+</ul>
+<h3 id="Lepton"><a href="#Lepton" class="headerlink" title="Lepton"></a>Lepton</h3><p>A good code snippet manager based on Github Gist.</p>
+<p><strong><em>References:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.slant.co/topics/7247/~code-snippets-manager#10">What is the best code-snippets manager?</a></li>
+</ul>
+<h3 id="Meld"><a href="#Meld" class="headerlink" title="Meld"></a>Meld</h3><p><strong><em>Refererences:</em></strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://linux.cn/article-8808-1.html">Linux 中国: 给中级 Meld 用户的有用技巧</a></li>
+</ul>
+<h4 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h4><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[user]</span><br><span class="line">    email = hejing01@qiyi.com</span><br><span class="line">    name = Jing He</span><br><span class="line">[core]</span><br><span class="line">    autocrlf = input</span><br><span class="line">[diff]</span><br><span class="line">    tool = meld</span><br><span class="line">[difftool]</span><br><span class="line">    prompt = <span class="literal">false</span></span><br><span class="line">[difftool <span class="string">"meld"</span>]</span><br><span class="line">    cmd = /usr/bin/meld <span class="string">"<span class="variable">$LOCAL</span>"</span> <span class="string">"<span class="variable">$REMOTE</span>"</span></span><br><span class="line">[merge]</span><br><span class="line">    tool = meld</span><br><span class="line">[mergetool <span class="string">"meld"</span>]</span><br><span class="line">    cmd = /usr/bin/meld <span class="string">"<span class="variable">$REMOTE</span>"</span> <span class="string">"<span class="variable">$MERGED</span>"</span> <span class="string">"<span class="variable">$LOCAL</span>"</span> --output <span class="string">"<span class="variable">$MERGED</span>"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>Note: I like current file into right hand window.</strong></p>
+<p>Ref <a target="_blank" rel="noopener" href="https://stackoverflow.com/a/34119867/4636081">stackoverflow: Setting up and using Meld as your git difftool and mergetool</a></p>
+<h4 id="Run-git-difftool"><a href="#Run-git-difftool" class="headerlink" title="Run git difftool"></a>Run <code>git difftool</code></h4><p><code>$LOCAL</code>: pre-image (旧的)<br><code>$REMOTE</code>: post-image (新的)</p>
+<p>Ref <a target="_blank" rel="noopener" href="https://git-scm.com/docs/git-config#Documentation/git-config.txt-difftoollttoolgtcmd">git docs</a></p>
+<h4 id="Run-git-mergetool"><a href="#Run-git-mergetool" class="headerlink" title="Run git mergetool"></a>Run <code>git mergetool</code></h4><p>Suppose current in <code>branch-a</code>, merge <code>branch-b</code> into <code>a</code>.</p>
+<p><code>b ($REMOTE) -&gt; a($LOCAL)</code></p>
+<h4 id="Problem-meld-not-work-on-Python-3-7"><a href="#Problem-meld-not-work-on-Python-3-7" class="headerlink" title="[Problem] meld not work on Python 3.7"></a>[Problem] meld not work on Python 3.7</h4><p>Edit <code>~/.gitconfig</code>:</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[diff]</span><br><span class="line">    tool = meld</span><br><span class="line">[difftool]</span><br><span class="line">    prompt = false</span><br><span class="line">[difftool "meld"]</span><br><span class="line">    cmd = "alias python=/usr/bin/python &amp;&amp; alias python3=/usr/bin/python3.6 &amp;&amp; /home/  rivergold/software/common/meld-3.20.1/bin/meld" "$LOCAL" "$REMOTE"</span><br><span class="line">[merge]</span><br><span class="line">    tool = meld</span><br><span class="line">[mergetool "meld"]</span><br><span class="line">    cmd = "alias python=/usr/bin/python &amp;&amp; alias python3=/usr/bin/python3.6 &amp;&amp; /home/  rivergold/software/common/meld-3.20.1/bin/meld"  "$REMOTE"  "$MERGED" "$LOCAL" --      output "$MERGED"</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="gitignore-io"><a href="#gitignore-io" class="headerlink" title="gitignore.io"></a>gitignore.io</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://gitignore.io/">gitignore.io</a></li>
+</ul>
+<p>Many gitignore template.</p>
+<p><strong><em>Ref:</em></strong> <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzIwNTc4NTEwOQ==&amp;mid=2247487007&amp;idx=1&amp;sn=8b036cef813799bd9fa3728cfb4b6552&amp;chksm=972adf65a05d567330f5f6480c9a3f6466a45898b4d5dad41e0a0f2259ccc6c8ae3330ced3f2&amp;mpshare=1&amp;scene=1&amp;srcid=#rd">码农有道: 用好这几个工具，能大幅提升你的 Git/GitHub 操作效率！</a></p>
+<h3 id="readme-md-generator"><a href="#readme-md-generator" class="headerlink" title="readme-md-generator"></a>readme-md-generator</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/kefranabg/readme-md-generator">Github</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">rivergold</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://rivergold.github.io/2022/02/27/git-memo/">https://rivergold.github.io/2022/02/27/git-memo/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/git/">git</a></div><div class="post_share"><div class="social-share" data-image="/images/home.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2022/02/25/hello-world/"><img class="prev-cover" src="/images/home.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">Hello World</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/images/bio.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">rivergold</div><div class="author-info__description">一名热爱生活的算法工程师</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">2</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">1</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/rivergold"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/rivergold" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:rivergold@126.com" target="_blank" title="Email"><i class="fa-solid fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#fallen-leaf-Good-Tutorials"><span class="toc-number">1.</span> <span class="toc-text">🍂Good Tutorials</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fallen-leaf-Concept"><span class="toc-number">2.</span> <span class="toc-text">🍂Concept</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Git-workflow"><span class="toc-number">2.1.</span> <span class="toc-text">Git workflow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Changelog"><span class="toc-number">2.2.</span> <span class="toc-text">Changelog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Licenses"><span class="toc-number">2.3.</span> <span class="toc-text">Licenses</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WIP"><span class="toc-number">2.4.</span> <span class="toc-text">WIP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gitignore"><span class="toc-number">2.5.</span> <span class="toc-text">gitignore</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#triangular-flag-on-post-Ignore-a-folder-without-a-specific-file"><span class="toc-number">2.5.1.</span> <span class="toc-text">🚩Ignore a folder without a specific file</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Ignore-filename-contain-parttern"><span class="toc-number">2.5.2.</span> <span class="toc-text">Ignore filename contain parttern</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fallen-leaf-Generate-Key"><span class="toc-number">3.</span> <span class="toc-text">🍂Generate Key</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fallen-leaf-git-config"><span class="toc-number">4.</span> <span class="toc-text">🍂git config</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#username-and-email"><span class="toc-number">4.1.</span> <span class="toc-text">username and email</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Set-global-user-name-and-email"><span class="toc-number">4.1.1.</span> <span class="toc-text">Set global user name and email</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Set-single-repo-user-name-and-email"><span class="toc-number">4.1.2.</span> <span class="toc-text">Set single repo user name and email</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fallen-leaf-git-clone"><span class="toc-number">5.</span> <span class="toc-text">🍂git clone</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Clone-a-specific-tag"><span class="toc-number">5.1.</span> <span class="toc-text">Clone a specific tag</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fallen-leaf-git-checkout"><span class="toc-number">6.</span> <span class="toc-text">🍂git checkout</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Checkout-into-a-specific-tag"><span class="toc-number">6.1.</span> <span class="toc-text">Checkout into a specific tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Checkout-new-branch-from-a-specific-tag"><span class="toc-number">6.2.</span> <span class="toc-text">Checkout new branch from a specific tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Checkout-new-branch-from-remote"><span class="toc-number">6.3.</span> <span class="toc-text">Checkout new branch from remote</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rename-local-and-remote-branch-name"><span class="toc-number">6.4.</span> <span class="toc-text">Rename local and remote branch name</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fallen-leaf-git-reset"><span class="toc-number">7.</span> <span class="toc-text">🍂git reset</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Reset-remote-url"><span class="toc-number">7.1.</span> <span class="toc-text">Reset remote url</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fallen-leaf-git-rm"><span class="toc-number">8.</span> <span class="toc-text">🍂git rm</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Untrack-tracked-file"><span class="toc-number">8.1.</span> <span class="toc-text">Untrack tracked file</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fallen-leaf-git-rebase"><span class="toc-number">9.</span> <span class="toc-text">🍂git rebase</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%90%86%E8%A7%A3"><span class="toc-number">9.1.</span> <span class="toc-text">理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%91%BD%E4%BB%A4%E7%9A%84%E5%90%AB%E4%B9%89"><span class="toc-number">9.2.</span> <span class="toc-text">1. 命令的含义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%87%E8%AE%B0"><span class="toc-number">9.3.</span> <span class="toc-text">2. 切记</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%90%8C%E6%AD%A5%E4%B8%8A%E4%B8%8B%E6%B8%B8%E5%88%86%E6%94%AF"><span class="toc-number">9.4.</span> <span class="toc-text">3. 同步上下游分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%A7%A3%E5%86%B3-rebase-%E5%86%B2%E7%AA%81"><span class="toc-number">9.5.</span> <span class="toc-text">4. 解决 rebase 冲突</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fallen-leaf-git-fetch"><span class="toc-number">10.</span> <span class="toc-text">🍂git fetch</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Fetch-a-specific-tag"><span class="toc-number">10.1.</span> <span class="toc-text">Fetch a specific tag</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fallen-leaf-git-merge"><span class="toc-number">11.</span> <span class="toc-text">🍂git merge</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fallen-leaf-git-pull"><span class="toc-number">12.</span> <span class="toc-text">🍂git pull</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Pull-from-a-local-branch"><span class="toc-number">12.1.</span> <span class="toc-text">Pull from a local branch</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fallen-leaf-git-push"><span class="toc-number">13.</span> <span class="toc-text">🍂git push</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Delete-remote-branch"><span class="toc-number">13.1.</span> <span class="toc-text">Delete remote branch</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fallen-leaf-git-clean"><span class="toc-number">14.</span> <span class="toc-text">🍂git clean</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Delete-untracked-files"><span class="toc-number">14.1.</span> <span class="toc-text">Delete untracked files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Delete-untracked-files-and-directory"><span class="toc-number">14.2.</span> <span class="toc-text">Delete untracked files and directory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Use-n-simulate-what-will-delete"><span class="toc-number">14.3.</span> <span class="toc-text">Use -n simulate what will delete</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fallen-leaf-git-stash"><span class="toc-number">15.</span> <span class="toc-text">🍂 git stash</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git-stash-with-custom-message"><span class="toc-number">15.1.</span> <span class="toc-text">git stash with custom message</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fallen-leaf-git-remote"><span class="toc-number">16.</span> <span class="toc-text">🍂 git remote</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Refresh-remote-branches"><span class="toc-number">16.1.</span> <span class="toc-text">Refresh remote branches</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fallen-leaf-git-tag"><span class="toc-number">17.</span> <span class="toc-text">🍂 git tag</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#List-tags"><span class="toc-number">17.1.</span> <span class="toc-text">List tags</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-tag"><span class="toc-number">17.2.</span> <span class="toc-text">Create tag</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Create-annotated-tag"><span class="toc-number">17.2.1.</span> <span class="toc-text">Create annotated tag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Create-tag-on-specific-commit-id"><span class="toc-number">17.2.2.</span> <span class="toc-text">Create tag on specific commit id</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Push-tag-to-remote"><span class="toc-number">17.3.</span> <span class="toc-text">Push tag to remote</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Update-local-tags-from-remote"><span class="toc-number">17.4.</span> <span class="toc-text">Update local tags from remote</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Delete-tag"><span class="toc-number">17.5.</span> <span class="toc-text">Delete tag</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Delete-local-tag"><span class="toc-number">17.5.1.</span> <span class="toc-text">Delete local tag</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Delete-remote-tag"><span class="toc-number">17.5.2.</span> <span class="toc-text">Delete remote tag</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fallen-leaf-git-submodule"><span class="toc-number">18.</span> <span class="toc-text">🍂 git submodule</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#git-submodule-sync"><span class="toc-number">18.1.</span> <span class="toc-text">git submodule sync</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Problem-amp-Solution"><span class="toc-number">18.2.</span> <span class="toc-text">Problem &amp; Solution</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Error-git-submodule-update-init-recursive-occur-error-Server-does-not-allow-request-for-unadvertised-object-xxxx"><span class="toc-number">18.3.</span> <span class="toc-text">[Error] git submodule update --init --recursive occur error: Server does not allow request for unadvertised object xxxx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Update-submodule-to-the-latest-commit-with-origin"><span class="toc-number">18.4.</span> <span class="toc-text">Update submodule to the latest commit with origin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reset-submodule"><span class="toc-number">18.5.</span> <span class="toc-text">Reset submodule</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Remove-submodule"><span class="toc-number">18.6.</span> <span class="toc-text">Remove submodule</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93%EF%BC%88%E6%84%9F%E8%A7%89%E4%B8%8D%E5%A4%AA%E5%AF%B9%EF%BC%89"><span class="toc-number">18.7.</span> <span class="toc-text">经验总结（感觉不太对）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fallen-leaf-tig"><span class="toc-number">19.</span> <span class="toc-text">🍂tig</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Build-from-Source"><span class="toc-number">19.1.</span> <span class="toc-text">Build from Source</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Install-ncurses-to-support-Chinese"><span class="toc-number">19.1.1.</span> <span class="toc-text">Install ncurses to support Chinese</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Build"><span class="toc-number">19.1.2.</span> <span class="toc-text">Build</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bacis-Command"><span class="toc-number">19.2.</span> <span class="toc-text">Bacis Command</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Create-new-branch"><span class="toc-number">19.2.1.</span> <span class="toc-text">Create new branch</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Checkout-into-branch"><span class="toc-number">19.2.2.</span> <span class="toc-text">Checkout into branch</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Edit-file"><span class="toc-number">19.2.3.</span> <span class="toc-text">Edit file</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Show-commit-id-in-main-view"><span class="toc-number">19.2.4.</span> <span class="toc-text">Show commit id in main view</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Config-vim-as-default-git-editor"><span class="toc-number">19.3.</span> <span class="toc-text">Config vim as default git editor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tigrc"><span class="toc-number">19.4.</span> <span class="toc-text">tigrc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Problem-amp-Solution-1"><span class="toc-number">19.5.</span> <span class="toc-text">Problem &amp; Solution</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#When-run-tig-occur-tig-No-revisions-match-the-given-arguments"><span class="toc-number">19.5.1.</span> <span class="toc-text">When run tig, occur tig: No revisions match the given arguments.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fallen-leaf-Tricks"><span class="toc-number">20.</span> <span class="toc-text">🍂Tricks</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Fork-and-keep-update-with-raw-repo"><span class="toc-number">20.1.</span> <span class="toc-text">Fork and keep update with raw repo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Good-way-of-setting-Github-notifications"><span class="toc-number">20.2.</span> <span class="toc-text">Good way of setting Github notifications</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#References-for-how-to-replay-in-PR"><span class="toc-number">20.3.</span> <span class="toc-text">References for how to replay in PR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Download-a-single-file-from-Github"><span class="toc-number">20.4.</span> <span class="toc-text">Download a single file from Github</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Merge"><span class="toc-number">20.5.</span> <span class="toc-text">Merge</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Download-a-single-folder-or-directory-from-a-Github-repo"><span class="toc-number">20.6.</span> <span class="toc-text">Download a single folder or directory from a Github repo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rebase-vs-Merge"><span class="toc-number">20.7.</span> <span class="toc-text">Rebase vs Merge</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Code-Review"><span class="toc-number">20.8.</span> <span class="toc-text">Code Review</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#How-to-use-Watch-Star-and-Fork"><span class="toc-number">20.9.</span> <span class="toc-text">How to use Watch, Star and Fork</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Merge-two-repos"><span class="toc-number">20.10.</span> <span class="toc-text">Merge two repos</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Keep-gitignore-file-when-switch-branch"><span class="toc-number">20.11.</span> <span class="toc-text">Keep gitignore file when switch branch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pull-Request"><span class="toc-number">20.12.</span> <span class="toc-text">Pull Request</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#List-remote-tags"><span class="toc-number">20.13.</span> <span class="toc-text">List remote tags</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-independent-branch"><span class="toc-number">20.14.</span> <span class="toc-text">Create independent branch</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fallen-leaf-Problems-amp-Solutions"><span class="toc-number">21.</span> <span class="toc-text">🍂Problems &amp; Solutions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#origin-dev-and-origin-master-is-not-at-the-same-header"><span class="toc-number">21.1.</span> <span class="toc-text">origin&#x2F;dev and origin&#x2F;master is not at the same header</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fallen-leaf-Tools"><span class="toc-number">22.</span> <span class="toc-text">🍂Tools</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#VSCode"><span class="toc-number">22.1.</span> <span class="toc-text">VSCode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lepton"><span class="toc-number">22.2.</span> <span class="toc-text">Lepton</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Meld"><span class="toc-number">22.3.</span> <span class="toc-text">Meld</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Config"><span class="toc-number">22.3.1.</span> <span class="toc-text">Config</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Run-git-difftool"><span class="toc-number">22.3.2.</span> <span class="toc-text">Run git difftool</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Run-git-mergetool"><span class="toc-number">22.3.3.</span> <span class="toc-text">Run git mergetool</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Problem-meld-not-work-on-Python-3-7"><span class="toc-number">22.3.4.</span> <span class="toc-text">[Problem] meld not work on Python 3.7</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gitignore-io"><span class="toc-number">22.4.</span> <span class="toc-text">gitignore.io</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#readme-md-generator"><span class="toc-number">22.5.</span> <span class="toc-text">readme-md-generator</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/02/27/git-memo/" title="Git Memo">Git Memo</a><time datetime="2022-02-27T03:23:35.000Z" title="Created 2022-02-27 11:23:35">2022-02-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/02/25/hello-world/" title="Hello World">Hello World</a><time datetime="2022-02-25T14:34:29.820Z" title="Created 2022-02-25 22:34:29">2022-02-25</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2022 By rivergold</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: '',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.vemoji)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    twikoo.getCommentsCount({
+      envId: '',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      document.getElementById('twikoo-count').innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

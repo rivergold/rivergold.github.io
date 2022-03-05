@@ -1,8 +1,10 @@
 ---
 title: Linux命令行挂载U盘
+date: 2022-03-05 11:55:21
 tags:
-- linux
+  - linux
 ---
+
 
 使用命令行挂载U盘需要3步：
 
@@ -25,11 +27,6 @@ mkdir /media/xxx/xxx
 sudo mount /dev/sdx1 /media/xxx/xxx
 ```
 
-Ref：
-- [博客园: Linux系统下查看USB设备名及使用USB设备](https://www.cnblogs.com/rusking/p/6107989.html)
-
-​
-
 ## Step3 安全弹出
 
 ```bash
@@ -37,5 +34,6 @@ udisksctl umount -b /dev/sdx1
 udiskctl power-off -b /dev/sdx
 ```
 
-Ref：
-- [Stackoverflow: What is the Command Line Equivalent of "Safely Remove Drive"?](https://askubuntu.com/a/532691)：Good
+References：
+- [博客园: Linux系统下查看USB设备名及使用USB设备](https://www.cnblogs.com/rusking/p/6107989.html)
+- [Stackoverflow: What is the Command Line Equivalent of "Safely Remove Drive"?](https://askubuntu.com/a/532691)

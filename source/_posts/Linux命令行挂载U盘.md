@@ -1,5 +1,5 @@
 ---
-title: Linux命令行挂载U盘
+title: Linux Memo - 命令行挂载U盘
 date: 2022-03-05 11:55:21
 tags:
   - linux

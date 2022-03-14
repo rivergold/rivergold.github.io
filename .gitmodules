@@ -1,0 +1,5 @@
+[submodule "themes/butterfly"]
+	path = themes/butterfly
+	url = https://github.com/jerryc127/hexo-theme-butterfly.git
+[submodules "themes/butterfly"]
+	branch = dev

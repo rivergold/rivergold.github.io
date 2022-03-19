@@ -81,6 +81,37 @@ git submodule add https://github.com/jerryc127/hexo-theme-butterfly.git themes/b
 
 为了能获取最新的Butterfly的功能，同时跟踪作者的修改，rivergold采用的是将Butterfly作为submodule进行管理。对`git submodule`不熟的盆友可以参考{% post_link git_memo-使用submodule Git Memo - 使用submodule %}
 
+### 修改主页subtitle的打字动画速度
+
+由于主题默认的配置中没有调整打字动画速度的参数，所以才用了修改源码这种简单直接的方法。。。
+源码位置在`butterfly/layout/include/third-party/subtitle.pug`中，控制打字速度的变量为`typeSpeed`，原始设置为150，数值越大打字动画速度越慢（这个数值应该表示的停留间隙）。
+
+```pug
+case source
+  when 1
+    script.
+      function subtitleType () {
+        fetch('https://v1.hitokoto.cn')
+          .then(response => response.json())
+          .then(data => {
+            if (!{effect}) {
+              const from = '出自 ' + data.from
+              const sub = !{JSON.stringify(subContent)}
+              sub.unshift(data.hitokoto, from)
+              window.typed = new Typed('#subtitle', {
+                strings: sub,
+                startDelay: 300,
+                typeSpeed: 100,
+                loop: !{loop},
+                backSpeed: 100,
+              })
+            } else {
+              document.getElementById('subtitle').innerHTML = data.hitokoto
+            }
+          })
+      }
+```
+
 ### 配置锚点
 
 由于Butterfly默认的锚点配置相对简单且不能控制锚点显示层级和自定义更好的锚点图标，因此rivergold走上了自定义锚点配置的探索之路。参考了众多博客后，发现替换hexo的markdown渲染器并增加相关配置后可以解决问题。

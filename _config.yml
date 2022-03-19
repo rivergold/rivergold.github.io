@@ -106,3 +106,46 @@ deploy:
   repo: git@github.com:rivergold/rivergold.github.io.git
   # example, https://github.com/hexojs/hexojs.github.io
   branch: feature/hexo
+# # Markdown-it config
+# ## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki
+# ## cn_Docs: https://markdown-it.docschina.org/api/MarkdownIt.html#markdownit-new
+
+markdown:
+  render:
+    # false。设成 true 来启用在源码中(支持) HTML 标签。注意！这是不安全的！你可能需要额外的消毒剂(sanitizer)来组织来自 XSS 的输出。最好是通过插件来扩展特性，而不是启用 HTML。
+    html: true
+    # 设成 true 来给闭合的单个标签（<br />）添加 '/'。只有完全兼容 CommonMark 模式时才需要这样做。实际上你只需要 HTML 输出。
+    xhtmlOut: false
+    # 设成 true 来转化段落里的 \n 成 <br>
+    breaks: true
+    # 设成 true 来自动转化像 URL 的文本成链接。
+    linkify: true
+    # 设成 true 来启用某些语言中性的替换以及引号的美化（智能引号）。
+    typographer: true
+    # String 或 Array 类型。在 typographer 启用和支持智能引号时，进行双引号 + 单引号对替换。 比方说，
+    # 你可以支持 '«»„“' 给俄罗斯人使用， '„“‚‘' 给德国人使用。
+    # 还有 ['«\xA0', '\xA0»', '‹\xA0', '\xA0›']  给法国人使用（包括 nbsp）。
+    quotes: "“”‘’"
+  plugins:
+    - markdown-it-abbr
+    - markdown-it-footnote
+    - markdown-it-ins
+    - markdown-it-sub
+    - markdown-it-sup
+    - markdown-it-emoji
+  anchors:
+    level: 2
+    collisionSuffix: "v"
+    # If `true`, creates an anchor tag with a permalink besides the heading.
+    # 如果为“true”，则在标题旁边创建一个带有永久链接的定位标记。
+    permalink: true
+    permalinkClass: header-anchor
+    # The symbol used to make the permalink
+    # 用于生成永久链接的符号，支持emoji
+    permalinkSymbol: ":cactus: "
+    # 设定链接图标在标题left还是right
+    permalinkSide: "left"
+    # 转换锚点 ID 中的字母为大写或小写 # "0" 不转换, "1" 为小写, "2" 为大写
+    case: 0
+    # 用于替换空格的符号, 默认为 "-"
+    separator: "-"

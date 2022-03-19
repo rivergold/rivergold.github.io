@@ -1,13 +1,26 @@
 ---
 title: 使用Hexo搭建博客
+date: 2022-03-19 17:53:46
 tags:
-- hexo
-- js
+  - hexo
+  - js
 ---
 
 之前是使用jekyll搭建的博客，但是总有些不太满意的地方，也因为自己对Ruby不了解，所以决心将博客迁移至Hexo进行搭建，这里记录下自己的一些经验。
 
 ## Hexo基础命令
+
+### 创建草稿
+
+```bash
+hexo new draft <title>
+```
+
+### 发布草稿
+
+```bash
+hexo publish post <title>
+```
 
 ### 本地预览
 
@@ -181,6 +194,9 @@ plugins:
 
 该插件使得markdown支持emoji表情，可以使得你的博客标题更好看哦～
 
+[`hexo-renderer-markdown-it` 的配置与插件配置](https://blog.bugimg.com/works/`hexo-renderer-markdown-it`_and_plugins_config.html)
+[hexo - 使用渲染器 - `hexo-renderer-markdown-it`](https://lamirs.vercel.app/hexo-%E4%BD%BF%E7%94%A8%E6%B8%B2%E6%9F%93%E5%99%A8-`hexo-renderer-markdown-it`/)
+
 另外还有一点需要注意，对于`anchors`中的`level`配置，指的是>=`level`的所有标题都会添加permalink并进行渲染。原始的`hexo-renderer-markdown-it`并不支持配置从某个`level`的header到另一个level的header的permalink，这会导致文章中几乎所有的标题前面都加上的`permalinkSymbol`图标，rivergold个人觉得有点太繁杂了，所以对`hexo-renderer-markdown-it`中对anchors配置的源码进行了修改（虽然我是做算法的，但也能照猫画虎改js代码。。。）
 
 `hexo-renderer-markdown-it`中对anchors配置的源代码在`node_modules/hexo-renderer-markdown-it`/lib/anchors.js`
@@ -234,5 +250,44 @@ const anchor = function (md, opts) {
 
 有人在`hexo-renderer-markdown-it`仓库中提出了类似问题的[issue#177](https://github.com/hexojs/hexo-renderer-markdown-it/issues/177)，rivergold也在进行了回复，虽然没有提交PR但还是希望可以帮助到大家:grinning:。
 
-[`hexo-renderer-markdown-it` 的配置与插件配置](https://blog.bugimg.com/works/`hexo-renderer-markdown-it`_and_plugins_config.html)
-[hexo - 使用渲染器 - `hexo-renderer-markdown-it`](https://lamirs.vercel.app/hexo-%E4%BD%BF%E7%94%A8%E6%B8%B2%E6%9F%93%E5%99%A8-`hexo-renderer-markdown-it`/)
+那如果实现不同level的header使用不同的permalinkSymbol呢？实现也很简单，参考`renderPermalink`函数新增加`renderSubPermalink`函数和`subPermalinkSymbol`变量便可以实现：
+
+```javascript
+// 用于渲染level-2以下的header
+const renderSubPermalink = function (slug, opts, tokens, idx) {
+    const permalink = [Object.assign(new Token('link_open', 'a', 1), {
+        attrs: [['class', opts.permalinkClass], ['href', '#' + slug]]
+    }), Object.assign(new Token('text', '', 0), {
+        content: opts.subPermalinkSymbol
+    }), new Token('link_close', 'a', -1), Object.assign(new Token('text', '', 0), {
+        content: ''
+    })];
+
+    if (opts.permalinkSide === 'right') {
+        return tokens[idx + 1].children.push(...permalink);
+    }
+
+    return tokens[idx + 1].children.unshift(...permalink);
+};
+```
+
+```javascript
+// 添加逻辑控制
+if (tokens[idx].tag.substr(1) == opts.level) {
+    if (opts.permalink) {
+        opts.renderPermalink.apply(opts, [slug, opts].concat(args));
+    }
+}
+else{
+    if (opts.permalink) {
+        opts.renderSubPermalink.apply(opts, [slug, opts].concat(args));
+    }
+}
+```
+
+修改后完整的`anchors.js`已同步到了[GitHubGist](https://gist.github.com/rivergold/bc7af863a74ffaf2d3d0109b768c6ad8)，需要的盆友可以参考哦～
+
+References:
+
+- [Hexo文档](https://hexo.io/zh-tw/docs/index.html)
+- [Butterfly主题](https://butterfly.js.org/)

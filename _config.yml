@@ -143,6 +143,7 @@ markdown:
     # The symbol used to make the permalink
     # 用于生成永久链接的符号，支持emoji
     permalinkSymbol: ":cactus: "
+    subPermalinkSymbol: "# "
     # 设定链接图标在标题left还是right
     permalinkSide: "left"
     # 转换锚点 ID 中的字母为大写或小写 # "0" 不转换, "1" 为小写, "2" 为大写

@@ -231,7 +231,7 @@ highlight_theme: mac #  darker / pale night / light / ocean / mac / mac light / 
 highlight_copy: true # copy button
 highlight_lang: false # show the code language
 highlight_shrink: false # true: shrink the code blocks / false: expand the code blocks | none: expand code blocks and hide the button
-highlight_height_limit: false # unit: px
+highlight_height_limit: 200 # unit: px
 code_word_wrap: false
 
 # copy settings
@@ -394,9 +394,9 @@ index_post_content:
   method: 3
   length: 500 # if you set method to 2 or 3, the length need to config
 
-# anchor
+# anchor（锚点）
 # when you scroll in post, the URL will update according to header id.
-anchor: false
+anchor: true
 
 # Share System (分享功能)
 # --------------------------------------
@@ -538,6 +538,8 @@ site_verification:
 #   blockquote_padding_color: "#49b1f5"
 #   blockquote_background_color: "#49b1f5"
 #   scrollbar_color: "#49b1f5"
+#   meta_theme_color_light: "ffffff"
+#   meta_theme_color_dark: "#0d0d0d"
 
 # The top_img settings of home page
 # default: top img - full screen, site info - middle (默認top_img全屏，site_info在中間)

@@ -121,7 +121,6 @@ git checkout -b <branch_name>
 
 `git checkout -b <branch_name>`等同于`git branch <branch_name>` + `git checkout <branch_name>`
 
-
 对文件的基本操作
 
 ```bash

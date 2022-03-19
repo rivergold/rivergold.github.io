@@ -100,11 +100,11 @@ git submodule status
 git submodule update --remote [submodule路径]
 ```
 
-如果没有指定submodule路径，git将拉取所有submodule，对他们的master/main分支进行更新。
+如果没有指定submodule路径，git将拉取所有submodule，对他们的master(main)分支进行更新。
 
 ## 修改submodule追踪的分支
 
-需要说明的一个知识点：git submodule默认追踪的是submodule的master/main分支，如果你想修改submodule追踪其它分支，你可以修改.gitmodules文件（该方法会让其他开发者采用相同的配置），也可以只修改本地的`.git/config`配置。
+需要说明的一个知识点：git submodule默认追踪的是submodule的master(main)分支，如果你想修改submodule追踪其它分支，你可以修改.gitmodules文件（该方法会让其他开发者采用相同的配置），也可以只修改本地的`.git/config`配置。
 
 ```bash
 # 仅修改本地，该命令会修改.git/config文件

@@ -1,0 +1,197 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Python包发布PyPi教程 | Rivergold's Blog</title><meta name="keywords" content="Python"><meta name="author" content="rivergold"><meta name="copyright" content="rivergold"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="rivergold最近开发了几个包，希望将它们到PyPi从而可以通过pip一键安装，总结了一份教程share给大家。 🌵 核心步骤 总结起来主要分为5个步骤，分别为：  Write your package code and test it. Write setup.py Build wheel Config pypirc Upload into PyPI  下面以rivergold写的ruti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python包发布PyPi教程">
+<meta property="og:url" content="https://rivergold.github.io/2021/02/01/Python%E5%8C%85%E5%8F%91%E5%B8%83PyPi%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Rivergold&#39;s Blog">
+<meta property="og:description" content="rivergold最近开发了几个包，希望将它们到PyPi从而可以通过pip一键安装，总结了一份教程share给大家。 🌵 核心步骤 总结起来主要分为5个步骤，分别为：  Write your package code and test it. Write setup.py Build wheel Config pypirc Upload into PyPI  下面以rivergold写的ruti">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://rivergold.github.io/images/feiwu1.jpg">
+<meta property="article:published_time" content="2021-02-01T13:49:22.000Z">
+<meta property="article:modified_time" content="2022-03-20T14:00:31.708Z">
+<meta property="article:author" content="rivergold">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://rivergold.github.io/images/feiwu1.jpg"><link rel="shortcut icon" href="/images/website.png"><link rel="canonical" href="https://rivergold.github.io/2021/02/01/Python%E5%8C%85%E5%8F%91%E5%B8%83PyPi%E6%95%99%E7%A8%8B/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="5yaAKhew0t5Xuh4mt5bGo2N4tf-gnve8k9gX3hVVi2A"/><meta name="baidu-site-verification" content="code-rK7HOIC1Td"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: 'ca-pub-4153422940631371',
+  enable_page_level_ads: 'true'
+});</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":300},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Python包发布PyPi教程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-03-20 22:00:31'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/images/bio.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/images/feiwu1.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Rivergold's Blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Python包发布PyPi教程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-02-01T13:49:22.000Z" title="Created 2021-02-01 21:49:22">2021-02-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-03-20T14:00:31.708Z" title="Updated 2022-03-20 22:00:31">2022-03-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Tech/">Tech</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Python包发布PyPi教程"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>rivergold最近开发了几个包，希望将它们到PyPi从而可以通过pip一键安装，总结了一份教程share给大家。</p>
+<h2 id="核心步骤"><a class="header-anchor" href="#核心步骤"><span class="github-emoji"><span>🌵</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f335.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> </a>核心步骤</h2>
+<p>总结起来主要分为5个步骤，分别为：</p>
+<ol>
+<li>Write your package code and test it.</li>
+<li>Write <code>setup.py</code></li>
+<li>Build wheel</li>
+<li>Config <code>pypirc</code></li>
+<li>Upload into PyPI</li>
+</ol>
+<p>下面以rivergold写的<code>rutils</code>包（一个集合了日常图像开发常用的小工具的包）作为样例，依次对以上步骤详细介绍下。</p>
+<h2 id="Step-1-Write-your-package"><a class="header-anchor" href="#Step-1-Write-your-package"><span class="github-emoji"><span>🌵</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f335.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> </a>Step-1 Write your package</h2>
+<p>You need to manage your code as a Python package. Here is an example:</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">rutils</span><br><span class="line">├── CHANGELOG.md</span><br><span class="line">├── LICENSE</span><br><span class="line">├── README.md</span><br><span class="line">├── rutils</span><br><span class="line">│&nbsp;&nbsp; ├── common.py</span><br><span class="line">│&nbsp;&nbsp; ├── __init__.py</span><br><span class="line">│&nbsp;&nbsp; ├── time.py</span><br><span class="line">│&nbsp;&nbsp; └── video.py</span><br><span class="line">├── setup.py</span><br><span class="line">└── test</span><br><span class="line">    ├── common</span><br><span class="line">    │&nbsp;&nbsp; ├── test_run_command.py</span><br><span class="line">    │&nbsp;&nbsp; └── test_str2path.py</span><br><span class="line">    └── test_video.py</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p>You need to add <code>__init__.py</code> to each subfolder to make your folder as a Python Package. And this structure will also help you import module conveniently. You can get source code from <a target="_blank" rel="noopener" href="https://github.com/rivergold/rutils">GitHub</a>.</p>
+<h2 id="Step-2-Write-setup-py"><a class="header-anchor" href="#Step-2-Write-setup-py"><span class="github-emoji"><span>🌵</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f335.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> </a>Step-2 Write <code>setup.py</code></h2>
+<p>You can use <code>setup.py</code> to declare the package information, author, dependences and other metadate about this package.</p>
+<p>Here is an <code>setup.py</code> example:</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"><span class="keyword">from</span> setuptools <span class="keyword">import</span> setup, find_packages</span><br><span class="line"></span><br><span class="line">this_dir = Path(__file__).parent.resolve()</span><br><span class="line">readme_path = this_dir / <span class="string">'README.md'</span></span><br><span class="line"><span class="keyword">with</span> readme_path.<span class="built_in">open</span>(<span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    long_description = f.read()</span><br><span class="line"></span><br><span class="line">setup(name=<span class="string">'rutils'</span>,</span><br><span class="line">      version=<span class="string">'0.2.0'</span>,</span><br><span class="line">      packages=find_packages(),</span><br><span class="line">      description=<span class="string">'Utils for Computer Vision'</span>,</span><br><span class="line">      install_requires=[<span class="string">'pillow'</span>, <span class="string">'pymediainfo'</span>, <span class="string">'rlogger'</span>],</span><br><span class="line">      long_description=long_description,</span><br><span class="line">      long_description_content_type=<span class="string">'text/markdown'</span>,</span><br><span class="line">      author=<span class="string">'rivergold'</span>,</span><br><span class="line">      author_email=<span class="string">'jinghe.rivergold@gmail.com'</span>,</span><br><span class="line">      license=<span class="string">'MIT'</span>)</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="Step-3-Build-wheel"><a class="header-anchor" href="#Step-3-Build-wheel"><span class="github-emoji"><span>🌵</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f335.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> </a>Step-3 Build wheel</h2>
+<p>Run <code>python setup.up bdist_wheel</code> will build a wheel named as <code>&lt;package_name&gt;-&lt;version&gt;-py3-none-any.whl</code> in <code>./dist</code>. This wheel will be uploaded into PyPI in next step.</p>
+<h2 id="Step-4-Config-pypirc"><a class="header-anchor" href="#Step-4-Config-pypirc"><span class="github-emoji"><span>🌵</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f335.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> </a>Step-4 Config <code>pypirc</code></h2>
+<p><code>pypirc</code> is a config file for pypi repo url. The file path is <code>~/.pypirc</code>.</p>
+<p>PyPI has two repo, one is formal, another is test:</p>
+<ul>
+<li>Formal: <code>https://pypi.org/simple/</code></li>
+<li>Test: <code>https://test.pypi.org/simple</code></li>
+</ul>
+<p>You’d better upload your package into test repo to do a test at first time, and upload to formal repo after testing ok.</p>
+<p>Here is an <code>pypirc</code> example with multi url repo:</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[distutils]</span><br><span class="line">index-servers =</span><br><span class="line">    testpypi</span><br><span class="line">    pypi</span><br><span class="line"></span><br><span class="line">[testpypi]</span><br><span class="line">repository: https://test.pypi.org/legacy/</span><br><span class="line">username: xxx</span><br><span class="line">password: xxx</span><br><span class="line"></span><br><span class="line">[pypi]</span><br><span class="line">repository: https://upload.pypi.org/legacy/</span><br><span class="line">username: xxx</span><br><span class="line">password: xxx</span><br></pre></td></tr></tbody></table></figure>
+<p>Upload package</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">twine upload -r &lt;repo_name_in_pypirc&gt; dist/*</span><br></pre></td></tr></tbody></table></figure>
+<p><a target="_blank" rel="noopener" href="https://www.coder.work/article/1269078">Blog: pypirc 中 distutils 的多服务器配置中的默认服务器</a></p>
+<h2 id="Step-5-Upload-to-PyPI"><a class="header-anchor" href="#Step-5-Upload-to-PyPI"><span class="github-emoji"><span>🌵</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f335.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> </a>Step-5 Upload to PyPI</h2>
+<p>We use <code>twine</code> to upload package into PyPI.</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># </span><span class="language-bash">Test repo</span></span><br><span class="line">twine upload -r testpypi dist/*</span><br><span class="line"><span class="meta"># </span><span class="language-bash">pip install from <span class="built_in">test</span> repo</span></span><br><span class="line">pip install &lt;package name&gt; -i https://test.pypi.org/simple</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta"># </span><span class="language-bash">Formal repo</span></span><br><span class="line">twine upload -r pypi dist/*</span><br><span class="line"><span class="meta"># </span><span class="language-bash">pip install from formal repo</span></span><br><span class="line">pip install &lt;package name&gt; -i https://pypi.org/simple</span><br></pre></td></tr></tbody></table></figure>
+<p>注：上传到 PyPI formal repo 的 package，需要等待一段时间后，才可以使用<code>pip install &lt;package_name&gt;</code>（没有<code>-i</code>）进行安装</p>
+<hr>
+<h2 id="Tricks"><a class="header-anchor" href="#Tricks"><span class="github-emoji"><span>🌵</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f335.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span> </a>Tricks</h2>
+<h3 id="Add-Project-Description"><a class="header-anchor" href="#Add-Project-Description">⁋ </a>Add Project Description</h3>
+<p>You need to add followings into <code>setup.py</code></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Read git repo README.md</span></span><br><span class="line">this_dir = Path(__file__).parent.resolve()</span><br><span class="line">readme_path = this_dir / <span class="string">'README.md'</span></span><br><span class="line"><span class="keyword">with</span> readme_path.<span class="built_in">open</span>(<span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    long_description = f.read()</span><br><span class="line"></span><br><span class="line">setup(name=<span class="string">'rutils'</span>,</span><br><span class="line">      version=<span class="string">'0.2.0'</span>,</span><br><span class="line">      packages=find_packages(),</span><br><span class="line">      description=<span class="string">'Utils for Computer Vision'</span>,</span><br><span class="line">      install_requires=[<span class="string">'pillow'</span>, <span class="string">'pymediainfo'</span>, <span class="string">'rlogger'</span>],</span><br><span class="line">      long_description=long_description,             <span class="comment"># Add this line</span></span><br><span class="line">      long_description_content_type=<span class="string">'text/markdown'</span>, <span class="comment"># Add this line</span></span><br><span class="line">      author=<span class="string">'rivergold'</span>,</span><br><span class="line">      author_email=<span class="string">'jinghe.rivergold@gmail.com'</span>,</span><br><span class="line">      license=<span class="string">'MIT'</span>)</span><br></pre></td></tr></tbody></table></figure>
+<p><a target="_blank" rel="noopener" href="https://packaging.python.org/guides/making-a-pypi-friendly-readme/">PyPA: Making a PyPI-friendly README</a></p>
+<h3 id="Package-Version"><a class="header-anchor" href="#Package-Version">⁋ </a>Package Version</h3>
+<p>注: pypi 不允许版本号的覆盖，所以每次 upload 的版本号都要不一样才行；所以最好先用 Test repo 做测试，测试 ok 后再上传到 Formal repo</p>
+<p><a target="_blank" rel="noopener" href="https://www.python.org/dev/peps/pep-0440/#version-specifiers">PEP 440 – Version Identification and Dependency Specification</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://rivergold.github.io">rivergold</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://rivergold.github.io/2021/02/01/Python%E5%8C%85%E5%8F%91%E5%B8%83PyPi%E6%95%99%E7%A8%8B/">https://rivergold.github.io/2021/02/01/Python%E5%8C%85%E5%8F%91%E5%B8%83PyPi%E6%95%99%E7%A8%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a></div><div class="post_share"><div class="social-share" data-image="/images/feiwu1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/03/06/FFmpeg%E5%91%BD%E4%BB%A4%E6%94%B6%E9%9B%86/"><img class="prev-cover" src="/images/feiwu1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">FFmpeg命令收集</div></div></a></div><div class="next-post pull-right"><a href="/2021/02/02/%E4%BD%BF%E7%94%A8Flask%E6%90%AD%E5%BB%BA%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/"><img class="next-cover" src="/images/feiwu1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">使用Flask搭建文件服务器</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2021/02/02/%E4%BD%BF%E7%94%A8Flask%E6%90%AD%E5%BB%BA%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="使用Flask搭建文件服务器"><img class="cover" src="/images/feiwu1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-02</div><div class="title">使用Flask搭建文件服务器</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/images/bio.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">rivergold</div><div class="author-info__description">热爱生活的算法工程师</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/rivergold"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/rivergold" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:rivergold@126.com" target="_blank" title="Email"><i class="fa-solid fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.</span> <span class="toc-text">🌵 核心步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-1-Write-your-package"><span class="toc-number">2.</span> <span class="toc-text">🌵 Step-1 Write your package</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-2-Write-setup-py"><span class="toc-number">3.</span> <span class="toc-text">🌵 Step-2 Write setup.py</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-3-Build-wheel"><span class="toc-number">4.</span> <span class="toc-text">🌵 Step-3 Build wheel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-4-Config-pypirc"><span class="toc-number">5.</span> <span class="toc-text">🌵 Step-4 Config pypirc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-5-Upload-to-PyPI"><span class="toc-number">6.</span> <span class="toc-text">🌵 Step-5 Upload to PyPI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tricks"><span class="toc-number">7.</span> <span class="toc-text">🌵 Tricks</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Add-Project-Description"><span class="toc-number">7.1.</span> <span class="toc-text">Add Project Description</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Package-Version"><span class="toc-number">7.2.</span> <span class="toc-text">Package Version</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/03/14/git_memo-%E4%BD%BF%E7%94%A8submodule/" title="Git Memo - 使用submodule">Git Memo - 使用submodule</a><time datetime="2022-03-14T09:02:00.000Z" title="Created 2022-03-14 17:02:00">2022-03-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/03/14/git_memo-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="Git Memo - 常用命令">Git Memo - 常用命令</a><time datetime="2022-03-14T09:02:00.000Z" title="Created 2022-03-14 17:02:00">2022-03-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/03/11/vscode-%E8%B0%83%E8%AF%95%E9%85%8D%E7%BD%AE/" title="vscode - 调试配置">vscode - 调试配置</a><time datetime="2022-03-11T02:25:39.000Z" title="Created 2022-03-11 10:25:39">2022-03-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/03/05/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%8C%82%E8%BD%BDU%E7%9B%98/" title="Linux Memo - 命令行挂载U盘">Linux Memo - 命令行挂载U盘</a><time datetime="2022-03-05T03:55:21.000Z" title="Created 2022-03-05 11:55:21">2022-03-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/03/01/%E4%BD%BF%E7%94%A8Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" title="使用Hexo搭建博客">使用Hexo搭建博客</a><time datetime="2022-03-01T09:53:46.000Z" title="Created 2022-03-01 17:53:46">2022-03-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2022 By rivergold</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

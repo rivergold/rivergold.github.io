@@ -25,7 +25,7 @@ aside:
   position: left # left or right
   card_author:
     enable: true
-    description: 一名热爱生活的算法工程师
+    description: 热爱生活的算法工程师
     button:
       enable: true
       icon: fab fa-github
@@ -126,7 +126,8 @@ cover:
   default_cover:
     # - https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg
     # - /images/bio.png
-    - /images/home.jpg
+    # - /images/home.jpg
+    - /images/feiwu1.jpg
 
 # Replace Broken Images (替換無法顯示的圖片)
 error_img:
@@ -496,10 +497,10 @@ microsoft_clarity:
 
 # Google Adsense (谷歌廣告)
 google_adsense:
-  enable: false
+  enable: true
   auto_ads: true
   js: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js
-  client:
+  client: ca-pub-4153422940631371
   enable_page_level_ads: true
 
 # Insert ads manually (手動插入廣告)
@@ -512,10 +513,10 @@ google_adsense:
 # --------------------------------------
 
 site_verification:
-  # - name: google-site-verification
-  #   content: xxxxxx
-  # - name: baidu-site-verification
-  #   content: xxxxxxx
+  - name: google-site-verification
+    content: 5yaAKhew0t5Xuh4mt5bGo2N4tf-gnve8k9gX3hVVi2A
+  - name: baidu-site-verification
+    content: code-rK7HOIC1Td
 
 # Beautify/Effect (美化/效果)
 # --------------------------------------

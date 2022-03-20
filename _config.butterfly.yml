@@ -90,7 +90,7 @@ disable_top_img: false
 index_img: /images/home.jpg
 
 # If the banner of page not setting, it will show the top_img
-default_top_img:
+default_top_img: /images/home.jpg
 
 # The banner image of archive page
 archive_img: /images/home.jpg

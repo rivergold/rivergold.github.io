@@ -1,6 +1,7 @@
 ---
 title: vscode - 调试配置
 date: 2022-03-11 10:25:39
+categories: Tech
 tags:
   - vscode
 ---

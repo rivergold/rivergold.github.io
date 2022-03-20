@@ -1,9 +1,10 @@
 ---
 title: 使用Hexo搭建博客
 date: 2022-03-01 17:53:46
+categories: Tech
 tags:
-  - hexo
-  - js
+  - Hexo
+  - JavaScript
 ---
 
 之前是使用jekyll搭建的博客，但是总有些不太满意的地方，也因为自己对Ruby不了解，所以决心将博客迁移至Hexo进行搭建，这里记录下自己的一些经验。
@@ -286,6 +287,19 @@ else{
 ```
 
 修改后完整的`anchors.js`已同步到了[GitHubGist](https://gist.github.com/rivergold/bc7af863a74ffaf2d3d0109b768c6ad8)，需要的盆友可以参考哦～
+
+<!-- ### 添加sitemap
+
+为了能让Google和Baidu收录自己的博客，让大家可以在搜索引擎中检索到，我们需要对自己的博客网站进行SEO优化。
+
+#### 使用hexo-generator-sitemap生成sitemap.xml
+
+```bash
+npm install hexo-generator-sitemap --save
+```
+
+[让Google搜索到自己的博客](https://zoharandroid.github.io/2019-08-03-%E8%AE%A9%E8%B0%B7%E6%AD%8C%E6%90%9C%E7%B4%A2%E5%88%B0%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/)
+[Hexo sitemap插件](https://butterfly.js.org/posts/4073eda/#%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%96%A6) -->
 
 References:
 

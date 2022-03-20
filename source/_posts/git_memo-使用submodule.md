@@ -1,8 +1,9 @@
 ---
 title: Git Memo - 使用submodule
 date: 2022-03-14 17:02:00
+categories: Tech
 tags:
-- git
+- Git
 ---
 
 当你所开发的repo需要使用另外一个repo时，你可以使用submodule对需要使用的repo进行管理。

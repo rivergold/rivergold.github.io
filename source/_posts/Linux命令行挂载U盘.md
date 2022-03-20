@@ -1,8 +1,9 @@
 ---
 title: Linux Memo - 命令行挂载U盘
 date: 2022-03-05 11:55:21
+categories: Tech
 tags:
-  - linux
+  - Linux
 ---
 
 
@@ -35,5 +36,6 @@ udiskctl power-off -b /dev/sdx
 ```
 
 References：
+
 - [博客园: Linux系统下查看USB设备名及使用USB设备](https://www.cnblogs.com/rusking/p/6107989.html)
 - [Stackoverflow: What is the Command Line Equivalent of "Safely Remove Drive"?](https://askubuntu.com/a/532691)

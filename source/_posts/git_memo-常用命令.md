@@ -1,9 +1,10 @@
 ---
 title: Git Memo - 常用命令
-date: 2022-03-14 17:02:00
 categories: Tech
 tags:
-- Git
+  - Git
+abbrlink: 37765f79
+date: 2022-03-14 17:02:00
 ---
 
 ## Generate Key

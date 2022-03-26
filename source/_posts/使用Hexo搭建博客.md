@@ -1,10 +1,11 @@
 ---
 title: 使用Hexo搭建博客
-date: 2022-03-01 17:53:46
 categories: Tech
 tags:
   - Hexo
   - JavaScript
+abbrlink: eb656981
+date: 2022-03-01 17:53:46
 ---
 
 之前是使用jekyll搭建的博客，但是总有些不太满意的地方，也因为自己对Ruby不了解，所以决心将博客迁移至Hexo进行搭建，这里记录下自己的一些经验。

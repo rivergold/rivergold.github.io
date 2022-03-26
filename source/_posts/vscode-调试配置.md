@@ -1,9 +1,10 @@
 ---
 title: vscode - 调试配置
-date: 2022-03-11 10:25:39
 categories: Tech
 tags:
   - vscode
+abbrlink: eca434c1
+date: 2022-03-11 10:25:39
 ---
 
 最近在工作中使用C++开发框架，期间需要进行debug，所以学习了下如何在vscode中配置相关编译和调试的配置。

@@ -1,9 +1,10 @@
 ---
 title: Linux Memo - 命令行挂载U盘
-date: 2022-03-05 11:55:21
 categories: Tech
 tags:
   - Linux
+abbrlink: 1bcaf7bc
+date: 2022-03-05 11:55:21
 ---
 
 

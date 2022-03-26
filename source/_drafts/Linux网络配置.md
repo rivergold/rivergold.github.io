@@ -217,25 +217,88 @@ http <ip> <port>
 
 基于Flask-AutoIndex可以使Flask支持文件目录展示功能，并可以进行下载
 
-示例代码如下：
+### 安装依赖
+
+```bash
+pip install flask flask_autoindex
+```
+
+文件结构如下:
+
+```bash
+flask_fileserver
+├── __init__.py
+└── route_func
+    ├── __init__.py
+    └── upload.py
+```
+
+完成的代码rivergold放在了[GitHub flask-fileserver](https://github.com/rivergold/flask-fileserver)上，需要的小伙伴可跳转参考，这里列出主要的两个文件，分别是`__init__.py`和`route_func/upload.py`。
 
 ```python
-# app.py
+# __init__.py
+# 用于创建app
+import os.path
 from flask import Flask
 from flask_autoindex import AutoIndex
+from .route_func.upload import upload_file
 
-app = Flask(__name__)
 
-ppath = "/" # update your own parent directory here
+def create_app(browse_root_dir=None, upload_dir=None):
+    app = Flask(__name__)
+    AutoIndex(app, browse_root=browse_root_dir.as_posix())
+    app.config['upload_dir'] = upload_dir
+    app.add_url_rule('/upload',
+                     endpoint='upload',
+                     view_func=upload_file,
+                     methods=['GET', 'POST'])
+    return app
+```
 
-app = Flask(__name__)
-AutoIndex(app, browse_root=ppath)
+```python
+# route_func/upload.py
+# 提供文件上传和存储功能
+from pathlib import Path
+import flask
+from flask import Flask, flash, request, redirect, url_for
+from werkzeug.utils import secure_filename
 
-if __name__ == "__main__":
-    app.run()
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', '.tar', '.zip'}
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+def upload_file():
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            print(flask.current_app.config)
+            save_dir = Path(flask.current_app.config['upload_dir'])
+            save_path = save_dir / filename
+            file.save(save_path.as_posix())
+            return redirect(url_for('autoindex'))
+    return '''
+    <!doctype html>
+    <title>Upload new File</title>
+    <h1>Upload new File</h1>
+    <form method=post enctype=multipart/form-data>
+      <input type=file name=file>
+      <input type=submit value=Upload>
+    </form>
+    '''
 ```
 
 [stackoverflow: python flask browsing through directory with files](https://stackoverflow.com/a/58303738)
+[Flask doc: Uploading Files](https://flask.palletsprojects.com/en/2.0.x/patterns/fileuploads/)
 
 ## NFS远程挂载
 

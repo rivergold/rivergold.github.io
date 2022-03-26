@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://rivergold.github.io/2019/10619959240.html</loc>
+    
+    <lastmod>2022-03-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://rivergold.github.io/2022/03eb656981.html</loc>
     
     <lastmod>2022-03-26</lastmod>
@@ -126,14 +135,14 @@
   </url>
   
   <url>
-    <loc>https://rivergold.github.io/tags/Flask/</loc>
+    <loc>https://rivergold.github.io/tags/FFmpeg/</loc>
     <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://rivergold.github.io/tags/FFmpeg/</loc>
+    <loc>https://rivergold.github.io/tags/Flask/</loc>
     <lastmod>2022-03-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

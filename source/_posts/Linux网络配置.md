@@ -1,10 +1,13 @@
 ---
 title: Linux网络配置
 categories: Tech
-date: 2022-03-26 11:57:55
 tags:
-- Linux
+  - Linux
+  - Flask
+abbrlink: 619959240
+date: 2019-10-01 11:57:55
 ---
+
 
 日常开发基本都是在Linux上个进行的，有一个好的开发环境至关重要。rivergold整理一份关于Linux网络配置的笔记，主要包括以下内容：
 
@@ -155,7 +158,71 @@ firewall-cmd --reload # 需要重新加载才能生效
 
 ## Linux设置静态IP
 
-TODO
+{% tabs Linux设置静态IP %}
+<!-- tab Ubuntu -->
+
+新版本的Ubuntu（17.04以上）使用`netplan`代替了`/etc/network/interfaces`对网络进行管理。
+
+### 创建netplan配置文件
+
+netplan的配置文件放在`/etc/netplan`目录下，配置文件采用yaml格式
+
+```bash
+cd /etc/netplan
+cp 01-network-manager-all.yaml custom_static.yaml
+mv 01-network-manager-all.yaml 01-network-manager-all.yaml.backup # 对默认配置文件进行备份
+```
+
+### 查看当前网卡和IP信息
+
+```bash
+$ ip link
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: ens3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+    link/ether 08:00:27:6c:13:63 brd ff:ff:ff:ff:ff:ff
+```
+
+该命令获取到了network interfaces信息，可以看到ens3（不同机器的名称会不一样）是正在使用的网卡，我们需要对其进行配置。在将其配置成静态IP前，我们需要获取当前的IP。
+
+```bash
+ip address show ens3
+```
+
+如果想重新获取新的IP地址，可以使用以下命令：
+
+#### 获取新IP地址
+
+```bash
+sudo dhclient -r # 释放当前IP
+sudo dhclient
+```
+
+[stackoverflow: How do I request a new IP address from my DHCP server using Ubuntu Server?](https://serverfault.com/a/24517)
+
+### 修改配置文件
+
+编辑之前创建的`/etc/netplan/custom_static.yaml`文件
+
+```yaml
+network:
+    version: 2
+    renderer: networkd
+    ethernets:
+        enp0s31f6:
+            dhcp4: false
+            gateway4: <网关>
+            addresses:
+                - <IP地址>
+            nameservers:
+                addresses: [<dns1>,<dns2>,...]
+```
+
+[How to Configure Static IP Address on Ubuntu 20.04](https://linuxize.com/post/how-to-configure-static-ip-address-on-ubuntu-20-04/)
+<!-- endtab -->
+<!-- tab CentOS -->
+<!-- endtab -->
+{% endtabs %}
 
 ---
 
@@ -206,6 +273,14 @@ socks5 <ip> <port>
 # http
 http <ip> <port>
 ```
+
+#### 使用
+
+```bash
+proxychains4 -q <your command>
+```
+
+- `-q`: makes proxychains quiet
 
 [Harker' Blog: Centos 7 安装 Proxychains 实现 Linux 代理](http://www.harker.cn/archives/proxychains.html)
 
@@ -300,6 +375,8 @@ def upload_file():
 [stackoverflow: python flask browsing through directory with files](https://stackoverflow.com/a/58303738)
 [Flask doc: Uploading Files](https://flask.palletsprojects.com/en/2.0.x/patterns/fileuploads/)
 
+---
+
 ## NFS远程挂载
 
 基于 Linux 实现远程文件夹的挂载，可以把本地Linux的盘挂载到远程服务器上，从而使得二者间文件的读写更加方便。rivergold认为一个比较好的使用场景是，将本地的代码文件远程挂载到服务器上（或者是开发机上的代码文件挂载到另一个带有GPU的训练机器上），这样可以方便修改代码并进行实验。如果网络带宽够用，也可以把训练数据进行远程挂载。
@@ -339,6 +416,8 @@ yum -y install rpcbind
 /data/share_dir 192.168.1.5(rw,no_root_squash,no_all_squash,async) # 共享目录/data/share_dir给192.168.1.5，192.168.1.5具有读写权限
 ```
 
+关于参数的详细介绍可以参考[nfs参数说明](https://www.cnblogs.com/nulige/articles/12543142.html)，写的特别详细。
+
 #### 启动NFS
 
 ```bash
@@ -347,7 +426,7 @@ sudo systemctl start nfs
 # sudo systemctl restart nfs-kernel-server
 ```
 
-当`/etc/exports`发生修改后，可以使用以下命令在不重启NFS服务的情况下使新配置的生效
+当`/etc/exports`发生修改后，可以使用以下命令在不重启NFS服务的情况下使新配置的生效。
 
 ```bash
 exportfs -a
@@ -402,79 +481,6 @@ sudo umount -f -l <local_mount_path>
 - `-l`: Lazy unmount. Detach the filesystem from the filesystem hierarchy now, and cleanup all references to the filesystem as soon as it is not busy anymore. (Requires kernel 2.4.11 or later.)
 
 [stackoverflow: How to unmount NFS when server is gone?](https://askubuntu.com/questions/292043/how-to-unmount-nfs-when-server-is-gone)
-
-## :fallen_leaf:Flask
-
-- [Flask 中文](https://dormousehole.readthedocs.io/en/latest/)
-
-### Example
-
-```python
-from flask import Flask
-from flask import request
-
-app = Flask(__name__)
-
-@app.route('/', methods=['GET', 'POST'])
-def get_callback_data():
-    print('##Debug## method is {}'.format(request.method))
-    print(request.get_json())
-      if request.method == 'GET':
-          print(request.form['data'])
-          return 'ok'
-      elif request.method == 'POST':
-          print(request.form['data'])
-          return 'ok'
-      else:
-          raise ValueError('Only support GET or POST method.')
-```
-
-Run:
-
-```bash
-export FLASK_APP=<python_script_name>
-flask run --host=0.0.0.0
-```
-
-**_References:_**
-
-- [Flask Doc: 快速上手](https://dormousehole.readthedocs.io/en/latest/quickstart.html)
-
-### Get request data
-
-```python
-data = request.get_json()
-```
-
-**_References:_**
-
-- [stackoverflow: How to get data received in Flask request](https://stackoverflow.com/questions/10434599/how-to-get-data-received-in-flask-request)
-
----
-
-### Params with url
-
-```python
-@app.route('/param', methods=['GET', 'POST'])
-def get_callback_data(param):
-    print(param)
-```
-
-**_References:_**
-
-- [CSDN: Flask 带参 URL 传值的方法](https://blog.csdn.net/weixin_36380516/article/details/80008496)
-
-## :fallen_leaf:科学上网
-
-关于科学上网，折腾了很久，搭建过 shaodowsocks 和 V2ray，使用过 Vultr 和 Linode。整体速度也都还行，但是由于需要花费一定时间维护（大部分时间是 IP 被封了换机器）。最终我决定还是投入到[just my socks](https://justmysocks.net/)的怀抱，不折腾了。
-
-### Tools
-
-#### SwitchyOmega
-
-一款好用的用于管理 proxy 代理规则的浏览器插件
-
-相应的代理规则可以从[GFWList](https://github.com/gfwlist/gfwlist)找到更新链接。
 
 References:
 

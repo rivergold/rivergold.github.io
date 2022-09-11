@@ -4,10 +4,12 @@ categories: Tech
 tags:
   - Git
   - Docker
+abbrlink: 3053651376
 date: 2022-08-26 14:46:00
 ---
 
-因组内算法开发工作需要搭建一套Gitlab CI实现算法底库的自动化编译和Linux端/车机端离线测试，这里记录一下踩过的坑。。。
+
+因组内算法开发工作需要搭建一套Gitlab CI实现算法底库的自动化编译和Linux端/车机端离线测试，这里记录一下踩过的坑🤣
 
 ## 简介
 
@@ -30,7 +32,6 @@ GitLab CI/CD 由一个名为 .gitlab-ci.yml 的文件进行配置，改文件位
 为了快速部署，我采用的方案是在将Gitlab Runner和Excutor都部署在docker中。
 
 这里Gitlab Runner的工作原理为：runner运行在一个docker container中，其负责维护一个对应repo的基础分支，当有作业任务分发到当前runner时，runner会根据CI yaml所配置的image创建并启动一个对应的container，在这个container中切换分支更新代码后执行相应的CI命令。
-
 
 ### 安装Gitlab Runner
 
@@ -88,12 +89,12 @@ check_interval = 0
   session_timeout = 1800
 
 [[runners]]
-  name = "fanqiang-server"
-  url = "http://gitlab.gwm.cn/"
-  id = 89
-  token = "z9Y14k2DXg-H8asJmFbm"
-  token_obtained_at = 2022-08-24T09:23:35Z
-  token_expires_at = 0001-01-01T00:00:00Z
+  name = "your_runner_name"
+  url = "your_url"
+  id = 1
+  token = "xxx"
+  token_obtained_at = xxx
+  token_expires_at = xxx
   executor = "docker"
   limit = 2
   [runners.custom_build_dir]
